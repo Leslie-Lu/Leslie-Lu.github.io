@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>生物统计 | Zhen Lu</title>
+    <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
+      <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <description>生物统计</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>生物统计</title>
+      <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
+    </image>
+    
+    <item>
+      <title>RCT处理组进行合并的问题</title>
+      <link>https://leslie-lu.github.io/post/treatment_groups/</link>
+      <pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/treatment_groups/</guid>
+      <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;在涉及到不同药物剂量分组（如，10mg、20mg等）或者疫苗接种方案（如，一针型、两针型等）之间效果比较的&lt;strong&gt;RCT&lt;/strong&gt;的统计分析中，出多组之间比较的TFL我们都很熟悉。但是有时候，甲方会要求你出一个合并不同treatment group再与placebo组进行比较的TFL。&lt;/p&gt;
+&lt;p&gt;这个时候，就涉及到不同treatment group如何进行合并的问题。虽然说你可以直接将10mg和20mg组直接合并，形成组合后的新的treatment组与placebo组进行比较。但是，你有没有考虑到，这样简单直接地进行处理组的合并，算出来的效应值真的是正确的么？监管机构会不会认可你的统计分析结果？&lt;/p&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
+&lt;p&gt;毫无疑问，有三种合并方案供你选择：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方案一：10mg直接加上20mg组的人，如下：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sas&#34; data-lang=&#34;sas&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;data &lt;/span&gt;temp; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt; temp;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;format&lt;/span&gt; trt2 $&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;.;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; trt &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; (&lt;span class=&#34;s&#34;&gt;&amp;#39;1 Dose&amp;#39;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;2 Dose&amp;#39;&lt;/span&gt;) &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; trt2=&lt;span class=&#34;s&#34;&gt;&amp;#39;1 Dose or 2 Dose&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; trt=&lt;span class=&#34;s&#34;&gt;&amp;#39;Placebo&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; trt2=&lt;span class=&#34;s&#34;&gt;&amp;#39;Placebo&amp;#39;&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;* Column 1 2 4;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ods &lt;span class=&#34;k&#34;&gt;output&lt;/span&gt; Lsmeans=Lsmeans124&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;proc mixed &lt;/span&gt;data=temp;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class trt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    model y = trt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    lsmeans trt / cl alpha=&lt;span class=&#34;m&#34;&gt;0.05&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;* Column 3;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ods &lt;span class=&#34;k&#34;&gt;output&lt;/span&gt; Lsmeans=Lsmeans3&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;proc mixed &lt;/span&gt;data=temp;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class trt2;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    model y = trt2;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    lsmeans trt2 / cl alpha=&lt;span class=&#34;m&#34;&gt;0.05&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;方案二：类似于方案一，但是使用estimate statement来估计合并后新组的效应，赋予原10mg、20mg组相同的权重&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方案三：类似于方案二，但是赋予原10mg、20mg组不同的权重，即根据原组别的样本量给与不同的权重&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在问题就来了，到底哪一种方案效应值的估计是&lt;strong&gt;无偏&lt;/strong&gt;的？&lt;/p&gt;
+&lt;p&gt;方案二和三的code我们放在了&lt;a href=&#34;https://mp.weixin.qq.com/s/7iX06wn6C8UTjUhknrTKug&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;知识星球&lt;/a&gt;里，欢迎感兴趣的朋友自行查看。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;p&gt;通过对不同组别之间不同的样本量、不同的效应值大小的模拟，这里我们直接给出结论，日后朋友们在实际进行组别合并的时候，可以作为参考。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方案一的使用场景，有且只有当原始组别之间的效应值相当近似接近时。这种简单粗暴的合并没有考虑样本量以及效应值的实际差异，当这两者在原组别之间存在较大差异时，方案一粗暴地合并效应值，会导致效应值较大的置信区间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方案二和三无疑是优于方案一的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;其中，方案三应该是最优解。方案二没有考虑到样本量对效应值合并的影响，相同的权重会导致合并后效应值错误有偏。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于以上，下次再进行treatment group的合并时，大家还是要多一个心眼的。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
