@@ -13,6 +13,41 @@
     </image>
     
     <item>
+      <title>多重填补的tipping point analysis</title>
+      <link>https://leslie-lu.github.io/post/tipping-point-analysis/</link>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/tipping-point-analysis/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;前面我写了&lt;a href=&#34;https://mp.weixin.qq.com/s/wlEvSXeXxbUFjmdf2FO2AQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多重填补的统计学考虑与SAS实现&lt;/a&gt;这篇文章，里面提了一嘴MI的tipping point analysis。小伙伴们在后台私信留言说写一下tipping point analysis。今天它来了。&lt;/p&gt;
+&lt;h2 id=&#34;mnar缺失模式&#34;&gt;MNAR缺失模式&lt;/h2&gt;
+&lt;p&gt;我们提到，对于MI的sensitivity analysis，常见的分析就是做tipping point analysis，它主要就是评估在MNAR（missing not at random）缺失模式下，该缺失值填补对主分析结果的影响，判断主分析的结果是否是对于MAR的假设是稳健的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;换句话说，MI在MAR的前提假设下能够提供无偏的效应值的综合估计。而tipping point analysis就是要做下压力测试，即估计需要数据缺失多大程度上背离MAR，主分析的结果会被推翻（由$p \leq 0.05$变为$p&amp;gt;0.05$)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;特别是在临床试验中，由于我们很难基于收集到的数据有百分百的把握确认MAR的缺失，这个时候，tipping point analysis的结果对于主分析的结论就有一定程度上的验证能力了。&lt;/p&gt;
+&lt;h2 id=&#34;tipping-point-analysis-tpa&#34;&gt;tipping point analysis (tpa)&lt;/h2&gt;
+&lt;p&gt;怎么做tpa？一般地，我们遵循以下的步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;数据先经过标准的MI的处理。这个我们在&lt;a href=&#34;https://mp.weixin.qq.com/s/wlEvSXeXxbUFjmdf2FO2AQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多重填补的统计学考虑与SAS实现&lt;/a&gt;这篇文章中已经完整介绍过了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重复第一步的MI缺失值填补，但不同的是，这一步我们要求MI填补时，着重将试验药组的缺失值调整到更不利于试验药效果的数值，而将对照组的缺失值调整到更有利于对照组药物效果的数值。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;举个例子。某治疗疣（wart）的药物。我们需要在不同的visit采用Physician Wart Assessment (PWA) scale来评估疣的治疗效果。这时候，两组药物受试者在不同的访视存在PWA的缺失。此时，按照我们上面说的原则，在做tpa时，我们要求MI填补时尽可能将试验组的PWA分数填补得更高一些（即，治疗效果更差），如我要求其PWA分数的shift范围是0-3，每次以0.5的速度增加；而将对照组的PWA分数填补得更低（即，治疗效果更好），我同样要求其PWA分数的shift范围是0-3，每次以0.5的速度增加。这样的话，即存在7*7= 49种填补的结果。然后我们分别针对每种情况得到的填补数据集，重复普通的MI过程，来综合估计效应值。最后来check主分析的结论是否会被推翻（$p&amp;gt;0.05$)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;我们也可以在第2步的基础上，采用更大的shift范围，来看到何种程度时，主分析的结果会被完全推翻。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;有同学可能就问了，那么这个shift范围参数的选择，有没有一定的依据？这个参数，一般，我们会根据药物实际效应的估计值来相应地评估选择。简单点说，我们预估它在多大程度上shift在现实中是有可能发生的，那么采用这个范围就是可行的。在这个范围之内，主分析MI的结果都不会被推翻，那么我们就可以有足够的信心，来说明主分析的结果是稳健的了。而这也就是MI的tipping point analysis了。&lt;/p&gt;
+&lt;p&gt;示例tpa的sas实现代码，会放在&lt;a href=&#34;https://t.zsxq.com/10qxcDEKD&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;知识星球&lt;/a&gt;上，感兴趣的朋友可以自行去查看。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
+    
+    <item>
       <title>vim编辑器</title>
       <link>https://leslie-lu.github.io/post/vim/</link>
       <pubDate>Mon, 07 Aug 2023 00:00:00 +0000</pubDate>
