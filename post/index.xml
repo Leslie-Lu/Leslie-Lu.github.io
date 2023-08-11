@@ -20,7 +20,11 @@
       <description>&lt;h2 id=&#34;说明&#34;&gt;说明&lt;/h2&gt;
 &lt;p&gt;前面已经写过&lt;a href=&#34;https://mp.weixin.qq.com/s/hhwEWYIa_ZGbAUXnFE20MA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;协方差分析&lt;/a&gt;，基本原理已经介绍得很清楚，这里就不再重复，只是做一些补充。&lt;/p&gt;
 &lt;h2 id=&#34;regression-to-the-mean-rtm&#34;&gt;regression to the mean (RTM)&lt;/h2&gt;
-&lt;p&gt;向均值回归，我们都很熟悉。我们&lt;a href=&#34;https://mp.weixin.qq.com/s/hhwEWYIa_ZGbAUXnFE20MA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;之前&lt;/a&gt;也提到了配对检验与ANCOVA在生物学假设上的区别。事实上，ANCOVA正是可以检验RTM是否存在，即统计学差异并非由treatment导致，而是全部或部分由随机（RTM）导致。&lt;/p&gt;
+&lt;p&gt;向均值回归，我们都很熟悉。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;RTM：在一系列测量中，极端值在下一次测量中往往会更接近平均值的趋势。这意味着，如果一个数据点在一次测量中远离了平均值，那么在下一次测量中它很可能会更接近平均值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们&lt;a href=&#34;https://mp.weixin.qq.com/s/hhwEWYIa_ZGbAUXnFE20MA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;之前&lt;/a&gt;也提到了配对检验与ANCOVA在生物学假设上的区别。事实上，ANCOVA正是可以检验RTM是否存在，即统计学差异并非由treatment导致，而是全部或部分由随机（RTM）导致。&lt;/p&gt;
 &lt;p&gt;这提示我们，在分析数据时，统计学方法是否运用合理，直接到影响到结论的可信程度，有可能很多已经出版发表的文章或者&lt;a href=&#34;https://mp.weixin.qq.com/s/f3bGcfGBipL_oMTMIBri8g&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;临床试验结果&lt;/a&gt;里面，其结论是完全错误的。&lt;/p&gt;
 &lt;h2 id=&#34;note&#34;&gt;Note&lt;/h2&gt;
 &lt;p&gt;一般，使用ANCOVA，我们遵循以下的原则：&lt;/p&gt;
