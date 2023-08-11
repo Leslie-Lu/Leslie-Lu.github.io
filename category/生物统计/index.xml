@@ -5,12 +5,57 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 09 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 11 Aug 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>协方差分析ANCOVA</title>
+      <link>https://leslie-lu.github.io/post/ancova/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/ancova/</guid>
+      <description>&lt;h2 id=&#34;说明&#34;&gt;说明&lt;/h2&gt;
+&lt;p&gt;前面已经写过&lt;a href=&#34;https://mp.weixin.qq.com/s/hhwEWYIa_ZGbAUXnFE20MA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;协方差分析&lt;/a&gt;，基本原理已经介绍得很清楚，这里就不再重复，只是做一些补充。&lt;/p&gt;
+&lt;h2 id=&#34;regression-to-the-mean-rtm&#34;&gt;regression to the mean (RTM)&lt;/h2&gt;
+&lt;p&gt;向均值回归，我们都很熟悉。我们&lt;a href=&#34;https://mp.weixin.qq.com/s/hhwEWYIa_ZGbAUXnFE20MA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;之前&lt;/a&gt;也提到了配对检验与ANCOVA在生物学假设上的区别。事实上，ANCOVA正是可以检验RTM是否存在，即统计学差异并非由treatment导致，而是全部或部分由随机（RTM）导致。&lt;/p&gt;
+&lt;p&gt;这提示我们，在分析数据时，统计学方法是否运用合理，直接到影响到结论的可信程度，有可能很多已经出版发表的文章或者&lt;a href=&#34;https://mp.weixin.qq.com/s/f3bGcfGBipL_oMTMIBri8g&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;临床试验结果&lt;/a&gt;里面，其结论是完全错误的。&lt;/p&gt;
+&lt;h2 id=&#34;note&#34;&gt;Note&lt;/h2&gt;
+&lt;p&gt;一般，使用ANCOVA，我们遵循以下的原则：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./%e5%be%ae%e4%bf%a1%e5%9b%be%e7%89%87_20230811154529.png&#34; alt=&#34;Steps for ANCOVA&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;如果确认不存在协变量的影响，则直接使用ANOVA方差分析；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当协变量在不同的treatment水平上影响相同时，直接进行ANCOVA计算least squares mean；否则，需要分别汇报不同treatment水平各自的效应值大小。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>多重填补的tipping point analysis</title>
