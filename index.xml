@@ -13,6 +13,57 @@
     </image>
     
     <item>
+      <title>efficacy endpoints分析的multiplicity</title>
+      <link>https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/</link>
+      <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/</guid>
+      <description>&lt;h1 id=&#34;multiplicity&#34;&gt;multiplicity&lt;/h1&gt;
+&lt;p&gt;对于efficacy endpoints的分析，诺大一个RCT项目，一般不会只有单独的一个primary endpoint，在primary之外，都会有secondary、exploratory之类多个终点。在同一个研究中对多个检验假设分别进行统计推断，当结果的比较分析次数增多时，这就会引来多重性问题（multiplicity/multiple comparisons)，即，使得$I$类错误增大，以至于出现假阳性结论的药物上市的概率增大。&lt;/p&gt;
+&lt;h1 id=&#34;efficacy-endpoints&#34;&gt;efficacy endpoints&lt;/h1&gt;
+&lt;p&gt;我们这里主要介绍RCT中出现了多个efficacy endpoints时的多重性问题的其中一种解决策略。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提醒大家注意，当RCT的结论完全服从于primary endpoint的结论时，无论ensondary、exploratoty endpoints多少个，此时，不需要考虑multiplicity。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;针对同一问题不同方面的不同endpoints，虽然有primary、secondary之分，如果我们认为次要指标的结果将有利于试验，此时，我们可以采用hierarchical testing的方式来依次进行统计推断。当且仅当上一级假设有统计学意义时，下一级才可以进行统计推断，否则整个序贯检验将被终止。在这种策略下，我们不需要校正$I$类错误。&lt;/p&gt;
+&lt;p&gt;我们来看一个实际应用这个策略的案例：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;hierarchical testing&#34; srcset=&#34;
+               /post/efficacy-endpoints-multiplicity/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230815204525_hu69637e5a1aa9b5be370f431251771a0b_148455_1723c261345789d160c36f35096e7f8f.webp 400w,
+               /post/efficacy-endpoints-multiplicity/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230815204525_hu69637e5a1aa9b5be370f431251771a0b_148455_90f5fdc3041635b178b8ae1c229fecef.webp 760w,
+               /post/efficacy-endpoints-multiplicity/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230815204525_hu69637e5a1aa9b5be370f431251771a0b_148455_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230815204525_hu69637e5a1aa9b5be370f431251771a0b_148455_1723c261345789d160c36f35096e7f8f.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;661&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这个项目的SAP我已经放在了知识星球上(&lt;a href=&#34;https://t.zsxq.com/10qxcDEKD&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://t.zsxq.com/10qxcDEKD&lt;/a&gt;)。&lt;/p&gt;
+&lt;p&gt;这种gate-keeping的方式，主要用于主要、次要指标共存时的假设检验，也非常好理解：一旦主要指标无统计学意义，则后续一切都将失去意义，无论其是否有统计学意义。类似的做法还有下面这个：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PFS will be analyzed first when approximately 264 events are reached. In line with the gate keeping strategy, ORR will only be assessed for superiority should PFS have demonstrated superiority.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
+    
+    <item>
       <title>协方差分析ANCOVA</title>
       <link>https://leslie-lu.github.io/post/ancova/</link>
       <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
