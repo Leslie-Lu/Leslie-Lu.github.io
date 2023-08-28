@@ -5,12 +5,71 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>对照组的设置</title>
+      <link>https://leslie-lu.github.io/post/control/</link>
+      <pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/control/</guid>
+      <description>&lt;h1 id=&#34;对照组的基本类型&#34;&gt;对照组的基本类型&lt;/h1&gt;
+&lt;p&gt;根据是否为同期对照，基本可分为同期对照与历史对照。其中，同期对照包括：安慰剂对照、阳性对照、量效对照、空白对照；历史对照则为外部对照。由于同期对照的对照组与试验组来自于相同人群，因而对比外部对照，其在控制偏倚和混杂上的效率更高，更有说服力，因而，除非条件不允许，否则常用同期对照。&lt;/p&gt;
+&lt;p&gt;安慰剂对照与阳性对照都比较常见。量效对照主要出现在临床药理学研究中，来探索药物的剂量效应关系、剂量与不良反应之间的关系以及最佳剂量范围。而空白对照由于存在对照组受试者无法得到治疗的伦理问题，一般只在前述对照无法完成的情况下使用，如，放射治疗、外科手术等。&lt;/p&gt;
+&lt;p&gt;对于历史对照而言，由于是在不同人群或不同时空条件下的对照，最主要的缺点就是偏倚和混杂得不到有效的控制，因而常用于无法采用同期平行对照的探索性研究。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;除了上述常见的对照类型，在交叉设计中，我们也能看到同一受试者在不同时期接受不同治疗从而自身互为对照的交叉对照。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;对照组的灵活设置类型&#34;&gt;对照组的灵活设置类型&lt;/h1&gt;
+&lt;h2 id=&#34;三臂试验&#34;&gt;三臂试验&lt;/h2&gt;
+&lt;p&gt;在非劣效试验中，当试验药与阳性药之间的比较不能检测出差别时，需要增加一个安慰剂对照组，这样就构成了三臂试验（three-arm trial）。此时，若能检测出试验药与安慰剂的区别，结论就很明确，否则试验药与安慰剂也检测不出差别时，可能是试验药无效或检验效能太低无法检测出二者间的实际区别。&lt;/p&gt;
+&lt;p&gt;对于这类设计，样本量的安排可以采用非等比例分组，将非安慰剂组的样本量增大，来增加组间比较的精度，同时减小安慰剂组样本量来改善伦理。&lt;/p&gt;
+&lt;h2 id=&#34;加载试验&#34;&gt;加载试验&lt;/h2&gt;
+&lt;p&gt;加载试验（add-on）是在已接受且无法脱离标准治疗的人群中对试验药做安慰剂对照试验。全部受试者接受标准治疗且不宜中断，在此基础上，试验组加用试验药，对照组加用安慰剂。很明显，加载研究是针对单纯安慰剂对照试验可能威胁受试者的生命安全，从而形成附加试验。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;加载试验对疗效和安全性的估计是一种疗法联合的结果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;早期脱离试验&#34;&gt;早期脱离试验&lt;/h2&gt;
+&lt;p&gt;早期脱离设计（early escape）允许受试者在研究者规定的条件下（如，缺乏预先设定的疗效、发生某些严重不良事件、完成预先设定的服药周期）终止或提前退出随机化分组。相较于传统RCT，其更易被伦理接受，但随之带来的是，由于不能直接比较全部随机化受试者的疗效（早期脱离的受试者无法观察到主要疗效指标），这类试验的分析结论具有一定的局限性。&lt;/p&gt;
+&lt;h2 id=&#34;随机撤药试验&#34;&gt;随机撤药试验&lt;/h2&gt;
+&lt;p&gt;随机撤药设计（randomized discontinuation design）有更优的伦理学考虑&lt;a href=&#34;%e9%99%88%e5%b3%b0%ef%bc%8c%e5%a4%8f%e7%bb%93%e6%9d%a5.%e4%b8%b4%e5%ba%8a%e8%af%95%e9%aa%8c%e7%bb%9f%e8%ae%a1%e5%ad%a6&#34; title=&#34;参考&#34;&gt;&lt;/a&gt;。它的设计如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;随机撤药设计&#34; srcset=&#34;
+               /post/control/featured_hu56f592244b1e37a258c73592aeea47c0_120343_46f92d5b1987c69892cb62b31778e0aa.webp 400w,
+               /post/control/featured_hu56f592244b1e37a258c73592aeea47c0_120343_28771432734383e8fb2cd7dc3d374682.webp 760w,
+               /post/control/featured_hu56f592244b1e37a258c73592aeea47c0_120343_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/control/featured_hu56f592244b1e37a258c73592aeea47c0_120343_46f92d5b1987c69892cb62b31778e0aa.webp&#34;
+               width=&#34;736&#34;
+               height=&#34;470&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;在第一阶段，全部受试者均在导入期接受试验药；根据受试者的治疗结果进入第二阶段的受试者划分：治疗有效的受试者继续试验药治疗；疾病仍然进展的受试者停止试验药治疗，撤出试验；对于病情稳定的受试者，提示试验药可能有效，这部分受试者进行随机化分组。&lt;/p&gt;
+&lt;p&gt;很明显，在伦理上，随机撤药设计比单纯的安慰剂对照更容易被接受。但是，需要注意的是，由于随机撤药设计在全部受试者人群中进行了对试验药可能有效的人群筛选，其结论是基于部分人群，并非全部受试者，导致可能高估试验药的实际疗效。此外，虽然在第二阶段实现了随机化，但是试验药可能存在迟滞效应，导致进入对照组的受试者可能受益于第一阶段的试验药治疗，因而，随机撤药设计的疗效估计是有偏的，需要谨慎对待。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>efficacy endpoints分析的multiplicity</title>
