@@ -5,12 +5,87 @@
     <link>https://leslie-lu.github.io/post/</link>
       <atom:link href="https://leslie-lu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://leslie-lu.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>【E9R1】临床试验案例分析</title>
+      <link>https://leslie-lu.github.io/post/e9r1/</link>
+      <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/e9r1/</guid>
+      <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;2022年1月21日，我国国家药品监督管理局（NMPA）正式适用ICH E9R1。作为对E9的增补，E9R1强调了因果治疗效应的重要性，定义治疗效应为相同受试者在不同治疗条件下可能发生的结果的比较。估计目标estimand则是对治疗效应地精确描述，它在群体层面总结了相同患者在不同治疗条件下的结果。临床试验中的estimand决定了临床试验的设计和分析方法。&lt;/p&gt;
+&lt;p&gt;E9R1提出了估计目标的五大属性，包括目标人群(population)、治疗(处理)(treatment)、目标变量(或终点)(variable or endpoint)、伴发事件(intercurrent event, ICE)以及伴发事件的处理策略、和群体层面汇总(population-level summary)。通过对这些属性来精确地定义治疗效应。&lt;/p&gt;
+&lt;h2 id=&#34;案例&#34;&gt;案例&lt;/h2&gt;
+&lt;p&gt;治疗反流性食管炎的随机、双盲临床试验&lt;a href=&#34;DIA%e4%bc%b0%e8%ae%a1%e7%9b%ae%e6%a0%87%e5%8f%8a%e6%95%8f%e6%84%9f%e6%80%a7%e5%88%86%e6%9e%90%e8%93%9d%e7%9a%ae%e4%b9%a6&#34; title=&#34;案例&#34;&gt;&lt;/a&gt;。研究为多中心、随机、双盲双模拟、阳性药物平行对照的Ⅲ期临床研究，旨在评估试验药物的疗效和安全性。试验以8周内经内镜检查证实的反流性食管炎愈合率为主要疗效终点进行非劣效评价，非劣效界值取-10%。&lt;/p&gt;
+&lt;p&gt;符合入排标准的反流性食管炎受试者，按照1:1的比例随机分配到试验组或对照组，分层因素为内镜下食管炎的洛杉矶(LA)分级。服药均为每日服用一次试验药或阳性对照药。所有受试者在治疗4周后给予内镜检查，如内镜检查显示食管炎愈合，则终止治疗；如食管炎尚未愈合则继续治疗4周。治疗过程中将通过内镜检查、临床症状评分表来采集疗效数据从而进行疗效评价；通过采集实验室检查数据、不良事件等来评价药物的安全性。&lt;/p&gt;
+&lt;h2 id=&#34;分析&#34;&gt;分析&lt;/h2&gt;
+&lt;h3 id=&#34;估计目标&#34;&gt;估计目标&lt;/h3&gt;
+&lt;p&gt;对于估计目标的定义，重点关注下治疗和ICE及其处理策略。&lt;/p&gt;
+&lt;p&gt;对于治疗而言，试验组受试者需每日1次服用试验药物及阳性药物模拟剂，对照组受试者需每日1次服用阳性药物及试验药物模拟剂，连续服用4-8周。具体疗程根据治疗第4周的内镜检查结果显示食管炎是否愈合来确定。&lt;/p&gt;
+&lt;p&gt;对于ICE及其处理策略，如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;handling ICE&#34; srcset=&#34;
+               /post/e9r1/featured_huf14fba0cb55206ff668cb917cbafccd9_150161_6d7a9a49a75b41a0bf97a354ab163b73.webp 400w,
+               /post/e9r1/featured_huf14fba0cb55206ff668cb917cbafccd9_150161_e4645a7a99d155596efe420ad3ce02f1.webp 760w,
+               /post/e9r1/featured_huf14fba0cb55206ff668cb917cbafccd9_150161_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/e9r1/featured_huf14fba0cb55206ff668cb917cbafccd9_150161_6d7a9a49a75b41a0bf97a354ab163b73.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;345&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;统计分析&#34;&gt;统计分析&lt;/h3&gt;
+&lt;p&gt;本试验为非劣效实验，主要估计目标以全分析集FAS为主要分析人群，依据ITT原则，尽可能避免排除受试者带来的因果效应推断的偏倚问题。&lt;/p&gt;
+&lt;p&gt;群体层面的汇总，计算试验组与对照组间8周内经内镜检查证实反流性食管炎愈合的受试者的比例的差值及其95% CI。若率差的95% CI下限大于-10%，则可认为非劣效结论成立。&lt;/p&gt;
+&lt;p&gt;其中，关于缺失数据的处理，基于两类情况的缺失：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对于主要估计目标中与ICE无关的数据缺失，即physical missing，如因提前退出试验而导致的数据缺失，采用non-response imputation进行处理；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于主要估计目标中与ICE相关的数据缺失，采用上面表格中的hypothetical strategy，按照未愈合进行保守估计。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;敏感性分析&#34;&gt;敏感性分析&lt;/h3&gt;
+&lt;p&gt;在非劣效研究中缺失数据的敏感性分析对于评价研究结论的稳健性，比在优效性试验中有着更大的价值和重要性。如果试验中包含了较多混杂因素带来的伴发事件，采用假想策略，即使主要统计分析达到了非劣效结论，但是缺失数据的敏感性分析仍可能显示试验结论的不稳健。&lt;/p&gt;
+&lt;p&gt;因而，本研究采用以下敏感性分析：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;由于主要缺失数据处理方法采用NRI方法进行处理，因此，仅对对照组8周内内镜检查结果中的缺失值由未愈合转为愈合的受试者数进行&lt;a href=&#34;https://mp.weixin.qq.com/s/vj5iUlkhhoj_VXygpf2gog&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tipping point analysis&lt;/a&gt;，寻找试验结论从非劣效转为劣效的临界点；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;考虑到对物理缺失数据的NRI处理方法，以及与伴发事件相关的缺失数据假定未发生愈合的处理方法，可能会降低非劣效检验的检定敏感性，因此，还将按照其所在组别的愈合情况进行&lt;a href=&#34;https://mp.weixin.qq.com/s/wlEvSXeXxbUFjmdf2FO2AQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多重填补&lt;/a&gt;，并基于填补后的数据集进行统计分析后，采用Rubin方法将基于填补后数据集的分析合并后得到试验组与对照组间8周内反流性食管炎愈合的受试者比例差值及其95%CI，进
+行非劣效评价；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;采用经$\delta$调整的基于对照组多重填补(jump to reference, J2R)。根据对照组非缺失数据所计算的反应率$p_c$，对于对照组中8周内内镜检查结果基于Bernoulli($p_c$) 进行多重填补，试验组中8周内内镜检查结果基于Bernoulli($p_c$ - $\delta$)进行多重填补，并基于填补后的数据集进行统计分析后，采用Rubin方法将基于填补后数据集的分析合并后得到试验组与对照组间8周内反流性食管炎愈合的受试者比例差值及其95%CI。其中，$\delta$表示该试验的非劣效界值。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>肿瘤试验PFS和OS的矛盾</title>
