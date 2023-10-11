@@ -13,6 +13,103 @@
     </image>
     
     <item>
+      <title>IPCW的SAS实现</title>
+      <link>https://leslie-lu.github.io/post/ipcw/</link>
+      <pubDate>Wed, 11 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/ipcw/</guid>
+      <description>&lt;h2 id=&#34;ipcw&#34;&gt;IPCW&lt;/h2&gt;
+&lt;p&gt;前面我们已经在这篇文章里介绍过&lt;a href=&#34;https://mp.weixin.qq.com/s/pz89iFMs-q0ZNnPF2b2xfA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IPCW的原理&lt;/a&gt;。当时有小伙伴在知识星球里提问，IPCW在sas中的具体实现。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;问题&#34; srcset=&#34;
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_66a9f0f3d61b726b8f0ab970e1537c5d.webp 400w,
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_92cad26ccd18b34292523a26bcd019c9.webp 760w,
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_66a9f0f3d61b726b8f0ab970e1537c5d.webp&#34;
+               width=&#34;562&#34;
+               height=&#34;298&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;今天我们来大致讲一下它的SAScode，完整的代码已经上传进我的&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;，感兴趣的同学可以自行下载查看。&lt;/p&gt;
+&lt;h2 id=&#34;数据结构&#34;&gt;数据结构&lt;/h2&gt;
+&lt;p&gt;首先，我们需要准备count格式的生存数据，如下面这个dummy dataset：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;dummy dataset&#34; srcset=&#34;
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_c4bfb544a0b2d01f4c6d0b0fc04e737b.webp 400w,
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_f505652fee77604de42debad06cd4fbe.webp 760w,
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_c4bfb544a0b2d01f4c6d0b0fc04e737b.webp&#34;
+               width=&#34;524&#34;
+               height=&#34;270&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;其中，xo_time标示crossover发生的时间，即表示是否发生了crossover，tstart、tstop标明count格式的生存数据，显示各个时间点受试者at risk的情况。&lt;/p&gt;
+&lt;h2 id=&#34;step-1-计算未删失未发生crossover的概率&#34;&gt;step 1: 计算未删失（未发生crossover）的概率&lt;/h2&gt;
+&lt;p&gt;这一步，根据协变量的不同，采用的模型也不行同。对于包含时依协变量的数据，我们可以分别构建包含基线协变量以及包含时依协变量的两个模型，来计算权重。&lt;/p&gt;
+&lt;p&gt;采用logistic可以使用以下code：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sas&#34; data-lang=&#34;sas&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;proc genmod &lt;/span&gt;data=dummy descending &lt;span class=&#34;k&#34;&gt;order&lt;/span&gt;=data;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  class crossover id;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  model crossover= baseline_covariates time_dependent_covariates / d=bin &lt;span class=&#34;k&#34;&gt;link&lt;/span&gt;=logit;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  repeated subject=id;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;output&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;out&lt;/span&gt;=&lt;span class=&#34;k&#34;&gt;out&lt;/span&gt; prob=t&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们在星球里给的代码采用的是cox来计算概率，如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sas&#34; data-lang=&#34;sas&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;proc phreg &lt;/span&gt;data=weight_est outest=survmod covs(aggregate) covm; * covs option &lt;span class=&#34;k&#34;&gt;and&lt;/span&gt; id statement adjust for repeated measures;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;trt&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  class &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_cl&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  model (&lt;span class=&#34;nv&#34;&gt;&amp;amp;tstart&lt;/span&gt;,&lt;span class=&#34;nv&#34;&gt;&amp;amp;tend&lt;/span&gt;)*xo_cnsr(&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;)= &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_ct&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_ct&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_cl&lt;/span&gt; /rl;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  id &lt;span class=&#34;nv&#34;&gt;&amp;amp;subjid&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;output&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;out&lt;/span&gt;= probs_TV survival = w_TV&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;step2-利用ipcw加权&#34;&gt;step2: 利用IPCW加权&lt;/h2&gt;
+&lt;p&gt;需要注意的是，在加权之前，我们可以进行权重的截断来进行stablize。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sas&#34; data-lang=&#34;sas&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;proc phreg &lt;/span&gt;data=surv_ph outest=survmod covs(aggregate) covm; * covs option &lt;span class=&#34;k&#34;&gt;and&lt;/span&gt; id statement adjust for repeated measures;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;Final Model using weights from Cox PH Model&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  class &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;trt&lt;/span&gt;(ref=first);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  model (&lt;span class=&#34;nv&#34;&gt;&amp;amp;tstart&lt;/span&gt;,&lt;span class=&#34;nv&#34;&gt;&amp;amp;tend&lt;/span&gt;)*dth_event(&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;)= &lt;span class=&#34;nv&#34;&gt;&amp;amp;trt&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_ct&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;bl_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_cl&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;tv_ct&lt;/span&gt; /rl;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  id &lt;span class=&#34;nv&#34;&gt;&amp;amp;subjid&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  weight sw_t/norm&lt;span class=&#34;kr&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;run;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
+    
+    <item>
       <title>欢迎加入公众号学习交流圈</title>
       <link>https://leslie-lu.github.io/post/planet/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>

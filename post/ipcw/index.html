@@ -279,12 +279,12 @@
 
   
 
-<meta name="description" content="multiplicity 对于efficacy endpoints的分析，诺大一个RCT项目，一般不会只有单独的一个prima" />
+<meta name="description" content="IPCW 前面我们已经在这篇文章里介绍过IPCW的原理。当时有小伙伴在知识星球里提问，IPCW在sas中的具" />
 
 
 
-<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/" />
-<link rel="canonical" href="https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/" />
+<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/post/ipcw/" />
+<link rel="canonical" href="https://leslie-lu.github.io/post/ipcw/" />
 
 
 
@@ -317,20 +317,20 @@
 
   <meta property="twitter:site" content="@callmeleslielu" />
   <meta property="twitter:creator" content="@callmeleslielu" />
-<meta property="twitter:image" content="https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/featured.png" />
+<meta property="twitter:image" content="https://leslie-lu.github.io/post/ipcw/featured.png" />
 <meta property="og:site_name" content="Zhen Lu" />
-<meta property="og:url" content="https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/" />
-<meta property="og:title" content="efficacy endpoints分析的multiplicity | Zhen Lu" />
-<meta property="og:description" content="multiplicity 对于efficacy endpoints的分析，诺大一个RCT项目，一般不会只有单独的一个prima" /><meta property="og:image" content="https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/featured.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:url" content="https://leslie-lu.github.io/post/ipcw/" />
+<meta property="og:title" content="IPCW的SAS实现 | Zhen Lu" />
+<meta property="og:description" content="IPCW 前面我们已经在这篇文章里介绍过IPCW的原理。当时有小伙伴在知识星球里提问，IPCW在sas中的具" /><meta property="og:image" content="https://leslie-lu.github.io/post/ipcw/featured.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
       property="article:published_time"
-      content="2023-08-15T00:00:00&#43;00:00"
+      content="2023-10-11T00:00:00&#43;00:00"
     />
   
   
-    <meta property="article:modified_time" content="2023-08-15T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2023-10-11T00:00:00&#43;00:00">
   
 
 
@@ -356,16 +356,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/"
+    "@id": "https://leslie-lu.github.io/post/ipcw/"
   },
-  "headline": "efficacy endpoints分析的multiplicity",
+  "headline": "IPCW的SAS实现",
   
   "image": [
-    "https://leslie-lu.github.io/post/efficacy-endpoints-multiplicity/featured.png"
+    "https://leslie-lu.github.io/post/ipcw/featured.png"
   ],
   
-  "datePublished": "2023-08-15T00:00:00Z",
-  "dateModified": "2023-08-15T00:00:00Z",
+  "datePublished": "2023-10-11T00:00:00Z",
+  "dateModified": "2023-10-11T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -380,7 +380,7 @@
       "url": "https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "multiplicity 对于efficacy endpoints的分析，诺大一个RCT项目，一般不会只有单独的一个prima"
+  "description": "IPCW 前面我们已经在这篇文章里介绍过IPCW的原理。当时有小伙伴在知识星球里提问，IPCW在sas中的具"
 }
 </script>
 
@@ -402,7 +402,7 @@
 
 
   
-  <title>efficacy endpoints分析的multiplicity | Zhen Lu</title>
+  <title>IPCW的SAS实现 | Zhen Lu</title>
 
   
   
@@ -422,7 +422,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="4fa16aedcc5649ad67d00064d110a65d" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="2089290942e34a0180f44eebc75aff1d" >
 
   
   
@@ -748,7 +748,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>efficacy endpoints分析的multiplicity</h1>
+  <h1>IPCW的SAS实现</h1>
 
   
 
@@ -777,7 +777,7 @@
     
       
     
-    Aug 15, 2023
+    Oct 11, 2023
   </span>
   
 
@@ -818,15 +818,8 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h1 id="multiplicity">multiplicity</h1>
-<p>对于efficacy endpoints的分析，诺大一个RCT项目，一般不会只有单独的一个primary endpoint，在primary之外，都会有secondary、exploratory之类多个终点。在同一个研究中对多个检验假设分别进行统计推断，当结果的比较分析次数增多时，这就会引来多重性问题（multiplicity/multiple comparisons)，即，使得$I$类错误增大，以至于出现假阳性结论的药物上市的概率增大。</p>
-<h1 id="efficacy-endpoints">efficacy endpoints</h1>
-<p>我们这里主要介绍RCT中出现了多个efficacy endpoints时的多重性问题的其中一种解决策略。</p>
-<blockquote>
-<p>提醒大家注意，当RCT的结论完全服从于primary endpoint的结论时，无论ensondary、exploratoty endpoints多少个，此时，不需要考虑multiplicity。</p>
-</blockquote>
-<p>针对同一问题不同方面的不同endpoints，虽然有primary、secondary之分，如果我们认为次要指标的结果将有利于试验，此时，我们可以采用hierarchical testing的方式来依次进行统计推断。当且仅当上一级假设有统计学意义时，下一级才可以进行统计推断，否则整个序贯检验将被终止。在这种策略下，我们不需要校正$I$类错误。</p>
-<p>我们来看一个实际应用这个策略的案例：</p>
+      <h2 id="ipcw">IPCW</h2>
+<p>前面我们已经在这篇文章里介绍过<a href="https://mp.weixin.qq.com/s/pz89iFMs-q0ZNnPF2b2xfA" target="_blank" rel="noopener">IPCW的原理</a>。当时有小伙伴在知识星球里提问，IPCW在sas中的具体实现。</p>
 <p>
 
 
@@ -845,22 +838,75 @@
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="hierarchical testing" srcset="
-               /post/efficacy-endpoints-multiplicity/featured_hu69637e5a1aa9b5be370f431251771a0b_148455_905d2d99594c12a86ef0cc7cb62df15d.webp 400w,
-               /post/efficacy-endpoints-multiplicity/featured_hu69637e5a1aa9b5be370f431251771a0b_148455_b50ee0351cc78d0610464fd25da78903.webp 760w,
-               /post/efficacy-endpoints-multiplicity/featured_hu69637e5a1aa9b5be370f431251771a0b_148455_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
-               src="/post/efficacy-endpoints-multiplicity/featured_hu69637e5a1aa9b5be370f431251771a0b_148455_905d2d99594c12a86ef0cc7cb62df15d.webp"
-               width="760"
-               height="661"
+    <div class="w-100" ><img alt="问题" srcset="
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_66a9f0f3d61b726b8f0ab970e1537c5d.webp 400w,
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_92cad26ccd18b34292523a26bcd019c9.webp 760w,
+               /post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
+               src="/post/ipcw/featured_hu2f300d4cfafca6c5638ea841538e3d02_24328_66a9f0f3d61b726b8f0ab970e1537c5d.webp"
+               width="562"
+               height="298"
                loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
-<p>这个项目的SAP我已经放在了知识星球上(<a href="https://t.zsxq.com/10qxcDEKD" target="_blank" rel="noopener">https://t.zsxq.com/10qxcDEKD</a>)。</p>
-<p>这种gate-keeping的方式，主要用于主要、次要指标共存时的假设检验，也非常好理解：一旦主要指标无统计学意义，则后续一切都将失去意义，无论其是否有统计学意义。类似的做法还有下面这个：</p>
-<blockquote>
-<p>PFS will be analyzed first when approximately 264 events are reached. In line with the gate keeping strategy, ORR will only be assessed for superiority should PFS have demonstrated superiority.</p>
-</blockquote>
-<h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
+<p>今天我们来大致讲一下它的SAScode，完整的代码已经上传进我的<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>，感兴趣的同学可以自行下载查看。</p>
+<h2 id="数据结构">数据结构</h2>
+<p>首先，我们需要准备count格式的生存数据，如下面这个dummy dataset：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="dummy dataset" srcset="
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_c4bfb544a0b2d01f4c6d0b0fc04e737b.webp 400w,
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_f505652fee77604de42debad06cd4fbe.webp 760w,
+               /post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
+               src="/post/ipcw/data_huae82ab37dd1e4838b6bfafb245b420f9_69377_c4bfb544a0b2d01f4c6d0b0fc04e737b.webp"
+               width="524"
+               height="270"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>其中，xo_time标示crossover发生的时间，即表示是否发生了crossover，tstart、tstop标明count格式的生存数据，显示各个时间点受试者at risk的情况。</p>
+<h2 id="step-1-计算未删失未发生crossover的概率">step 1: 计算未删失（未发生crossover）的概率</h2>
+<p>这一步，根据协变量的不同，采用的模型也不行同。对于包含时依协变量的数据，我们可以分别构建包含基线协变量以及包含时依协变量的两个模型，来计算权重。</p>
+<p>采用logistic可以使用以下code：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sas" data-lang="sas"><span class="line"><span class="cl"><span class="kr">proc genmod </span>data=dummy descending <span class="k">order</span>=data;
+</span></span><span class="line"><span class="cl">  class crossover id;
+</span></span><span class="line"><span class="cl">  model crossover= baseline_covariates time_dependent_covariates / d=bin <span class="k">link</span>=logit;
+</span></span><span class="line"><span class="cl">  repeated subject=id;
+</span></span><span class="line"><span class="cl">  <span class="k">output</span> <span class="k">out</span>=<span class="k">out</span> prob=t<span class="kr">;
+</span></span></span><span class="line"><span class="cl"><span class="kr">run;</span>
+</span></span></code></pre></div><p>我们在星球里给的代码采用的是cox来计算概率，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sas" data-lang="sas"><span class="line"><span class="cl"><span class="kr">proc phreg </span>data=weight_est outest=survmod covs(aggregate) covm; * covs option <span class="k">and</span> id statement adjust for repeated measures;
+</span></span><span class="line"><span class="cl">  <span class="k">by</span> <span class="nv">&amp;trt</span>;
+</span></span><span class="line"><span class="cl">  class <span class="nv">&amp;bl_cl</span> <span class="nv">&amp;tv_cl</span>;
+</span></span><span class="line"><span class="cl">  model (<span class="nv">&amp;tstart</span>,<span class="nv">&amp;tend</span>)*xo_cnsr(<span class="m">0</span>)= <span class="nv">&amp;bl_ct</span> <span class="nv">&amp;bl_cl</span> <span class="nv">&amp;tv_ct</span> <span class="nv">&amp;tv_cl</span> /rl;
+</span></span><span class="line"><span class="cl">  id <span class="nv">&amp;subjid</span>;
+</span></span><span class="line"><span class="cl">  <span class="k">output</span> <span class="k">out</span>= probs_TV survival = w_TV<span class="kr">;
+</span></span></span><span class="line"><span class="cl"><span class="kr">run;</span>
+</span></span></code></pre></div><h2 id="step2-利用ipcw加权">step2: 利用IPCW加权</h2>
+<p>需要注意的是，在加权之前，我们可以进行权重的截断来进行stablize。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sas" data-lang="sas"><span class="line"><span class="cl"><span class="kr">proc phreg </span>data=surv_ph outest=survmod covs(aggregate) covm; * covs option <span class="k">and</span> id statement adjust for repeated measures;
+</span></span><span class="line"><span class="cl">  <span class="k">title</span> <span class="s">&#39;Final Model using weights from Cox PH Model&#39;</span>;
+</span></span><span class="line"><span class="cl">  class <span class="nv">&amp;bl_cl</span> <span class="nv">&amp;tv_cl</span> <span class="nv">&amp;trt</span>(ref=first);
+</span></span><span class="line"><span class="cl">  model (<span class="nv">&amp;tstart</span>,<span class="nv">&amp;tend</span>)*dth_event(<span class="m">0</span>)= <span class="nv">&amp;trt</span> <span class="nv">&amp;bl_ct</span> <span class="nv">&amp;bl_cl</span> <span class="nv">&amp;tv_cl</span> <span class="nv">&amp;tv_ct</span> /rl;
+</span></span><span class="line"><span class="cl">  id <span class="nv">&amp;subjid</span>;
+</span></span><span class="line"><span class="cl">  weight sw_t/norm<span class="kr">;
+</span></span></span><span class="line"><span class="cl"><span class="kr">run;</span>
+</span></span></code></pre></div><h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
 
     </div>
 
@@ -887,7 +933,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fefficacy-endpoints-multiplicity%2F&amp;text=efficacy&#43;endpoints%E5%88%86%E6%9E%90%E7%9A%84multiplicity" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fipcw%2F&amp;text=IPCW%E7%9A%84SAS%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -904,7 +950,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fefficacy-endpoints-multiplicity%2F&amp;t=efficacy&#43;endpoints%E5%88%86%E6%9E%90%E7%9A%84multiplicity" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fipcw%2F&amp;t=IPCW%E7%9A%84SAS%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -923,7 +969,7 @@
         
       
       <li>
-        <a href="mailto:?subject=efficacy%20endpoints%E5%88%86%E6%9E%90%E7%9A%84multiplicity&amp;body=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fefficacy-endpoints-multiplicity%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=IPCW%E7%9A%84SAS%E5%AE%9E%E7%8E%B0&amp;body=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fipcw%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -940,7 +986,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fefficacy-endpoints-multiplicity%2F&amp;title=efficacy&#43;endpoints%E5%88%86%E6%9E%90%E7%9A%84multiplicity" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fipcw%2F&amp;title=IPCW%E7%9A%84SAS%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -957,7 +1003,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fefficacy-endpoints-multiplicity%2F&amp;title=efficacy&#43;endpoints%E5%88%86%E6%9E%90%E7%9A%84multiplicity" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fipcw%2F&amp;title=IPCW%E7%9A%84SAS%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
