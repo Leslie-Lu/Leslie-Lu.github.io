@@ -279,12 +279,12 @@
 
   
 
-<meta name="description" content="Men who have sex with men (MSM) have been recommended for targeted monkeypox vaccination. We aimed to investigate monkeypox awareness and explore the correlates of monkeypox vaccination hesitancy among MSM in China. We conducted a cross-sectional survey from August 10 to September 9, 2022. Awareness related to monkeypox and attitude toward monkeypox vaccination among MSM aged ≥18 years were collected. Multivariable logistic regression was applied to evaluate correlates of vaccination hesitancy. The discrepancy in awareness between subgroups regarding HIV status was assessed. A total of 1090 MSM were included (age: median 30 years, interquartile range [IQR], 25-35; HIV-infected: 53.12%). Only 13.85% of respondents expressed high monkeypox vaccination hesitancy. Hesitancy was associated with no fixed income (adjuster odds ratio [aOR], 2.46, 95% confidence interval [CI], 1.48-4.11), infrequent information following (sometimes, 3.01, 1.55-5.83; seldom or never, 5.66, 2.58-12.45), and lack of worries about monkeypox endemic (1.78, 1.11-2.87). Participants who believed that HIV-infected cases accounted for a smaller proportion (1.62, 1.01-2.60), disagreed that monkeypox virus could be detected in semen (2.21, 1.26-3.88), and considered either replication-competent (1.84, 1.14-2.96) or replication-deficient (4.80, 2.26-10.21) monkeypox vaccine unsuitable for HIV-infected people were generally more hesitant. Compared with HIV-uninfected MSM, HIV-infected MSM supported more for vaccination promotion. MSM in China had low hesitancy toward monkeypox vaccination. Safety and affordability of vaccine and availability of information were essential aspects to reduce hesitancy. Education on vaccination benefits should be encouraged to promote future vaccination plans." />
+<meta name="description" content="森林图 前面我们在这篇文章里介绍过亚组分析森林图。 我们当时是借助宏来实现森林图的绘制，但是宏没有适配展" />
 
 
 
-<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/publication/journal-article/2023-01-01_monkeypox_awareness_/" />
-<link rel="canonical" href="https://leslie-lu.github.io/publication/journal-article/2023-01-01_monkeypox_awareness_/" />
+<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/post/forest-plot/" />
+<link rel="canonical" href="https://leslie-lu.github.io/post/forest-plot/" />
 
 
 
@@ -307,31 +307,30 @@
 
 
   
-  
 
 
 
 
 
 
-<meta property="twitter:card" content="summary" />
+<meta property="twitter:card" content="summary_large_image" />
 
   <meta property="twitter:site" content="@callmeleslielu" />
   <meta property="twitter:creator" content="@callmeleslielu" />
-<meta property="twitter:image" content="https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+<meta property="twitter:image" content="https://leslie-lu.github.io/post/forest-plot/featured.png" />
 <meta property="og:site_name" content="Zhen Lu" />
-<meta property="og:url" content="https://leslie-lu.github.io/publication/journal-article/2023-01-01_monkeypox_awareness_/" />
-<meta property="og:title" content="Monkeypox awareness and low vaccination hesitancy among men who have sex with men in China | Zhen Lu" />
-<meta property="og:description" content="Men who have sex with men (MSM) have been recommended for targeted monkeypox vaccination. We aimed to investigate monkeypox awareness and explore the correlates of monkeypox vaccination hesitancy among MSM in China. We conducted a cross-sectional survey from August 10 to September 9, 2022. Awareness related to monkeypox and attitude toward monkeypox vaccination among MSM aged ≥18 years were collected. Multivariable logistic regression was applied to evaluate correlates of vaccination hesitancy. The discrepancy in awareness between subgroups regarding HIV status was assessed. A total of 1090 MSM were included (age: median 30 years, interquartile range [IQR], 25-35; HIV-infected: 53.12%). Only 13.85% of respondents expressed high monkeypox vaccination hesitancy. Hesitancy was associated with no fixed income (adjuster odds ratio [aOR], 2.46, 95% confidence interval [CI], 1.48-4.11), infrequent information following (sometimes, 3.01, 1.55-5.83; seldom or never, 5.66, 2.58-12.45), and lack of worries about monkeypox endemic (1.78, 1.11-2.87). Participants who believed that HIV-infected cases accounted for a smaller proportion (1.62, 1.01-2.60), disagreed that monkeypox virus could be detected in semen (2.21, 1.26-3.88), and considered either replication-competent (1.84, 1.14-2.96) or replication-deficient (4.80, 2.26-10.21) monkeypox vaccine unsuitable for HIV-infected people were generally more hesitant. Compared with HIV-uninfected MSM, HIV-infected MSM supported more for vaccination promotion. MSM in China had low hesitancy toward monkeypox vaccination. Safety and affordability of vaccine and availability of information were essential aspects to reduce hesitancy. Education on vaccination benefits should be encouraged to promote future vaccination plans." /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:url" content="https://leslie-lu.github.io/post/forest-plot/" />
+<meta property="og:title" content="森林图SAS代码 | Zhen Lu" />
+<meta property="og:description" content="森林图 前面我们在这篇文章里介绍过亚组分析森林图。 我们当时是借助宏来实现森林图的绘制，但是宏没有适配展" /><meta property="og:image" content="https://leslie-lu.github.io/post/forest-plot/featured.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
       property="article:published_time"
-      content="2023-01-01T00:00:00&#43;00:00"
+      content="2023-10-13T00:00:00&#43;00:00"
     />
   
   
-    <meta property="article:modified_time" content="2023-01-01T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2023-10-13T00:00:00&#43;00:00">
   
 
 
@@ -346,25 +345,31 @@
 
 
 
+  
+
 
 
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://leslie-lu.github.io/publication/journal-article/2023-01-01_monkeypox_awareness_/"
+    "@id": "https://leslie-lu.github.io/post/forest-plot/"
   },
-  "headline": "Monkeypox awareness and low vaccination hesitancy among men who have sex with men in China",
+  "headline": "森林图SAS代码",
   
-  "datePublished": "2023-01-01T00:00:00Z",
-  "dateModified": "2023-01-01T00:00:00Z",
+  "image": [
+    "https://leslie-lu.github.io/post/forest-plot/featured.png"
+  ],
+  
+  "datePublished": "2023-10-13T00:00:00Z",
+  "dateModified": "2023-10-13T00:00:00Z",
   
   "author": {
     "@type": "Person",
-    "name": "Y. Li"
+    "name": "Zhen Lu 陆震"
   },
   
   "publisher": {
@@ -375,7 +380,7 @@
       "url": "https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Men who have sex with men (MSM) have been recommended for targeted monkeypox vaccination. We aimed to investigate monkeypox awareness and explore the correlates of monkeypox vaccination hesitancy among MSM in China. We conducted a cross-sectional survey from August 10 to September 9, 2022. Awareness related to monkeypox and attitude toward monkeypox vaccination among MSM aged ≥18 years were collected. Multivariable logistic regression was applied to evaluate correlates of vaccination hesitancy. The discrepancy in awareness between subgroups regarding HIV status was assessed. A total of 1090 MSM were included (age: median 30 years, interquartile range [IQR], 25-35; HIV-infected: 53.12%). Only 13.85% of respondents expressed high monkeypox vaccination hesitancy. Hesitancy was associated with no fixed income (adjuster odds ratio [aOR], 2.46, 95% confidence interval [CI], 1.48-4.11), infrequent information following (sometimes, 3.01, 1.55-5.83; seldom or never, 5.66, 2.58-12.45), and lack of worries about monkeypox endemic (1.78, 1.11-2.87). Participants who believed that HIV-infected cases accounted for a smaller proportion (1.62, 1.01-2.60), disagreed that monkeypox virus could be detected in semen (2.21, 1.26-3.88), and considered either replication-competent (1.84, 1.14-2.96) or replication-deficient (4.80, 2.26-10.21) monkeypox vaccine unsuitable for HIV-infected people were generally more hesitant. Compared with HIV-uninfected MSM, HIV-infected MSM supported more for vaccination promotion. MSM in China had low hesitancy toward monkeypox vaccination. Safety and affordability of vaccine and availability of information were essential aspects to reduce hesitancy. Education on vaccination benefits should be encouraged to promote future vaccination plans."
+  "description": "森林图 前面我们在这篇文章里介绍过亚组分析森林图。 我们当时是借助宏来实现森林图的绘制，但是宏没有适配展"
 }
 </script>
 
@@ -397,7 +402,7 @@
 
 
   
-  <title>Monkeypox awareness and low vaccination hesitancy among men who have sex with men in China | Zhen Lu</title>
+  <title>森林图SAS代码 | Zhen Lu</title>
 
   
   
@@ -417,7 +422,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="fb6d462b11ef9664157d05d0022a1a87" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="bf673d1d37bfe23c662c0d7da028a9d2" >
 
   
   
@@ -721,16 +726,7 @@
     
     
 
-    
-
-
-
-
-
-
-
-
-<div class="pub">
+    <article class="article">
 
   
 
@@ -752,7 +748,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>Monkeypox awareness and low vaccination hesitancy among men who have sex with men in China</h1>
+  <h1>森林图SAS代码</h1>
 
   
 
@@ -769,25 +765,8 @@
   <div>
     
 
-  <span >
-      Y. Li</span>, <span >
-      X. Peng</span>, <span >
-      L. Fu</span>, <span >
-      B. Wang</span>, <span >
-      Y. Sun</span>, <span >
-      Y. Chen</span>, <span >
-      Y.-F. Lin</span>, <span >
-      X. Wu</span>, <span >
-      Q. Liu</span>, <span >
-      Y. Gao</span>, <span >
-      W. Zheng</span>, <span >
-      J. Bian</span>, <span >
-      Z. Lu</span>, <span >
-      X. Meng</span>, <span >
-      H. Xue</span>, <span >
-      H. Li</span>, <span >
-      H. Jiang</span>, <span >
-      H. Zou</span>
+  <span class="author-highlighted">
+      Zhen Lu 陆震</span>
   </div>
   
   
@@ -798,13 +777,18 @@
     
       
     
-    January, 2023
+    Oct 13, 2023
   </span>
   
 
   
 
   
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
 
   
   
@@ -812,6 +796,10 @@
   
 
   
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/sas/">SAS</a></span>
   
 
 </div>
@@ -829,47 +817,73 @@
 
   <div class="article-container">
 
-    
-    <h3>Abstract</h3>
-    <p class="pub-abstract">Men who have sex with men (MSM) have been recommended for targeted monkeypox vaccination. We aimed to investigate monkeypox awareness and explore the correlates of monkeypox vaccination hesitancy among MSM in China. We conducted a cross-sectional survey from August 10 to September 9, 2022. Awareness related to monkeypox and attitude toward monkeypox vaccination among MSM aged ≥18 years were collected. Multivariable logistic regression was applied to evaluate correlates of vaccination hesitancy. The discrepancy in awareness between subgroups regarding HIV status was assessed. A total of 1090 MSM were included (age: median 30 years, interquartile range [IQR], 25-35; HIV-infected: 53.12%). Only 13.85% of respondents expressed high monkeypox vaccination hesitancy. Hesitancy was associated with no fixed income (adjuster odds ratio [aOR], 2.46, 95% confidence interval [CI], 1.48-4.11), infrequent information following (sometimes, 3.01, 1.55-5.83; seldom or never, 5.66, 2.58-12.45), and lack of worries about monkeypox endemic (1.78, 1.11-2.87). Participants who believed that HIV-infected cases accounted for a smaller proportion (1.62, 1.01-2.60), disagreed that monkeypox virus could be detected in semen (2.21, 1.26-3.88), and considered either replication-competent (1.84, 1.14-2.96) or replication-deficient (4.80, 2.26-10.21) monkeypox vaccine unsuitable for HIV-infected people were generally more hesitant. Compared with HIV-uninfected MSM, HIV-infected MSM supported more for vaccination promotion. MSM in China had low hesitancy toward monkeypox vaccination. Safety and affordability of vaccine and availability of information were essential aspects to reduce hesitancy. Education on vaccination benefits should be encouraged to promote future vaccination plans.</p>
-    
+    <div class="article-style">
+      <h2 id="森林图">森林图</h2>
+<p>前面我们在这篇文章里介绍过<a href="https://mp.weixin.qq.com/s/tbbz2FgUyiptsdIxaOeWsw" target="_blank" rel="noopener">亚组分析森林图</a>。</p>
+<p>
 
-    
-    
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-12 col-md-3 pub-row-heading">Type</div>
-          <div class="col-12 col-md-9">
-            <a href="/publication/#2">
-              Journal article
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="forest plot1" srcset="
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_66eaa354176fc86a75d07f9660bd4255.webp 400w,
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_dd5234007694e8bb11860c3420def664.webp 760w,
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
+               src="/post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_66eaa354176fc86a75d07f9660bd4255.webp"
+               width="760"
+               height="343"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>我们当时是借助宏来实现森林图的绘制，但是宏没有适配展示生存分析的中位生存时间、有效事件数这些有用的信息，使用起来非常不灵活；另外有时候，我们是用R、python跑出来的亚组分析结果，如果想保持一样的图片出版风格，也不容易统一。如，我们想在文章中加入下图风格的森林图：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="forest plot2" srcset="
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_910cef5de321b6d9e3beb8e49730db8f.webp 400w,
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_b0b973d0a65c69da3d7b43c0f6aa9fc0.webp 760w,
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_1200x1200_fit_q100_h2_lanczos_3.webp 1200w"
+               src="/post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_910cef5de321b6d9e3beb8e49730db8f.webp"
+               width="760"
+               height="339"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>这样SAS和R出来的风格很难一致。如果我们还想额外增加一列subgroup人数的count，这个时候就非常需要改动起来非常灵活的SAS代码了。</p>
+<h2 id="解决">解决</h2>
+<p>出于以上的种种考虑，刚好自己最近在做相关的文章分析，我们<em>特别定制</em>了改动非常容易的SAS代码，想着尽可能地保持高灵活高度统一的森林图风格，完整的代码已经上传进我的<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>，欢迎感兴趣的或者有实际需求的同学自行下载查看使用。</p>
+<p>我自己使用起来的感受，还是非常不错的，可以像上面第二张森林图一样，灵活地额外增加列的信息，如各个亚组的有效事件数count以及percent、交互项p值以及脚注。另外，由于我们不规定森林图之前的分析，所以，可以自由地使用SAS、R、python的回归结果来作图。图片格式可选择有pdf、png。</p>
+<h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
+
     </div>
-    <div class="d-md-none space-below"></div>
-    
-
-    
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-12 col-md-3 pub-row-heading">Publication</div>
-          <div class="col-12 col-md-9">J Med Virol, (95), <em>pp. e28567</em>, <a href="https://doi.org/10.1002/jmv.28567" target="_blank" rel="noopener">https://doi.org/10.1002/jmv.28567</a></div>
-        </div>
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    <div class="d-md-none space-below"></div>
-    
-
-    <div class="space-below"></div>
-
-    <div class="article-style"></div>
 
     
 
@@ -894,7 +908,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2Fpublication%2Fjournal-article%2F2023-01-01_monkeypox_awareness_%2F&amp;text=Monkeypox&#43;awareness&#43;and&#43;low&#43;vaccination&#43;hesitancy&#43;among&#43;men&#43;who&#43;have&#43;sex&#43;with&#43;men&#43;in&#43;China" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fforest-plot%2F&amp;text=%E6%A3%AE%E6%9E%97%E5%9B%BESAS%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -911,7 +925,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2Fpublication%2Fjournal-article%2F2023-01-01_monkeypox_awareness_%2F&amp;t=Monkeypox&#43;awareness&#43;and&#43;low&#43;vaccination&#43;hesitancy&#43;among&#43;men&#43;who&#43;have&#43;sex&#43;with&#43;men&#43;in&#43;China" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fforest-plot%2F&amp;t=%E6%A3%AE%E6%9E%97%E5%9B%BESAS%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -930,7 +944,7 @@
         
       
       <li>
-        <a href="mailto:?subject=Monkeypox%20awareness%20and%20low%20vaccination%20hesitancy%20among%20men%20who%20have%20sex%20with%20men%20in%20China&amp;body=https%3A%2F%2Fleslie-lu.github.io%2Fpublication%2Fjournal-article%2F2023-01-01_monkeypox_awareness_%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=%E6%A3%AE%E6%9E%97%E5%9B%BESAS%E4%BB%A3%E7%A0%81&amp;body=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fforest-plot%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -947,7 +961,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2Fpublication%2Fjournal-article%2F2023-01-01_monkeypox_awareness_%2F&amp;title=Monkeypox&#43;awareness&#43;and&#43;low&#43;vaccination&#43;hesitancy&#43;among&#43;men&#43;who&#43;have&#43;sex&#43;with&#43;men&#43;in&#43;China" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fforest-plot%2F&amp;title=%E6%A3%AE%E6%9E%97%E5%9B%BESAS%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -964,7 +978,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2Fpublication%2Fjournal-article%2F2023-01-01_monkeypox_awareness_%2F&amp;title=Monkeypox&#43;awareness&#43;and&#43;low&#43;vaccination&#43;hesitancy&#43;among&#43;men&#43;who&#43;have&#43;sex&#43;with&#43;men&#43;in&#43;China" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2Fpost%2Fforest-plot%2F&amp;title=%E6%A3%AE%E6%9E%97%E5%9B%BESAS%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -988,107 +1002,146 @@
 
 
 
-
+  
+  
   
     
-
-
-
-
   
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://leslie-lu.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu40113b7f0710b95ddc9688f77545e8fa_101554_270x270_fill_q100_lanczos_center.jpg" alt="Zhen Lu 陆震"></a>
     
 
-
-
-
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://leslie-lu.github.io/">Zhen Lu 陆震</a></h5>
+      <h6 class="card-subtitle">PhD Candidate of Biostatistics</h6>
+      <p class="card-text">My research interests include biostatistics and machine learning.</p>
+      <ul class="network-icon" aria-hidden="true">
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:?" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://space.bilibili.com/32159908" target="_blank" rel="noopener">
+        <i class="fab fa-bilibili"></i>
+      </a>
+    </li>
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/uploads/qrcode.jpg" >
+        <i class="fab fa-weixin"></i>
+      </a>
+    </li>
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.zhihu.com/people/edison-70-18" target="_blank" rel="noopener">
+        <i class="fab fa-zhihu"></i>
+      </a>
+    </li>
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/callmeleslielu" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
   
     
-
-
-
-
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=LKLQ1g8AAAAJ" target="_blank" rel="noopener">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
   
     
-
-
-
-
-  
     
-
-
-
-
-  
     
-
-
-
-
-  
+      
     
-
-
-
-
-  
     
-
-
-
-
-  
     
-
-
-
-
-  
     
-
-
-
-
-  
     
-
-
-
-
-  
+      
     
+    <li>
+      <a href="https://github.com/Leslie-Lu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
 
-
+    </div>
+  </div>
 
 
   
@@ -1143,7 +1196,7 @@
 
 
   </div>
-</div>
+</article>
   </div>
 
   <div class="page-footer">

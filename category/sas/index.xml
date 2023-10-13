@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SAS | Zhen Lu</title>
+    <link>https://leslie-lu.github.io/category/sas/</link>
+      <atom:link href="https://leslie-lu.github.io/category/sas/index.xml" rel="self" type="application/rss+xml" />
+    <description>SAS</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 13 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>SAS</title>
+      <link>https://leslie-lu.github.io/category/sas/</link>
+    </image>
+    
+    <item>
+      <title>森林图SAS代码</title>
+      <link>https://leslie-lu.github.io/post/forest-plot/</link>
+      <pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/forest-plot/</guid>
+      <description>&lt;h2 id=&#34;森林图&#34;&gt;森林图&lt;/h2&gt;
+&lt;p&gt;前面我们在这篇文章里介绍过&lt;a href=&#34;https://mp.weixin.qq.com/s/tbbz2FgUyiptsdIxaOeWsw&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;亚组分析森林图&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;forest plot1&#34; srcset=&#34;
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_66eaa354176fc86a75d07f9660bd4255.webp 400w,
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_dd5234007694e8bb11860c3420def664.webp 760w,
+               /post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/forest-plot/plot1_hube95559fa10bb6cb49f3d6b6455e69d2_40081_66eaa354176fc86a75d07f9660bd4255.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;343&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;我们当时是借助宏来实现森林图的绘制，但是宏没有适配展示生存分析的中位生存时间、有效事件数这些有用的信息，使用起来非常不灵活；另外有时候，我们是用R、python跑出来的亚组分析结果，如果想保持一样的图片出版风格，也不容易统一。如，我们想在文章中加入下图风格的森林图：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;forest plot2&#34; srcset=&#34;
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_910cef5de321b6d9e3beb8e49730db8f.webp 400w,
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_b0b973d0a65c69da3d7b43c0f6aa9fc0.webp 760w,
+               /post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/forest-plot/featured_hu85c9681cfe23672f308e4b76abfc5985_89288_910cef5de321b6d9e3beb8e49730db8f.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;339&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这样SAS和R出来的风格很难一致。如果我们还想额外增加一列subgroup人数的count，这个时候就非常需要改动起来非常灵活的SAS代码了。&lt;/p&gt;
+&lt;h2 id=&#34;解决&#34;&gt;解决&lt;/h2&gt;
+&lt;p&gt;出于以上的种种考虑，刚好自己最近在做相关的文章分析，我们&lt;em&gt;特别定制&lt;/em&gt;了改动非常容易的SAS代码，想着尽可能地保持高灵活高度统一的森林图风格，完整的代码已经上传进我的&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;，欢迎感兴趣的或者有实际需求的同学自行下载查看使用。&lt;/p&gt;
+&lt;p&gt;我自己使用起来的感受，还是非常不错的，可以像上面第二张森林图一样，灵活地额外增加列的信息，如各个亚组的有效事件数count以及percent、交互项p值以及脚注。另外，由于我们不规定森林图之前的分析，所以，可以自由地使用SAS、R、python的回归结果来作图。图片格式可选择有pdf、png。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
