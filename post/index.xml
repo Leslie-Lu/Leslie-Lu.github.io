@@ -5,12 +5,148 @@
     <link>https://leslie-lu.github.io/post/</link>
       <atom:link href="https://leslie-lu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 13 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://leslie-lu.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>RStudio更新支持Copilot</title>
+      <link>https://leslie-lu.github.io/post/copilot/</link>
+      <pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/post/copilot/</guid>
+      <description>&lt;h2 id=&#34;rstudio更新&#34;&gt;RStudio更新&lt;/h2&gt;
+&lt;p&gt;RStudio在2023.09.1的版本更新中，终于支持了Google Copilot。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Copilot&#34; srcset=&#34;
+               /post/copilot/plot1_hua70969be4e36e445d1f5b99b4121e477_28178_20bd931d9f950d9e49e8bbcd6acfbd00.webp 400w,
+               /post/copilot/plot1_hua70969be4e36e445d1f5b99b4121e477_28178_ba5df79608e957b1c7b6aadfcce5335e.webp 760w,
+               /post/copilot/plot1_hua70969be4e36e445d1f5b99b4121e477_28178_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/copilot/plot1_hua70969be4e36e445d1f5b99b4121e477_28178_20bd931d9f950d9e49e8bbcd6acfbd00.webp&#34;
+               width=&#34;722&#34;
+               height=&#34;272&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;OpenAI的chatgpt已经对实际的科研和工作产生了巨大的影响，相信已经有不少的小伙伴已经日常使用chatgpt了。在编程的IDE中，vs code也已经支持了copilot。对于习惯使用rstudio的小伙伴来说，copilot无疑能帮助到你的编程。Google copilot是OpenAI和Github联合推出的AI编程助手，它基于github中通过托管的repository中的代码进行微调。相比于边问chatgpt边写代码，直接在rstudio中使用copilot可能更为方便。&lt;/p&gt;
+&lt;h2 id=&#34;使用copilot&#34;&gt;使用copilot&lt;/h2&gt;
+&lt;p&gt;在rstudio的global option里进行github账号的关联即可使用copilot。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;RStudio&#34; srcset=&#34;
+               /post/copilot/plot2_hua38898666fa999fc01b6ddaf19d147e8_38929_15e6114d305fab85e8814783a44d48fc.webp 400w,
+               /post/copilot/plot2_hua38898666fa999fc01b6ddaf19d147e8_38929_aae1d85ab253af451206c06b866c5d9f.webp 760w,
+               /post/copilot/plot2_hua38898666fa999fc01b6ddaf19d147e8_38929_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/copilot/plot2_hua38898666fa999fc01b6ddaf19d147e8_38929_15e6114d305fab85e8814783a44d48fc.webp&#34;
+               width=&#34;628&#34;
+               height=&#34;644&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;不过在试用结束后，copilot需要付费继续使用。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;账号关联&#34; srcset=&#34;
+               /post/copilot/featured_hu34bee3f705c5a88612fd8d1c86045575_54115_d660a7eb68ee43500f2d7495e950445a.webp 400w,
+               /post/copilot/featured_hu34bee3f705c5a88612fd8d1c86045575_54115_bfca6b2ce34f82def61ff7ac96703890.webp 760w,
+               /post/copilot/featured_hu34bee3f705c5a88612fd8d1c86045575_54115_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/copilot/featured_hu34bee3f705c5a88612fd8d1c86045575_54115_d660a7eb68ee43500f2d7495e950445a.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;547&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;利用copilot，我们基本可以实现以下功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码自动智能填补；&lt;/li&gt;
+&lt;li&gt;智能生成任务需求的基本框架代码；&lt;/li&gt;
+&lt;li&gt;在注释中进行类似于chatgpt的提问；&lt;/li&gt;
+&lt;li&gt;编程过程中的全程指导。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如下面:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;copilot&#34; srcset=&#34;
+               /post/copilot/plot3_hu75fcfb9325fc99d24ff85e09a9ca663e_23803_c07faff07a02c305dde9558c23d09405.webp 400w,
+               /post/copilot/plot3_hu75fcfb9325fc99d24ff85e09a9ca663e_23803_0834ce683508c5a7c46b4f6db0a85ddd.webp 760w,
+               /post/copilot/plot3_hu75fcfb9325fc99d24ff85e09a9ca663e_23803_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/post/copilot/plot3_hu75fcfb9325fc99d24ff85e09a9ca663e_23803_c07faff07a02c305dde9558c23d09405.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;97&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;感兴趣的小伙伴已经看完就可以去用起来啦。关于具体的使用指南，我已经放在了我的&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，欢迎大家查阅。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>森林图SAS代码</title>
