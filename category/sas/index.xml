@@ -5,12 +5,165 @@
     <link>https://leslie-lu.github.io/category/sas/</link>
       <atom:link href="https://leslie-lu.github.io/category/sas/index.xml" rel="self" type="application/rss+xml" />
     <description>SAS</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 31 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 20 Nov 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>SAS</title>
       <link>https://leslie-lu.github.io/category/sas/</link>
     </image>
+    
+    <item>
+      <title>MMRM的SAS和R实现</title>
+      <link>https://leslie-lu.github.io/2023/11/20/mmrm/</link>
+      <pubDate>Mon, 20 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2023/11/20/mmrm/</guid>
+      <description>&lt;h2 id=&#34;missing-data&#34;&gt;missing data&lt;/h2&gt;
+&lt;p&gt;在&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，不断有小伙伴提问到missing data相关的问题。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;question&#34; srcset=&#34;
+               /2023/11/20/mmrm/fig1_hu0e57f70e562dbec0dfedae47690a221a_16107_49066146ea5309fa7a2e0192906a2499.webp 400w,
+               /2023/11/20/mmrm/fig1_hu0e57f70e562dbec0dfedae47690a221a_16107_6f5252e005f78207ace2ea7d3894ad41.webp 760w,
+               /2023/11/20/mmrm/fig1_hu0e57f70e562dbec0dfedae47690a221a_16107_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/2023/11/20/mmrm/fig1_hu0e57f70e562dbec0dfedae47690a221a_16107_49066146ea5309fa7a2e0192906a2499.webp&#34;
+               width=&#34;758&#34;
+               height=&#34;128&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;missing data是个庞大的问题，我们只能在遇到具体的问题时对应给出回答，再争取由点到面。&lt;/p&gt;
+&lt;p&gt;一般，具体的思路如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;landscape&#34; srcset=&#34;
+               /2023/11/20/mmrm/fig2_hu055fc29ef151189f245ef24dbb11c7bf_62553_d2c5664405325afa73a4c1ed6192028e.webp 400w,
+               /2023/11/20/mmrm/fig2_hu055fc29ef151189f245ef24dbb11c7bf_62553_42c9286a0d6005a84b8891d9b19af30b.webp 760w,
+               /2023/11/20/mmrm/fig2_hu055fc29ef151189f245ef24dbb11c7bf_62553_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/2023/11/20/mmrm/fig2_hu055fc29ef151189f245ef24dbb11c7bf_62553_d2c5664405325afa73a4c1ed6192028e.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;327&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;今天我们主要讲一讲MMRM（mixed model repeated measures）。&lt;/p&gt;
+&lt;h2 id=&#34;mmrm&#34;&gt;MMRM&lt;/h2&gt;
+&lt;p&gt;对于logitudinal data和重复测量数据，我们可以采用MMRM来分析。MMRM的基本思路是，将每个受试者的测量数据建模，然后将所有受试者的模型汇总，得到整体的模型。MMRM不具体地指定个体水平上的random effects，相反，其基于时间刻度上重复测量之间的相关性（残差相关）进行建模（不仅是估计means同时估计variances和covariances）。对于这个相关性的刻画，MMRM有着灵活的相关矩阵结构的假设，如unstructured (UN)、homogeneous Toeplitz (TOEP)、auto-regressive (AR(1))、heterogeneous auto-regressive (ARH(1))、compound symmetry (CS)、heterogeneous compound symmetry (CSH)等，可以用来估计固定效应，一般我们选择UN。而对于固定效应，MMRM可以估计每组每个时间节点endpoint的均值水平，如来自NEJM的下图&lt;a href=&#34;https://doi.org/10.1056/NEJMoa2304430&#34; title=&#34;Two Phase 3 Trials of Gantenerumab in Early Alzheimer’s Disease&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;fig3&#34; srcset=&#34;
+               /2023/11/20/mmrm/fig3_hudc9994d1f19635a765962a33cd9772b6_42721_e9e3732a3e1afa6980445bcd03bc749b.webp 400w,
+               /2023/11/20/mmrm/fig3_hudc9994d1f19635a765962a33cd9772b6_42721_5474ee612001bfb8ed55b060c16df6a6.webp 760w,
+               /2023/11/20/mmrm/fig3_hudc9994d1f19635a765962a33cd9772b6_42721_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/2023/11/20/mmrm/fig3_hudc9994d1f19635a765962a33cd9772b6_42721_e9e3732a3e1afa6980445bcd03bc749b.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;263&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;而更为重要的是，MMRM可以基于所有现有的数据，包括missing data（missing at random），来估计固定效应。这一点是MMRM的优势，也是我们选择MMRM的原因。&lt;/p&gt;
+&lt;p&gt;下面我们将给出MMRM的SAS和R的实现。这里，我们dummy一个RCT的数据，两组，每组200个受试者，每个受试者有9周的测量数据（分值），无缺失，需要比较两组第9周分值相对于baseline改变（change from baseline）之间的差异，采用MMRM分析。&lt;/p&gt;
+&lt;h2 id=&#34;sas&#34;&gt;SAS&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;proc mixed data=adqs method=reml covtest;
+  class usubjid avisit trt01p(REF=&#39;Placebo&#39;) region1;
+  model chg = trt01p avisit base region1 trt01p*avisit / ddfm=KR;
+  repeated avisit / subject=usubjid type=un;
+  lsmeans trt01p * avisit / cl pdiff alpha = 0.05 obsmargins;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;除模型诊断等相关信息之外，主要least suqares means结果如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;LSM&#34; srcset=&#34;
+               /2023/11/20/mmrm/fig4_hu201d52dd15aba02bf9d8a5069cdb9419_112282_cd16e7bee789fec8be2b51819e0be120.webp 400w,
+               /2023/11/20/mmrm/fig4_hu201d52dd15aba02bf9d8a5069cdb9419_112282_f2dce998f8143a54a322410a83041f4a.webp 760w,
+               /2023/11/20/mmrm/fig4_hu201d52dd15aba02bf9d8a5069cdb9419_112282_1200x1200_fit_q100_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://leslie-lu.github.io/2023/11/20/mmrm/fig4_hu201d52dd15aba02bf9d8a5069cdb9419_112282_cd16e7bee789fec8be2b51819e0be120.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;316&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(mmrm)
+library(emmeans)
+library(dplyr)
+  fit_mmrm &amp;lt;- mmrm(
+    formula = CHG ~ TRT01P + AVISIT + BASE + REGION1 + TRT01P*AVISIT +
+    us(AVISIT | USUBJID),
+    data = adqs,
+    reml = TRUE,
+    control = mmrm_control(method = &amp;quot;Kenward-Roger&amp;quot; , vcov =&amp;quot;Kenward-RogerLinear&amp;quot;)
+  )
+summary(fit_mmrm)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;二者结果基本一致，需要注意的是，在R中，利用以上代码的话，如果要获得组间LSM difference，我们需要另外编程来获得，具体的代码已经放进&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;，欢迎大家下载查阅。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>结合SAS和R绘制临床试验figure</title>
