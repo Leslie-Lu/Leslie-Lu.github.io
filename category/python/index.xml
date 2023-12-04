@@ -5,12 +5,86 @@
     <link>https://leslie-lu.github.io/category/python/</link>
       <atom:link href="https://leslie-lu.github.io/category/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 04 Dec 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>Python</title>
       <link>https://leslie-lu.github.io/category/python/</link>
     </image>
+    
+    <item>
+      <title>SCI中的XGBoost</title>
+      <link>https://leslie-lu.github.io/2023/12/04/xgboost/</link>
+      <pubDate>Mon, 04 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2023/12/04/xgboost/</guid>
+      <description>&lt;h2 id=&#34;xgboost&#34;&gt;XGBoost&lt;/h2&gt;
+&lt;p&gt;应该来说，目前在各大数据竞赛的顶级解决方案和基于机器学习的SCI文章中，XGBoost是最受欢迎的机器学习算法之一。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://raw.githubusercontent.com/dmlc/dmlc.github.io/master/img/logo-m/xgboost.png&#34; alt=&#34;XGBoost&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;XGBoost是一种基于决策树的集成学习算法，它的全称是eXtreme Gradient Boosting，由陈天奇等人在2016年提出&lt;a href=&#34;%27Xgboost:%20A%20scalable%20tree%20boosting%20system%27&#34;&gt; &lt;/a&gt;，它 是&lt;a href=&#34;https://mp.weixin.qq.com/s/GSU8kPthr5oErmKsl7HAow&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gradient Boosting算法&lt;/a&gt;的一种高效实现，在Gradient Boosting算法的基础上做了很多改进，从而在算法精度、速度和泛化能力上都有了很大的提升。XGBoost的核心思想是，通过集成多个决策树来构建一个更加强大的模型。在集成过程中，XGBoost会对每个决策树的预测结果进行累加，从而得到最终的预测结果。在每一轮迭代中，XGBoost都会训练一个新的决策树，并将其添加到集成模型中。在训练过程中，XGBoost会根据模型的表现来调整决策树的复杂度，从而提高模型的泛化能力。&lt;/p&gt;
+&lt;p&gt;$$obj^{(t)} = ∑_{i=1}^{n} \left( l(y_i,\hat{y}&lt;em&gt;{i}^{t-1})+g&lt;/em&gt;{i}f_{t}(x_i) + \frac{1}{2}h_if_t^2(x_i) \right) + w(f_t)+ constant$$&lt;/p&gt;
+&lt;p&gt;在精度上，XGBoost将损失函数展开到二阶导数（其中$g_i$为一阶导数、$h_i$为e二阶导数），从而得到了更加精确的损失函数近似值。在速度上，XGBoost使用了并行计算技术、稀疏感知、加权分位数，从而提高了算法的训练速度。在泛化能力上，XGBoost对损失函数使用了正则化技术（控制树的复杂度），从而降低了模型的方差，同时在加性模型（由多个基模型组成）中设置缩减率和列抽样等，防止模型过拟合。&lt;/p&gt;
+&lt;p&gt;其中，最核心的，XGBoost相较于GBDT（gradient boosting decision tree）的一个最大特点是，用到了损失函数的二阶导数，我们用numpy手写的话，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class LogisticLoss:
+    def __init__(self): #initialize the object
+        sigmoid = Sigmoid()
+        self._func = sigmoid
+        self._grad = sigmoid.gradient
+    
+    # 定义损失函数形式
+    def loss(self, y, y_pred):
+        y_pred = np.clip(y_pred, 1e-15, 1 - 1e-15) #限制在1e-15和1-1e-15之间，防止log(0)出现
+        p = self._func(y_pred)
+        return y * np.log(p) + (1 - y) * np.log(1 - p) #logistic loss, formula for binary classification
+
+    # 定义一阶梯度
+    def gradient(self, y, y_pred):
+        p = self._func(y_pred)
+        return -(y - p)
+
+    # 定义二阶梯度
+    def hess(self, y, y_pred):
+        p = self._func(y_pred)
+        return p * (1 - p)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;关于其原理的推导，具体可以参考官方文档中的介绍&lt;a href=&#34;https://xgboost.readthedocs.io/en/stable/tutorials/model.html&#34; title=&#34;Introduction to Boosted Trees&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;/a&gt;。另外，XGBoost的手写实现，我放进了&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，欢迎感兴趣的朋友查阅。&lt;/p&gt;
+&lt;h2 id=&#34;xgboost的应用&#34;&gt;XGBoost的应用&lt;/h2&gt;
+&lt;p&gt;事实上，在实际应用中，我们并不需要重复造轮子，XGBoost的python实现已经非常成熟了，我们可以直接调用sklearn中的XGBClassifier和XGBRegressor来完成分类和回归任务。我们用iris数据集来做一个简单的分类任务，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from sklearn import datasets
+data = datasets.load_iris()
+X, y = data.data, data.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=43)  
+xgb_model = xgb.XGBClassifier()
+xgb_model.fit(X_train, y_train, early_stopping_rounds=80, eval_metric=&amp;quot;auc&amp;quot;,
+                    eval_set=[(X_test, y_test)])
+y_predi= xgb_model.predict_proba(X_test) 
+y_predi = np.argmax(y_predi, axis=1)
+accuracy_score(y_test, y_predi)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们可以看到，XGBoost的调用非常简单，只需要调用XGBClassifier()，然后fit即可。在fit的过程中，我们可以设置early_stopping_rounds，即在多少轮之后，如果模型没有提升，就停止训练。这样可以有效防止模型过拟合。另外，我们可以设置eval_metric，即评估指标，这里我们设置为auc，即ROC曲线下的面积。最后，我们可以用predict_proba来预测概率，用predict来预测类别。最后，我们可以用accuracy_score来计算准确率，这里我们得到的准确率为0.9667。&lt;/p&gt;
+&lt;p&gt;当然，如果要在SCI中应用，我们需要更进一步地调参，这里我们就不展开了。感兴趣的朋友可以参考我之前发表的&lt;a href=&#34;https://dx.doi.org/10.1016/j.eclinm.2023.102080&#34; title=&#34;machine learning models&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;文章&lt;/a&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>Life table的python dashboard</title>
