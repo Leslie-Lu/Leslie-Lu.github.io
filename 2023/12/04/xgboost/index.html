@@ -841,7 +841,7 @@
   </div></figure>
 </p>
 <p>XGBoost是一种基于决策树的集成学习算法，它的全称是eXtreme Gradient Boosting，由陈天奇等人在2016年提出<a href="%27Xgboost:%20A%20scalable%20tree%20boosting%20system%27"> </a>，它 是<a href="https://mp.weixin.qq.com/s/GSU8kPthr5oErmKsl7HAow" target="_blank" rel="noopener">Gradient Boosting算法</a>的一种高效实现，在Gradient Boosting算法的基础上做了很多改进，从而在算法精度、速度和泛化能力上都有了很大的提升。XGBoost的核心思想是，通过集成多个决策树来构建一个更加强大的模型。在集成过程中，XGBoost会对每个决策树的预测结果进行累加，从而得到最终的预测结果。在每一轮迭代中，XGBoost都会训练一个新的决策树，并将其添加到集成模型中。在训练过程中，XGBoost会根据模型的表现来调整决策树的复杂度，从而提高模型的泛化能力。</p>
-<p>$obj^{(t)} = ∑_{i=1}^{n} \left( l(y_i,\hat{y}<em>{i}^{t-1})+g</em>{i}f_{t}(x_i) + \frac{1}{2}h_if_t^2(x_i) \right) + w(f_t)+ constant$</p>
+<p>$$obj^{(t)} = ∑_{i=1}^{n} \left( l(y_i,\hat{y}<em>{i}^{t-1})+g</em>{i}f_{t}(x_i) + \frac{1}{2}h_if_t^2(x_i) \right) + w(f_t)+ constant$$</p>
 <p>在精度上，XGBoost将损失函数展开到二阶导数（其中$g_i$为一阶导数、$h_i$为二阶导数），从而得到了更加精确的损失函数近似值。在速度上，XGBoost使用了并行计算技术、稀疏感知、加权分位数，从而提高了算法的训练速度。在泛化能力上，XGBoost对损失函数使用了正则化技术（控制树的复杂度），从而降低了模型的方差，同时在加性模型（由多个基模型组成）中设置缩减率和列抽样等，防止模型过拟合。</p>
 <p>其中，最核心的，XGBoost相较于GBDT（gradient boosting decision tree）的一个最大特点是，用到了损失函数的二阶导数，我们用numpy手写的话，如下：</p>
 <pre><code class="language-python">class LogisticLoss:
