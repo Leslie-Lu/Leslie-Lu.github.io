@@ -5,7 +5,7 @@
     <link>https://leslie-lu.github.io/category/r/</link>
       <atom:link href="https://leslie-lu.github.io/category/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 11 Dec 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>R</title>
@@ -14,17 +14,22 @@
     
     <item>
       <title>非劣效试验中配对proportions的样本量计算</title>
-      <link>https://leslie-lu.github.io/2023/12/10/noninferiority-trial-paired-proportions/</link>
-      <pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://leslie-lu.github.io/2023/12/10/noninferiority-trial-paired-proportions/</guid>
+      <link>https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/</link>
+      <pubDate>Mon, 11 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/</guid>
       <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
 &lt;p&gt;有医生来问，在非劣效试验中，如果是配对的proportions，样本量应该怎么计算？参考文献在这&lt;a href=&#34;https://doi.org/10.1093/jbcr/iry029&#34; title=&#34;A comparative study of the ReCell® device and autologous split-thickness meshed skin graft in the treatment of acute burn injuries&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; &lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;具体就是在样本量和功效计算这部分。&lt;/p&gt;
+&lt;p&gt;首先介绍下文章背景。&lt;/p&gt;
+&lt;h3 id=&#34;背景&#34;&gt;背景&lt;/h3&gt;
+&lt;p&gt;早期切除和自体移植是更深层次烧伤的标准护理。然而，供体部位是重要的并发症源。为解决这一问题，ReCell®自体细胞采集装置（ReCell）被设计用于在现场制备非培养的自体皮肤细胞悬液（ASCS），能够使用最小的供体皮肤进行表皮再生。进行了一项前瞻性研究，以评估ReCell与网格状分层皮肤移植（STSG，对照组）治疗深度部分厚度烧伤的临床表现。&lt;/p&gt;
+&lt;p&gt;主要有效性终点包括：1）治疗部位在4周时创面闭合的发生率（≥95% 表皮再生）和2）在1周时供体部位完全愈合的发生率（100% 表皮再生）。&lt;/p&gt;
+&lt;p&gt;原文中样本量与功效的计算方法如下：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;pic1&lt;/th&gt;
-&lt;th&gt;pic2&lt;/th&gt;
+&lt;th&gt;method-1&lt;/th&gt;
+&lt;th&gt;method-2&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
@@ -74,6 +79,89 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;思考1&#34;&gt;思考1&lt;/h3&gt;
+&lt;p&gt;首先这是个配对设计，同一个人的两处相似创面接受不同的治疗，然后比较两种治疗的效果。&lt;/p&gt;
+&lt;p&gt;对于4周创面闭合发生率的比较，设定为非劣效试验，即ASCS相比于对照组，创面闭合发生率低于1%。这里的非劣效界值为1%，按照原文的说法，是基于临床医生的经验，认为1%的差异是可以接受的。另外，我们注意到，它并没有根据两组的历史数据（愈合率）来确定样本量，而是给出了类似于四格表的比例，如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111105407.png&#34; alt=&#34;annotation&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这是PASS中给出的非劣效相关proportion的样本量计算：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111107072.png&#34; alt=&#34;pass&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;但是，原文中给出的参数是：单侧非劣效比较，两个率期待的差异是0，proportion discordant应该是原文中出现了错误，正确的应该是$\pi_{10}+\pi_{01}=0.1$，proportion of both yes$\pi_{11}=0.75$，且利用Newcombe在1998年提到的配对比例的方法模拟1000次得到在样本量为90的前提下的功效。&lt;/p&gt;
+&lt;p&gt;根据这些参数，在PASS中无法得到原文中的结果。&lt;/p&gt;
+&lt;p&gt;我们转而利用nQuery中的样本量计算，选择lower confidence limit for diffence in paired proportions using simulation，得到的结果如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111113489.png&#34; alt=&#34;nquery&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这个结果和原文中的结果是一致的。在未知两组率的历史数据，只有proportion discordant和proportion of both yes的情况下，推荐利用nQuery中的模拟方法得到样本量和功效。&lt;/p&gt;
+&lt;h3 id=&#34;思考2&#34;&gt;思考2&lt;/h3&gt;
+&lt;p&gt;对于1周供体部位完全愈合的发生率的比较，就比较简单了，不涉及非劣效比较，同时给出两组率，我们直接利用SAS中的&lt;code&gt;proc power&lt;/code&gt;的&lt;code&gt;pairedfreq&lt;/code&gt;，利用McNemar’s test for paired proportions得到样本量和功效，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;proc power;
+	pairedfreq dist=normal TEST=MCNEMAR METHOD=MIETTINEN
+		discpropdiff = 0.35
+      	totalpropdisc = 0.5
+     	npairs = .
+      	power = .95;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;两个样本量，取大者作为最终的样本量，即90。&lt;/p&gt;
+&lt;p&gt;最后，我在星球里给了一个用R来做样本量和功效的模拟，感兴趣的朋友可以去&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里查阅。&lt;/p&gt;
 &lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
 </description>
     </item>
