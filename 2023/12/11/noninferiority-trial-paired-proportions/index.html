@@ -925,7 +925,7 @@
     <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111107072.png" alt="pass" loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
-<p>但是，原文中给出的参数是：单侧非劣效比较，两个率期待的差异是0，proportion discordant应该是原文中出现了错误，正确的应该是$\pi_{10}+\pi_{01}=0.1$，proportion of both yes$\pi_{11}=0.75$，且利用Newcombe在1998年提到的配对比例的方法模拟1000次得到在样本量为90的前提下的功效。</p>
+<p>但是，原文中给出的参数是：单侧非劣效比较，两个率期待的差异是0，proportion discordant应该是原文中出现了错误，正确的应该是$\pi_{10}+\pi_{01}=0.1$，proportion of both yes$\pi_{11}=0.75$，且利用Newcombe在1998年提到的配对比例的方法<a href="https://doi.org/10.1002/%28SICI%291097-0258%2819981130%2917:22%3C2635::AID-SIM954%3E3.0.CO;2-C" title="Improved confidence intervals for the difference between binomial proportions based on paired data" target="_blank" rel="noopener"></a>模拟1000次得到在样本量为90的前提下的功效。</p>
 <p>根据这些参数，在PASS中无法得到原文中的结果。</p>
 <p>我们转而利用nQuery中的样本量计算，选择lower confidence limit for diffence in paired proportions using simulation，得到的结果如下：</p>
 <p>
