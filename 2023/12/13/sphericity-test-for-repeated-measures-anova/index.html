@@ -281,12 +281,12 @@
 
   
 
-<meta name="description" content="windows11 23h2 我们之前在rstudio和vscode里介入了copilot，在这篇文章里介绍过了。在windo" />
+<meta name="description" content="问题 我们之前发过这篇重复测量分析的完整思路。 今天我们讨论另外一个问题：重复测量方差分析的球形检验，源" />
 
 
 
-<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2023/11/29/windows-copilot/" />
-<link rel="canonical" href="https://leslie-lu.github.io/2023/11/29/windows-copilot/" />
+<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/" />
+<link rel="canonical" href="https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/" />
 
 
 
@@ -322,18 +322,18 @@
   <meta property="twitter:creator" content="@callmeleslielu" />
 <meta property="twitter:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" />
 <meta property="og:site_name" content="Zhen Lu" />
-<meta property="og:url" content="https://leslie-lu.github.io/2023/11/29/windows-copilot/" />
-<meta property="og:title" content="windows11 23h2 更新桌面copilot | Zhen Lu" />
-<meta property="og:description" content="windows11 23h2 我们之前在rstudio和vscode里介入了copilot，在这篇文章里介绍过了。在windo" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:url" content="https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/" />
+<meta property="og:title" content="重复测量分析方差分析的球形检验 | Zhen Lu" />
+<meta property="og:description" content="问题 我们之前发过这篇重复测量分析的完整思路。 今天我们讨论另外一个问题：重复测量方差分析的球形检验，源" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
       property="article:published_time"
-      content="2023-11-29T00:00:00&#43;00:00"
+      content="2023-12-13T00:00:00&#43;00:00"
     />
   
   
-    <meta property="article:modified_time" content="2023-11-29T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2023-12-13T00:00:00&#43;00:00">
   
 
 
@@ -359,12 +359,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://leslie-lu.github.io/2023/11/29/windows-copilot/"
+    "@id": "https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/"
   },
-  "headline": "windows11 23h2 更新桌面copilot",
+  "headline": "重复测量分析方差分析的球形检验",
   
-  "datePublished": "2023-11-29T00:00:00Z",
-  "dateModified": "2023-11-29T00:00:00Z",
+  "datePublished": "2023-12-13T00:00:00Z",
+  "dateModified": "2023-12-13T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -379,7 +379,7 @@
       "url": "https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "windows11 23h2 我们之前在rstudio和vscode里介入了copilot，在这篇文章里介绍过了。在windo"
+  "description": "问题 我们之前发过这篇重复测量分析的完整思路。 今天我们讨论另外一个问题：重复测量方差分析的球形检验，源"
 }
 </script>
 
@@ -401,7 +401,7 @@
 
 
   
-  <title>windows11 23h2 更新桌面copilot | Zhen Lu</title>
+  <title>重复测量分析方差分析的球形检验 | Zhen Lu</title>
 
   
   
@@ -421,7 +421,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9954c6a1b480e8af51ddaedd47807b60" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="5ce342a3ea9532b0adf0435112c40a49" >
 
   
   
@@ -747,7 +747,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>windows11 23h2 更新桌面copilot</h1>
+  <h1>重复测量分析方差分析的球形检验</h1>
 
   
 
@@ -776,7 +776,7 @@
     
       
     
-    Nov 29, 2023
+    Dec 13, 2023
   </span>
   
 
@@ -785,7 +785,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    3 min read
   </span>
   
 
@@ -798,7 +798,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%B7%A5%E5%85%B7/">工具</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/">生物统计</a>, <a href="/category/sas/">SAS</a></span>
   
 
 </div>
@@ -817,8 +817,9 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="windows11-23h2">windows11 23h2</h2>
-<p>我们之前在rstudio和vscode里介入了copilot，在<a href="https://mp.weixin.qq.com/s/XrhstTXAt8k7KVg4sT3r4Q" target="_blank" rel="noopener">这篇文章</a>里介绍过了。在windows11 23h2的更新中，微软也加入支持了了桌面级copilot，我们终于可以直接在桌面上使用copilot。</p>
+      <h2 id="问题">问题</h2>
+<p>我们之前发过这篇<a href="https://mp.weixin.qq.com/s/wKpDcMQjeLtD3--llIpcAw" target="_blank" rel="noopener">重复测量分析的完整思路</a>。</p>
+<p>今天我们讨论另外一个问题：重复测量方差分析的球形检验，源于<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>里有同学提问：</p>
 <p>
 
 
@@ -837,21 +838,19 @@
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://i.ytimg.com/vi/kuJ-H6f8KJs/maxresdefault.jpg" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131439261.png" alt="提问" loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
-<p>Copilot的一些重要功能包括：</p>
-<ul>
-<li>
-<p>从网络上获取答案和灵感，支持创新和协作，帮助专注于手头的任务（我个人用的比较多的就是编程）<a href="https://www.howto-connect.com/windows-11-23h2-new-features-and-release-date-assumptive/" title="copilot" target="_blank" rel="noopener"></a>。Copilot可以快速提供相关答案，并可以根据您的想法生成图像；</p>
-</li>
-<li>
-<p>目前桌面Copilot可以帮助执行我们需要完成的简单任务。从调整电脑设置到使用Snap Assist整理窗口，Copilot可以节省时间，帮助提高效率。</p>
-</li>
-</ul>
-<h2 id="启用copilot">启用copilot</h2>
-<p>要在Windows 11中启用Copilot，需要更新到23h2版本。点击&quot;Windows Update&quot;，点击&quot;检查更新&quot;，如果&quot;Windows 11 version 23H2&quot;出现在可用更新中，点击&quot;下载并安装&quot;。</p>
-<p>如果系统中没有自动显示此更新，也可以尝试使用媒体创建工具（Media Creation Tool）手动下载并安装此更新<a href="https://www.itechtics.com/upgrade-to-windows-11-23h2/" title="windows update" target="_blank" rel="noopener"></a>。此外，还可以直接从Microsoft的Windows 11下载页面下载最新版本的Windows 11 ISO文件，然后使用它进行升级或干净安装。</p>
+<h2 id="repeated-measures-anova-vs-manova">repeated measures ANOVA vs MANOVA</h2>
+<p>回答这个问题之前，我们首先来考虑重复测量方差分析和multivariate analysis of variance（MANOVA)的区别。</p>
+<p>对于MANOVA，如果同样一种效应有多个测量指标，我们可以同时联合考虑这些指标，而不是分别考虑拟合一个单独的模型。比如，我们想知道不同的药物对于血压的影响，我们可以同时考虑收缩压和舒张压，而不是分别考虑。而对于repeated measures ANOVA，我们只能分别考虑收缩压和舒张压。</p>
+<p>此外，repeated measures ANOVA感兴趣的效应更加偏重于within-subject effects（time）以及interaction between within-subject effects and between-subject effects（time*group），而MANOVA则更加偏重于between-subject effects（group）。</p>
+<h2 id="球形检验-sphericity-test">球形检验 sphericity test</h2>
+<p>了解了repeated measures ANOVA主要关心的效应之后，我们再来看球形检验。</p>
+<p>repeated measures ANOVA是来源于univariate ANOVA，其同样要求假设：mutlivariate normality，homogeneity of variance，independence，但是它增加了一个sphericity。spherecity要求不同重复测量指标水平之间的协方差相等（Type H covariances<a href="https://doi.org/10.1080/01621459.1970.10481187" title="Huynh and Feldt 1970" target="_blank" rel="noopener"></a>），即协方差矩阵为一个球形矩阵。</p>
+<p>如果sphericity assumption不成立，对于within-subject effects，我们需要进行correction（adjusted univariate test），否则会导致type I error inflation。而对于between-subject effects，我们不需要进行correction，因为between-subject effects的type I error inflation是可以接受的。对于adjusted univariate test，常见的correction方法有G-G (Greenhouse-Geisser correction) and H-F (Huynh-Feldt correction)。同时，相比这种校正的方法，更好的方法是使用multivariate test。</p>
+<p>我们来看一个例子。</p>
+<p>首先是球形检验的结果。</p>
 <p>
 
 
@@ -870,9 +869,57 @@
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://www.bleepstatic.com/images/news/u/1097497/Windows%2011/Copilot2.jpg" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131507348.png" alt="sphericity test" loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
+<p>可以看到，球形检验的结果是显著的，即sphericity assumption不成立。因此，我们可以采取multivariate test，也可以采取adjusted univariate test。我们重点关注within-subject effects。</p>
+<p>首先是adjusted univariate test。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131504764.png" alt="adjusted univariate test for within-subject effects" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>adjusted可以对自由度的分子和分母进行调整。调整后的p值G-G（Greenhouse-Geisser校正）和H-F（Huynh-Feldt校正）考虑了重复测量之间的相关性，其中自由度的分子和分母都乘以epsilon，并用新的自由度评估F比的显著性。Greenhouse-Geisser校正更为保守。</p>
+<p>然后是multivariate test。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131510765.png" alt="multivariate test for within-subject effects" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>在这个例子中，两者的结论是一致的，都是显著的。但是更多时候，两者的结论是不一致的。在不清楚数据是否满足sphericity assumption的情况下，我们可以考虑multivariate test。</p>
+<p>我在<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>里放了两个例子，感兴趣的同学可以去看看。</p>
 <h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
 
     </div>
@@ -900,7 +947,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F11%2F29%2Fwindows-copilot%2F&amp;text=windows11&#43;23h2&#43;%E6%9B%B4%E6%96%B0%E6%A1%8C%E9%9D%A2copilot" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F13%2Fsphericity-test-for-repeated-measures-anova%2F&amp;text=%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E5%88%86%E6%9E%90%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -917,7 +964,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F11%2F29%2Fwindows-copilot%2F&amp;t=windows11&#43;23h2&#43;%E6%9B%B4%E6%96%B0%E6%A1%8C%E9%9D%A2copilot" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F13%2Fsphericity-test-for-repeated-measures-anova%2F&amp;t=%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E5%88%86%E6%9E%90%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -936,7 +983,7 @@
         
       
       <li>
-        <a href="mailto:?subject=windows11%2023h2%20%E6%9B%B4%E6%96%B0%E6%A1%8C%E9%9D%A2copilot&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F11%2F29%2Fwindows-copilot%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E5%88%86%E6%9E%90%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F13%2Fsphericity-test-for-repeated-measures-anova%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -953,7 +1000,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F11%2F29%2Fwindows-copilot%2F&amp;title=windows11&#43;23h2&#43;%E6%9B%B4%E6%96%B0%E6%A1%8C%E9%9D%A2copilot" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F13%2Fsphericity-test-for-repeated-measures-anova%2F&amp;title=%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E5%88%86%E6%9E%90%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -970,7 +1017,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F11%2F29%2Fwindows-copilot%2F&amp;title=windows11&#43;23h2&#43;%E6%9B%B4%E6%96%B0%E6%A1%8C%E9%9D%A2copilot" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F13%2Fsphericity-test-for-repeated-measures-anova%2F&amp;title=%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E5%88%86%E6%9E%90%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1182,6 +1229,21 @@
 
 
   
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/2023/12/11/noninferiority-trial-paired-proportions/">非劣效试验中配对proportions的样本量计算</a></li>
+      
+      <li><a href="/2023/11/21/repeated-measures-analysis/">重复测量分析的完整思路</a></li>
+      
+      <li><a href="/2023/11/20/mmrm/">MMRM的SAS和R实现</a></li>
+      
+      <li><a href="/2023/10/31/graphs/">结合SAS和R绘制临床试验figure</a></li>
+      
+    </ul>
+  </div>
   
 
 

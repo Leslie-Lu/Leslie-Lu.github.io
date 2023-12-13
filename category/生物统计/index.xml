@@ -5,12 +5,124 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 11 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>重复测量分析方差分析的球形检验</title>
+      <link>https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/</link>
+      <pubDate>Wed, 13 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2023/12/13/sphericity-test-for-repeated-measures-anova/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;我们之前发过这篇&lt;a href=&#34;https://mp.weixin.qq.com/s/wKpDcMQjeLtD3--llIpcAw&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;重复测量分析的完整思路&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;今天我们讨论另外一个问题：重复测量方差分析的球形检验，源于&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里有同学提问：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131439261.png&#34; alt=&#34;提问&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;repeated-measures-anova-vs-manova&#34;&gt;repeated measures ANOVA vs MANOVA&lt;/h2&gt;
+&lt;p&gt;回答这个问题之前，我们首先来考虑重复测量方差分析和multivariate analysis of variance（MANOVA)的区别。&lt;/p&gt;
+&lt;p&gt;对于MANOVA，如果同样一种效应有多个测量指标，我们可以同时联合考虑这些指标，而不是分别考虑拟合一个单独的模型。比如，我们想知道不同的药物对于血压的影响，我们可以同时考虑收缩压和舒张压，而不是分别考虑。而对于repeated measures ANOVA，我们只能分别考虑收缩压和舒张压。&lt;/p&gt;
+&lt;p&gt;此外，repeated measures ANOVA感兴趣的效应更加偏重于within-subject effects（time）以及interaction between within-subject effects and between-subject effects（time*group），而MANOVA则更加偏重于between-subject effects（group）。&lt;/p&gt;
+&lt;h2 id=&#34;球形检验-sphericity-test&#34;&gt;球形检验 sphericity test&lt;/h2&gt;
+&lt;p&gt;了解了repeated measures ANOVA主要关心的效应之后，我们再来看球形检验。&lt;/p&gt;
+&lt;p&gt;repeated measures ANOVA是来源于univariate ANOVA，其同样要求假设：mutlivariate normality，homogeneity of variance，independence，但是它增加了一个sphericity。spherecity要求不同重复测量指标水平之间的协方差相等（Type H covariances&lt;a href=&#34;https://doi.org/10.1080/01621459.1970.10481187&#34; title=&#34;Huynh and Feldt 1970&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;/a&gt;），即协方差矩阵为一个球形矩阵。&lt;/p&gt;
+&lt;p&gt;如果sphericity assumption不成立，对于within-subject effects，我们需要进行correction（adjusted univariate test），否则会导致type I error inflation。而对于between-subject effects，我们不需要进行correction，因为between-subject effects的type I error inflation是可以接受的。对于adjusted univariate test，常见的correction方法有G-G (Greenhouse-Geisser correction) and H-F (Huynh-Feldt correction)。同时，相比这种校正的方法，更好的方法是使用multivariate test。&lt;/p&gt;
+&lt;p&gt;我们来看一个例子。&lt;/p&gt;
+&lt;p&gt;首先是球形检验的结果。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131507348.png&#34; alt=&#34;sphericity test&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;可以看到，球形检验的结果是显著的，即sphericity assumption不成立。因此，我们可以采取multivariate test，也可以采取adjusted univariate test。我们重点关注within-subject effects。&lt;/p&gt;
+&lt;p&gt;首先是adjusted univariate test。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131504764.png&#34; alt=&#34;adjusted univariate test for within-subject effects&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;adjusted可以对自由度的分子和分母进行调整。调整后的p值G-G（Greenhouse-Geisser校正）和H-F（Huynh-Feldt校正）考虑了重复测量之间的相关性，其中自由度的分子和分母都乘以epsilon，并用新的自由度评估F比的显著性。Greenhouse-Geisser校正更为保守。&lt;/p&gt;
+&lt;p&gt;然后是multivariate test。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312131510765.png&#34; alt=&#34;multivariate test for within-subject effects&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;在这个例子中，两者的结论是一致的，都是显著的。但是更多时候，两者的结论是不一致的。在不清楚数据是否满足sphericity assumption的情况下，我们可以考虑multivariate test。&lt;/p&gt;
+&lt;p&gt;我在&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里放了两个例子，感兴趣的同学可以去看看。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>非劣效试验中配对proportions的样本量计算</title>
