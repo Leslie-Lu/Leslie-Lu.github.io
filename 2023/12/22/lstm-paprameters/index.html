@@ -869,7 +869,7 @@
 <p>LSTM借助这种软性的门控机制，可以有效的解决梯度爆炸/消失的问题，从而可以有效的处理长序列数据。</p>
 <h2 id="lstm参数数量的计算">LSTM参数数量的计算</h2>
 <p>接下来我们来看LSTM参数数量的计算。</p>
-<p>在上面第二张图的公式中，我们已经可以清楚地看到，在一个LSTM cell中，上面四个函数各有一个W、U矩阵，分别对应于输入、隐藏状态的权重，那我们就可以计算这些权重矩阵的维度，即$hidden_size \times input_size + hidden_size \times hidden_size$，这些矩阵都是可训练的，此外，每个函数都有一个偏置矩阵，维度为$hidden_size$，因此，这些矩阵的数量就是LSTM的参数数量，由于存在四个函数，则总的参数数量为$$4 \times (hidden_size \times input_size + hidden_size \times hidden_size)+ hidden_size$$。</p>
+<p>在上面第二张图的公式中，我们已经可以清楚地看到，在一个LSTM cell中，上面四个函数各有一个W、U矩阵，分别对应于输入、隐藏状态的权重，那我们就可以计算这些权重矩阵的维度，即$hidden_{size} \times input_{size} + hidden_{size} \times hidden_{size}$，这些矩阵都是可训练的，此外，每个函数都有一个偏置矩阵，维度为$hidden_{size}$，因此，这些矩阵的数量就是LSTM的参数数量，由于存在四个函数，则总的参数数量为$$4 \times (hidden_{size} \times input_{size} + hidden_{size} \times hidden_{size})+ hidden_{size}$$。</p>
 <p>我们利用一个小的代码示例来验证一下这个公式。</p>
 <pre><code class="language-python">input = Input(shape=(30, 3))
 output= LSTM(2)(input)
