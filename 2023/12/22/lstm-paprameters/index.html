@@ -281,12 +281,12 @@
 
   
 
-<meta name="description" content="问题 前面我写了多重填补的统计学考虑与SAS实现这篇文章，里面提了一嘴MI的tipping point analy" />
+<meta name="description" content="LSTM 我们前面发过这篇RNN的pytorch实现，在里面提到了，RNN会出现梯度爆炸/消失的问题，而LS" />
 
 
 
-<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2023/08/09/tipping-point-analysis/" />
-<link rel="canonical" href="https://leslie-lu.github.io/2023/08/09/tipping-point-analysis/" />
+<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2023/12/22/lstm-paprameters/" />
+<link rel="canonical" href="https://leslie-lu.github.io/2023/12/22/lstm-paprameters/" />
 
 
 
@@ -322,18 +322,18 @@
   <meta property="twitter:creator" content="@callmeleslielu" />
 <meta property="twitter:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" />
 <meta property="og:site_name" content="Zhen Lu" />
-<meta property="og:url" content="https://leslie-lu.github.io/2023/08/09/tipping-point-analysis/" />
-<meta property="og:title" content="多重填补的tipping point analysis | Zhen Lu" />
-<meta property="og:description" content="问题 前面我写了多重填补的统计学考虑与SAS实现这篇文章，里面提了一嘴MI的tipping point analy" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:url" content="https://leslie-lu.github.io/2023/12/22/lstm-paprameters/" />
+<meta property="og:title" content="LSTM参数数量的计算 | Zhen Lu" />
+<meta property="og:description" content="LSTM 我们前面发过这篇RNN的pytorch实现，在里面提到了，RNN会出现梯度爆炸/消失的问题，而LS" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
       property="article:published_time"
-      content="2023-08-09T00:00:00&#43;00:00"
+      content="2023-12-22T00:00:00&#43;00:00"
     />
   
   
-    <meta property="article:modified_time" content="2023-08-09T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2023-12-22T00:00:00&#43;00:00">
   
 
 
@@ -359,12 +359,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://leslie-lu.github.io/2023/08/09/tipping-point-analysis/"
+    "@id": "https://leslie-lu.github.io/2023/12/22/lstm-paprameters/"
   },
-  "headline": "多重填补的tipping point analysis",
+  "headline": "LSTM参数数量的计算",
   
-  "datePublished": "2023-08-09T00:00:00Z",
-  "dateModified": "2023-08-09T00:00:00Z",
+  "datePublished": "2023-12-22T00:00:00Z",
+  "dateModified": "2023-12-22T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -379,7 +379,7 @@
       "url": "https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "问题 前面我写了多重填补的统计学考虑与SAS实现这篇文章，里面提了一嘴MI的tipping point analy"
+  "description": "LSTM 我们前面发过这篇RNN的pytorch实现，在里面提到了，RNN会出现梯度爆炸/消失的问题，而LS"
 }
 </script>
 
@@ -401,7 +401,7 @@
 
 
   
-  <title>多重填补的tipping point analysis | Zhen Lu</title>
+  <title>LSTM参数数量的计算 | Zhen Lu</title>
 
   
   
@@ -421,7 +421,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="0ff4e854741436ccf394cbcb6fb7f49d" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="50c3443090688f5aa25eca4335c08904" >
 
   
   
@@ -747,7 +747,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>多重填补的tipping point analysis</h1>
+  <h1>LSTM参数数量的计算</h1>
 
   
 
@@ -776,7 +776,7 @@
     
       
     
-    Aug 9, 2023
+    Dec 22, 2023
   </span>
   
 
@@ -798,7 +798,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/">生物统计</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/">生物统计</a>, <a href="/category/python/">Python</a>, <a href="/category/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>, <a href="/category/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span>
   
 
 </div>
@@ -817,32 +817,88 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="问题">问题</h2>
-<p>前面我写了<a href="https://mp.weixin.qq.com/s/wlEvSXeXxbUFjmdf2FO2AQ" target="_blank" rel="noopener">多重填补的统计学考虑与SAS实现</a>这篇文章，里面提了一嘴MI的tipping point analysis。小伙伴们在后台私信留言说写一下tipping point analysis。今天它来了。</p>
-<h2 id="mnar缺失模式">MNAR缺失模式</h2>
-<p>我们提到，对于MI的sensitivity analysis，常见的分析就是做tipping point analysis，它主要就是评估在MNAR（missing not at random）缺失模式下，该缺失值填补对主分析结果的影响，判断主分析的结果是否是对于MAR的假设是稳健的。</p>
-<blockquote>
-<p>换句话说，MI在MAR的前提假设下能够提供无偏的效应值的综合估计。而tipping point analysis就是要做下压力测试，即估计需要数据缺失多大程度上背离MAR，主分析的结果会被推翻（由$p \leq 0.05$变为$p&gt;0.05$)。</p>
-</blockquote>
-<p>特别是在临床试验中，由于我们很难基于收集到的数据有百分百的把握确认MAR的缺失，这个时候，tipping point analysis的结果对于主分析的结论就有一定程度上的验证能力了。</p>
-<h2 id="tipping-point-analysis-tpa">tipping point analysis (tpa)</h2>
-<p>怎么做tpa？一般地，我们遵循以下的步骤：</p>
-<ol>
-<li>
-<p>数据先经过标准的MI的处理。这个我们在<a href="https://mp.weixin.qq.com/s/wlEvSXeXxbUFjmdf2FO2AQ" target="_blank" rel="noopener">多重填补的统计学考虑与SAS实现</a>这篇文章中已经完整介绍过了。</p>
-</li>
-<li>
-<p>重复第一步的MI缺失值填补，但不同的是，这一步我们要求MI填补时，着重将试验药组的缺失值调整到更不利于试验药效果的数值，而将对照组的缺失值调整到更有利于对照组药物效果的数值。</p>
-</li>
-</ol>
-<blockquote>
-<p>举个例子。某治疗疣（wart）的药物。我们需要在不同的visit采用Physician Wart Assessment (PWA) scale来评估疣的治疗效果。这时候，两组药物受试者在不同的访视存在PWA的缺失。此时，按照我们上面说的原则，在做tpa时，我们要求MI填补时尽可能将试验组的PWA分数填补得更高一些（即，治疗效果更差），如我要求其PWA分数的shift范围是0-3，每次以0.5的速度增加；而将对照组的PWA分数填补得更低（即，治疗效果更好），我同样要求其PWA分数的shift范围是0-3，每次以0.5的速度增加。这样的话，即存在7*7= 49种填补的结果。然后我们分别针对每种情况得到的填补数据集，重复普通的MI过程，来综合估计效应值。最后来check主分析的结论是否会被推翻（$p&gt;0.05$)。</p>
-</blockquote>
-<ol start="3">
-<li>我们也可以在第2步的基础上，采用更大的shift范围，来看到何种程度时，主分析的结果会被完全推翻。</li>
-</ol>
-<p>有同学可能就问了，那么这个shift范围参数的选择，有没有一定的依据？这个参数，一般，我们会根据药物实际效应的估计值来相应地评估选择。简单点说，我们预估它在多大程度上shift在现实中是有可能发生的，那么采用这个范围就是可行的。在这个范围之内，主分析MI的结果都不会被推翻，那么我们就可以有足够的信心，来说明主分析的结果是稳健的了。而这也就是MI的tipping point analysis了。</p>
-<p>示例tpa的sas实现代码，会放在<a href="https://t.zsxq.com/10qxcDEKD" target="_blank" rel="noopener">知识星球</a>上，感兴趣的朋友可以自行去查看。</p>
+      <h2 id="lstm">LSTM</h2>
+<p>我们前面发过这篇<a href="https://mp.weixin.qq.com/s/79qWsSZk_juTgTaAq2iHRw" target="_blank" rel="noopener">RNN的pytorch实现</a>，在里面提到了，RNN会出现梯度爆炸/消失的问题，而LSTM可以解决这个问题。</p>
+<p>LSTM的全称是long short-term memory，是一种特殊的RNN，其结构如下图所示。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" alt="LSTM" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>实际上，相比于RNN，LSTM引入了门控机制，有三个门（gate）：forget gate，input gate，output gate。门控机制的引入控制了信息传递的路径，从而解决梯度爆炸/消失的问题。具体来看，如下图。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*ryIzdQtDwrdx_sJHdufrEQ.png" alt="LSTM equations" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>$f_t$是forget gate，$i_t$是input gate，$o_t$是output gate，$c_t$是cell state，$h_t$是hidden state，$x_t$是输入，$W$是weight，$b$是bias。</p>
+<p>LSTM将历史信息看作一种记忆，在简单循环网络中中，记忆是通过hidden state来传递的，然而，hidden rate在每个时刻都会被更新，因此，记忆会随着时间的推移而消失，我们将其看做一种短期记忆。而在LSTM中，记忆是通过cell state来传递的。cell state有能力将关键信息保存一定的时间间隔，同时，其保存信息的生命周期要长于短期记忆，但又短语长期记忆，因而这就是LSTM名字的由来。</p>
+<p>更加具体的，如上图，cell state可以看作是一个管道，信息可以从管道中流过，也可以从管道中流出，这个过程是通过门控机制来控制的。forget gate控制信息从管道中流出的比例，这是由sigmoid激活函数进行控制；input gate则控制当下时刻输入信息对cell state的更新比例，output gate则控制更新后的cell state信息从管道中流出的比例。</p>
+<p>LSTM借助这种软性的门控机制，可以有效的解决梯度爆炸/消失的问题，从而可以有效的处理长序列数据。</p>
+<h2 id="lstm参数数量的计算">LSTM参数数量的计算</h2>
+<p>接下来我们来看LSTM参数数量的计算。</p>
+<p>在上面第二张图的公式中，我们已经可以清楚地看到，在一个LSTM cell中，上面四个函数各有一个W、U矩阵，分别对应于输入、隐藏状态的权重，那我们就可以计算这些权重矩阵的维度，即$hidden_size \times input_size + hidden_size \times hidden_size$，这些矩阵都是可训练的，此外，每个函数都有一个偏置矩阵，维度为$hidden_size$，因此，这些矩阵的数量就是LSTM的参数数量，由于存在四个函数，则总的参数数量为$$4 \times (hidden_size \times input_size + hidden_size \times hidden_size)+ hidden_size$$。</p>
+<p>我们利用一个小的代码示例来验证一下这个公式。</p>
+<pre><code class="language-python">input = Input(shape=(30, 3))
+output= LSTM(2)(input)
+model_LSTM = Model(inputs=input, outputs=output)
+
+model_LSTM.summary()
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312221914589.png" alt="output" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>可以看到，和公式的结果保持一致。</p>
 <h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
 
     </div>
@@ -870,7 +926,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F08%2F09%2Ftipping-point-analysis%2F&amp;text=%E5%A4%9A%E9%87%8D%E5%A1%AB%E8%A1%A5%E7%9A%84tipping&#43;point&#43;analysis" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F22%2Flstm-paprameters%2F&amp;text=LSTM%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E7%9A%84%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -887,7 +943,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F08%2F09%2Ftipping-point-analysis%2F&amp;t=%E5%A4%9A%E9%87%8D%E5%A1%AB%E8%A1%A5%E7%9A%84tipping&#43;point&#43;analysis" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F22%2Flstm-paprameters%2F&amp;t=LSTM%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E7%9A%84%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -906,7 +962,7 @@
         
       
       <li>
-        <a href="mailto:?subject=%E5%A4%9A%E9%87%8D%E5%A1%AB%E8%A1%A5%E7%9A%84tipping%20point%20analysis&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F08%2F09%2Ftipping-point-analysis%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=LSTM%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E7%9A%84%E8%AE%A1%E7%AE%97&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F22%2Flstm-paprameters%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -923,7 +979,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F08%2F09%2Ftipping-point-analysis%2F&amp;title=%E5%A4%9A%E9%87%8D%E5%A1%AB%E8%A1%A5%E7%9A%84tipping&#43;point&#43;analysis" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F22%2Flstm-paprameters%2F&amp;title=LSTM%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E7%9A%84%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -940,7 +996,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F08%2F09%2Ftipping-point-analysis%2F&amp;title=%E5%A4%9A%E9%87%8D%E5%A1%AB%E8%A1%A5%E7%9A%84tipping&#43;point&#43;analysis" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F22%2Flstm-paprameters%2F&amp;title=LSTM%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E7%9A%84%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1152,6 +1208,17 @@
 
 
   
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/2023/12/04/xgboost/">SCI中的XGBoost</a></li>
+      
+      <li><a href="/2023/11/13/life-table/">Life table的python dashboard</a></li>
+      
+    </ul>
+  </div>
   
 
 
