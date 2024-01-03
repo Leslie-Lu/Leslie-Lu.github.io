@@ -281,12 +281,12 @@
 
   
 
-<meta name="description" content="问题 有医生来问，在非劣效试验中，如果是配对的proportions，样本量应该怎么计算？参考文献在这" />
+<meta name="description" content="问题 我们前面简单介绍过这篇临床试验生存分析的有效事件数模拟，在里面用R语言简单模拟了单臂试验的有效事" />
 
 
 
-<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/" />
-<link rel="canonical" href="https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/" />
+<link rel="alternate" hreflang="en-us" href="https://leslie-lu.github.io/2024/01/03/sas-simulation/" />
+<link rel="canonical" href="https://leslie-lu.github.io/2024/01/03/sas-simulation/" />
 
 
 
@@ -322,18 +322,18 @@
   <meta property="twitter:creator" content="@callmeleslielu" />
 <meta property="twitter:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" />
 <meta property="og:site_name" content="Zhen Lu" />
-<meta property="og:url" content="https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/" />
-<meta property="og:title" content="非劣效试验中配对proportions的样本量计算 | Zhen Lu" />
-<meta property="og:description" content="问题 有医生来问，在非劣效试验中，如果是配对的proportions，样本量应该怎么计算？参考文献在这" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:url" content="https://leslie-lu.github.io/2024/01/03/sas-simulation/" />
+<meta property="og:title" content="样本量计算之SAS simulation | Zhen Lu" />
+<meta property="og:description" content="问题 我们前面简单介绍过这篇临床试验生存分析的有效事件数模拟，在里面用R语言简单模拟了单臂试验的有效事" /><meta property="og:image" content="https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
       property="article:published_time"
-      content="2023-12-11T00:00:00&#43;00:00"
+      content="2024-01-03T00:00:00&#43;00:00"
     />
   
   
-    <meta property="article:modified_time" content="2023-12-11T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2024-01-03T00:00:00&#43;00:00">
   
 
 
@@ -359,12 +359,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://leslie-lu.github.io/2023/12/11/noninferiority-trial-paired-proportions/"
+    "@id": "https://leslie-lu.github.io/2024/01/03/sas-simulation/"
   },
-  "headline": "非劣效试验中配对proportions的样本量计算",
+  "headline": "样本量计算之SAS simulation",
   
-  "datePublished": "2023-12-11T00:00:00Z",
-  "dateModified": "2023-12-11T00:00:00Z",
+  "datePublished": "2024-01-03T00:00:00Z",
+  "dateModified": "2024-01-03T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -379,7 +379,7 @@
       "url": "https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "问题 有医生来问，在非劣效试验中，如果是配对的proportions，样本量应该怎么计算？参考文献在这"
+  "description": "问题 我们前面简单介绍过这篇临床试验生存分析的有效事件数模拟，在里面用R语言简单模拟了单臂试验的有效事"
 }
 </script>
 
@@ -401,7 +401,7 @@
 
 
   
-  <title>非劣效试验中配对proportions的样本量计算 | Zhen Lu</title>
+  <title>样本量计算之SAS simulation | Zhen Lu</title>
 
   
   
@@ -421,7 +421,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="17efe3d19c5fa7e50933162e3ad404ff" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c41695cb9ccd6118d2f8e849cf244adf" >
 
   
   
@@ -747,7 +747,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>非劣效试验中配对proportions的样本量计算</h1>
+  <h1>样本量计算之SAS simulation</h1>
 
   
 
@@ -776,7 +776,7 @@
     
       
     
-    Dec 11, 2023
+    Jan 3, 2024
   </span>
   
 
@@ -798,7 +798,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/">生物统计</a>, <a href="/category/sas/">SAS</a>, <a href="/category/r/">R</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/">生物统计</a>, <a href="/category/sas/">SAS</a>, <a href="/category/%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97/">样本量计算</a></span>
   
 
 </div>
@@ -818,70 +818,8 @@
 
     <div class="article-style">
       <h2 id="问题">问题</h2>
-<p>有医生来问，在非劣效试验中，如果是配对的proportions，样本量应该怎么计算？参考文献在这<a href="https://doi.org/10.1093/jbcr/iry029" title="A comparative study of the ReCell® device and autologous split-thickness meshed skin graft in the treatment of acute burn injuries" target="_blank" rel="noopener"> </a>。</p>
-<p>具体就是在样本量和功效计算这部分。</p>
-<p>首先介绍下文章背景。</p>
-<h3 id="背景">背景</h3>
-<p>早期切除和自体移植是更深层次烧伤的标准护理。然而，供体部位是重要的并发症源。为解决这一问题，ReCell®自体细胞采集装置（ReCell）被设计用于在现场制备非培养的自体皮肤细胞悬液（ASCS），能够使用最小的供体皮肤进行表皮再生。进行了一项前瞻性研究，以评估ReCell与网格状分层皮肤移植（STSG，对照组）治疗深度部分厚度烧伤的临床表现。</p>
-<p>主要有效性终点包括：1）治疗部位在4周时创面闭合的发生率（≥95% 表皮再生）和2）在1周时供体部位完全愈合的发生率（100% 表皮再生）。</p>
-<p>原文中样本量与功效的计算方法如下：</p>
-<table>
-<thead>
-<tr>
-<th>method-1</th>
-<th>method-2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312102159286.png" alt="sample size and power 1" loading="lazy" data-zoomable /></div>
-  </div></figure>
-</td>
-<td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312102200825.png" alt="sample size and power 2" loading="lazy" data-zoomable /></div>
-  </div></figure>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="思考1">思考1</h3>
-<p>首先这是个配对设计，同一个人的两处相似创面接受不同的治疗，然后比较两种治疗的效果。</p>
-<p>对于4周创面闭合发生率的比较，设定为非劣效试验，即ASCS相比于对照组，创面闭合发生率低于1%。这里的非劣效界值为1%，按照原文的说法，是基于临床医生的经验，认为1%的差异是可以接受的。另外，我们注意到，它并没有根据两组的历史数据（愈合率）来确定样本量，而是给出了类似于四格表的比例，如下：</p>
+<p>我们前面简单介绍过这篇<a href="https://mp.weixin.qq.com/s/0PvvlMZkBF_uXNOgTT95pg" target="_blank" rel="noopener">临床试验生存分析的有效事件数模拟</a>，在里面用R语言简单模拟了单臂试验的有效事件数估计。</p>
+<p>就有朋友在<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>里问了：</p>
 <p>
 
 
@@ -900,68 +838,86 @@
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111105407.png" alt="annotation" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401032007751.png" alt="提问" loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
-<p>这是PASS中给出的非劣效相关proportion的样本量计算：</p>
-<p>
+<p>实际上，我们可以在PASS中完全包含复杂情况的样本量计算，我也是这么回答这位同学的。</p>
+<p>但是，非要在SAS里做可不可以呢？答案当然是可以的，我们接下来借助<code>proc iml</code>来完成生存分析的样本量和power估算。</p>
+<h2 id="sas-simulation">SAS simulation</h2>
+<p>已知，在估算样本量的时候，稍微复杂一点的，我们需要考虑的参数有：试验组别、招募时间、随访时间、有效事件数的分布、脱落情况、是否发生crossover、hazard rate or event rate、hazard rate是否保持不变等[ ]( &ldquo;Sample Size Calculation for Complex Clinical Trials with Survival Endpoints&rdquo;)。</p>
+<p>我们这里假设一点稍微简单的情况。</p>
+<p>两组，每组100人，组1 event rate为0.1，组2 event rate为0.32，两组招募在3个月内完成招募，招募时间服从均匀分布，试验随访时间3年结束，组1、组2在随访1年后失访概率分别为0.20、0.25，要求模拟在当前样本量下的统计学功效。</p>
+<p>那我们首先来在<code>proc iml</code>里定义这些参数，如下：</p>
+<pre><code class="language-sas">n1 = 100; 
+n2 = 100; 
+pe1 = 0.1; 
+pe2 = 0.32;
+pd1 = 0.20;
+pd2 = 0.25;
+studyduration = 3;
 
+myran1=j(n1, 1, 0);
+myran2=j(n2, 1, 0);
 
+result = j(1,2,0);
+</code></pre>
+<p>我们模拟5000次，每次的模拟设置如下：</p>
+<pre><code class="language-sas">    enroll = 0.25*(uniform(myran1)) // 0.25*(uniform(myran2)); 
 
+		event_ = (log(1-uniform(myran1))/log(1-pe1)) // (log(1-uniform(myran2))/log(1-pe2));
+		event = enroll + event_; 
 
+		loss_ = (log(1-uniform(myran1))/log(1-pd1)) // (log(1-uniform(myran2))/log(1-pd2));
+		loss = enroll+loss_;
 
+		censor = (loss&lt;studyduration)#loss + studyduration*(loss&gt;=studyduration);
 
+		status = (event||censor)[,&gt;&lt;]||(censor&lt;event)||(myran1//(1+myran2));
 
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111107072.png" alt="pass" loading="lazy" data-zoomable /></div>
-  </div></figure>
-</p>
-<p>但是，原文中给出的参数是：单侧非劣效比较，两个率期待的差异是0，proportion discordant应该是原文中出现了错误，正确的应该是$\pi_{10}+\pi_{01}=0.1$，proportion of both yes$\pi_{11}=0.75$，且利用Newcombe在1998年提到的配对比例的方法<a href="https://doi.org/10.1002/%28SICI%291097-0258%2819981130%2917:22%3C2635::AID-SIM954%3E3.0.CO;2-C" title="Improved confidence intervals for the difference between binomial proportions based on paired data" target="_blank" rel="noopener"></a>模拟1000次得到在样本量为90的前提下的功效。</p>
-<p>根据这些参数，在PASS中无法得到原文中的结果。</p>
-<p>我们转而利用nQuery中的样本量计算，选择lower confidence limit for diffence in paired proportions using simulation，得到的结果如下：</p>
-<p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202312111113489.png" alt="nquery" loading="lazy" data-zoomable /></div>
-  </div></figure>
-</p>
-<p>这个结果和原文中的结果是一致的。在未知两组率的历史数据，只有proportion discordant和proportion of both yes的情况下，推荐利用nQuery中的模拟方法得到样本量和功效。</p>
-<h3 id="思考2">思考2</h3>
-<p>对于1周供体部位完全愈合的发生率的比较，就比较简单了，不涉及非劣效比较，同时给出两组率，我们直接利用SAS中的<code>proc power</code>的<code>pairedfreq</code>，利用McNemar’s test for paired proportions得到样本量和功效，如下：</p>
-<pre><code class="language-sas">proc power;
-	pairedfreq dist=normal TEST=MCNEMAR METHOD=MIETTINEN
-		discpropdiff = 0.35
-      	totalpropdisc = 0.5
-     	npairs = .
-      	power = .95;
+		chisq = logrank(status);
+		result = result//(chisq||i);
+</code></pre>
+<p>其中，enroll的时间我们设置服从 (0, 0.25) 的均匀分布，即招募时间在0-3个月之间，event_和loss_分别为终点事件和脱落发生的分布，从而设置censor和status变量，拿到模拟的数据之后，我们基于logrank检验计算统计量及p值。</p>
+<p>chisq是根据status来计算logrank test的统计量，最后将每次模拟的统计量和i（i为模拟的次数）放在result里。</p>
+<p>进而，我们统计模拟5000次中，有多少次统计量显著，即统计学功效。</p>
+<pre><code class="language-sas">data result;
+	set result (where=(runid&gt;0));
+	prob = 1-probchi(chisq,1);
+	if prob&lt;0.05 then reject=1; else reject=0;
+run;
+proc freq data=result;
+	tables reject;
+	title &quot;Percent of rejections of null hypothesis&quot;;
 run;
 </code></pre>
-<p>两个样本量，取大者作为最终的样本量，即90。</p>
-<p>最后，我在星球里给了一个用R来做样本量和功效的模拟，感兴趣的朋友可以去<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>里查阅。</p>
+<p>我们来看下5000次模拟的结果：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401032030510.png" alt="result" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>可以看到，在当前样本量及event rate之下，power是足够的。至此，我们就完成了一个我们日常常用的生存分析的样本量计算。</p>
+<h2 id="拓展">拓展</h2>
+<p>上面例子中，我们没有考虑crossover的发生、hazard rate是否保持不变、复杂的失访等情况，如果我们想考虑这些情况，我们可以在模拟的时候加入这些参数来考虑，从原理上，基于<code>proc iml</code>的模拟，我们是可以完成任何复杂的生存分析的样本量及功效估计的情况。</p>
+<p>另外，大家可能注意到了，我们这里是在估算power，如果是想要计算样本量呢？</p>
+<p>我们可以首先利用logrank的公式来估算大致的样本量，并利用以上代码来估计对应的power，并不断地迭代，直到我们得到满意的power，该样本量即可成为我们最终的选择。</p>
+<p>完整的SAS代码我已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg" target="_blank" rel="noopener">星球</a>里，感兴趣的同学可以去看看。</p>
 <h4 id="did-you-find-this-page-helpful-consider-sharing-it-">Did you find this page helpful? Consider sharing it 🙌</h4>
 
     </div>
@@ -989,7 +945,7 @@ run;
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F11%2Fnoninferiority-trial-paired-proportions%2F&amp;text=%E9%9D%9E%E5%8A%A3%E6%95%88%E8%AF%95%E9%AA%8C%E4%B8%AD%E9%85%8D%E5%AF%B9proportions%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fleslie-lu.github.io%2F2024%2F01%2F03%2Fsas-simulation%2F&amp;text=%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E4%B9%8BSAS&#43;simulation" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1006,7 +962,7 @@ run;
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F11%2Fnoninferiority-trial-paired-proportions%2F&amp;t=%E9%9D%9E%E5%8A%A3%E6%95%88%E8%AF%95%E9%AA%8C%E4%B8%AD%E9%85%8D%E5%AF%B9proportions%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fleslie-lu.github.io%2F2024%2F01%2F03%2Fsas-simulation%2F&amp;t=%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E4%B9%8BSAS&#43;simulation" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1025,7 +981,7 @@ run;
         
       
       <li>
-        <a href="mailto:?subject=%E9%9D%9E%E5%8A%A3%E6%95%88%E8%AF%95%E9%AA%8C%E4%B8%AD%E9%85%8D%E5%AF%B9proportions%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F11%2Fnoninferiority-trial-paired-proportions%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E4%B9%8BSAS%20simulation&amp;body=https%3A%2F%2Fleslie-lu.github.io%2F2024%2F01%2F03%2Fsas-simulation%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1042,7 +998,7 @@ run;
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F11%2Fnoninferiority-trial-paired-proportions%2F&amp;title=%E9%9D%9E%E5%8A%A3%E6%95%88%E8%AF%95%E9%AA%8C%E4%B8%AD%E9%85%8D%E5%AF%B9proportions%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fleslie-lu.github.io%2F2024%2F01%2F03%2Fsas-simulation%2F&amp;title=%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E4%B9%8BSAS&#43;simulation" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1059,7 +1015,7 @@ run;
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2023%2F12%2F11%2Fnoninferiority-trial-paired-proportions%2F&amp;title=%E9%9D%9E%E5%8A%A3%E6%95%88%E8%AF%95%E9%AA%8C%E4%B8%AD%E9%85%8D%E5%AF%B9proportions%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fleslie-lu.github.io%2F2024%2F01%2F03%2Fsas-simulation%2F&amp;title=%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E4%B9%8BSAS&#43;simulation" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1276,15 +1232,15 @@ run;
     <h3>Related</h3>
     <ul>
       
+      <li><a href="/2023/12/13/sphericity-test-for-repeated-measures-anova/">重复测量分析方差分析的球形检验</a></li>
+      
+      <li><a href="/2023/12/11/noninferiority-trial-paired-proportions/">非劣效试验中配对proportions的样本量计算</a></li>
+      
+      <li><a href="/2023/11/21/repeated-measures-analysis/">重复测量分析的完整思路</a></li>
+      
       <li><a href="/2023/11/20/mmrm/">MMRM的SAS和R实现</a></li>
       
       <li><a href="/2023/10/31/graphs/">结合SAS和R绘制临床试验figure</a></li>
-      
-      <li><a href="/2024/01/03/sas-simulation/">样本量计算之SAS simulation</a></li>
-      
-      <li><a href="/2023/12/13/sphericity-test-for-repeated-measures-anova/">重复测量分析方差分析的球形检验</a></li>
-      
-      <li><a href="/2023/11/21/repeated-measures-analysis/">重复测量分析的完整思路</a></li>
       
     </ul>
   </div>

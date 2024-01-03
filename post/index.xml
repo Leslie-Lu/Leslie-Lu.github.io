@@ -5,12 +5,122 @@
     <link>https://leslie-lu.github.io/post/</link>
       <atom:link href="https://leslie-lu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 22 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 03 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://leslie-lu.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>样本量计算之SAS simulation</title>
+      <link>https://leslie-lu.github.io/2024/01/03/sas-simulation/</link>
+      <pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2024/01/03/sas-simulation/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;我们前面简单介绍过这篇&lt;a href=&#34;https://mp.weixin.qq.com/s/0PvvlMZkBF_uXNOgTT95pg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;临床试验生存分析的有效事件数模拟&lt;/a&gt;，在里面用R语言简单模拟了单臂试验的有效事件数估计。&lt;/p&gt;
+&lt;p&gt;就有朋友在&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里问了：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401032007751.png&#34; alt=&#34;提问&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;实际上，我们可以在PASS中完全包含复杂情况的样本量计算，我也是这么回答这位同学的。&lt;/p&gt;
+&lt;p&gt;但是，非要在SAS里做可不可以呢？答案当然是可以的，我们接下来借助&lt;code&gt;proc iml&lt;/code&gt;来完成生存分析的样本量和power估算。&lt;/p&gt;
+&lt;h2 id=&#34;sas-simulation&#34;&gt;SAS simulation&lt;/h2&gt;
+&lt;p&gt;已知，在估算样本量的时候，稍微复杂一点的，我们需要考虑的参数有：试验组别、招募时间、随访时间、有效事件数的分布、脱落情况、是否发生crossover、hazard rate or event rate、hazard rate是否保持不变等[ ]( &amp;ldquo;Sample Size Calculation for Complex Clinical Trials with Survival Endpoints&amp;rdquo;)。&lt;/p&gt;
+&lt;p&gt;我们这里假设一点稍微简单的情况。&lt;/p&gt;
+&lt;p&gt;两组，每组100人，组1 event rate为0.1，组2 event rate为0.32，两组招募在3个月内完成招募，招募时间服从均匀分布，试验随访时间3年结束，组1、组2在随访1年后失访概率分别为0.20、0.25，要求模拟在当前样本量下的统计学功效。&lt;/p&gt;
+&lt;p&gt;那我们首先来在&lt;code&gt;proc iml&lt;/code&gt;里定义这些参数，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;n1 = 100; 
+n2 = 100; 
+pe1 = 0.1; 
+pe2 = 0.32;
+pd1 = 0.20;
+pd2 = 0.25;
+studyduration = 3;
+
+myran1=j(n1, 1, 0);
+myran2=j(n2, 1, 0);
+
+result = j(1,2,0);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们模拟5000次，每次的模拟设置如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;    enroll = 0.25*(uniform(myran1)) // 0.25*(uniform(myran2)); 
+
+		event_ = (log(1-uniform(myran1))/log(1-pe1)) // (log(1-uniform(myran2))/log(1-pe2));
+		event = enroll + event_; 
+
+		loss_ = (log(1-uniform(myran1))/log(1-pd1)) // (log(1-uniform(myran2))/log(1-pd2));
+		loss = enroll+loss_;
+
+		censor = (loss&amp;lt;studyduration)#loss + studyduration*(loss&amp;gt;=studyduration);
+
+		status = (event||censor)[,&amp;gt;&amp;lt;]||(censor&amp;lt;event)||(myran1//(1+myran2));
+
+		chisq = logrank(status);
+		result = result//(chisq||i);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中，enroll的时间我们设置服从 (0, 0.25) 的均匀分布，即招募时间在0-3个月之间，event_和loss_分别为终点事件和脱落发生的分布，从而设置censor和status变量，拿到模拟的数据之后，我们基于logrank检验计算统计量及p值。&lt;/p&gt;
+&lt;p&gt;chisq是根据status来计算logrank test的统计量，最后将每次模拟的统计量和i（i为模拟的次数）放在result里。&lt;/p&gt;
+&lt;p&gt;进而，我们统计模拟5000次中，有多少次统计量显著，即统计学功效。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;data result;
+	set result (where=(runid&amp;gt;0));
+	prob = 1-probchi(chisq,1);
+	if prob&amp;lt;0.05 then reject=1; else reject=0;
+run;
+proc freq data=result;
+	tables reject;
+	title &amp;quot;Percent of rejections of null hypothesis&amp;quot;;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们来看下5000次模拟的结果：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401032030510.png&#34; alt=&#34;result&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;可以看到，在当前样本量及event rate之下，power是足够的。至此，我们就完成了一个我们日常常用的生存分析的样本量计算。&lt;/p&gt;
+&lt;h2 id=&#34;拓展&#34;&gt;拓展&lt;/h2&gt;
+&lt;p&gt;上面例子中，我们没有考虑crossover的发生、hazard rate是否保持不变、复杂的失访等情况，如果我们想考虑这些情况，我们可以在模拟的时候加入这些参数来考虑，从原理上，基于&lt;code&gt;proc iml&lt;/code&gt;的模拟，我们是可以完成任何复杂的生存分析的样本量及功效估计的情况。&lt;/p&gt;
+&lt;p&gt;另外，大家可能注意到了，我们这里是在估算power，如果是想要计算样本量呢？&lt;/p&gt;
+&lt;p&gt;我们可以首先利用logrank的公式来估算大致的样本量，并利用以上代码来估计对应的power，并不断地迭代，直到我们得到满意的power，该样本量即可成为我们最终的选择。&lt;/p&gt;
+&lt;p&gt;完整的SAS代码我已经放进了&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，感兴趣的同学可以去看看。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>LSTM参数数量的计算</title>
