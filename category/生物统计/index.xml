@@ -5,12 +5,177 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 03 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 10 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>MedDRA的asc文件的SAS读取</title>
+      <link>https://leslie-lu.github.io/2024/01/10/meddra-sas/</link>
+      <pubDate>Wed, 10 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2024/01/10/meddra-sas/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;起因是，有同学在小红书上提问，怎么用SAS读取MedDRA的asc文件。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401101641687.png&#34; alt=&#34;提问&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;那我们这篇文章就在不使用MedDRA Desktop Browser (MDB)前提下，用SAS实现一下。&lt;/p&gt;
+&lt;h2 id=&#34;meddra&#34;&gt;MedDRA&lt;/h2&gt;
+&lt;p&gt;首先，还是介绍下MedDRA，MedDRA是Medical Dictionary for Regulatory Activities的缩写，是由国际药品监管机构协调委员会（International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use，简称ICH）制定的一套医学术语词典，用于药物不良事件（Adverse Event，简称AE）的记录、报告和分析。其旨在支持全球药物和医疗器械的监管和研究。该词典提供了统一的医学术语体系，用于描述和报告与药物治疗相关的医学事件和药物副作用。&lt;/p&gt;
+&lt;p&gt;MedDRA的主要特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;全球标准化： MedDRA是全球性标准，被世界范围内的药品监管机构采用，包括美国FDA、欧洲药物管理局（EMA）等。&lt;/li&gt;
+&lt;li&gt;多语言支持： 以多语言形式提供，促进全球卫生专业人员、研究人员和监管机构之间的有效沟通。&lt;/li&gt;
+&lt;li&gt;层次化结构： 采用层次化的术语结构，从高层次的系统性术语到更具体的事件术语，为不同层次的用户提供了灵活性。&lt;/li&gt;
+&lt;li&gt;定期更新： MedDRA定期进行更新，以反映新兴的医学知识和新药物的开发。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MedDRA的术语结构如下图所示：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401101646786.png&#34; alt=&#34;MedDRA&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;asc文件&#34;&gt;asc文件&lt;/h2&gt;
+&lt;p&gt;我们拿到的MedDRA文件一般是asc文件，其格式如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401101647687.png&#34; alt=&#34;asc&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这里我们拿到的是最新的26.1中文版本MedDRA。&lt;/p&gt;
+&lt;p&gt;如果不用SAS读取，在MDB中显示如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401101727684.png&#34; alt=&#34;mdb&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;sas读取&#34;&gt;SAS读取&lt;/h2&gt;
+&lt;p&gt;我们可以用SAS的&lt;code&gt;infile&lt;/code&gt;来读取，首先导入SOC/HLGT/HLT/PT hierarchy文件，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sas&#34;&gt;data mdhier_&amp;amp;dsver.;
+        infile &amp;quot;&amp;amp;path.\mdhier.asc&amp;quot; dsd dlm=&#39;$&#39; missover lrecl=32767;
+        length pt_name 
+               hlt_name 
+               hlgt_name 
+               soc_name $100 
+               soc_abbrev $5 
+               null_field $1
+               primary_soc_fg $1;
+          input pt_code 
+              hlt_code 
+              hlgt_code 
+              soc_code 
+              pt_name 
+              hlt_name 
+              hlgt_name 
+              soc_name
+              soc_abbrev 
+              null_field 
+              pt_soc_code 
+              primary_soc_fg;
+
+        length ver $4;
+        ver = left(&amp;quot;&amp;amp;ver.&amp;quot;);
+        aebodsys = upcase(soc_name);
+        aedecod = upcase(pt_name);
+    run; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后再类似地分别导入PT、LLT level文件，再将二者通过pt code merge起来，最后再将SOC/HLGT/HLT/PT level文件merge起来。&lt;/p&gt;
+&lt;p&gt;最终输出的文件如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401101648687.png&#34; alt=&#34;output&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这就拿到了我们想要的文件，也就解决了小红书那位同学的问题。&lt;/p&gt;
+&lt;p&gt;完整的SAS宏代码我已经放进了&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，感兴趣的同学可以去看看。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>生存分析样本量计算之SAS simulation</title>
