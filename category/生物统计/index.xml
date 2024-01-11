@@ -5,12 +5,79 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 10 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 11 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>你做了这么久的stratified cox，文献告诉你，你可能一直在用错</title>
+      <link>https://leslie-lu.github.io/2024/01/11/stratified-cox/</link>
+      <pubDate>Thu, 11 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2024/01/11/stratified-cox/</guid>
+      <description>&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;
+&lt;p&gt;有同学发过来一篇&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8606770/&#34; title=&#34;Moving beyond conventional stratified analysis to assess the treatment effect in a comparative oncology study&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;文献&lt;/a&gt;，我一看，好家伙，之前写统计方法部分，并没有注意到这个问题。&lt;/p&gt;
+&lt;p&gt;接下来请大家跟着我，一起来学习一下，并更新你的统计方法知识库。&lt;/p&gt;
+&lt;h2 id=&#34;stratified-cox-model&#34;&gt;stratified cox model&lt;/h2&gt;
+&lt;p&gt;我们知道，对于一般的生存分析cox模型，我们要求满足&lt;a href=&#34;https://mp.weixin.qq.com/s/xWQBvtw1B3Acs7TdkQcwuQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PH假定&lt;/a&gt;。如果不满足该假定，我们可以用stratified cox model来解决更加精确一点的参数估计。那这么通用的stratified cox就是最合适的方法么？&lt;/p&gt;
+&lt;p&gt;这个问题其实就引出了治疗效应的异质性问题，也就是说，我们的治疗效应是否在不同的子组中是一致的？如果不一致，我们就需要用到更加精确的方法来估计治疗效应。&lt;/p&gt;
+&lt;p&gt;在临床试验中，我们一般会根据一些严重影响到生存的基线特征进行分层，比如性别、年龄、疾病分期等。这些基线特征，也就是我们的分层变量，会影响到治疗效应的估计。如果我们的分层变量与治疗效应的异质性无关，那么我们的stratified cox model就是最合适的方法。注意，这句话是什么意思？我们来看一下KEYNOTE-189 study的结果。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401111703554.png&#34; alt=&#34;KEYNOTE-189&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;这是一项关于晚期非小细胞肺癌的临床试验，研究了pembrolizumab联合化疗与单独化疗的治疗效果。我们看到，对于分层变量TPS的不同水平，HR的值并不一致，分别是0.59、0.55、0.42，而在overall population中，HR的值是0.52。此外，从生存曲线上看出，在总的人群和subpopulation里，PH假定都是被违反的。这就说明，分层变量不同水平与治疗效应的异质性是有关的，在这种情况下，治疗效应的临床解释就出现了问题，PH都不满足，你为啥能对你的结果有足够的信心说服药审中心呢？这也是为什么FDA会要求我们做subgroup analysis，来看看治疗效应的异质性是否存在。&lt;/p&gt;
+&lt;p&gt;那我们做一下stratified cox，拿到的HR为0.53 (95%CI 0.41 to 0.70)，问题来了，这个0.53你要怎么解释？hazard本身的意义是表示死亡的强度（intensity or force of motality），表示在每个TPS分层里，pembrolizumab联合化疗vs单独化疗的hazard都是0.53，但是我们前面清楚的看到，每个分层的hazard是从0.42到0.59的变化的，你只用一个stratified cox来做TPS分层的校正得到的0.53来汇总解释这种变化，是不好解释在overall population里的hazard，你无法排除subpopulation size与异质性给overall population带来的影响。也就是说，我们的stratified cox model并不是最合适的方法。&lt;/p&gt;
+&lt;p&gt;那咋办，我要拿到一个能够代表overall population的hazard。&lt;/p&gt;
+&lt;h2 id=&#34;解决&#34;&gt;解决&lt;/h2&gt;
+&lt;p&gt;我们前面既然提到了subpopulation size以及不同组的治疗效应的异质性，那思路就来了，加权。&lt;/p&gt;
+&lt;p&gt;根据治疗效应带来的不同亚组的生存率本质上的不同，我们对不同亚组的生存率（survival rate）进行亚组人数数量的加权，这样就能拿到一个基于亚组大小的加权后的生存率，基于这个加权后的生存率，我们去计算加权后的生存分析的&lt;a href=&#34;https://mp.weixin.qq.com/s/KJ5wiWF0uz88Bmt2_wisOw&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;参数&lt;/a&gt;，这样我们可以拿到各个亚组的RD、OR、median survival time，如下图：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401111739256.png&#34; alt=&#34;weighted parameters&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;同样，基于加权的参数，我们可以算加权更新后，在overall population里，在考虑了不同亚组治疗异质性之后，治疗效应的平均估计量，我们拿到了一个OR。在考虑了前述因素之后，我们可以得出结论，pembrolizumab联合化疗vs单独化疗的OR值更加精确地反映真实的治疗效应。median survival time同样支持我们的结论。&lt;/p&gt;
+&lt;p&gt;如此一来，我们终于可以摆脱单一的stratified cox得出的结论，而可以充分考虑ovreall pupulation的人群构成带来的异质性给参数估计带来的影响。这一点非常的重要，特别地，当有因素连作为分层因素都没有被纳入随机化分层之时，利用加权估计，我们可以避免治疗效应的不平衡带来的overall treatement effect的难以解释。&lt;/p&gt;
+&lt;p&gt;这就提示我们，在临床试验中，对于治疗效应的异质性问题，我们需要更加谨慎地考虑不同细分亚组人群给总的效应带来的影响，而不是简单的套用模型或公式，笼统地重复计算。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>MedDRA的asc文件的SAS读取</title>
