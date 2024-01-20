@@ -5,12 +5,93 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 11 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 20 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>用R画了一个微信红包封面</title>
+      <link>https://leslie-lu.github.io/2024/01/20/stratified-cox/</link>
+      <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2024/01/20/stratified-cox/</guid>
+      <description>&lt;h2 id=&#34;红包封面&#34;&gt;红包封面&lt;/h2&gt;
+&lt;p&gt;大家先拿红包封面，数量有限，只有2000个哦~领完再往下看😆。&lt;/p&gt;
+&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;
+&lt;p&gt;受到y叔的&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI5NjUyNzkxMg==&amp;amp;mid=2247494203&amp;amp;idx=1&amp;amp;sn=56e52bc902d5acb41b1975b07ec339aa&amp;amp;chksm=ed33d39b4f47f8061e566f31feca85198d9dc1de557f6668d28a834a18a99e6e368a2a59c577&amp;amp;scene=0&amp;amp;xtrack=1#rd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;微信红包封面&lt;/a&gt;的启发，我决定也用R画一个我们自己公众号的专属微信红包封面。别的公众号有的，咱们公众号的朋友们也要拥有😃。&lt;/p&gt;
+&lt;p&gt;y叔的微信红包封面如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401192102727.png&#34; alt=&#34;y叔的微信红包封面&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;他使用自己写的包&lt;code&gt;emojifont&lt;/code&gt;，直接生成的龙的emoji，从而画的红包封面。这个包还是很有意思的，大家可以去看看，地址在&lt;a href=&#34;https://cran.r-project.org/web/packages/emojifont/vignettes/emojifont.html#emoji-in-r-plot&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;那我们就不要重复这个思路了，我们不拿emoji，拿龙的剪纸框架来画一个红包封面。我在网上找到了一个免费的龙的剪纸框架，如下：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://media.istockphoto.com/id/1834783885/vector/happy-chinese-new-year-2024-year-of-the-dragon-zodiac.jpg?s=612x612&amp;amp;w=0&amp;amp;k=20&amp;amp;c=6x-gPDRKuG_kFJfiVBTJJRk6XZTuAsmdj8TCT0WUpHk=&#34; alt=&#34;龙的剪纸框架&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;是不是还挺有意思的，拿到素材之后，我就直接用R加到了我们的微信封面之中，最后只需要几行R的代码就可以生成我们现在的微信红包封面了。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401192120827.jpg&#34; alt=&#34;微信红包封面&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;代码很简单，我直接已经放进了&lt;a href=&#34;https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;星球&lt;/a&gt;里，感兴趣的同学可以去看看。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>你用了这么久的stratified cox，文献告诉你，你俩可能不合适</title>
