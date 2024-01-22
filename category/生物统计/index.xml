@@ -5,12 +5,73 @@
     <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
       <atom:link href="https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>生物统计</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 20 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 22 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://leslie-lu.github.io/media/icon_hub5ad547e93238d960d41533040420c4e_290480_512x512_fill_lanczos_center_3.png</url>
       <title>生物统计</title>
       <link>https://leslie-lu.github.io/category/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1/</link>
     </image>
+    
+    <item>
+      <title>文献解读：肿瘤试验估计目标框架</title>
+      <link>https://leslie-lu.github.io/2024/01/22/paper-reading/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://leslie-lu.github.io/2024/01/22/paper-reading/</guid>
+      <description>&lt;h2 id=&#34;案例&#34;&gt;案例&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://dx.doi.org/10.1056/nejmoa1509277&#34; title=&#34;Inotuzumab Ozogamicin versus Standard Therapy for Acute Lymphoblastic Leukemia&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;INO-VATE ALL(NCT01564784)研究&lt;/a&gt;是一项开放标签、两组随机、3期试验，用于比较奥加伊妥珠单抗(Inotuzumab Ozogamicin)与标准密集化疗在复发性或难治性ALL成年受试者的安全性和有效性。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202401222039863.png&#34; alt=&#34;INO-VATE ALL(NCT01564784)研究&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;统计分析及估计目标框架&#34;&gt;统计分析及估计目标框架&lt;/h2&gt;
+&lt;p&gt;受试者以1: 1的比例随机分配接受奥加伊妥珠单抗或研究者选择的标准治疗(FLAG，阿糖胞苷+米托蒽醌，或高剂量阿糖胞苷)。两组之间不允许交叉。随机化分层因子包括：首次缓解持续时间(&amp;lt; 12个月 vs. ≥ 12个月)，抢救治疗阶段(首次 vs. 二次)和年龄(&amp;lt;55岁 vs.≥55岁)。达到完全缓解的受试者可以根据研究者的酌情接受骨髓细胞移植。&lt;/p&gt;
+&lt;p&gt;主要终点是无进展生存期(PFS)以及总生存期(OS)，这里主要总结OS。&lt;/p&gt;
+&lt;h3 id=&#34;估计目标&#34;&gt;估计目标&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;目标人群：复发性或难治性ALL成年受试者&lt;/li&gt;
+&lt;li&gt;治疗：奥加伊妥珠单抗或研究者选择的标准治疗(FLAG，阿糖胞苷+米托蒽醌，或高剂量阿糖胞苷)，两组均可有后续治疗（包括骨髓细胞移植）。两组之间不允许交叉。&lt;/li&gt;
+&lt;li&gt;目标变量：OS，定义为随机化至全因死亡之间的时间&lt;/li&gt;
+&lt;li&gt;伴发事件处理策略：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;对于后续治疗，采取疗法策略，即此时关注的科学问题混合了伴发事件带来的治疗效应，而不是试验用药的“纯”疗效；&lt;/li&gt;
+&lt;li&gt;对于非研究疾病导致的死亡，采取复合策略，即伴发事件为关注的终点指标的一部分。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;群体层面汇总：hazard ratio (HR)和95%可信区间(CI)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;研究的主要估计目标关注的是全因死亡，因此使用复合策略，将非研究疾病导致的死亡整合到关注的终点指标的定义之中。对于后续治疗，采取疗法策略，即此时关注的科学问题混合了伴发事件带来的治疗效应，而不是试验用药的“纯”疗效。对未发生全因死亡的受试者，将其删失在最后已知存活的时间。统计分析主要采用分层Cox Proportional Hazards模型，估计HR和95%CI，以及使用Kaplan-Meier方法估计中位生存期和其95%CI。&lt;/p&gt;
+&lt;h3 id=&#34;补充估计目标1&#34;&gt;补充估计目标1&lt;/h3&gt;
+&lt;p&gt;考虑到后续治疗对全因死亡终点可能的影响，因而需要排除这些后续治疗对OS的混杂影响。&lt;/p&gt;
+&lt;p&gt;排除后续治疗的影响，使用假想策略，基于无信息删失的假设（即接受了后续治疗的受试者与没有接受的受试者，发生终点时间的风险是相同的），将受试者删失在接受后续治疗的时间点，且使用后续治疗之后发生的全因死亡不纳入统计分析。&lt;/p&gt;
+&lt;h3 id=&#34;补充估计目标2&#34;&gt;补充估计目标2&lt;/h3&gt;
+&lt;p&gt;考虑到HR对比例风险假设的依赖，使用RMST方法估计两组的中位生存期差异，以及其95%CI。&lt;/p&gt;
+&lt;h3 id=&#34;补充估计目标3&#34;&gt;补充估计目标3&lt;/h3&gt;
+&lt;p&gt;考虑到非研究疾病导致的死亡，对生存结局带来的竞争风险影响，即非研究疾病导致的死亡的受试者不再有发生研究疾病导致的死亡的机会，在这种情况下，使用在治策略，去估计竞争事件发生之前的疗效，即估计在竞争事件发生之前的疗效（time-to-event），而不是估计在竞争事件发生之后的疗效。&lt;/p&gt;
+&lt;p&gt;使用cause-specific Cox Proportional Hazards模型，估计HR和95%CI。在统计分析中，将非研究疾病导致的死亡做删失处理。&lt;/p&gt;
+&lt;h3 id=&#34;补充估计目标4&#34;&gt;补充估计目标4&lt;/h3&gt;
+&lt;p&gt;使用subdistribution hazard ratio (SHR)和95%CI，以及使用Fine-Gray方法估计中位生存期和其95%CI。&lt;/p&gt;
+&lt;p&gt;发生竞争事件的受试者不会被移除出风险集，且将其time-to-event作为无穷大。&lt;/p&gt;
+&lt;h4 id=&#34;did-you-find-this-page-helpful-consider-sharing-it-&#34;&gt;Did you find this page helpful? Consider sharing it 🙌&lt;/h4&gt;
+</description>
+    </item>
     
     <item>
       <title>用R画了一个微信红包封面</title>
