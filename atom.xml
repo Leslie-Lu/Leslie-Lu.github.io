@@ -473,14 +473,19 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="最优f1指数" class="level4">
 <h4 class="anchored" data-anchor-id="最优f1指数">2. 最优F1指数</h4>
 <p>F1指数是precision和recall的调和平均数。我们可以通过最大F1指数来选择最优的阈值。</p>
+<div id="threshold-f1" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>Threshold using optimal f1-score: 0.471.</code></pre>
+</div>
+</div>
 <p>F1最高为0.471，我们采用它来进行预测：</p>
 <div id="threshold-f1-predict" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">thresh <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">thresh <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">.471</span></span>
-<span id="cb13-2">yhat <span class="op" style="color: #5E5E5E;
+<span id="cb14-2">yhat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.where(ypred <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -489,7 +494,7 @@ background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb13-3"><span class="bu" style="color: null;
+<span id="cb14-3"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -501,15 +506,47 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="roc曲线" class="level4">
 <h4 class="anchored" data-anchor-id="roc曲线">3. ROC曲线</h4>
 <p>我们可以通过<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">ROC曲线</a>来选择最优的阈值。ROC曲线下的面积AUC越大，说明模型越好。我们可以选择ROC曲线最靠近左上角的点作为最优阈值。</p>
+<div id="cell-threshold-roc" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="figure-img" width="445" height="447"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="prc曲线" class="level4">
 <h4 class="anchored" data-anchor-id="prc曲线">4. PRC曲线</h4>
 <p>PRC曲线是<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">precision-recall曲线</a>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</p>
+<div id="cell-threshold-prc" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="figure-img" width="445" height="447"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Selected threshold using precision-recall curve: 0.674.</code></pre>
+</div>
+</div>
 </section>
 <section id="分别关注precision和recall" class="level4">
 <h4 class="anchored" data-anchor-id="分别关注precision和recall">5. 分别关注precision和recall</h4>
 <p>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</p>
+<div id="cell-threshold-pre-recall" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="figure-img" width="614" height="374"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
 <p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+<p><br></p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
 
