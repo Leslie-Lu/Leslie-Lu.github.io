@@ -522,9 +522,9 @@ Xvalid.shape: (114, 30)</code></pre>
 <p>我们可以通过<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">ROC曲线</a>来选择最优的阈值。ROC曲线下的面积AUC越大，说明模型越好。我们可以选择ROC曲线最靠近左上角的点作为最优阈值。</p>
 <div id="cell-threshold-roc" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="figure-img" width="445" height="447"></p>
+<p><img src="index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -535,9 +535,9 @@ Xvalid.shape: (114, 30)</code></pre>
 <p>PRC曲线是<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">precision-recall曲线</a>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</p>
 <div id="cell-threshold-prc" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="figure-img" width="445" height="447"></p>
+<p><img src="index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -551,9 +551,9 @@ Xvalid.shape: (114, 30)</code></pre>
 <p>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</p>
 <div id="cell-threshold-pre-recall" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="figure-img" width="614" height="374"></p>
+<p><img src="index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="quarto-figure quarto-figure-center anchored figure-img" width="614" height="374"></p>
 </figure>
 </div>
 </div>
@@ -1207,69 +1207,72 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: threshold-roc</span></span>
-<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> RocCurveDisplay</span>
-<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a>roc_disp <span class="op">=</span> RocCurveDisplay.from_predictions(</span>
-<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a>    yvalid, ypred, name<span class="op">=</span><span class="st">"RandomForestClassifier"</span>, color<span class="op">=</span><span class="st">"#191964"</span></span>
-<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a>roc_disp.ax_.set_title(<span class="st">"ROC curve"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a>roc_disp.ax_.grid(<span class="va">True</span>)</span>
-<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. PRC曲线</span></span>
-<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a>PRC曲线是<span class="co">[</span><span class="ot">precision-recall曲线</span><span class="co">](https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw)</span>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</span>
-<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: threshold-prc</span></span>
-<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> PrecisionRecallDisplay</span>
-<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a>pr_disp <span class="op">=</span> PrecisionRecallDisplay.from_predictions(</span>
-<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a>    yvalid, ypred, name<span class="op">=</span><span class="st">"RandomForestClassifier"</span>, color<span class="op">=</span><span class="st">"#CD0066"</span></span>
-<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>pr_disp.ax_.set_title(<span class="st">"Precision-Recall curve"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a>pr_disp.ax_.grid(<span class="va">True</span>)</span>
-<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a>p, r, thresh <span class="op">=</span> precision_recall_curve(yvalid, ypred)</span>
-<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a>best_thresh <span class="op">=</span> thresh[np.where(r <span class="op">&gt;=</span> <span class="fl">.95</span>)[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]]</span>
-<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Selected threshold using precision-recall curve: </span><span class="sc">{</span>best_thresh<span class="sc">:,.3f}</span><span class="ss">."</span>)</span>
-<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分别关注precision和recall</span></span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> RocCurveDisplay</span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a>roc_disp <span class="op">=</span> RocCurveDisplay.from_predictions(</span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a>    yvalid, ypred, name<span class="op">=</span><span class="st">"RandomForestClassifier"</span>, color<span class="op">=</span><span class="st">"#191964"</span></span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a>roc_disp.ax_.set_title(<span class="st">"ROC curve"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a>roc_disp.ax_.grid(<span class="va">True</span>)</span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. PRC曲线</span></span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>PRC曲线是<span class="co">[</span><span class="ot">precision-recall曲线</span><span class="co">](https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw)</span>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: threshold-prc</span></span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> PrecisionRecallDisplay</span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a>pr_disp <span class="op">=</span> PrecisionRecallDisplay.from_predictions(</span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>    yvalid, ypred, name<span class="op">=</span><span class="st">"RandomForestClassifier"</span>, color<span class="op">=</span><span class="st">"#CD0066"</span></span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a>pr_disp.ax_.set_title(<span class="st">"Precision-Recall curve"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a>pr_disp.ax_.grid(<span class="va">True</span>)</span>
+<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a>p, r, thresh <span class="op">=</span> precision_recall_curve(yvalid, ypred)</span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a>best_thresh <span class="op">=</span> thresh[np.where(r <span class="op">&gt;=</span> <span class="fl">.95</span>)[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Selected threshold using precision-recall curve: </span><span class="sc">{</span>best_thresh<span class="sc">:,.3f}</span><span class="ss">."</span>)</span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分别关注precision和recall</span></span>
 <span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: threshold-pre-recall</span></span>
-<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a>p, r, thresh <span class="op">=</span> precision_recall_curve(yvalid, ypred)</span>
-<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a>p, r <span class="op">=</span> p[:<span class="op">-</span><span class="dv">1</span>], r[:<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span>  plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="dv">4</span>), tight_layout<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"precision &amp; recall vs. threshold"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a>ax.plot(thresh, p, color<span class="op">=</span><span class="st">"red"</span>, linewidth<span class="op">=</span><span class="fl">1.25</span>, label<span class="op">=</span><span class="st">"precision"</span>)</span>
-<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a>ax.plot(thresh, r, color<span class="op">=</span><span class="st">"blue"</span>, linewidth<span class="op">=</span><span class="fl">1.25</span>, label<span class="op">=</span><span class="st">"recall"</span>)</span>
-<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"threshold"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a><span class="co"># ax.set_xticks(np.arange(tmax+1))</span></span>
-<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, which<span class="op">=</span><span class="st">"major"</span>, direction<span class="op">=</span><span class="st">"in"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"y"</span>, which<span class="op">=</span><span class="st">"major"</span>, direction<span class="op">=</span><span class="st">"in"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_ticks_position(<span class="st">"none"</span>)</span>
-<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_ticks_position(<span class="st">"none"</span>)</span>
-<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fancybox<span class="op">=</span><span class="va">True</span>, framealpha<span class="op">=</span><span class="dv">1</span>, fontsize<span class="op">=</span><span class="st">"medium"</span>)</span>
-<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</span>
+<span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: threshold-pre-recall</span></span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a>p, r, thresh <span class="op">=</span> precision_recall_curve(yvalid, ypred)</span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a>p, r <span class="op">=</span> p[:<span class="op">-</span><span class="dv">1</span>], r[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span>  plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="dv">4</span>), tight_layout<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"precision &amp; recall vs. threshold"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a>ax.plot(thresh, p, color<span class="op">=</span><span class="st">"red"</span>, linewidth<span class="op">=</span><span class="fl">1.25</span>, label<span class="op">=</span><span class="st">"precision"</span>)</span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a>ax.plot(thresh, r, color<span class="op">=</span><span class="st">"blue"</span>, linewidth<span class="op">=</span><span class="fl">1.25</span>, label<span class="op">=</span><span class="st">"recall"</span>)</span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"threshold"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a><span class="co"># ax.set_xticks(np.arange(tmax+1))</span></span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, which<span class="op">=</span><span class="st">"major"</span>, direction<span class="op">=</span><span class="st">"in"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"y"</span>, which<span class="op">=</span><span class="st">"major"</span>, direction<span class="op">=</span><span class="st">"in"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_ticks_position(<span class="st">"none"</span>)</span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_ticks_position(<span class="st">"none"</span>)</span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fancybox<span class="op">=</span><span class="va">True</span>, framealpha<span class="op">=</span><span class="dv">1</span>, fontsize<span class="op">=</span><span class="st">"medium"</span>)</span>
 <span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a>代码已经放进了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里。</span>
-<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>代码已经放进了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里。</span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

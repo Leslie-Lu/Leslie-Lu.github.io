@@ -508,9 +508,9 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <p>我们可以通过<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">ROC曲线</a>来选择最优的阈值。ROC曲线下的面积AUC越大，说明模型越好。我们可以选择ROC曲线最靠近左上角的点作为最优阈值。</p>
 <div id="cell-threshold-roc" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="figure-img" width="445" height="447"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -521,9 +521,9 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <p>PRC曲线是<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">precision-recall曲线</a>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</p>
 <div id="cell-threshold-prc" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="figure-img" width="445" height="447"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -537,9 +537,9 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <p>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</p>
 <div id="cell-threshold-pre-recall" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="figure-img" width="614" height="374"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="quarto-figure quarto-figure-center anchored figure-img" width="614" height="374"></p>
 </figure>
 </div>
 </div>
