@@ -11,7 +11,209 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Sat, 11 May 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 13 May 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Hierarchical composite endpoints治疗效应的可视化</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="复合终点" class="level3">
+<h3 class="anchored" data-anchor-id="复合终点">复合终点</h3>
+<p>有时，根据主要研究目的，我们很难从多个终点指标中选出其中某一个作为主要终点，此时，我们可以利用<strong>复合终点</strong>来作为主要终点。</p>
+<p>Hierarchical composite endpoints (<a href="https://cran.r-project.org/web/packages/hce/hce.pdf">HCE</a>)可以整合不同类型、不同重要性终点成一个有序终点指标，以表示患者经历的不同严重程度的终点。如，在固定随访的RCT中，outcomes of interest可以是death、hospitalization，而这两个终点存在严重程度的差异。很明显，死亡是最严重的。同样最终死亡的两个患者，生存时间更长，意味治疗效应更好；同样最终住院的两个患者，入院前时间更长，治疗效应更好；同样未住院的两个患者，某一实验室指标的change from baseline更大，效应更好。</p>
+<p>对于这种HCE，我们可以计算<a href="@RN1185">win odds</a>来比较组间差异，然而，治疗效应的可视化受到复合终点的影响，不容易像单纯的生存曲线那样用合适的工具可视化出来。</p>
+<p>针对这一问题，AstraZeneca的Martin Karpefors等人提出了一种新的方法，即<em><a href="@RN1187">maraca plot</a></em>。这种方法可以将复合终点中time to event(TTE)以及连续性终点的治疗效应可视化出来，同时也可以用来比较不同治疗组之间的差异。对应的<a href="https://cran.r-project.org/web/packages/maraca/index.html">R包</a>可以方便地实现这一点。</p>
+</section>
+<section id="maraca-plot" class="level3">
+<h3 class="anchored" data-anchor-id="maraca-plot">maraca plot</h3>
+<p>maraca基于ggplot2，其中，对于TTE采用Kaplan-Meier曲线展示cumulative proportions，对于连续性终点可选用箱线图、violin plot以及scatter plot展示连续性分布。这种方法可以同时展示HCE的不同组成成分。</p>
+<p>来看一个例子。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(maraca)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: hce</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(hce_scenario_a, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"maraca"</span>)</span>
+<span id="cb4-2">data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> hce_scenario_a</span>
+<span id="cb4-3">data <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  SUBJID              GROUP GROUPN      AVAL0       AVAL    TRTP
+1      1          Outcome I      0 120.440921   120.4409  Active
+2      2 Continuous outcome  40000   3.345229 40003.3452 Control
+3      3 Continuous outcome  40000  22.802615 40022.8026  Active
+4      4          Outcome I      0 577.311386   577.3114 Control
+5      5         Outcome II  10000 781.758081 10781.7581  Active
+6      6        Outcome III  20000 985.097981 20985.0980 Control</code></pre>
+</div>
+</div>
+<p>具体变量意义，大家可以查看<code>?hce_scenario_a</code>。</p>
+<p>可视化如下：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">column_names <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"GROUP"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">arm =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRTP"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">value =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AVAL0"</span>)</span>
+<span id="cb6-2">tte_outcomes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome I"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome II"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome III"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome IV"</span>)</span>
+<span id="cb6-3">continuous_outcome <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Continuous outcome"</span></span>
+<span id="cb6-4">arm_levels <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">active =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Active"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">control =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Control"</span>)</span>
+<span id="cb6-5">maraca_object <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">maraca</span>(</span>
+<span id="cb6-6">  data, tte_outcomes, continuous_outcome, arm_levels, column_names,</span>
+<span id="cb6-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fixed_followup =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">compute_win_odds =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb6-8">)</span>
+<span id="cb6-9">AZ_colors <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#830051"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F0AB00"</span>)</span>
+<span id="cb6-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(maraca_object, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">density_plot_type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"default"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_bw</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> AZ_colors) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> AZ_colors)</span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index_files/figure-html/maraca-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="结果解释" class="level3">
+<h3 class="anchored" data-anchor-id="结果解释">结果解释</h3>
+<p>怎么看这张图？</p>
+<p>首先是x轴上HCE的5个组成成分，x轴上每个成分的长度大小，代表了患者达到不同成分终点的比例，可以看到，continuous outcome的比例最大，说明这个终点的患者所占比例最大。其次，cumulative percentage显示active组在四个TTE终点上是存在差异的。再然后是continuous outcome的分布，偏向x轴右侧代表change from baseline更大。而这些结合起来，就是win odds的结果，可以看到，和我们从可视化的角度看到的结果是一致的。</p>
+<p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
+  author = {Lu, Zhen},
+  title = {Hierarchical Composite {endpoints治疗效应的可视化}},
+  date = {2024-05-13},
+  url = {https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
+Lu, Zhen. 2024. <span>“Hierarchical Composite
+Endpoints治疗效应的可视化.”</span> May 13, 2024. <a href="https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints">https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints</a>.
+</div></div></section></div> ]]></description>
+  <category>r</category>
+  <category>clinical trial</category>
+  <category>endpoint</category>
+  <guid>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</guid>
+  <pubDate>Mon, 13 May 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405131659328.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>最优分类阈值</title>
   <dc:creator>Zhen Lu</dc:creator>
