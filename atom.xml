@@ -10,8 +10,126 @@
 <atom:link href="https://leslie-lu.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
-<generator>quarto-1.4.554</generator>
-<lastBuildDate>Fri, 17 May 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.555</generator>
+<lastBuildDate>Fri, 07 Jun 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>常用损失函数</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="loss-function" class="level3">
+<h3 class="anchored" data-anchor-id="loss-function">loss function</h3>
+<p>在机器学习/深度学习任务中，衡量模型预测值与真实值之间的差异的指标称为损失函数。损失函数是模型训练的关键组成部分，它可以帮助我们优化模型参数，使得模型的预测值更加接近真实值。预测任务的目标也是最小化损失函数，如，我们利用反向传播算法等方法，通过更新损失函数相对于模型参数的梯度来最小化损失函数，提高模型的预测能力。此外，有效的损失函数还可以帮助我们平衡模型的偏差和方差，提高模型的泛化能力。</p>
+<p>依据预测任务的不同，损失函数可以分为回归任务和分类任务两大类。回归任务的损失函数通常是均方误差（MSE）或平均绝对误差（MAE），而分类任务的损失函数则有交叉熵损失函数、Hinge损失函数等。本文将介绍常用的损失函数及其应用场景。</p>
+<section id="均方误差mse" class="level4">
+<h4 class="anchored" data-anchor-id="均方误差mse">均方误差（MSE）</h4>
+<p>均方误差（Mean Squared Error，MSE）是回归任务中最常用的损失函数之一，它衡量模型预测值与真实值之间的差异。MSE的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AMSE%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(y_i%20-%20%5Chat%7By%7D_i)%5E2%0A"></p>
+<p>可以看到，MSE是预测值与真实值之间差值的平方和的均值，它对较大差异分配更高的惩罚。MSE非负，越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。MSE对异常值敏感，因为它是差值的平方和，异常值的平方会放大差异，导致模型的预测能力下降。</p>
+<p>其在pytorch中的实现：</p>
+<div id="mse" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">torch.nn.MSELoss(reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mean'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="平均绝对误差mae" class="level4">
+<h4 class="anchored" data-anchor-id="平均绝对误差mae">平均绝对误差（MAE）</h4>
+<p>平均绝对误差（Mean Absolute Error，MAE）是回归任务中另一种常用的损失函数。MAE的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AMAE%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%7Cy_i%20-%20%5Chat%7By%7D_i%7C%0A"></p>
+<p>相比于MSE，MAE是预测值与真实值之间差值的绝对值的均值，它对异常值不敏感，因为它是差值的绝对值的和，不会对某一异常值的差异分配过高的权重。MAE的值越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。</p>
+<p>针对MAE和MSE的优缺点，我们可以根据具体的任务需求选择合适的损失函数。如果任务需要重点关注异常值，可以选择MSE，否则选择MAE。</p>
+<div id="mae" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">torch.nn.L1Loss(reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mean'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="huber-loss" class="level4">
+<h4 class="anchored" data-anchor-id="huber-loss">Huber loss</h4>
+<p>Huber loss是一种结合了MSE和MAE的损失函数，它在差值较小的情况下使用MSE，差值较大的情况下使用MAE。Huber loss的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL_%7B%5Cdelta%7D(y,%20%5Chat%7By%7D)%20=%20%5Cleft%5C%7B%0A%5Cbegin%7Barray%7D%7Bll%7D%0A%5Cfrac%7B1%7D%7B2%7D(y%20-%20%5Chat%7By%7D)%5E2,%20&amp;%20%5Ctext%7Bif%20%7D%20%7Cy%20-%20%5Chat%7By%7D%7C%20%5Cleq%20%5Cdelta%20%5C%5C%0A%5Cdelta%20%7Cy%20-%20%5Chat%7By%7D%7C%20-%20%5Cfrac%7B1%7D%7B2%7D%20%5Cdelta%5E2,%20&amp;%20%5Ctext%7Botherwise%7D%0A%5Cend%7Barray%7D%0A%5Cright.%0A"></p>
+<p>其中，<img src="https://latex.codecogs.com/png.latex?%5Cdelta">是一个超参数，用于控制MSE和MAE之间的平衡。Huber loss对异常值不敏感，同时保留了MSE的平滑性，是一种较为稳健的损失函数。</p>
+<div id="smoothl1loss" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">torch.nn.SmoothL1Loss(reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mean'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="二元交叉熵损失函数binary-cross-entropy-loss" class="level4">
+<h4 class="anchored" data-anchor-id="二元交叉熵损失函数binary-cross-entropy-loss">二元交叉熵损失函数（Binary Cross Entropy Loss）</h4>
+<p>交叉熵损失函数（Cross Entropy Loss）是二分类任务中最常用的损失函数之一，我们前面也以及<a href="https://mp.weixin.qq.com/s/y2gZKXebDv3tKha7Hu5Djw">介绍过</a>。交叉熵损失函数的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20-%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20y_i%20%5Clog(%5Chat%7By%7D_i)%20+%20(1%20-%20y_i)%20%5Clog(1%20-%20%5Chat%7By%7D_i)%0A"></p>
+<p>其中，<img src="https://latex.codecogs.com/png.latex?y_i">是真实标签，<img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_i">是模型预测的概率值。交叉熵损失函数对于模型预测的概率值和真实标签之间的差异进行了惩罚，使得模型更加关注预测正确的类别。交叉熵损失函数是一种凸函数，可以通过梯度下降等方法进行优化。</p>
+<div id="bce" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">torch.nn.BCELoss(weight<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mean'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="多类交叉熵损失函数categorical-cross-entropy-loss" class="level4">
+<h4 class="anchored" data-anchor-id="多类交叉熵损失函数categorical-cross-entropy-loss">多类交叉熵损失函数（Categorical Cross Entropy Loss）</h4>
+<p>多类交叉熵损失函数是多分类任务中常用的损失函数之一，它是交叉熵损失函数的扩展。多类交叉熵损失函数的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20-%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Csum_%7Bj=1%7D%5E%7Bm%7D%20y_%7Bij%7D%20%5Clog(%5Chat%7By%7D_%7Bij%7D)%0A"></p>
+<p>其中，<img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D">是真实标签，<img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_%7Bij%7D">是模型预测的概率值。</p>
+<div id="ce" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.nn.CrossEntropyLoss(weight<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,ignore_index<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mean'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="hinge损失函数" class="level4">
+<h4 class="anchored" data-anchor-id="hinge损失函数">Hinge损失函数</h4>
+<p>Hinge损失函数是支持向量机（SVM）中常用的损失函数之一，它适用于二分类任务。Hinge损失函数的计算公式如下：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20%5Cmax(0,%201%20-%20y%20%5Ccdot%20%5Chat%7By%7D)%0A"></p>
+<p>Hinge损失函数旨在最大化决策边界的间隔，即使得正确分类的样本距离决策边界的距离尽可能大。Hinge损失函数对于误分类的样本进行了惩罚，使得模型更加关注分类边界附近的样本，从而尽可能把数据点推向远离决策边界的方向。</p>
+<p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>machine learning</category>
+  <category>deep learning</category>
+  <category>loss function</category>
+  <guid>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</guid>
+  <pubDate>Fri, 07 Jun 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406072019199.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Python中机器学习模型的校准</title>
   <dc:creator>Zhen Lu</dc:creator>
