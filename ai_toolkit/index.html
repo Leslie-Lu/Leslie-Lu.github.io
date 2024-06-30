@@ -7,10 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="dcterms.date" content="2024-05-10">
-<meta name="description" content="Zhen Lu is working on a bunch of exciting and groundbreaking projects.">
 
-<title>What I use | Zhen Lu</title>
+<title>AI Toolkit | Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,6 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -44,6 +44,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -72,17 +74,75 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-screening .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-screening'] = new List('listing-screening', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <style>
 
       .quarto-title-block .quarto-title-banner {
-        background: #771C6D;
+        background: #CF4446;
       }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -116,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../ai_toolkit/index.html"> 
+    <a class="nav-link active" href="../ai_toolkit/index.html" aria-current="page"> 
 <span class="menu-text">AI Toolkit</span></a>
   </li>  
   <li class="nav-item">
@@ -128,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../uses/index.html" aria-current="page"> 
+    <a class="nav-link" href="../uses/index.html"> 
 <span class="menu-text">Uses</span></a>
   </li>  
 </ul>
@@ -177,58 +237,94 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">What I use</h1>
-                  <div>
-        <div class="description">
-          Zhen Lu is working on a bunch of exciting and groundbreaking projects.
-        </div>
-      </div>
-                </div>
+    <div class="quarto-title column-page-left">
+      <h1 class="title">AI Toolkit</h1>
+                      </div>
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       
-      <div>
-      <div class="quarto-title-meta-heading">Last updated</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">May 10, 2024</p>
-      </div>
-    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#screening" id="toc-screening" class="nav-link active" data-scroll-target="#screening">SCREENing</a></li>
+  </ul>
+</nav>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<div class="cell">
-<style type="text/css">
-#title-block-header .description {
-    display: none;
-}
-</style>
+<p>This is a collection of my work in the field of artificial intelligence (AI). I focus on developing and applying advanced statistical and machine learning methods to solve complex problems in healthcare. I have extensive experience in developing and applying machine learning models to predict disease outcomes, identify risk factors, and develop personalized treatment plans. I have also developed and applied advanced statistical methods to analyze large-scale electronic health records data to identify patterns and trends in disease progression and treatment outcomes. <i class="ai  ai-blank-just-to-add-ai-dependency-to-this-page" title="" style="color:"></i></p>
+<section id="screening" class="level2">
+<h2 class="anchored" data-anchor-id="screening">SCREENing</h2>
+<div id="listing-screening" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1719747700353" data-listing-reading-time-sort="4" data-listing-word-count-sort="686">
+<div class="thumbnail">
+<p><a href="../ai_toolkit/screening/index.html" class="no-external"></a></p><a href="../ai_toolkit/screening/index.html" class="no-external">
+<p class="card-img-top"><img src="screening/risk.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../ai_toolkit/screening/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../ai_toolkit/screening/index.html" class="no-external">A Triple SCREENing Strategy for Cervical Cancer Prevention (CCP)</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../ai_toolkit/screening/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../ai_toolkit/screening/index.html" class="no-external">
+
+<section id="section" class="level3 sidebar">
+
+</section>
+<section id="column" class="level3 page-columns page-full">
+
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p></p>
+<figcaption class="margin-caption">CCP-specific risk estimates of CIN2+/CIN3+</figcaption>
+</figure>
+</div>
+</section>
+</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../ai_toolkit/screening/index.html" class="no-external"></a></p><a href="../ai_toolkit/screening/index.html" class="no-external">
+<div class="listing-author">
+Zhen Lu
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 
 
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
