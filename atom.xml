@@ -10,8 +10,123 @@
 <atom:link href="https://leslie-lu.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
-<generator>quarto-1.5.55</generator>
-<lastBuildDate>Fri, 19 Jul 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.5.56</generator>
+<lastBuildDate>Sat, 03 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>倾向性评分加权</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="背景介绍" class="level3">
+<h3 class="anchored" data-anchor-id="背景介绍">背景介绍</h3>
+<p>对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。</p>
+<p>我们公众号以往有过五篇类似的介绍内容，分别是：</p>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/S5nd__7fflKBekeOKCJQEQ">倾向性评分分析</a></li>
+<li><a href="https://mp.weixin.qq.com/s/HuyE_79VJMY1e0VoRgcLbA">倾向性评分分析的统计学考虑</a></li>
+<li><a href="https://mp.weixin.qq.com/s/j8olCbIDN06UCHgWirzq3g">倾向性评分匹配的生存分析怎么做</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hMXiND44bFGD57c7t7wGaw">倾向性评分overlapping weighting的SAS实现（一）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/fxqrH0Im2y_oqfg3K63Epw">生存资料倾向性评分OW的SAS实现（二）</a></li>
+</ol>
+<p>其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。</p>
+</section>
+<section id="因果效应" class="level3">
+<h3 class="anchored" data-anchor-id="因果效应">因果效应</h3>
+<p>首先，我们来看下几种因果效应。</p>
+<p>ATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。</p>
+<p>我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。</p>
+</section>
+<section id="倾向性评分加权" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="倾向性评分加权">倾向性评分加权</h3>
+<p>针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：</p>
+<ol type="1">
+<li>ATE：<img src="https://latex.codecogs.com/png.latex?w_%7BATE%7D%20=%20%5Cfrac%7BZ_i%7D%7Be_i%7D%20+%20%5Cfrac%7B1%20-%20Z_i%7D%7B1%20-%20e_i%7D"></li>
+<li>ATT：<img src="https://latex.codecogs.com/png.latex?w_%7BATT%7D%20=%20%5Cfrac%7Be_iZ_i%7D%7Be_i%7D%20+%20%5Cfrac%7Be_i(1-Z_i)%7D%7B1-e_i%7D"></li>
+<li>ATC：<img src="https://latex.codecogs.com/png.latex?w_%7BATC%7D%20=%20%5Cfrac%7B(1-e_i)Z_i%7D%7Be_i%7D%20+%20%5Cfrac%7B(1-e_i)%20(1-Z_i)%7D%7B1%20-%20e_i%7D"></li>
+<li>ATM：<img src="https://latex.codecogs.com/png.latex?w_%7BATC%7D%20=%20%5Cfrac%7B(1-e_i)Z_i%7D%7Be_i%7D%20+%20%5Cfrac%7B(1-e_i)%20(1-Z_i)%7D%7B1%20-%20e_i%7D"></li>
+<li>ATO：<img src="https://latex.codecogs.com/png.latex?w_%7BAT0%7D%20=%20(1-e_i)Z_i%20+%20e_i(1-Z_i)"></li>
+</ol>
+<p>以上五种加权的示例以及具体实现的全部代码，我们已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
+<p>这里我们展示下加权后人群的分布情况。</p>
+<section id="原始人群的ps分布" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="原始人群的ps分布">原始人群的ps分布</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ps of original population</figcaption>
+</figure>
+</div>
+</section>
+<section id="ate" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="ate">ATE</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATE</figcaption>
+</figure>
+</div>
+</section>
+<section id="att" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="att">ATT</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATT</figcaption>
+</figure>
+</div>
+</section>
+<section id="atc" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="atc">ATC</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATC</figcaption>
+</figure>
+</div>
+</section>
+<section id="atm" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="atm">ATM</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATM</figcaption>
+</figure>
+</div>
+</section>
+<section id="ato" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="ato">ATO</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATO</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>propensity score</category>
+  <category>weighting</category>
+  <guid>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</guid>
+  <pubDate>Sat, 03 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>预测模型领域新书推荐</title>
   <dc:creator>Zhen Lu</dc:creator>

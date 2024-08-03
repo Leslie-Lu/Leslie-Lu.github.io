@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="常用损失函数介绍">
+<meta name="description" content="倾向性评分加权的具体介绍">
 
-<title>常用损失函数 | Zhen Lu – Zhen Lu</title>
+<title>倾向性评分加权 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,7 +155,7 @@ window.Quarto = {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -249,17 +249,15 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">常用损失函数</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">倾向性评分加权</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          常用损失函数介绍
+          倾向性评分加权的具体介绍
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">python</div>
-                <div class="quarto-category">machine learning</div>
-                <div class="quarto-category">deep learning</div>
-                <div class="quarto-category">loss function</div>
+                <div class="quarto-category">propensity score</div>
+                <div class="quarto-category">weighting</div>
               </div>
                   </div>
   </div>
@@ -277,7 +275,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Friday, June 7, 2024</p>
+        <p class="date">Saturday, August 3, 2024</p>
       </div>
     </div>
     
@@ -292,7 +290,10 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#loss-function" id="toc-loss-function" class="nav-link active" data-scroll-target="#loss-function">loss function</a></li>
+  <li><a href="#背景介绍" id="toc-背景介绍" class="nav-link active" data-scroll-target="#背景介绍">背景介绍</a></li>
+  <li><a href="#因果效应" id="toc-因果效应" class="nav-link" data-scroll-target="#因果效应">因果效应</a></li>
+  <li><a href="#倾向性评分加权" id="toc-倾向性评分加权" class="nav-link" data-scroll-target="#倾向性评分加权">倾向性评分加权</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结">总结</a></li>
   </ul>
 </nav>
 </nav>
@@ -301,93 +302,107 @@ window.Quarto = {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<section id="loss-function" class="level3">
-<h3 class="anchored" data-anchor-id="loss-function">loss function</h3>
-<p>在机器学习/深度学习任务中，衡量模型预测值与真实值之间的差异的指标称为损失函数。损失函数是模型训练的关键组成部分，它可以帮助我们优化模型参数，使得模型的预测值更加接近真实值。预测任务的目标也是最小化损失函数，如，我们利用反向传播算法等方法，通过更新损失函数相对于模型参数的梯度来最小化损失函数，提高模型的预测能力。此外，有效的损失函数还可以帮助我们平衡模型的偏差和方差，提高模型的泛化能力。</p>
-<p>依据预测任务的不同，损失函数可以分为回归任务和分类任务两大类。回归任务的损失函数通常是均方误差（MSE）或平均绝对误差（MAE），而分类任务的损失函数则有交叉熵损失函数、Hinge损失函数等。本文将介绍常用的损失函数及其应用场景。</p>
-<section id="均方误差mse" class="level4">
-<h4 class="anchored" data-anchor-id="均方误差mse">均方误差（MSE）</h4>
-<p>均方误差（Mean Squared Error，MSE）是回归任务中最常用的损失函数之一，它衡量模型预测值与真实值之间的差异。MSE的计算公式如下：</p>
-<p><span class="math display">\[
-MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-\]</span></p>
-<p>可以看到，MSE是预测值与真实值之间差值的平方和的均值，它对较大差异分配更高的惩罚。MSE非负，越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。MSE对异常值敏感，因为它是差值的平方和，异常值的平方会放大差异，导致模型的预测能力下降。</p>
-<p>其在pytorch中的实现：</p>
-<div id="mse" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>torch.nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="背景介绍" class="level3">
+<h3 class="anchored" data-anchor-id="背景介绍">背景介绍</h3>
+<p>对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。</p>
+<p>我们公众号以往有过五篇类似的介绍内容，分别是：</p>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/S5nd__7fflKBekeOKCJQEQ">倾向性评分分析</a></li>
+<li><a href="https://mp.weixin.qq.com/s/HuyE_79VJMY1e0VoRgcLbA">倾向性评分分析的统计学考虑</a></li>
+<li><a href="https://mp.weixin.qq.com/s/j8olCbIDN06UCHgWirzq3g">倾向性评分匹配的生存分析怎么做</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hMXiND44bFGD57c7t7wGaw">倾向性评分overlapping weighting的SAS实现（一）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/fxqrH0Im2y_oqfg3K63Epw">生存资料倾向性评分OW的SAS实现（二）</a></li>
+</ol>
+<p>其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。</p>
+</section>
+<section id="因果效应" class="level3">
+<h3 class="anchored" data-anchor-id="因果效应">因果效应</h3>
+<p>首先，我们来看下几种因果效应。</p>
+<p>ATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。</p>
+<p>我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。</p>
+</section>
+<section id="倾向性评分加权" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="倾向性评分加权">倾向性评分加权</h3>
+<p>针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：</p>
+<ol type="1">
+<li>ATE：<span class="math inline">\(w_{ATE} = \frac{Z_i}{e_i} + \frac{1 - Z_i}{1 - e_i}\)</span></li>
+<li>ATT：<span class="math inline">\(w_{ATT} = \frac{e_iZ_i}{e_i} + \frac{e_i(1-Z_i)}{1-e_i}\)</span></li>
+<li>ATC：<span class="math inline">\(w_{ATC} = \frac{(1-e_i)Z_i}{e_i} + \frac{(1-e_i) (1-Z_i)}{1 - e_i}\)</span></li>
+<li>ATM：<span class="math inline">\(w_{ATC} = \frac{(1-e_i)Z_i}{e_i} + \frac{(1-e_i) (1-Z_i)}{1 - e_i}\)</span></li>
+<li>ATO：<span class="math inline">\(w_{AT0} = (1-e_i)Z_i + e_i(1-Z_i)\)</span></li>
+</ol>
+<p>以上五种加权的示例以及具体实现的全部代码，我们已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
+<p>这里我们展示下加权后人群的分布情况。</p>
+<section id="原始人群的ps分布" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="原始人群的ps分布">原始人群的ps分布</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ps of original population</figcaption>
+</figure>
 </div>
 </section>
-<section id="平均绝对误差mae" class="level4">
-<h4 class="anchored" data-anchor-id="平均绝对误差mae">平均绝对误差（MAE）</h4>
-<p>平均绝对误差（Mean Absolute Error，MAE）是回归任务中另一种常用的损失函数。MAE的计算公式如下：</p>
-<p><span class="math display">\[
-MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-\]</span></p>
-<p>相比于MSE，MAE是预测值与真实值之间差值的绝对值的均值，它对异常值不敏感，因为它是差值的绝对值的和，不会对某一异常值的差异分配过高的权重。MAE的值越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。</p>
-<p>针对MAE和MSE的优缺点，我们可以根据具体的任务需求选择合适的损失函数。如果任务需要重点关注异常值，可以选择MSE，否则选择MAE。</p>
-<div id="mae" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>torch.nn.L1Loss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ate" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="ate">ATE</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATE</figcaption>
+</figure>
 </div>
 </section>
-<section id="huber-loss" class="level4">
-<h4 class="anchored" data-anchor-id="huber-loss">Huber loss</h4>
-<p>Huber loss是一种结合了MSE和MAE的损失函数，它在差值较小的情况下使用MSE，差值较大的情况下使用MAE。Huber loss的计算公式如下：</p>
-<p><span class="math display">\[
-L_{\delta}(y, \hat{y}) = \left\{
-\begin{array}{ll}
-\frac{1}{2}(y - \hat{y})^2, &amp; \text{if } |y - \hat{y}| \leq \delta \\
-\delta |y - \hat{y}| - \frac{1}{2} \delta^2, &amp; \text{otherwise}
-\end{array}
-\right.
-\]</span></p>
-<p>其中，<span class="math inline">\(\delta\)</span>是一个超参数，用于控制MSE和MAE之间的平衡。Huber loss对异常值不敏感，同时保留了MSE的平滑性，是一种较为稳健的损失函数。</p>
-<div id="smoothl1loss" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>torch.nn.SmoothL1Loss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="att" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="att">ATT</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATT</figcaption>
+</figure>
 </div>
 </section>
-<section id="二元交叉熵损失函数binary-cross-entropy-loss" class="level4">
-<h4 class="anchored" data-anchor-id="二元交叉熵损失函数binary-cross-entropy-loss">二元交叉熵损失函数（Binary Cross Entropy Loss）</h4>
-<p>交叉熵损失函数（Cross Entropy Loss）是二分类任务中最常用的损失函数之一，我们前面也以及<a href="https://mp.weixin.qq.com/s/y2gZKXebDv3tKha7Hu5Djw">介绍过</a>。交叉熵损失函数的计算公式如下：</p>
-<p><span class="math display">\[
-L(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)
-\]</span></p>
-<p>其中，<span class="math inline">\(y_i\)</span>是真实标签，<span class="math inline">\(\hat{y}_i\)</span>是模型预测的概率值。交叉熵损失函数对于模型预测的概率值和真实标签之间的差异进行了惩罚，使得模型更加关注预测正确的类别。交叉熵损失函数是一种凸函数，可以通过梯度下降等方法进行优化。</p>
-<div id="bce" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>torch.nn.BCELoss(weight<span class="op">=</span><span class="va">None</span>, reduction<span class="op">=</span><span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="atc" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="atc">ATC</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATC</figcaption>
+</figure>
 </div>
 </section>
-<section id="多类交叉熵损失函数categorical-cross-entropy-loss" class="level4">
-<h4 class="anchored" data-anchor-id="多类交叉熵损失函数categorical-cross-entropy-loss">多类交叉熵损失函数（Categorical Cross Entropy Loss）</h4>
-<p>多类交叉熵损失函数是多分类任务中常用的损失函数之一，它是交叉熵损失函数的扩展。多类交叉熵损失函数的计算公式如下：</p>
-<p><span class="math display">\[
-L(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} y_{ij} \log(\hat{y}_{ij})
-\]</span></p>
-<p>其中，<span class="math inline">\(y_{ij}\)</span>是真实标签，<span class="math inline">\(\hat{y}_{ij}\)</span>是模型预测的概率值。</p>
-<div id="ce" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>torch.nn.CrossEntropyLoss(weight<span class="op">=</span><span class="va">None</span>,ignore_index<span class="op">=-</span><span class="dv">100</span>, reduction<span class="op">=</span><span class="st">'mean'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="atm" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="atm">ATM</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATM</figcaption>
+</figure>
 </div>
 </section>
-<section id="hinge损失函数" class="level4">
-<h4 class="anchored" data-anchor-id="hinge损失函数">Hinge损失函数</h4>
-<p>Hinge损失函数是支持向量机（SVM）中常用的损失函数之一，它适用于二分类任务。Hinge损失函数的计算公式如下：</p>
-<p><span class="math display">\[
-L(y, \hat{y}) = \max(0, 1 - y \cdot \hat{y})
-\]</span></p>
-<p>Hinge损失函数旨在最大化决策边界的间隔，即使得正确分类的样本距离决策边界的距离尽可能大。Hinge损失函数对于误分类的样本进行了惩罚，使得模型更加关注分类边界附近的样本，从而尽可能把数据点推向远离决策边界的方向。</p>
-<p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+<section id="ato" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="ato">ATO</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATO</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。</p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
 
 
 <!-- -->
 
-</section>
 </section>
 </section>
 
@@ -867,145 +882,97 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "常用损失函数"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-06-07</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "常用损失函数介绍"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406072019199.png"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - machine learning</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - deep learning</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - loss function</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># doi: </span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## loss function</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>在机器学习/深度学习任务中，衡量模型预测值与真实值之间的差异的指标称为损失函数。损失函数是模型训练的关键组成部分，它可以帮助我们优化模型参数，使得模型的预测值更加接近真实值。预测任务的目标也是最小化损失函数，如，我们利用反向传播算法等方法，通过更新损失函数相对于模型参数的梯度来最小化损失函数，提高模型的预测能力。此外，有效的损失函数还可以帮助我们平衡模型的偏差和方差，提高模型的泛化能力。</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>依据预测任务的不同，损失函数可以分为回归任务和分类任务两大类。回归任务的损失函数通常是均方误差（MSE）或平均绝对误差（MAE），而分类任务的损失函数则有交叉熵损失函数、Hinge损失函数等。本文将介绍常用的损失函数及其应用场景。</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### 均方误差（MSE）</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>均方误差（Mean Squared Error，MSE）是回归任务中最常用的损失函数之一，它衡量模型预测值与真实值之间的差异。MSE的计算公式如下：</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>可以看到，MSE是预测值与真实值之间差值的平方和的均值，它对较大差异分配更高的惩罚。MSE非负，越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。MSE对异常值敏感，因为它是差值的平方和，异常值的平方会放大差异，导致模型的预测能力下降。</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>其在pytorch中的实现：</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: MSE</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>torch.nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### 平均绝对误差（MAE）</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>平均绝对误差（Mean Absolute Error，MAE）是回归任务中另一种常用的损失函数。MAE的计算公式如下：</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>相比于MSE，MAE是预测值与真实值之间差值的绝对值的均值，它对异常值不敏感，因为它是差值的绝对值的和，不会对某一异常值的差异分配过高的权重。MAE的值越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>针对MAE和MSE的优缺点，我们可以根据具体的任务需求选择合适的损失函数。如果任务需要重点关注异常值，可以选择MSE，否则选择MAE。</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: MAE</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>torch.nn.L1Loss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### Huber loss</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>Huber loss是一种结合了MSE和MAE的损失函数，它在差值较小的情况下使用MSE，差值较大的情况下使用MAE。Huber loss的计算公式如下：</span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>L_{\delta}(y, \hat{y}) = \left<span class="sc">\{</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>\begin{array}{ll}</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>\frac{1}{2}(y - \hat{y})^2, &amp; \text{if } |y - \hat{y}| \leq \delta <span class="sc">\\</span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>\delta |y - \hat{y}| - \frac{1}{2} \delta^2, &amp; \text{otherwise}</span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>\right.</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>其中，$\delta$是一个超参数，用于控制MSE和MAE之间的平衡。Huber loss对异常值不敏感，同时保留了MSE的平滑性，是一种较为稳健的损失函数。</span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: smoothl1loss</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>torch.nn.SmoothL1Loss(reduction<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### 二元交叉熵损失函数（Binary Cross Entropy Loss）</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>交叉熵损失函数（Cross Entropy Loss）是二分类任务中最常用的损失函数之一，我们前面也以及<span class="co">[</span><span class="ot">介绍过</span><span class="co">](https://mp.weixin.qq.com/s/y2gZKXebDv3tKha7Hu5Djw)</span>。交叉熵损失函数的计算公式如下：</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>L(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>其中，$y_i$是真实标签，$\hat{y}_i$是模型预测的概率值。交叉熵损失函数对于模型预测的概率值和真实标签之间的差异进行了惩罚，使得模型更加关注预测正确的类别。交叉熵损失函数是一种凸函数，可以通过梯度下降等方法进行优化。</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: BCE</span></span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>torch.nn.BCELoss(weight<span class="op">=</span><span class="va">None</span>, reduction<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多类交叉熵损失函数（Categorical Cross Entropy Loss）</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>多类交叉熵损失函数是多分类任务中常用的损失函数之一，它是交叉熵损失函数的扩展。多类交叉熵损失函数的计算公式如下：</span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>L(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} y_{ij} \log(\hat{y}_{ij})</span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>其中，$y_{ij}$是真实标签，$\hat{y}_{ij}$是模型预测的概率值。</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: CE</span></span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>torch.nn.CrossEntropyLoss(weight<span class="op">=</span><span class="va">None</span>,ignore_index<span class="op">=-</span><span class="dv">100</span>, reduction<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hinge损失函数</span></span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>Hinge损失函数是支持向量机（SVM）中常用的损失函数之一，它适用于二分类任务。Hinge损失函数的计算公式如下：</span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>L(y, \hat{y}) = \max(0, 1 - y \cdot \hat{y})</span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>Hinge损失函数旨在最大化决策边界的间隔，即使得正确分类的样本距离决策边界的距离尽可能大。Hinge损失函数对于误分类的样本进行了惩罚，使得模型更加关注分类边界附近的样本，从而尽可能把数据点推向远离决策边界的方向。</span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>代码已经放进了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里。</span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "倾向性评分加权"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-08-03</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "倾向性评分加权的具体介绍"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - propensity score</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - weighting</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 背景介绍</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>我们公众号以往有过五篇类似的介绍内容，分别是：</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">倾向性评分分析</span><span class="co">](https://mp.weixin.qq.com/s/S5nd__7fflKBekeOKCJQEQ)</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">倾向性评分分析的统计学考虑</span><span class="co">](https://mp.weixin.qq.com/s/HuyE_79VJMY1e0VoRgcLbA)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">倾向性评分匹配的生存分析怎么做</span><span class="co">](https://mp.weixin.qq.com/s/j8olCbIDN06UCHgWirzq3g)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">倾向性评分overlapping weighting的SAS实现（一）</span><span class="co">](https://mp.weixin.qq.com/s/hMXiND44bFGD57c7t7wGaw)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">生存资料倾向性评分OW的SAS实现（二）</span><span class="co">](https://mp.weixin.qq.com/s/fxqrH0Im2y_oqfg3K63Epw)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 因果效应</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>首先，我们来看下几种因果效应。</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>ATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 倾向性评分加权</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ATE：$w_{ATE} = \frac{Z_i}{e_i} + \frac{1 - Z_i}{1 - e_i}$</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>ATT：$w_{ATT} = \frac{e_iZ_i}{e_i} + \frac{e_i(1-Z_i)}{1-e_i}$</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>ATC：$w_{ATC} = \frac{(1-e_i)Z_i}{e_i} + \frac{(1-e_i) (1-Z_i)}{1 - e_i}$</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>ATM：$w_{ATC} = \frac{(1-e_i)Z_i}{e_i} + \frac{(1-e_i) (1-Z_i)}{1 - e_i}$</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>ATO：$w_{AT0} = (1-e_i)Z_i + e_i(1-Z_i)$</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>以上五种加权的示例以及具体实现的全部代码，我们已经放在了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里，感兴趣的同学可以自行查看。</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>这里我们展示下加权后人群的分布情况。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### 原始人群的ps分布</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="al">![ps of original population](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png)</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### ATE</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="al">![ATE](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png)</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### ATT</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="al">![ATT](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png)</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### ATC</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="al">![ATC](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png)</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### ATM</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="al">![ATM](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png)</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### ATO</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="al">![ATO](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png)</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
