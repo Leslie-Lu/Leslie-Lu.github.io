@@ -1626,6 +1626,71 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>NumPy函数库基础</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/07/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>机器学习算法涉及很多线性代数知识，我们会经常使用NumPy函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</p>
+<p>在Python shell开发环境中输入下面命令：<img src="https://latex.codecogs.com/png.latex?from%20numpy%20import%20*">，将NumPy函数库中的所有模块引入到当前的命名空间，输入以下命令：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201454286.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">NumPy</figcaption>
+</figure>
+</div>
+<p>上述命令构造了一个4*4的随机数组（随机数组在不同计算机上输出可能不同）。</p>
+<p>在NumPy函数库中存在两种不同的数据类型（矩阵matrix和数组array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵matrix与MATLAB中matrices等价。</p>
+<p>调用mat()函数可将数组转换为矩阵：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201455985.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">mat</figcaption>
+</figure>
+</div>
+<p>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy库.I操作符可以很方便地算出矩阵的逆运算：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456663.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">逆矩阵</figcaption>
+</figure>
+</div>
+<p>接着执行矩阵乘法，得到矩阵与其逆矩阵相乘的结果：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456009.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">矩阵乘法</figcaption>
+</figure>
+</div>
+<p>结果应该是单位矩阵，除了对角线元素是1，4*4矩阵的其他元素应该全是0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201457590.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">误差</figcaption>
+</figure>
+</div>
+<p>函数eye(4)创建4*4的单位矩阵。</p>
+<p>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了NumPy函数库。后面我们会对它有更深的了解。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>numpy</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/07/</guid>
+  <pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201448332.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>Python基础要素之数值</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/06/</link>
@@ -1640,7 +1705,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="5b83bc98" class="cell" data-execution_count="1">
+<div id="6fcffaf8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -1703,7 +1768,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="ced881f0" class="cell" data-execution_count="2">
+<div id="19caa13b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -1787,7 +1852,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="11d6e057" class="cell" data-execution_count="3">
+<div id="72d22113" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -1844,7 +1909,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="e1d2bff0" class="cell" data-execution_count="4">
+<div id="c5b82709" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
