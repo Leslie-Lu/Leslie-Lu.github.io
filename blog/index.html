@@ -104,6 +104,34 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-posts_2020 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-execute','listing-bibliography','listing-csl','listing-pagetitle','listing-author-meta','listing-main-photo','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-author','listing-title','listing-date','listing-image','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-execute","listing-bibliography","listing-csl","listing-pagetitle","listing-author-meta","listing-main-photo","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-author","listing-title","listing-date","listing-image","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-posts_2020'] = new List('listing-posts_2020', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-posts_2019 .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -297,7 +325,7 @@ window.Quarto = {
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">2019</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="biostatistics">biostatistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="book">book <span class="quarto-category-count">(1)</span></div><div class="category" data-category="calibration">calibration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="causal inference">causal inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clinical research">clinical research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clinical trial">clinical trial <span class="quarto-category-count">(1)</span></div><div class="category" data-category="deep learning">deep learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="endpoint">endpoint <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ggplot2">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="jcr">jcr <span class="quarto-category-count">(1)</span></div><div class="category" data-category="loss function">loss function <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="missing data">missing data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="prediction model">prediction model <span class="quarto-category-count">(2)</span></div><div class="category" data-category="propensity score">propensity score <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="r">r <span class="quarto-category-count">(2)</span></div><div class="category" data-category="sample size">sample size <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sci">sci <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistical methods">statistical methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="weighting">weighting <span class="quarto-category-count">(1)</span></div><div class="category" data-category="workshop">workshop <span class="quarto-category-count">(3)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(14)</span></div><div class="category" data-category="biostatistics">biostatistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="book">book <span class="quarto-category-count">(1)</span></div><div class="category" data-category="calibration">calibration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="causal inference">causal inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clinical research">clinical research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clinical trial">clinical trial <span class="quarto-category-count">(1)</span></div><div class="category" data-category="deep learning">deep learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="endpoint">endpoint <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ggplot2">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="happy new year">happy new year <span class="quarto-category-count">(1)</span></div><div class="category" data-category="jcr">jcr <span class="quarto-category-count">(1)</span></div><div class="category" data-category="loss function">loss function <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="missing data">missing data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="prediction model">prediction model <span class="quarto-category-count">(2)</span></div><div class="category" data-category="propensity score">propensity score <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="r">r <span class="quarto-category-count">(2)</span></div><div class="category" data-category="sample size">sample size <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sci">sci <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistical methods">statistical methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="weighting">weighting <span class="quarto-category-count">(1)</span></div><div class="category" data-category="workshop">workshop <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -317,7 +345,7 @@ window.Quarto = {
 <div id="listing-posts_2024" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
     
-    <div class="blog-entry" data-index="0" data-categories="r,ggplot2" data-listing-date-sort="1724112000000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="79">
+    <div class="blog-entry" data-index="0" data-categories="r,ggplot2" data-listing-date-sort="1724112000000" data-listing-file-modified-sort="1724128528060" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="79">
         <div class="metadata">          
             <p class="date listing-date">August 20, 2024</p>
         </div>
@@ -349,7 +377,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="1" data-categories="workshop,prediction model" data-listing-date-sort="1723593600000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="16">
+    <div class="blog-entry" data-index="1" data-categories="workshop,prediction model" data-listing-date-sort="1723593600000" data-listing-file-modified-sort="1724128528060" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="16">
         <div class="metadata">          
             <p class="date listing-date">August 14, 2024</p>
         </div>
@@ -381,7 +409,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="2" data-categories="workshop,sample size,clinical research" data-listing-date-sort="1723334400000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+    <div class="blog-entry" data-index="2" data-categories="workshop,sample size,clinical research" data-listing-date-sort="1723334400000" data-listing-file-modified-sort="1724128528060" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
         <div class="metadata">          
             <p class="date listing-date">August 11, 2024</p>
         </div>
@@ -417,7 +445,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="3" data-categories="workshop,missing data,statistical methods" data-listing-date-sort="1722729600000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+    <div class="blog-entry" data-index="3" data-categories="workshop,missing data,statistical methods" data-listing-date-sort="1722729600000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
         <div class="metadata">          
             <p class="date listing-date">August 4, 2024</p>
         </div>
@@ -453,7 +481,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="4" data-categories="propensity score,weighting" data-listing-date-sort="1722643200000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="89">
+    <div class="blog-entry" data-index="4" data-categories="propensity score,weighting" data-listing-date-sort="1722643200000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="89">
         <div class="metadata">          
             <p class="date listing-date">August 3, 2024</p>
         </div>
@@ -485,7 +513,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="5" data-categories="prediction model,book" data-listing-date-sort="1721347200000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+    <div class="blog-entry" data-index="5" data-categories="prediction model,book" data-listing-date-sort="1721347200000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
         <div class="metadata">          
             <p class="date listing-date">July 19, 2024</p>
         </div>
@@ -517,7 +545,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="6" data-categories="sci,jcr" data-listing-date-sort="1719100800000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17">
+    <div class="blog-entry" data-index="6" data-categories="sci,jcr" data-listing-date-sort="1719100800000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17">
         <div class="metadata">          
             <p class="date listing-date">June 23, 2024</p>
         </div>
@@ -549,7 +577,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="7" data-categories="python,machine learning,deep learning,loss function" data-listing-date-sort="1717718400000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
+    <div class="blog-entry" data-index="7" data-categories="python,machine learning,deep learning,loss function" data-listing-date-sort="1717718400000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
         <div class="metadata">          
             <p class="date listing-date">June 7, 2024</p>
         </div>
@@ -589,7 +617,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="8" data-categories="python,machine learning,calibration" data-listing-date-sort="1715904000000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="90">
+    <div class="blog-entry" data-index="8" data-categories="python,machine learning,calibration" data-listing-date-sort="1715904000000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="90">
         <div class="metadata">          
             <p class="date listing-date">May 17, 2024</p>
         </div>
@@ -625,7 +653,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="9" data-categories="r,clinical trial,endpoint" data-listing-date-sort="1715558400000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="114">
+    <div class="blog-entry" data-index="9" data-categories="r,clinical trial,endpoint" data-listing-date-sort="1715558400000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="114">
         <div class="metadata">          
             <p class="date listing-date">May 13, 2024</p>
         </div>
@@ -661,7 +689,7 @@ window.Quarto = {
         
     </div>
     
-    <div class="blog-entry" data-index="10" data-categories="python,machine learning" data-listing-date-sort="1715385600000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319">
+    <div class="blog-entry" data-index="10" data-categories="python,machine learning" data-listing-date-sort="1715385600000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319">
         <div class="metadata">          
             <p class="date listing-date">May 11, 2024</p>
         </div>
@@ -719,8 +747,41 @@ No matching items
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4">2020</h2>
-<div id="posts_2020">
+<div id="listing-posts_2020" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    
+    <div class="blog-entry" data-index="0" data-categories="happy new year" data-listing-date-sort="1576022400000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
+        <div class="metadata">          
+            <p class="date listing-date">December 11, 2019</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/01/01/index.html">鼠年加油</a></p>
 
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('happy new year'); return false;">
+                    happy new year
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">回望一幕幕送别<br> 何尝不轻描淡写<br> 独自出姑苏城外<br> 流光未曾相约<br> 他日他乡重逢<br> 风轻柔河流缓缓</p>
+            
+            
+        </div>
+        
+        <div class="thumbnail">
+            <img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201229510.webp" alt="鼠年加油" title="鼠年加油">
+        </div>
+        
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 </section>
 <section id="section-5" class="level2">
@@ -728,7 +789,7 @@ No matching items
 <div id="listing-posts_2019" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
     
-    <div class="blog-entry" data-index="0" data-categories="statistics,biostatistics,causal inference" data-listing-date-sort="1576022400000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
+    <div class="blog-entry" data-index="0" data-categories="statistics,biostatistics,causal inference" data-listing-date-sort="1576022400000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
         <div class="metadata">          
             <p class="date listing-date">December 11, 2019</p>
         </div>
@@ -764,7 +825,7 @@ No matching items
         
     </div>
     
-    <div class="blog-entry" data-index="1" data-categories="statistics,biostatistics" data-listing-date-sort="1574899200000" data-listing-file-modified-sort="1724124124854" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+    <div class="blog-entry" data-index="1" data-categories="statistics,biostatistics" data-listing-date-sort="1574899200000" data-listing-file-modified-sort="1724128528056" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
         <div class="metadata">          
             <p class="date listing-date">November 28, 2019</p>
         </div>
