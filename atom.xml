@@ -1626,6 +1626,121 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>笔记</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/09/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="表示的重要性" class="level3">
+<h3 class="anchored" data-anchor-id="表示的重要性">表示的重要性</h3>
+<p>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立“表示第一，获取第二”的范式。</p>
+<p>通常，在寻求一个好的表示方法的过程中，关于如何获取知识的洞见就会自然产生，无论这种洞见是来自数据，还是来自程序员。</p>
+<p>人类的大脑肯定拥有某种简洁的信息表示方式，同时还拥有某种十分有效的程序用以正确解释每个问题，并从存储的信息表示中提取正确答案。我们需要给机器装备同样高效的表示信息和提取答案的算法，因果图和因果推断就派上了用场。</p>
+</section>
+<section id="打破规则" class="level3">
+<h3 class="anchored" data-anchor-id="打破规则">打破规则</h3>
+<p>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解“观察到某事件”和“使某事件发生”之间的区别。</p>
+<p>我们需要告诉计算机：“无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。”这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</p>
+<p>计算机能够进行因果推理的前提是，计算机懂得有选择地打破逻辑规则。</p>
+</section>
+<section id="概率的重要性" class="level3">
+<h3 class="anchored" data-anchor-id="概率的重要性">概率的重要性</h3>
+<p>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从X指向Y的箭头时，我们是在暗指，某些概率规则或函数具体说明了“如果X发生改变，Y将如何变化”。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</p>
+</section>
+<section id="概率与因果关系" class="level3">
+<h3 class="anchored" data-anchor-id="概率与因果关系">概率与因果关系</h3>
+<p>概率能将我们对静态世界的信念进行编码，而因果论则告诉我们，当世界被改变时（无论改变是通过干预还是通过想象实现的），概率是否会发生改变以及如何改变。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatics</category>
+  <category>causal inference</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/09/</guid>
+  <pubDate>Thu, 09 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201505235.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>如何用Python自编k-近邻算法？</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/08/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="k-近邻算法概述" class="level3">
+<h3 class="anchored" data-anchor-id="k-近邻算法概述">k-近邻算法概述</h3>
+<p>简单地说，kNN依据不同特征值之间的距离进行分类。它不具有显式的学习过程，实际上是利用训练数据集对特征向量空间进行划分，并作为其分类的模型，即我们知道训练集中每一数据与所属分类的对应关系，输入没有标签的新数据后，将新数据的每个特征与训练集中数据对应的特征进行比较，然后算法提取训练集中特征最为相似数据的分类标签，选择k个最相似数据中出现次数最多的类别作为新数据的分类。</p>
+</section>
+<section id="自编knn函数" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="自编knn函数">自编kNN函数</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201500514.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">kNN</figcaption>
+</figure>
+</div>
+<p>classify()函数有4个输入参数：待分类的输入向量inX，训练集dataSet，训练集标签向量labels，参数k为选择最近数据点个数，其中，inX维度为1xN，dataSet维度为MxN，labels维度为1xM，k为奇数。</p>
+<p>dataSet.shape以元组形式返回训练集维度(M, N)，dataSetsize为训练集的样本个数M。这里距离度量采用欧式距离，因而tile函数将输入数据重复M行1列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</p>
+<p>计算完距离之后，argsort函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用for循环确定前k个距离最小元素所属的类别voteIlabel，使用get函数按照字典classCount键值取得相应的字典值，如果字典中存在这个键，get函数就返回对应的字典值，如果不存在，则返回0，用这种方式计数k个数据中每个标签出现的次数。因而字典classCount中键值为标签，字典值为k个标签对应的个数。</p>
+<p>使用sorted函数对字典classCount进行排序：items函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的key就是排序的规则，关键字函数设置用于排序的关键字。使用operator模块中的itemgetter函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，reverse=True对应降序。所以最后返回sortedClassCount列表中第一个元组的第一个值，即在k个标签中出现次数最多的标签，这样即完成了一个简单的kNN算法。</p>
+</section>
+<section id="创建训练集" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="创建训练集">创建训练集</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201501398.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">训练集</figcaption>
+</figure>
+</div>
+<p>我们创建了一个简单的训练集，有4组数据，每组数据有两个我们已知的属性/特征值。向量labels包含了每个数据的标签信息，labels包含的元素个数等于group矩阵行数。</p>
+</section>
+<section id="运行knn" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="运行knn">运行kNN</h3>
+<p>我们需要在脚本中导入两个模块NumPy和运算符operator（kNN执行排序操作时使用到）：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201502739.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">import modules</figcaption>
+</figure>
+</div>
+<p>保存脚本文件，改变当前路径到存储脚本文件位置，进入Python：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201503020.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">run kNN</figcaption>
+</figure>
+</div>
+<p>输出结果应该是B，也可以改变输入数据运行。这样，我们已经构造了一个简单的kNN分类器。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>kNN</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/08/</guid>
+  <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201459098.jpeg" medium="image" type="image/jpeg"/>
+</item>
+<item>
   <title>NumPy函数库基础</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/07/</link>
@@ -1705,7 +1820,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="6fcffaf8" class="cell" data-execution_count="1">
+<div id="8061b1cb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -1768,7 +1883,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="19caa13b" class="cell" data-execution_count="2">
+<div id="d1656c5c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -1852,7 +1967,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="72d22113" class="cell" data-execution_count="3">
+<div id="2eced2d7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -1909,7 +2024,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="c5b82709" class="cell" data-execution_count="4">
+<div id="397b3132" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
