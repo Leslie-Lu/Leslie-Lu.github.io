@@ -11,7 +11,204 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.5.56</generator>
-<lastBuildDate>Wed, 14 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 20 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>大图嵌小图</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="由来" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="由来">由来</h3>
+<p>星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q1</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q2</figcaption>
+</figure>
+</div>
+<p>我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">survival curve</figcaption>
+</figure>
+</div>
+<p>想要把risk table嵌入到生存曲线中。</p>
+</section>
+<section id="方法一" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="方法一">方法一</h3>
+<p>使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># not run</span></span>
+<span id="cb1-2">subvp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">viewport</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.35</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.35</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.75</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.75</span>)</span>
+<span id="cb1-3">ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>plot</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>table, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vp =</span> subvp)</span></code></pre></div>
+</div>
+<p>viewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 1</figcaption>
+</figure>
+</div>
+</section>
+<section id="方法二" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="方法二">方法二</h3>
+<p>使用annotation_custom函数，它可以在图形中添加自定义的图形元素。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># not run</span></span>
+<span id="cb2-2">ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotation_custom</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplotGrob</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>table), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmin=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmax=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3000</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+<p>ggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 2</figcaption>
+</figure>
+</div>
+</section>
+<section id="方法三" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="方法三">方法三</h3>
+<p>使用ggpp包。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># not run</span></span>
+<span id="cb3-2">sub_plot<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> tibble<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(</span>
+<span id="cb3-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">98</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">98</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>table)</span>
+<span id="cb3-4">)</span>
+<span id="cb3-5">ggsurv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb3-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_plot_npc</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> sub_plot, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">npcx =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">npcy =</span> y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> plot))</span></code></pre></div>
+</div>
+<p>使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 3</figcaption>
+</figure>
+</div>
+<p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>r</category>
+  <category>ggplot2</category>
+  <guid>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</guid>
+  <pubDate>Tue, 20 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://leslie-lu.github.io/blog/2024/08/20/nested_layout" medium="image"/>
+</item>
 <item>
   <title>欢迎加入预测模型星球</title>
   <dc:creator>Zhen Lu</dc:creator>
