@@ -1626,6 +1626,122 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>Python初体验</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/04/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>目前Python这门语言有多火也不用多说，各种公众号推送制造的焦虑让你感觉实在不学不行，接下来我们就来体验一下别人口中的这门似乎很神奇的编程语言。</p>
+<section id="创建python脚本" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="创建python脚本">创建Python脚本</h3>
+<p>Python的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入“python3”，按下回车键，就能看见Python提示符（&gt;&gt;&gt;）：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201333812.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Python提示符</figcaption>
+</figure>
+</div>
+<p>面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本 ，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter notebook、Visual Studio code等。打开编辑器，一般我们将 #!/usr/bin/env python3 作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为first-script.py文件，这就是一个简单的Python脚本了。</p>
+</section>
+<section id="运行python脚本" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="运行python脚本">运行Python脚本</h3>
+<p>对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201335674.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Pycharm运行按钮</figcaption>
+</figure>
+</div>
+<p>当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：/Users/luzhen。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201336038.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">终端切换目录</figcaption>
+</figure>
+</div>
+<p>mac上下一步就是为脚本添加执行权限，输入命令：<img src="https://latex.codecogs.com/png.latex?chmod%20+x%20first-script.py">。chmod是一个Unix命令，表示改变访问权限（change access mode）。+x表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。</p>
+<p>接下来就可以运行脚本了：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201337790.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">终端运行脚本</figcaption>
+</figure>
+</div>
+<p>可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入<img src="https://latex.codecogs.com/png.latex?python3%20first-script.py">，也可成功执行脚本，mac上同样适用。</p>
+</section>
+<section id="与命令行交互的几个小技巧" class="level3">
+<h3 class="anchored" data-anchor-id="与命令行交互的几个小技巧">与命令行交互的几个小技巧</h3>
+<ul>
+<li>使用向上箭头键得到以前的命令</li>
+</ul>
+<p>在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。</p>
+<ul>
+<li>用Ctrl+c停止脚本</li>
+</ul>
+<p>我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是Ctrl+C，mac是Control+c，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）</p>
+<ul>
+<li>读懂出错信息并找到解决方案</li>
+</ul>
+<p>当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。</p>
+<p>这样以后，接下来我们就可以来了解认识Python的语言基础要素了。人生苦短，一起学习Python。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>causal inference</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/04/</guid>
+  <pubDate>Sat, 04 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201332191.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>因果推断-2</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/02/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="统计值的不确定性意味着什么" class="level3">
+<h3 class="anchored" data-anchor-id="统计值的不确定性意味着什么">统计值的不确定性意味着什么？</h3>
+<p>统计推断利用统计方法生成一个问题答案的实际估计值，并给出对该估计值的不确定性大小的统计估计。这种不确定性反映了样本数据集的代表性以及可能存在的测量误差或数据缺失。数据永远是从理论上无限的总体中抽取的有限样本。我们无法避免根据样本测量的概率无法代表整个总体的相应概率的可能性。统计学提供了很多方法来应对这种不确定性，包括极大似然估计、倾向评分、置信区间、显著性检验等。</p>
+</section>
+<section id="相关与独立" class="level3">
+<h3 class="anchored" data-anchor-id="相关与独立">相关与独立</h3>
+<p>以因果模型的路径图(因果图)来表示的变量之间的听从模式通常会导向数据中某种显而易见的模式或者相关关系。“A和B之间没有连接路径”翻译成统计语言，就是“A和B相互独立”，即发现A的存在不会改变B发生的可能性。</p>
+</section>
+<section id="想象力与规划" class="level3">
+<h3 class="anchored" data-anchor-id="想象力与规划">想象力与规划</h3>
+<p>历史学家尤瓦尔·赫拉利在他的《人类简史》一书中指出，人类祖先想象不存在之物的能力是一切的关键，正是这种能力让他们得以交流得更加顺畅。在获得这种能力之前，他们只相信自己的直系亲属或者本部落的人。而此后，信任就因共同的幻想(例如信仰无形但可想象的神，信仰来世，或者信仰领袖的神性)和期许而延伸到了更大的群体。我们的智人祖先新掌握的因果想象力使他们能够通过一种被我们称为“规划”的复杂过程更有效地完成许多事情，例如他们可以通过想象和比较几个狩猎策略的结果来完成一次狩猎活动。而要做到这一点，思维主体必须具备一个可供参考并且可以自主调整的关于狩猎现实的心理模型。心理模型是施展想象力的舞台，它使我们可以通过对模型局部的自主调整修改来试验重估不同情景的概率，人类的心理模型因而具有一种模块性，其涉及预测对环境进行刻意改变后的结果，并根据预测结果选择行为方案以催生出自己所期待的结果。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>causal inference</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/02/</guid>
+  <pubDate>Thu, 02 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201322870.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>鼠年加油</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/01/</link>
