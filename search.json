@@ -14,116 +14,67 @@
     "text": "calibration\n在我们利用机器学习模型来建模分类预测时，首要关注的指标能力当然是dircrimination，即模型的预测区分能力。常见的指标有sensitivity、specificity、AUROC等。我们在上一篇文章中介绍了如何选择最优分类阈值，这里我们接着介绍在选择了最优阈值后，如何评估模型的校准能力。\n所谓校准能力，即模型预测的概率与实际发生的概率一致。\n通俗来解释这个事情：比如说，我们模型预测某个病人患病的概率是0.8，那么，按照概率定义理解，模型预测概率为0.8时，100个人中应该有80个人最终患病，这个结果体现了模型的校准能力和稳定性。如果模型预测概率为0.8时，实际只有20个人患病，那么，模型的校准能力就不够好，你也不会信任这个模型在实际应用中的预测结果。这就是校准能力的重要性，即你的模型最终输出的概率值要准确反映出事件实际发生的概率。\n\n\n如何评价calibration\n\ncalibration plot\n\n\n\ncalibration curve\n\n\n上图是一个典型的calibration curve，也是我们在文章中常见的图。\n我们将模型预测概率cut或者quantile成5或者10个区间（bin），每个区间预测概率的均值作为x轴，每个区间实际发生的概率作为y轴，然后画出来这个曲线。这个图是评价模型校准能力的一个直观指标。python中可以轻松实现这个工作：\n\nfrom sklearn.calibration import calibration_curve\ny_means, pred_means = calibration_curve(y_true, y_pred, n_bins=10,strategy)\n\n理想情况下，所有点都在对角线上，即模型预测的概率与实际发生的概率完全一致。如果点在对角线上方，说明模型低估，反之，高估。\ncalibration level的定义有：\n\n\n\ncalibration level(Alonzo 2009)\n\n\n\n\n其他指标\n除了calibration plot，我们还可以用其他指标来评价模型的校准能力，比如说Brier score、Hosmer-Lemeshow test、calibration in the large等。这里不做详细介绍。\n我们感兴趣的是，当我们通过上述方法评价了模型的校准能力后，如果发现模型的校准能力不够好，我们应该怎么办？\n\n\n\ncalibrate model\n我们已经发现，模型输出值并不能代表概率。python中一般有predict_proba方法，即这个方法其实并不能保证输出的概率是真实的概率。\n\nfrom sklearn.ensemble import RandomForestClassifier\nmodel= RandomForestClassifier().fit(X_train, y_train)\ny_pred = model.predict_proba(X_test)[:,1]\n\n所以，我们需要对模型进行校准。\n\nPlatt scaling\nPlatt scaling是一种常见的校准方法，其原理是对模型输出的概率以及真实标签，用一个logistic regression模型来拟合，从而实现对模型输出的概率进行校准，拿到最终的概率。\n\nfrom sklearn.calibration import CalibratedClassifierCV\ncalibrated = CalibratedClassifierCV(model, method='sigmoid', cv=5)\ncalibrated.fit(X_train, y_train)\n\n\n\nIsotonic regression\nIsotonic regression是另一种校准方法，其原理是对模型输出的概率以及真实标签，用一个isotonic regression模型来拟合，从而实现对模型输出的概率进行校准。\n\nfrom sklearn.isotonic import IsotonicRegression\nir = IsotonicRegression().fit(y_pred, y_test)\n\n\n\nbayesian binning into quantiles\nBBQ是一种基于贝叶斯的校准方法，其原理是将预测概率分成若干个区间，然后在每个区间内对概率进行校准。该方法结合了分箱（binning）和贝叶斯推断的优点，可以在样本量较小时仍然保持较好的校准效果。\n还有其他方法可以供尝试。\n\n\n\ntake home message\n在利用机器学习模型进行分类预测时，我们不可忽视模型的校准能力。\n代码已经放进了星球里。\n\nDid you find this page helpful? Consider sharing it 🙌\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nAlonzo, T. A. 2009. “Clinical Prediction Models: A Practical Approach to Development, Validation, and Updating: By Ewout w. Steyerberg.” Generic. Oxford University Press.\n\nCitationBibTeX citation:@online{lu2024,\n  author = {Lu, Zhen},\n  title = {Python中机器学习模型的校准},\n  date = {2024-05-17},\n  url = {https://leslie-lu.github.io/blog/2024/05/17/calibration/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nLu, Zhen. 2024. “Python中机器学习模型的校准.” May 17, 2024.\nhttps://leslie-lu.github.io/blog/2024/05/17/calibration/."
   },
   {
-    "objectID": "cv/index.html",
-    "href": "cv/index.html",
-    "title": "Curriculum vitæ",
+    "objectID": "blog/2020/01/06/index.html",
+    "href": "blog/2020/01/06/index.html",
+    "title": "Python基础要素之数值",
     "section": "",
-    "text": "Download current CV"
+    "text": "前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。\n\n数值\nPython中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。\n整数：\n\nx = 9\nprint(\"Output #4: {0}\".format(x))\nprint(\"Output #5: {0}\".format(3**4))\nprint(\"Output #6: {0}\".format(int(8.3)/int(2.7)))\n\nOutput #4: 9\nOutput #5: 81\nOutput #6: 4.0\n\n\nOutput #6演示了将数值转换成整数并进行除法运算。\n浮点数：\n\nprint(\"Output #7: {0:.3f}\".format(8.3/2.7))\ny = 2.5*4.8\nprint(\"Output #8: {0:.1f}\".format(y))\nr = 8/float(3)\nprint(\"Output #9: {0:.2f}\".format(r))\nprint(\"Output #10: {0:.4f}\".format(8.0/3))\n\nOutput #7: 3.074\nOutput #8: 12.0\nOutput #9: 2.67\nOutput #10: 2.6667\n\n\n\n#!/usr/bin/env python3\nfrom math import exp, log, sqrt\nprint(\"Output #11: {0:.4f}\".format(exp(3)))\nprint(\"Output #12: {0:.2f}\".format(log(4)))\nprint(\"Output #13: {0:.1f}\".format(sqrt(81)))\n\nOutput #11: 20.0855\nOutput #12: 1.39\nOutput #13: 9.0\n\n\n\n\n.format格式化\n\n# Add two numbers together\nx = 4\ny = 5\nz = x + y\nprint(\"Output #2: Four plus five equals {0:d}.\".format(z))\n# Add two lists together\na = [1, 2, 3, 4]\nb = [\"first\", \"second\", \"third\", \"fourth\"]\nc = a + b\nprint(\"Output #3: {0}, {1}, {2}\".format(a, b, c))\n\nOutput #2: Four plus five equals 9.\nOutput #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']\n\n\n\n\ntype函数\nPython提供一个名为type的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。\n函数的语法非常简单：type(variable)会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。\n此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用type函数，不仅是变量，还有函数、语句等。\n\nDid you find this page helpful? Consider sharing it 🙌"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Hello there!",
+    "objectID": "blog/2024/08/20/nested_layout/index.html",
+    "href": "blog/2024/08/20/nested_layout/index.html",
+    "title": "大图嵌小图",
     "section": "",
-    "text": "I am a PhD candidate in epidemiology and biostatistics at Sun Yat-sen University. I have made contributions to neurosyphilis and cancer research, and my work has been published in journals including eClinicalMedicine, JMIR Public Health and Surveillance, among others. Besides, I have patented a clinical diagnosis system for neurological syphilis (LU504466, rank 1/1).\nIn addition to my work on neurosyphilis and cancer, I have extensive experience applying advanced statistical concepts, artificial intelligence, and causal inference methods to conduct real-world research based on electronic health records. I have conducted multiple studies in the areas of COVID-19, HPV and HIV infections, and cardiovascular disease.\nTo date (May 10, 2024), I have published 25 papers in peer-reviewed journals, serving as the first author and co-first author for 10 of these."
+    "text": "由来\n星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。\n\n\n\nQ1\n\n\n\n\n\nQ2\n\n\n我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：\n\n\n\nsurvival curve\n\n\n想要把risk table嵌入到生存曲线中。\n\n\n方法一\n使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。\n\n# not run\nsubvp &lt;- viewport(width = 0.35, height = 0.35, x = 0.75, y = 0.75)\nggsurv$plot\nprint(ggsurv$table, vp = subvp)\n\nviewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：\n\n\n\noption 1\n\n\n\n\n方法二\n使用annotation_custom函数，它可以在图形中添加自定义的图形元素。\n\n# not run\nggsurv$plot + annotation_custom(ggplotGrob(ggsurv$table), xmin=1900, xmax=3000, ymin=0.6, ymax=1)\n\nggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：\n\n\n\noption 2\n\n\n\n\n方法三\n使用ggpp包。\n\n# not run\nsub_plot= tibble::tibble(\n    x= .98, y= .98, plot= list(ggsurv$table)\n)\nggsurv$plot + \n    geom_plot_npc(data = sub_plot, aes(npcx = x, npcy = y, label = plot))\n\n使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：\n\n\n\noption 3\n\n\n完整代码已经放在了星球里，感兴趣的同学可以自行查看。\n\nDid you find this page helpful? Consider sharing it 🙌"
   },
   {
-    "objectID": "talks/index.html",
-    "href": "talks/index.html",
-    "title": "Talks",
+    "objectID": "news/index.html",
+    "href": "news/index.html",
+    "title": "What I’m doing now",
     "section": "",
-    "text": "This page contains the source code, links, and slides for various workshops, talks, lectures, and presentations I’ve given."
+    "text": "May 11 2024: 🚀✨🎉 网站由 rmarkdown 更新为 quarto 支持。Hello World！"
   },
   {
-    "objectID": "talks/index.html#section",
-    "href": "talks/index.html#section",
-    "title": "Talks",
+    "objectID": "blog/index.html#section",
+    "href": "blog/index.html#section",
+    "title": "Blog",
     "section": "2024",
-    "text": "2024"
+    "text": "2024\n\n\n    \n    \n                  \n            August 20, 2024\n        \n        \n            大图嵌小图\n\n            \n            \n                \n                \n                    r\n                \n                \n                \n                    ggplot2\n                \n                \n            \n            \n\n            调包\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 14, 2024\n        \n        \n            欢迎加入预测模型星球\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    prediction model\n                \n                \n            \n            \n\n            Clinical Prediction Model\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 11, 2024\n        \n        \n            星球第二期workshop上线\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    sample size\n                \n                \n                \n                    clinical research\n                \n                \n            \n            \n\n            Sample Size Calculations in Clinical Research\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 4, 2024\n        \n        \n            星球第一期workshop上线\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    missing data\n                \n                \n                \n                    statistical methods\n                \n                \n            \n            \n\n            Statistical Methods for Analysis with Missing Data\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 3, 2024\n        \n        \n            倾向性评分加权\n\n            \n            \n                \n                \n                    propensity score\n                \n                \n                \n                    weighting\n                \n                \n            \n            \n\n            倾向性评分加权的具体介绍\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            July 19, 2024\n        \n        \n            预测模型领域新书推荐\n\n            \n            \n                \n                \n                    prediction model\n                \n                \n                \n                    book\n                \n                \n            \n            \n\n            临床预测模型方法与应用\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            June 23, 2024\n        \n        \n            2023年最新JCR影响因子发布\n\n            \n            \n                \n                \n                    sci\n                \n                \n                \n                    jcr\n                \n                \n            \n            \n\n            2023年最新JCR影响因子\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            June 7, 2024\n        \n        \n            常用损失函数\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n                \n                    deep learning\n                \n                \n                \n                    loss function\n                \n                \n            \n            \n\n            常用损失函数介绍\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 17, 2024\n        \n        \n            Python中机器学习模型的校准\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n                \n                    calibration\n                \n                \n            \n            \n\n            预测模型如何校准\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 13, 2024\n        \n        \n            Hierarchical composite endpoints治疗效应的可视化\n\n            \n            \n                \n                \n                    r\n                \n                \n                \n                    clinical trial\n                \n                \n                \n                    endpoint\n                \n                \n            \n            \n\n            复合终点治疗效应的可视化\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 11, 2024\n        \n        \n            最优分类阈值\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n            \n            \n\n            分类问题中阈值的选择\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
   },
   {
-    "objectID": "blog/2024/08/14/clinical_prediction_model/index.html",
-    "href": "blog/2024/08/14/clinical_prediction_model/index.html",
-    "title": "欢迎加入预测模型星球",
-    "section": "",
-    "text": "由来\n前面我们给大家推荐了这本几位非常厉害的教授老师主编的《临床预测模型方法与应用》，陆陆续续地，在各个平台上，大家都反馈已经收到了这本书，并且这本书还很大很厚，涵盖了方法学、操作、专题以及案例。\n\n\n\nfeedback\n\n\n那这时候，就有同学和我说，按照以往看书的习惯，收到书的前一俩周，还是可以翻翻，但是后面就会慢慢地放在那里，然后就不了了之了。\n所以，我们就想，能不能有一个平台，让大家一起学习这本书，一起讨论、交流，一起进步呢？\n\n\n预测模型星球\n\n\n\n知识星球\n\n\n向大家完整介绍下这个星球，也鼓励更多想要讨论交流的小伙伴进入到我的星球里面，大家一起愉快地学习。\n\n首先，你要有实体书，不然我们每周讨论学习某一个章节的时候，你可能会有点懵。\n\n购买的二维码链接在这里。\n\n知识星球的目的是和大家一起营造一个国内高质量的预测模型类研究的知识圈，让星球里的人能够受益。\n\n来到这里你会遇到一群志同道合的人，一起学习、相互交流、共同促进。这个交流圈高度专注于预测类研究领域。\n\n\n\ncontent\n\n\n\n我们会每周一起学习讨论这本书的一个章节，每周一次，每次一个小时或一个章节，讨论的内容会包括这一章的重点内容、难点、案例分析等。\n除了这本书，如果未来人数足够，我们还会不定期地邀请一些同样从事预测类研究的博士生、学者，来和大家分享他们的研究成果、经验、心得等。\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "objectID": "blog/index.html#section-1",
+    "href": "blog/index.html#section-1",
+    "title": "Blog",
+    "section": "2023",
+    "text": "2023"
   },
   {
-    "objectID": "blog/2024/08/04/workshop_001/index.html",
-    "href": "blog/2024/08/04/workshop_001/index.html",
-    "title": "星球第一期workshop上线",
-    "section": "",
-    "text": "我们星球正式上线第一期workshop啦！\n\n\n\nworkshop\n\n\n本期workshop主题是“Statistical Methods for Analysis with Missing Data”。本期workshop将从缺失数据的概念、缺失数据的类型、缺失数据的机制、缺失数据的影响、缺失数据的处理方法等方面展开讲解，帮助大家更好地理解缺失数据的问题，掌握缺失数据的处理方法。\n\n\n\nscreenshot\n\n\n目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。\n\n\n\nused files\n\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "objectID": "blog/index.html#section-2",
+    "href": "blog/index.html#section-2",
+    "title": "Blog",
+    "section": "2022",
+    "text": "2022"
   },
   {
-    "objectID": "blog/2024/07/19/new_book/index.html",
-    "href": "blog/2024/07/19/new_book/index.html",
-    "title": "预测模型领域新书推荐",
-    "section": "",
-    "text": "首先，今天这篇不是软文哦。\n\n\n\n\n临床预测模型方法与应用\n\n\n非常高兴向大家推荐和我们课题组一直保持良好合作的荷兰 Utrecht University 王俊峰教授参与主编的新书《临床预测模型方法与应用》。\n王老师是临床预测模型领域内的专家，大家感兴趣的可以去看王老师的google scolar。在和王老师合作做项目的过程中，我也是收获很多，扫除了一些知识上的盲点和疑区。因而，对于关注我的同学们而言，如果有对临床预测模型感兴趣的，我也是非常推荐这本书。\n这本书由南京医科大学公共卫生学院的陈峰教授作序，主编人员都是在预测模型、生物统计领域内有着丰富经验和深刻见解的科研人员，王老师在我们合作的项目文章里也给与了我悉心的指导，北京天坛医院谷鸿秋教授也是刚刚作为一作发表了NEJM，这本书可以说是大咖云集了。\n\n\n\n序言\n\n\n\n\n\n序言\n\n\n相信很多做科研的同学，一直想找一本这个方向领域的权威且全面的中文书，这本书应该是一个不错的选择。如果是对预测模型感兴趣的小伙伴可以直接下单预定啦，也可以关注下8月份王老师在北大、复旦的讲座。这本书8月份会正式上市，目前可以扫码下图进行预定。\n\n\n\n预定\n\n\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "objectID": "blog/index.html#section-3",
+    "href": "blog/index.html#section-3",
+    "title": "Blog",
+    "section": "2021",
+    "text": "2021"
   },
   {
-    "objectID": "blog/2020/01/05/index.html",
-    "href": "blog/2020/01/05/index.html",
-    "title": "可惜没如果——因果关系的三个层级",
-    "section": "",
-    "text": "前言\n我们平时在统计中最常接触到的就是相关关系，而在因果推断中，实际上相关关系是处在因果关系三个层级的最低层级。正如我们所熟知的，相关不能说明因果，我们从观察到的数据中得到的相关对于因果的解释并不能起到直接的作用。\n\n\n因果关系的三个层级\n\n第一层级：关联\n我们一般通过观察寻找规律。如果观察到某一事件改变了观察到另一事件的可能性，我们便说这一事件与另一事件相关联。更进一步地，我们基于被动观察做出预测。\n典型的数据预测问题就是：“如果我观察到···会怎样？”例如，一家商店可能会问你：“购买牙膏的顾客同时购买牙线的可能性有多大？”这类问题是统计学的安身立命之本，统计学家主要通过收集和分析数据给出答案。\n我们可以这样解答：首先采集所有顾客购物行为的数据，筛选出购买牙膏的顾客，计算出当中购买牙线的人数比例。这个比例也就是我们所说的条件概率，用来反映(针对大数据)买牙膏和买牙线两种行为之间的关联程度，即P(牙线|牙膏)。典型常用的关联度量方法即相关分析或回归分析，具体操作就是将一条直线拟合到数据点集中，再去确定这条直线的斜率。\n我们在学习统计的时候，几乎所有老师都会和你说：“相关不代表因果。”统计学本身不能告诉我们，牙膏或牙线哪个是因，哪个是果。但是从商店的角度看，因果这件事并不重要——好的预测无需好的解释。\n当前的机器学习程序(包括应用深度神经网络的程序)几乎仍然完全是在关联模式下运行的。它们由一系列观察结果驱动，致力于拟合出一个函数，就像我们试图用点集拟合出一条直线一样。深度神经网络为拟合函数的复杂性增加了更多的层次，但其拟合过程仍然由原始数据驱动。如果无人驾驶汽车的程序设计者想让汽车在新情况下做出不同的反应，他就必须明确地在程序中添加这些新反应的描述代码，否则机器没有应对新情况的灵活性和适应性。\n\n\n第二层级：干预\n在第一层级中，我们基于被动观察发现规律，做出预测。而当我们开始寻求主动对环境做出改变时，我们就迈上了因果关系的第二层级。这一层级的一个典型问题是：“如果我们把牙膏的价格翻倍，牙线的销售额将会怎样？”问出这个问题的时候，我们实际上已经脱离了收集到的数据本身，而要对数据的环境做出干预。我们把这样的问题记作P(牙线|do(牙膏))，即“如果我们实施…行动，将会怎样”。\n毫无疑问，干预比关联更高级，因为其不仅涉及被动观察，还涉及主动改变现状。无论你的数据集有多大、神经网络有多深，只要你使用的是被动收集的数据，就无法回答有关干预的问题。从统计学中学到的任何方法都不足以让我们明确表述类似“如果价格翻倍将会发生什么”这样的问题，更谈不上回答了。\n为什么我们无法仅仅通过观察来回答牙线的问题呢？为什么不直接进入存有历史购买信息的数据库中，看看在牙膏价格翻倍的情况下对应的牙线的销售情况呢？原因在于，在历史销售信息中，牙膏涨价可能是出于完全不同的原因，如产品供不应求，其他商店也不得不涨价等。而我们只想刻意干预牙膏价格，这一结果就可能与历史上顾客在别处买不到便宜牙膏时的购买行为大相径庭。简单地说，我们只想知道单纯的牙膏涨价这个因所对应的牙线的果，而历史数据中各种影响因素完全超出了我们所提出问题的范畴，因而无法仅仅利用观察历史数据来回答干预的问题。\n因果推断则可以帮助我们解决这一问题。\n我们知道预测干预结果的一种非常直接的方法是：在严格控制的条件下进行实验。更加有趣的是，一个足够强大准确的因果模型可以在不进行实验的前提下，利用第一层级（关联）的数据来回答第二层级（干预）的问题。\n日常生活中，我们一直都在实施干预，尽管我们不会这么一本正经地称呼它。当我们服用阿司匹林试图治疗头痛时，就是在干预一个变量（人体内阿司匹林的量），以影响另一个变量（头痛的状态）。如果我们关于阿司匹林治愈头痛的因果知识是正确的，那么我们的结果变量的值将会从“头痛”变为“不头痛”。\n\n\n第三层级：反事实\n但是到此仍然不能回答所有我们感兴趣的因果问题：现在已经不头痛了，是因为我吃的阿司匹林么？是因为我吃的食物么？是因为我心情变好了么？\n正是这些问题将我们带入到因果关系的第三层级：反事实。要回答以上问题，我们就必须回到过去改变历史，“假如我们没有服用过阿司匹林，会怎样？”世界上没有哪个实验可以撤销对一个已接受过治疗的人所进行的治疗，进而比较治疗与未治疗两种条件下的结果。\n数据就是事实，而在反事实世界里，观察到的事实被完全否定。回到牙膏的例子，第三层级的问题是：“假如我们把牙膏价格翻倍，之前买了牙膏的顾客仍然选择购买的概率是多少？”在这个问题中，我们所做的就是将真实的世界（我们知道顾客以当前的价格购买了牙膏）和虚构的世界（牙膏价格翻倍）进行对比。\n“倘若那天，把该说的话好好说，该体谅的不执着，你会怎么做？”对这类问题的回答让我们得以从历史和他人的经验中获取经验教训。从想象的反事实中，我们获得了灵活性、反省能力以及改善行为的能力。\n因果关系第三层级的典型问题就是：”假如我当时做了…会怎样？“和“为什么？”两者都涉及观察到的世界与反事实世界的比较。仅靠干预实验无法回答这样的问题。\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "objectID": "blog/index.html#section-4",
+    "href": "blog/index.html#section-4",
+    "title": "Blog",
+    "section": "2020",
+    "text": "2020\n\n\n    \n    \n                  \n            January 6, 2020\n        \n        \n            Python基础要素之数值\n\n            \n            \n                \n                \n                    python\n                \n                \n            \n            \n\n            Python Training\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 5, 2020\n        \n        \n            可惜没如果——因果关系的三个层级\n\n            \n            \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            因果推断的基本知识\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 4, 2020\n        \n        \n            Python初体验\n\n            \n            \n                \n                \n                    pycharm\n                \n                \n                \n                    python\n                \n                \n            \n            \n\n            Python Training\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 2, 2020\n        \n        \n            因果推断-2\n\n            \n            \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            关于因果推断的基本概念\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 1, 2020\n        \n        \n            鼠年加油\n\n            \n            \n                \n                \n                    happy new year\n                \n                \n            \n            \n\n            新年快乐\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
   },
   {
-    "objectID": "blog/2020/01/02/index.html",
-    "href": "blog/2020/01/02/index.html",
-    "title": "因果推断-2",
-    "section": "",
-    "text": "统计值的不确定性意味着什么？\n统计推断利用统计方法生成一个问题答案的实际估计值，并给出对该估计值的不确定性大小的统计估计。这种不确定性反映了样本数据集的代表性以及可能存在的测量误差或数据缺失。数据永远是从理论上无限的总体中抽取的有限样本。我们无法避免根据样本测量的概率无法代表整个总体的相应概率的可能性。统计学提供了很多方法来应对这种不确定性，包括极大似然估计、倾向评分、置信区间、显著性检验等。\n\n\n相关与独立\n以因果模型的路径图(因果图)来表示的变量之间的听从模式通常会导向数据中某种显而易见的模式或者相关关系。“A和B之间没有连接路径”翻译成统计语言，就是“A和B相互独立”，即发现A的存在不会改变B发生的可能性。\n\n\n想象力与规划\n历史学家尤瓦尔·赫拉利在他的《人类简史》一书中指出，人类祖先想象不存在之物的能力是一切的关键，正是这种能力让他们得以交流得更加顺畅。在获得这种能力之前，他们只相信自己的直系亲属或者本部落的人。而此后，信任就因共同的幻想(例如信仰无形但可想象的神，信仰来世，或者信仰领袖的神性)和期许而延伸到了更大的群体。我们的智人祖先新掌握的因果想象力使他们能够通过一种被我们称为“规划”的复杂过程更有效地完成许多事情，例如他们可以通过想象和比较几个狩猎策略的结果来完成一次狩猎活动。而要做到这一点，思维主体必须具备一个可供参考并且可以自主调整的关于狩猎现实的心理模型。心理模型是施展想象力的舞台，它使我们可以通过对模型局部的自主调整修改来试验重估不同情景的概率，人类的心理模型因而具有一种模块性，其涉及预测对环境进行刻意改变后的结果，并根据预测结果选择行为方案以催生出自己所期待的结果。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2019/12/11/index.html",
-    "href": "blog/2019/12/11/index.html",
-    "title": "因果推断",
-    "section": "",
-    "text": "因果推断\n禁止言论就意味着禁止了思想，同时也扼杀了与此相关的原则、方法和工具。\n\n\n干预\ndo算子表明正在进行主动干预而非被动观察，这一概念在经典统计学中没有涉及。临床试验中使用do算子来确保观察到的病人存活期的变化能完全归因于药物本身，而没有混杂其他影响寿命长短的因素。如果不进行干预而让病人自行决定是否服用该药物，那么其他因素就可能会影响病人的决定，而服药和未服药的两组病人的存活期的差异也就无法再被仅仅归因于药物。例如，假设只有重症期的病人服用了这种药，那么两组之间的比较结果实际上反映的是其病情的严重程度，而非药物的影响。在数学上，我们把自行服药病人的生存期的观测概率称为条件概率，这里的概率是以观察到病人服用药物为条件的。【观察到】和【进行干预】是有本质的区别的。我们不认为气压计读数下降是风暴来临的原因，因为观察到气压计读数下降意味着风暴来临的概率增加，但人为使气压计读数下降并不能影响风暴来临的概率。因果推断要做的就是如何在不实际实施干预的情况下预测干预的效果。\n\n\n反事实\n假如某人在服用某种药物一个月后死亡，我们现在要关注的问题就是这种药物是否导致了他的死亡。为了回答这个问题，我们需要假设：如果他没服用这种药物，是否会避免死亡？反事实推理输出有关反事实世界的答案。\n语言会塑造思想。你无法回答一个你提不出来的问题；你也无法提出一个你的语言所不能描述的问题。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2019/11/28/index.html",
-    "href": "blog/2019/11/28/index.html",
-    "title": "统计学是干嘛的？",
-    "section": "",
-    "text": "统计学之所以存在，关键的原因只有一个，那就是变异及由此产生的抽样误差。没有变异，没有抽样误差，就没有统计学存在的理由。当我们把多个随机结果放在一起的时候，却能发现一定的规律性。正是因为这种规律的存在，所以我们仍然可以在变异中寻找规律，这也正是统计学的主要目的：从各种看似杂乱的现象中找出潜在的规律。\n\n抽样调查\n既然是规律，那就一定要在大多数人中存在，只在一小部分人中存在的现象不是规律，而是偶然，因为更多的是大多数人没有存在该现象，这才是规律。要证明一种现象是不是真正的规律，需要在大量人群中进行验证。由于我们无法接触到理论意义上的总体，因而我们换一种思路，调查部分具有代表性的样本，然后用统计学方法将样本的结果推广到总体，这就是我们所说的抽样调查。\n\n\n统计推断与参数估计\n统计学通常利用样本数据来推断总体结果，就是我们所说的用样本统计量推断总体参数。总体参数是客观存在的，经典的频率主义学派认为，总体参数是一个客观存在且固定的数值，而贝叶斯学派认为连总体参数自身也是个随机变量，所以也需要我们去估计。样本随机，样本统计量也是随机的，用它来估计总体参数，估计结果会存在一定的误差。但科学合理的抽样调查，其推断的结果是可靠的。偏差的样本会导致偏差的结论。样本必须足够代表总体。当然还需要考虑其他因素，比如调查员的水平、总体人群的变化等影响因素。\n\n\n抽样误差\n然而，即使代表性非常好的样本，也是无法真正等同于总体的，总会存在一定的抽样误差。样本统计量之间的差异就反映了抽样误差。由于抽样误差的存在，如果用样本统计量直接估计总体参数，那么肯定会有一定的偏差。所以在估计总体参数时需要考虑到抽样误差带来的偏差，因而我们在点估计之外，用置信区间来估计总体参数。抽样误差带来的偏差是多大呢？在实际中，我们不可能通过多次抽样，计算每个样本间统计量的差异大小从而去估计偏差大小，我们只能通过一次样本计算。这种根据一次样本计算抽样误差的大小就是标准误（standard error）。标准误几乎在所有统计方法中都会出现，因为它可以提示结果的可靠性：如果标准误较小，则说明抽样误差小，这意味着样本很稳定，对总体的代表性很好，由此推论结果较为可靠；如果标准误较大，则说明抽样误差大，提示样本代表性不强，这种情况下一般需要加大样本量，否则结果不可靠。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2020/01/01/index.html",
-    "href": "blog/2020/01/01/index.html",
-    "title": "鼠年加油",
-    "section": "",
-    "text": "回望一幕幕送别 何尝不轻描淡写 独自出姑苏城外 流光未曾相约 他日他乡重逢 风轻柔河流缓缓\n\n\n新年快乐，鼠年加油 没有珍惜的时间，2020开始去珍惜 没有完成的事情，2020开始去完成 从来不相信鸡汤，也不制造鸡汤 等2021年再回顾这一年 希望感受到的不再是很多尴尬的空白 每到新的一年，你的朋友圈是不是也有刷屏的感慨和祝福 一年初始，心愿是美好的 如果能坚持做下去，该是多么圆满 新年少偷点懒，多学习新东西 多看看书，多写点公众号😂 多做一些分享，和小伙伴们共同进步 希望每个你新年新气象，活成你想要的样子 感谢你的关注❤️\n\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2020/01/04/index.html",
-    "href": "blog/2020/01/04/index.html",
-    "title": "Python初体验",
-    "section": "",
-    "text": "目前Python这门语言有多火也不用多说，各种公众号推送制造的焦虑让你感觉实在不学不行，接下来我们就来体验一下别人口中的这门似乎很神奇的编程语言。\n\n创建Python脚本\nPython的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入“python3”，按下回车键，就能看见Python提示符（&gt;&gt;&gt;）：\n\n\n\nPython提示符\n\n\n面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本 ，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter notebook、Visual Studio code等。打开编辑器，一般我们将 #!/usr/bin/env python3 作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为first-script.py文件，这就是一个简单的Python脚本了。\n\n\n运行Python脚本\n对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：\n\n\n\nPycharm运行按钮\n\n\n当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：/Users/luzhen。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：\n\n\n\n终端切换目录\n\n\nmac上下一步就是为脚本添加执行权限，输入命令：\\(chmod +x first-script.py\\)。chmod是一个Unix命令，表示改变访问权限（change access mode）。+x表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。\n接下来就可以运行脚本了：\n\n\n\n终端运行脚本\n\n\n可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入\\(python3 first-script.py\\)，也可成功执行脚本，mac上同样适用。\n\n\n与命令行交互的几个小技巧\n\n使用向上箭头键得到以前的命令\n\n在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。\n\n用Ctrl+c停止脚本\n\n我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是Ctrl+C，mac是Control+c，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）\n\n读懂出错信息并找到解决方案\n\n当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。\n这样以后，接下来我们就可以来了解认识Python的语言基础要素了。人生苦短，一起学习Python。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2024/06/23/JCR_2023/index.html",
-    "href": "blog/2024/06/23/JCR_2023/index.html",
-    "title": "2023年最新JCR影响因子发布",
-    "section": "",
-    "text": "2023年最新JCR影响因子\n最新的影响因子前几天已经发布了，和去年一样，大家在公众号后台回复”JCR2023”，即可拿到最全的总结excel表格，包括2023年的最新影响因子，以及各个学科的排名，希望对大家有所帮助。\n\n\n关注的一些期刊\n几乎全部的期刊影响因子都回落到了几年前的水平。\n四大神刊中JAMA几近腰斩，柳叶刀系列的多个子刊也是如此。\n\n\n\n柳叶刀系列\n\n\n医工交叉领域也是普遍下滑。medical informatics数字医疗部分，lancet digital health和npj Digital Medicine分别是23.8和12.4分。\n以往动辄二三十分的盛况不再。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2024/08/03/propensity_score_weighting/index.html",
-    "href": "blog/2024/08/03/propensity_score_weighting/index.html",
-    "title": "倾向性评分加权",
-    "section": "",
-    "text": "背景介绍\n对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。\n我们公众号以往有过五篇类似的介绍内容，分别是：\n\n倾向性评分分析\n倾向性评分分析的统计学考虑\n倾向性评分匹配的生存分析怎么做\n倾向性评分overlapping weighting的SAS实现（一）\n生存资料倾向性评分OW的SAS实现（二）\n\n其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。\n\n\n因果效应\n首先，我们来看下几种因果效应。\nATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。\n我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。\n\n\n倾向性评分加权\n针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：\n\nATE：\\(w_{ATE} = \\frac{Z_i}{e_i} + \\frac{1 - Z_i}{1 - e_i}\\)\nATT：\\(w_{ATT} = \\frac{e_iZ_i}{e_i} + \\frac{e_i(1-Z_i)}{1-e_i}\\)\nATC：\\(w_{ATC} = \\frac{(1-e_i)Z_i}{e_i} + \\frac{(1-e_i) (1-Z_i)}{1 - e_i}\\)\nATM：\\(w_{ATC} = \\frac{(1-e_i)Z_i}{e_i} + \\frac{(1-e_i) (1-Z_i)}{1 - e_i}\\)\nATO：\\(w_{AT0} = (1-e_i)Z_i + e_i(1-Z_i)\\)\n\n以上五种加权的示例以及具体实现的全部代码，我们已经放在了星球里，感兴趣的同学可以自行查看。\n这里我们展示下加权后人群的分布情况。\n\n原始人群的ps分布\n\n\n\nps of original population\n\n\n\n\nATE\n\n\n\nATE\n\n\n\n\nATT\n\n\n\nATT\n\n\n\n\nATC\n\n\n\nATC\n\n\n\n\nATM\n\n\n\nATM\n\n\n\n\nATO\n\n\n\nATO\n\n\n\n\n\n总结\n相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。\n\nDid you find this page helpful? Consider sharing it 🙌"
-  },
-  {
-    "objectID": "blog/2024/08/11/workshop_002/index.html",
-    "href": "blog/2024/08/11/workshop_002/index.html",
-    "title": "星球第二期workshop上线",
-    "section": "",
-    "text": "我们星球正式上线第二期workshop啦！\n\n\n\nworkshop\n\n\n本期workshop主题是“Sample Size Calculations in Clinical Research”。本期workshop将从临床研究中不同试验设计的角度出发，介绍如何基于不同设计类型（平行设计、交叉设计、析因设计、成组序贯设计等）、比较类型（非劣效、等效、优效试验）、主要终点指标等因素进行样本量计算。\n\n\n\nscreenshot\n\n\n目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。\n\n\n\nused files\n\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "objectID": "blog/index.html#section-5",
+    "href": "blog/index.html#section-5",
+    "title": "Blog",
+    "section": "2019",
+    "text": "2019\n\n\n    \n    \n                  \n            December 11, 2019\n        \n        \n            因果推断\n\n            \n            \n                \n                \n                    statistics\n                \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            关于因果推断的基本概念\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            November 28, 2019\n        \n        \n            统计学是干嘛的？\n\n            \n            \n                \n                \n                    statistics\n                \n                \n                \n                    biostatistics\n                \n                \n            \n            \n\n            聊一聊什么是统计学\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
   },
   {
     "objectID": "publications/index.html",
@@ -175,60 +126,116 @@
     "text": "Translations"
   },
   {
-    "objectID": "blog/index.html#section",
-    "href": "blog/index.html#section",
-    "title": "Blog",
+    "objectID": "blog/2024/08/11/workshop_002/index.html",
+    "href": "blog/2024/08/11/workshop_002/index.html",
+    "title": "星球第二期workshop上线",
+    "section": "",
+    "text": "我们星球正式上线第二期workshop啦！\n\n\n\nworkshop\n\n\n本期workshop主题是“Sample Size Calculations in Clinical Research”。本期workshop将从临床研究中不同试验设计的角度出发，介绍如何基于不同设计类型（平行设计、交叉设计、析因设计、成组序贯设计等）、比较类型（非劣效、等效、优效试验）、主要终点指标等因素进行样本量计算。\n\n\n\nscreenshot\n\n\n目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。\n\n\n\nused files\n\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2024/08/03/propensity_score_weighting/index.html",
+    "href": "blog/2024/08/03/propensity_score_weighting/index.html",
+    "title": "倾向性评分加权",
+    "section": "",
+    "text": "背景介绍\n对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。\n我们公众号以往有过五篇类似的介绍内容，分别是：\n\n倾向性评分分析\n倾向性评分分析的统计学考虑\n倾向性评分匹配的生存分析怎么做\n倾向性评分overlapping weighting的SAS实现（一）\n生存资料倾向性评分OW的SAS实现（二）\n\n其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。\n\n\n因果效应\n首先，我们来看下几种因果效应。\nATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。\n我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。\n\n\n倾向性评分加权\n针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：\n\nATE：\\(w_{ATE} = \\frac{Z_i}{e_i} + \\frac{1 - Z_i}{1 - e_i}\\)\nATT：\\(w_{ATT} = \\frac{e_iZ_i}{e_i} + \\frac{e_i(1-Z_i)}{1-e_i}\\)\nATC：\\(w_{ATC} = \\frac{(1-e_i)Z_i}{e_i} + \\frac{(1-e_i) (1-Z_i)}{1 - e_i}\\)\nATM：\\(w_{ATC} = \\frac{(1-e_i)Z_i}{e_i} + \\frac{(1-e_i) (1-Z_i)}{1 - e_i}\\)\nATO：\\(w_{AT0} = (1-e_i)Z_i + e_i(1-Z_i)\\)\n\n以上五种加权的示例以及具体实现的全部代码，我们已经放在了星球里，感兴趣的同学可以自行查看。\n这里我们展示下加权后人群的分布情况。\n\n原始人群的ps分布\n\n\n\nps of original population\n\n\n\n\nATE\n\n\n\nATE\n\n\n\n\nATT\n\n\n\nATT\n\n\n\n\nATC\n\n\n\nATC\n\n\n\n\nATM\n\n\n\nATM\n\n\n\n\nATO\n\n\n\nATO\n\n\n\n\n\n总结\n相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2024/06/23/JCR_2023/index.html",
+    "href": "blog/2024/06/23/JCR_2023/index.html",
+    "title": "2023年最新JCR影响因子发布",
+    "section": "",
+    "text": "2023年最新JCR影响因子\n最新的影响因子前几天已经发布了，和去年一样，大家在公众号后台回复”JCR2023”，即可拿到最全的总结excel表格，包括2023年的最新影响因子，以及各个学科的排名，希望对大家有所帮助。\n\n\n关注的一些期刊\n几乎全部的期刊影响因子都回落到了几年前的水平。\n四大神刊中JAMA几近腰斩，柳叶刀系列的多个子刊也是如此。\n\n\n\n柳叶刀系列\n\n\n医工交叉领域也是普遍下滑。medical informatics数字医疗部分，lancet digital health和npj Digital Medicine分别是23.8和12.4分。\n以往动辄二三十分的盛况不再。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2020/01/04/index.html",
+    "href": "blog/2020/01/04/index.html",
+    "title": "Python初体验",
+    "section": "",
+    "text": "目前Python这门语言有多火也不用多说，各种公众号推送制造的焦虑让你感觉实在不学不行，接下来我们就来体验一下别人口中的这门似乎很神奇的编程语言。\n\n创建Python脚本\nPython的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入“python3”，按下回车键，就能看见Python提示符（&gt;&gt;&gt;）：\n\n\n\nPython提示符\n\n\n面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本 ，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter notebook、Visual Studio code等。打开编辑器，一般我们将 #!/usr/bin/env python3 作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为first-script.py文件，这就是一个简单的Python脚本了。\n\n\n运行Python脚本\n对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：\n\n\n\nPycharm运行按钮\n\n\n当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：/Users/luzhen。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：\n\n\n\n终端切换目录\n\n\nmac上下一步就是为脚本添加执行权限，输入命令：\\(chmod +x first-script.py\\)。chmod是一个Unix命令，表示改变访问权限（change access mode）。+x表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。\n接下来就可以运行脚本了：\n\n\n\n终端运行脚本\n\n\n可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入\\(python3 first-script.py\\)，也可成功执行脚本，mac上同样适用。\n\n\n与命令行交互的几个小技巧\n\n使用向上箭头键得到以前的命令\n\n在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。\n\n用Ctrl+c停止脚本\n\n我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是Ctrl+C，mac是Control+c，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）\n\n读懂出错信息并找到解决方案\n\n当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。\n这样以后，接下来我们就可以来了解认识Python的语言基础要素了。人生苦短，一起学习Python。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2020/01/01/index.html",
+    "href": "blog/2020/01/01/index.html",
+    "title": "鼠年加油",
+    "section": "",
+    "text": "回望一幕幕送别 何尝不轻描淡写 独自出姑苏城外 流光未曾相约 他日他乡重逢 风轻柔河流缓缓\n\n\n新年快乐，鼠年加油 没有珍惜的时间，2020开始去珍惜 没有完成的事情，2020开始去完成 从来不相信鸡汤，也不制造鸡汤 等2021年再回顾这一年 希望感受到的不再是很多尴尬的空白 每到新的一年，你的朋友圈是不是也有刷屏的感慨和祝福 一年初始，心愿是美好的 如果能坚持做下去，该是多么圆满 新年少偷点懒，多学习新东西 多看看书，多写点公众号😂 多做一些分享，和小伙伴们共同进步 希望每个你新年新气象，活成你想要的样子 感谢你的关注❤️\n\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2019/11/28/index.html",
+    "href": "blog/2019/11/28/index.html",
+    "title": "统计学是干嘛的？",
+    "section": "",
+    "text": "统计学之所以存在，关键的原因只有一个，那就是变异及由此产生的抽样误差。没有变异，没有抽样误差，就没有统计学存在的理由。当我们把多个随机结果放在一起的时候，却能发现一定的规律性。正是因为这种规律的存在，所以我们仍然可以在变异中寻找规律，这也正是统计学的主要目的：从各种看似杂乱的现象中找出潜在的规律。\n\n抽样调查\n既然是规律，那就一定要在大多数人中存在，只在一小部分人中存在的现象不是规律，而是偶然，因为更多的是大多数人没有存在该现象，这才是规律。要证明一种现象是不是真正的规律，需要在大量人群中进行验证。由于我们无法接触到理论意义上的总体，因而我们换一种思路，调查部分具有代表性的样本，然后用统计学方法将样本的结果推广到总体，这就是我们所说的抽样调查。\n\n\n统计推断与参数估计\n统计学通常利用样本数据来推断总体结果，就是我们所说的用样本统计量推断总体参数。总体参数是客观存在的，经典的频率主义学派认为，总体参数是一个客观存在且固定的数值，而贝叶斯学派认为连总体参数自身也是个随机变量，所以也需要我们去估计。样本随机，样本统计量也是随机的，用它来估计总体参数，估计结果会存在一定的误差。但科学合理的抽样调查，其推断的结果是可靠的。偏差的样本会导致偏差的结论。样本必须足够代表总体。当然还需要考虑其他因素，比如调查员的水平、总体人群的变化等影响因素。\n\n\n抽样误差\n然而，即使代表性非常好的样本，也是无法真正等同于总体的，总会存在一定的抽样误差。样本统计量之间的差异就反映了抽样误差。由于抽样误差的存在，如果用样本统计量直接估计总体参数，那么肯定会有一定的偏差。所以在估计总体参数时需要考虑到抽样误差带来的偏差，因而我们在点估计之外，用置信区间来估计总体参数。抽样误差带来的偏差是多大呢？在实际中，我们不可能通过多次抽样，计算每个样本间统计量的差异大小从而去估计偏差大小，我们只能通过一次样本计算。这种根据一次样本计算抽样误差的大小就是标准误（standard error）。标准误几乎在所有统计方法中都会出现，因为它可以提示结果的可靠性：如果标准误较小，则说明抽样误差小，这意味着样本很稳定，对总体的代表性很好，由此推论结果较为可靠；如果标准误较大，则说明抽样误差大，提示样本代表性不强，这种情况下一般需要加大样本量，否则结果不可靠。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2019/12/11/index.html",
+    "href": "blog/2019/12/11/index.html",
+    "title": "因果推断",
+    "section": "",
+    "text": "因果推断\n禁止言论就意味着禁止了思想，同时也扼杀了与此相关的原则、方法和工具。\n\n\n干预\ndo算子表明正在进行主动干预而非被动观察，这一概念在经典统计学中没有涉及。临床试验中使用do算子来确保观察到的病人存活期的变化能完全归因于药物本身，而没有混杂其他影响寿命长短的因素。如果不进行干预而让病人自行决定是否服用该药物，那么其他因素就可能会影响病人的决定，而服药和未服药的两组病人的存活期的差异也就无法再被仅仅归因于药物。例如，假设只有重症期的病人服用了这种药，那么两组之间的比较结果实际上反映的是其病情的严重程度，而非药物的影响。在数学上，我们把自行服药病人的生存期的观测概率称为条件概率，这里的概率是以观察到病人服用药物为条件的。【观察到】和【进行干预】是有本质的区别的。我们不认为气压计读数下降是风暴来临的原因，因为观察到气压计读数下降意味着风暴来临的概率增加，但人为使气压计读数下降并不能影响风暴来临的概率。因果推断要做的就是如何在不实际实施干预的情况下预测干预的效果。\n\n\n反事实\n假如某人在服用某种药物一个月后死亡，我们现在要关注的问题就是这种药物是否导致了他的死亡。为了回答这个问题，我们需要假设：如果他没服用这种药物，是否会避免死亡？反事实推理输出有关反事实世界的答案。\n语言会塑造思想。你无法回答一个你提不出来的问题；你也无法提出一个你的语言所不能描述的问题。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2020/01/02/index.html",
+    "href": "blog/2020/01/02/index.html",
+    "title": "因果推断-2",
+    "section": "",
+    "text": "统计值的不确定性意味着什么？\n统计推断利用统计方法生成一个问题答案的实际估计值，并给出对该估计值的不确定性大小的统计估计。这种不确定性反映了样本数据集的代表性以及可能存在的测量误差或数据缺失。数据永远是从理论上无限的总体中抽取的有限样本。我们无法避免根据样本测量的概率无法代表整个总体的相应概率的可能性。统计学提供了很多方法来应对这种不确定性，包括极大似然估计、倾向评分、置信区间、显著性检验等。\n\n\n相关与独立\n以因果模型的路径图(因果图)来表示的变量之间的听从模式通常会导向数据中某种显而易见的模式或者相关关系。“A和B之间没有连接路径”翻译成统计语言，就是“A和B相互独立”，即发现A的存在不会改变B发生的可能性。\n\n\n想象力与规划\n历史学家尤瓦尔·赫拉利在他的《人类简史》一书中指出，人类祖先想象不存在之物的能力是一切的关键，正是这种能力让他们得以交流得更加顺畅。在获得这种能力之前，他们只相信自己的直系亲属或者本部落的人。而此后，信任就因共同的幻想(例如信仰无形但可想象的神，信仰来世，或者信仰领袖的神性)和期许而延伸到了更大的群体。我们的智人祖先新掌握的因果想象力使他们能够通过一种被我们称为“规划”的复杂过程更有效地完成许多事情，例如他们可以通过想象和比较几个狩猎策略的结果来完成一次狩猎活动。而要做到这一点，思维主体必须具备一个可供参考并且可以自主调整的关于狩猎现实的心理模型。心理模型是施展想象力的舞台，它使我们可以通过对模型局部的自主调整修改来试验重估不同情景的概率，人类的心理模型因而具有一种模块性，其涉及预测对环境进行刻意改变后的结果，并根据预测结果选择行为方案以催生出自己所期待的结果。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2020/01/05/index.html",
+    "href": "blog/2020/01/05/index.html",
+    "title": "可惜没如果——因果关系的三个层级",
+    "section": "",
+    "text": "前言\n我们平时在统计中最常接触到的就是相关关系，而在因果推断中，实际上相关关系是处在因果关系三个层级的最低层级。正如我们所熟知的，相关不能说明因果，我们从观察到的数据中得到的相关对于因果的解释并不能起到直接的作用。\n\n\n因果关系的三个层级\n\n第一层级：关联\n我们一般通过观察寻找规律。如果观察到某一事件改变了观察到另一事件的可能性，我们便说这一事件与另一事件相关联。更进一步地，我们基于被动观察做出预测。\n典型的数据预测问题就是：“如果我观察到···会怎样？”例如，一家商店可能会问你：“购买牙膏的顾客同时购买牙线的可能性有多大？”这类问题是统计学的安身立命之本，统计学家主要通过收集和分析数据给出答案。\n我们可以这样解答：首先采集所有顾客购物行为的数据，筛选出购买牙膏的顾客，计算出当中购买牙线的人数比例。这个比例也就是我们所说的条件概率，用来反映(针对大数据)买牙膏和买牙线两种行为之间的关联程度，即P(牙线|牙膏)。典型常用的关联度量方法即相关分析或回归分析，具体操作就是将一条直线拟合到数据点集中，再去确定这条直线的斜率。\n我们在学习统计的时候，几乎所有老师都会和你说：“相关不代表因果。”统计学本身不能告诉我们，牙膏或牙线哪个是因，哪个是果。但是从商店的角度看，因果这件事并不重要——好的预测无需好的解释。\n当前的机器学习程序(包括应用深度神经网络的程序)几乎仍然完全是在关联模式下运行的。它们由一系列观察结果驱动，致力于拟合出一个函数，就像我们试图用点集拟合出一条直线一样。深度神经网络为拟合函数的复杂性增加了更多的层次，但其拟合过程仍然由原始数据驱动。如果无人驾驶汽车的程序设计者想让汽车在新情况下做出不同的反应，他就必须明确地在程序中添加这些新反应的描述代码，否则机器没有应对新情况的灵活性和适应性。\n\n\n第二层级：干预\n在第一层级中，我们基于被动观察发现规律，做出预测。而当我们开始寻求主动对环境做出改变时，我们就迈上了因果关系的第二层级。这一层级的一个典型问题是：“如果我们把牙膏的价格翻倍，牙线的销售额将会怎样？”问出这个问题的时候，我们实际上已经脱离了收集到的数据本身，而要对数据的环境做出干预。我们把这样的问题记作P(牙线|do(牙膏))，即“如果我们实施…行动，将会怎样”。\n毫无疑问，干预比关联更高级，因为其不仅涉及被动观察，还涉及主动改变现状。无论你的数据集有多大、神经网络有多深，只要你使用的是被动收集的数据，就无法回答有关干预的问题。从统计学中学到的任何方法都不足以让我们明确表述类似“如果价格翻倍将会发生什么”这样的问题，更谈不上回答了。\n为什么我们无法仅仅通过观察来回答牙线的问题呢？为什么不直接进入存有历史购买信息的数据库中，看看在牙膏价格翻倍的情况下对应的牙线的销售情况呢？原因在于，在历史销售信息中，牙膏涨价可能是出于完全不同的原因，如产品供不应求，其他商店也不得不涨价等。而我们只想刻意干预牙膏价格，这一结果就可能与历史上顾客在别处买不到便宜牙膏时的购买行为大相径庭。简单地说，我们只想知道单纯的牙膏涨价这个因所对应的牙线的果，而历史数据中各种影响因素完全超出了我们所提出问题的范畴，因而无法仅仅利用观察历史数据来回答干预的问题。\n因果推断则可以帮助我们解决这一问题。\n我们知道预测干预结果的一种非常直接的方法是：在严格控制的条件下进行实验。更加有趣的是，一个足够强大准确的因果模型可以在不进行实验的前提下，利用第一层级（关联）的数据来回答第二层级（干预）的问题。\n日常生活中，我们一直都在实施干预，尽管我们不会这么一本正经地称呼它。当我们服用阿司匹林试图治疗头痛时，就是在干预一个变量（人体内阿司匹林的量），以影响另一个变量（头痛的状态）。如果我们关于阿司匹林治愈头痛的因果知识是正确的，那么我们的结果变量的值将会从“头痛”变为“不头痛”。\n\n\n第三层级：反事实\n但是到此仍然不能回答所有我们感兴趣的因果问题：现在已经不头痛了，是因为我吃的阿司匹林么？是因为我吃的食物么？是因为我心情变好了么？\n正是这些问题将我们带入到因果关系的第三层级：反事实。要回答以上问题，我们就必须回到过去改变历史，“假如我们没有服用过阿司匹林，会怎样？”世界上没有哪个实验可以撤销对一个已接受过治疗的人所进行的治疗，进而比较治疗与未治疗两种条件下的结果。\n数据就是事实，而在反事实世界里，观察到的事实被完全否定。回到牙膏的例子，第三层级的问题是：“假如我们把牙膏价格翻倍，之前买了牙膏的顾客仍然选择购买的概率是多少？”在这个问题中，我们所做的就是将真实的世界（我们知道顾客以当前的价格购买了牙膏）和虚构的世界（牙膏价格翻倍）进行对比。\n“倘若那天，把该说的话好好说，该体谅的不执着，你会怎么做？”对这类问题的回答让我们得以从历史和他人的经验中获取经验教训。从想象的反事实中，我们获得了灵活性、反省能力以及改善行为的能力。\n因果关系第三层级的典型问题就是：”假如我当时做了…会怎样？“和“为什么？”两者都涉及观察到的世界与反事实世界的比较。仅靠干预实验无法回答这样的问题。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2024/07/19/new_book/index.html",
+    "href": "blog/2024/07/19/new_book/index.html",
+    "title": "预测模型领域新书推荐",
+    "section": "",
+    "text": "首先，今天这篇不是软文哦。\n\n\n\n\n临床预测模型方法与应用\n\n\n非常高兴向大家推荐和我们课题组一直保持良好合作的荷兰 Utrecht University 王俊峰教授参与主编的新书《临床预测模型方法与应用》。\n王老师是临床预测模型领域内的专家，大家感兴趣的可以去看王老师的google scolar。在和王老师合作做项目的过程中，我也是收获很多，扫除了一些知识上的盲点和疑区。因而，对于关注我的同学们而言，如果有对临床预测模型感兴趣的，我也是非常推荐这本书。\n这本书由南京医科大学公共卫生学院的陈峰教授作序，主编人员都是在预测模型、生物统计领域内有着丰富经验和深刻见解的科研人员，王老师在我们合作的项目文章里也给与了我悉心的指导，北京天坛医院谷鸿秋教授也是刚刚作为一作发表了NEJM，这本书可以说是大咖云集了。\n\n\n\n序言\n\n\n\n\n\n序言\n\n\n相信很多做科研的同学，一直想找一本这个方向领域的权威且全面的中文书，这本书应该是一个不错的选择。如果是对预测模型感兴趣的小伙伴可以直接下单预定啦，也可以关注下8月份王老师在北大、复旦的讲座。这本书8月份会正式上市，目前可以扫码下图进行预定。\n\n\n\n预定\n\n\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2024/08/04/workshop_001/index.html",
+    "href": "blog/2024/08/04/workshop_001/index.html",
+    "title": "星球第一期workshop上线",
+    "section": "",
+    "text": "我们星球正式上线第一期workshop啦！\n\n\n\nworkshop\n\n\n本期workshop主题是“Statistical Methods for Analysis with Missing Data”。本期workshop将从缺失数据的概念、缺失数据的类型、缺失数据的机制、缺失数据的影响、缺失数据的处理方法等方面展开讲解，帮助大家更好地理解缺失数据的问题，掌握缺失数据的处理方法。\n\n\n\nscreenshot\n\n\n目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。\n\n\n\nused files\n\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "blog/2024/08/14/clinical_prediction_model/index.html",
+    "href": "blog/2024/08/14/clinical_prediction_model/index.html",
+    "title": "欢迎加入预测模型星球",
+    "section": "",
+    "text": "由来\n前面我们给大家推荐了这本几位非常厉害的教授老师主编的《临床预测模型方法与应用》，陆陆续续地，在各个平台上，大家都反馈已经收到了这本书，并且这本书还很大很厚，涵盖了方法学、操作、专题以及案例。\n\n\n\nfeedback\n\n\n那这时候，就有同学和我说，按照以往看书的习惯，收到书的前一俩周，还是可以翻翻，但是后面就会慢慢地放在那里，然后就不了了之了。\n所以，我们就想，能不能有一个平台，让大家一起学习这本书，一起讨论、交流，一起进步呢？\n\n\n预测模型星球\n\n\n\n知识星球\n\n\n向大家完整介绍下这个星球，也鼓励更多想要讨论交流的小伙伴进入到我的星球里面，大家一起愉快地学习。\n\n首先，你要有实体书，不然我们每周讨论学习某一个章节的时候，你可能会有点懵。\n\n购买的二维码链接在这里。\n\n知识星球的目的是和大家一起营造一个国内高质量的预测模型类研究的知识圈，让星球里的人能够受益。\n\n来到这里你会遇到一群志同道合的人，一起学习、相互交流、共同促进。这个交流圈高度专注于预测类研究领域。\n\n\n\ncontent\n\n\n\n我们会每周一起学习讨论这本书的一个章节，每周一次，每次一个小时或一个章节，讨论的内容会包括这一章的重点内容、难点、案例分析等。\n除了这本书，如果未来人数足够，我们还会不定期地邀请一些同样从事预测类研究的博士生、学者，来和大家分享他们的研究成果、经验、心得等。\n\n后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和星球，我们会在这两个平台上发布最新的信息。\n\nDid you find this page helpful? Consider sharing it 🙌"
+  },
+  {
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks",
+    "section": "",
+    "text": "This page contains the source code, links, and slides for various workshops, talks, lectures, and presentations I’ve given."
+  },
+  {
+    "objectID": "talks/index.html#section",
+    "href": "talks/index.html#section",
+    "title": "Talks",
     "section": "2024",
-    "text": "2024\n\n\n    \n    \n                  \n            August 20, 2024\n        \n        \n            大图嵌小图\n\n            \n            \n                \n                \n                    r\n                \n                \n                \n                    ggplot2\n                \n                \n            \n            \n\n            调包\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 14, 2024\n        \n        \n            欢迎加入预测模型星球\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    prediction model\n                \n                \n            \n            \n\n            Clinical Prediction Model\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 11, 2024\n        \n        \n            星球第二期workshop上线\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    sample size\n                \n                \n                \n                    clinical research\n                \n                \n            \n            \n\n            Sample Size Calculations in Clinical Research\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 4, 2024\n        \n        \n            星球第一期workshop上线\n\n            \n            \n                \n                \n                    workshop\n                \n                \n                \n                    missing data\n                \n                \n                \n                    statistical methods\n                \n                \n            \n            \n\n            Statistical Methods for Analysis with Missing Data\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            August 3, 2024\n        \n        \n            倾向性评分加权\n\n            \n            \n                \n                \n                    propensity score\n                \n                \n                \n                    weighting\n                \n                \n            \n            \n\n            倾向性评分加权的具体介绍\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            July 19, 2024\n        \n        \n            预测模型领域新书推荐\n\n            \n            \n                \n                \n                    prediction model\n                \n                \n                \n                    book\n                \n                \n            \n            \n\n            临床预测模型方法与应用\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            June 23, 2024\n        \n        \n            2023年最新JCR影响因子发布\n\n            \n            \n                \n                \n                    sci\n                \n                \n                \n                    jcr\n                \n                \n            \n            \n\n            2023年最新JCR影响因子\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            June 7, 2024\n        \n        \n            常用损失函数\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n                \n                    deep learning\n                \n                \n                \n                    loss function\n                \n                \n            \n            \n\n            常用损失函数介绍\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 17, 2024\n        \n        \n            Python中机器学习模型的校准\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n                \n                    calibration\n                \n                \n            \n            \n\n            预测模型如何校准\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 13, 2024\n        \n        \n            Hierarchical composite endpoints治疗效应的可视化\n\n            \n            \n                \n                \n                    r\n                \n                \n                \n                    clinical trial\n                \n                \n                \n                    endpoint\n                \n                \n            \n            \n\n            复合终点治疗效应的可视化\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            May 11, 2024\n        \n        \n            最优分类阈值\n\n            \n            \n                \n                \n                    python\n                \n                \n                \n                    machine learning\n                \n                \n            \n            \n\n            分类问题中阈值的选择\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
+    "text": "2024"
   },
   {
-    "objectID": "blog/index.html#section-1",
-    "href": "blog/index.html#section-1",
-    "title": "Blog",
-    "section": "2023",
-    "text": "2023"
-  },
-  {
-    "objectID": "blog/index.html#section-2",
-    "href": "blog/index.html#section-2",
-    "title": "Blog",
-    "section": "2022",
-    "text": "2022"
-  },
-  {
-    "objectID": "blog/index.html#section-3",
-    "href": "blog/index.html#section-3",
-    "title": "Blog",
-    "section": "2021",
-    "text": "2021"
-  },
-  {
-    "objectID": "blog/index.html#section-4",
-    "href": "blog/index.html#section-4",
-    "title": "Blog",
-    "section": "2020",
-    "text": "2020\n\n\n    \n    \n                  \n            January 5, 2020\n        \n        \n            可惜没如果——因果关系的三个层级\n\n            \n            \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            因果推断的基本知识\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 4, 2020\n        \n        \n            Python初体验\n\n            \n            \n                \n                \n                    pycharm\n                \n                \n                \n                    python\n                \n                \n            \n            \n\n            Python Training\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 2, 2020\n        \n        \n            因果推断-2\n\n            \n            \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            关于因果推断的基本概念\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            January 1, 2020\n        \n        \n            鼠年加油\n\n            \n            \n                \n                \n                    happy new year\n                \n                \n            \n            \n\n            新年快乐\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/index.html#section-5",
-    "href": "blog/index.html#section-5",
-    "title": "Blog",
-    "section": "2019",
-    "text": "2019\n\n\n    \n    \n                  \n            December 11, 2019\n        \n        \n            因果推断\n\n            \n            \n                \n                \n                    statistics\n                \n                \n                \n                    biostatistics\n                \n                \n                \n                    causal inference\n                \n                \n            \n            \n\n            关于因果推断的基本概念\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n    \n                  \n            November 28, 2019\n        \n        \n            统计学是干嘛的？\n\n            \n            \n                \n                \n                    statistics\n                \n                \n                \n                    biostatistics\n                \n                \n            \n            \n\n            聊一聊什么是统计学\n            \n            \n        \n        \n        \n            \n        \n        \n    \n    \n\n\nNo matching items"
-  },
-  {
-    "objectID": "news/index.html",
-    "href": "news/index.html",
-    "title": "What I’m doing now",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hello there!",
     "section": "",
-    "text": "May 11 2024: 🚀✨🎉 网站由 rmarkdown 更新为 quarto 支持。Hello World！"
+    "text": "I am a PhD candidate in epidemiology and biostatistics at Sun Yat-sen University. I have made contributions to neurosyphilis and cancer research, and my work has been published in journals including eClinicalMedicine, JMIR Public Health and Surveillance, among others. Besides, I have patented a clinical diagnosis system for neurological syphilis (LU504466, rank 1/1).\nIn addition to my work on neurosyphilis and cancer, I have extensive experience applying advanced statistical concepts, artificial intelligence, and causal inference methods to conduct real-world research based on electronic health records. I have conducted multiple studies in the areas of COVID-19, HPV and HIV infections, and cardiovascular disease.\nTo date (May 10, 2024), I have published 25 papers in peer-reviewed journals, serving as the first author and co-first author for 10 of these."
   },
   {
-    "objectID": "blog/2024/08/20/nested_layout/index.html",
-    "href": "blog/2024/08/20/nested_layout/index.html",
-    "title": "大图嵌小图",
+    "objectID": "cv/index.html",
+    "href": "cv/index.html",
+    "title": "Curriculum vitæ",
     "section": "",
-    "text": "由来\n星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。\n\n\n\nQ1\n\n\n\n\n\nQ2\n\n\n我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：\n\n\n\nsurvival curve\n\n\n想要把risk table嵌入到生存曲线中。\n\n\n方法一\n使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。\n\n# not run\nsubvp &lt;- viewport(width = 0.35, height = 0.35, x = 0.75, y = 0.75)\nggsurv$plot\nprint(ggsurv$table, vp = subvp)\n\nviewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：\n\n\n\noption 1\n\n\n\n\n方法二\n使用annotation_custom函数，它可以在图形中添加自定义的图形元素。\n\n# not run\nggsurv$plot + annotation_custom(ggplotGrob(ggsurv$table), xmin=1900, xmax=3000, ymin=0.6, ymax=1)\n\nggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：\n\n\n\noption 2\n\n\n\n\n方法三\n使用ggpp包。\n\n# not run\nsub_plot= tibble::tibble(\n    x= .98, y= .98, plot= list(ggsurv$table)\n)\nggsurv$plot + \n    geom_plot_npc(data = sub_plot, aes(npcx = x, npcy = y, label = plot))\n\n使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：\n\n\n\noption 3\n\n\n完整代码已经放在了星球里，感兴趣的同学可以自行查看。\n\nDid you find this page helpful? Consider sharing it 🙌"
+    "text": "Download current CV"
   },
   {
     "objectID": "blog/2024/05/13/hierarchical_composite_endpoints/index.html",

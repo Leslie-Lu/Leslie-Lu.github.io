@@ -1626,6 +1626,330 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>Python基础要素之数值</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/06/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</p>
+<section id="数值" class="level3">
+<h3 class="anchored" data-anchor-id="数值">数值</h3>
+<p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
+<p>整数：</p>
+<div id="5b83bc98" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span></span>
+<span id="cb1-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #4: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(x))</span>
+<span id="cb1-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #5: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb1-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #6: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8.3</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.7</span>)))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Output #4: 9
+Output #5: 81
+Output #6: 4.0</code></pre>
+</div>
+</div>
+<p>Output #6演示了将数值转换成整数并进行除法运算。</p>
+<p>浮点数：</p>
+<div id="ced881f0" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #7: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.3f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8.3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.7</span>))</span>
+<span id="cb3-2">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.8</span></span>
+<span id="cb3-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #8: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.1f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(y))</span>
+<span id="cb3-4">r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb3-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #9: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.2f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(r))</span>
+<span id="cb3-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #10: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.4f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8.0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Output #7: 3.074
+Output #8: 12.0
+Output #9: 2.67
+Output #10: 2.6667</code></pre>
+</div>
+</div>
+<div id="11d6e057" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#!/usr/bin/env python3</span></span>
+<span id="cb5-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> math <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> exp, log, sqrt</span>
+<span id="cb5-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #11: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.4f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(exp(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)))</span>
+<span id="cb5-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #12: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.2f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(log(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)))</span>
+<span id="cb5-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #13: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:.1f}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(sqrt(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">81</span>)))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Output #11: 20.0855
+Output #12: 1.39
+Output #13: 9.0</code></pre>
+</div>
+</div>
+</section>
+<section id="format格式化" class="level3">
+<h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
+<div id="e1d2bff0" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add two numbers together</span></span>
+<span id="cb7-2">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb7-3">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span></span>
+<span id="cb7-4">z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> y</span>
+<span id="cb7-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #2: Four plus five equals </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0:d}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">."</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(z))</span>
+<span id="cb7-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add two lists together</span></span>
+<span id="cb7-7">a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]</span>
+<span id="cb7-8">b <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"first"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"second"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"third"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fourth"</span>]</span>
+<span id="cb7-9">c <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> b</span>
+<span id="cb7-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Output #3: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">, </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{1}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">, </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{2}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(a, b, c))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Output #2: Four plus five equals 9.
+Output #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']</code></pre>
+</div>
+</div>
+</section>
+<section id="type函数" class="level3">
+<h3 class="anchored" data-anchor-id="type函数">type函数</h3>
+<p>Python提供一个名为type的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</p>
+<p>函数的语法非常简单：type(variable)会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</p>
+<p>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用type函数，不仅是变量，还有函数、语句等。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/06/</guid>
+  <pubDate>Mon, 06 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201435557.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>可惜没如果——因果关系的三个层级</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/05/</link>
