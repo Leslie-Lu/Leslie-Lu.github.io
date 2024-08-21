@@ -1731,8 +1731,8 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="工作空间和目录">工作空间和目录</h3>
 <p>工作空间（workspace）是当前R的工作环境，存储着所有你定义的对象（向量、矩阵、函数、数据框和列表）。在一个R会话结束时，你可以将当前工作空间保存到一个镜像中，以便在下次启动R时自动载入它。当前的工作目录（working directory）是R用来读取文件和保存结果的默认目录。</p>
 <p>用于管理工作空间和目录的部分标准命令如下：</p>
-<p>-getwd()：查看当前工作目录</p>
 <ul>
+<li><p>getwd()：查看当前工作目录</p></li>
 <li><p>setwd()：重新设定当前工作目录。如果需要读入一个不在当前工作目录下的文件，需要在调用语句中写明文件的完整路径。setwd()命令的路径中使用正斜杠/。R将反斜杠。即使在Windows平台上运行R，在路径中也要使用正斜杠。</p></li>
 <li><p>ls()：列出当前工作空间中的对象</p></li>
 <li><p>rm(objectlist)：删除一个或多个对象</p></li>
@@ -2212,7 +2212,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="5b6aa1ff" class="cell" data-execution_count="1">
+<div id="eb3c87e8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2275,7 +2275,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="41babba4" class="cell" data-execution_count="2">
+<div id="78d6f8aa" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2359,7 +2359,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="8050a17e" class="cell" data-execution_count="3">
+<div id="66ebea3f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -2416,7 +2416,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="029a3b84" class="cell" data-execution_count="4">
+<div id="e80bbcae" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
