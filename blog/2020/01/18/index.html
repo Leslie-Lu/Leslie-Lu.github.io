@@ -9,7 +9,7 @@
 <meta name="author" content="Zhen Lu">
 <meta name="description" content="Python Training">
 
-<title>Python基础要素之数值 | Zhen Lu – Zhen Lu</title>
+<title>Python正则表达式与模式匹配 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -220,7 +220,7 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Python基础要素之数值</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">Python正则表达式与模式匹配</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
           Python Training
@@ -228,6 +228,8 @@ div.column-margin+hr.dinkus {
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">python</div>
+                <div class="quarto-category">regular expression</div>
+                <div class="quarto-category">pattern matching</div>
               </div>
                   </div>
   </div>
@@ -245,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, January 6, 2020</p>
+        <p class="date">Saturday, January 18, 2020</p>
       </div>
     </div>
     
@@ -256,103 +258,53 @@ div.column-margin+hr.dinkus {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#数值" id="toc-数值" class="nav-link active" data-scroll-target="#数值">数值</a></li>
-  <li><a href="#format格式化" id="toc-format格式化" class="nav-link" data-scroll-target="#format格式化">.format格式化</a></li>
-  <li><a href="#type函数" id="toc-type函数" class="nav-link" data-scroll-target="#type函数">type函数</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</p>
-<section id="数值" class="level3">
-<h3 class="anchored" data-anchor-id="数值">数值</h3>
-<p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
-<p>整数：</p>
-<div id="2cee23c5" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #4: 9
-Output #5: 81
-Output #6: 4.0</code></pre>
+<p>很多商业分析都依赖模式匹配，也称为正则表达式（regular expression）。举例来说，我们可能需要分析一下来自深圳的所有订单。此时，你需要识别的模式就是“深圳”这个词。同样，你可能需要分析来自某个供应商的商品质量，此时你要识别的模式就是供应商的名字。</p>
+<p>Python包含了re模块，它提供了在文本中搜索特定模式/正则表达式的强大功能。要在脚本中使用re模块提供的功能，我们需要在脚本上方加入代码import re。</p>
+<p>导入re模块后，可以使用一大波函数和元字符来创建和搜索任意复杂的模式。元字符（metacharacter）是正则表达式中具有特殊意义的字符，使正则表达式能够匹配特定的字符串。</p>
+<p>常用的元字符包括 |、()、[]、.、*、+、?、^、$和(?P<name>)。如果你在正则表达式中见到这些字符，要知道程序不是要搜索这些字符本身，而是要搜索它们要描述的东西。</name></p>
+<p>re模块包含了很多有用的函数，用于创建和搜索特定的模式。一起来看一个示例代码：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231421391.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">sample code</figcaption>
+</figure>
 </div>
+<p>第一行赋值字符串变量string，下一行将字符串拆分为列表，列表中的每个元素都是一个单词。使用re.compile和re.I函数以及用r表示的原始字符串，创建一个名为pattern的正则表达式。re.compile函数将文本形式的模式编译成为正则表达式（正则表达式不是必须编译的，但编译是个好习惯，因为这样可以显著地提高程序运行速度），re.I函数确保模式是不区分大小写的，即能同时在字符串中匹配“The”和“the”，原始字符串标志r可确保Python不处理字符串中的转义字符（如、），这样在进行模式匹配是，字符串中的转义字符和正则表达式中的元字符就不会有意外的冲突。利用for循环在列表变量sring_list的各个元素之间进行迭代，取出列表中所有的单词，使用re.search函数将每个单词与正则表达式进行比较，如果相匹配，那么count的值就加1。print语句打印出正则表达式在字符串汇总找到模式“The”（不区分大小写）的次数。</p>
+<p>再看另一个示例：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422976.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">sample code 2</figcaption>
+</figure>
 </div>
-<p>Output #6演示了将数值转换成整数并进行除法运算。</p>
-<p>浮点数：</p>
-<div id="0010a17b" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #7: 3.074
-Output #8: 12.0
-Output #9: 2.67
-Output #10: 2.6667</code></pre>
+<p>这个示例想要打印出相匹配的字符串，而不是相匹配的次数，这里使用到了(?P<name>)元字符和group函数。(?P<name>)元字符使匹配的字符串可以在后面的程序中通过组名符号name来引用，这里称为match_word。后面if语句中使用了group函数获取分段截获的字符串，如果相匹配，那么就在search函数返回的数据结构中找出match_word组合中的值，并打印出来。</name></name></p>
+<p>最后一个示例：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422618.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">sample code 3</figcaption>
+</figure>
 </div>
-</div>
-<div id="f80c590d" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #11: 20.0855
-Output #12: 1.39
-Output #13: 9.0</code></pre>
-</div>
-</div>
-</section>
-<section id="format格式化" class="level3">
-<h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="3777a0d3" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #2: Four plus five equals 9.
-Output #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']</code></pre>
-</div>
-</div>
-</section>
-<section id="type函数" class="level3">
-<h3 class="anchored" data-anchor-id="type函数">type函数</h3>
-<p>Python提供一个名为type的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</p>
-<p>函数的语法非常简单：type(variable)会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</p>
-<p>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用type函数，不仅是变量，还有函数、语句等。</p>
+<p>我们演示了使用re.sub函数在文本中用一种模式替换另一种模式。将正则表达式赋给变量string_to_find不是必需的，但若正则表达式特别长或复杂的话，将它赋给一个变量，然后传入re.compile函数有助于理解。最后使用re.sub函数以不区分大小写的方式在变量string中寻找模式，将发现的每个模式替换成a。</p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -831,92 +783,60 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python基础要素之数值"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-01-06</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Python Training"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201435557.webp"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数值</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>整数：</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>Output #6演示了将数值转换成整数并进行除法运算。</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>浮点数：</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## .format格式化</span></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## type函数</span></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>Python提供一个名为type的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>函数的语法非常简单：type(variable)会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用type函数，不仅是变量，还有函数、语句等。</span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python正则表达式与模式匹配"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-01-18</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Python Training"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231410900.webp"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - regular expression</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - pattern matching</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>很多商业分析都依赖模式匹配，也称为正则表达式（regular expression）。举例来说，我们可能需要分析一下来自深圳的所有订单。此时，你需要识别的模式就是“深圳”这个词。同样，你可能需要分析来自某个供应商的商品质量，此时你要识别的模式就是供应商的名字。</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Python包含了re模块，它提供了在文本中搜索特定模式/正则表达式的强大功能。要在脚本中使用re模块提供的功能，我们需要在脚本上方加入代码import re。</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>导入re模块后，可以使用一大波函数和元字符来创建和搜索任意复杂的模式。元字符（metacharacter）是正则表达式中具有特殊意义的字符，使正则表达式能够匹配特定的字符串。</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>常用的元字符包括 |、()、[]、.、*、+、?、^、$和(?P&lt;name&gt;)。如果你在正则表达式中见到这些字符，要知道程序不是要搜索这些字符本身，而是要搜索它们要描述的东西。 </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>re模块包含了很多有用的函数，用于创建和搜索特定的模式。一起来看一个示例代码：</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="al">![sample code](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231421391.webp)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>第一行赋值字符串变量string，下一行将字符串拆分为列表，列表中的每个元素都是一个单词。使用re.compile和re.I函数以及用r表示的原始字符串，创建一个名为pattern的正则表达式。re.compile函数将文本形式的模式编译成为正则表达式（正则表达式不是必须编译的，但编译是个好习惯，因为这样可以显著地提高程序运行速度），re.I函数确保模式是不区分大小写的，即能同时在字符串中匹配“The”和“the”，原始字符串标志r可确保Python不处理字符串中的转义字符（如\、\t或\n），这样在进行模式匹配是，字符串中的转义字符和正则表达式中的元字符就不会有意外的冲突。利用for循环在列表变量sring_list的各个元素之间进行迭代，取出列表中所有的单词，使用re.search函数将每个单词与正则表达式进行比较，如果相匹配，那么count的值就加1。print语句打印出正则表达式在字符串汇总找到模式“The”（不区分大小写）的次数。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>再看另一个示例：</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="al">![sample code 2](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422976.webp)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>这个示例想要打印出相匹配的字符串，而不是相匹配的次数，这里使用到了(?P&lt;name&gt;)元字符和group函数。(?P&lt;name&gt;)元字符使匹配的字符串可以在后面的程序中通过组名符号name来引用，这里称为match_word。后面if语句中使用了group函数获取分段截获的字符串，如果相匹配，那么就在search函数返回的数据结构中找出match_word组合中的值，并打印出来。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>最后一个示例：</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="al">![sample code 3](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422618.webp)</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>我们演示了使用re.sub函数在文本中用一种模式替换另一种模式。将正则表达式赋给变量string_to_find不是必需的，但若正则表达式特别长或复杂的话，将它赋给一个变量，然后传入re.compile函数有助于理解。最后使用re.sub函数以不区分大小写的方式在变量string中寻找模式，将发现的每个模式替换成a。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
