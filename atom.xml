@@ -1626,6 +1626,220 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>R语言编程入门</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/22/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="前言" class="level3">
+<h3 class="anchored" data-anchor-id="前言">前言</h3>
+<p>类似其他计算机高级语言，R用户只需要熟悉其命令、语句及简单的语法规则，就可以做数据管理和分析处理工作。R把大部分常用的复杂数据计算的算法作为标准函数调用，用户仅需要指出函数名及其必要的参数即可，这一特点使得R编程十分简单。</p>
+<p>R是面向对象的、区分大小写的解释型数组编程语言，输入后可直接给出结果。R中功能靠函数实现。R的函数分为“高级”和“低级”函数，高级函数可调用低级函数，这里的高级函数习惯上称为泛型函数。plot()就是泛型函数，可以根据数据的类型调用底层的函数，应用相应的方法绘制相应的图形。这就是面向对象编程的思想。</p>
+</section>
+<section id="数据集" class="level3">
+<h3 class="anchored" data-anchor-id="数据集">数据集</h3>
+<p>创建含有研究信息的数据集，这是任何数据分析的第一步。数据集通常是由数据构成的一个矩形数组，行表示观测，列表是变量。</p>
+<p>R可以处理的数据类型包括数值型（如100）、字符型（如“流光相约”）、逻辑型（TRUE/FALSE）、复数型（如2+3i）和因子型（表示不同类别）。R中有许多用于存储数据的结构，包括标量、向量、矩阵、数组、数据框和列表。多样化数据结构赋予了R极其灵活的数据处理能力。</p>
+</section>
+<section id="标量与向量" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="标量与向量">标量与向量</h3>
+<p>标量可以看成是只含一个元素的向量，用于保存常量，如f=3、g=’US’和h=TRUE。</p>
+<p>向量是一系列元素的组合，用于存储数值型、字符型或逻辑型数据的一维数组。执行组合功能的函数c()可用来创建向量：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231458101.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">vector</figcaption>
+</figure>
+</div>
+<p>提示：单个向量中的数据必须是相同的类型或模式（数值型、字符型或逻辑型），同一向量中不可混杂不同类型数据。</p>
+<p>通过在方括号中给定元素所处位置的数值访问向量中的元素，如a[c(2, 4)]用于访问向量a中第2个和第4个元素。</p>
+</section>
+<section id="矩阵" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="矩阵">矩阵</h3>
+<p>矩阵是一个二维数组，和向量类似，其中元素必须类型相同，即一个矩阵中只能包含一种数据类型（数值型、字符型或逻辑型），可通过函数matrix()创建矩阵：</p>
+<p><code>mymatrix= matrix(vector,nrow = ,ncol = ,byrow = ,dimnames = list())</code></p>
+<p>其中，vector包含了矩阵的元素，nrow和ncol用于制定行和列的维数，dimnames包含了可选的、以字符型向量表示的行名和列名，byrow表明矩阵应当按行填充（byrow=T）还是按列填充（byrow=F），默认按列填充。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231459393.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">matrix</figcaption>
+</figure>
+</div>
+<p>我们可以使用下标和方括号来选择矩阵中的行、列或元素。X[i,]表示矩阵X中的第i行，X[,j]表示第j列，X[i, j]表示第i行第j个元素。</p>
+</section>
+<section id="数组" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="数组">数组</h3>
+<p>矩阵都是二维的，仅能包含一种数据类型，当维度超过2时，需要使用数组，可通过函数array()创建：</p>
+<p><code>myarray= array(vector,dimensions,dimnames)</code></p>
+<p>其中，vector包含了数组中的数据，dimensions是一个数值型向量，给出了各个维度下标的最大值，dimnames是可选的、各维度名称标签的列表。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231500194.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">array</figcaption>
+</figure>
+</div>
+<p>数组是矩阵的一个自然推广，从数组中选取元素的方式与矩阵相同。</p>
+</section>
+<section id="数据框" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="数据框">数据框</h3>
+<p>与通常在SAS、SPSS和STATA中看到的数据集类似，不同的列可以包含不同类型的数据。数据框是R中最常处理的数据结构，可使用函数data.frame()创建：</p>
+<p><code>mydata=data.frame(col1,col2,col3,...)</code></p>
+<p>其中，列向量col1，col2，col3等可谓任何类型（如字符型、数值型或逻辑型）。</p>
+<p>选取数据框中元素的方式比较多，既可以使用下标记号，也可以直接指定列名，如patientdata<img src="https://latex.codecogs.com/png.latex?age%EF%BC%8C%E5%85%B6%E4%B8%AD">被用来选取一个给定数据框中的某个特定变量。</p>
+<p>在每个变量名前都输入一次数据框名可能十分麻烦，我们可以联合使用函数attach()和detach()，或单独使用函数with()来简化代码。函数attach()将数据框添加到R的搜索路径中，R在遇到一个变量名后，将检查搜索路径中的数据框，以定位到这个变量，如</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501809.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">dataframe</figcaption>
+</figure>
+</div>
+<p>函数detach()将数据框从搜索路径中移除，不会影响数据框本身。注意：函数attach()和detach()最好是分析一个单独的数据框，并且不太可能有多个同名对象。当同名时，原始对象将进行优先运算。另一种方式是使用函数with()，如</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501015.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">with function</figcaption>
+</figure>
+</div>
+<p>花括号{}之间的语句都针对该数据框执行，无需担心名称冲突；若仅有一条语句，花括号可以省略。函数with()的局限性在于赋值仅在此函数的括号内有效。若需要创建在with()结构外依然存在的对象，使用特殊赋值符号 -&gt;&gt; ，即可保存对象到全局环境中。</p>
+</section>
+<section id="列表" class="level3">
+<h3 class="anchored" data-anchor-id="列表">列表</h3>
+<p>列表是一些对象（成分）的有序集合，允许整合若干对象到单个对象名下，其中的对象可以是任何数据结构，如某个列表可以是若干向量、矩阵、数据框甚至其他列表的组合，使用函数list()创建列表：</p>
+<p><code>mylist=list(object1,object2,...)</code></p>
+<p>可以通过在双重方括号中指明代表某个成分的数字或名称来访问列表中的元素，如mylist[[4]]。由于列表允许以一种简单的方式组织和重新调用可能不相干的信息，且许多R函数的运行结果都是以列表的形式返回的，由分析人员决定需要取出其中哪些成分，列表是R中的重要数据结构。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>r</category>
+  <category>programming</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/22/</guid>
+  <pubDate>Wed, 22 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231456030.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>上手vim编辑器</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/21/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>我们平时已经接触了不少的程序编辑器，今天我们要上手一种命令行模式下的文本编辑器——vim编辑器。说它是文本编辑器有点小瞧它的功能，实际上，它也可以作为程序编辑器使用，且功能十分强大。</p>
+<p>在所有的Linux发行版上面都会有一个文本编辑器，那就是vi，vim是高级版的vi。vim不仅可以用不同的颜色显示文字内容，还能够进行诸如shell脚本、C语言等程序编辑，搭配Python也是十分的香，甚至不少人用它来作为写作的专用编辑器。由此可知它的功能有多么的强大。</p>
+<p>如果你在学习Linux，身边的人都会建议你：学习使用命令行模式来处理Linux系统的设置问题，而尽量少去使用图形窗口模式。在配置Linux参数文件时，我们就需要一款强大稳定的文本编辑器。而Linux在命令行模式下的文本编辑器有哪些呢？我们常听到emacs、nano、vim等，而在其中，其实vim并非是对用户最友善的文本编辑器。但是为什么这么多人推荐使用呢？原因有几点：</p>
+<ul>
+<li><p>所有的UNIX-like系统都会内置vi文本编辑器，其他的文本编辑器不一定会存在；</p></li>
+<li><p>很多软件的编辑接口都会主动调用vi；</p></li>
+<li><p>vim具有程序编辑的能力，可以主动地以字体颜色辨别语法的正确性，方便程序设计；</p></li>
+<li><p>编辑速度相当快速。</p></li>
+</ul>
+<p>可以说，如果不上手vim，Linux中很多命令根本无法操作。</p>
+<p>我们提到，vim是高级版本的vi，它可以用颜色或下划线的方式来显示一些特殊的信息，可以依据文件的扩展名或是文件内的开头信息，判断该文件的内容而自动调用该程序的语法判断样式，再以颜色来显示程序代码与一般信息，vim是程序开发者的一项非常好用的工具，就连vim的官方网站（http://www.vim.org）都认为自己是一款程序开发工具而非仅仅是文本处理软件。</p>
+<p>由于是命令行模式下的编辑器，当我们在编辑程序或者制作网页的时候，vim不能做到一般编辑器那样所见即所得，这是它的一个特色。vim同样也有一些非常好用的功能，如支持正则表达式的查找方式、多文件编辑、区块复制等，非常的棒。我们会在日后持续更新vim的使用分享。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>vim</category>
+  <category>linux</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/21/</guid>
+  <pubDate>Tue, 21 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231449328.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>计算机概论3</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/20/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="内存" class="level3">
+<h3 class="anchored" data-anchor-id="内存">内存</h3>
+<p>前面提到CPU所使用的数据都是来自内存（Main Memory），不论是软件程序还是文件数据，都必须要读入内存后CPU才能利用。个人电脑的内存主要组件为动态随机存取内存（Dynamic Random Access Memory，DRAM），随机存取内存只有在通电时才能记录与使用，断电之后数据就消失，因此我们也称这种RAM为挥发性内存。</p>
+<p>DRAM根据技术的更新又分好几代，而使用上较广泛的有所谓的SDRAM与DDR SDRAM两种。新一代的PC大多使用DDR内存。</p>
+<p>在某种意义上，内存的容量有时比CPU的速度还要重要。如果内存容量不够大的话将会导致某些大容量数据无法被完整地加载，此时已存在内存当中但暂时没有被使用到的数据就必须要先被释放，使得可用内存容量大于该数据，那份新数据才能够被加载。所以。通常越大的内存代表越快速的系统，这是因为系统不用常常释放一些内存中的数据。</p>
+</section>
+<section id="cpu的二级高速缓存" class="level3">
+<h3 class="anchored" data-anchor-id="cpu的二级高速缓存">CPU的二级高速缓存</h3>
+<p>除了内存外，个人电脑中还有许多类似内存的存储结构存在，最为我们所熟知的还有CPU内的二级高速缓存。我们现在知道CPU的数据都由内存提供，但CPU到内存之间还是得要通过内存控制器。如果某些很常用的程序或数据可以放置到CPU内存的话，那么CPU数据的读取就不需要跑到内存重新读取，这对于性能来说是一个很大的提升，这就是二级缓存的设计理念。新一代的CPU都有内置容量不等的L2缓存在CPU内部，以加快CPU的运行性能。</p>
+</section>
+<section id="只读存储器" class="level3">
+<h3 class="anchored" data-anchor-id="只读存储器">只读存储器</h3>
+<p>还记得你的电脑在开机的时候可以按下[Del]按键来进入一个名为BIOS（Basic Input Output System）的界面吧？BIOS是一个程序，这个程序是写死到主板上面的一个存储芯片中的，这个存储芯片在没有通电时也能够记录数据，这就是只读存储器（Read Only Memory，ROM）。ROM是一种非易失性的存储。</p>
+<p>BIOS对于个人电脑来说是非常重要的，它是系统在启动的时候首先会去读取的一个小程序。另外，固件（firmware）很多也是使用ROM来进行软件的写入（固件：固定在硬件上面的控制软件）。BIOS就是个固件，控制着启动时各项硬件参数的获取与启动设备的选择。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>linux</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/20/</guid>
+  <pubDate>Mon, 20 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231447001.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>谈谈电脑的CPU</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/01/19/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="前言" class="level3">
+<h3 class="anchored" data-anchor-id="前言">前言</h3>
+<p>前面我们已经初步了解了计算机–<a href="https://mp.weixin.qq.com/s/Zu811hypKzQwmD_AwkyQnw">你真的了解自己的电脑吗？</a>接下来我们继续深入计算机的CPU单元。</p>
+</section>
+<section id="cpu" class="level3">
+<h3 class="anchored" data-anchor-id="cpu">CPU</h3>
+<p>前面我们提过，一般我们常说的电脑指的是x86的个人电脑架构。Linux操作系统最早在发展的时候，就是依据个人电脑的架构来设计的。而在个人电脑架构中，充当“大脑”的无疑是CPU。</p>
+<p>由于CPU负责大量运算，因而它是电脑中具有相当高发热量的组件。现在的所谓多内核CPU，是在一块CPU封装内嵌入两个以上的运算内核，即含有两个以上的CPU单元。</p>
+<p>我们已经知道，CPU内部指令集的不同会导致其工作效率的高低，那么CPU性能的比较还有什么呢？答案是频率。CPU的频率就是CPU每秒钟可以进行的工作次数，频率越高表示这块CPU在单位时间内可以做更多的事情。举例来说，Intel的i7-4790CPU频率为3.6GHz，即表示这块CPU在一秒内可以进行3.6*10的九次方次工作。但是需要注意的是：只能在同款CPU间比较频率的快慢，不同CPU由于指令集、架构、使用的二级缓存及其运算机制的可能不同，单纯看频率没有可比性。</p>
+<p>我们可能听过“超频”这个词，它是什么意思呢？CPU在出厂时，厂商已经设置了这款CPU正常稳定工作的频率，一些电脑硬件玩家要发挥出CPU最大的性能，往往会手动将CPU的外频通过主板提供的设置功能更改成较高频率。现在Intel的CPU会主动帮你超频，以合理利用CPU以及节能。</p>
+<p>最常听见的还有32位与64位电脑，我们可能也一头雾水。其实这个也与CPU相关。我们将CPU每次能够处理的数据量称为字长（word size），字长依据CPU的设计而有32位与64位，而32位与64位电脑主要就是依据这个CPU所能解析的字长而来的。早期的32位CPU中，由于CPU每次解析的数据量有限，因此从内存传来的数据量就有所限制，这也导致32位的CPU最多只能支持最大到4GB的内存。目前的64位CPU统称为x86-64。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>linux</category>
+  <guid>https://leslie-lu.github.io/blog/2020/01/19/</guid>
+  <pubDate>Sun, 19 Jan 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231443028.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>Python正则表达式与模式匹配</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/18/</link>
@@ -2266,7 +2480,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="e13e40e1" class="cell" data-execution_count="1">
+<div id="f1c3dd10" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2329,7 +2543,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="7369f207" class="cell" data-execution_count="2">
+<div id="c521abc3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2413,7 +2627,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="5ccadc72" class="cell" data-execution_count="3">
+<div id="55d217d0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -2470,7 +2684,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="5fb037a0" class="cell" data-execution_count="4">
+<div id="ee9bcae0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
