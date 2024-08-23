@@ -1638,7 +1638,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <p>很多商业分析都依赖模式匹配，也称为正则表达式（regular expression）。举例来说，我们可能需要分析一下来自深圳的所有订单。此时，你需要识别的模式就是“深圳”这个词。同样，你可能需要分析来自某个供应商的商品质量，此时你要识别的模式就是供应商的名字。</p>
 <p>Python包含了re模块，它提供了在文本中搜索特定模式/正则表达式的强大功能。要在脚本中使用re模块提供的功能，我们需要在脚本上方加入代码import re。</p>
 <p>导入re模块后，可以使用一大波函数和元字符来创建和搜索任意复杂的模式。元字符（metacharacter）是正则表达式中具有特殊意义的字符，使正则表达式能够匹配特定的字符串。</p>
-<p>常用的元字符包括 |、()、[]、.、*、+、?、^、$和(?P<name>)。如果你在正则表达式中见到这些字符，要知道程序不是要搜索这些字符本身，而是要搜索它们要描述的东西。</name></p>
+<p>常用的元字符包括 |、()、[]、.、*、+、?、^、$和<code>(?P&lt;name&gt;)</code>。如果你在正则表达式中见到这些字符，要知道程序不是要搜索这些字符本身，而是要搜索它们要描述的东西。</p>
 <p>re模块包含了很多有用的函数，用于创建和搜索特定的模式。一起来看一个示例代码：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -1654,7 +1654,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <figcaption class="margin-caption">sample code 2</figcaption>
 </figure>
 </div>
-<p>这个示例想要打印出相匹配的字符串，而不是相匹配的次数，这里使用到了(?P<name>)元字符和group函数。(?P<name>)元字符使匹配的字符串可以在后面的程序中通过组名符号name来引用，这里称为match_word。后面if语句中使用了group函数获取分段截获的字符串，如果相匹配，那么就在search函数返回的数据结构中找出match_word组合中的值，并打印出来。</name></name></p>
+<p>这个示例想要打印出相匹配的字符串，而不是相匹配的次数，这里使用到了<code>(?P&lt;name&gt;)</code>元字符和group函数。<code>(?P&lt;name&gt;)</code>元字符使匹配的字符串可以在后面的程序中通过组名符号name来引用，这里称为match_word。后面if语句中使用了group函数获取分段截获的字符串，如果相匹配，那么就在search函数返回的数据结构中找出match_word组合中的值，并打印出来。</p>
 <p>最后一个示例：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -2266,7 +2266,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="2cee23c5" class="cell" data-execution_count="1">
+<div id="e13e40e1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2329,7 +2329,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="0010a17b" class="cell" data-execution_count="2">
+<div id="7369f207" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2413,7 +2413,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="f80c590d" class="cell" data-execution_count="3">
+<div id="5ccadc72" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -2470,7 +2470,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="3777a0d3" class="cell" data-execution_count="4">
+<div id="5fb037a0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
