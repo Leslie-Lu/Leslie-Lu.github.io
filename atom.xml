@@ -1626,6 +1626,62 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>R语言基础–数据的输入</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/01/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="前言" class="level3">
+<h3 class="anchored" data-anchor-id="前言">前言</h3>
+<p>R可从键盘、文本文件、Excel、流行的统计软件、特殊格式的文件，以及多种关系型数据库中导入数据。</p>
+</section>
+<section id="键盘输入数据" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="键盘输入数据">键盘输入数据</h3>
+<p>R中的函数edit()会自动调用一个允许手动输入数据的文本编辑器，步骤如下：</p>
+<ol type="1">
+<li><p>创建一个空数据框(或矩阵)，其中变量名和变量的模式需与预期的最终数据集一致；</p></li>
+<li><p>针对这个数据对象调用文本编辑器，输入数据，并将结果保存回此数据对象中。</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281548152.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">example</figcaption>
+</figure>
+</div>
+<p>类似于<code>age=numeric(0)</code>的赋值语句创建一个指定模式但不含实际数据的变量。编辑的结果需要赋值回对象本身，函数edit()事实上是在对象的一个副本上进行操作的，如果不将其赋值到一个目标，所有修改会全部丢失。单击列的标题，可以用编辑器修改变量名和变量类型（数值型、字符型），可通过单击未使用列的标题来添加新的变量。<code>mydata= edit(mydata)</code>的更简洁的等价写法是<code>fix(mydata)</code>。</p>
+</section>
+<section id="从带分隔符的文本文件导入数据" class="level3">
+<h3 class="anchored" data-anchor-id="从带分隔符的文本文件导入数据">从带分隔符的文本文件导入数据</h3>
+<p>可以使用read.table()函数，此函数可读入一个表格格式的文件并将其保存为一个数据框，语法如下：</p>
+<p><code>data= read.table(file,header = TRUE,sep= "delimiter",row.names='name')</code></p>
+<p>其中，file是一个带分隔符的ASCII文本文件，header表示文件是否在首行包含变量名，sep指定分隔行内数据的分隔符，row.names指定一个或多个行标记符（指定某变量为行名，该列即不再有标签，导致数据会少一列）。</p>
+<p>默认情况下，字符型变量将转换为因子。设置选项stringsAsFactors=FALSE，将停止对所有字符型变量的转换，或者使用选项colClasses指定每一列的类，如logical（逻辑型）、numeric（数值型）、characer（字符型）、factor（因子）。</p>
+</section>
+<section id="导入excel数据" class="level3">
+<h3 class="anchored" data-anchor-id="导入excel数据">导入Excel数据</h3>
+<p>读取一个Excel文件可以在Excel中将其导出为一个逗号分隔文件csv，再使用前文描述的方式将其导入R中。或者可以使用xlsx包，函数read.xlsx()导入一个工作表到一个数据框中：</p>
+<p><code>read.xlsx(file, sheetIndex, sheetName, rowIndex)</code></p>
+<p>read.xlsx()允许指定工作表中特定的行（rowIndex）和列（colIndex），配合上对应每一列的类（colClasses）。对于大型的工作簿，可以使用函数read.xlsx2()，该函数用Java来运行更加多的处理过程，可获得可观的质量提升。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>r</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/01/</guid>
+  <pubDate>Sat, 01 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>计算机概论5</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/01/31/</link>
@@ -2753,7 +2809,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
 <h3 class="anchored" data-anchor-id="数值">数值</h3>
 <p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
 <p>整数：</p>
-<div id="4a85679c" class="cell" data-execution_count="1">
+<div id="504fa499" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2816,7 +2872,7 @@ Output #6: 4.0</code></pre>
 </div>
 <p>Output #6演示了将数值转换成整数并进行除法运算。</p>
 <p>浮点数：</p>
-<div id="13f01bdb" class="cell" data-execution_count="2">
+<div id="9af2efec" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2900,7 +2956,7 @@ Output #9: 2.67
 Output #10: 2.6667</code></pre>
 </div>
 </div>
-<div id="bf416c46" class="cell" data-execution_count="3">
+<div id="58bd3a89" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#!/usr/bin/env python3</span></span>
@@ -2957,7 +3013,7 @@ Output #13: 9.0</code></pre>
 </section>
 <section id="format格式化" class="level3">
 <h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div id="99fac3a4" class="cell" data-execution_count="4">
+<div id="be44b949" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Add two numbers together</span></span>
