@@ -11,7 +11,76 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Tue, 20 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 29 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>github actions使用docker渲染quarto文档</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/08/29/docker/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/29/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">error</figcaption>
+</figure>
+</div>
+<p>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</p>
+<p>没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。</p>
+<p>我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：</p>
+<pre class="{bash}"><code># install R and dependencies
+ENV DEBIAN_FRONTEND=noninteractive
+# Update package indices
+RUN apt-get update -qq
+# Install helper packages
+RUN apt-get install --no-install-recommends -y software-properties-common dirmngr
+# Add the signing key for the R repository
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# Add the R 4.0 repository from CRAN
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+RUN apt-get install --no-install-recommends -y r-base 
+RUN R -e "if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
+WORKDIR /project
+COPY renv.lock .
+ENV RENV_PATHS_LIBRARY /renv
+RUN mkdir -p renv
+COPY .Rprofile .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.json renv/settings.json
+RUN R -e "renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"
+
+# install python and dependencies
+RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</code></pre>
+<p>这样使用docker的方式就不会报错了：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/29/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">success</figcaption>
+</figure>
+</div>
+<p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>github</category>
+  <category>quarto</category>
+  <category>docker</category>
+  <guid>https://leslie-lu.github.io/blog/2024/08/29/docker/index.html</guid>
+  <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>&lt;9b&gt;&lt;8c&gt;&lt;8f&gt;&lt;9b&gt;</title>
   <dc:creator>Zhen Lu</dc:creator>
