@@ -11,7 +11,116 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Thu, 29 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 30 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>星球JC | 胃癌早期筛查工具</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/08/30/docker/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<blockquote class="blockquote">
+<p>大家好，这一期预测模型星球Journal Club的分享来自中国医科大学的徐林玉同学，分享的是2019年发表在中科院医学1区的顶级期刊Gut上，题为“Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study”的研究论文。</p>
+</blockquote>
+<section id="研究背景" class="level3">
+<h3 class="anchored" data-anchor-id="研究背景">研究背景</h3>
+<p>胃癌是中国第二常见的癌症，早期检测和治疗可以显著降低其死亡率。然而，由于高风险人群庞大，全面的胃镜筛查在经济和操作上都不切实际。当前，中国的国家筛查指南建议对高风险人群从40岁开始进行筛查，但由于高风险人群估计超过3亿人，全面的胃镜筛查并不可行。因此，迫切需要一种风险分层工具，作为胃镜检查前的初步筛查工具，以进一步识别真正的高风险个体；且当前中国国内尚无类似的工具。</p>
+<p>现有的筛查工具主要基于已知的胃癌风险因素，如萎缩性胃炎和幽门螺杆菌感染。虽然有一些方法如ABC方法在日本被开发用于预测未来胃癌的发生，但其在中国高风险人群中的适用性仍存在疑问。此外，现有的生物标志物组合方法虽然在某些研究中表现良好，但其结果可能不适用于中国的高风险人群。因此，这项全国多中心横断面研究的目标是开发一种新的预测规则，用于二级预防（早发现、早诊断、早治疗），作为初步筛查工具，用于在中国无症状人群中识别高风险个体，以便进一步进行诊断性胃镜检查。</p>
+</section>
+<section id="研究方法" class="level3">
+<h3 class="anchored" data-anchor-id="研究方法">研究方法</h3>
+<section id="研究类型" class="level4">
+<h4 class="anchored" data-anchor-id="研究类型">研究类型</h4>
+<p>全国、多中心、横断面研究。</p>
+</section>
+<section id="研究人群" class="level4">
+<h4 class="anchored" data-anchor-id="研究人群">研究人群</h4>
+<p>年龄在40至80岁之间、无胃肠道症状的个体，符合中国胃癌高风险标准，并前往医院进行胃镜筛查。</p>
+</section>
+<section id="数据收集" class="level4">
+<h4 class="anchored" data-anchor-id="数据收集">数据收集</h4>
+<p>通过问卷调查、血清学检测（PG I、PG II、G-17、抗幽门螺杆菌IgG抗体）、胃镜检查和组织学检查收集数据。</p>
+</section>
+<section id="统计分析" class="level4">
+<h4 class="anchored" data-anchor-id="统计分析">统计分析</h4>
+<p>文章对数据的管理采取了中心化的管理，尽可能确保数据质量。参与者按2:1比例被随机分为开发队列和验证队列。开发队列用于模型开发，验证队列用于外部验证。文章利用Logistic回归模型开发预测规则。在开发队列中，通过univariate and multivariate analyses评估危险因素与胃癌的关联，其中，univariate analyses阈值设为p&lt;0.25，且multivariate analyses采用backward stepwise进行进一步的变量筛选。文章预测规则的设定基于regression coefficient-based scoring method（Points were assigned by dividing the regression coefficients by the absolute value of the smallest coefficient in the model and rounding up to the nearest integer）。模型整体性能通过R²和Brier评分进行衡量，区分能力通过AUC和discrimination slope评估，校准能力通过Hosmer-Lemeshow χ2统计量和calibration in the large进行评估。同时，评估模型预测的敏感度、特异度、准确率、阳性预测值（positive predictive value）、阴性预测值（negative predictive value）、阳性似然比（positive likelihood ratio）、阴性似然比（negative likelihood rario）和number needed to screen（defined as the number of participants who would need to undergo gastroscopy for one patient with GC to be identified）。文章对开发队列进行bootstrap抽样1000次作为内部验证，验证队列上进行外部验证。同时，基于u test比较模型在开发队列、验证队列上的AUC表现。此外，文章额外做了一部分工作，即将自身模型与当前现有文献中的预测模型进行效果的对比。数据分析使用IBM SPSS和R软件进行。</p>
+</section>
+</section>
+<section id="研究结果" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="研究结果">研究结果</h3>
+<p>此研究收集了2015年6月至2017年3月期间来自中国115家医院的数据，最终纳入14,929名合格参与者。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">图1 研究对象纳入及定义</figcaption>
+</figure>
+</div>
+<section id="预测规则的开发" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="预测规则的开发">预测规则的开发</h4>
+<p>基于分数的预测规则的开发：采用单因素和多因素分析，确定了包括年龄、性别、PG I/II比率、G-17水平、幽门螺杆菌感染和饮食习惯（腌制和油炸食品消费）在内的7个预测因素。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Table 1</figcaption>
+</figure>
+</div>
+<p>按照0–25分评分范围进行风险分层，将个体分为低风险（≤11）、中风险（12–16）和高风险（17–25）组。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">图2 logistic回归模型中胃癌的预测因素及相关预测规则</figcaption>
+</figure>
+</div>
+<p>其中，中高风险组的胃镜检查检测到70.8%的胃癌病例和70.3%的早期胃癌病例。低风险组的胃镜检查需求减少了66.7%。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Table 4</figcaption>
+</figure>
+</div>
+<p>预测性能：开发的预测规则具有良好的性能表现。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">图3 预测模型的性能指标</figcaption>
+</figure>
+</div>
+</section>
+<section id="与其他预测模型的性能比较" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="与其他预测模型的性能比较">与其他预测模型的性能比较</h4>
+<p>该预测规则表现良好，并显示出显著优于其他三种替代预测方法（即Miki等人的ABC方法、中国的基于ELISA的ABC方法以及Tu等人的五种生物标志物方法）在识别胃癌患者方面的区分能力。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">图4 验证队列中预测模型和替代预测模型的比较</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="take-home-message" class="level3">
+<h3 class="anchored" data-anchor-id="take-home-message">Take home message</h3>
+<ol type="1">
+<li><p>该预测规则在识别中国人群中胃镜检查前的高风险个体方面表现良好。可以作为一种准确且具有成本效益的大规模初步筛查工具，以提高胃癌（包括早期胃癌）的检测率，从而改善胃癌的二级预防。</p></li>
+<li><p>文章不仅比较了自身模型在多中心外部验证中的效果，更是对比了现有模型，且表现均优于现有模型。</p></li>
+<li><p>采用回归赋分的方式，对于人工智能算法解释性较好，能较好地在医院中进行推广应用；此外，采用赋分划分亚组的方式，关注到了模型实际可能带来的收益。</p></li>
+</ol>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>journal club</category>
+  <guid>https://leslie-lu.github.io/blog/2024/08/30/docker/index.html</guid>
+  <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302124427.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>github actions使用docker渲染quarto文档</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -3747,70 +3856,6 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
   <guid>https://leslie-lu.github.io/blog/2020/01/08/index.html</guid>
   <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201459098.jpeg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>NumPy函数库基础</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/07/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>机器学习算法涉及很多线性代数知识，我们会经常使用NumPy函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</p>
-<p>在Python shell开发环境中输入下面命令：<code>from numpy import *</code>，将NumPy函数库中的所有模块引入到当前的命名空间，输入以下命令：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/07/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201454286.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">NumPy</figcaption>
-</figure>
-</div>
-<p>上述命令构造了一个4*4的随机数组（随机数组在不同计算机上输出可能不同）。</p>
-<p>在NumPy函数库中存在两种不同的数据类型（矩阵matrix和数组array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵matrix与MATLAB中matrices等价。</p>
-<p>调用mat()函数可将数组转换为矩阵：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/07/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201455985.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">mat</figcaption>
-</figure>
-</div>
-<p>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy库.I操作符可以很方便地算出矩阵的逆运算：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/07/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456663.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">逆矩阵</figcaption>
-</figure>
-</div>
-<p>接着执行矩阵乘法，得到矩阵与其逆矩阵相乘的结果：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/07/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456009.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">矩阵乘法</figcaption>
-</figure>
-</div>
-<p>结果应该是单位矩阵，除了对角线元素是1，4*4矩阵的其他元素应该全是0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/07/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201457590.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">误差</figcaption>
-</figure>
-</div>
-<p>函数eye(4)创建4*4的单位矩阵。</p>
-<p>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了NumPy函数库。后面我们会对它有更深的了解。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>numpy</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/07/index.html</guid>
-  <pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201448332.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
