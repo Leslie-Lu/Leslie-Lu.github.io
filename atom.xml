@@ -31,7 +31,128 @@
 <p>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</p>
 <p>没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。</p>
 <p>我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：</p>
-<pre class="{bash}"><code># install R and dependencies
+<p>```{bash eval=FALSE} # install R and dependencies ENV DEBIAN_FRONTEND=noninteractive # Update package indices RUN apt-get update -qq # Install helper packages RUN apt-get install –no-install-recommends -y software-properties-common dirmngr # Add the signing key for the R repository RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc # Add the R 4.0 repository from CRAN RUN add-apt-repository “deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/” RUN apt-get install –no-install-recommends -y r-base RUN R -e “if (!requireNamespace(‘renv’, quietly=TRUE)) install.packages(‘renv’, repos = c(CRAN = ‘https://cloud.r-project.org’))” WORKDIR /project COPY renv.lock . ENV RENV_PATHS_LIBRARY /renv RUN mkdir -p renv COPY .Rprofile .Rprofile COPY renv/activate.R renv/activate.R COPY renv/settings.json renv/settings.json RUN R -e “renv::activate(); renv::restore(repos = ‘https://cloud.r-project.org’)”</p>
+<section id="install-python-and-dependencies" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="install-python-and-dependencies">install python and dependencies</h2>
+<p>RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip<br>
+&amp;&amp; rm -rf /var/lib/apt/lists/* COPY requirements.txt . RUN pip3 install –no-cache-dir –break-system-packages -r requirements.txt</p>
+<pre><code>
+
+
+这样使用docker的方式就不会报错了：
+
+![success](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png)
+
+完整代码已经放在了[星球](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)里，感兴趣的同学可以自行查看。
+
+#### Did you find this page helpful? Consider sharing it 🙌
+
+
+
+
+
+:::{#quarto-navigation-envelope .hidden}
+[Zhen Lu]{.hidden render-id="quarto-int-sidebar-title"}
+[Zhen Lu]{.hidden render-id="quarto-int-navbar-title"}
+[Home]{.hidden render-id="quarto-int-navbar:Home"}
+[/index.html]{.hidden render-id="quarto-int-navbar:/index.html"}
+[Blog]{.hidden render-id="quarto-int-navbar:Blog"}
+[/blog/index.html]{.hidden render-id="quarto-int-navbar:/blog/index.html"}
+[Talks]{.hidden render-id="quarto-int-navbar:Talks"}
+[/talks/index.html]{.hidden render-id="quarto-int-navbar:/talks/index.html"}
+[Publications]{.hidden render-id="quarto-int-navbar:Publications"}
+[/publications/index.html]{.hidden render-id="quarto-int-navbar:/publications/index.html"}
+[CV]{.hidden render-id="quarto-int-navbar:CV"}
+[/cv/index.html]{.hidden render-id="quarto-int-navbar:/cv/index.html"}
+[News]{.hidden render-id="quarto-int-navbar:News"}
+[/news/index.html]{.hidden render-id="quarto-int-navbar:/news/index.html"}
+[Uses]{.hidden render-id="quarto-int-navbar:Uses"}
+[/uses/index.html]{.hidden render-id="quarto-int-navbar:/uses/index.html"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[/atom.xml]{.hidden render-id="quarto-int-navbar:/atom.xml"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[mailto:luzh29@mail2.sysu.edu.cn]{.hidden render-id="quarto-int-navbar:mailto:luzh29@mail2.sysu.edu.cn"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://twitter.com/ZhenLu_Biost]{.hidden render-id="quarto-int-navbar:https://twitter.com/ZhenLu_Biost"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://www.youtube.com/@leslielu8542]{.hidden render-id="quarto-int-navbar:https://www.youtube.com/@leslielu8542"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://space.bilibili.com/32159908]{.hidden render-id="quarto-int-navbar:https://space.bilibili.com/32159908"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg]{.hidden render-id="quarto-int-navbar:https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://www.zhihu.com/people/edison-70-18]{.hidden render-id="quarto-int-navbar:https://www.zhihu.com/people/edison-70-18"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://scholar.google.com/citations?user=LKLQ1g8AAAAJ]{.hidden render-id="quarto-int-navbar:https://scholar.google.com/citations?user=LKLQ1g8AAAAJ"}
+[]{.hidden render-id="quarto-int-navbar:"}
+[https://github.com/Leslie-Lu]{.hidden render-id="quarto-int-navbar:https://github.com/Leslie-Lu"}
+[&lt;span class="faux-block"&gt; 2016–2024 Zhen Lu&lt;/span&gt;
+&lt;span class="faux-block"&gt;All content licensed under&lt;br&gt;[  Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)&lt;/span&gt;      
+]{.hidden render-id="footer-left"}
+[&lt;span class="faux-block"&gt; &lt;strong&gt;ORCID&lt;/strong&gt; [0000-0002-3481-6310](https://orcid.org/0000-0002-3481-6310)&lt;/span&gt;
+]{.hidden render-id="footer-center"}
+[&lt;span class="faux-block"&gt;Made with  and [Quarto](https://quarto.org/)&lt;/span&gt;
+&lt;span class="faux-block"&gt;[View the source at  GitHub](https://github.com/Leslie-Lu/Leslie-Lu.github.io)&lt;/span&gt;
+]{.hidden render-id="footer-right"}
+:::
+
+
+
+:::{#quarto-meta-markdown .hidden}
+[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-metatitle"}
+[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-twittercardtitle"}
+[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-ogcardtitle"}
+[Zhen Lu]{.hidden render-id="quarto-metasitename"}
+[Dockerfiles]{.hidden render-id="quarto-twittercarddesc"}
+[Dockerfiles]{.hidden render-id="quarto-ogcardddesc"}
+:::
+
+
+
+
+&lt;!-- --&gt;
+
+::: {.quarto-embedded-source-code}
+```````````````````{.markdown shortcodes="false"}
+---
+title: "github actions使用docker渲染quarto文档"
+date: 2024-08-29
+description: "Dockerfiles"
+image: "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png"
+categories:
+  - github
+  - quarto
+  - docker
+format:
+  html: 
+    shift-heading-level-by: 1
+    include-in-header:
+      - text: |
+          &lt;style type="text/css"&gt;
+          hr.dinkus {
+              width: 50px;
+              margin: 2em auto 2em;
+              border-top: 5px dotted #454545;
+          }
+          
+          div.column-margin+hr.dinkus {
+              margin: 1em auto 2em;
+          }
+          &lt;/style&gt;
+---
+
+在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：
+
+![error](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png)
+
+错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。
+
+没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。
+
+我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：
+
+```{bash eval=FALSE}
+# install R and dependencies
 ENV DEBIAN_FRONTEND=noninteractive
 # Update package indices
 RUN apt-get update -qq
@@ -67,10 +188,8 @@ RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</cod
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
+<p>``````````````````` :::</p>
+</section>
 </section>
 
  ]]></description>
@@ -1684,9 +1803,778 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>协方差分析</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/23/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>医学试验设计一个很重要的目的就是为了排除非处理因素的干扰影响，使试验误差的估计降到最低限度，从而可以准确地获得处理因素的试验效应。但在某些实际问题中，有些因素在目前还不能控制或难以控制。如在动物饲养试验中，各组动物所增加的平均体重不仅仅与各种饲料营养价值高低有关，还与各动物的进食量有关，甚至与各动物的初始体重等因素及其交互作用都有关系。如果直接进行方差分析，会因为混杂因素的影响而无法得出正确的结论。</p>
+<p>协方差分析是将回归分析与方差分析结合起来使用的一种分析方法。在协方差分析中，先将定量的影响因素（即难以控制的混杂因素）看作自变量/协变量，建立因变量随自变量变化的回归方程，利用回归方程把因变量的变化中受不易控制的定量因素的影响扣除掉，从而能够较合理地比较定性的影响因素处在不同水平下，经回归分析手段修正以后的因变量的总体均数之间是否有显著性的差别，这就是协方差分析的基本思想。</p>
+<p>协方差分析用于比较一个变量Y在一个或几个因素不同水平上的差异，但Y在受这些因素影响的同时，还受到另一个变量X的影响，且X变量的取值难以人为控制，不能作为方差分析中的一个因素处理。此时如果X与Y之间可以建立回归关系，则可以用协方差分析的方法排除X对Y的影响，然后再用方差分析的方法对各因素水平的差异进行统计推断。在协方差分析中，我们称Y为因变量，X为协变量，即在方差分析中用来校正因变量的数值型变量。</p>
+<p>也许有人会问随机因素的影响也是不能人为控制的，为什么不能把X作为一种随机因素处理呢？</p>
+<p>这里的差异主要在于作为随机因素处理时，虽然每一水平的影响是不能人为控制的，但我们至少可以得到几个属于同一水平的重复，因此可以把它们分别用另一因素的不同水平处理，最后在方差分析时，我们才能排除这一随机因素的影响，对另一因素的各水平进行比较。</p>
+<p>例如，当我们考虑动物窝别对增重的影响时，一般可把它当作随机因素处理。一方面是由于它不易数量化，另一方面是同一窝一般有几只动物，可分别接受另一因素不同水平的处理。如果我们考虑试验开始时动物初始体重的影响，这时一般的方法是选初始体重相同的动物作为一组，分别接受另一因素的不同水平处理，此时用方差分析没有问题。但显然，这种方法往往是很困难的，一般需要很大的样本。若可供试验的动物样本很少，初始体重又有明显差异，无法选出体重相当的动物，那就只好认为初始体重X与最终体重Y有回归关系，采用协方差分析的方法排除初始体重的影响，再来比较其他因素如饲料种类、数量对增重的影响。协方差分析既利用了回归分析的基本方法，又用到了方差分析的基本方法，这就是协方差分析的基本思想。</p>
+<p>消除初始体重影响的另一种方法是对最终体重与初始体重的差值进行统计分析，这种方法与协方差分析的生物学意义是不同的。对差值进行分析的生物学假设是初始体重对以后的体重增量没有任何影响，而协方差分析则是假设体重增量中包含初始体重的影响（不仅仅是初始体重对最终体重的影响），这种影响的大小与初始体重成正比，如果这一比值为1，协方差分析与对差值进行方差分析是相同的。但如果比值不为1，它们的结果将是不同的。也就是说，协方差分析假设使初始体重不同的因素在以后的生长过程中也会发挥作用，而对差值进行方差分析则是假设这些因素以后不再发挥作用，这两种生物学假设是有很大区别的。</p>
+<p>在学习中需要注意统计学知识背后的研究假设。由于协方差分析包含了对协变量影响是否存在及其大小等一系列统计检验与估计，它显然比对差值进行分析等方法有更广泛的适用范围，因此除非有明显的证据说明对差值进行分析的生物学假设是正确的，一般情况下还是应采用协方差分析方法。</p>
+<p>在医学研究中，很多情况下都需要借助协方差分析来排除非处理因素的干扰，从而准确地估计处理因素的试验效应。如，评价3种药物治疗高脂血症的效果，寻求各方面自然条件基本相同的受试者是很困难的，但是把患者的年龄、体重指数、用药前的血脂水平等作为协变量进行协方差分析，就简单很多。同样，比较几种不同营养奶粉对婴幼儿体重增长的作用差异，把研究对象的性别、年龄、基线体重等混杂因子作为协变量进行协方差分析，则是非常有效的统计分析方法。</p>
+<p>和方差分析一样，协方差分析也属于参数分析，因变量Y应当满足以下假设条件：</p>
+<ol type="1">
+<li><p>在效应因子的每一个水平上，因变量Y服从正态分布，且方差相等；</p></li>
+<li><p>在效应因子的每一个水平上，因变量Y和协变量X呈线性关系，且斜率相同。</p></li>
+</ol>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>ancova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/23/index.html</guid>
+  <pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>试验设计与方差分析（4）</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/22/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="重复测量设计" class="level3">
+<h3 class="anchored" data-anchor-id="重复测量设计">重复测量设计</h3>
+<p>重复测量是指对同一观察对象的同一观察指标在不同的时间点上进行多次测量，用于分析观察指标在不同时间上的变化规律。</p>
+<p>这类测量资料在医学研究中比较常见，例如，药效分析中常分析给药后不同时间的疗效比较，由于同一受试对象在不同时点的观测值之间往往彼此不独立，存在某种程度的相关，因此不能满足常规统计方法所要求的独立性假定，使得其分析方法有别于一般的统计分析方法。</p>
+<p>最常见的重复测量资料是前后测量设计，如高血压患者治疗前后的血压，其设计与配对设计t检验的试验表达完全相同，但却是两种不同类型的设计，其区别在于：</p>
+<ol type="1">
+<li><p>配对设计中同一对子的两个试验单位可以随机分配处理，两个试验单位同期观察试验结果，可以比较处理组间差异，而前后测量设计不能同期观察试验结果；</p></li>
+<li><p>配对t检验要求同一对子的两个试验单位的观察结果分别与差值相互独立，差值服从正态分布，而前后测量设计前后两次测量的结果通常与差值不独立；</p></li>
+<li><p>配对设计用平均差值推断处理作用，而前后测量设计除了分析平均差值外，还可以进行相关回归分析。</p></li>
+</ol>
+<p>重复测量设计大体有两类，一类是对每个人在同一时间不同因子组合间测量，另外一类是对每个人在不同时间点上重复。前者常见于裂区设计，而后者常见于经典试验设计，即包括前测、处理一次或几次后测的情况，后者比前者要多见。不论沿裂区方向还是沿时间点方向重复，个体内因子无一例外的都是重复测量因子。</p>
+<p>重复测量设计的特点是一定有个体内因子，但不一定有个体间因子，后者是不同处理组合或不同个体组，而且即使有不同组群（如男性和女性），但人人都经历重复测量，而不是一组接受重复测量，另一组不接受。</p>
+<p>具有重复测量的设计，即在给予某种处理后，在几个不同的时间点上从同一个受试对象身上重复获得指标的观测值，有时是从同一个个体的不同部位上重复获得指标的观测值。由于这种设计符合许多医学试验本身的特点，故在医学科研中应用的频率相当高。</p>
+<p>如果试验中共有k个试验因素，其中只有m个因素与重复测量有关，则称为具有m个重复测量的k因素设计。重复测量资料来源于同一受试对象的某一观测值的多次重复测量，常见的重复测量数据的基本格式：N个观测个体，g个处理组，X为观测指标，p为重复测量次数。</p>
+<p>在对重复测量资料进行方差分析时，除了要求样本是随机的，在处理的同一水平上观测是独立的，及每一水平的测定值都来自正态总体外，特别强调协方差的复合对称性或球形性。因此，在进行重复测量资料的方差分析前，应先对资料的协方差阵进行球形性检验。若满足球形性要求，则直接进行方差分析；若不满足球形性要求，则需对与时间有关的F统计量分子、分母的自由度进行校正，以减少犯I类错误的概率，或直接进行多变量方差分析。</p>
+<p>对重复测量试验数据的方差分析，需考虑两个因素的影响：一个因素是处理分组，可通过施加干预和随机分组来实现；另一个因素是测量时间，由研究者根据专业知识和要求确定。因此重复测量资料的变异可分解为处理因素、时间因素、处理和时间的交互作用、受试对象间的随机误差和重复测量的随机误差等5部分。</p>
+<p>重复测量设计的优点：每一个体作为自身的对照，克服了个体间的变异，分析时可更好地集中于处理效应，且被试者自身差异的问题不再存在，即减少了一个差异来源；重复测量设计的每一个体作为自身的对照，研究所需的个体相对较少，因此更加经济。</p>
+<p>重复测量设计的缺点：滞留效应，前面的处理效应有可能滞留到下一次的处理；潜隐效应，前面的处理效应有可能激活原本以前不活跃的效应；学习效应，由于是逐步熟悉试验，因此研究对象的反应能力有可能逐步得到提高。</p>
+<p>对于重复测量资料的分析处理，我们应用较多的是单变量方差分析的一般线性模型方法。在R数据格式中，重复测量资料同一观察单位在各测量点的测量值用一组变量来表示，计算时将这一组变量当作一个整体作为反应变量来处理。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>anova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/22/index.html</guid>
+  <pubDate>Sat, 22 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>试验设计与方差分析（3）</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/20/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="正交设计" class="level3">
+<h3 class="anchored" data-anchor-id="正交设计">正交设计</h3>
+<p>析因设计的缺点是当因素个数较多时（3个因素以上），所需试验单位数、处理组数、试验次数和方差分析的计算量会剧增。减少多因素试验次数的有效方法是采用正交试验设计。</p>
+<p>当析因设计要求的试验次数太多时，一个非常自然的想法就是从析因设计的全部水平组合中选择一部分有代表性的水平组合进行试验，因此就出现了分式析因设计。但是对于试验设计知识较少的实际工作者而言，选择适当的分式析因设计还是比较困难的，而正交试验设计是研究多因素多水平的又一种试验设计方法。</p>
+<p>它是根据正交性从全部的试验组合中挑选出部分有代表性的水平组合进行试验，这些有代表性的水平组合具备均匀分散、齐整可比的特点。正交试验设计是分式析因设计的主要方法，高效、快速、经济。日本著名统计学家田口玄一将正交试验选择的水平组合列成表格，称为正交表。</p>
+<p>例如做一个3因素3水平的试验，按全面试验要求，需进行3<em>3</em>3=27种水平组合的试验，且尚未考虑每一组合的重复数，而正交试验设计可以大大减少工作量。</p>
+<p>正交设计在医学研究中的用途相当广泛，在具体的操作上，也比析因设计简单，可寻找疗效好的药物配方、医疗仪器多个参数的优化组合、医疗产品的生成工艺、生物体的培养条件等。</p>
+<p>假定在一个农业试验中要考察3个小麦品种、3种不同的肥料和3种播种方式对小麦产量的影响，并假定有9个地力基本相同的试验小区。在这个问题中，有3个可能影响小麦产量的因子：品种、肥料和播种方式，每个因子有3个水平，如果要做完全试验，就需要3<em>3</em>3=27个小区，而实际上总共只有9个小区，显然，完全试验在当前的情况下行不通。</p>
+<p>因此我们可退一步考虑，按照上述正交设计的想法，设计要求品种、肥料和播种方式中的任意两个的不同水平的搭配都出现一次，满足这种性质的试验设计就是正交试验。</p>
+<p>下面给出正交设计的一般性陈述：考虑设计一个试验，安排m个因子，做n次试验，若它满足以下两个条件，则其为正交试验：</p>
+<ol type="1">
+<li><p>每一因子的不同水平在试验中出现相同的次数（均衡性）；</p></li>
+<li><p>任意两因子的不同水平组合在试验中出现相同的次数（正交性）。</p></li>
+</ol>
+<p>就定义来说，等重复的完全试验显然满足上述两个条件，因此当然也是正交试验设计。但由于其要求的试验次数太多，所以实际上很难实施。我们通常所说的正交试验设计，是指既满足上述两条件，同时试验次数n又远远小于N的设计。</p>
+<p>正交试验设计的方案可以用一张表来表示，这张表就被称为正交设计表。一般来说，正交设计表的第1行为表头，标明每列所代表的因子，最左一列标明试验的序号，由1到n。注意：试验的序号并不表示试验的时间先后顺序，先后顺序要按照随机化原则来安排。表中每列的数字代表相应因子的水平序号，每行的数字代表在相应试验中各因子的水平序号，有：</p>
+<ol type="1">
+<li><p>每列中不同数字出现的次数相同（试验的均衡性）；</p></li>
+<li><p>每两列中不同的数字组合出现的次数相同（试验的正交性）。</p></li>
+</ol>
+<p>假定因子对响应变量的影响无交互效应（许多实际情况正是这样），正交试验的优点是在很少的试验次数（与全面试验相比）中，所得数据可以简便而有效地对因子效应进行参数估计和方差分析。</p>
+<p>其方法可一般地归纳如下：</p>
+<ul>
+<li><p>总均值的估计=试验数据的总平均值</p></li>
+<li><p>某因子的某个主效应的估计=该因子的该主效应所出现的试验数据的平均值-总平均值</p></li>
+<li><p>总平方和=（试验数据-总平均值）的平方和，自由度=n-1</p></li>
+<li><p>某因子的主效应平方和=重复数*参数估计的平方和，自由度=水平数-1</p></li>
+<li><p>残差平方和=总平方和-因子效应平方和的和，自由度=总平方和-因子效应自由度的和</p></li>
+</ul>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>anova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/20/index.html</guid>
+  <pubDate>Thu, 20 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>试验设计与方差分析（2）</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/18/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="拉丁方设计" class="level3">
+<h3 class="anchored" data-anchor-id="拉丁方设计">拉丁方设计</h3>
+<p>完全随机设计只涉及一个处理因素，随机区组设计涉及一个处理因素、一个区组因素/配伍因素。若实验研究涉及一个处理因素和两个控制因素，每个因素的类别数或水平数相等，此时可采用拉丁方设计来安排试验，将两个控制因素分别安排在拉丁方设计的行和列上。</p>
+<p>将k个不同符号排成k行k列，使得每一个符号在每一行、每一列都只出现一次的方阵，叫做k*k拉丁方。</p>
+<p>拉丁方设计就是将处理从纵横两个方向排列为区组/重复，使每个处理在每一行和每一列中出现的次数相等（通常为1次），即在行和列两个方向都进行局部控制，所以它是比随机区组多一个方向局部控制的随机排列设计，因而具有较高精确性。</p>
+<p>拉丁方设计的特点是处理数、重复数、行数、列数都相等，即处理数=行区组数=列区组数=重复次数，它的每一行和每一列都是一个区组或一次重复，而每一个处理在每一行或每一列都只出现1次</p>
+<p>拉丁方试验设计的步骤：</p>
+<ol type="1">
+<li><p>选择标准方：标准方是指代表处理因素水平的字母。在进行拉丁方设计时，首先要根据试验处理水平数k从标准方表中选定一个k*k的标准方，随后要对选定的标准方的行、列和处理进行随机化排列；</p></li>
+<li><p>列随机</p></li>
+<li><p>行随机</p></li>
+<li><p>处理随机</p></li>
+</ol>
+<p>拉丁方设计的特点是纵横两个方向都设了区组，从而可在两个方向上对土壤等差异（指田间试验时）进行局部控制。试验有k个处理，便有k*k个观测值。进行方差分析时，从总变异方差中除了分解出处理间方差和误差项方差外，还可以分解出纵横两个区组的方差，这样可使误差项方差进一步减小，所以拉丁方试验的精确度比随机区组试验更高。</p>
+<p>拉丁方设计的优点是：精确度高；缺点是：由于重复数与处理数必须相等，使得两者之间相互制约，缺乏伸缩性。因此采用拉丁方设计时试验的处理数不能太多，一般以4～10个为宜。</p>
+</section>
+<section id="析因设计" class="level3">
+<h3 class="anchored" data-anchor-id="析因设计">析因设计</h3>
+<p>单因素方差分析只涉及一个处理因素，该因素至少有两个水平，只是根据试验对象的属性和控制试验误差的需要，采用的试验设计方法有所不同。如比较注射4种不同剂量雌激素对大白鼠子宫重量的影响，处理因素是注射不同剂量的雌激素，有4个水平。完全随机设计是将n只白鼠随机分4组，随机区组设计是将n只白鼠按出生体重相近的原则，4只一组配成区组后，每个区组内随机分配4个处理水平，拉丁方设计则是在随机区组设计的基础上增加了一个列区组，如白鼠有4个种系（行区组），每个种系的4只白鼠按体重分成4个级别（列区组）。可以看出，完全随机设计、随机区组设计和拉丁方设计的处理因素没有变化，都是比较注射4种不同剂量雌激素带来的差别，只是改变了设计的方法，在同样的试验条件下，通过改进试验设计方法可以大大提高试验的效率，如上述试验，白鼠按体重配成区组后再施加处理（随机区组设计），试验的误差均方通常小于完全随机设计。</p>
+<p>而上述介绍的各种试验设计方法，严格地说，它们仅适用于只有1个处理因素的试验问题之中，其他因素都属于区组因素，即与处理因素无交互作用。若试验所涉及的处理因素的个数为2或以上，当各因素在试验中所处的地位基本平等，且因素之间存在1级（即2因素之间）、2级（即3因素之间）乃至更复杂的交互作用时，则需选用析因设计。</p>
+<p>在评价药物疗效时，除需知道A药和B药各剂量的疗效外（主效应），还需知道两种药同时使用的协同疗效，析因设计及其相应的方差分析用于分析药物的单独效应、主效应和交互效应。</p>
+<p>主效应：某因素各水平的平均效应；单独效应：在每个B水平，A的效应；或在每个A水平，B的效应；交互效应：某因素各水平的单独效应随另一因素水平变化而变化，则称两因素之间存在交互效应，包括协同、拮抗作用。</p>
+<p>析因设计有交互作用的二因子方差分析将总偏差平方和做如下分解：</p>
+<ul>
+<li><p>误差偏差平方和：反映随机误差对试验结果的影响；</p></li>
+<li><p>因子A引起的偏差平方和：除含有误差波动外，反映因子A对试验结果的影响；</p></li>
+<li><p>因子B引起的偏差平方和：除含有误差波动外，反映因子B对试验结果的影响；</p></li>
+<li><p>因子A与B的交互作用的偏差平方和：反映因子A与B的交互作用对试验结果的影响。</p></li>
+</ul>
+<p>如果不存在交互效应，则只需考虑各因素的主效应；在方差分析中，如果存在交互效应，解释结果时，要逐一分析各因素的单独效应，找出最优搭配。在两因素析因设计时，只需考虑一阶交互效应；3个因素及以上时，除一阶交互效应外，还需考虑二阶、三阶等高阶交互效应，解释将更复杂。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>anova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/18/index.html</guid>
+  <pubDate>Tue, 18 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>试验设计与方差分析（1）</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/17/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="完全随机设计" class="level3">
+<h3 class="anchored" data-anchor-id="完全随机设计">完全随机设计</h3>
+<p>完全随机设计采用完全随机化的分组方法，将全部试验对象分配到k个处理组，各组分别接受不同的处理，试验结束后比较各组均数之间的差别有无统计学意义，推断处理因素的效应。</p>
+<p>在方差分析中，常称上述的处理因素为因子，用A、B、C等表示因子在试验中所处的不同情况或状态称为水平。</p>
+<p>方差分析解决问题的思路是：从所有观测值的总变异（总方差）中分析出系统误差和随机误差，并用数量表示，在一定意义下比较系统误差和随机误差，若两者的差别不大，说明试验条件的变化（因素水平的不同）对试验结果影响不大；若两者相差较大，且系统误差大得多，说明系统条件变化引出的误差不可忽视。</p>
+</section>
+<section id="随机区组设计" class="level3">
+<h3 class="anchored" data-anchor-id="随机区组设计">随机区组设计</h3>
+<p>随机区组设计是根据局部控制和随机排列的原理进行的：将研究的对象按照不同的性质划分为等于重复次数的区组，例如将试验土地按土壤肥力程度等不同的性质划分为等于重复次数的区组，使区组内环境差异最小，而区组间环境允许存在差异，每个区组即为一次完整的重复，区组内的各处理都独立地随机排列，这是随机排列设计中最常用最基本的设计。</p>
+<p>随机区组设计的优点：富于伸缩性，单因素、复因素以及综合试验等都可应用；能提供无偏的误差估计，在大区域试验中能有效地降低非处理因素等试验条件的单向差异，降低误差；对试验地的地形要求不严，只对每个区组内的非处理因素等试验条件要求尽量一致，因此不同区组可分散设置在不同地段上。</p>
+<p>随机区组设计的缺点：这种设计方法不允许处理数太多，处理数过多，区组必然增大，局部控制的效率会降低，所以处理数一般不超过20个，最好在10个左右。</p>
+<p>随机区组设计考虑了个体差异的影响，可分析处理因素和个体差异对试验效应的影响，所以又称为两因素实验设计，比完全随机设计的检验效率高。</p>
+<p>该设计是将受试对象先按配比条件配成配伍组（如动物试验时，可按同窝别、同性别、体重相近等进行配伍），每个配伍组有3个或以上的受试对象，再按随机化原则分别将各配伍组中的受试对象分配到各个处理组。</p>
+<p>在进行单因素随机区组试验结果的统计分析时，可将处理看作A因素，区组看作B因素，剩余部分则为试验误差。总平方和=区组间平方和+处理间平方和+试验误差平方和，总自由度=区组自由度+处理自由度+误差自由度。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>anova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/17/index.html</guid>
+  <pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>方差分析</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/15/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="方差分析" class="level3">
+<h3 class="anchored" data-anchor-id="方差分析">方差分析</h3>
+<p>t检验和u检验不适用于多个样本均数的比较，而用方差分析比较多个样本均数，可以有效地控制I类错误。</p>
+<p>方差分析（analysis of variance，ANOVA）由英国统计学家R.A.Fisher首先提出，以F命名其统计量，故方差分析又称F检验。</p>
+<p>方差分析的基本思想是根据研究的目的和设计类型，将总变异的离均差平方和SS及其自由度v分别分解成相应的若干部分，然后求各相应部分的变异（数理统计证明，总的离均差平方和等于各部分离均差平方和之和）；再用各部分的变异与组内（或误差）变异进行比较，得出统计量F值；最后根据F值的大小确定p值，作出统计推断。</p>
+<p>方差分析的用途很广，包括两个或多个样本均数间的比较，分析两个或多个因素间的交互作用，回归方程的线性假设检验，多元线性回归分析中偏回归系数的假设检验，两样本的方差齐性检验等。</p>
+<p>方差分析的应用条件为：各样本需是相互独立的随机样本；各样本来自正态分布总体；各总体方差相等，即方差齐性。</p>
+</section>
+<section id="方差分析基本术语" class="level3">
+<h3 class="anchored" data-anchor-id="方差分析基本术语">方差分析基本术语</h3>
+<p>实验设计和方差分析都有自己相应的语言。</p>
+<p>以研究某药物对某癌细胞株增殖影响的研究为例，现有两种药物：新研究药物（Treatdrug）和对照组药物（Controldrug）。</p>
+<p>我们提取培养10个某癌细胞株作为研究对象，随机分配一半癌细胞株接受为期96h的Treatdrug治疗，另一半接受为期96h的Controldrug治疗。研究结束时，对两组细胞株的细胞抑制率进行评估。</p>
+<p>在这个实验设计中，治疗方案是两水平（Treatdrug和Controldrug）的组间因子，之所以称作组间因子是因为每个患者都仅被分配到一个组别中，没有患者同时接受Treatdrug和Controldrug。</p>
+<p>细胞抑制率是因变量，治疗方案是自变量。由于在每种治疗方案下观测数相等，因此这种设计也称为均衡设计；若观测数不同，则称为非均衡设计。</p>
+<p>因为仅有一个类别型变量，这种设计又称为单因子方差分析或进一步称为单因子组间方差分析。</p>
+<p>方差分析主要是通过F检验来进行效果评测，若治疗方案的F检验显著，则说明96h后两种药物的细胞抑制率均值不同。</p>
+<p>假设只对Treatdrug的效果感兴趣，则需要将10个癌细胞株都放在Treatdrug组中，然后在治疗24h和96h后分别评估疗效。此时，时间是两水平（24h和96h）的组内因子，因为每个癌细胞株在时间的所有水平下都进行了测量，因此这种设计称为单因子组内方差分析；又由于每个癌细胞株都不止一次被测量，也称作重复测量方差分析。若时间的F检验显著，则说明细胞抑制率在24h和96h间发生了改变。</p>
+<p>现假设对治疗方案差异和它随时间的改变都感兴趣，则可以将两个设计结合起来：随机分配一半癌细胞株到Treatdrug组，另一半到Controldrug组，在24h和96h分别评估它们的细胞抑制率。治疗方案和时间都作为因子时，既可以分析治疗方案的影响和时间的影响，也可以分析治疗方案和时间的交互作用。前两个为主效应，交互部分为交互效应。在这种情况下，需要进行3次F检验，治疗方案因素1次，时间因素1次，两者的交互因素1次。若治疗方案显著，说明Treatdrug和Controldrug对癌细胞的抑制效果不同；若时间显著，表明细胞抑制率在24h和96h间发生了改变；若两种因素交互效应显著，说明两种药物随着时间变化对癌细胞的一直效果不同（即细胞抑制率从24h到96h的改变程度在Treatdrug和Controldrug之间是不同的）。</p>
+<p>当设计中包含两个甚至更多因子时，便是多因子方差分析设计。两个因子时称为双因子方差分析，三因子时称为三因子方差分析。若因子设计包括组内因子和组间因子，又称为混合模型方差分析。</p>
+<p>这里，即使不同的癌细胞株被随机分配到不同的治疗方案中，但在研究开始时两组癌细胞株的增殖速度可能不同，治疗后的差异可能是最初的增殖速度不同导致的，而不是实验方案的影响。增殖速度也可以解释因变量的组间差异，因此它常被称为混杂因素。如果我们在评测治疗方案类型的影响前，对组建的统计学差异进行统计性调整，将初始增殖速度作为协变量，这样的设计称为协方差分析。</p>
+<p>当因变量不止一个时，该设计被称为多元方差分析，若还存在协变量，则称为多元协方差分析。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>anova</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/15/index.html</guid>
+  <pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>R&lt;80&gt;&lt;95&gt;&lt;8d&gt;&lt;84&gt;&lt;90&gt;&lt;86&gt;&lt;88&gt;&lt;86&gt;&lt;9e&gt;&lt;90&gt;&lt;9e&gt;&lt;8b&gt;</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/06/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="d80" class="level3">
+<h3 class="anchored" data-anchor-id="d80"><e5>&lt;89&gt;&lt;8d&gt;<e8><a8>&lt;80&gt;</a8></e8></e5></h3>
+<p>R<e6>&lt;98&gt;<af><e4><b8>&lt;80&gt;<e7><a7>&lt;8d&gt;<e5>&lt;9d&gt;&lt;97&gt;<e7>&lt;8a&gt;<b6><e7><bb>&lt;93&gt;<e6>&lt;9e&gt;&lt;84&gt;<e7><a8>&lt;8b&gt;<e5><ba>&lt;8f&gt;<e8><af><ad><e8><a8>&lt;80&gt;<ef><bc>&lt;8c&gt;<e2>&lt;80&gt;&lt;9c&gt;<e5>&lt;9d&gt;&lt;97&gt;<e2>&lt;80&gt;&lt;9d&gt;<e7>&lt;94&gt;<b1><e5><a4><a7><e6>&lt;8b&gt;<ac><e5>&lt;8f&gt;<b7><e5>&lt;88&gt;&lt;92&gt;<e5>&lt;88&gt;&lt;86&gt;<ef><bc>&lt;8c&gt;<e5><bd>&lt;93&gt;<e2>&lt;80&gt;&lt;9c&gt;<e5>&lt;9d&gt;&lt;97&gt;<e2>&lt;80&gt;&lt;9d&gt;<e5>&lt;8f&gt;<aa><e5>&lt;8c&gt;&lt;85&gt;<e5>&lt;90&gt;<ab><e4><b8>&lt;80&gt;<e6>&lt;9d&gt;<a1><e8><af><ad><e5>&lt;8f&gt;<a5><e6>&lt;97&gt;<b6><e5><a4><a7><e6>&lt;8b&gt;<ac><e5>&lt;8f&gt;<b7><e5>&lt;8f&gt;<af><e4><bb><a5><e7>&lt;9c&gt;&lt;81&gt;<e7>&lt;95&gt;<a5><e3>&lt;80&gt;&lt;82&gt;<e7><a8>&lt;8b&gt;<e5><ba>&lt;8f&gt;<e8><af><ad><e5>&lt;8f&gt;<a5><e7>&lt;94&gt;<b1><e6>&lt;8d&gt;<a2><e8><a1>&lt;8c&gt;<e7><ac><a6><e6>&lt;88&gt;&lt;96&gt;<e5>&lt;88&gt;&lt;86&gt;<e5>&lt;8f&gt;<b7><e5>&lt;88&gt;&lt;86&gt;<e9>&lt;9a&gt;&lt;94&gt;<e3>&lt;80&gt;&lt;82&gt;<e5>&lt;92&gt;&lt;8c&gt;<e8><ae><b8><e5><a4>&lt;9a&gt;<e8>&lt;84&gt;&lt;9a&gt;<e6>&lt;9c&gt;<ac><e8><af><ad><e8><a8>&lt;80&gt;<e4><b8>&lt;80&gt;<e6><a0><b7><ef><bc>&lt;8c&gt;R<e8><af><ad><e8><a8>&lt;80&gt;<e4><b8>&lt;8d&gt;<e9>&lt;9c&gt;&lt;80&gt;<e8><a6>&lt;81&gt;<e2>&lt;80&gt;&lt;9c&gt;<e5><a3><b0><e6>&lt;98&gt;&lt;8e&gt;<e2>&lt;80&gt;&lt;9d&gt;<e5>&lt;8f&gt;&lt;98&gt;<e9>&lt;87&gt;&lt;8f&gt;<e3>&lt;80&gt;&lt;82&gt;</e3></e9></e5></e2></e6></b0></a3></e5></e2></a6></e8></e9></b8></e4></a8></e8></ad></af></e8></bc></ef></b7></a0></e6></b8></e4></a8></e8></ad></af></e8></ac></e6></e8></a4></e5></b8></ae></e8></e5></e3></e9></e5></b7></e5></e5></e6></a6></ac></e7></a1></e8></a2></e6></b1></e7></a5></e5></ad></af></e8></ba></e5></a8></e7></e3></a5></e7></e7></a5></bb></e4></af></e5></b7></e5></ac></e6></a7></a4></e5></b6></e6></a5></e5></ad></af></e8></a1></e6></b8></e4></ab></e5></e5></aa></e5></e2></e5></e2></bd></e5></bc></ef></e5></e5></b7></e5></ac></e6></a7></a4></e5></b1></e7></e2></e5></e2></bc></ef></a8></e8></ad></af></e8></ba></e5></a8></e7></e6></bb></e7></b6></e7></e5></a7></e7></b8></e4></af></e6></p>
+<p><e6>&lt;8e&gt;<a5><e4><b8>&lt;8b&gt;<e6>&lt;9d&gt;<a5><e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e4><b8>&lt;80&gt;<e8><b5><b7><e6>&lt;9d&gt;<a5><e5><a4>&lt;84&gt;<e7>&lt;90&gt;&lt;86&gt;<e5>&lt;88&gt;&lt;86&gt;<e6>&lt;9e&gt;&lt;90&gt;<e4><b8>&lt;80&gt;<e4><b8><aa><e7><ae>&lt;80&gt;<e5>&lt;8d&gt;&lt;95&gt;<e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e4><bb><bb><e5>&lt;8a&gt;<a1><e3>&lt;80&gt;&lt;82&gt;</e3></a1></e5></bb></bb></e4></ae></e6></b0></e6></e7></e5></ae></e7></aa></b8></e4></b8></e4></e6></e5></e7></a4></e5></a5></e6></b7></b5></e8></b8></e4></ac></bb></e4></e6></a5></e6></b8></e4></a5></e6></p>
+</section>
+<section id="e8b" class="level3">
+<h3 class="anchored" data-anchor-id="e8b"><e5><ae>&lt;9e&gt;<e4><be>&lt;8b&gt;</be></e4></ae></e5></h3>
+<p><e4><b8>&lt;80&gt;<e7><bb>&lt;84&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e5>&lt;8f&gt;&lt;82&gt;<e5>&lt;8a&gt;<a0><e4><ba>&lt;86&gt;<e6>&lt;95&gt;<b0><e5><ad><a6><e3>&lt;80&gt;&lt;81&gt;<e7><a7>&lt;91&gt;<e5><ad><a6><e5>&lt;92&gt;&lt;8c&gt;<e8>&lt;8b&gt;<b1><e8><af><ad><e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e8>&lt;80&gt;&lt;83&gt;<e8><af>&lt;95&gt;<e3>&lt;80&gt;&lt;82&gt;<e4><b8><ba><e4><ba>&lt;86&gt;<e7><bb>&lt;99&gt;<e6>&lt;89&gt;&lt;80&gt;<e6>&lt;9c&gt;&lt;89&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e7><a1><ae><e5><ae>&lt;9a&gt;<e4><b8>&lt;80&gt;<e4><b8><aa><e7><bb><bc><e5>&lt;90&gt;&lt;88&gt;<e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e8><a1><a1><e9>&lt;87&gt;&lt;8f&gt;<e6>&lt;8c&gt;&lt;87&gt;<e6><a0>&lt;87&gt;<ef><bc>&lt;8c&gt;<e9>&lt;9c&gt;&lt;80&gt;<e8><a6>&lt;81&gt;<e5><b0>&lt;86&gt;<e8><bf>&lt;99&gt;<e4><ba>&lt;9b&gt;<e7><a7>&lt;91&gt;<e7>&lt;9b&gt;<ae><e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7><bb>&lt;84&gt;<e5>&lt;90&gt;&lt;88&gt;<e8><b5><b7><e6>&lt;9d&gt;<a5><ef><bc>&lt;8c&gt;<e5><b0>&lt;86&gt;<e6>&lt;8e&gt;&lt;92&gt;<e5>&lt;90&gt;&lt;8d&gt;<e5>&lt;9c&gt;<a8><e5>&lt;89&gt;&lt;8d&gt;20%<e7>&lt;9a&gt;&lt;84&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e8><af>&lt;84&gt;<e5><ae>&lt;9a&gt;<e4><b8><ba>A<ef><bc>&lt;8c&gt;<e6>&lt;8e&gt;<a5><e4><b8>&lt;8b&gt;<e6>&lt;9d&gt;<a5>20%<e7>&lt;9a&gt;&lt;84&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e8><af>&lt;84&gt;<e5><ae>&lt;9a&gt;<e4><b8><ba>B<ef><bc>&lt;8c&gt;<e4><be>&lt;9d&gt;<e6><ad><a4><e7><b1><bb><e6>&lt;8e&gt;<a8><ef><bc>&lt;8c&gt;<e6>&lt;9c&gt;&lt;80&gt;<e5>&lt;90&gt;&lt;8e&gt;<ef><bc>&lt;8c&gt;<e6>&lt;8c&gt;&lt;89&gt;<e5><ad>&lt;97&gt;<e6><af>&lt;8d&gt;<e9><a1><ba><e5><ba>&lt;8f&gt;<e5><af><b9><e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e6>&lt;8e&gt;&lt;92&gt;<e5><ba>&lt;8f&gt;<e3>&lt;80&gt;&lt;82&gt;<e8><af><b7><e8><af>&lt;95&gt;<e5><a4>&lt;84&gt;<e7>&lt;90&gt;&lt;86&gt;<e5>&lt;88&gt;&lt;86&gt;<e6>&lt;9e&gt;&lt;90&gt;<e3>&lt;80&gt;&lt;82&gt;</e3></e6></e5></e7></a4></e5></af></e8></b7></af></e8></e3></ba></e5></e6></a1></e8></bf></e8></e7></a6></ad></e5></b9></af></e5></ba></e5></ba></a1></e9></af></e6></ad></e5></e6></bc></ef></e5></e6></bc></ef></a8></e6></bb></b1></e7></a4></ad></e6></be></e4></bc></ef></ba></b8></e4></ae></e5></af></e8></e7></a6></ad></e5></e7></a5></e6></b8></e4></a5></e6></bc></ef></ba></b8></e4></ae></e5></af></e8></e7></a6></ad></e5></e7></e5></a8></e5></e5></e6></b0></e5></bc></ef></a5></e6></b7></b5></e8></e5></bb></e7></a9></bb></e7></e6></e7></ae></e7></a7></e7></ba></e4></bf></e8></b0></e5></a6></e8></e9></bc></ef></a0></e6></e6></e9></a1></a1></e8></a9></bb></e7></e6></e7></e5></bc></bb></e7></aa></b8></e4></b8></e4></ae></e5></ae></a1></e7></e7></a6></ad></e5></e6></e6></bb></e7></ba></e4></ba></b8></e4></e3></af></e8></e8></a7></e7></b8></e4></ad></af></e8></b1></e8></e5></a6></ad></e5></a7></e7></e3></a6></ad></e5></b0></e6></ba></e4></a0></e5></e5></e7></a6></ad></e5></bb></e7></b8></e4></p>
+<p><e5><a6>&lt;82&gt;<e4><b8>&lt;8b&gt;<ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e9><a6>&lt;96&gt;<e5>&lt;85&gt;&lt;88&gt;<e5>&lt;88&gt;&lt;9b&gt;<e5><bb><ba><e5>&lt;8e&gt;&lt;9f&gt;<e5><a7>&lt;8b&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e6><a1>&lt;86&gt;<ef><bc>&lt;9a&gt;</bc></ef></a1></e6></ae></e6></b0></e6></a7></e5></e5></ba></bb></e5></e5></e5></a6></e9></ac></bb></e4></e6></bc></ef></b8></e4></a6></e5></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_8455315f80cbbf433a0a3aa2fbfb1dec">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">studentname<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"John Davis"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Angela Williams"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Bullwinkle Moose"</span>, </span>
+<span id="cb1-2">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"David Jones"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Janice Markhammer"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cheryl Cushing"</span>, </span>
+<span id="cb1-3">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Reuven Ytzrhak"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Greg Knox"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joel England"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Mary Rayburn"</span>)</span>
+<span id="cb1-4">math<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">502</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">600</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">412</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">358</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">495</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">410</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">625</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">573</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">522</span>)</span>
+<span id="cb1-5">science<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">99</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">82</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">75</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">85</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">89</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">86</span>)</span>
+<span id="cb1-6">English<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">22</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">27</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>)</span>
+<span id="cb1-7">scoredata<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(studentname, math, science, English, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stringsAsFactors=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb1-8">scoredata</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         studentname math science English
+1         John Davis  502      95      25
+2    Angela Williams  600      99      22
+3   Bullwinkle Moose  412      80      18
+4        David Jones  358      82      15
+5  Janice Markhammer  495      75      20
+6     Cheryl Cushing  512      85      28
+7     Reuven Ytzrhak  410      80      15
+8          Greg Knox  625      95      30
+9       Joel England  573      89      27
+10      Mary Rayburn  522      86      18</code></pre>
+</div>
+</div>
+<p><e8><a7>&lt;82&gt;<e5><af>&lt;9f&gt;<e6><ad><a4><e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e9>&lt;9b&gt;&lt;86&gt;<ef><bc>&lt;8c&gt;<e9><a9><ac><e4><b8>&lt;8a&gt;<e5>&lt;8f&gt;<af><e4><bb><a5><e5>&lt;8f&gt;&lt;91&gt;<e7>&lt;8e&gt;<b0><e4><b8>&lt;80&gt;<e4><ba>&lt;9b&gt;<e6>&lt;98&gt;&lt;8e&gt;<e6>&lt;98&gt;<be><e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;8c&gt;&lt;91&gt;<e6>&lt;88&gt;&lt;98&gt;<ef><bc>&lt;9a&gt;<e9><a6>&lt;96&gt;<e5>&lt;85&gt;&lt;88&gt;<ef><bc>&lt;8c&gt;<e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e8>&lt;80&gt;&lt;83&gt;<e8><af>&lt;95&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e6>&lt;98&gt;<af><e6>&lt;97&gt;<a0><e6><b3>&lt;95&gt;<e6><af>&lt;94&gt;<e8><be>&lt;83&gt;<e7>&lt;9a&gt;&lt;84&gt;<e3>&lt;80&gt;&lt;82&gt;<e7>&lt;94&gt;<b1><e4><ba>&lt;8e&gt;<e5><ae>&lt;83&gt;<e4><bb><ac><e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;9d&gt;&lt;87&gt;<e5>&lt;80&gt;<bc><e5>&lt;92&gt;&lt;8c&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5><b7><ae><e7>&lt;9b&gt;<b8><e5><b7><ae><e5><be>&lt;88&gt;<e5><a4><a7><ef><bc>&lt;8c&gt;<e5><af><b9><e5><ae>&lt;83&gt;<e4><bb><ac><e6><b1>&lt;82&gt;<e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e7>&lt;9a&gt;&lt;84&gt;<e5><b9><b3><e5>&lt;9d&gt;&lt;87&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e6>&lt;98&gt;<af><e6><b2><a1><e6>&lt;9c&gt;&lt;89&gt;<e6>&lt;84&gt;&lt;8f&gt;<e4><b9>&lt;89&gt;<e7>&lt;9a&gt;&lt;84&gt;<e3>&lt;80&gt;&lt;82&gt;<e5>&lt;9b&gt;<a0><e6><ad><a4><ef><bc>&lt;8c&gt;<e5>&lt;9c&gt;<a8><e7><bb>&lt;84&gt;<e5>&lt;90&gt;&lt;88&gt;<e8><bf>&lt;99&gt;<e4><ba>&lt;9b&gt;<e8>&lt;80&gt;&lt;83&gt;<e8><af>&lt;95&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e4><b9>&lt;8b&gt;<e5>&lt;89&gt;&lt;8d&gt;<ef><bc>&lt;8c&gt;<e5><bf>&lt;85&gt;<e9><a1><bb><e5><b0>&lt;86&gt;<e5>&lt;85&gt;<b6><e8><bd><ac><e6>&lt;8d&gt;<a2><e4><b8><ba><e5>&lt;8f&gt;<af><e6><af>&lt;94&gt;<e8><be>&lt;83&gt;<e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e3>&lt;80&gt;&lt;82&gt;</e3></a9></bb></e7></e6></e7></be></e8></af></e6></af></e5></ba></b8></e4></a2></e6></ac></bd></e8></b6></e5></b0></e5></bb></a1></e9></bf></e5></bc></ef></e5></b9></e4></a9></bb></e7></e6></af></e8></e8></ba></e4></bf></e8></e5></bb></e7></a8></e5></bc></ef></a4></ad></e6></a0></e5></e3></e7></b9></e4></e6></e6></a1></b2></e6></af></e6></a9></bb></e7></e6></e5></b3></b9></e5></e7></a7></e7></b8></e4></b1></e6></ac></bb></e4></ae></e5></b9></af></e5></bc></ef></a7></a4></e5></be></e5></ae></b7></e5></b8></e7></ae></b7></e5></e5></a0></e6></e5></bc></e5></e5></e7></ac></bb></e4></ae></e5></ba></e4></b1></e7></e3></e7></be></e8></af></e6></b3></e6></a0></e6></af></e6></a9></bb></e7></e6></af></e8></e8></a7></e7></b8></e4></bc></ef></e5></a6></e9></bc></ef></e6></e6></e7></be></e6></e6></ba></e4></b8></e4></b0></e7></e5></a5></bb></e4></af></e5></b8></e4></ac></a9></e9></bc></ef></e9></ae></e6></b0></e6></a4></ad></e6></af></e5></a7></e8></p>
+<p><e5>&lt;9b&gt;<a0><e8>&lt;80&gt;&lt;8c&gt;<ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e5>&lt;81&gt;&lt;9a&gt;<e5><a6>&lt;82&gt;<e4><b8>&lt;8b&gt;<e5><a4>&lt;84&gt;<e7>&lt;90&gt;&lt;86&gt;<ef><bc>&lt;8c&gt;<e5><b0>&lt;86&gt;<e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5>&lt;8c&gt;&lt;96&gt;<ef><bc>&lt;8c&gt;<e8><bf>&lt;99&gt;<e6><a0><b7><e6><af>&lt;8f&gt;<e7><a7>&lt;91&gt;<e8>&lt;80&gt;&lt;83&gt;<e8><af>&lt;95&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e9>&lt;83&gt;<bd><e6>&lt;98&gt;<af><e7>&lt;94&gt;<a8><e5>&lt;8d&gt;&lt;95&gt;<e4><bd>&lt;8d&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5><b7><ae><e6>&lt;9d&gt;<a5><e8><a1><a8><e7><a4><ba><ef><bc>&lt;8c&gt;<e8>&lt;80&gt;&lt;8c&gt;<e9>&lt;9d&gt;&lt;9e&gt;<e5>&lt;8e&gt;&lt;9f&gt;<e5><a7>&lt;8b&gt;<e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;88&gt;&lt;86&gt;<e5>&lt;80&gt;<bc><e5><b0><ba><e5><ba><a6><e8><a1><a8><e7><a4><ba><ef><bc>&lt;9a&gt;</bc></ef></ba></a4></e7></a8></a1></e8></a6></ba></e5></ba></b0></e5></bc></e5></e5></e7></a7></e5></e5></e9></e8></bc></ef></ba></a4></e7></a8></a1></e8></a5></e6></ae></b7></e5></e5></a0></e6></bd></e4></e5></a8></e7></af></e6></bd></e9></a9></bb></e7></e6></af></e8></e8></a7></e7></af></e6></b7></a0></e6></bf></e8></bc></ef></e5></e5></a0></e6></a1></e8></bf></e8></a9></bb></e7></e6></a7></e7></b8></e4></b0></e5></bc></ef></e7></a4></e5></b8></e4></a6></e5></e5></ac></bb></e4></e6></bc></ef></e8></a0></e5></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_ae29a5658cb802de17dfbbf2c1b7e24f">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">z<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(scoredata[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>])</span>
+<span id="cb3-2">z</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             math     science     English
+ [1,]  0.01269128  1.07806562  0.58685145
+ [2,]  1.14336936  1.59143020  0.03667822
+ [3,] -1.02568654 -0.84705156 -0.69688609
+ [4,] -1.64871324 -0.59036927 -1.24705932
+ [5,] -0.06807144 -1.48875728 -0.33010394
+ [6,]  0.12806660 -0.20534583  1.13702468
+ [7,] -1.04876160 -0.84705156 -1.24705932
+ [8,]  1.43180765  1.07806562  1.50380683
+ [9,]  0.83185601  0.30801875  0.95363360
+[10,]  0.24344191 -0.07700469 -0.69688609
+attr(,"scaled:center")
+   math science English 
+  500.9    86.6    21.8 
+attr(,"scaled:scale")
+     math   science   English 
+86.673654  7.791734  5.452828 </code></pre>
+</div>
+</div>
+<p>scale<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e4><b8><ba><e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e5><af><b9><e8><b1><a1><e6>&lt;8c&gt;&lt;89&gt;<e5>&lt;88&gt;&lt;97&gt;<e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e4><b8><ad><e5><bf>&lt;83&gt;<e5>&lt;8c&gt;&lt;96&gt;<ef><bc>&lt;88&gt;center=TRUE<ef><bc>&lt;89&gt;<e6>&lt;88&gt;&lt;96&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5>&lt;8c&gt;&lt;96&gt;<ef><bc>&lt;88&gt;center=TRUE, scale=TRUE<ef><bc>&lt;89&gt;<ef><bc>&lt;8c&gt;<e9><bb>&lt;98&gt;<e8><ae><a4><e6>&lt;83&gt;&lt;85&gt;<e5>&lt;86&gt;<b5><e4><b8>&lt;8b&gt;<ef><bc>&lt;8c&gt;<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0>scale<e5><af><b9><e7>&lt;9f&gt;<a9><e9>&lt;98&gt;<b5><e6>&lt;88&gt;&lt;96&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e6><a1>&lt;86&gt;<e7>&lt;9a&gt;&lt;84&gt;<e6>&lt;8c&gt;&lt;87&gt;<e5><ae>&lt;9a&gt;<e5>&lt;88&gt;&lt;97&gt;<e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e5>&lt;9d&gt;&lt;87&gt;<e5>&lt;80&gt;<bc><e4><b8><ba>0<e3>&lt;80&gt;&lt;81&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5><b7><ae><e4><b8><ba>1<e7>&lt;9a&gt;&lt;84&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5>&lt;8c&gt;&lt;96&gt;<ef><bc>&lt;8c&gt;<e7><bb>&lt;99&gt;<e5>&lt;87&gt;<ba><e5>&lt;90&gt;&lt;84&gt;<e7><a7>&lt;91&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5>&lt;8c&gt;&lt;96&gt;<e5>&lt;90&gt;&lt;8e&gt;<e7>&lt;9a&gt;&lt;84&gt;<e7><bb>&lt;93&gt;<e6>&lt;9e&gt;&lt;9c&gt;<e4><bb><a5><e5>&lt;8f&gt;&lt;8a&gt;<e5>&lt;90&gt;&lt;84&gt;<e7><a7>&lt;91&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;9d&gt;&lt;87&gt;<e5>&lt;80&gt;<bc><e5>&lt;92&gt;&lt;8c&gt;<e6><a0>&lt;87&gt;<e5>&lt;87&gt;&lt;86&gt;<e5><b7><ae><e3>&lt;80&gt;&lt;82&gt;</e3></ae></b7></e5></e5></a0></e6></e5></bc></e5></e5></e7></a9></bb></e7></e6></a7></e7></e5></e5></a5></bb></e4></e6></bb></e7></e7></e5></e5></e5></a0></e6></a9></bb></e7></e6></a7></e7></e5></ba></e5></bb></e7></bc></ef></e5></e5></a0></e6></e7></ba></b8></e4></ae></b7></e5></e5></a0></e6></e3></ba></b8></e4></bc></e5></e5></a1></e8></bf></e8></e5></ae></e5></e6></e7></a1></e6></ae></e6></b0></e6></e6></b5></e9></a9></e7></b9></af></e5></b0></e6></bd></e5></bc></ef></b8></e4></b5></e5></e6></a4></ae></e8></bb></e9></bc></ef></bc></ef></bc></ef></e5></e5></a0></e6></e6></bc></ef></bc></ef></e5></bf></e5></ad></b8></e4></a1></e8></bf></e8></e5></e6></a1></b1></e8></b9></af></e5></ae></e6></b0></e6></ba></b8></e4></b0></e6></bd></e5></p>
+<p><e7>&lt;84&gt;<b6><e5>&lt;90&gt;&lt;8e&gt;<ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e9>&lt;80&gt;&lt;9a&gt;<e8><bf>&lt;87&gt;mean<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e6>&lt;9d&gt;<a5><e8><ae><a1><e7><ae>&lt;97&gt;<e5>&lt;90&gt;&lt;84&gt;<e8><a1>&lt;8c&gt;<e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;9d&gt;&lt;87&gt;<e5>&lt;80&gt;<bc><e4><bb><a5><e8>&lt;8e&gt;<b7><e5><be>&lt;97&gt;<e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7>&lt;9a&gt;&lt;84&gt;<e7><bb><bc><e5>&lt;90&gt;&lt;88&gt;<e8><af>&lt;84&gt;<e4><bb><b7><e5><be>&lt;97&gt;<e5>&lt;88&gt;&lt;86&gt;<ef><bc>&lt;8c&gt;<e5><b9><b6><e4><bd><bf><e7>&lt;94&gt;<a8>cbind<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5><b0>&lt;86&gt;<e5>&lt;85&gt;<b6><e6><b7><bb><e5>&lt;8a&gt;<a0><e5>&lt;88&gt;<b0><e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;8e&gt;&lt;9f&gt;<e5><a7>&lt;8b&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e6><a1>&lt;86&gt;<e4><b8><ad><ef><bc>&lt;9a&gt;</bc></ef></ad></b8></e4></a1></e6></ae></e6></b0></e6></a7></e5></e5></e7></a9></bb></e7></e6></e7></a6></ad></e5></b0></e5></a0></e5></bb></b7></e6></b6></e5></b0></e5></b0></e6></bd></e5></a8></e7></bf></bd></e4></b6></b9></e5></bc></ef></e5></be></e5></b7></bb></e4></af></e8></e5></bc></bb></e7></e7></a9></bb></e7></e6></a7></e7></b8></e4></be></e5></b7></e8></a5></bb></e4></bc></e5></e5></e7></a1></e8></e5></ae></e7></a1></ae></e8></a5></e6></b0></e6></bd></e5></bf></e8></e9></ac></bb></e4></e6></bc></ef></e5></b6></e7></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_8d32f6078d17efc5bfb6ce2adc76be0c">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">Score<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">apply</span>(z, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, mean)</span>
+<span id="cb5-2">Score</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.5592028  0.9238259 -0.8565414 -1.1620473 -0.6289776  0.3532485
+ [7] -1.0476242  1.3378934  0.6978361 -0.1768163</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">scoredata2<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cbind</span>(scoredata, Score)</span>
+<span id="cb7-2">scoredata2</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         studentname math science English      Score
+1         John Davis  502      95      25  0.5592028
+2    Angela Williams  600      99      22  0.9238259
+3   Bullwinkle Moose  412      80      18 -0.8565414
+4        David Jones  358      82      15 -1.1620473
+5  Janice Markhammer  495      75      20 -0.6289776
+6     Cheryl Cushing  512      85      28  0.3532485
+7     Reuven Ytzrhak  410      80      15 -1.0476242
+8          Greg Knox  625      95      30  1.3378934
+9       Joel England  573      89      27  0.6978361
+10      Mary Rayburn  522      86      18 -0.1768163</code></pre>
+</div>
+</div>
+<p>apply<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5>&lt;8f&gt;<af><e5><b0>&lt;86&gt;<e4><b8>&lt;80&gt;<e4><b8><aa><e4><bb><bb><e6>&lt;84&gt;&lt;8f&gt;<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5><ba>&lt;94&gt;<e7>&lt;94&gt;<a8><e5>&lt;88&gt;<b0><e7>&lt;9f&gt;<a9><e9>&lt;98&gt;<b5><e3>&lt;80&gt;&lt;81&gt;<e6>&lt;95&gt;<b0><e7><bb>&lt;84&gt;<e3>&lt;80&gt;&lt;81&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e6><a1>&lt;86&gt;<e7>&lt;9a&gt;&lt;84&gt;<e4><bb><bb><e4><bd>&lt;95&gt;<e7><bb><b4><e5><ba><a6><e4><b8>&lt;8a&gt;<ef><bc>&lt;8c&gt;<e5>&lt;9c&gt;<a8><e7>&lt;9f&gt;<a9><e9>&lt;98&gt;<b5><e6>&lt;88&gt;&lt;96&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e6><a1>&lt;86&gt;<e4><b8><ad><ef><bc>&lt;8c&gt;1<e8><a1><a8><e7><a4><ba><e8><a1>&lt;8c&gt;<ef><bc>&lt;8c&gt;2<e8><a1><a8><e7><a4><ba><e5>&lt;88&gt;&lt;97&gt;<e3>&lt;80&gt;&lt;82&gt;cbind<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e5>&lt;88&gt;&lt;97&gt;<e5>&lt;90&gt;&lt;88&gt;<e5><b9><b6><ef><bc>&lt;8c&gt;<e5><a2>&lt;9e&gt;<e5>&lt;8a&gt;<a0><e5>&lt;88&gt;&lt;97&gt;<e3>&lt;80&gt;&lt;82&gt;</e3></e5></a0></e5></a2></e5></bc></ef></b6></b9></e5></e5></e5></a1></e8></bf></e8></b0></e6></bd></e5></e3></e5></ba></a4></e7></a8></a1></e8></bc></ef></a1></e8></ba></a4></e7></a8></a1></e8></bc></ef></ad></b8></e4></a1></e6></ae></e6></b0></e6></e6></b5></e9></a9></e7></a8></e5></bc></ef></b8></e4></a6></ba></e5></b4></bb></e7></bd></e4></bb></bb></e4></e7></a1></e6></ae></e6></b0></e6></e3></bb></e7></b0></e6></e3></b5></e9></a9></e7></b0></e5></a8></e7></ba></e5></b0></e6></bd></e5></e6></bb></bb></e4></aa></b8></e4></b8></e4></b0></e5></af></e5></b0></e6></bd></e5></p>
+<p><e6>&lt;8e&gt;<a5><e4><b8>&lt;8b&gt;<e6>&lt;9d&gt;<a5><ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e9>&lt;80&gt;&lt;9a&gt;<e8><bf>&lt;87&gt;<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0>quantile<e7><bb>&lt;99&gt;<e5>&lt;87&gt;<ba><e4><b8>&lt;89&gt;<e7><a7>&lt;91&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7><bb><bc><e5>&lt;90&gt;&lt;88&gt;<e8><af>&lt;84&gt;<e4><bb><b7><e5><be>&lt;97&gt;<e5>&lt;88&gt;&lt;86&gt;<e7>&lt;9a&gt;&lt;84&gt;<e7>&lt;99&gt;<be><e5>&lt;88&gt;&lt;86&gt;<e4><bd>&lt;8d&gt;<e6>&lt;95&gt;<b0><ef><bc>&lt;8c&gt;<e5><b0>&lt;86&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e7>&lt;9a&gt;&lt;84&gt;<e7>&lt;99&gt;<be><e5>&lt;88&gt;&lt;86&gt;<e4><bd>&lt;8d&gt;<e6>&lt;95&gt;<b0><e6>&lt;8e&gt;&lt;92&gt;<e5>&lt;90&gt;&lt;8d&gt;<e9>&lt;87&gt;&lt;8d&gt;<e7><bc>&lt;96&gt;<e7><a0>&lt;81&gt;<e4><b8><ba><e4><b8>&lt;80&gt;<e4><b8><aa><e6>&lt;96&gt;<b0><e7>&lt;9a&gt;&lt;84&gt;<e7><b1><bb><e5>&lt;88&gt;<ab><e5>&lt;9e&gt;&lt;8b&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e5>&lt;8f&gt;&lt;98&gt;<e9>&lt;87&gt;&lt;8f&gt;grade<ef><bc>&lt;8c&gt;<e5><a6>&lt;82&gt;<e4><b8>&lt;8b&gt;<ef><bc>&lt;9a&gt;</bc></ef></b8></e4></a6></e5></bc></ef></e9></e5></a9></bb></e7></e6></e5></ab></e5></bb></b1></e7></e7></b0></e6></aa></b8></e4></b8></e4></ba></b8></e4></a0></e7></bc></e7></e9></e5></e6></b0></e6></bd></e4></e5></be></e7></e7></e7></a6></ad></e5></b0></e5></bc></ef></b0></e6></bd></e4></e5></be></e7></e7></e5></be></e5></b7></bb></e4></af></e8></e5></bc></bb></e7></a9></bb></e7></e6></a7></e7></b8></e4></ba></e5></bb></e7></b0></e6></bd></e5></bf></e8></e9></ac></bb></e4></e6></bc></ef></a5></e6></b8></e4></a5></e6></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-4_6c0f2d74da3ade1adcb73be9d1483faa">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">y<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">quantile</span>(Score, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>))</span>
+<span id="cb9-2">y</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       80%        60%        40%        20% 
+ 0.7430341  0.4356302 -0.3576808 -0.8947579 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]]<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span></span>
+<span id="cb11-2">scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]]<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span></span>
+<span id="cb11-3">scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span></span>
+<span id="cb11-4">scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"D"</span></span>
+<span id="cb11-5">scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"E"</span></span>
+<span id="cb11-6">scoredata2</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         studentname math science English      Score grade
+1         John Davis  502      95      25  0.5592028     B
+2    Angela Williams  600      99      22  0.9238259     A
+3   Bullwinkle Moose  412      80      18 -0.8565414     D
+4        David Jones  358      82      15 -1.1620473     E
+5  Janice Markhammer  495      75      20 -0.6289776     D
+6     Cheryl Cushing  512      85      28  0.3532485     C
+7     Reuven Ytzrhak  410      80      15 -1.0476242     E
+8          Greg Knox  625      95      30  1.3378934     A
+9       Joel England  573      89      27  0.6978361     B
+10      Mary Rayburn  522      86      18 -0.1768163     C</code></pre>
+</div>
+</div>
+<p>quantile<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e6><b1>&lt;82&gt;<e5>&lt;88&gt;&lt;86&gt;<e4><bd>&lt;8d&gt;<e6>&lt;95&gt;<b0><ef><bc>&lt;8c&gt;<e8><bf>&lt;99&gt;<e9>&lt;87&gt;&lt;8c&gt;<e6><b1>&lt;82&gt;Score<e6>&lt;95&gt;<b0><e5>&lt;80&gt;<bc><e5>&lt;9e&gt;&lt;8b&gt;<e5>&lt;90&gt;&lt;91&gt;<e9>&lt;87&gt;&lt;8f&gt;<e7>&lt;9a&gt;&lt;84&gt;20%<e3>&lt;80&gt;&lt;81&gt;40%<e3>&lt;80&gt;&lt;81&gt;60%<e5>&lt;92&gt;&lt;8c&gt;80%<e5>&lt;88&gt;&lt;86&gt;<e4><bd>&lt;8d&gt;<e7>&lt;82&gt;<b9><e3>&lt;80&gt;&lt;82&gt;</e3></b9></e7></bd></e4></e5></e5></e3></e3></e7></e9></e5></e5></bc></e5></b0></e6></b1></e6></e9></bf></e8></bc></ef></b0></e6></bd></e4></e5></b1></e6></b0></e6></bd></e5></p>
+<p><e6>&lt;8e&gt;<a5><e4><b8>&lt;8b&gt;<e6>&lt;9d&gt;<a5><ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e4><bd><bf><e7>&lt;94&gt;<a8>strsplit<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e4><bb><a5><e7><a9><ba><e6><a0><bc><e6>&lt;8a&gt;&lt;8a&gt;<e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e5><a7>&lt;93&gt;<e5>&lt;90&gt;&lt;8d&gt;<e6>&lt;8b&gt;&lt;86&gt;<e5>&lt;88&gt;&lt;86&gt;<e4><b8><ba><e5><a7>&lt;93&gt;<e6><b0>&lt;8f&gt;<e5>&lt;92&gt;&lt;8c&gt;<e5>&lt;90&gt;&lt;8d&gt;<e5><ad>&lt;97&gt;<ef><bc>&lt;9a&gt;</bc></ef></ad></e5></e5></e5></b0></e6></a7></e5></ba></b8></e4></e5></e6></e5></a7></e5></e7></a6></ad></e5></e6></bc></a0></e6></ba></a9></e7></a5></bb></e4></b0></e6></bd></e5></a8></e7></bf></bd></e4></ac></bb></e4></e6></bc></ef></a5></e6></b8></e4></a5></e6></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-5_accfb3a3618bdd484bac7630df246cd0">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">name<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strsplit</span>(scoredata2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>studentname, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>)</span>
+<span id="cb13-2">name</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "John"  "Davis"
+
+[[2]]
+[1] "Angela"   "Williams"
+
+[[3]]
+[1] "Bullwinkle" "Moose"     
+
+[[4]]
+[1] "David" "Jones"
+
+[[5]]
+[1] "Janice"     "Markhammer"
+
+[[6]]
+[1] "Cheryl"  "Cushing"
+
+[[7]]
+[1] "Reuven"  "Ytzrhak"
+
+[[8]]
+[1] "Greg" "Knox"
+
+[[9]]
+[1] "Joel"    "England"
+
+[[10]]
+[1] "Mary"    "Rayburn"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">lastname<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(name, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"["</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb15-2">firstname<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(name, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"["</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb15-3">scoredata3<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cbind</span>(firstname, lastname, scoredata2[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb15-4">scoredata3</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    firstname   lastname math science English      Score grade
+1        John      Davis  502      95      25  0.5592028     B
+2      Angela   Williams  600      99      22  0.9238259     A
+3  Bullwinkle      Moose  412      80      18 -0.8565414     D
+4       David      Jones  358      82      15 -1.1620473     E
+5      Janice Markhammer  495      75      20 -0.6289776     D
+6      Cheryl    Cushing  512      85      28  0.3532485     C
+7      Reuven    Ytzrhak  410      80      15 -1.0476242     E
+8        Greg       Knox  625      95      30  1.3378934     A
+9        Joel    England  573      89      27  0.6978361     B
+10       Mary    Rayburn  522      86      18 -0.1768163     C</code></pre>
+</div>
+</div>
+<p>strsplit<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5><ba>&lt;94&gt;<e7>&lt;94&gt;<a8><e5>&lt;88&gt;<b0><e4><b8>&lt;80&gt;<e4><b8><aa><e5><ad>&lt;97&gt;<e7><ac><a6><e4><b8><b2><e5>&lt;90&gt;&lt;91&gt;<e9>&lt;87&gt;&lt;8f&gt;<e4><b8>&lt;8a&gt;<e4><bc>&lt;9a&gt;<e8><bf>&lt;94&gt;<e5>&lt;9b&gt;&lt;9e&gt;<e4><b8>&lt;80&gt;<e4><b8><aa><e5>&lt;88&gt;&lt;97&gt;<e8><a1><a8><ef><bc>&lt;8c&gt;<e4><bd><bf><e7>&lt;94&gt;<a8>sapply<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5>&lt;88&gt;&lt;86&gt;<e5>&lt;88&gt;<ab><e6>&lt;8f&gt;&lt;90&gt;<e5>&lt;8f&gt;&lt;96&gt;<e5>&lt;88&gt;&lt;97&gt;<e8><a1><a8><e4><b8><ad><e6><af>&lt;8f&gt;<e4><b8><aa><e6>&lt;88&gt;&lt;90&gt;<e5>&lt;88&gt;&lt;86&gt;<e7>&lt;9a&gt;&lt;84&gt;<e7><ac><ac><e4><b8>&lt;80&gt;<e4><b8><aa><e5>&lt;85&gt;&lt;83&gt;<e7><b4><a0><e5>&lt;92&gt;&lt;8c&gt;<e7><ac><ac><e4><ba>&lt;8c&gt;<e4><b8><aa><e5>&lt;85&gt;&lt;83&gt;<e7><b4><a0><ef><bc>&lt;8c&gt;<code>[</code><e6>&lt;98&gt;<af><e4><b8>&lt;80&gt;<e4><b8><aa><e5>&lt;8f&gt;<af><e4><bb><a5><e6>&lt;8f&gt;&lt;90&gt;<e5>&lt;8f&gt;&lt;96&gt;<e6>&lt;9f&gt;&lt;90&gt;<e4><b8><aa><e5><af><b9><e8><b1><a1><e7>&lt;9a&gt;&lt;84&gt;<e4><b8>&lt;80&gt;<e9>&lt;83&gt;<a8><e5>&lt;88&gt;&lt;86&gt;<e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><ef><bc>&lt;8c&gt;<e5>&lt;86&gt;&lt;8d&gt;<e4><bd><bf><e7>&lt;94&gt;<a8>cbind<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e5><b0>&lt;86&gt;<e5><ae>&lt;83&gt;<e4><bb><ac><e6><b7><bb><e5>&lt;8a&gt;<a0><e5>&lt;88&gt;<b0><e5><ad><a6><e7>&lt;94&gt;&lt;9f&gt;<e6>&lt;88&gt;&lt;90&gt;<e7><bb><a9><e7>&lt;9a&gt;&lt;84&gt;<e5>&lt;8e&gt;&lt;9f&gt;<e5><a7>&lt;8b&gt;<e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e4><b8><ad><e3>&lt;80&gt;&lt;82&gt;</e3></ad></b8></e4></ae></e6></b0></e6></a7></e5></e5></e7></a9></bb></e7></e6></e7></a6></ad></e5></b0></e5></a0></e5></bb></b7></e6></ac></bb></e4></ae></e5></b0></e5></b0></e6></bd></e5></a8></e7></bf></bd></e4></e5></bc></ef></b0></e6></bd></e5></e7></e5></a8></e9></b8></e4></e7></a1></b1></e8></b9></af></e5></aa></b8></e4></e6></e5></e6></a5></bb></e4></af></e5></aa></b8></e4></b8></e4></af></e6></bc></ef></a0></b4></e7></e5></aa></b8></e4></ba></e4></ac></ac></e7></e5></a0></b4></e7></e5></aa></b8></e4></b8></e4></ac></ac></e7></e7></e5></e6></aa></b8></e4></af></e6></ad></b8></e4></a8></a1></e8></e5></e5></e6></ab></e5></e5></b0></e6></bd></e5></a8></e7></bf></bd></e4></bc></ef></a8></a1></e8></e5></aa></b8></e4></b8></e4></e5></bf></e8></bc></e4></b8></e4></e9></e5></b2></b8></e4></a6></ac></e7></ad></e5></aa></b8></e4></b8></e4></b0></e5></a8></e7></ba></e5></b0></e6></bd></e5></p>
+<p><e6>&lt;9c&gt;&lt;80&gt;<e5>&lt;90&gt;&lt;8e&gt;<ef><bc>&lt;8c&gt;<e6>&lt;88&gt;&lt;91&gt;<e4><bb><ac><e4><bd><bf><e7>&lt;94&gt;<a8>order<e5>&lt;87&gt;<bd><e6>&lt;95&gt;<b0><e4><be>&lt;9d&gt;<e5><a7>&lt;93&gt;<e6><b0>&lt;8f&gt;<e5>&lt;92&gt;&lt;8c&gt;<e5>&lt;90&gt;&lt;8d&gt;<e5><ad>&lt;97&gt;<e5><af><b9><e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e9>&lt;9b&gt;&lt;86&gt;<e8><bf>&lt;9b&gt;<e8><a1>&lt;8c&gt;<e6>&lt;8e&gt;&lt;92&gt;<e5><ba>&lt;8f&gt;<ef><bc>&lt;8c&gt;<e5><ae>&lt;8c&gt;<e6>&lt;88&gt;&lt;90&gt;<e8><bf>&lt;99&gt;<e4><b8><aa><e6>&lt;95&gt;<b0><e6>&lt;8d&gt;<ae><e4><bb><bb><e5>&lt;8a&gt;<a1><e3>&lt;80&gt;&lt;82&gt;</e3></a1></e5></bb></bb></e4></ae></e6></b0></e6></aa></b8></e4></bf></e8></e6></ae></e5></bc></ef></ba></e5></e6></a1></e8></bf></e8></e9></ae></e6></b0></e6></b9></af></e5></ad></e5></e5></e5></b0></e6></a7></e5></be></e4></b0></e6></bd></e5></a8></e7></bf></bd></e4></ac></bb></e4></e6></bc></ef></e5></e6></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-6_f5d4809378d27bdaf98f65c11a8c66b6">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">scoredata4<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> scoredata3[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(lastname, firstname),]</span>
+<span id="cb17-2">scoredata4</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    firstname   lastname math science English      Score grade
+6      Cheryl    Cushing  512      85      28  0.3532485     C
+1        John      Davis  502      95      25  0.5592028     B
+9        Joel    England  573      89      27  0.6978361     B
+4       David      Jones  358      82      15 -1.1620473     E
+8        Greg       Knox  625      95      30  1.3378934     A
+5      Janice Markhammer  495      75      20 -0.6289776     D
+3  Bullwinkle      Moose  412      80      18 -0.8565414     D
+10       Mary    Rayburn  522      86      18 -0.1768163     C
+2      Angela   Williams  600      99      22  0.9238259     A
+7      Reuven    Ytzrhak  410      80      15 -1.0476242     E</code></pre>
+</div>
+</div>
+<section id="did-you-find-this-page-helpful-consider-sharing-it-9f998c" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it-9f998c">Did you find this page helpful? Consider sharing it <f0>&lt;9f&gt;&lt;99&gt;&lt;8c&gt;</f0></h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>r</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/06/index.html</guid>
+  <pubDate>Thu, 06 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>计算机概论7–操作系统</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/02/05/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>我们前面提到，在早期想要让计算机执行程序就得要参考一堆硬件功能函数，并且学习机器语言才能够编写程序，同时由于硬件与软件功能不一定一致，每次编写程序时都必须要重新改写，非常的麻烦。</p>
+<p>如果能够将所有的硬件都驱动，并且提供一个软件的参考接口来给工程师开发软件，开发软件无疑会变得简单得多，而这就是操作系统（Operating System，OS）。</p>
+<section id="操作系统内核kernel" class="level3">
+<h3 class="anchored" data-anchor-id="操作系统内核kernel">操作系统内核（Kernel）</h3>
+<p>操作系统其实也是一组程序，这组程序的重点在于管理计算机的所有活动以及驱动系统中的所有硬件。硬件的所有操作都必须要通过操作系统来实现，而这一功能的实现就是靠操作系统的内核完成。你的计算机能不能完成一些任务，都与内核有关。只有内核提供的功能，你的计算机系统才能帮你完成。举例来说，如果你的内核并不支持TCP/IP的网络协议，那么无论你配置什么样的网卡，这个内核都无法提供网络功能。</p>
+<p>内核主要在管理硬件与提供相关的功能（读写硬盘、网络功能、CPU资源分配等），这些管理的操作都非常重要。如果用户能够直接使用到内核的话，一旦不小心将内核程序停止或破坏，将会导致整个系统的崩溃。因此内核程序放置到内存当中的区块是受保护的，并且启动后就一直常驻在内存之中。</p>
+</section>
+<section id="系统调用" class="level3">
+<h3 class="anchored" data-anchor-id="系统调用">系统调用</h3>
+<p>既然硬件都是由内核管理的，那么如果开发人员想要开发软件的话，自然就得要参考这个内核的相关功能。这样一来，还是从原本的参考硬件函数变成参考内核功能，还是一样的麻烦。</p>
+<p>为了解决这个问题，操作系统通常会提供一套应用程序编程接口（Application Programming Interface，API）即系统调用层给程序员来开发软件，开发人员只要遵守该API公认的系统调用参数就可以比较容易地开发软件了。举例来说，我们学习C语言只要参考C语言的函数即可，不需要再去考虑其他内核的相关功能，因为内核的系统调用接口会主动地将C语言的相关语法转成内核可以了解的任务函数，内核自然就能够顺利地运行该程序。</p>
+<p>内核只会进行计算机系统的资源分配，所以系统还需要有应用程序的提供，才能够供用户使用。应用程序与内核有比较大的关系，与硬件关系则不大；硬件也与内核有比较大的关系，至于与用户直接有关的则是应用程序。</p>
+<p>有几点需要注意：</p>
+<ul>
+<li><p>操作系统的内核层直接参考硬件规格写成，所以同一个操作系统程序不能够在不一样的硬件架构上运行；</p></li>
+<li><p>操作系统只是管理整个硬件资源，包括CPU、内存、输入输出设备及文件系统等，如果没有其他的应用程序辅助，操作系统只能让计算机处于准备妥当的状态之中，无法完成用户所想要的功能；</p></li>
+<li><p>应用程序的开发都是参考操作系统的API，所以该程序只能在该操作系统当中运行，不能在其他操作系统上运行。所以有些游戏不能够在Linux上安装运行。</p></li>
+</ul>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>linux</category>
+  <guid>https://leslie-lu.github.io/blog/2020/02/05/index.html</guid>
+  <pubDate>Wed, 05 Feb 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>样本量和检验效能的估计问题</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/03/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/04/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1722,7 +2610,7 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <category>biostatistics</category>
   <category>sample size</category>
   <category>power</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/03/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/04/index.html</guid>
   <pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281607494.webp" medium="image" type="image/webp"/>
 </item>
@@ -2912,603 +3800,6 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <guid>https://leslie-lu.github.io/blog/2020/01/07/index.html</guid>
   <pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201448332.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Python基础要素之数值</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/06/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</p>
-<section id="数值" class="level3">
-<h3 class="anchored" data-anchor-id="数值">数值</h3>
-<p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
-<p>整数：</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span></span>
-<span id="cb1-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #4: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(x))</span>
-<span id="cb1-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #5: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>))</span>
-<span id="cb1-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #6: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8.3</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2.7</span>)))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #4: 9
-Output #5: 81
-Output #6: 4.0</code></pre>
-</div>
-</div>
-<p>Output #6演示了将数值转换成整数并进行除法运算。</p>
-<p>浮点数：</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #7: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.3f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8.3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2.7</span>))</span>
-<span id="cb3-2">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2.5</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4.8</span></span>
-<span id="cb3-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #8: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.1f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(y))</span>
-<span id="cb3-4">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">float</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb3-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #9: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.2f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(r))</span>
-<span id="cb3-6"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #10: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.4f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8.0</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #7: 3.074
-Output #8: 12.0
-Output #9: 2.67
-Output #10: 2.6667</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#!/usr/bin/env python3</span></span>
-<span id="cb5-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> math <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> exp, log, sqrt</span>
-<span id="cb5-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #11: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.4f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(exp(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)))</span>
-<span id="cb5-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #12: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.2f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(log(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>)))</span>
-<span id="cb5-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #13: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:.1f}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(sqrt(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">81</span>)))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #11: 20.0855
-Output #12: 1.39
-Output #13: 9.0</code></pre>
-</div>
-</div>
-</section>
-<section id="format格式化" class="level3">
-<h3 class="anchored" data-anchor-id="format格式化">.format格式化</h3>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Add two numbers together</span></span>
-<span id="cb7-2">x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span></span>
-<span id="cb7-3">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb7-4">z <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> y</span>
-<span id="cb7-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #2: Four plus five equals </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0:d}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">."</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(z))</span>
-<span id="cb7-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Add two lists together</span></span>
-<span id="cb7-7">a <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>]</span>
-<span id="cb7-8">b <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"first"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"second"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"third"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"fourth"</span>]</span>
-<span id="cb7-9">c <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> a <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> b</span>
-<span id="cb7-10"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Output #3: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{0}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{1}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{2}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(a, b, c))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #2: Four plus five equals 9.
-Output #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']</code></pre>
-</div>
-</div>
-</section>
-<section id="type函数" class="level3">
-<h3 class="anchored" data-anchor-id="type函数">type函数</h3>
-<p>Python提供一个名为type的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</p>
-<p>函数的语法非常简单：type(variable)会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</p>
-<p>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用type函数，不仅是变量，还有函数、语句等。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/06/index.html</guid>
-  <pubDate>Mon, 06 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201435557.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>可惜没如果——因果关系的三个层级</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/05/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="前言" class="level3">
-<h3 class="anchored" data-anchor-id="前言">前言</h3>
-<p>我们平时在统计中最常接触到的就是相关关系，而在因果推断中，实际上相关关系是处在因果关系三个层级的最低层级。正如我们所熟知的，相关不能说明因果，我们从观察到的数据中得到的相关对于因果的解释并不能起到直接的作用。</p>
-</section>
-<section id="因果关系的三个层级" class="level3">
-<h3 class="anchored" data-anchor-id="因果关系的三个层级">因果关系的三个层级</h3>
-<section id="第一层级关联" class="level4">
-<h4 class="anchored" data-anchor-id="第一层级关联">第一层级：关联</h4>
-<p>我们一般通过观察寻找规律。如果观察到某一事件改变了观察到另一事件的可能性，我们便说这一事件与另一事件相关联。更进一步地，我们基于被动观察做出预测。</p>
-<p>典型的数据预测问题就是：“如果我观察到···会怎样？”例如，一家商店可能会问你：“购买牙膏的顾客同时购买牙线的可能性有多大？”这类问题是统计学的安身立命之本，统计学家主要通过收集和分析数据给出答案。</p>
-<p>我们可以这样解答：首先采集所有顾客购物行为的数据，筛选出购买牙膏的顾客，计算出当中购买牙线的人数比例。这个比例也就是我们所说的条件概率，用来反映(针对大数据)买牙膏和买牙线两种行为之间的关联程度，即P(牙线|牙膏)。典型常用的关联度量方法即相关分析或回归分析，具体操作就是将一条直线拟合到数据点集中，再去确定这条直线的斜率。</p>
-<p>我们在学习统计的时候，几乎所有老师都会和你说：“相关不代表因果。”统计学本身不能告诉我们，牙膏或牙线哪个是因，哪个是果。但是从商店的角度看，因果这件事并不重要——好的预测无需好的解释。</p>
-<p>当前的机器学习程序(包括应用深度神经网络的程序)几乎仍然完全是在关联模式下运行的。它们由一系列观察结果驱动，致力于拟合出一个函数，就像我们试图用点集拟合出一条直线一样。深度神经网络为拟合函数的复杂性增加了更多的层次，但其拟合过程仍然由原始数据驱动。如果无人驾驶汽车的程序设计者想让汽车在新情况下做出不同的反应，他就必须明确地在程序中添加这些新反应的描述代码，否则机器没有应对新情况的灵活性和适应性。</p>
-</section>
-<section id="第二层级干预" class="level4">
-<h4 class="anchored" data-anchor-id="第二层级干预">第二层级：干预</h4>
-<p>在第一层级中，我们基于被动观察发现规律，做出预测。而当我们开始寻求主动对环境做出改变时，我们就迈上了因果关系的第二层级。这一层级的一个典型问题是：“如果我们把牙膏的价格翻倍，牙线的销售额将会怎样？”问出这个问题的时候，我们实际上已经脱离了收集到的数据本身，而要对数据的环境做出干预。我们把这样的问题记作P(牙线|do(牙膏))，即“如果我们实施…行动，将会怎样”。</p>
-<p>毫无疑问，干预比关联更高级，因为其不仅涉及被动观察，还涉及主动改变现状。无论你的数据集有多大、神经网络有多深，只要你使用的是被动收集的数据，就无法回答有关干预的问题。从统计学中学到的任何方法都不足以让我们明确表述类似“如果价格翻倍将会发生什么”这样的问题，更谈不上回答了。</p>
-<p>为什么我们无法仅仅通过观察来回答牙线的问题呢？为什么不直接进入存有历史购买信息的数据库中，看看在牙膏价格翻倍的情况下对应的牙线的销售情况呢？原因在于，在历史销售信息中，牙膏涨价可能是出于完全不同的原因，如产品供不应求，其他商店也不得不涨价等。而我们只想刻意干预牙膏价格，这一结果就可能与历史上顾客在别处买不到便宜牙膏时的购买行为大相径庭。简单地说，我们只想知道单纯的牙膏涨价这个因所对应的牙线的果，而历史数据中各种影响因素完全超出了我们所提出问题的范畴，因而无法仅仅利用观察历史数据来回答干预的问题。</p>
-<p>因果推断则可以帮助我们解决这一问题。</p>
-<p>我们知道预测干预结果的一种非常直接的方法是：在严格控制的条件下进行实验。更加有趣的是，一个足够强大准确的因果模型可以在不进行实验的前提下，利用第一层级（关联）的数据来回答第二层级（干预）的问题。</p>
-<p>日常生活中，我们一直都在实施干预，尽管我们不会这么一本正经地称呼它。当我们服用阿司匹林试图治疗头痛时，就是在干预一个变量（人体内阿司匹林的量），以影响另一个变量（头痛的状态）。如果我们关于阿司匹林治愈头痛的因果知识是正确的，那么我们的结果变量的值将会从“头痛”变为“不头痛”。</p>
-</section>
-<section id="第三层级反事实" class="level4">
-<h4 class="anchored" data-anchor-id="第三层级反事实">第三层级：反事实</h4>
-<p>但是到此仍然不能回答所有我们感兴趣的因果问题：现在已经不头痛了，是因为我吃的阿司匹林么？是因为我吃的食物么？是因为我心情变好了么？</p>
-<p>正是这些问题将我们带入到因果关系的第三层级：反事实。要回答以上问题，我们就必须回到过去改变历史，“假如我们没有服用过阿司匹林，会怎样？”世界上没有哪个实验可以撤销对一个已接受过治疗的人所进行的治疗，进而比较治疗与未治疗两种条件下的结果。</p>
-<p>数据就是事实，而在反事实世界里，观察到的事实被完全否定。回到牙膏的例子，第三层级的问题是：“假如我们把牙膏价格翻倍，之前买了牙膏的顾客仍然选择购买的概率是多少？”在这个问题中，我们所做的就是将真实的世界（我们知道顾客以当前的价格购买了牙膏）和虚构的世界（牙膏价格翻倍）进行对比。</p>
-<p>“倘若那天，把该说的话好好说，该体谅的不执着，你会怎么做？”对这类问题的回答让我们得以从历史和他人的经验中获取经验教训。从想象的反事实中，我们获得了灵活性、反省能力以及改善行为的能力。</p>
-<p>因果关系第三层级的典型问题就是：”假如我当时做了…会怎样？“和“为什么？”两者都涉及观察到的世界与反事实世界的比较。仅靠干预实验无法回答这样的问题。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>causal inference</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/05/index.html</guid>
-  <pubDate>Sun, 05 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201409351.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Python初体验</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/04/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>目前Python这门语言有多火也不用多说，各种公众号推送制造的焦虑让你感觉实在不学不行，接下来我们就来体验一下别人口中的这门似乎很神奇的编程语言。</p>
-<section id="创建python脚本" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="创建python脚本">创建Python脚本</h3>
-<p>Python的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入“python3”，按下回车键，就能看见Python提示符（&gt;&gt;&gt;）：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/04/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201333812.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Python提示符</figcaption>
-</figure>
-</div>
-<p>面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本 ，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter notebook、Visual Studio code等。打开编辑器，一般我们将 #!/usr/bin/env python3 作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为first-script.py文件，这就是一个简单的Python脚本了。</p>
-</section>
-<section id="运行python脚本" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="运行python脚本">运行Python脚本</h3>
-<p>对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/04/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201335674.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Pycharm运行按钮</figcaption>
-</figure>
-</div>
-<p>当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：/Users/luzhen。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/04/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201336038.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">终端切换目录</figcaption>
-</figure>
-</div>
-<p>mac上下一步就是为脚本添加执行权限，输入命令：<code>chmod +x first-script.py</code>。chmod是一个Unix命令，表示改变访问权限（change access mode）。+x表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。</p>
-<p>接下来就可以运行脚本了：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/04/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201337790.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">终端运行脚本</figcaption>
-</figure>
-</div>
-<p>可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入<img src="https://latex.codecogs.com/png.latex?python3%20first-script.py">，也可成功执行脚本，mac上同样适用。</p>
-</section>
-<section id="与命令行交互的几个小技巧" class="level3">
-<h3 class="anchored" data-anchor-id="与命令行交互的几个小技巧">与命令行交互的几个小技巧</h3>
-<ul>
-<li>使用向上箭头键得到以前的命令</li>
-</ul>
-<p>在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。</p>
-<ul>
-<li>用Ctrl+c停止脚本</li>
-</ul>
-<p>我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是Ctrl+C，mac是Control+c，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）</p>
-<ul>
-<li>读懂出错信息并找到解决方案</li>
-</ul>
-<p>当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。</p>
-<p>这样以后，接下来我们就可以来了解认识Python的语言基础要素了。人生苦短，一起学习Python。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>pycharm</category>
-  <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/04/index.html</guid>
-  <pubDate>Sat, 04 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201332191.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>因果推断-2</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/02/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="统计值的不确定性意味着什么" class="level3">
-<h3 class="anchored" data-anchor-id="统计值的不确定性意味着什么">统计值的不确定性意味着什么？</h3>
-<p>统计推断利用统计方法生成一个问题答案的实际估计值，并给出对该估计值的不确定性大小的统计估计。这种不确定性反映了样本数据集的代表性以及可能存在的测量误差或数据缺失。数据永远是从理论上无限的总体中抽取的有限样本。我们无法避免根据样本测量的概率无法代表整个总体的相应概率的可能性。统计学提供了很多方法来应对这种不确定性，包括极大似然估计、倾向评分、置信区间、显著性检验等。</p>
-</section>
-<section id="相关与独立" class="level3">
-<h3 class="anchored" data-anchor-id="相关与独立">相关与独立</h3>
-<p>以因果模型的路径图(因果图)来表示的变量之间的听从模式通常会导向数据中某种显而易见的模式或者相关关系。“A和B之间没有连接路径”翻译成统计语言，就是“A和B相互独立”，即发现A的存在不会改变B发生的可能性。</p>
-</section>
-<section id="想象力与规划" class="level3">
-<h3 class="anchored" data-anchor-id="想象力与规划">想象力与规划</h3>
-<p>历史学家尤瓦尔·赫拉利在他的《人类简史》一书中指出，人类祖先想象不存在之物的能力是一切的关键，正是这种能力让他们得以交流得更加顺畅。在获得这种能力之前，他们只相信自己的直系亲属或者本部落的人。而此后，信任就因共同的幻想(例如信仰无形但可想象的神，信仰来世，或者信仰领袖的神性)和期许而延伸到了更大的群体。我们的智人祖先新掌握的因果想象力使他们能够通过一种被我们称为“规划”的复杂过程更有效地完成许多事情，例如他们可以通过想象和比较几个狩猎策略的结果来完成一次狩猎活动。而要做到这一点，思维主体必须具备一个可供参考并且可以自主调整的关于狩猎现实的心理模型。心理模型是施展想象力的舞台，它使我们可以通过对模型局部的自主调整修改来试验重估不同情景的概率，人类的心理模型因而具有一种模块性，其涉及预测对环境进行刻意改变后的结果，并根据预测结果选择行为方案以催生出自己所期待的结果。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>causal inference</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/02/index.html</guid>
-  <pubDate>Thu, 02 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201322870.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>鼠年加油</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/01/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div style="text-align: center;">
-<p>回望一幕幕送别<br> 何尝不轻描淡写<br> 独自出姑苏城外<br> 流光未曾相约<br> 他日他乡重逢<br> 风轻柔河流缓缓</p>
-</div>
-<div style="text-align: center;">
-<p>新年快乐，鼠年加油<br> 没有珍惜的时间，2020开始去珍惜<br> 没有完成的事情，2020开始去完成<br> 从来不相信鸡汤，也不制造鸡汤<br> 等2021年再回顾这一年<br> 希望感受到的不再是很多尴尬的空白<br> 每到新的一年，你的朋友圈是不是也有刷屏的感慨和祝福<br> 一年初始，心愿是美好的<br> 如果能坚持做下去，该是多么圆满<br> 新年少偷点懒，多学习新东西<br> 多看看书，多写点公众号😂<br> 多做一些分享，和小伙伴们共同进步<br> 希望每个你新年新气象，活成你想要的样子<br> 感谢你的关注❤️<br></p>
-</div>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>happy new year</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/01/index.html</guid>
-  <pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201229510.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>因果推断</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2019/12/11/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="因果推断" class="level3">
-<h3 class="anchored" data-anchor-id="因果推断">因果推断</h3>
-<p>禁止言论就意味着禁止了思想，同时也扼杀了与此相关的原则、方法和工具。</p>
-</section>
-<section id="干预" class="level3">
-<h3 class="anchored" data-anchor-id="干预">干预</h3>
-<p>do算子表明正在进行主动干预而非被动观察，这一概念在经典统计学中没有涉及。临床试验中使用do算子来确保观察到的病人存活期的变化能完全归因于药物本身，而没有混杂其他影响寿命长短的因素。如果不进行干预而让病人自行决定是否服用该药物，那么其他因素就可能会影响病人的决定，而服药和未服药的两组病人的存活期的差异也就无法再被仅仅归因于药物。例如，假设只有重症期的病人服用了这种药，那么两组之间的比较结果实际上反映的是其病情的严重程度，而非药物的影响。在数学上，我们把自行服药病人的生存期的观测概率称为条件概率，这里的概率是以观察到病人服用药物为条件的。【观察到】和【进行干预】是有本质的区别的。我们不认为气压计读数下降是风暴来临的原因，因为观察到气压计读数下降意味着风暴来临的概率增加，但人为使气压计读数下降并不能影响风暴来临的概率。因果推断要做的就是如何在不实际实施干预的情况下预测干预的效果。</p>
-</section>
-<section id="反事实" class="level3">
-<h3 class="anchored" data-anchor-id="反事实">反事实</h3>
-<p>假如某人在服用某种药物一个月后死亡，我们现在要关注的问题就是这种药物是否导致了他的死亡。为了回答这个问题，我们需要假设：如果他没服用这种药物，是否会避免死亡？反事实推理输出有关反事实世界的答案。</p>
-<p>语言会塑造思想。你无法回答一个你提不出来的问题；你也无法提出一个你的语言所不能描述的问题。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>statistics</category>
-  <category>biostatistics</category>
-  <category>causal inference</category>
-  <guid>https://leslie-lu.github.io/blog/2019/12/11/index.html</guid>
-  <pubDate>Wed, 11 Dec 2019 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408182144602.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>统计学是干嘛的？</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2019/11/28/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>统计学之所以存在，关键的原因只有一个，那就是变异及由此产生的抽样误差。没有变异，没有抽样误差，就没有统计学存在的理由。当我们把多个随机结果放在一起的时候，却能发现一定的规律性。正是因为这种规律的存在，所以我们仍然可以在变异中寻找规律，这也正是统计学的主要目的：从各种看似杂乱的现象中找出潜在的规律。</p>
-<section id="抽样调查" class="level3">
-<h3 class="anchored" data-anchor-id="抽样调查">抽样调查</h3>
-<p>既然是规律，那就一定要在大多数人中存在，只在一小部分人中存在的现象不是规律，而是偶然，因为更多的是大多数人没有存在该现象，这才是规律。要证明一种现象是不是真正的规律，需要在大量人群中进行验证。由于我们无法接触到理论意义上的总体，因而我们换一种思路，调查部分具有代表性的样本，然后用统计学方法将样本的结果推广到总体，这就是我们所说的抽样调查。</p>
-</section>
-<section id="统计推断与参数估计" class="level3">
-<h3 class="anchored" data-anchor-id="统计推断与参数估计">统计推断与参数估计</h3>
-<p>统计学通常利用样本数据来推断总体结果，就是我们所说的用样本统计量推断总体参数。总体参数是客观存在的，经典的频率主义学派认为，总体参数是一个客观存在且固定的数值，而贝叶斯学派认为连总体参数自身也是个随机变量，所以也需要我们去估计。样本随机，样本统计量也是随机的，用它来估计总体参数，估计结果会存在一定的误差。但科学合理的抽样调查，其推断的结果是可靠的。偏差的样本会导致偏差的结论。样本必须足够代表总体。当然还需要考虑其他因素，比如调查员的水平、总体人群的变化等影响因素。</p>
-</section>
-<section id="抽样误差" class="level3">
-<h3 class="anchored" data-anchor-id="抽样误差">抽样误差</h3>
-<p>然而，即使代表性非常好的样本，也是无法真正等同于总体的，总会存在一定的抽样误差。样本统计量之间的差异就反映了抽样误差。由于抽样误差的存在，如果用样本统计量直接估计总体参数，那么肯定会有一定的偏差。所以在估计总体参数时需要考虑到抽样误差带来的偏差，因而我们在点估计之外，用置信区间来估计总体参数。抽样误差带来的偏差是多大呢？在实际中，我们不可能通过多次抽样，计算每个样本间统计量的差异大小从而去估计偏差大小，我们只能通过一次样本计算。这种根据一次样本计算抽样误差的大小就是标准误（standard error）。标准误几乎在所有统计方法中都会出现，因为它可以提示结果的可靠性：如果标准误较小，则说明抽样误差小，这意味着样本很稳定，对总体的代表性很好，由此推论结果较为可靠；如果标准误较大，则说明抽样误差大，提示样本代表性不强，这种情况下一般需要加大样本量，否则结果不可靠。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>statistics</category>
-  <category>biostatistics</category>
-  <guid>https://leslie-lu.github.io/blog/2019/11/28/index.html</guid>
-  <pubDate>Thu, 28 Nov 2019 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408182144602.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
