@@ -9,7 +9,7 @@
 <meta name="author" content="Zhen Lu">
 <meta name="description" content="Dockerfiles">
 
-<title>Zhen Lu – github actions使用docker渲染quarto文档 | Zhen Lu</title>
+<title>github actions使用docker渲染quarto文档 | Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -85,7 +119,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed slimcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -134,39 +168,39 @@ div.column-margin+hr.dinkus {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../../../../atom.xml" rel="" target="">
- <span class="menu-text">{{&lt; iconify bi rss size=1.1em title='RSS' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="mailto:luzh29@mail2.sysu.edu.cn" rel="" target="">
- <span class="menu-text">{{&lt; iconify bi envelope size=1.1em title='E-mail' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="bi:envelope" style="font-size: 1.1em;" aria-label="Icon envelope from bi Iconify.design set." title="E-mail"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://twitter.com/ZhenLu_Biost" rel="me" target="">
- <span class="menu-text">{{&lt; iconify bi twitter-x size=1.1em title='X' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="bi:twitter-x" style="font-size: 1.1em;" aria-label="Icon twitter-x from bi Iconify.design set." title="X"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://www.youtube.com/@leslielu8542" rel="me" target="">
- <span class="menu-text">{{&lt; iconify bi youtube size=1.1em title='YouTube' &gt;}}</span></a>
+    <a class="nav-link" href="https://www.youtube.com/(leslielu8542?)" rel="me" target="">
+ <span class="menu-text"><iconify-icon inline="" icon="bi:youtube" style="font-size: 1.1em;" aria-label="Icon youtube from bi Iconify.design set." title="YouTube"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://space.bilibili.com/32159908" rel="me" target="">
- <span class="menu-text">{{&lt; iconify fa6-brands bilibili size=1em title='bilibili' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="fa6-brands:bilibili" style="font-size: 1em;" aria-label="Icon bilibili from fa6-brands Iconify.design set." title="bilibili"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg" rel="me" target="">
- <span class="menu-text">{{&lt; iconify bi wechat size=1em title='Wechat' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="bi:wechat" style="font-size: 1em;" aria-label="Icon wechat from bi Iconify.design set." title="Wechat"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://www.zhihu.com/people/edison-70-18" rel="me" target="">
- <span class="menu-text">{{&lt; iconify simple-icons zhihu size=1em title='Zhihu' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="simple-icons:zhihu" style="font-size: 1em;" aria-label="Icon zhihu from simple-icons Iconify.design set." title="Zhihu"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://scholar.google.com/citations?user=LKLQ1g8AAAAJ" rel="me" target="">
- <span class="menu-text">{{&lt; iconify academicons google-scholar-square size=1em title='Google scholar' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 1em;" aria-label="Icon google-scholar-square from academicons Iconify.design set." title="Google scholar"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/Leslie-Lu" rel="me" target="">
- <span class="menu-text">{{&lt; iconify bi github size=1.1em title='GitHub' &gt;}}</span></a>
+ <span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" aria-label="Icon github from bi Iconify.design set." title="GitHub"></iconify-icon></span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -217,13 +251,7 @@ div.column-margin+hr.dinkus {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#install-python-and-dependencies" id="toc-install-python-and-dependencies" class="nav-link active" data-scroll-target="#install-python-and-dependencies">install python and dependencies</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -245,153 +273,32 @@ div.column-margin+hr.dinkus {
 <p>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</p>
 <p>没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。</p>
 <p>我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：</p>
-<p>```{bash eval=FALSE} # install R and dependencies ENV DEBIAN_FRONTEND=noninteractive # Update package indices RUN apt-get update -qq # Install helper packages RUN apt-get install –no-install-recommends -y software-properties-common dirmngr # Add the signing key for the R repository RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc # Add the R 4.0 repository from CRAN RUN add-apt-repository “deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/” RUN apt-get install –no-install-recommends -y r-base RUN R -e “if (!requireNamespace(‘renv’, quietly=TRUE)) install.packages(‘renv’, repos = c(CRAN = ‘https://cloud.r-project.org’))” WORKDIR /project COPY renv.lock . ENV RENV_PATHS_LIBRARY /renv RUN mkdir -p renv COPY .Rprofile .Rprofile COPY renv/activate.R renv/activate.R COPY renv/settings.json renv/settings.json RUN R -e “renv::activate(); renv::restore(repos = ‘https://cloud.r-project.org’)”</p>
-<section id="install-python-and-dependencies" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="install-python-and-dependencies">install python and dependencies</h2>
-<p>RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip<br>
-&amp;&amp; rm -rf /var/lib/apt/lists/* COPY requirements.txt . RUN pip3 install –no-cache-dir –break-system-packages -r requirements.txt</p>
-<pre><code>
-
-
-这样使用docker的方式就不会报错了：
-
-![success](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png)
-
-完整代码已经放在了[星球](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)里，感兴趣的同学可以自行查看。
-
-#### Did you find this page helpful? Consider sharing it 🙌
-
-
-
-
-
-:::{#quarto-navigation-envelope .hidden}
-[Zhen Lu]{.hidden render-id="quarto-int-sidebar-title"}
-[Zhen Lu]{.hidden render-id="quarto-int-navbar-title"}
-[Home]{.hidden render-id="quarto-int-navbar:Home"}
-[/index.html]{.hidden render-id="quarto-int-navbar:/index.html"}
-[Blog]{.hidden render-id="quarto-int-navbar:Blog"}
-[/blog/index.html]{.hidden render-id="quarto-int-navbar:/blog/index.html"}
-[Talks]{.hidden render-id="quarto-int-navbar:Talks"}
-[/talks/index.html]{.hidden render-id="quarto-int-navbar:/talks/index.html"}
-[Publications]{.hidden render-id="quarto-int-navbar:Publications"}
-[/publications/index.html]{.hidden render-id="quarto-int-navbar:/publications/index.html"}
-[CV]{.hidden render-id="quarto-int-navbar:CV"}
-[/cv/index.html]{.hidden render-id="quarto-int-navbar:/cv/index.html"}
-[News]{.hidden render-id="quarto-int-navbar:News"}
-[/news/index.html]{.hidden render-id="quarto-int-navbar:/news/index.html"}
-[Uses]{.hidden render-id="quarto-int-navbar:Uses"}
-[/uses/index.html]{.hidden render-id="quarto-int-navbar:/uses/index.html"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[/atom.xml]{.hidden render-id="quarto-int-navbar:/atom.xml"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[mailto:luzh29@mail2.sysu.edu.cn]{.hidden render-id="quarto-int-navbar:mailto:luzh29@mail2.sysu.edu.cn"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://twitter.com/ZhenLu_Biost]{.hidden render-id="quarto-int-navbar:https://twitter.com/ZhenLu_Biost"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://www.youtube.com/@leslielu8542]{.hidden render-id="quarto-int-navbar:https://www.youtube.com/@leslielu8542"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://space.bilibili.com/32159908]{.hidden render-id="quarto-int-navbar:https://space.bilibili.com/32159908"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg]{.hidden render-id="quarto-int-navbar:https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://www.zhihu.com/people/edison-70-18]{.hidden render-id="quarto-int-navbar:https://www.zhihu.com/people/edison-70-18"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://scholar.google.com/citations?user=LKLQ1g8AAAAJ]{.hidden render-id="quarto-int-navbar:https://scholar.google.com/citations?user=LKLQ1g8AAAAJ"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://github.com/Leslie-Lu]{.hidden render-id="quarto-int-navbar:https://github.com/Leslie-Lu"}
-[&lt;span class="faux-block"&gt; 2016–2024 Zhen Lu&lt;/span&gt;
-&lt;span class="faux-block"&gt;All content licensed under&lt;br&gt;[  Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)&lt;/span&gt;      
-]{.hidden render-id="footer-left"}
-[&lt;span class="faux-block"&gt; &lt;strong&gt;ORCID&lt;/strong&gt; [0000-0002-3481-6310](https://orcid.org/0000-0002-3481-6310)&lt;/span&gt;
-]{.hidden render-id="footer-center"}
-[&lt;span class="faux-block"&gt;Made with  and [Quarto](https://quarto.org/)&lt;/span&gt;
-&lt;span class="faux-block"&gt;[View the source at  GitHub](https://github.com/Leslie-Lu/Leslie-Lu.github.io)&lt;/span&gt;
-]{.hidden render-id="footer-right"}
-:::
-
-
-
-:::{#quarto-meta-markdown .hidden}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-metatitle"}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-twittercardtitle"}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-ogcardtitle"}
-[Zhen Lu]{.hidden render-id="quarto-metasitename"}
-[Dockerfiles]{.hidden render-id="quarto-twittercarddesc"}
-[Dockerfiles]{.hidden render-id="quarto-ogcardddesc"}
-:::
-
-
-
-
-&lt;!-- --&gt;
-
-::: {.quarto-embedded-source-code}
-```````````````````{.markdown shortcodes="false"}
----
-title: "github actions使用docker渲染quarto文档"
-date: 2024-08-29
-description: "Dockerfiles"
-image: "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png"
-categories:
-  - github
-  - quarto
-  - docker
-format:
-  html: 
-    shift-heading-level-by: 1
-    include-in-header:
-      - text: |
-          &lt;style type="text/css"&gt;
-          hr.dinkus {
-              width: 50px;
-              margin: 2em auto 2em;
-              border-top: 5px dotted #454545;
-          }
-          
-          div.column-margin+hr.dinkus {
-              margin: 1em auto 2em;
-          }
-          &lt;/style&gt;
----
-
-在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：
-
-![error](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png)
-
-错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。
-
-没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。
-
-我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：
-
-```{bash eval=FALSE}
-# install R and dependencies
-ENV DEBIAN_FRONTEND=noninteractive
-# Update package indices
-RUN apt-get update -qq
-# Install helper packages
-RUN apt-get install --no-install-recommends -y software-properties-common dirmngr
-# Add the signing key for the R repository
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-# Add the R 4.0 repository from CRAN
-RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-RUN apt-get install --no-install-recommends -y r-base 
-RUN R -e "if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
-WORKDIR /project
-COPY renv.lock .
-ENV RENV_PATHS_LIBRARY /renv
-RUN mkdir -p renv
-COPY .Rprofile .Rprofile
-COPY renv/activate.R renv/activate.R
-COPY renv/settings.json renv/settings.json
-RUN R -e "renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"
-
-# install python and dependencies
-RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip \
-    &amp;&amp; rm -rf /var/lib/apt/lists/*
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install R and dependencies</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> DEBIAN_FRONTEND=noninteractive</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Update package indices</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="at">-qq</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Install helper packages</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> install <span class="at">--no-install-recommends</span> <span class="at">-y</span> software-properties-common dirmngr</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the signing key for the R repository</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the R 4.0 repository from CRAN</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">add-apt-repository</span> <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> install <span class="at">--no-install-recommends</span> <span class="at">-y</span> r-base </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /project</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> renv.lock .</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> RENV_PATHS_LIBRARY /renv</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">mkdir</span> <span class="at">-p</span> renv</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> .Rprofile .Rprofile</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> renv/activate.R renv/activate.R</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> renv/settings.json renv/settings.json</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># install python and dependencies</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> python3.10 python3-pip <span class="dt">\</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> requirements.txt .</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pip3</span> install <span class="at">--no-cache-dir</span> <span class="at">--break-system-packages</span> <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>这样使用docker的方式就不会报错了：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -402,8 +309,10 @@ RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</cod
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-<p>``````````````````` :::</p>
-</section>
+
+
+<!-- -->
+
 </section>
 
 </main> <!-- /main -->
@@ -692,24 +601,88 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="Leslie-Lu/Leslie-Lu.github.io" data-repo-id="R_kgDOL6FPww" data-category="Blog comments" data-category-id="DIC_kwDOL6FPw84CfSVZ" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "github actions使用docker渲染quarto文档"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-08-29</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Dockerfiles"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - github</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - quarto</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - docker</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="al">![error](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png)</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="in">```Dockerfile</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="in"># install R and dependencies</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="in">ENV DEBIAN_FRONTEND=noninteractive</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="in"># Update package indices</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="in">RUN apt-get update -qq</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="in"># Install helper packages</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="in">RUN apt-get install --no-install-recommends -y software-properties-common dirmngr</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="in"># Add the signing key for the R repository</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="in">RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="in"># Add the R 4.0 repository from CRAN</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="in">RUN apt-get install --no-install-recommends -y r-base </span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">RUN R -e "if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="in">WORKDIR /project</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="in">COPY renv.lock .</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">ENV RENV_PATHS_LIBRARY /renv</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">RUN mkdir -p renv</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">COPY .Rprofile .Rprofile</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">COPY renv/activate.R renv/activate.R</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="in">COPY renv/settings.json renv/settings.json</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="in">RUN R -e "renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="in"># install python and dependencies</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="in">RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip \</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="in">    &amp;&amp; rm -rf /var/lib/apt/lists/*</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="in">COPY requirements.txt .</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="in">RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>这样使用docker的方式就不会报错了：</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="al">![success](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png)</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>完整代码已经放在了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里，感兴趣的同学可以自行查看。</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Did you find this page helpful? Consider sharing it 🙌</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      <div class="footer-contents"><span class="faux-block"> 2016–2024 Zhen Lu</span>
-<span class="faux-block">All content licensed under<br>[  Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</span>      
-</div>  
-    </div>   
-    <div class="nav-footer-center">
-      <div class="footer-contents"><span class="faux-block"> <strong>ORCID</strong> [0000-0002-3481-6310](https://orcid.org/0000-0002-3481-6310)</span>
-</div>  
-    </div>
-    <div class="nav-footer-right">
-      <div class="footer-contents"><span class="faux-block">Made with  and [Quarto](https://quarto.org/)</span>
-<span class="faux-block">[View the source at  GitHub](https://github.com/Leslie-Lu/Leslie-Lu.github.io)</span>
-</div>  
-    </div>
+    <div class="nav-footer-left"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2016–2024 Zhen Lu</span> <span class="faux-block">All content licensed under<br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></span><br>
+</div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-orcid" aria-label="orcid"></i> <strong>ORCID</strong> <a href="https://orcid.org/0000-0002-3481-6310">0000-0002-3481-6310</a></span></div>
+    <div class="nav-footer-right"><span class="faux-block">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span> <span class="faux-block"><a href="https://github.com/Leslie-Lu/Leslie-Lu.github.io">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></div>
   </div>
 </footer>
 

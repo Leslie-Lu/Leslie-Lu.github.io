@@ -31,153 +31,162 @@
 <p>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</p>
 <p>没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。</p>
 <p>我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：</p>
-<p>```{bash eval=FALSE} # install R and dependencies ENV DEBIAN_FRONTEND=noninteractive # Update package indices RUN apt-get update -qq # Install helper packages RUN apt-get install –no-install-recommends -y software-properties-common dirmngr # Add the signing key for the R repository RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc # Add the R 4.0 repository from CRAN RUN add-apt-repository “deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/” RUN apt-get install –no-install-recommends -y r-base RUN R -e “if (!requireNamespace(‘renv’, quietly=TRUE)) install.packages(‘renv’, repos = c(CRAN = ‘https://cloud.r-project.org’))” WORKDIR /project COPY renv.lock . ENV RENV_PATHS_LIBRARY /renv RUN mkdir -p renv COPY .Rprofile .Rprofile COPY renv/activate.R renv/activate.R COPY renv/settings.json renv/settings.json RUN R -e “renv::activate(); renv::restore(repos = ‘https://cloud.r-project.org’)”</p>
-<section id="install-python-and-dependencies" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="install-python-and-dependencies">install python and dependencies</h2>
-<p>RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip<br>
-&amp;&amp; rm -rf /var/lib/apt/lists/* COPY requirements.txt . RUN pip3 install –no-cache-dir –break-system-packages -r requirements.txt</p>
-<pre><code>
-
-
-这样使用docker的方式就不会报错了：
-
-![success](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png)
-
-完整代码已经放在了[星球](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)里，感兴趣的同学可以自行查看。
-
-#### Did you find this page helpful? Consider sharing it 🙌
-
-
-
-
-
-:::{#quarto-navigation-envelope .hidden}
-[Zhen Lu]{.hidden render-id="quarto-int-sidebar-title"}
-[Zhen Lu]{.hidden render-id="quarto-int-navbar-title"}
-[Home]{.hidden render-id="quarto-int-navbar:Home"}
-[/index.html]{.hidden render-id="quarto-int-navbar:/index.html"}
-[Blog]{.hidden render-id="quarto-int-navbar:Blog"}
-[/blog/index.html]{.hidden render-id="quarto-int-navbar:/blog/index.html"}
-[Talks]{.hidden render-id="quarto-int-navbar:Talks"}
-[/talks/index.html]{.hidden render-id="quarto-int-navbar:/talks/index.html"}
-[Publications]{.hidden render-id="quarto-int-navbar:Publications"}
-[/publications/index.html]{.hidden render-id="quarto-int-navbar:/publications/index.html"}
-[CV]{.hidden render-id="quarto-int-navbar:CV"}
-[/cv/index.html]{.hidden render-id="quarto-int-navbar:/cv/index.html"}
-[News]{.hidden render-id="quarto-int-navbar:News"}
-[/news/index.html]{.hidden render-id="quarto-int-navbar:/news/index.html"}
-[Uses]{.hidden render-id="quarto-int-navbar:Uses"}
-[/uses/index.html]{.hidden render-id="quarto-int-navbar:/uses/index.html"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[/atom.xml]{.hidden render-id="quarto-int-navbar:/atom.xml"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[mailto:luzh29@mail2.sysu.edu.cn]{.hidden render-id="quarto-int-navbar:mailto:luzh29@mail2.sysu.edu.cn"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://twitter.com/ZhenLu_Biost]{.hidden render-id="quarto-int-navbar:https://twitter.com/ZhenLu_Biost"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://www.youtube.com/@leslielu8542]{.hidden render-id="quarto-int-navbar:https://www.youtube.com/@leslielu8542"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://space.bilibili.com/32159908]{.hidden render-id="quarto-int-navbar:https://space.bilibili.com/32159908"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg]{.hidden render-id="quarto-int-navbar:https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://www.zhihu.com/people/edison-70-18]{.hidden render-id="quarto-int-navbar:https://www.zhihu.com/people/edison-70-18"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://scholar.google.com/citations?user=LKLQ1g8AAAAJ]{.hidden render-id="quarto-int-navbar:https://scholar.google.com/citations?user=LKLQ1g8AAAAJ"}
-[]{.hidden render-id="quarto-int-navbar:"}
-[https://github.com/Leslie-Lu]{.hidden render-id="quarto-int-navbar:https://github.com/Leslie-Lu"}
-[&lt;span class="faux-block"&gt; 2016–2024 Zhen Lu&lt;/span&gt;
-&lt;span class="faux-block"&gt;All content licensed under&lt;br&gt;[  Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)&lt;/span&gt;      
-]{.hidden render-id="footer-left"}
-[&lt;span class="faux-block"&gt; &lt;strong&gt;ORCID&lt;/strong&gt; [0000-0002-3481-6310](https://orcid.org/0000-0002-3481-6310)&lt;/span&gt;
-]{.hidden render-id="footer-center"}
-[&lt;span class="faux-block"&gt;Made with  and [Quarto](https://quarto.org/)&lt;/span&gt;
-&lt;span class="faux-block"&gt;[View the source at  GitHub](https://github.com/Leslie-Lu/Leslie-Lu.github.io)&lt;/span&gt;
-]{.hidden render-id="footer-right"}
-:::
-
-
-
-:::{#quarto-meta-markdown .hidden}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-metatitle"}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-twittercardtitle"}
-[github actions使用docker渲染quarto文档 | Zhen Lu]{.hidden render-id="quarto-ogcardtitle"}
-[Zhen Lu]{.hidden render-id="quarto-metasitename"}
-[Dockerfiles]{.hidden render-id="quarto-twittercarddesc"}
-[Dockerfiles]{.hidden render-id="quarto-ogcardddesc"}
-:::
-
-
-
-
-&lt;!-- --&gt;
-
-::: {.quarto-embedded-source-code}
-```````````````````{.markdown shortcodes="false"}
----
-title: "github actions使用docker渲染quarto文档"
-date: 2024-08-29
-description: "Dockerfiles"
-image: "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png"
-categories:
-  - github
-  - quarto
-  - docker
-format:
-  html: 
-    shift-heading-level-by: 1
-    include-in-header:
-      - text: |
-          &lt;style type="text/css"&gt;
-          hr.dinkus {
-              width: 50px;
-              margin: 2em auto 2em;
-              border-top: 5px dotted #454545;
-          }
-          
-          div.column-margin+hr.dinkus {
-              margin: 1em auto 2em;
-          }
-          &lt;/style&gt;
----
-
-在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：
-
-![error](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png)
-
-错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。
-
-没办法，只能选择换一种方法来render网站的内容，我又不想在本地利用quarto每次手动来render网页，最后只能尝试选择利用docker中配置的ubuntu环境来render github repository中更新的内容，然后再像以前一样，把render出来的html，重新利用actions publish到新的repository中，这样来更新网页内容，避开直接使用actions出现的这个错误。
-
-我给docker的配置Dockfiles如下，给有可能遇见同样错误的同学参考：
-
-```{bash eval=FALSE}
-# install R and dependencies
-ENV DEBIAN_FRONTEND=noninteractive
-# Update package indices
-RUN apt-get update -qq
-# Install helper packages
-RUN apt-get install --no-install-recommends -y software-properties-common dirmngr
-# Add the signing key for the R repository
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-# Add the R 4.0 repository from CRAN
-RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-RUN apt-get install --no-install-recommends -y r-base 
-RUN R -e "if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
-WORKDIR /project
-COPY renv.lock .
-ENV RENV_PATHS_LIBRARY /renv
-RUN mkdir -p renv
-COPY .Rprofile .Rprofile
-COPY renv/activate.R renv/activate.R
-COPY renv/settings.json renv/settings.json
-RUN R -e "renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"
-
-# install python and dependencies
-RUN apt-get update &amp;&amp; apt-get install -y python3.10 python3-pip \
-    &amp;&amp; rm -rf /var/lib/apt/lists/*
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</code></pre>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install R and dependencies</span></span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ENV</span> DEBIAN_FRONTEND=noninteractive</span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Update package indices</span></span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">apt-get</span> update <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-qq</span></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Install helper packages</span></span>
+<span id="cb1-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--no-install-recommends</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span> software-properties-common dirmngr</span>
+<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add the signing key for the R repository</span></span>
+<span id="cb1-8"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">wget</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tee</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
+<span id="cb1-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add the R 4.0 repository from CRAN</span></span>
+<span id="cb1-10"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">add-apt-repository</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">lsb_release</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-cs</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-cran40/"</span></span>
+<span id="cb1-11"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--no-install-recommends</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span> r-base </span>
+<span id="cb1-12"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">R</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"</span></span>
+<span id="cb1-13"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">WORKDIR</span> /project</span>
+<span id="cb1-14"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">COPY</span> renv.lock .</span>
+<span id="cb1-15"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ENV</span> RENV_PATHS_LIBRARY /renv</span>
+<span id="cb1-16"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> renv</span>
+<span id="cb1-17"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">COPY</span> .Rprofile .Rprofile</span>
+<span id="cb1-18"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">COPY</span> renv/activate.R renv/activate.R</span>
+<span id="cb1-19"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">COPY</span> renv/settings.json renv/settings.json</span>
+<span id="cb1-20"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">R</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv::activate(); renv::restore(repos = 'https://cloud.r-project.org')"</span></span>
+<span id="cb1-21"></span>
+<span id="cb1-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install python and dependencies</span></span>
+<span id="cb1-23"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">apt-get</span> update <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&amp;&amp;</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span> python3.10 python3-pip <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb1-24">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&amp;&amp;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rm</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-rf</span> /var/lib/apt/lists/<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span></span>
+<span id="cb1-25"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">COPY</span> requirements.txt .</span>
+<span id="cb1-26"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">RUN</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip3</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--no-cache-dir</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--break-system-packages</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <p>这样使用docker的方式就不会报错了：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -188,8 +197,10 @@ RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt</cod
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
 <h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-<p>``````````````````` :::</p>
-</section>
+
+
+<!-- -->
+
 </section>
 
  ]]></description>
