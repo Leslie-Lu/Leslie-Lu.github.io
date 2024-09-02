@@ -1923,6 +1923,579 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>空间中的向量</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/03/12/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>我们知道，向量的坐标表示方法并不是唯一的，它的具体表示和空间中基底的选择密切相关。</p>
+<section id="向量的坐标" class="level3">
+<h3 class="anchored" data-anchor-id="向量的坐标">向量的坐标</h3>
+<p>向量的坐标依赖于选取的基底。</p>
+<p>对于二维向量u=[4,5]⊤而言，我们一直以来都理所当然地认定一个事实：它表示一条在x轴上投影为4、y轴上投影为5的有向线段，它的坐标是(4,5)。这其实是基于一个没有刻意强调前提：利用方向为x轴、y轴正方向，且长度为1的两个向量，即Ex=[1,0]⊤，Ey=[0,1]⊤作为上述讨论的基础。因此，对于向量u而言，其完整的写法应该为u=4Ex + 5Ey，进一步展开就是u=4[1,0]⊤ + 5[0,1]⊤，这种形式的表意是最完整的。</p>
+<p>这里被选中作为向量u基准的一组向量是Ex和Ey，它们被称为基底。基底的每一个成员向量被称为基向量，而坐标对应的就是各个基向量前的系数。一般情况下，若不做特殊说明，那么基向量都是选取沿着坐标轴正方向且长度为1的向量，这样方便描述和计算。</p>
+<p>关于向量u的完整准确的说法是：在基底(Ex,Ey)下，其坐标是[4,5]⊤。也就是说，坐标必须依托于指定的基底才有意义。因此，要想准确地描述向量，首先就要确定一组基底，然后通过求出向量在各个基向量上的投影值，最后才能确定在这个基上的坐标值。</p>
+</section>
+<section id="向量在不同基底上表示为不同坐标" class="level3">
+<h3 class="anchored" data-anchor-id="向量在不同基底上表示为不同坐标">向量在不同基底上表示为不同坐标</h3>
+<p>一个指定的向量可以在多组不同的基底上进行坐标表示，在不同的基底表示下，坐标自然也是不同的。根据一组基底对应的坐标值去求另一组基底所对应的坐标值，这就是以后我们将会反复用到的坐标变换。</p>
+<p>根据我们之前关于向量内积的介绍，最好是事先把基向量的模长转化为1。这样一来，从向量内积的内涵可以看出，若基向量的模长是1，那么就可以用目标向量内积基向量，从而可以直接获得该向量在这个基向量方向上的对应坐标值。实际上，对于任何一个向量，想要找到同方向上模长为1的向量并不是一件难事，只要让向量的各成分分别除以向量的模长即可，就能使向量的模长为单位1。而向量的坐标就是指定基的对应系数。</p>
+</section>
+<section id="构成基底的条件" class="level3">
+<h3 class="anchored" data-anchor-id="构成基底的条件">构成基底的条件</h3>
+<p>在一个n维空间中，不是随便选取n个向量都能作为一组基底，构成基底的向量必须满足这样的条件：在n维空间中，任意一个向量都可以表示为这一组基向量的线性组合，并且这种线性组合的表示方式（也就是系数）必须是唯一的。</p>
+<ul>
+<li><p>向量数量足够</p>
+<p>若想成为三维空间中的一组基底，首先，其中的每个基向量的维数都必须是3；其次，基向量的个数也必须为3个。若数量不足，如只有两个三维向量a1和a2（假设它们是不共线的两个向量），那么无论对这两个向量怎么进行线性组合，它们都只能表示二者所构成的平面上的任意向量，而三维空间中位于该二维平面上外的任何一个向量，都无法由a1和a2的线性组合进行表示。</p></li>
+<li><p>满足线性无关</p>
+<p>如何确保表示方法的唯一性呢？这里我们引入向量线性无关的概念。一组向量需要满足线性无关的条件，即其中任何一个向量都不能通过其余向量的线性组合的形式进行表示。</p>
+<p>换句话说，当且仅当x1=x2=x3=…=xn=0的等式关系成立时，线性组合x1u1 + x2u2 + x3u3 + … + xnun才能生成零向量，若xi中有非零值存在，那么这一组向量就是线性相关的。一组向量满足线性无关的条件等效于满足线性组合表示方法的唯一性（可以从反证法的角度说明线性无关和表示方法的唯一性是等价的）。</p>
+<p>在这个三维空间中，要求所选取的3个基向量线性无关。若它们线性相关，那么x3就可以表示为x1和x2的线性组合，换句话说，备选的3个向量就处在一个平面上了。这样，自然无法通过线性组合的方法来表示三维空间中位于平面外的任何一个向量了，即3个三维向量之间由于彼此线性相关，因此无法张成整个三维空间，只能张成三维空间中的二维平面甚至是退化为一条直线。</p>
+<p>若三维空间中基向量的个数超过3个，则是不行的。如，假设有4个向量试图成为该空间的一组基向量，任选出其中的3个向量，按照前提，假设它们之间满足线性无关性，那么对于第4个向量，由于它也处于三维空间中，则它一定能够被前3个向量的线性组合所表示。那么，三维空间中的这4个向量显示是线性相关的，无法满足向量构成基底的唯一性条件。</p></li>
+</ul>
+</section>
+<section id="构成基底的条件-1" class="level3">
+<h3 class="anchored" data-anchor-id="构成基底的条件-1">构成基底的条件</h3>
+<p>对于一组向量，由它的所有线性组合所构成的空间称为这一组向量的张成空间。张成空间对所讨论向量的线性无关性没有要求，这些向量可以是线性相关的。</p>
+<p>两个线性无关的二维向量，它们构成了二维空间中的一组基底，因此它们的张成空间就是整个二维空间；两个线性相关的共线二维向量，它们的张成空间是一条穿过原点的一维直线；等。</p>
+<p>向量的个数和维数都不是其张成空间维数及形态的决定因素，具体的情况需要结合向量的线性无关性进行整体考量，这就会涉及秩的相关概念。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>linear algebra</category>
+  <guid>https://leslie-lu.github.io/blog/2020/03/12/index.html</guid>
+  <pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Python与向量</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/03/11/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 行向量</span></span>
+<span id="cb1-3">a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>])</span>
+<span id="cb1-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(a)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1 2 3 4]</code></pre>
+</div>
+</div>
+<p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>])</span>
+<span id="cb3-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(a.transpose()) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#从程序的运行结果来看，确实是无效的</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1 2 3 4]</code></pre>
+</div>
+</div>
+<p>应该如何表示一个列向量呢？</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>])</span>
+<span id="cb5-2">A_t<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> A[:, np.newaxis] <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#增加一个维度</span></span>
+<span id="cb5-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A_t)</span>
+<span id="cb5-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A_t.shape) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#列向量本身就是二维表示的</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]
+ [2]
+ [3]
+ [4]]
+(4, 1)</code></pre>
+</div>
+</div>
+<p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
+<span id="cb7-2">A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]])</span>
+<span id="cb7-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span>
+<span id="cb7-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A.T) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#此时可以直接通过行向量转置的方法生成对应的列向量</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 2 3 4]]
+[[1]
+ [2]
+ [3]
+ [4]]</code></pre>
+</div>
+</div>
+<section id="向量的加法" class="level3">
+<h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
+<p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]).T</span>
+<span id="cb9-2">u</span>
+<span id="cb9-3">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>]]).T</span>
+<span id="cb9-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>v)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 6]
+ [ 8]
+ [10]]</code></pre>
+</div>
+</div>
+</section>
+<section id="向量的数乘" class="level3">
+<h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
+<p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]).T</span>
+<span id="cb11-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>u)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[3]
+ [6]
+ [9]]</code></pre>
+</div>
+</div>
+</section>
+<section id="向量间的乘法内积和外积" class="level3">
+<h3 class="anchored" data-anchor-id="向量间的乘法内积和外积">向量间的乘法：内积和外积</h3>
+<p>向量间的乘法分为内积和外积两种形式。</p>
+<p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
+<p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span>
+<span id="cb13-2">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>])</span>
+<span id="cb13-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 若使用numpy库中的内积运算函数dot进行运算，传入的参数必须是用一维数组表示的行向量</span></span>
+<span id="cb13-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(u,v)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#一维乘一维，结果还是一维</span></span>
+<span id="cb13-5"></span>
+<span id="cb13-6">uC<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> u[:,np.newaxis]</span>
+<span id="cb13-7">vC<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> v[:,np.newaxis]</span>
+<span id="cb13-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(uC)</span>
+<span id="cb13-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(vC)</span>
+<span id="cb13-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(uC,vC)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#行数为1的二维数组，即二维数组形式的行向量，报错</span></span>
+<span id="cb13-11"></span>
+<span id="cb13-12">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]])</span>
+<span id="cb13-13">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>]])</span>
+<span id="cb13-14"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(u,v)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#列数为1的二维数组，即二维数组形式的行向量，报错</span></span>
+<span id="cb13-15"></span>
+<span id="cb13-16">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]]).T</span>
+<span id="cb13-17">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>]]).T</span>
+<span id="cb13-18"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(u,v)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
+</div>
+<p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]])</span>
+<span id="cb14-2">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>]]).T</span>
+<span id="cb14-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(u,v)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#二维乘二维，结果还是二维</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[37]]</code></pre>
+</div>
+</div>
+<p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
+<p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>])</span>
+<span id="cb16-2">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>])</span>
+<span id="cb16-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.cross(u,v)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#一维乘一维，结果还是一维</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_355/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+  print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
+</div>
+</div>
+<p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>])</span>
+<span id="cb19-2">y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>])</span>
+<span id="cb19-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[  0 -27   9]</code></pre>
+</div>
+</div>
+</section>
+<section id="向量先数乘后叠加向量的线性组合" class="level3">
+<h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
+<p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]).T</span>
+<span id="cb21-2">v<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>]]).T</span>
+<span id="cb21-3">w<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>]]).T</span>
+<span id="cb21-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>u <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>w)</span>
+<span id="cb21-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(u)</span>
+<span id="cb21-6">u.shape</span>
+<span id="cb21-7">np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]).shape</span>
+<span id="cb21-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(np.dot(u.T,v.T)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#报错，带有第二个维度无法进行向量内积</span></span></code></pre></div>
+</div>
+<p>进一步思考：我们知道，两个向量相加，在几何上就是将两个向量首尾依次连接，所得到的结果向量就是连接最初的起点和最终的终点的有向连线。我们假定有3个非零的三维列向量u、v和w，讨论以下几种不同的线性组合情况：</p>
+<ul>
+<li><p>第一种情况：cu的所有线性组合构成的图像</p>
+<p>由于标量c可以取0，因而cu的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</p></li>
+<li><p>第二种情况：cu+dv的所有线性组合构成的图像</p>
+<ol type="1">
+<li>当向量u和向量v不在一条直线上时，即u和v不共线</li>
+</ol>
+<p><code>cu+dv</code>的所有线性组合构成的图像可以表示为三维空间中的一个通过原点(0,0,0)的二维平面。</p>
+<ol start="2" type="1">
+<li>当向量u和向量v处在一条直线上时</li>
+</ol>
+<p>则<code>cu+dv</code>的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</p></li>
+<li><p>第三种情况：cu+dv+ew的所有线性组合构成的图像</p>
+<ol type="1">
+<li><p>当向量u、v、w不在一个平面上时，cu+dv+ew的所有线性组合构成的图像是整个三维空间。</p></li>
+<li><p>当向量u、v、w处在一个平面上时，cu+dv+ew的所有线性组合构成的图像是三维空间中的一个通过原点(0,0,0)的二维平面。</p></li>
+<li><p>当向量u、v、w处在一条直线上时，cu+dv+ew的所有线性组合构成的图像是三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</p></li>
+</ol></li>
+</ul>
+<p>我们发现，在讨论上述线性组合的多种不同情况时，均反复提到了共线、共面的概念。这些特殊的性质会对一组向量线性组合所得到的结果向量在空间中的位置产生重要影响，它们构成了线性代数中非常重要的概念。后面我们也将使用更加专业的词汇对其进行描述和介绍，即线性相关和线性无关。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>linear algebra</category>
+  <category>python</category>
+  <guid>https://leslie-lu.github.io/blog/2020/03/11/index.html</guid>
+  <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>线性代数之向量</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/03/10/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>空间是贯穿整个线性代数的主干脉络和核心概念。下面我们学习利用向量这个工具对空间进行定量描述。</p>
+<section id="关于向量" class="level3">
+<h3 class="anchored" data-anchor-id="关于向量">关于向量</h3>
+<p>直观地说，把一组数字排列成一行或一列，就称为向量。它可以作为对空间进行描述的有力工具。</p>
+<p>如一个简单的二维向量[4,5]⊤，这个向量有两个成分：第一个成分是数字4，第二个成分是数字5。其可以理解为二维平面中x坐标为4，y坐标为5的一个点，也可以理解为以平面中的原点(0,0)为起点，(4,5)为重点的一条有向线段，这就是二维向量的空间表示。一个向量中成分的个数就是该向量的维数。</p>
+<p>不过，向量也不局限于用来直接描述空间中的点坐标和有向线段，也可以凭借基础的数据表示功能，成为一种描述事物属性的便捷工具。</p>
+<p>如你的考试成绩为：语文85分，数学92分，英语89分。由于这三门课具有不同科目属性，因此，可以使用一个三维向量来对其进行表示，即score=[85,92,89]⊤。此时不仅仅可以把向量score看作是一个盛放数据的容器，似乎也可以利用它讲科目考试成绩和空间建立起某种关联。</p>
+<p>又如，在自然语言处理中，也少不了向量这个重要的工具。程序在进行文本阅读时，首先会对文本材料进行分词处理，然后使用向量对词汇进行表示。这是因为向量很适合将对象的属性和特征对应到高维空间中进行定量表达，同时在此基础上进行进一步的后续处理，如判断词汇之间的相似性等。</p>
+<p>我们陆续接触到一些数据处理的基本方法：如投影、降维等，这些方法都是在向量描述的基础上实现的。</p>
+</section>
+<section id="列向量" class="level3">
+<h3 class="anchored" data-anchor-id="列向量">列向量</h3>
+<p>向量对应地就拥有两种表达方式：若元素是纵向排列的，就称为列向量；若元素是横向排列的，就成为行向量。在没有特殊说明的情况下，一般都默认为列向量。为什么会偏爱列向量呢？主要是为了方便后续的向量坐标变换、空间之间的映射等计算过程的处理。</p>
+<p>将一个矩阵A所表示的映射作用于某个向量x上时，习惯上将其写成矩阵乘以向量的表达形式，即Ax。这种写法的数据表示基础就是：向量x必须是一个列向量。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>biostatistics</category>
+  <category>linear algebra</category>
+  <guid>https://leslie-lu.github.io/blog/2020/03/10/index.html</guid>
+  <pubDate>Tue, 10 Mar 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>协方差分析</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/02/23/index.html</link>
@@ -3650,212 +4223,6 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
   <guid>https://leslie-lu.github.io/blog/2020/01/11/index.html</guid>
   <pubDate>Sat, 11 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211511348.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Python基础要素之字符串</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/10/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>字符串是Python中的另一种基本数据类型。它通常是指人类可以阅读的文本，但更广泛地说，它是一个字符序列，并且字符只有在组成这个序列时才有意义。一些对象看上去是数值，但实际上是字符串，比如邮政编码，你对邮政编码做加减乘除是没有意义的，所以最好在代码中将其作为字符串来处理。接下来介绍用于字符串管理的一些模块、函数和操作。</p>
-<section id="字符串" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="字符串">字符串</h3>
-<p>字符串可以包含在单引号、双引号、3个单引号或3个双引号之间：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211503380.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">字符串</figcaption>
-</figure>
-</div>
-<p>Output #14展示了一个包含在单引号之间的简单字符串。</p>
-</section>
-<section id="len" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="len">+、*、len()</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211503929.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">operator</figcaption>
-</figure>
-</div>
-<p>Output #18展示了使用+操作符将两个字符串相加。+操作符按照原样相加，如果你想在结果字符串中留出空格的话，就必须在原字符串中加上空格（Output #18在字母a后加了空格），Output #19中的*操作符也是这样，其将字符串重复一定的次数。Output #20展示了使用内置函数len来确定字符串中字符的数量。len函数将空格与标点符号都计入字符串长度，所以结果是23个字符。</p>
-</section>
-<section id="split函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="split函数">split函数</h3>
-<p>使用split函数将一个字符串拆分成一个子字符串列表（列表中的子字符串正好可以构成原字符串）。split函数可以在括号中使用两个附加参数，第一个附加参数表示使用哪个字符进行拆分，第二个参数表示进行拆分的次数。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211504667.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">split</figcaption>
-</figure>
-</div>
-<p>在Output #21中，括号中没有附加参数，所以split函数使用空格字符（默认值）对字符串进行拆分。因为这个字符串有5个空格，所以被拆分成具有6个子字符串的列表。Output #22中，第一个附加参数是用空格来拆分字符串，第二个附加参数是2，说明只想用前两个空格进行拆分，生成一个带有3个元素的列表。第二个参数会在我们解析数据的时候派上用场。举例来说，你可能会解析一个日志文件，文件中包含时间戳、错误代码和由空格分隔的错误信息。在这种情况下，可以使用前两个空格进行拆分，解析出时间戳和错误代码，但是不使用剩下的空格进行拆分，以便完整地保留错误信息。Output #23和Output #24中，括号中的附加参数是都好，split函数在出现逗号的位置拆分字符串。</p>
-</section>
-<section id="join函数" class="level3">
-<h3 class="anchored" data-anchor-id="join函数">join函数</h3>
-<p>使用join函数将列表中的子字符串组合成一个字符串。join函数将一个参数放在join前面，表示使用这个字符（或字符串）在子字符串之间进行组合。<code>print("Output #25: {0}".format(','.join(string2_list)))</code>这里join函数将子字符串组合成一个字符串，子字符串之间为逗号。因为列表中有6个子字符串，所以组合后有5个逗号。</p>
-</section>
-<section id="strip函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="strip函数">strip函数</h3>
-<p>使用strip、lstrip和rstrip函数从字符串两端删除不想要的字符，这三个函数都可以在括号中使用一个附加参数来设定要从字符串两端删除的字符（或字符串）。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211506349.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">strip</figcaption>
-</figure>
-</div>
-<p>可以看到，string3的左侧有几个空格，右侧包含制表符（、几个空格和换行符（）。在Output #26中，你会看到句子前面有空白，句子下面有一个空行，句子后面有你看不到的制表符和空格。{0:s}中的s表示传入的值应该格式化为一个字符串。下面展示了从字符串两端删除其他字符的方法，将要删除的字符作为strip函数的附加参数即可：通过将美元符号、下划线、短划线和加号作为附加参数，通知程序从字符串两端删除它们。</p>
-</section>
-<section id="replace函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="replace函数">replace函数</h3>
-<p>使用replace函数将字符串中的一个或一组字符替换为另一个或另一组字符。replace函数在括号中使用两个附加参数，第一个参数作用是在字符串中查找要替换的字符或一组字符，第二个参数是要用来替换的一个或一组字符。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211507108.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">replace</figcaption>
-</figure>
-</div>
-<p>Output #32展示了使用replace函数将字符串中的空格替换为!@!。Output #33展示了使用逗号替换字符串中的空格。</p>
-</section>
-<section id="loweruppercapitalize函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="loweruppercapitalize函数">lower、upper、capitalize函数</h3>
-<p>lower和upper函数分别用来将字符串中的字母转换为小写和大写，capitalize函数对字符串中的第一个字母应用upper函数，对其余字母应用lower函数：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/10/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211508119.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">lower-upper-capitalize</figcaption>
-</figure>
-</div>
-<p>Output #36对句子的首字母大写。Output #37将capitalize函数放在一个for循环中，对string8_list这个列表中的每个元素首字母大写，其余字母小写。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/10/index.html</guid>
-  <pubDate>Fri, 10 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211501817.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>笔记</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/09/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="表示的重要性" class="level3">
-<h3 class="anchored" data-anchor-id="表示的重要性">表示的重要性</h3>
-<p>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立“表示第一，获取第二”的范式。</p>
-<p>通常，在寻求一个好的表示方法的过程中，关于如何获取知识的洞见就会自然产生，无论这种洞见是来自数据，还是来自程序员。</p>
-<p>人类的大脑肯定拥有某种简洁的信息表示方式，同时还拥有某种十分有效的程序用以正确解释每个问题，并从存储的信息表示中提取正确答案。我们需要给机器装备同样高效的表示信息和提取答案的算法，因果图和因果推断就派上了用场。</p>
-</section>
-<section id="打破规则" class="level3">
-<h3 class="anchored" data-anchor-id="打破规则">打破规则</h3>
-<p>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解“观察到某事件”和“使某事件发生”之间的区别。</p>
-<p>我们需要告诉计算机：“无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。”这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</p>
-<p>计算机能够进行因果推理的前提是，计算机懂得有选择地打破逻辑规则。</p>
-</section>
-<section id="概率的重要性" class="level3">
-<h3 class="anchored" data-anchor-id="概率的重要性">概率的重要性</h3>
-<p>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从X指向Y的箭头时，我们是在暗指，某些概率规则或函数具体说明了“如果X发生改变，Y将如何变化”。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</p>
-</section>
-<section id="概率与因果关系" class="level3">
-<h3 class="anchored" data-anchor-id="概率与因果关系">概率与因果关系</h3>
-<p>概率能将我们对静态世界的信念进行编码，而因果论则告诉我们，当世界被改变时（无论改变是通过干预还是通过想象实现的），概率是否会发生改变以及如何改变。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>biostatics</category>
-  <category>causal inference</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/09/index.html</guid>
-  <pubDate>Thu, 09 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201505235.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>如何用Python自编k-近邻算法？</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/08/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="k-近邻算法概述" class="level3">
-<h3 class="anchored" data-anchor-id="k-近邻算法概述">k-近邻算法概述</h3>
-<p>简单地说，kNN依据不同特征值之间的距离进行分类。它不具有显式的学习过程，实际上是利用训练数据集对特征向量空间进行划分，并作为其分类的模型，即我们知道训练集中每一数据与所属分类的对应关系，输入没有标签的新数据后，将新数据的每个特征与训练集中数据对应的特征进行比较，然后算法提取训练集中特征最为相似数据的分类标签，选择k个最相似数据中出现次数最多的类别作为新数据的分类。</p>
-</section>
-<section id="自编knn函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="自编knn函数">自编kNN函数</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/08/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201500514.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">kNN</figcaption>
-</figure>
-</div>
-<p>classify()函数有4个输入参数：待分类的输入向量inX，训练集dataSet，训练集标签向量labels，参数k为选择最近数据点个数，其中，inX维度为1xN，dataSet维度为MxN，labels维度为1xM，k为奇数。</p>
-<p>dataSet.shape以元组形式返回训练集维度(M, N)，dataSetsize为训练集的样本个数M。这里距离度量采用欧式距离，因而tile函数将输入数据重复M行1列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</p>
-<p>计算完距离之后，argsort函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用for循环确定前k个距离最小元素所属的类别voteIlabel，使用get函数按照字典classCount键值取得相应的字典值，如果字典中存在这个键，get函数就返回对应的字典值，如果不存在，则返回0，用这种方式计数k个数据中每个标签出现的次数。因而字典classCount中键值为标签，字典值为k个标签对应的个数。</p>
-<p>使用sorted函数对字典classCount进行排序：items函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的key就是排序的规则，关键字函数设置用于排序的关键字。使用operator模块中的itemgetter函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，reverse=True对应降序。所以最后返回sortedClassCount列表中第一个元组的第一个值，即在k个标签中出现次数最多的标签，这样即完成了一个简单的kNN算法。</p>
-</section>
-<section id="创建训练集" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="创建训练集">创建训练集</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/08/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201501398.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">训练集</figcaption>
-</figure>
-</div>
-<p>我们创建了一个简单的训练集，有4组数据，每组数据有两个我们已知的属性/特征值。向量labels包含了每个数据的标签信息，labels包含的元素个数等于group矩阵行数。</p>
-</section>
-<section id="运行knn" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="运行knn">运行kNN</h3>
-<p>我们需要在脚本中导入两个模块NumPy和运算符operator（kNN执行排序操作时使用到）：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/08/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201502739.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">import modules</figcaption>
-</figure>
-</div>
-<p>保存脚本文件，改变当前路径到存储脚本文件位置，进入Python：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/08/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201503020.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">run kNN</figcaption>
-</figure>
-</div>
-<p>输出结果应该是B，也可以改变输入数据运行。这样，我们已经构造了一个简单的kNN分类器。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>kNN</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/08/index.html</guid>
-  <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201459098.jpeg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
