@@ -2319,7 +2319,7 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_355/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_353/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
@@ -2424,13 +2424,11 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
 <p>由于标量c可以取0，因而cu的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</p></li>
 <li><p>第二种情况：cu+dv的所有线性组合构成的图像</p>
 <ol type="1">
-<li>当向量u和向量v不在一条直线上时，即u和v不共线</li>
-</ol>
-<p><code>cu+dv</code>的所有线性组合构成的图像可以表示为三维空间中的一个通过原点(0,0,0)的二维平面。</p>
-<ol start="2" type="1">
-<li>当向量u和向量v处在一条直线上时</li>
-</ol>
+<li><p>当向量u和向量v不在一条直线上时，即u和v不共线</p>
+<p><code>cu+dv</code>的所有线性组合构成的图像可以表示为三维空间中的一个通过原点(0,0,0)的二维平面。</p></li>
+<li><p>当向量u和向量v处在一条直线上时</p>
 <p>则<code>cu+dv</code>的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</p></li>
+</ol></li>
 <li><p>第三种情况：cu+dv+ew的所有线性组合构成的图像</p>
 <ol type="1">
 <li><p>当向量u、v、w不在一个平面上时，cu+dv+ew的所有线性组合构成的图像是整个三维空间。</p></li>
