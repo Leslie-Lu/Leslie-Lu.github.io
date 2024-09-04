@@ -1923,6 +1923,397 @@ Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="ht
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>Python与矩阵</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2020/04/26/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>矩阵可以被看作是排列的向量或堆放在一起的数字。矩阵的意义非常重要，它可以作用在一个具体的向量上，使向量空间位置发生变换。</p>
+<section id="矩阵的python表示" class="level3">
+<h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
+<p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 矩阵的表示：</span></span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3">A <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>],</span>
+<span id="cb1-4">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>],</span>
+<span id="cb1-5">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>],</span>
+<span id="cb1-6">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>]])</span>
+<span id="cb1-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span>
+<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 在形容矩阵的形状和规模时，一般采用其行数和列数来进行描述</span></span>
+<span id="cb1-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A.shape)</span>
+<span id="cb1-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 通过矩阵A的shape属性，可以获取一个表示矩阵规模的元组对象</span></span>
+<span id="cb1-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 这个元组对象包含两个元素：第一个元素表示行数，第二个表示列数</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 2]
+ [3 4]
+ [5 6]
+ [7 8]]
+(4, 2)</code></pre>
+</div>
+</div>
+<p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#行向量；用生成矩阵的方法生成了一个1*4的矩阵，用来表示一个四维的行向量</span></span>
+<span id="cb3-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(B.shape)</span>
+<span id="cb3-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(B.T) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#转置成列向量；因为是矩阵形式，所以可以用转置方法，得到对应的四维列向量</span></span>
+<span id="cb3-4">C<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb3-5">            [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>],</span>
+<span id="cb3-6">            [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>],</span>
+<span id="cb3-7">            [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#列向量</span></span>
+<span id="cb3-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(C)</span>
+<span id="cb3-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1, 4)
+[[1]
+ [2]
+ [3]
+ [4]]
+[[1]
+ [2]
+ [3]
+ [4]]
+(4, 1)</code></pre>
+</div>
+</div>
+</section>
+<section id="特殊形态的矩阵" class="level3">
+<h3 class="anchored" data-anchor-id="特殊形态的矩阵">特殊形态的矩阵</h3>
+<ol type="1">
+<li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
+</ol>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb5-2">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>],</span>
+<span id="cb5-3">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>],</span>
+<span id="cb5-4">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#4阶方阵</span></span>
+<span id="cb5-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span>
+<span id="cb5-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 1 1 1]
+ [2 2 2 2]
+ [3 3 3 3]
+ [4 4 4 4]]
+(4, 4)</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>对称矩阵：开始介绍对称矩阵之前，先说明一下矩阵转置的概念。</p>
+<p>对于指定的矩阵，若将其行和列上的元素进行位置互换，即原行元素作新列，原列元素作新行，即可得到一个全新的矩阵，这个新矩阵称为原矩阵的转置矩阵，行和列互换的矩阵操作就称为矩阵的转置。</p>
+<p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
+<p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
+</ol>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 矩阵的转置：</span></span>
+<span id="cb7-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb7-3">A <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>],</span>
+<span id="cb7-4">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>]])</span>
+<span id="cb7-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span>
+<span id="cb7-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A.T)</span>
+<span id="cb7-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 对称矩阵：</span></span>
+<span id="cb7-8"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb7-9">S <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>],</span>
+<span id="cb7-10">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>],</span>
+<span id="cb7-11">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>],</span>
+<span id="cb7-12">              [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]])</span>
+<span id="cb7-13"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(S)</span>
+<span id="cb7-14"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(S.T)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 2 3 4]
+ [5 6 7 8]]
+[[1 5]
+ [2 6]
+ [3 7]
+ [4 8]]
+[[1 2 3 4]
+ [2 5 6 7]
+ [3 6 8 9]
+ [4 7 9 0]]
+[[1 2 3 4]
+ [2 5 6 7]
+ [3 6 8 9]
+ [4 7 9 0]]</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
+</ol>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>])</span>
+<span id="cb9-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
+</ol>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>])</span>
+<span id="cb11-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A)</span>
+<span id="cb11-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(A.T)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 0 0 0 0]
+ [0 2 0 0 0]
+ [0 0 3 0 0]
+ [0 0 0 4 0]
+ [0 0 0 0 5]]
+[[1 0 0 0 0]
+ [0 2 0 0 0]
+ [0 0 3 0 0]
+ [0 0 0 4 0]
+ [0 0 0 0 5]]</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
+</ol>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span>
+<span id="cb13-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(I)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]</code></pre>
+</div>
+</div>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>linear algebra</category>
+  <category>matrix</category>
+  <category>python</category>
+  <guid>https://leslie-lu.github.io/blog/2020/04/26/index.html</guid>
+  <pubDate>Sun, 26 Apr 2020 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409041318020.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>R语言4.0发布上线</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/04/25/index.html</link>
@@ -2383,7 +2774,7 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_355/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_356/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
@@ -3990,69 +4381,6 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
   <guid>https://leslie-lu.github.io/blog/2020/01/18/index.html</guid>
   <pubDate>Sat, 18 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231410900.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>你真的了解自己的电脑吗？</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/17/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="前言" class="level3">
-<h3 class="anchored" data-anchor-id="前言">前言</h3>
-<p>我们现在基本上人手一台电脑，无论你是Mac、Windows还是Linux，你真的了解你手头上的电脑么？当你在选购新电脑或者购买部件的时候，是否了解该怎么挑选呢？接下来我们一起了解下最常见也是容易搞不懂的电脑/计算机。</p>
-</section>
-<section id="什么是计算机" class="level3">
-<h3 class="anchored" data-anchor-id="什么是计算机">什么是计算机</h3>
-<p>一般地，接受用户输入命令与数据，经由中央处理器的数学与逻辑单元运算处理后，以产生或存储成有用的信息的机器，我们就称之为计算机。从这个意义上讲，我们日常用的计算器、手机、GPS卫星定位系统、ATM取款机、台式电脑、笔记本电脑、iPad、Apple Watch等都是计算机。我们常说的计算机是其中的台式或笔记本电脑。</p>
-</section>
-<section id="电脑硬件" class="level3">
-<h3 class="anchored" data-anchor-id="电脑硬件">电脑硬件</h3>
-<p>电脑的三大部分（以台式电脑为例）包括：</p>
-<ul>
-<li><p>输入单元：包括键鼠、读卡器、扫描仪、手写板、触控屏幕等</p></li>
-<li><p>主机部分：即系统单元，在主机机箱内，里面含有一堆板子、CPU与内存等</p></li>
-<li><p>输出单元：屏幕、打印机等</p></li>
-</ul>
-<p>主机里面最重要的就是一块主板，上面安装了中央处理器（Central Processing Unit, CPU）以及内存、硬盘（或存储卡）还有一些适配卡设备。大部分智能手机是将这些组件直接焊接在主板上面而不是插卡。</p>
-</section>
-<section id="cpu" class="level3">
-<h3 class="anchored" data-anchor-id="cpu">CPU</h3>
-<p>整台主机的重点在于CPU，CPU为一个具有特定功能的芯片，里面含有指令集，如果你想要让主机进行什么操作，就得要参考这块CPU是否有相关内置的指令集才可以。由于CPU的工作主要在于管理和运算，因此在CPU内又可分为两个主要的单元，分别是算术逻辑单元和控制单元。其中算术逻辑单元主要负责程序运算与逻辑判断，控制单元则主要协调各周边组件与各单元间的工作。CPU是整个电脑系统的最重要部分。</p>
-<p>CPU依设计理念不同，主要分为：</p>
-<ul>
-<li><p>精简指令集（RISC）系统：ARM公司的ARM CPU系列等。我们常使用的各品牌手机、导航系统、路由器等，几乎都是使用ARM架构的CPU。</p></li>
-<li><p>复杂指令集（CISC）系统：AMD、Intel等x86架构的CPU。由于x86架构CPU被大量用于个人电脑，因此个人电脑常被称为x86架构电脑。64位的个人电脑CPU又被统称为x86-64架构。x86架构的称呼来源于Intel最早研发出来的CPU代号。所谓的位（bit），指的是CPU一次读取数据的最大量。64位CPU表示CPU一次可以读写64位的数据，一般32位CPU所能读写的最大数据量大概是4GB。</p></li>
-</ul>
-</section>
-<section id="电脑上面常用的计算单位容量速度等" class="level3">
-<h3 class="anchored" data-anchor-id="电脑上面常用的计算单位容量速度等">电脑上面常用的计算单位（容量、速度等）</h3>
-<ul>
-<li><p>容量单位：电脑对数据的判断主要依据有没有通电来记录信息，所以理论上对于每一个记录单位而言，电脑只认识0与1而已。0/1这个二进制的单位我们称之为位（bit，比特）。但位实在太小，因而每份数据都使用8个位来记录，8位为一字节（Byte）。同样的，字节依然太小，因而有K代表1024B，M代表1024K，G代表1024M，T代表1024G，P代表1024T，E代表1024P。一般来说，数据容量使用二进制，所以1GB的文件大小为1024<em>1024</em>1204B。</p></li>
-<li><p>速度单位：CPU的命令周期常使用MHz或GHz之类的单位，这个Hz是“次数/秒”的意思。而在网络传输方面，由于网络使用的是位为单位，因此网络常使用的单位为Mbit/s（每秒多少Mbit）。大家常听到的“20M/5M”光纤传输速度，如果转成数据容量的字节时，其实理论最大传输值为：每秒2.5MB/每秒625KB的下载或上传速度。</p></li>
-</ul>
-<p>假设你今天购买了一块500GB的硬盘，但是格式化完毕后只剩下460GB左右的容量，这是为什么呢？一般硬盘制造商使用十进制的单位，所以500GB代表500<em>1000</em>1000*1000B，转成数据的容量单位时使用二进制（1024为基数），所以就成为466GB左右的容量了。并非厂商骗人，只是因为硬盘的最小物理量为512B，最小的组成单位为扇区（sector），通常硬盘容量的计算采用多少个扇区，所以才会使用十进制来处理。</p>
-</section>
-<section id="内存" class="level3">
-<h3 class="anchored" data-anchor-id="内存">内存</h3>
-<p>CPU读取的数据完全从内存中来（无论是程序还是一般文件数据），如果要读取硬盘中的数据，也要将数据挪到内存当中，再交由CPU来读取。内存中的数据则是从输入单元所传输进来的，而CPU处理完毕的数据也必须要先写回内存，最后数据才从内存传输到输出单元。</p>
-<p>这就是我们常说的，要加快系统性能，通常将内存容量加大就可以获得相当好的效果。因为所有的数据都是要经过内存的传输，所以内存的容量如果太小，数据读写性能就不足，对性能的影响相当大，尤其在Linux作为服务器操作系统的环境下。这也是为什么在买手机时，人们对可用内存（运行内存）的要求都很高的原因。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/17/index.html</guid>
-  <pubDate>Fri, 17 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408211533740.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
