@@ -11,7 +11,85 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 30 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 04 Sep 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>从随意推断（casual inference）到因果推断（causal inference）</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<blockquote class="blockquote">
+<p>因果分析的核心首先是因果问题，它决定了我们分析什么数据、如何分析这些数据以及我们的推断结论适用于什么人群。提出一个好的因果问题是比较难的，相对来讲，因果分析则要简单得多。本书属于方法应用性质，主要聚焦于因果推断的分析阶段。在本书前六章中，我们将讨论什么是因果问题，如何改进我们的问题，以及思考一些例子。</p>
+</blockquote>
+<p>因果问题是我们可以通过统计方法提出的一组更广泛问题中的一部分，这些问题依据数据科学的主要目的可以大致分为：描述、预测和因果推断 <span class="citation" data-cites="hernan2019">(Hernán, Hsu, and Healy 2019)</span>。然而，在实际中，受到所使用统计方法的影响（如，这三类问题都可使用回归来处理）以及我们讨论它们的方式影响，我们常常会将这三种问题混淆在一起。当我们实际想要进行的是基于非随机数据的因果推断时，我们经常使用“关联”（association）这样的委婉说法，而不是直接声明我们想要估计因果效应 <span class="citation" data-cites="Hernan2018">(Hernán 2018)</span>。</p>
+<p>例如，最近一项关于流行病学研究中所使用语言的研究显示，估计效应的描述中最常见的词根是 “associate”，而许多研究人员也默认 “associate” 至少暗示了某种因果效应 (Figure&nbsp;1) <span class="citation" data-cites="haber_causal_language">(Haber et al. 2022)</span>。在分析的全部研究中，只有大约 1% 使用了 “cause” 这个词根。此外，三分之一的研究基于结论提出了相关的行动建议，而其中 80% 的建议都暗含了某种因果效应。而提出了行动建议的这些研究通常比那些只是描述效应的研究（如，使用 “associate” 和 “compare” 这样的词根）要有更强的因果效应暗示。另一方面，尽管一些研究暗示其目标是因果推断，但只有大约 4% 使用了本书将讨论的那些正式的因果推断模型，其它研究更多的做法是通过对先前相关研究或理论的引用讨论来证明他们建立的因果关系的合理性。</p>
+<div class="cell page-columns page-full" data-hash="index_cache/html/fig-word-ranking_42976e0f2cecba99cd93881d2797c418">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-word-ranking" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index_files/figure-html/fig-word-ranking-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1: 研究人员使用的词根的因果强度排名。具有更多 “Strong” 排名的词根比那些具有更多 “None” 或 “Weak” 评分的词根具有更强的因果暗示。数据来自 Haber 等人。</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>因为没有明确地提出带有具体因果假设和目标的因果问题，我们最终都得到了“薛定谔的因果推断”：</p>
+<blockquote class="blockquote">
+<p>我们的结果表明，“薛定谔的因果推断”是很常见的，即研究一方面避免声明（甚至明确否认）对估计因果效应的兴趣，但另一方面又充满了因果意图、推断、因果暗示和行动建议。</p>
+<p>— <span class="citation" data-cites="haber_causal_language">Haber et al. (2022)</span></p>
+</blockquote>
+<p>这种方法是随意推断（casual inference）的一个例子：在没有做必要的工作来理解因果问题并处理因果假设的情况下进行推断。</p>
+<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
+
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Did you find this page helpful? Consider sharing it 🙌</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-haber_causal_language" class="csl-entry">
+Haber, N. A., S. E. Wieten, J. M. Rohrer, O. A. Arah, P. W. G. Tennant, E. A. Stuart, E. J. Murray, et al. 2022. <span>“<span class="nocase"><span>C</span>ausal and <span>A</span>ssociational <span>L</span>anguage in <span>O</span>bservational <span>H</span>ealth <span>R</span>esearch: <span>A</span> <span>S</span>ystematic <span>E</span>valuation</span>.”</span> <em>Am J Epidemiol</em> 191 (12): 2084–97.
+</div>
+<div id="ref-Hernan2018" class="csl-entry">
+Hernán, Miguel A. 2018. <span>“The C-Word: Scientific Euphemisms Do Not Improve Causal Inference From Observational Data.”</span> <em>American Journal of Public Health</em> 108 (5): 616–19. <a href="https://doi.org/10.2105/ajph.2018.304337">https://doi.org/10.2105/ajph.2018.304337</a>.
+</div>
+<div id="ref-hernan2019" class="csl-entry">
+Hernán, Miguel A., John Hsu, and Brian Healy. 2019. <span>“A Second Chance to Get Causal Inference Right: A Classification of Data Science Tasks.”</span> <em>CHANCE</em> 32 (1): 42–49. <a href="https://doi.org/10.1080/09332480.2019.1579578">https://doi.org/10.1080/09332480.2019.1579578</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
+  author = {Lu, Zhen},
+  title = {从随意推断（casual {inference）到因果推断（causal}
+    Inference）},
+  date = {2024-09-04},
+  url = {https://leslie-lu.github.io//blog/2024/09/04/casual_inference},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
+Lu, Zhen. 2024. <span>“从随意推断（casual Inference）到因果推断（causal
+Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io//blog/2024/09/04/casual_inference">https://leslie-lu.github.io//blog/2024/09/04/casual_inference</a>.
+</div></div></section></div> ]]></description>
+  <category>causal inference</category>
+  <guid>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index.html</guid>
+  <pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://leslie-lu.github.io/blog/2024/09/04/casual_inference" medium="image"/>
+</item>
 <item>
   <title>星球JC | 胃癌早期筛查工具</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -1906,16 +1984,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
-  author = {Lu, Zhen},
-  title = {最优分类阈值},
-  date = {2024-05-11},
-  url = {https://leslie-lu.github.io//blog/2024/05/11/optimal_threshold},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
-Lu, Zhen. 2024. <span>“最优分类阈值.”</span> May 11, 2024. <a href="https://leslie-lu.github.io//blog/2024/05/11/optimal_threshold">https://leslie-lu.github.io//blog/2024/05/11/optimal_threshold</a>.
-</div></div></section></div> ]]></description>
+ ]]></description>
   <category>python</category>
   <category>machine learning</category>
   <guid>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index.html</guid>
@@ -2774,7 +2843,7 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_356/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_357/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
@@ -4328,59 +4397,6 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
   <guid>https://leslie-lu.github.io/blog/2020/01/19/index.html</guid>
   <pubDate>Sun, 19 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231443028.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Python正则表达式与模式匹配</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/18/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>很多商业分析都依赖模式匹配，也称为正则表达式（regular expression）。举例来说，我们可能需要分析一下来自深圳的所有订单。此时，你需要识别的模式就是“深圳”这个词。同样，你可能需要分析来自某个供应商的商品质量，此时你要识别的模式就是供应商的名字。</p>
-<p>Python包含了re模块，它提供了在文本中搜索特定模式/正则表达式的强大功能。要在脚本中使用re模块提供的功能，我们需要在脚本上方加入代码import re。</p>
-<p>导入re模块后，可以使用一大波函数和元字符来创建和搜索任意复杂的模式。元字符（metacharacter）是正则表达式中具有特殊意义的字符，使正则表达式能够匹配特定的字符串。</p>
-<p>常用的元字符包括 |、()、[]、.、*、+、?、^、$和<code>(?P&lt;name&gt;)</code>。如果你在正则表达式中见到这些字符，要知道程序不是要搜索这些字符本身，而是要搜索它们要描述的东西。</p>
-<p>re模块包含了很多有用的函数，用于创建和搜索特定的模式。一起来看一个示例代码：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/18/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231421391.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">sample code</figcaption>
-</figure>
-</div>
-<p>第一行赋值字符串变量string，下一行将字符串拆分为列表，列表中的每个元素都是一个单词。使用re.compile和re.I函数以及用r表示的原始字符串，创建一个名为pattern的正则表达式。re.compile函数将文本形式的模式编译成为正则表达式（正则表达式不是必须编译的，但编译是个好习惯，因为这样可以显著地提高程序运行速度），re.I函数确保模式是不区分大小写的，即能同时在字符串中匹配“The”和“the”，原始字符串标志r可确保Python不处理字符串中的转义字符（如、），这样在进行模式匹配是，字符串中的转义字符和正则表达式中的元字符就不会有意外的冲突。利用for循环在列表变量sring_list的各个元素之间进行迭代，取出列表中所有的单词，使用re.search函数将每个单词与正则表达式进行比较，如果相匹配，那么count的值就加1。print语句打印出正则表达式在字符串汇总找到模式“The”（不区分大小写）的次数。</p>
-<p>再看另一个示例：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/18/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422976.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">sample code 2</figcaption>
-</figure>
-</div>
-<p>这个示例想要打印出相匹配的字符串，而不是相匹配的次数，这里使用到了<code>(?P&lt;name&gt;)</code>元字符和group函数。<code>(?P&lt;name&gt;)</code>元字符使匹配的字符串可以在后面的程序中通过组名符号name来引用，这里称为match_word。后面if语句中使用了group函数获取分段截获的字符串，如果相匹配，那么就在search函数返回的数据结构中找出match_word组合中的值，并打印出来。</p>
-<p>最后一个示例：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/18/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231422618.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">sample code 3</figcaption>
-</figure>
-</div>
-<p>我们演示了使用re.sub函数在文本中用一种模式替换另一种模式。将正则表达式赋给变量string_to_find不是必需的，但若正则表达式特别长或复杂的话，将它赋给一个变量，然后传入re.compile函数有助于理解。最后使用re.sub函数以不区分大小写的方式在变量string中寻找模式，将发现的每个模式替换成a。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-<h5 class="anchored" data-anchor-id="did-you-find-this-page-helpful-consider-sharing-it">Did you find this page helpful? Consider sharing it 🙌</h5>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>regular expression</category>
-  <category>pattern matching</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/18/index.html</guid>
-  <pubDate>Sat, 18 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231410900.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
