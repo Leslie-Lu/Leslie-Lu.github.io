@@ -10,13 +10,14 @@
 <atom:link href="https://leslie-lu.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
-<generator>quarto-1.3.450</generator>
+<generator>quarto-1.5.57</generator>
 <lastBuildDate>Wed, 04 Sep 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>从随意推断（casual inference）到因果推断（causal inference）</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -26,7 +27,7 @@
 </blockquote>
 <p>因果问题是我们可以通过统计方法提出的一组更广泛问题中的一部分，这些问题依据数据科学的主要目的可以大致分为：描述、预测和因果推断 <span class="citation" data-cites="hernan2019">(Hernán, Hsu, and Healy 2019)</span>。然而，在实际中，受到所使用统计方法的影响（如，这三类问题都可使用回归来处理）以及我们讨论它们的方式影响，我们常常会将这三种问题混淆在一起。当我们实际想要进行的是基于非随机数据的因果推断时，我们经常使用“关联”（association）这样的委婉说法，而不是直接声明我们想要估计因果效应 <span class="citation" data-cites="Hernan2018">(Hernán 2018)</span>。</p>
 <p>例如，最近一项关于流行病学研究中所使用语言的研究显示，估计效应的描述中最常见的词根是 “associate”，而许多研究人员也默认 “associate” 至少暗示了某种因果效应 (Figure&nbsp;1) <span class="citation" data-cites="haber_causal_language">(Haber et al. 2022)</span>。在分析的全部研究中，只有大约 1% 使用了 “cause” 这个词根。此外，三分之一的研究基于结论提出了相关的行动建议，而其中 80% 的建议都暗含了某种因果效应。而提出了行动建议的这些研究通常比那些只是描述效应的研究（如，使用 “associate” 和 “compare” 这样的词根）要有更强的因果效应暗示。另一方面，尽管一些研究暗示其目标是因果推断，但只有大约 4% 使用了本书将讨论的那些正式的因果推断模型，其它研究更多的做法是通过对先前相关研究或理论的引用讨论来证明他们建立的因果关系的合理性。</p>
-<div class="cell page-columns page-full" data-hash="index_cache/html/fig-word-ranking_42976e0f2cecba99cd93881d2797c418">
+<div class="cell page-columns page-full">
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -40,10 +41,14 @@
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-word-ranking" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index_files/figure-html/fig-word-ranking-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1: 研究人员使用的词根的因果强度排名。具有更多 “Strong” 排名的词根比那些具有更多 “None” 或 “Weak” 评分的词根具有更强的因果暗示。数据来自 Haber 等人。</figcaption>
+<div id="fig-word-ranking" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-word-ranking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index_files/figure-html/fig-word-ranking-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-word-ranking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: 研究人员使用的词根的因果强度排名。具有更多 “Strong” 排名的词根比那些具有更多 “None” 或 “Weak” 评分的词根具有更强的因果暗示。数据来自 Haber 等人。
+</figcaption>
 </figure>
 </div>
 </div>
@@ -54,16 +59,13 @@
 <p>— <span class="citation" data-cites="haber_causal_language">Haber et al. (2022)</span></p>
 </blockquote>
 <p>这种方法是随意推断（casual inference）的一个例子：在没有做必要的工作来理解因果问题并处理因果假设的情况下进行推断。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-
 
 
 <!-- -->
 
 
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Did you find this page helpful? Consider sharing it 🙌</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-haber_causal_language" class="csl-entry">
 Haber, N. A., S. E. Wieten, J. M. Rohrer, O. A. Arah, P. W. G. Tennant, E. A. Stuart, E. J. Murray, et al. 2022. <span>“<span class="nocase"><span>C</span>ausal and <span>A</span>ssociational <span>L</span>anguage in <span>O</span>bservational <span>H</span>ealth <span>R</span>esearch: <span>A</span> <span>S</span>ystematic <span>E</span>valuation</span>.”</span> <em>Am J Epidemiol</em> 191 (12): 2084–97.
 </div>
@@ -73,28 +75,29 @@ Hernán, Miguel A. 2018. <span>“The C-Word: Scientific Euphemisms Do Not Impro
 <div id="ref-hernan2019" class="csl-entry">
 Hernán, Miguel A., John Hsu, and Brian Healy. 2019. <span>“A Second Chance to Get Causal Inference Right: A Classification of Data Science Tasks.”</span> <em>CHANCE</em> 32 (1): 42–49. <a href="https://doi.org/10.1080/09332480.2019.1579578">https://doi.org/10.1080/09332480.2019.1579578</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
   author = {Lu, Zhen},
   title = {从随意推断（casual {inference）到因果推断（causal}
     Inference）},
   date = {2024-09-04},
-  url = {https://leslie-lu.github.io//blog/2024/09/04/casual_inference},
+  url = {https://leslie-lu.github.io/blog/2024/09/04/casual_inference/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
 Lu, Zhen. 2024. <span>“从随意推断（casual Inference）到因果推断（causal
-Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io//blog/2024/09/04/casual_inference">https://leslie-lu.github.io//blog/2024/09/04/casual_inference</a>.
+Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/blog/2024/09/04/casual_inference/">https://leslie-lu.github.io/blog/2024/09/04/casual_inference/</a>.
 </div></div></section></div> ]]></description>
   <category>causal inference</category>
-  <guid>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/</guid>
   <pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://mmbiz.qpic.cn/mmbiz_png/icqaaCSQOkbc2EFeOVKYnc6toQVFbkZPhcGKIs3qZdksl4mjibRBazibubwicmoZ28Bt1umDmJalCpcMckdRqhtGUQ/640?wx_fmt=png&amp;from=appmsg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" medium="image"/>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051340717.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>星球JC | 胃癌早期筛查工具</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/30/docker/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/30/docker/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -131,8 +134,8 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
 <p>此研究收集了2015年6月至2017年3月期间来自中国115家医院的数据，最终纳入14,929名合格参与者。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">图1 研究对象纳入及定义</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图1 研究对象纳入及定义</figcaption>
 </figure>
 </div>
 <section id="预测规则的开发" class="level4 page-columns page-full">
@@ -140,29 +143,29 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
 <p>基于分数的预测规则的开发：采用单因素和多因素分析，确定了包括年龄、性别、PG I/II比率、G-17水平、幽门螺杆菌感染和饮食习惯（腌制和油炸食品消费）在内的7个预测因素。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Table 1</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Table 1</figcaption>
 </figure>
 </div>
 <p>按照0–25分评分范围进行风险分层，将个体分为低风险（≤11）、中风险（12–16）和高风险（17–25）组。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">图2 logistic回归模型中胃癌的预测因素及相关预测规则</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图2 logistic回归模型中胃癌的预测因素及相关预测规则</figcaption>
 </figure>
 </div>
 <p>其中，中高风险组的胃镜检查检测到70.8%的胃癌病例和70.3%的早期胃癌病例。低风险组的胃镜检查需求减少了66.7%。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Table 4</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Table 4</figcaption>
 </figure>
 </div>
 <p>预测性能：开发的预测规则具有良好的性能表现。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">图3 预测模型的性能指标</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图3 预测模型的性能指标</figcaption>
 </figure>
 </div>
 </section>
@@ -171,8 +174,8 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
 <p>该预测规则表现良好，并显示出显著优于其他三种替代预测方法（即Miki等人的ABC方法、中国的基于ELISA的ABC方法以及Tu等人的五种生物标志物方法）在识别胃癌患者方面的区分能力。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/30/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">图4 验证队列中预测模型和替代预测模型的比较</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图4 验证队列中预测模型和替代预测模型的比较</figcaption>
 </figure>
 </div>
 </section>
@@ -195,15 +198,16 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
 
  ]]></description>
   <category>journal club</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/30/docker/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/30/docker/</guid>
   <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302124427.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>github actions使用docker渲染quarto文档</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/29/docker/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/29/docker/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -211,8 +215,8 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
 <p>在用github pages更新静态网站内容时，发现github actions突然报之前并未出现过的错误：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/29/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">error</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292356507.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">error</figcaption>
 </figure>
 </div>
 <p>错误表明系统在尝试调用UPower、Vulkan服务时遇到了问题，但是我也没找到到底是在哪里调用。而且UPower是一个用于管理电池电量和电源管理的服务，通常在桌面环境中使用。我尝试更新unbuntu上upower这些包的时候，发现github pages这种方式并没有给使用这类包的权限，看google上似乎也没有针对这个错误的比较好的解决方式。</p>
@@ -223,12 +227,14 @@ background-color: null;
 font-style: inherit;"># install R and dependencies</span></span>
 <span id="cb1-2"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">ENV</span> DEBIAN_FRONTEND=noninteractive</span>
 <span id="cb1-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Update package indices</span></span>
 <span id="cb1-4"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">apt-get</span> update <span class="at" style="color: #657422;
@@ -239,6 +245,7 @@ background-color: null;
 font-style: inherit;"># Install helper packages</span></span>
 <span id="cb1-6"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
@@ -251,12 +258,14 @@ background-color: null;
 font-style: inherit;"># Add the signing key for the R repository</span></span>
 <span id="cb1-8"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">wget</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tee</span> <span class="at" style="color: #657422;
@@ -267,6 +276,7 @@ background-color: null;
 font-style: inherit;"># Add the R 4.0 repository from CRAN</span></span>
 <span id="cb1-10"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">add-apt-repository</span> <span class="st" style="color: #20794D;
@@ -284,6 +294,7 @@ background-color: null;
 font-style: inherit;">-cran40/"</span></span>
 <span id="cb1-11"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
@@ -293,6 +304,7 @@ background-color: null;
 font-style: inherit;">-y</span> r-base </span>
 <span id="cb1-12"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">R</span> <span class="at" style="color: #657422;
@@ -302,15 +314,19 @@ background-color: null;
 font-style: inherit;">"if (!requireNamespace('renv', quietly=TRUE)) install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"</span></span>
 <span id="cb1-13"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">WORKDIR</span> /project</span>
 <span id="cb1-14"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">COPY</span> renv.lock .</span>
 <span id="cb1-15"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">ENV</span> RENV_PATHS_LIBRARY /renv</span>
 <span id="cb1-16"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
@@ -318,15 +334,19 @@ background-color: null;
 font-style: inherit;">-p</span> renv</span>
 <span id="cb1-17"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">COPY</span> .Rprofile .Rprofile</span>
 <span id="cb1-18"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">COPY</span> renv/activate.R renv/activate.R</span>
 <span id="cb1-19"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">COPY</span> renv/settings.json renv/settings.json</span>
 <span id="cb1-20"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">R</span> <span class="at" style="color: #657422;
@@ -340,10 +360,12 @@ background-color: null;
 font-style: inherit;"># install python and dependencies</span></span>
 <span id="cb1-23"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">apt-get</span> update <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">&amp;&amp;</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">apt-get</span> install <span class="at" style="color: #657422;
@@ -353,6 +375,7 @@ background-color: null;
 font-style: inherit;">\</span></span>
 <span id="cb1-24">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">&amp;&amp;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rm</span> <span class="at" style="color: #657422;
@@ -362,9 +385,11 @@ background-color: null;
 font-style: inherit;">*</span></span>
 <span id="cb1-25"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">COPY</span> requirements.txt .</span>
 <span id="cb1-26"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">RUN</span> <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip3</span> install <span class="at" style="color: #657422;
@@ -377,8 +402,8 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <p>这样使用docker的方式就不会报错了：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/29/docker/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">success</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">success</figcaption>
 </figure>
 </div>
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
@@ -394,15 +419,16 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
   <category>github</category>
   <category>quarto</category>
   <category>docker</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/29/docker/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/29/docker/</guid>
   <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>大图嵌小图</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -412,21 +438,21 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <p>星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Q1</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q1</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Q2</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q2</figcaption>
 </figure>
 </div>
 <p>我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">survival curve</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">survival curve</figcaption>
 </figure>
 </div>
 <p>想要把risk table嵌入到生存曲线中。</p>
@@ -434,7 +460,7 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <section id="方法一" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="方法一">方法一</h3>
 <p>使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_6b9faa99cd1b0e0846b7c25e1284f7fe">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># not run</span></span>
@@ -473,15 +499,15 @@ font-style: inherit;">vp =</span> subvp)</span></code></pre></div>
 <p>viewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">option 1</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 1</figcaption>
 </figure>
 </div>
 </section>
 <section id="方法二" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="方法二">方法二</h3>
 <p>使用annotation_custom函数，它可以在图形中添加自定义的图形元素。</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_ca1fffe6d3dc9025eb45468c335cc631">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># not run</span></span>
@@ -516,15 +542,15 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <p>ggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">option 2</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 2</figcaption>
 </figure>
 </div>
 </section>
 <section id="方法三" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="方法三">方法三</h3>
 <p>使用ggpp包。</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_7a8899ed28d6bf91362d1e79c6f457c5">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># not run</span></span>
@@ -573,8 +599,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/20/nested_layout/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">option 3</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 3</figcaption>
 </figure>
 </div>
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
@@ -590,15 +616,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
  ]]></description>
   <category>r</category>
   <category>ggplot2</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</guid>
   <pubDate>Tue, 20 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>欢迎加入预测模型星球</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -608,8 +635,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>前面我们给大家推荐了这本几位非常厉害的教授老师主编的<a href="https://mp.weixin.qq.com/s/QQDM3aqyjaOSXXlZznJRDg">《临床预测模型方法与应用》</a>，陆陆续续地，在各个平台上，大家都反馈已经收到了这本书，并且这本书还很大很厚，涵盖了方法学、操作、专题以及案例。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141829108.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">feedback</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141829108.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">feedback</figcaption>
 </figure>
 </div>
 <p>那这时候，就有同学和我说，按照以往看书的习惯，收到书的前一俩周，还是可以翻翻，但是后面就会慢慢地放在那里，然后就不了了之了。</p>
@@ -619,8 +646,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="预测模型星球">预测模型星球</h3>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">知识星球</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">知识星球</figcaption>
 </figure>
 </div>
 <p>向大家完整介绍下这个星球，也鼓励更多想要讨论交流的小伙伴进入到我的星球里面，大家一起愉快地学习。</p>
@@ -634,8 +661,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>来到这里你会遇到一群志同道合的人，一起学习、相互交流、共同促进。这个交流圈高度专注于预测类研究领域。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141840460.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">content</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141840460.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">content</figcaption>
 </figure>
 </div>
 <ol start="3" type="1">
@@ -655,15 +682,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
  ]]></description>
   <category>workshop</category>
   <category>prediction model</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/14/clinical_prediction_model/</guid>
   <pubDate>Wed, 14 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>星球第二期workshop上线</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/11/workshop_002/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/11/workshop_002/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -671,22 +699,22 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>我们<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>正式上线第二期workshop啦！</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/11/workshop_002/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111605260.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">workshop</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111605260.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">workshop</figcaption>
 </figure>
 </div>
 <p>本期workshop主题是“Sample Size Calculations in Clinical Research”。本期workshop将从临床研究中不同试验设计的角度出发，介绍如何基于不同设计类型（平行设计、交叉设计、析因设计、成组序贯设计等）、比较类型（非劣效、等效、优效试验）、主要终点指标等因素进行样本量计算。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/11/workshop_002/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111619582.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">screenshot</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111619582.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">screenshot</figcaption>
 </figure>
 </div>
 <p>目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/11/workshop_002/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111620421.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">used files</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111620421.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">used files</figcaption>
 </figure>
 </div>
 <p>后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>，我们会在这两个平台上发布最新的信息。</p>
@@ -702,15 +730,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
   <category>workshop</category>
   <category>sample size</category>
   <category>clinical research</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/11/workshop_002/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/11/workshop_002/</guid>
   <pubDate>Sun, 11 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408111605260.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>星球第一期workshop上线</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/04/workshop_001/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/04/workshop_001/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -718,22 +747,22 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>我们<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>正式上线第一期workshop啦！</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/04/workshop_001/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041637573.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">workshop</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041637573.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">workshop</figcaption>
 </figure>
 </div>
 <p>本期workshop主题是“Statistical Methods for Analysis with Missing Data”。本期workshop将从缺失数据的概念、缺失数据的类型、缺失数据的机制、缺失数据的影响、缺失数据的处理方法等方面展开讲解，帮助大家更好地理解缺失数据的问题，掌握缺失数据的处理方法。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/04/workshop_001/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041641868.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">screenshot</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041641868.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">screenshot</figcaption>
 </figure>
 </div>
 <p>目前暂定的安排是每周一节一小时，直到本期workshop的全部内容结束。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/04/workshop_001/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041644463.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">used files</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041644463.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">used files</figcaption>
 </figure>
 </div>
 <p>后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>，我们会在这两个平台上发布最新的信息。</p>
@@ -749,15 +778,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
   <category>workshop</category>
   <category>missing data</category>
   <category>statistical methods</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/04/workshop_001/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/04/workshop_001/</guid>
   <pubDate>Sun, 04 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041637573.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>倾向性评分加权</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -797,8 +827,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="原始人群的ps分布">原始人群的ps分布</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ps of original population</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ps of original population</figcaption>
 </figure>
 </div>
 </section>
@@ -806,8 +836,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="ate">ATE</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ATE</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATE</figcaption>
 </figure>
 </div>
 </section>
@@ -815,8 +845,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="att">ATT</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ATT</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATT</figcaption>
 </figure>
 </div>
 </section>
@@ -824,8 +854,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="atc">ATC</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ATC</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATC</figcaption>
 </figure>
 </div>
 </section>
@@ -833,8 +863,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="atm">ATM</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ATM</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATM</figcaption>
 </figure>
 </div>
 </section>
@@ -842,8 +872,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="ato">ATO</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ATO</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ATO</figcaption>
 </figure>
 </div>
 </section>
@@ -863,15 +893,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
  ]]></description>
   <category>propensity score</category>
   <category>weighting</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</guid>
   <pubDate>Sat, 03 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>预测模型领域新书推荐</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/07/19/new_book/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/07/19/new_book/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -881,8 +912,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 </blockquote>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/07/19/new_book/https:/img01.yzcdn.cn/upload_files/2024/07/19/FlaDOPwuw67QXR1EG_dIwX858yNM.jpg!large.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">临床预测模型方法与应用</figcaption>
+<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FlaDOPwuw67QXR1EG_dIwX858yNM.jpg!large.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">临床预测模型方法与应用</figcaption>
 </figure>
 </div>
 <p>非常高兴向大家推荐和我们课题组一直保持良好合作的荷兰 Utrecht University <a href="https://www.uu.nl/staff/JWang6">王俊峰教授</a>参与主编的新书《<a href="https://shop19174385.m.youzan.com/wscgoods/detail/3f2t7uivrox5lr1?scan=1&amp;activity=none&amp;from=kdt&amp;qr=directgoods_4268678081&amp;shopAutoEnter=1&amp;is_share=1&amp;from_uuid=4760198145&amp;goodsImg=https%3A%2F%2Fimg01.yzcdn.cn%2Fupload_files%2F2024%2F07%2F19%2FFlaDOPwuw67QXR1EG_dIwX858yNM.jpg&amp;sf=wx_sm&amp;share_cmpt=native_wechat">临床预测模型方法与应用</a>》。</p>
@@ -890,21 +921,21 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>这本书由南京医科大学公共卫生学院的陈峰教授作序，主编人员都是在预测模型、生物统计领域内有着丰富经验和深刻见解的科研人员，王老师在我们合作的项目文章里也给与了我悉心的指导，北京天坛医院<a href="https://scholar.google.com/citations?user=lRMQ1TQAAAAJ&amp;hl=en">谷鸿秋教授</a>也是刚刚作为一作发表了<a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2400314">NEJM</a>，这本书可以说是大咖云集了。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/07/19/new_book/https:/img01.yzcdn.cn/upload_files/2024/07/19/FhenV4zyYep1OLarEbPTNGwBTxQE.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">序言</figcaption>
+<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FhenV4zyYep1OLarEbPTNGwBTxQE.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">序言</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/07/19/new_book/https:/img01.yzcdn.cn/upload_files/2024/07/19/FgbP3FuafNrK00Art1Rl0ocpCIZ7.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">序言</figcaption>
+<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FgbP3FuafNrK00Art1Rl0ocpCIZ7.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">序言</figcaption>
 </figure>
 </div>
 <p>相信很多做科研的同学，一直想找一本这个方向领域的权威且全面的中文书，这本书应该是一个不错的选择。如果是对预测模型感兴趣的小伙伴可以直接下单预定啦，也可以关注下8月份王老师在北大、复旦的讲座。这本书8月份会正式上市，目前可以扫码下图进行预定。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/07/19/new_book/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202407191947983.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">预定</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202407191947983.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">预定</figcaption>
 </figure>
 </div>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
@@ -918,15 +949,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
  ]]></description>
   <category>prediction model</category>
   <category>book</category>
-  <guid>https://leslie-lu.github.io/blog/2024/07/19/new_book/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/07/19/new_book/</guid>
   <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
   <media:content url="https://img01.yzcdn.cn/upload_files/2024/07/19/FlaDOPwuw67QXR1EG_dIwX858yNM.jpg!large.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>2023年最新JCR影响因子发布</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -941,8 +973,8 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
 <p>四大神刊中JAMA几近腰斩，柳叶刀系列的多个子刊也是如此。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406231742280.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">柳叶刀系列</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406231742280.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">柳叶刀系列</figcaption>
 </figure>
 </div>
 <p>医工交叉领域也是普遍下滑。medical informatics数字医疗部分，lancet digital health和npj Digital Medicine分别是23.8和12.4分。</p>
@@ -959,15 +991,16 @@ font-style: inherit;">label =</span> plot))</span></code></pre></div>
  ]]></description>
   <category>sci</category>
   <category>jcr</category>
-  <guid>https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/</guid>
   <pubDate>Sun, 23 Jun 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406231731181.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>常用损失函数</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/06/07/loss_function/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1076,15 +1109,16 @@ font-style: inherit;">'mean'</span>)</span></code></pre></div>
   <category>machine learning</category>
   <category>deep learning</category>
   <category>loss function</category>
-  <guid>https://leslie-lu.github.io/blog/2024/06/07/loss_function/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</guid>
   <pubDate>Fri, 07 Jun 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406072019199.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Python中机器学习模型的校准</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/05/17/calibration/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/05/17/calibration/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1101,8 +1135,8 @@ font-style: inherit;">'mean'</span>)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="calibration-plot">calibration plot</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/17/calibration/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171632445.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">calibration curve</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171632445.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">calibration curve</figcaption>
 </figure>
 </div>
 <p>上图是一个典型的calibration curve，也是我们在文章中常见的图。</p>
@@ -1125,8 +1159,8 @@ font-style: inherit;">10</span>,strategy)</span></code></pre></div>
 <p>calibration level的定义有：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/17/calibration/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171653641.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">calibration level<span class="citation" data-cites="RN410">(Alonzo 2009)</span></figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171653641.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">calibration level<span class="citation" data-cites="RN410">(Alonzo 2009)</span></figcaption>
 </figure>
 </div>
 </section>
@@ -1202,43 +1236,41 @@ font-style: inherit;">=</span> IsotonicRegression().fit(y_pred, y_test)</span></
 <h3 class="anchored" data-anchor-id="take-home-message">take home message</h3>
 <p>在利用机器学习模型进行分类预测时，我们不可忽视模型的校准能力。</p>
 <p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-
 
 
 <!-- -->
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Did you find this page helpful? Consider sharing it 🙌</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-RN410" class="csl-entry">
 Alonzo, T. A. 2009. <span>“Clinical Prediction Models: A Practical Approach to Development, Validation, and Updating: By Ewout w. Steyerberg.”</span> Generic. Oxford University Press.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
   author = {Lu, Zhen},
   title = {Python中机器学习模型的校准},
   date = {2024-05-17},
-  url = {https://leslie-lu.github.io//blog/2024/05/17/calibration},
+  url = {https://leslie-lu.github.io/blog/2024/05/17/calibration/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
 Lu, Zhen. 2024. <span>“Python中机器学习模型的校准.”</span> May 17, 2024.
-<a href="https://leslie-lu.github.io//blog/2024/05/17/calibration">https://leslie-lu.github.io//blog/2024/05/17/calibration</a>.
+<a href="https://leslie-lu.github.io/blog/2024/05/17/calibration/">https://leslie-lu.github.io/blog/2024/05/17/calibration/</a>.
 </div></div></section></div> ]]></description>
   <category>python</category>
   <category>machine learning</category>
   <category>calibration</category>
-  <guid>https://leslie-lu.github.io/blog/2024/05/17/calibration/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/05/17/calibration/</guid>
   <pubDate>Fri, 17 May 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171632445.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Hierarchical composite endpoints治疗效应的可视化</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1254,7 +1286,7 @@ Lu, Zhen. 2024. <span>“Python中机器学习模型的校准.”</span> May 17,
 <h3 class="anchored" data-anchor-id="maraca-plot">maraca plot</h3>
 <p>maraca基于ggplot2，其中，对于TTE采用Kaplan-Meier曲线展示cumulative proportions，对于连续性终点可选用箱线图、violin plot以及scatter plot展示连续性分布。这种方法可以同时展示HCE的不同组成成分。</p>
 <p>来看一个例子。</p>
-<div class="cell" data-hash="index_cache/html/libraries_aae59afc246ff0df0303add1d49e7116">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(maraca)</span>
@@ -1285,7 +1317,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 </div>
 <p>具体变量意义，大家可以查看<code>?hce_scenario_a</code>。</p>
 <p>可视化如下：</p>
-<div class="cell" data-layout-align="center" data-hash="index_cache/html/maraca-plot_90f126d45e058f991796050627aaba01">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">column_names <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
@@ -1391,7 +1423,7 @@ font-style: inherit;">values =</span> AZ_colors)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index_files/figure-html/maraca-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index_files/figure-html/maraca-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1402,46 +1434,44 @@ font-style: inherit;">values =</span> AZ_colors)</span></code></pre></div>
 <p>怎么看这张图？</p>
 <p>首先是x轴上HCE的5个组成成分，x轴上每个成分的长度大小，代表了患者达到不同成分终点的比例，可以看到，continuous outcome的比例最大，说明这个终点的患者所占比例最大。其次，cumulative percentage显示active组在四个TTE终点上是存在差异的。再然后是continuous outcome的分布，偏向x轴右侧代表change from baseline更大。而这些结合起来，就是win odds的结果，可以看到，和我们从可视化的角度看到的结果是一致的。</p>
 <p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
-<section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
-
 
 
 <!-- -->
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Did you find this page helpful? Consider sharing it 🙌</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-RN1185" class="csl-entry">
 Gasparyan, S. B., E. K. Kowalewski, F. Folkvaljon, O. Bengtsson, J. Buenconsejo, J. Adler, and G. G. Koch. 2021. <span>“Power and Sample Size Calculation for the Win Odds Test: Application to an Ordinal Endpoint in COVID-19 Trials.”</span> Journal Article. <em>Journal of Biopharmaceutical Statistics</em> 31 (6): 765–87.
 </div>
 <div id="ref-RN1187" class="csl-entry">
 Karpefors, M., D. Lindholm, and S. B. Gasparyan. 2023. <span>“The Maraca Plot: A Novel Visualization of Hierarchical Composite Endpoints.”</span> Journal Article. <em>Clinical Trials (London, England)</em> 20 (1): 84–88. <a href="https://doi.org/10.1177/17407745221134949">https://doi.org/10.1177/17407745221134949</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
   author = {Lu, Zhen},
   title = {Hierarchical Composite {endpoints治疗效应的可视化}},
   date = {2024-05-13},
-  url = {https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints},
+  url = {https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
 Lu, Zhen. 2024. <span>“Hierarchical Composite
-Endpoints治疗效应的可视化.”</span> May 13, 2024. <a href="https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints">https://leslie-lu.github.io//blog/2024/05/13/hierarchical_composite_endpoints</a>.
+Endpoints治疗效应的可视化.”</span> May 13, 2024. <a href="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/">https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</a>.
 </div></div></section></div> ]]></description>
   <category>r</category>
   <category>clinical trial</category>
   <category>endpoint</category>
-  <guid>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</guid>
   <pubDate>Mon, 13 May 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405131659328.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>最优分类阈值</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1660,7 +1690,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <section id="模型预测" class="level3">
 <h3 class="anchored" data-anchor-id="模型预测">模型预测</h3>
 <p>拿到模型后，自然我们可以开始预测：</p>
-<div class="cell" data-execution_count="3">
+<div id="cell-predict" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">ypred <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mdl.predict_proba(Xvalid)[:,<span class="dv" style="color: #AD0000;
@@ -1930,11 +1960,11 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="roc曲线" class="level4">
 <h4 class="anchored" data-anchor-id="roc曲线">3. ROC曲线</h4>
 <p>我们可以通过<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">ROC曲线</a>来选择最优的阈值。ROC曲线下的面积AUC越大，说明模型越好。我们可以选择ROC曲线最靠近左上角的点作为最优阈值。</p>
-<div class="cell" data-execution_count="9">
+<div id="cell-threshold-roc" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div id="threshold-roc" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-roc-output-1.png" class="figure-img" width="445" height="447"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-roc-output-1.png" id="threshold-roc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -1943,11 +1973,11 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="prc曲线" class="level4">
 <h4 class="anchored" data-anchor-id="prc曲线">4. PRC曲线</h4>
 <p>PRC曲线是<a href="https://mp.weixin.qq.com/s/Zw85hAdx7VdwCioG5NwHQw">precision-recall曲线</a>。相比于ROC曲线，PRC曲线更适合类别不平衡的情况。我们主要选择PRC曲线最靠近右上角的点作为最优阈值。</p>
-<div class="cell" data-execution_count="10">
+<div id="cell-threshold-prc" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div id="threshold-prc" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-prc-output-1.png" class="figure-img" width="445" height="447"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-prc-output-1.png" id="threshold-prc" class="quarto-figure quarto-figure-center anchored figure-img" width="445" height="447"></p>
 </figure>
 </div>
 </div>
@@ -1959,11 +1989,11 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="分别关注precision和recall" class="level4">
 <h4 class="anchored" data-anchor-id="分别关注precision和recall">5. 分别关注precision和recall</h4>
 <p>我们可以通过调整阈值来分别关注precision和recall。比如，我们可以通过调整阈值来提高recall，减少假阴性的情况。</p>
-<div class="cell" data-execution_count="11">
+<div id="cell-threshold-pre-recall" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div id="threshold-pre-recall" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-pre-recall-output-1.png" class="figure-img" width="614" height="374"></p>
+<p><img src="https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index_files/figure-html/threshold-pre-recall-output-1.png" id="threshold-pre-recall" class="quarto-figure quarto-figure-center anchored figure-img" width="614" height="374"></p>
 </figure>
 </div>
 </div>
@@ -1984,15 +2014,16 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
  ]]></description>
   <category>python</category>
   <category>machine learning</category>
-  <guid>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/</guid>
   <pubDate>Sat, 11 May 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Python与矩阵</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/26/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/04/26/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2001,7 +2032,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div class="cell" data-execution_count="1">
+<div id="509e2da0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -2056,7 +2087,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div class="cell" data-execution_count="2">
+<div id="34085c74" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -2119,7 +2150,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div class="cell" data-execution_count="3">
+<div id="71b66f49" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2180,7 +2211,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div class="cell" data-execution_count="4">
+<div id="5ea6f8a5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -2287,7 +2318,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div class="cell" data-execution_count="5">
+<div id="e73279b3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -2309,7 +2340,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div class="cell" data-execution_count="6">
+<div id="a757a7cf" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -2345,7 +2376,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div class="cell" data-execution_count="7">
+<div id="e00960df" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -2375,15 +2406,16 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
   <category>linear algebra</category>
   <category>matrix</category>
   <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/26/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/04/26/</guid>
   <pubDate>Sun, 26 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409041318020.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言4.0发布上线</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/25/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/04/25/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2405,15 +2437,16 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
  ]]></description>
   <category>r</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/25/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/04/25/</guid>
   <pubDate>Sat, 25 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409032128325.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>概率密度与累积分布</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/03/22/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/03/22/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2439,15 +2472,16 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
  ]]></description>
   <category>biostatistics</category>
   <category>probability</category>
-  <guid>https://leslie-lu.github.io/blog/2020/03/22/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/03/22/</guid>
   <pubDate>Sun, 22 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409032123556.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>空间中的向量</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/03/12/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/03/12/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2495,21 +2529,22 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
  ]]></description>
   <category>biostatistics</category>
   <category>linear algebra</category>
-  <guid>https://leslie-lu.github.io/blog/2020/03/12/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/03/12/</guid>
   <pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Python与向量</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/03/11/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/03/11/</link>
   <description><![CDATA[ 
 
 
 
 
+
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div class="cell" data-execution_count="1">
+<div id="192ebe48" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -2537,7 +2572,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div class="cell" data-execution_count="2">
+<div id="30bc0f93" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2559,7 +2594,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div class="cell" data-execution_count="3">
+<div id="a6c72b00" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2593,7 +2628,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div class="cell" data-execution_count="4">
+<div id="e175c67a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -2627,7 +2662,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div class="cell" data-execution_count="5">
+<div id="2833788c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2662,7 +2697,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div class="cell" data-execution_count="6">
+<div id="46750575" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2691,7 +2726,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div class="cell" data-execution_count="7">
+<div id="3ce6162f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2786,7 +2821,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div class="cell" data-execution_count="8">
+<div id="b153c87c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2816,7 +2851,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div class="cell" data-execution_count="9">
+<div id="ebe37860" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2840,12 +2875,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_357/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_30954/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div class="cell" data-execution_count="10">
+<div id="f7354179" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2875,7 +2910,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div class="cell" data-execution_count="11">
+<div id="c536de19" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2971,15 +3006,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <category>biostatistics</category>
   <category>linear algebra</category>
   <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/03/11/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/03/11/</guid>
   <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>线性代数之向量</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/03/10/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/03/10/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3010,15 +3046,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>linear algebra</category>
-  <guid>https://leslie-lu.github.io/blog/2020/03/10/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/03/10/</guid>
   <pubDate>Tue, 10 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>协方差分析</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/23/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/23/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3048,15 +3085,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>ancova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/23/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/23/</guid>
   <pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>试验设计与方差分析（4）</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/22/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/22/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3092,15 +3130,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/22/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/22/</guid>
   <pubDate>Sat, 22 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>试验设计与方差分析（3）</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/20/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/20/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3146,15 +3185,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/20/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/20/</guid>
   <pubDate>Thu, 20 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>试验设计与方差分析（2）</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/18/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/18/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3201,15 +3241,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/18/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/18/</guid>
   <pubDate>Tue, 18 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>试验设计与方差分析（1）</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/17/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/17/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3240,15 +3281,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/17/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/17/</guid>
   <pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>方差分析</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/15/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/15/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3287,15 +3329,16 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
  ]]></description>
   <category>biostatistics</category>
   <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/15/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/15/</guid>
   <pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言数据处理分析实例</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/06/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/06/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3309,7 +3352,7 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
 <h3 class="anchored" data-anchor-id="实例">实例</h3>
 <p>一组学生参加了数学、科学和英语三科考试。为了给所有学生确定一个综合的成绩衡量指标，需要将这些科目的成绩组合起来，将排名在前20%的学生评定为A，接下来20%的学生评定为B，依此类推，最后，按字母顺序对学生进行排序。请试处理分析。</p>
 <p>如下，我们首先创建原始数据框：</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_8455315f80cbbf433a0a3aa2fbfb1dec">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">studentname<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -3438,7 +3481,7 @@ font-style: inherit;">FALSE</span>)</span>
 </div>
 <p>观察此数据集，马上可以发现一些明显的挑战：首先，三科考试成绩是无法比较的。由于它们的均值和标准差相差很大，对它们求三科的平均成绩是没有意义的。因此，在组合这些考试成绩之前，必须将其转换为可比较的成绩。</p>
 <p>因而，我们做如下处理，将三科成绩进行标准化，这样每科考试成绩都是用单位标准差来表示，而非原始的分值尺度表示：</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_ae29a5658cb802de17dfbbf2c1b7e24f">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">z<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -3473,7 +3516,7 @@ attr(,"scaled:scale")
 </div>
 <p>scale函数为数据对象按列进行中心化（center=TRUE）或标准化（center=TRUE, scale=TRUE），默认情况下，函数scale对矩阵或数据框的指定列进行均值为0、标准差为1的标准化，给出各科成绩标准化后的结果以及各科成绩的均值和标准差。</p>
 <p>然后，我们通过mean函数来计算各行的均值以获得三科成绩的综合评价得分，并使用cbind函数将其添加到学生成绩的原始数据框中：</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_8d32f6078d17efc5bfb6ce2adc76be0c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">Score<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -3508,7 +3551,7 @@ font-style: inherit;">cbind</span>(scoredata, Score)</span>
 </div>
 <p>apply函数可将一个任意函数应用到矩阵、数组、数据框的任何维度上，在矩阵或数据框中，1表示行，2表示列。cbind函数进行列合并，增加列。</p>
 <p>接下来，我们通过函数quantile给出三科成绩综合评价得分的百分位数，将学生的百分位数排名重编码为一个新的类别型成绩变量grade，如下：</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-4_6c0f2d74da3ade1adcb73be9d1483faa">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">y<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -3619,7 +3662,7 @@ font-style: inherit;">"E"</span></span>
 </div>
 <p>quantile函数求分位数，这里求Score数值型向量的20%、40%、60%和80%分位点。</p>
 <p>接下来，我们使用strsplit函数以空格把学生姓名拆分为姓氏和名字：</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-5_accfb3a3618bdd484bac7630df246cd0">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">name<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -3705,7 +3748,7 @@ font-style: inherit;">1</span>])</span>
 </div>
 <p>strsplit函数应用到一个字符串向量上会返回一个列表，使用sapply函数分别提取列表中每个成分的第一个元素和第二个元素，<code>[</code>是一个可以提取某个对象的一部分的函数，再使用cbind函数将它们添加到学生成绩的原始数据中。</p>
 <p>最后，我们使用order函数依姓氏和名字对数据集进行排序，完成这个数据任务。</p>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-6_f5d4809378d27bdaf98f65c11a8c66b6">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">scoredata4<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> scoredata3[<span class="fu" style="color: #4758AB;
@@ -3737,15 +3780,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>r</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/06/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/06/</guid>
   <pubDate>Thu, 06 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>计算机概论7–操作系统</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/05/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/05/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3779,15 +3823,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/05/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/05/</guid>
   <pubDate>Wed, 05 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>样本量和检验效能的估计问题</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/04/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/04/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3822,15 +3867,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
   <category>biostatistics</category>
   <category>sample size</category>
   <category>power</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/04/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/04/</guid>
   <pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281607494.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>计算机概论6</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/02/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/02/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3858,15 +3904,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/02/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/02/</guid>
   <pubDate>Sun, 02 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言基础–数据的输入</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/01/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/02/01/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3884,8 +3931,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 </ol>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/02/01/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281548152.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">example</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281548152.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">example</figcaption>
 </figure>
 </div>
 <p>类似于<code>age=numeric(0)</code>的赋值语句创建一个指定模式但不含实际数据的变量。编辑的结果需要赋值回对象本身，函数edit()事实上是在对象的一个副本上进行操作的，如果不将其赋值到一个目标，所有修改会全部丢失。单击列的标题，可以用编辑器修改变量名和变量类型（数值型、字符型），可通过单击未使用列的标题来添加新的变量。<code>mydata= edit(mydata)</code>的更简洁的等价写法是<code>fix(mydata)</code>。</p>
@@ -3913,15 +3960,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>r</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/01/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/02/01/</guid>
   <pubDate>Sat, 01 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>计算机概论5</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/31/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/31/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3950,15 +3998,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/31/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/31/</guid>
   <pubDate>Fri, 31 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言基础–函数</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/30/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/30/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3979,8 +4028,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>这里我们不举例子，大家可以下载下图所示的一份文档，可以打印出来，随时查阅。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/30/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231528510.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">cheat sheet</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231528510.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">cheat sheet</figcaption>
 </figure>
 </div>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
@@ -3995,15 +4044,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
  ]]></description>
   <category>r</category>
   <category>programming</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/30/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/30/</guid>
   <pubDate>Thu, 30 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言基础–运算符</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/29/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/29/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4078,15 +4128,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
  ]]></description>
   <category>r</category>
   <category>programming</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/29/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/29/</guid>
   <pubDate>Wed, 29 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言基础–因子</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/28/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/28/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4098,8 +4149,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>函数factor()以一个整数向量的形式存储类别值，同时一个由字符串（原始值）组成的内部向量将映射到这些整数上，如：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/28/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231514840.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">factor</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231514840.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">factor</figcaption>
 </figure>
 </div>
 <p>将此向量存储为(1, 2, 1, 1)，并在内部将其关联为1=Type1和2=Type2（具体赋值根据字母顺序决定）。针对向量diabetes进行的任何分析都会将其视为名义型变量并自动选择合适的统计方法。</p>
@@ -4107,15 +4158,15 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>要表示有序型变量，需要为函数factor()指定参数ordered=TRUE，如：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/28/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515774.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ordered-factor</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515774.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ordered-factor</figcaption>
 </figure>
 </div>
 <p>此时顺序为’Excellent’‘Improved’‘Poor’（对于字符型向量，因子的水平默认依字母顺序创建），这里恰好与逻辑顺序一致。若不一致，可以通过指定levels选项覆盖默认排序：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/28/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515992.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">ordered-factor-levels</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515992.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ordered-factor-levels</figcaption>
 </figure>
 </div>
 <section id="did-you-find-this-page-helpful-consider-sharing-it" class="level5">
@@ -4130,15 +4181,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
  ]]></description>
   <category>r</category>
   <category>programming</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/28/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/28/</guid>
   <pubDate>Tue, 28 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>计算机概论4</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/27/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/27/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4181,15 +4233,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/27/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/27/</guid>
   <pubDate>Mon, 27 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>R语言编程入门</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/22/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/22/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4210,8 +4263,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>向量是一系列元素的组合，用于存储数值型、字符型或逻辑型数据的一维数组。执行组合功能的函数c()可用来创建向量：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/22/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231458101.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">vector</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231458101.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">vector</figcaption>
 </figure>
 </div>
 <p>提示：单个向量中的数据必须是相同的类型或模式（数值型、字符型或逻辑型），同一向量中不可混杂不同类型数据。</p>
@@ -4224,8 +4277,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>其中，vector包含了矩阵的元素，nrow和ncol用于制定行和列的维数，dimnames包含了可选的、以字符型向量表示的行名和列名，byrow表明矩阵应当按行填充（byrow=T）还是按列填充（byrow=F），默认按列填充。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/22/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231459393.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">matrix</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231459393.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">matrix</figcaption>
 </figure>
 </div>
 <p>我们可以使用下标和方括号来选择矩阵中的行、列或元素。X[i,]表示矩阵X中的第i行，X[,j]表示第j列，X[i, j]表示第i行第j个元素。</p>
@@ -4237,8 +4290,8 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>其中，vector包含了数组中的数据，dimensions是一个数值型向量，给出了各个维度下标的最大值，dimnames是可选的、各维度名称标签的列表。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/22/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231500194.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">array</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231500194.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">array</figcaption>
 </figure>
 </div>
 <p>数组是矩阵的一个自然推广，从数组中选取元素的方式与矩阵相同。</p>
@@ -4252,15 +4305,15 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 <p>在每个变量名前都输入一次数据框名可能十分麻烦，我们可以联合使用函数attach()和detach()，或单独使用函数with()来简化代码。函数attach()将数据框添加到R的搜索路径中，R在遇到一个变量名后，将检查搜索路径中的数据框，以定位到这个变量，如</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/22/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501809.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">dataframe</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501809.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">dataframe</figcaption>
 </figure>
 </div>
 <p>函数detach()将数据框从搜索路径中移除，不会影响数据框本身。注意：函数attach()和detach()最好是分析一个单独的数据框，并且不太可能有多个同名对象。当同名时，原始对象将进行优先运算。另一种方式是使用函数with()，如</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://leslie-lu.github.io/blog/2020/01/22/https:/cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501015.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">with function</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501015.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">with function</figcaption>
 </figure>
 </div>
 <p>花括号{}之间的语句都针对该数据框执行，无需担心名称冲突；若仅有一条语句，花括号可以省略。函数with()的局限性在于赋值仅在此函数的括号内有效。若需要创建在with()结构外依然存在的对象，使用特殊赋值符号 -&gt;&gt; ，即可保存对象到全局环境中。</p>
@@ -4282,15 +4335,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
  ]]></description>
   <category>r</category>
   <category>programming</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/22/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/22/</guid>
   <pubDate>Wed, 22 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231456030.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>上手vim编辑器</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/21/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/21/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4318,15 +4372,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
  ]]></description>
   <category>vim</category>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/21/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/21/</guid>
   <pubDate>Tue, 21 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231449328.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>计算机概论3</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/20/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/20/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4356,15 +4411,16 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/20/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/20/</guid>
   <pubDate>Mon, 20 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231447001.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>谈谈电脑的CPU</title>
   <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/19/index.html</link>
+  <link>https://leslie-lu.github.io/blog/2020/01/19/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4391,7 +4447,7 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
  ]]></description>
   <category>linux</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/19/index.html</guid>
+  <guid>https://leslie-lu.github.io/blog/2020/01/19/</guid>
   <pubDate>Sun, 19 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231443028.webp" medium="image" type="image/webp"/>
 </item>
