@@ -16,13 +16,7 @@
   <title>从随意推断（casual inference）到因果推断（causal inference）</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<blockquote class="blockquote">
+  <description><![CDATA[ <blockquote class="blockquote">
 <p>因果分析的核心首先是因果问题，它决定了我们分析什么数据、如何分析这些数据以及我们的推断结论适用于什么人群。提出一个好的因果问题是比较难的，相对来讲，因果分析则要简单得多。本书属于方法应用性质，主要聚焦于因果推断的分析阶段。在本书前六章中，我们将讨论什么是因果问题，如何改进我们的问题，以及思考一些例子。</p>
 </blockquote>
 <p>因果问题是我们可以通过统计方法提出的一组更广泛问题中的一部分，这些问题依据数据科学的主要目的可以大致分为：描述、预测和因果推断 <span class="citation" data-cites="hernan2019">(Hernán, Hsu, and Healy 2019)</span>。然而，在实际中，受到所使用统计方法的影响（如，这三类问题都可使用回归来处理）以及我们讨论它们的方式影响，我们常常会将这三种问题混淆在一起。当我们实际想要进行的是基于非随机数据的因果推断时，我们经常使用“关联”（association）这样的委婉说法，而不是直接声明我们想要估计因果效应 <span class="citation" data-cites="Hernan2018">(Hernán 2018)</span>。</p>
@@ -42,14 +36,12 @@
 </div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-word-ranking" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-word-ranking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full"><div aria-describedby="fig-word-ranking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://leslie-lu.github.io/blog/2024/09/04/casual_inference/index_files/figure-html/fig-word-ranking-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-word-ranking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: 研究人员使用的词根的因果强度排名。具有更多 “Strong” 排名的词根比那些具有更多 “None” 或 “Weak” 评分的词根具有更强的因果暗示。数据来自 Haber 等人。
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -421,181 +413,226 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
   <title>大图嵌小图</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="由来" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="由来">由来</h3>
+  <description><![CDATA[ <section id="由来" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="由来">由来</h3>
 <p>星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Q1</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q1</figcaption></figure>
 </div>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Q2</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Q2</figcaption></figure>
 </div>
 <p>我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">survival curve</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">survival curve</figcaption></figure>
 </div>
 <p>想要把risk table嵌入到生存曲线中。</p>
-</section>
-<section id="方法一" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="方法一">方法一</h3>
+</section><section id="方法一" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法一">方法一</h3>
 <p>使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">subvp <span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">subvp</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">viewport</span>(<span class="at" style="color: #657422;
+font-style: inherit;">viewport</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+font-style: inherit;">(</span>width <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">0.35</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">height =</span> <span class="fl" style="color: #AD0000;
+font-style: inherit;">0.35</span>, height <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">0.35</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">x =</span> <span class="fl" style="color: #AD0000;
+font-style: inherit;">0.35</span>, x <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">0.75</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+font-style: inherit;">0.75</span>, y <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">0.75</span>)</span>
-<span id="cb1-2">ggsurv<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">$</span>plot</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
+font-style: inherit;">0.75</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">print</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>table, <span class="at" style="color: #657422;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">vp =</span> subvp)</span></code></pre></div>
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">plot</span></span>
+<span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">table</span>, vp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">subvp</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>viewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 1</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 1</figcaption></figure>
 </div>
-</section>
-<section id="方法二" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="方法二">方法二</h3>
+</section><section id="方法二" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法二">方法二</h3>
 <p>使用annotation_custom函数，它可以在图形中添加自定义的图形元素。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">ggsurv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">plot</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">annotation_custom</span>(<span class="fu" style="color: #4758AB;
+font-style: inherit;">annotation_custom</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">ggplotGrob</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">$</span>table), <span class="at" style="color: #657422;
+font-style: inherit;">ggplotGrob</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">xmin=</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">1900</span>, <span class="at" style="color: #657422;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">xmax=</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">3000</span>, <span class="at" style="color: #657422;
+font-style: inherit;">table</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">ymin=</span><span class="fl" style="color: #AD0000;
+font-style: inherit;">)</span>, xmin<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">ymax=</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">1900</span>, xmax<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3000</span>, ymin<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>, ymax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>ggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 2</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 2</figcaption></figure>
 </div>
-</section>
-<section id="方法三" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="方法三">方法三</h3>
+</section><section id="方法三" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法三">方法三</h3>
 <p>使用ggpp包。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">sub_plot<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">=</span> tibble<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">sub_plot</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">tibble</span>(</span>
-<span id="cb3-2">    <span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">x=</span> .<span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span></span>
+<span>    x<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">98</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">y=</span> .<span class="dv" style="color: #AD0000;
+font-style: inherit;">.98</span>, y<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">98</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">plot=</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">.98</span>, plot<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">list</span>(ggsurv<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">$</span>table)</span>
-<span id="cb3-3">)</span>
-<span id="cb3-4">ggsurv<span class="sc" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">table</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">plot</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> </span>
-<span id="cb3-5">    <span class="fu" style="color: #4758AB;
+<span>    <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_plot_npc</span>(<span class="at" style="color: #657422;
+font-style: inherit;">geom_plot_npc</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">data =</span> sub_plot, <span class="fu" style="color: #4758AB;
+font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">npcx =</span> x, <span class="at" style="color: #657422;
+font-style: inherit;">sub_plot</span>, <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">npcy =</span> y, <span class="at" style="color: #657422;
+font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">label =</span> plot))</span></code></pre></div>
+font-style: inherit;">(</span>npcx <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">x</span>, npcy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span>, label <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">plot</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 3</figcaption>
-</figure>
+<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">option 3</figcaption></figure>
 </div>
 <p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
 
 
 <!-- -->
 
-</section>
-
- ]]></description>
+</section> ]]></description>
   <category>r</category>
   <category>ggplot2</category>
   <guid>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</guid>
@@ -1230,42 +1267,56 @@ Lu, Zhen. 2024. <span>“Python中机器学习模型的校准.”</span> May 17,
   <title>Hierarchical composite endpoints治疗效应的可视化</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="复合终点" class="level3">
-<h3 class="anchored" data-anchor-id="复合终点">复合终点</h3>
+  <description><![CDATA[ <section id="复合终点" class="level3"><h3 class="anchored" data-anchor-id="复合终点">复合终点</h3>
 <p>有时，根据主要研究目的，我们很难从多个终点指标中选出其中某一个作为主要终点，此时，我们可以利用<strong>复合终点</strong>来作为主要终点。</p>
 <p>Hierarchical composite endpoints (<a href="https://cran.r-project.org/web/packages/hce/hce.pdf">HCE</a>)可以整合不同类型、不同重要性终点成一个有序终点指标，以表示患者经历的不同严重程度的终点。如，在固定随访的RCT中，outcomes of interest可以是death、hospitalization，而这两个终点存在严重程度的差异。很明显，死亡是最严重的。同样最终死亡的两个患者，生存时间更长，意味治疗效应更好；同样最终住院的两个患者，入院前时间更长，治疗效应更好；同样未住院的两个患者，某一实验室指标的change from baseline更大，效应更好。</p>
 <p>对于这种HCE，我们可以计算win odds<span class="citation" data-cites="RN1185">(Gasparyan et al. 2021)</span>来比较组间差异，然而，治疗效应的可视化受到复合终点的影响，不容易像单纯的生存曲线那样用合适的工具可视化出来。</p>
 <p>针对这一问题，AstraZeneca的Martin Karpefors等人提出了一种新的方法，即<em>maraca plot<span class="citation" data-cites="RN1187">(Karpefors, Lindholm, and Gasparyan 2023)</span></em>。这种方法可以将复合终点中time to event(TTE)以及连续性终点的治疗效应可视化出来，同时也可以用来比较不同治疗组之间的差异。对应的<a href="https://cran.r-project.org/web/packages/maraca/index.html">R包</a>可以方便地实现这一点。</p>
-</section>
-<section id="maraca-plot" class="level3">
-<h3 class="anchored" data-anchor-id="maraca-plot">maraca plot</h3>
+</section><section id="maraca-plot" class="level3"><h3 class="anchored" data-anchor-id="maraca-plot">maraca plot</h3>
 <p>maraca基于ggplot2，其中，对于TTE采用Kaplan-Meier曲线展示cumulative proportions，对于连续性终点可选用箱线图、violin plot以及scatter plot展示连续性分布。这种方法可以同时展示HCE的不同组成成分。</p>
 <p>来看一个例子。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">library</span>(maraca)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">data</span>(hce_scenario_a, <span class="at" style="color: #657422;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://github.com/AstraZeneca/maraca">maraca</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"maraca"</span>)</span>
-<span id="cb1-3">data <span class="ot" style="color: #003B4F;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">&lt;-</span> hce_scenario_a</span>
-<span id="cb1-4">data <span class="sc" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">hce_scenario_a</span>, package <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"maraca"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">data</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">hce_scenario_a</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">head</span>()</span></code></pre></div>
+font-style: inherit;"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  SUBJID              GROUP GROUPN      AVAL0       AVAL    TRTP
 1      1          Outcome I      0 120.440921   120.4409  Active
@@ -1276,31 +1327,41 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 6      6        Outcome III  20000 985.097981 20985.0980 Control</code></pre>
 </div>
 </div>
-<p>具体变量意义，大家可以查看<code>?hce_scenario_a</code>。</p>
+<p>具体变量意义，大家可以查看<code><a href="https://rdrr.io/pkg/maraca/man/hce_scenario_a.html">?hce_scenario_a</a></code>。</p>
 <p>可视化如下：</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">column_names <span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">column_names</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">(</span>outcome <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"GROUP"</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">arm =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">"GROUP"</span>, arm <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"TRTP"</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">value =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">"TRTP"</span>, value <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"AVAL0"</span>)</span>
-<span id="cb3-2">tte_outcomes <span class="ot" style="color: #003B4F;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AVAL0"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">tte_outcomes</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Outcome I"</span>, <span class="st" style="color: #20794D;
 background-color: null;
@@ -1308,90 +1369,141 @@ font-style: inherit;">"Outcome II"</span>, <span class="st" style="color: #20794
 background-color: null;
 font-style: inherit;">"Outcome III"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Outcome IV"</span>)</span>
-<span id="cb3-3">continuous_outcome <span class="ot" style="color: #003B4F;
+font-style: inherit;">"Outcome IV"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">continuous_outcome</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Continuous outcome"</span></span>
-<span id="cb3-4">arm_levels <span class="ot" style="color: #003B4F;
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">arm_levels</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">active =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">(</span>active <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"Active"</span>, <span class="at" style="color: #657422;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">control =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">"Active"</span>, control <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"Control"</span>)</span>
-<span id="cb3-5">maraca_object <span class="ot" style="color: #003B4F;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Control"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">maraca_object</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">maraca</span>(</span>
-<span id="cb3-6">  data, tte_outcomes, continuous_outcome, arm_levels, column_names,</span>
-<span id="cb3-7">  <span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://rdrr.io/pkg/maraca/man/maraca.html">maraca</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">fixed_followup =</span> <span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span></span>
+<span>  <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">3</span><span class="sc" style="color: #5E5E5E;
+font-style: inherit;">data</span>, <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">tte_outcomes</span>, <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">365</span>, <span class="at" style="color: #657422;
+font-style: inherit;">continuous_outcome</span>, <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">compute_win_odds =</span> <span class="cn" style="color: #8f5902;
+font-style: inherit;">arm_levels</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">column_names</span>,</span>
+<span>  fixed_followup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span>, compute_win_odds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span></span>
-<span id="cb3-8">)</span>
-<span id="cb3-9">AZ_colors <span class="ot" style="color: #003B4F;
+<span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">AZ_colors</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"#830051"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"#F0AB00"</span>)</span>
-<span id="cb3-10"><span class="fu" style="color: #4758AB;
+font-style: inherit;">"#F0AB00"</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">plot</span>(maraca_object, <span class="at" style="color: #657422;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">density_plot_type =</span> <span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"default"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">maraca_object</span>, density_plot_type <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"default"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">theme_bw</span>() <span class="sc" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb3-11">  <span class="fu" style="color: #4758AB;
+<span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">scale_color_manual</span>(<span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">values =</span> AZ_colors) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">(</span>values <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">AZ_colors</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb3-12">  <span class="fu" style="color: #4758AB;
+<span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">values =</span> AZ_colors)</span></code></pre></div>
+font-style: inherit;">(</span>values <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">AZ_colors</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index_files/figure-html/maraca-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<figure class="figure"><p><img src="https://leslie-lu.github.io/blog/2024/05/13/hierarchical_composite_endpoints/index_files/figure-html/maraca-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="结果解释" class="level3">
-<h3 class="anchored" data-anchor-id="结果解释">结果解释</h3>
+</section><section id="结果解释" class="level3"><h3 class="anchored" data-anchor-id="结果解释">结果解释</h3>
 <p>怎么看这张图？</p>
 <p>首先是x轴上HCE的5个组成成分，x轴上每个成分的长度大小，代表了患者达到不同成分终点的比例，可以看到，continuous outcome的比例最大，说明这个终点的患者所占比例最大。其次，cumulative percentage显示active组在四个TTE终点上是存在差异的。再然后是continuous outcome的分布，偏向x轴右侧代表change from baseline更大。而这些结合起来，就是win odds的结果，可以看到，和我们从可视化的角度看到的结果是一致的。</p>
 <p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
@@ -1400,9 +1512,7 @@ font-style: inherit;">values =</span> AZ_colors)</span></code></pre></div>
 <!-- -->
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-RN1185" class="csl-entry">
 Gasparyan, S. B., E. K. Kowalewski, F. Folkvaljon, O. Bengtsson, J. Buenconsejo, J. Adler, and G. G. Koch. 2021. <span>“Power and Sample Size Calculation for the Win Odds Test: Application to an Ordinal Endpoint in COVID-19 Trials.”</span> Journal Article. <em>Journal of Biopharmaceutical Statistics</em> 31 (6): 765–87.
 </div>
@@ -1990,7 +2100,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="2de33073" class="cell" data-execution_count="1">
+<div id="756cd5eb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -2045,7 +2155,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="fbcc2cdd" class="cell" data-execution_count="2">
+<div id="4bafa58b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -2108,7 +2218,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="3f465817" class="cell" data-execution_count="3">
+<div id="17796831" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2169,7 +2279,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="a388392e" class="cell" data-execution_count="4">
+<div id="170a0efa" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -2276,7 +2386,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="92e84417" class="cell" data-execution_count="5">
+<div id="7a3b8f54" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -2298,7 +2408,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="f5c6036c" class="cell" data-execution_count="6">
+<div id="7e14ab9a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -2334,7 +2444,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="d2b54ffd" class="cell" data-execution_count="7">
+<div id="d89e4b18" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -2490,7 +2600,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="e3ec26e1" class="cell" data-execution_count="1">
+<div id="802e5eb9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -2518,7 +2628,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="5cbeae45" class="cell" data-execution_count="2">
+<div id="cff23d64" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2540,7 +2650,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="c6f3f009" class="cell" data-execution_count="3">
+<div id="a68baaf5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2574,7 +2684,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="8029054c" class="cell" data-execution_count="4">
+<div id="0591d471" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -2608,7 +2718,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="e886f0fa" class="cell" data-execution_count="5">
+<div id="7c9ca696" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2643,7 +2753,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="915091db" class="cell" data-execution_count="6">
+<div id="f835dd18" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2672,7 +2782,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="32e1149f" class="cell" data-execution_count="7">
+<div id="699a9985" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2767,7 +2877,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="c3a382ea" class="cell" data-execution_count="8">
+<div id="29a7e27c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2797,7 +2907,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="2ad2f6f0" class="cell" data-execution_count="9">
+<div id="03023254" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2821,12 +2931,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6759/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_7097/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="91f2ff16" class="cell" data-execution_count="10">
+<div id="94a5cbc1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2856,7 +2966,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="dddf857f" class="cell" data-execution_count="11">
+<div id="8f0b93e8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3259,41 +3369,36 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <title>R语言数据处理分析实例</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2020/02/06/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="前言" class="level3">
-<h3 class="anchored" data-anchor-id="前言">前言</h3>
+  <description><![CDATA[ <section id="前言" class="level3"><h3 class="anchored" data-anchor-id="前言">前言</h3>
 <p>R是一种块状结构程序语言，“块”由大括号划分，当“块”只包含一条语句时大括号可以省略。程序语句由换行符或分号分隔。和许多脚本语言一样，R语言不需要“声明”变量。</p>
 <p>接下来我们一起来处理分析一个简单的数据任务。</p>
-</section>
-<section id="实例" class="level3">
-<h3 class="anchored" data-anchor-id="实例">实例</h3>
+</section><section id="实例" class="level3"><h3 class="anchored" data-anchor-id="实例">实例</h3>
 <p>一组学生参加了数学、科学和英语三科考试。为了给所有学生确定一个综合的成绩衡量指标，需要将这些科目的成绩组合起来，将排名在前20%的学生评定为A，接下来20%的学生评定为B，依此类推，最后，按字母顺序对学生进行排序。请试处理分析。</p>
 <p>如下，我们首先创建原始数据框：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">studentname<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">studentname</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"John Davis"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Angela Williams"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Bullwinkle Moose"</span>, </span>
-<span id="cb1-2">               <span class="st" style="color: #20794D;
+<span>               <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"David Jones"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Janice Markhammer"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Cheryl Cushing"</span>, </span>
-<span id="cb1-3">               <span class="st" style="color: #20794D;
+<span>               <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Reuven Ytzrhak"</span>, <span class="st" style="color: #20794D;
 background-color: null;
@@ -3301,92 +3406,128 @@ font-style: inherit;">"Greg Knox"</span>, <span class="st" style="color: #20794D
 background-color: null;
 font-style: inherit;">"Joel England"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Mary Rayburn"</span>)</span>
-<span id="cb1-4">math<span class="ot" style="color: #003B4F;
+font-style: inherit;">"Mary Rayburn"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">math</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">502</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">600</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">502</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">412</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">600</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">358</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">412</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">495</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">358</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">512</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">495</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">410</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">512</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">625</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">410</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">573</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">625</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">522</span>)</span>
-<span id="cb1-5">science<span class="ot" style="color: #003B4F;
+font-style: inherit;">573</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">522</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">99</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">82</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">75</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">85</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">89</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">86</span>)</span>
-<span id="cb1-6">English<span class="ot" style="color: #003B4F;
+font-style: inherit;">science</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">25</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">22</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">95</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">18</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">99</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">80</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">82</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">28</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">75</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">85</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">80</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">27</span>,<span class="dv" style="color: #AD0000;
+font-style: inherit;">95</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">18</span>)</span>
-<span id="cb1-7">scoredata<span class="ot" style="color: #003B4F;
+font-style: inherit;">89</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">86</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">English</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">data.frame</span>(studentname, math, science, English, <span class="at" style="color: #657422;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">stringsAsFactors=</span><span class="cn" style="color: #8f5902;
+font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">FALSE</span>)</span>
-<span id="cb1-8">scoredata</span></code></pre></div>
+font-style: inherit;">25</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">22</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">27</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">studentname</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">math</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">science</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">English</span>, stringsAsFactors<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English
 1         John Davis  502      95      25
@@ -3404,18 +3545,32 @@ font-style: inherit;">FALSE</span>)</span>
 <p>观察此数据集，马上可以发现一些明显的挑战：首先，三科考试成绩是无法比较的。由于它们的均值和标准差相差很大，对它们求三科的平均成绩是没有意义的。因此，在组合这些考试成绩之前，必须将其转换为可比较的成绩。</p>
 <p>因而，我们做如下处理，将三科成绩进行标准化，这样每科考试成绩都是用单位标准差来表示，而非原始的分值尺度表示：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">z<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">z</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">scale</span>(scoredata[<span class="dv" style="color: #AD0000;
+font-style: inherit;"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">scoredata</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">4</span>])</span>
-<span id="cb3-2">z</span></code></pre></div>
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">z</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             math     science     English
  [1,]  0.01269128  1.07806562  0.58685145
@@ -3439,24 +3594,48 @@ attr(,"scaled:scale")
 <p>scale函数为数据对象按列进行中心化（center=TRUE）或标准化（center=TRUE, scale=TRUE），默认情况下，函数scale对矩阵或数据框的指定列进行均值为0、标准差为1的标准化，给出各科成绩标准化后的结果以及各科成绩的均值和标准差。</p>
 <p>然后，我们通过mean函数来计算各行的均值以获得三科成绩的综合评价得分，并使用cbind函数将其添加到学生成绩的原始数据框中：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">Score<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">apply</span>(z, <span class="dv" style="color: #AD0000;
+font-style: inherit;"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">1</span>, mean)</span>
-<span id="cb5-2">Score</span></code></pre></div>
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">z</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mean</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0.5592028  0.9238259 -0.8565414 -1.1620473 -0.6289776  0.3532485
  [7] -1.0476242  1.3378934  0.6978361 -0.1768163</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">scoredata2<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">cbind</span>(scoredata, Score)</span>
-<span id="cb7-2">scoredata2</span></code></pre></div>
+font-style: inherit;"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata2</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English      Score
 1         John Davis  502      95      25  0.5592028
@@ -3474,13 +3653,21 @@ font-style: inherit;">cbind</span>(scoredata, Score)</span>
 <p>apply函数可将一个任意函数应用到矩阵、数组、数据框的任何维度上，在矩阵或数据框中，1表示行，2表示列。cbind函数进行列合并，增加列。</p>
 <p>接下来，我们通过函数quantile给出三科成绩综合评价得分的百分位数，将学生的百分位数排名重编码为一个新的类别型成绩变量grade，如下：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">y<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">quantile</span>(Score, <span class="fu" style="color: #4758AB;
+font-style: inherit;"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.8</span>,<span class="fl" style="color: #AD0000;
 background-color: null;
@@ -3488,86 +3675,198 @@ font-style: inherit;">0.6</span>,<span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.4</span>,<span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">0.2</span>))</span>
-<span id="cb9-2">y</span></code></pre></div>
+font-style: inherit;">0.2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       80%        60%        40%        20% 
  0.7430341  0.4356302 -0.3576808 -0.8947579 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">scoredata2<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">1</span>]]<span class="ot" style="color: #003B4F;
+font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"A"</span></span>
-<span id="cb11-2">scoredata2<span class="sc" style="color: #5E5E5E;
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">[</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">2</span>]]<span class="ot" style="color: #003B4F;
+font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"B"</span></span>
-<span id="cb11-3">scoredata2<span class="sc" style="color: #5E5E5E;
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">2</span>] <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">[</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">3</span>]]<span class="ot" style="color: #003B4F;
+font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"C"</span></span>
-<span id="cb11-4">scoredata2<span class="sc" style="color: #5E5E5E;
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">3</span>] <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&amp;</span> Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">[</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">&gt;=</span>y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">4</span>]]<span class="ot" style="color: #003B4F;
+font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"D"</span></span>
-<span id="cb11-5">scoredata2<span class="sc" style="color: #5E5E5E;
+<span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$</span>grade[Score <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&lt;</span> y[<span class="dv" style="color: #AD0000;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">4</span>]]<span class="ot" style="color: #003B4F;
+font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"E"</span></span>
-<span id="cb11-6">scoredata2</span></code></pre></div>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata2</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English      Score grade
 1         John Davis  502      95      25  0.5592028     B
@@ -3585,16 +3884,28 @@ font-style: inherit;">"E"</span></span>
 <p>quantile函数求分位数，这里求Score数值型向量的20%、40%、60%和80%分位点。</p>
 <p>接下来，我们使用strsplit函数以空格把学生姓名拆分为姓氏和名字：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">name<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">name</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">strsplit</span>(scoredata2<span class="sc" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">$</span>studentname, <span class="st" style="color: #20794D;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">" "</span>)</span>
-<span id="cb13-2">name</span></code></pre></div>
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">studentname</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">name</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "John"  "Davis"
@@ -3626,34 +3937,68 @@ font-style: inherit;">" "</span>)</span>
 [[10]]
 [1] "Mary"    "Rayburn"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">lastname<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">lastname</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">sapply</span>(name, <span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"["</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb15-2">firstname<span class="ot" style="color: #003B4F;
+font-style: inherit;">name</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"["</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">firstname</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">sapply</span>(name, <span class="st" style="color: #20794D;
+font-style: inherit;"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"["</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb15-3">scoredata3<span class="ot" style="color: #003B4F;
+font-style: inherit;">name</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"["</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata3</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">cbind</span>(firstname, lastname, scoredata2[<span class="sc" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">1</span>])</span>
-<span id="cb15-4">scoredata3</span></code></pre></div>
+font-style: inherit;">firstname</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">lastname</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata3</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    firstname   lastname math science English      Score grade
 1        John      Davis  502      95      25  0.5592028     B
@@ -3671,12 +4016,30 @@ font-style: inherit;">1</span>])</span>
 <p>strsplit函数应用到一个字符串向量上会返回一个列表，使用sapply函数分别提取列表中每个成分的第一个元素和第二个元素，<code>[</code>是一个可以提取某个对象的一部分的函数，再使用cbind函数将它们添加到学生成绩的原始数据中。</p>
 <p>最后，我们使用order函数依姓氏和名字对数据集进行排序，完成这个数据任务。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">scoredata4<span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">=</span> scoredata3[<span class="fu" style="color: #4758AB;
+font-style: inherit;">scoredata4</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">order</span>(lastname, firstname),]</span>
-<span id="cb17-2">scoredata4</span></code></pre></div>
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">lastname</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">firstname</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span>,<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">scoredata4</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    firstname   lastname math science English      Score grade
 6      Cheryl    Cushing  512      85      28  0.3532485     C
@@ -3695,9 +4058,7 @@ font-style: inherit;">order</span>(lastname, firstname),]</span>
 
 <!-- -->
 
-</section>
-
- ]]></description>
+</section> ]]></description>
   <category>r</category>
   <guid>https://leslie-lu.github.io/blog/2020/02/06/</guid>
   <pubDate>Thu, 06 Feb 2020 00:00:00 GMT</pubDate>
