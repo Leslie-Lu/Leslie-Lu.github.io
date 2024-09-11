@@ -11,7 +11,119 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 09 Sep 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Sep 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Software 2.0</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/09/11/software_2.0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在过去几十年里，软件开发的核心一直是由人类编写规则和逻辑的传统编程，即<code>Software 1.0</code>。程序员用代码构建起一个个复杂的系统，通过显式的规则解决问题。但随着深度学习和神经网络技术的崛起，这种模式正在逐渐被颠覆。<a href="https://karpathy.medium.com/software-2-0-a64152b37c35">Andrej Karpathy</a> 提出的<code>Software 2.0</code>概念，深入探讨了其对未来的影响。</p>
+<section id="什么是-software-2.0" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="什么是-software-2.0">什么是 Software 2.0 ？</h3>
+<p>Software 2.0 是指通过训练神经网络来生成程序，替代手动编写代码。简单来说，机器不再依赖程序员的硬编码，而是通过大量的数据和学习算法来获得解决问题的能力。例如，过去我们可能需要为图像识别编写复杂的规则，而在 Software 2.0 中，算法通过提供大量标记图像进行训练，自动学会识别不同类别的物体。</p>
+<p>在这个新的编程范式中，<strong>代码不再由人类编写，而是通过机器学习生成</strong>。这个过程的核心不再是编写清晰的规则，而是设计良好的神经网络架构，并用足够多的高质量数据进行训练。最终，机器通过训练模型来预测和处理任务。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*7aTCueMW8oBRiqkyobunVA.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">software 2.0</figcaption>
+</figure>
+</div>
+</section>
+<section id="software-1.0-与-2.0-的对比" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="software-1.0-与-2.0-的对比">Software 1.0 与 2.0 的对比</h3>
+<p>传统的 Software 1.0 主要依赖人类编写的逻辑和规则。在这种模式下，开发者根据明确的需求编写代码，并对程序行为进行详细的控制。而在 Software 2.0 中，开发人员的角色更多地转向了管理数据、设计模型架构以及优化算法。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*CHcu2L0NmAZwCpQgmS1ByA.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">programming</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 43%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>特性</th>
+<th>Software 1.0</th>
+<th>Software 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>开发方式</td>
+<td>人类编写显式规则</td>
+<td>通过神经网络训练自动生成</td>
+</tr>
+<tr class="even">
+<td>代码控制</td>
+<td>开发人员详细控制代码逻辑</td>
+<td>依赖数据和训练模型生成解决方案</td>
+</tr>
+<tr class="odd">
+<td>依赖因素</td>
+<td>编程语言、开发工具</td>
+<td>数据质量、模型架构、训练算法</td>
+</tr>
+<tr class="even">
+<td>开发者角色</td>
+<td>编写程序和调试代码</td>
+<td>管理数据、设计架构、优化模型</td>
+</tr>
+</tbody>
+</table>
+<p>从表中可以看出，Software 2.0 是一种更为抽象的开发模式，开发者的工作重心从直接编写代码转移到了更高层次的架构设计和数据处理。</p>
+</section>
+<section id="数据的重要性" class="level3">
+<h3 class="anchored" data-anchor-id="数据的重要性">数据的重要性</h3>
+<p>在 Software 2.0 中，数据是最关键的资源。模型的性能和准确性与数据量和质量息息相关。因此，数据的标注、收集和处理成为了决定模型成败的关键。与传统编程不同，开发人员不再关心每一个细节的实现，而是通过大量高质量的数据来训练神经网络，使其能够自主推导出解决问题的最佳方案。</p>
+</section>
+<section id="开发者角色的转变" class="level3">
+<h3 class="anchored" data-anchor-id="开发者角色的转变">开发者角色的转变</h3>
+<p>在这种新的编程范式下，开发者的角色发生了根本性变化。程序员不再需要直接编写实现任务的规则，而是专注于以下几方面：</p>
+<ol type="1">
+<li><p><strong>数据管理</strong>：负责收集、清理和标注数据。</p></li>
+<li><p><strong>模型设计</strong>：选择和设计合适的神经网络架构，如卷积神经网络（CNN）或循环神经网络（RNN）。</p></li>
+<li><p><strong>超参数调整</strong>：在训练过程中调整参数优化模型。</p></li>
+<li><p><strong>模型评估与调优</strong>：通过测试集评估模型效果，分析模型的表现并不断改进。</p></li>
+</ol>
+<p>这种转变带来了开发流程的简化，也使开发人员的工作重点转移到了模型架构和数据质量的把控上。</p>
+</section>
+<section id="神经网络的能力与挑战" class="level3">
+<h3 class="anchored" data-anchor-id="神经网络的能力与挑战">神经网络的能力与挑战</h3>
+<p>通过神经网络，机器可以在各种复杂任务上表现出超越传统规则编程的能力。这些任务包括图像分类、自然语言处理、自动驾驶等领域。然而，神经网络本身也带来了新的挑战，例如：</p>
+<ul>
+<li><p><strong>黑箱问题</strong>：难以解释其决策过程。</p></li>
+<li><p><strong>数据依赖性</strong>：模型的性能高度依赖数据质量。</p></li>
+</ul>
+</section>
+<section id="未来展望" class="level3">
+<h3 class="anchored" data-anchor-id="未来展望">未来展望</h3>
+<p>Software 2.0 的出现标志着软件开发进入了一个全新的时代。随着计算能力的增强、数据资源的增长以及深度学习技术的突破，越来越多的领域将从传统编程模式转向数据驱动的神经网络模型。</p>
+<p>未来，开发者将逐渐从具体的代码编写中解放出来，转而专注于更高层次的架构设计和数据优化。Software 2.0 不仅提高了开发效率，还能在许多复杂任务中表现出前所未有的能力，彻底改变我们构建软件的方式。</p>
+<hr>
+<p><strong>结语</strong></p>
+<p>Software 2.0 的核心思想是用数据和神经网络取代传统代码编写。随着这项技术的进步，编程范式将发生深刻变革。开发者需要适应这一趋势，掌握更多的数据处理和模型设计技能，以应对这个数据驱动的新时代。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>deep learning</category>
+  <category>software</category>
+  <guid>https://leslie-lu.github.io/blog/2024/09/11/software_2.0/</guid>
+  <pubDate>Wed, 11 Sep 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://miro.medium.com/v2/resize:fit:720/format:webp/1*5NG3U8MsaTqmQpjkr_-UOw.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>爱因斯坦求和</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -31,7 +143,7 @@
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="e849e95d" class="cell" data-execution_count="1">
+<div id="247a9711" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -63,7 +175,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="535113dc" class="cell" data-execution_count="2">
+<div id="d870e339" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -83,7 +195,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="1b88c40f" class="cell" data-execution_count="3">
+<div id="97eb46a9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -94,7 +206,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="11a4519f" class="cell" data-execution_count="4">
+<div id="f767f57b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -105,7 +217,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="775408ce" class="cell" data-execution_count="5">
+<div id="1d6323dd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -118,7 +230,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="f1e2d85a" class="cell" data-execution_count="6">
+<div id="335eb2c3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -141,14 +253,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 2.3289, -2.6709, -5.1583],
-         [-1.8557, -0.5446,  3.5100]],
+<pre><code>tensor([[[ 3.6824,  2.4618,  1.1995],
+         [ 4.2421,  1.7519,  0.5015]],
 
-        [[-1.9746, -2.4516, -4.1949],
-         [-0.5026,  3.8085,  5.8703]],
+        [[ 0.0976,  0.0112,  0.5286],
+         [-2.6215, -0.5272, -0.6281]],
 
-        [[ 0.1622,  0.3414, -0.2540],
-         [ 0.8955, -2.3982,  0.7543]]])</code></pre>
+        [[-1.5794, -5.9034,  0.9683],
+         [-0.7396,  1.2149,  0.8304]]])</code></pre>
 </div>
 </div>
 </section>
@@ -2530,7 +2642,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="e3b81fbc" class="cell" data-execution_count="1">
+<div id="ccff1a8f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -2585,7 +2697,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="34dde943" class="cell" data-execution_count="2">
+<div id="80c41ad0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2625,7 +2737,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="7104c9cc" class="cell" data-execution_count="3">
+<div id="fae61b67" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2690,7 +2802,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="0c1132af" class="cell" data-execution_count="4">
+<div id="b6d55f40" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2755,7 +2867,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="cb0d73c0" class="cell" data-execution_count="1">
+<div id="09b72b37" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -2810,7 +2922,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="cfe9bd93" class="cell" data-execution_count="2">
+<div id="2ad87387" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -2873,7 +2985,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="7a28881b" class="cell" data-execution_count="3">
+<div id="45914451" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2934,7 +3046,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="ba05c349" class="cell" data-execution_count="4">
+<div id="626a6f15" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -3041,7 +3153,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="bc7779ee" class="cell" data-execution_count="5">
+<div id="2ec364b4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -3063,7 +3175,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="ecd337c3" class="cell" data-execution_count="6">
+<div id="0f92839d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -3099,7 +3211,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="b2295876" class="cell" data-execution_count="7">
+<div id="a7b79f09" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -3255,7 +3367,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="ad0dae00" class="cell" data-execution_count="1">
+<div id="b5cda8de" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3283,7 +3395,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="ba16ec56" class="cell" data-execution_count="2">
+<div id="5b628270" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3305,7 +3417,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="49c6c566" class="cell" data-execution_count="3">
+<div id="0bb4e260" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3339,7 +3451,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="1fb15854" class="cell" data-execution_count="4">
+<div id="52b8a776" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -3373,7 +3485,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="ea5a3b71" class="cell" data-execution_count="5">
+<div id="06582023" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3408,7 +3520,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="a267f2d4" class="cell" data-execution_count="6">
+<div id="e9635e10" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3437,7 +3549,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="ffea07e9" class="cell" data-execution_count="7">
+<div id="1182f7c7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3532,7 +3644,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="d5e0a68d" class="cell" data-execution_count="8">
+<div id="94dd828a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3562,7 +3674,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="3706e2e9" class="cell" data-execution_count="9">
+<div id="212c0da6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3586,12 +3698,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6946/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_6938/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="cf0a690a" class="cell" data-execution_count="10">
+<div id="4c5fc5ae" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3621,7 +3733,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="22c39f50" class="cell" data-execution_count="11">
+<div id="475e9919" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4921,49 +5033,6 @@ font-style: inherit;">scoredata4</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2020/01/31/</guid>
   <pubDate>Fri, 31 Jan 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>R语言基础–函数</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/01/30/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="前言" class="level3">
-<h3 class="anchored" data-anchor-id="前言">前言</h3>
-<p>R中作为数据处理基石的函数，可分为数值（数学、统计、概率）函数和字符处理函数。</p>
-</section>
-<section id="数值函数" class="level3">
-<h3 class="anchored" data-anchor-id="数值函数">数值函数</h3>
-<p>对数据做变换是数学函数的一个主要用途。数学函数也被用作公式中的一部分，用于绘图函数和在输出结果之前对数值做格式化。</p>
-<p>统计函数我们在进行统计学方法分析时一定会用到。</p>
-<p>概率函数通常用来生成特征已知的模拟数据，以及在用户编写的统计函数中计算概率值。</p>
-</section>
-<section id="字符处理函数" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="字符处理函数">字符处理函数</h3>
-<p>数学和统计函数是用来处理数值型数据的，而字符处理函数可以从文本型数据中抽取信息，或者为打印输出和生成报告重设文本的格式。</p>
-<p>这里我们不举例子，大家可以下载下图所示的一份文档，可以打印出来，随时查阅。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231528510.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">cheat sheet</figcaption>
-</figure>
-</div>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>r</category>
-  <category>programming</category>
-  <guid>https://leslie-lu.github.io/blog/2020/01/30/</guid>
-  <pubDate>Thu, 30 Jan 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
