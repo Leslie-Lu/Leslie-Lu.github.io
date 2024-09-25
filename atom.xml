@@ -11,7 +11,134 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 16 Sep 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 25 Sep 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>星球JC | 高尿酸血症及相关代谢疾病风险模型</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/09/25/jc/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<blockquote class="blockquote">
+<p>大家好，这一期预测模型星球Journal Club的分享来自青岛大学的 hedwig 同学。</p>
+</blockquote>
+<p>这篇文章是 2024年 发表在 science 子刊 advanced scicence，题为 Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia <span class="citation" data-cites="RN1343">(Zeng et al. 2024)</span>。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251439788.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">title</figcaption>
+</figure>
+</div>
+<section id="研究背景" class="level3">
+<h3 class="anchored" data-anchor-id="研究背景">研究背景</h3>
+<p>高尿酸血症（HUA）是指由于体内尿酸生成增加或排泄减少而导致的血清尿酸（SUA）水平升高。SUA 升高不仅会导致痛风，同时也会增加其他代谢异常风险，如慢性肾病、高血压、心血管疾病以及糖尿病。因此，早期识别HUA和预测痛风风险，能够为提早干预和预后管理提供宝贵见解。</p>
+<p>目前，HUA 或痛风的风险评估主要依赖于临床指标或多基因风险评分（PRSs），缺乏将遗传和临床特征相结合的预测模型。另外，现有模型只是单纯预测 HUA 是否发生，但没有更加具体地量化 HUA 风险。</p>
+<p>本研究旨在结合遗传和临床数据，开发并验证一个叠加的多模态机器学习模型，以便及时识别 HUA，及早预测痛风以及代谢相关疾病。</p>
+</section>
+<section id="研究方法" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="研究方法">研究方法</h3>
+<section id="研究类型" class="level4">
+<h4 class="anchored" data-anchor-id="研究类型">研究类型</h4>
+<p>多中心研究。</p>
+</section>
+<section id="研究人群" class="level4">
+<h4 class="anchored" data-anchor-id="研究人群">研究人群</h4>
+<p>英国和中国两个队列。</p>
+<p>UKBB 是一项正在进行的前瞻性研究，研究对象为 2006 年至 2010 年间招募的 50 万名年龄在 40-69 岁之间的个体，收集数据包括临床、基因型以及多次随访数据；南方医院数据集包括接受健康体检的参与者的信息。参与者为从 2015 年至 2020 年期间到医院体检的年龄 ≥18 岁的人群。</p>
+</section>
+<section id="模型构建" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="模型构建">模型构建</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251446365.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">study design</figcaption>
+</figure>
+</div>
+<p>UKBB 数据随机按 8:2 分为训练集和内部测试集；南方医院数据作为外部测试集。</p>
+<p>筛选相关临床特征：根据以往文献选择了 10 个重要变量，此外，对于基因数据，采用 LASSO 筛选对 HUA 有预测价值的 SNP。考虑到基因数据和临床特征变量的尺度不同，研究对所有变量进行标准化处理。</p>
+<p>构建预测模型：研究采用集成学习的方式，将多个机器学习模型集成起来，将基分类器输出的预测概率作为 meta-classifier 的输入特征。其中，基分类器包含 7 个模型：Light Gradient-Boosting Machine、classical extreme Gradient Boosting、Categorical Boosting、Random Forest、Adaptive Boosting、Logistic Regression 以及 K-Nearest Neighbor，meta-classifier 为 classical extreme Gradient Boosting。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251448150.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">ensemble learning</figcaption>
+</figure>
+</div>
+<p>预后价值判断：对于 meta-classifier 输出的概率，研究即视为 ISHUA 分值，使用最大约登指数进行 cutoff 的确定（全部使用终点为痛风的 cutoff），依据 ISHUA 的 cutoff 值，研究将人群分为低风险与高风险亚组，进而利用随访数据，使用 KM 生存曲线及 Cox 回归，评价其对痛风及代谢相关疾病预后的预测价值。</p>
+<p>生活方式评价：利用模型划分的风险亚组，估计高风险组中生活方式与痛风及代谢相关疾病发生的相关关系。</p>
+</section>
+</section>
+<section id="研究结果" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="研究结果">研究结果</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251450510.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Table 1</figcaption>
+</figure>
+</div>
+<p>对于临床特征：利用单因素 Logistic 回归分析 10 个临床特征与 HUA 之间的相关关系，筛选的临床特征均与高尿酸血症具有显著相关性。此外使用 Cox 回归分析这 10 个特征与与痛风之间的关系。</p>
+<p>对于基因特征：从 GWAS 分析结果中选择与 SUA 相关（p 值小于 <img src="https://latex.codecogs.com/png.latex?5%5Ctimes%7B10%7D%5E5"> 或以往研究报道在跨种族人群中相关）的 SNP，对选中的 SNP 进行注释，并基于确定的 SNP 进行富集分析（GO 和 KEGG 分析）。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251453156.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">enrichment analysis</figcaption>
+</figure>
+</div>
+<section id="模型性能评价" class="level4">
+<h4 class="anchored" data-anchor-id="模型性能评价">模型性能评价</h4>
+<p>在训练集中，使用遗传特征的模型预测 HUA 的 AUC 为 0.703（95%CI：0.700-0.705），使用临床特征的模型预测 HUA 的 AUC 为 0.822（95%CI：0.820-0.824），而结合了遗传和临床特征的堆叠多模态模型 AUC 为 0.859（95%CI：0.857-0.861）。</p>
+<p>在内部测试集和外部测试集中，堆叠多模态模型的预测性能也明显优于单独的遗传或临床模型。此外，基于两个年龄亚组（以 40 岁为界）评价模型表现，发现模型在不同年龄组中均具有较好的性能。</p>
+</section>
+<section id="ishua-的预后评估" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="ishua-的预后评估">ISHUA 的预后评估</h4>
+<p>ISHUA 与已知的 HUA 风险因素（人口统计、临床和遗传）相关性。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251455716.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">association</figcaption>
+</figure>
+</div>
+<p>ISHUA 预测痛风及其他代谢相关性结局（Gout、AF、CAD、DmT2、HF、Hypertension、ESRD、All-cause death），Kaplan-Meier 生存曲线显示，ISHUA 分组能够较好地区分痛风及其他代谢相关性疾病。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251456843.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">prognosis</figcaption>
+</figure>
+</div>
+<p>此外，还探讨了改变生活方式对不良结局的潜在获益。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251457970.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">lifestyle</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="take-home-message" class="level3">
+<h3 class="anchored" data-anchor-id="take-home-message">Take home message</h3>
+<ol type="1">
+<li><p>文章同时纳入基因和临床特征数据，提升对 HUA 的预测能力；</p></li>
+<li><p>结合长期随访数据，观察模型的风险分组对相关疾病发生发展的预测价值。</p></li>
+</ol>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-RN1343" class="csl-entry">
+Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Yan Li, et al. 2024. <span>“Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia.”</span> Journal Article. <em>Advanced Science</em> 11 (34): 2404047. https://doi.org/<a href="https://doi.org/10.1002/advs.202404047">https://doi.org/10.1002/advs.202404047</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>journal club</category>
+  <guid>https://leslie-lu.github.io/blog/2024/09/25/jc/</guid>
+  <pubDate>Wed, 25 Sep 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251439788.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>解析 Beta 分布与贝叶斯</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -210,7 +337,7 @@
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="ce2faeb8" class="cell" data-execution_count="1">
+<div id="4d352b0c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -242,7 +369,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="e59bec3c" class="cell" data-execution_count="2">
+<div id="2fa0b9cd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -262,7 +389,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="3d32c95d" class="cell" data-execution_count="3">
+<div id="782a7789" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -273,7 +400,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="aa7ec7dc" class="cell" data-execution_count="4">
+<div id="da5a36ba" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -284,7 +411,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="e843277f" class="cell" data-execution_count="5">
+<div id="a526bb24" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -297,7 +424,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="6bc8a065" class="cell" data-execution_count="6">
+<div id="da0155d9" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -320,14 +447,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 1.0024,  0.5061,  0.5826],
-         [-1.6321,  2.0952,  2.3320]],
+<pre><code>tensor([[[-3.2970,  3.7999,  1.3929],
+         [ 1.2630,  0.9885,  3.5345]],
 
-        [[ 0.1472,  0.6669, -1.7829],
-         [-2.9653,  1.1094,  2.4780]],
+        [[ 0.9269, -0.4480,  2.1328],
+         [ 0.7446,  1.4192,  0.7125]],
 
-        [[-1.7425, -2.1073,  1.3140],
-         [-1.6906,  0.1928,  1.5686]]])</code></pre>
+        [[-0.9483, -0.0203, -0.2999],
+         [-0.8483,  0.7683, -1.3320]]])</code></pre>
 </div>
 </div>
 </section>
@@ -2709,7 +2836,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="2b55f554" class="cell" data-execution_count="1">
+<div id="7c9210af" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -2764,7 +2891,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="26bf0b5b" class="cell" data-execution_count="2">
+<div id="3f494e74" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2804,7 +2931,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="4c8a329c" class="cell" data-execution_count="3">
+<div id="d76e06ba" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2869,7 +2996,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="aa86bddc" class="cell" data-execution_count="4">
+<div id="79692bf1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -2934,7 +3061,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="a07ff9e2" class="cell" data-execution_count="1">
+<div id="69d321f6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -2989,7 +3116,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="6f84d63d" class="cell" data-execution_count="2">
+<div id="6dcb1bdd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -3052,7 +3179,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="073fa839" class="cell" data-execution_count="3">
+<div id="41e7f6cc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3113,7 +3240,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="1704277e" class="cell" data-execution_count="4">
+<div id="dc95ac1a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -3220,7 +3347,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="e52b7ce9" class="cell" data-execution_count="5">
+<div id="0143c13f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -3242,7 +3369,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="e5310050" class="cell" data-execution_count="6">
+<div id="6e3cffa7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -3278,7 +3405,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="69a155ac" class="cell" data-execution_count="7">
+<div id="8179f296" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -3434,7 +3561,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="192747a5" class="cell" data-execution_count="1">
+<div id="e35e0ecb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3462,7 +3589,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="b19b9eef" class="cell" data-execution_count="2">
+<div id="b0f97b98" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3484,7 +3611,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="7528deb5" class="cell" data-execution_count="3">
+<div id="f46a5853" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3518,7 +3645,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="b55cd1eb" class="cell" data-execution_count="4">
+<div id="3f7a4063" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -3552,7 +3679,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="4140f643" class="cell" data-execution_count="5">
+<div id="f600dc2d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3587,7 +3714,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="2109beec" class="cell" data-execution_count="6">
+<div id="6b9b1e38" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3616,7 +3743,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="2cb6dab5" class="cell" data-execution_count="7">
+<div id="8b65fd85" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3711,7 +3838,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="9d1e9486" class="cell" data-execution_count="8">
+<div id="4c353d43" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3741,7 +3868,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="2f327a0e" class="cell" data-execution_count="9">
+<div id="58dfbfff" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3765,12 +3892,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6862/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_31453/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="7b63a042" class="cell" data-execution_count="10">
+<div id="545f1ec9" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -3800,7 +3927,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="97f04241" class="cell" data-execution_count="11">
+<div id="70624e2c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5012,59 +5139,6 @@ font-style: inherit;">scoredata4</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2020/02/02/</guid>
   <pubDate>Sun, 02 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>R语言基础–数据的输入</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/01/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="前言" class="level3">
-<h3 class="anchored" data-anchor-id="前言">前言</h3>
-<p>R可从键盘、文本文件、Excel、流行的统计软件、特殊格式的文件，以及多种关系型数据库中导入数据。</p>
-</section>
-<section id="键盘输入数据" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="键盘输入数据">键盘输入数据</h3>
-<p>R中的函数edit()会自动调用一个允许手动输入数据的文本编辑器，步骤如下：</p>
-<ol type="1">
-<li><p>创建一个空数据框(或矩阵)，其中变量名和变量的模式需与预期的最终数据集一致；</p></li>
-<li><p>针对这个数据对象调用文本编辑器，输入数据，并将结果保存回此数据对象中。</p></li>
-</ol>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281548152.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">example</figcaption>
-</figure>
-</div>
-<p>类似于<code>age=numeric(0)</code>的赋值语句创建一个指定模式但不含实际数据的变量。编辑的结果需要赋值回对象本身，函数edit()事实上是在对象的一个副本上进行操作的，如果不将其赋值到一个目标，所有修改会全部丢失。单击列的标题，可以用编辑器修改变量名和变量类型（数值型、字符型），可通过单击未使用列的标题来添加新的变量。<code>mydata= edit(mydata)</code>的更简洁的等价写法是<code>fix(mydata)</code>。</p>
-</section>
-<section id="从带分隔符的文本文件导入数据" class="level3">
-<h3 class="anchored" data-anchor-id="从带分隔符的文本文件导入数据">从带分隔符的文本文件导入数据</h3>
-<p>可以使用read.table()函数，此函数可读入一个表格格式的文件并将其保存为一个数据框，语法如下：</p>
-<p><code>data= read.table(file,header = TRUE,sep= "delimiter",row.names='name')</code></p>
-<p>其中，file是一个带分隔符的ASCII文本文件，header表示文件是否在首行包含变量名，sep指定分隔行内数据的分隔符，row.names指定一个或多个行标记符（指定某变量为行名，该列即不再有标签，导致数据会少一列）。</p>
-<p>默认情况下，字符型变量将转换为因子。设置选项stringsAsFactors=FALSE，将停止对所有字符型变量的转换，或者使用选项colClasses指定每一列的类，如logical（逻辑型）、numeric（数值型）、characer（字符型）、factor（因子）。</p>
-</section>
-<section id="导入excel数据" class="level3">
-<h3 class="anchored" data-anchor-id="导入excel数据">导入Excel数据</h3>
-<p>读取一个Excel文件可以在Excel中将其导出为一个逗号分隔文件csv，再使用前文描述的方式将其导入R中。或者可以使用xlsx包，函数read.xlsx()导入一个工作表到一个数据框中：</p>
-<p><code>read.xlsx(file, sheetIndex, sheetName, rowIndex)</code></p>
-<p>read.xlsx()允许指定工作表中特定的行（rowIndex）和列（colIndex），配合上对应每一列的类（colClasses）。对于大型的工作簿，可以使用函数read.xlsx2()，该函数用Java来运行更加多的处理过程，可获得可观的质量提升。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>r</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/01/</guid>
-  <pubDate>Sat, 01 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
