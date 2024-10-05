@@ -270,24 +270,24 @@ div.column-margin+hr.dinkus {
 
 
 
-<p>机器学习算法涉及很多线性代数知识，我们会经常使用NumPy函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</p>
-<p>在Python shell开发环境中输入下面命令：<code>from numpy import *</code>，将NumPy函数库中的所有模块引入到当前的命名空间，输入以下命令：</p>
+<p>机器学习算法涉及很多线性代数知识，我们会经常使用 NumPy 函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</p>
+<p>在Python shell开发环境中输入下面命令：<code>from numpy import *</code>，将 NumPy 函数库中的所有模块引入到当前的命名空间，输入以下命令：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201454286.webp" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">NumPy</figcaption>
 </figure>
 </div>
-<p>上述命令构造了一个4*4的随机数组（随机数组在不同计算机上输出可能不同）。</p>
-<p>在NumPy函数库中存在两种不同的数据类型（矩阵matrix和数组array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵matrix与MATLAB中matrices等价。</p>
-<p>调用mat()函数可将数组转换为矩阵：</p>
+<p>上述命令构造了一个 <code>4*4</code> 的随机数组（随机数组在不同计算机上输出可能不同）。</p>
+<p>在 NumPy 函数库中存在两种不同的数据类型（矩阵 matrix 和数组 array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵 matrix 与 MATLAB 中 matrices 等价。</p>
+<p>调用 <code>mat()</code> 函数可将数组转换为矩阵：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201455985.jpeg" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">mat</figcaption>
 </figure>
 </div>
-<p>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy库.I操作符可以很方便地算出矩阵的逆运算：</p>
+<p>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy 库 <code>.I</code> 操作符可以很方便地算出矩阵的逆运算：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456663.webp" class="img-fluid figure-img"></p>
@@ -301,15 +301,15 @@ div.column-margin+hr.dinkus {
 <figcaption class="margin-caption">矩阵乘法</figcaption>
 </figure>
 </div>
-<p>结果应该是单位矩阵，除了对角线元素是1，4*4矩阵的其他元素应该全是0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</p>
+<p>结果应该是单位矩阵，除了对角线元素是 1，<code>4*4</code> 矩阵的其他元素应该全是 0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201457590.webp" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">误差</figcaption>
 </figure>
 </div>
-<p>函数eye(4)创建4*4的单位矩阵。</p>
-<p>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了NumPy函数库。后面我们会对它有更深的了解。</p>
+<p>函数 <code>eye(4)</code> 创建 <code>4*4</code> 的单位矩阵。</p>
+<p>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了 NumPy 函数库。后面我们会对它有更深的了解。</p>
 
 
 <!-- -->
@@ -817,21 +817,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>机器学习算法涉及很多线性代数知识，我们会经常使用NumPy函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>机器学习算法涉及很多线性代数知识，我们会经常使用 NumPy 函数库，用线性代数简化不同的数据点上执行的相同数学运算。将数据表示为矩阵形式，只需要执行简单的矩阵运算而不需要复杂的循环操作。</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>在Python shell开发环境中输入下面命令：<span class="in">`from numpy import *`</span>，将NumPy函数库中的所有模块引入到当前的命名空间，输入以下命令：</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>在Python shell开发环境中输入下面命令：<span class="in">`from numpy import *`</span>，将 NumPy 函数库中的所有模块引入到当前的命名空间，输入以下命令：</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="al">![NumPy](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201454286.webp)</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>上述命令构造了一个4*4的随机数组（随机数组在不同计算机上输出可能不同）。</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>上述命令构造了一个 <span class="in">`4*4`</span> 的随机数组（随机数组在不同计算机上输出可能不同）。</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>在NumPy函数库中存在两种不同的数据类型（矩阵matrix和数组array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵matrix与MATLAB中matrices等价。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>在 NumPy 函数库中存在两种不同的数据类型（矩阵 matrix 和数组 array），二者都可以用于处理行列表示的数字元素。虽然看起来很相似，但在这两个数据类型上执行相同的数学运算可能得到不同的结果，其中的矩阵 matrix 与 MATLAB 中 matrices 等价。</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>调用mat()函数可将数组转换为矩阵：</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>调用 <span class="in">`mat()`</span> 函数可将数组转换为矩阵：</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="al">![mat](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201455985.jpeg)</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy库.I操作符可以很方便地算出矩阵的逆运算：</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>如何进行矩阵求逆呢？不记得或者没学过矩阵求逆也没关系，NumPy 库 <span class="in">`.I`</span> 操作符可以很方便地算出矩阵的逆运算：</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="al">![逆矩阵](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456663.webp)</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
@@ -839,13 +839,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="al">![矩阵乘法](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201456009.webp)</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>结果应该是单位矩阵，除了对角线元素是1，4*4矩阵的其他元素应该全是0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>结果应该是单位矩阵，除了对角线元素是 1，<span class="in">`4*4`</span> 矩阵的其他元素应该全是 0。上面实际输出略有不同，矩阵里还留下了很多数值非常小的元素，这是计算机处理误差产生的结果，我们来看一下误差值：</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![误差](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201457590.webp)</span></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>函数eye(4)创建4*4的单位矩阵。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>函数 <span class="in">`eye(4)`</span> 创建 <span class="in">`4*4`</span> 的单位矩阵。</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了NumPy函数库。后面我们会对它有更深的了解。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>只要能够顺利完成上面的例子，你就已经正确地安装并初步使用了 NumPy 函数库。后面我们会对它有更深的了解。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
