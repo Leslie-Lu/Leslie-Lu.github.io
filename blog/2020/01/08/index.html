@@ -291,10 +291,10 @@ div.column-margin+hr.dinkus {
 <figcaption class="margin-caption">kNN</figcaption>
 </figure>
 </div>
-<p>classify()函数有4个输入参数：待分类的输入向量inX，训练集dataSet，训练集标签向量labels，参数k为选择最近数据点个数，其中，inX维度为1xN，dataSet维度为MxN，labels维度为1xM，k为奇数。</p>
-<p>dataSet.shape以元组形式返回训练集维度(M, N)，dataSetsize为训练集的样本个数M。这里距离度量采用欧式距离，因而tile函数将输入数据重复M行1列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</p>
-<p>计算完距离之后，argsort函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用for循环确定前k个距离最小元素所属的类别voteIlabel，使用get函数按照字典classCount键值取得相应的字典值，如果字典中存在这个键，get函数就返回对应的字典值，如果不存在，则返回0，用这种方式计数k个数据中每个标签出现的次数。因而字典classCount中键值为标签，字典值为k个标签对应的个数。</p>
-<p>使用sorted函数对字典classCount进行排序：items函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的key就是排序的规则，关键字函数设置用于排序的关键字。使用operator模块中的itemgetter函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，reverse=True对应降序。所以最后返回sortedClassCount列表中第一个元组的第一个值，即在k个标签中出现次数最多的标签，这样即完成了一个简单的kNN算法。</p>
+<p><code>classify()</code> 函数有 4 个输入参数：待分类的输入向量 inX ，训练集 dataSet，训练集标签向量 labels，参数 k 为选择最近数据点个数，其中，inX 维度为 <code>1*N</code>，dataSet 维度为 <code>M*N</code>，labels 维度为 <code>1*M</code>，k 为奇数。</p>
+<p>dataSet.shape 以元组形式返回训练集维度 (M, N)，dataSetsize 为训练集的样本个数 M。这里距离度量采用欧式距离，因而 <code>tile</code> 函数将输入数据重复 M 行 1 列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</p>
+<p>计算完距离之后，<code>argsort</code> 函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用 for 循环确定前 k 个距离最小元素所属的类别 voteIlabel，使用 <code>get</code> 函数按照字典 classCount 键值取得相应的字典值，如果字典中存在这个键，<code>get</code> 函数就返回对应的字典值，如果不存在，则返回 0，用这种方式计数 k 个数据中每个标签出现的次数。因而字典 classCount 中键值为标签，字典值为 k 个标签对应的个数。</p>
+<p>使用 <code>sorted</code> 函数对字典 classCount 进行排序：<code>items</code> 函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的 key 就是排序的规则，关键字函数设置用于排序的关键字。使用 <code>operator</code> 模块中的 <code>itemgetter</code> 函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，<code>reverse=True</code> 对应降序。所以最后返回 sortedClassCount 列表中第一个元组的第一个值，即在 k 个标签中出现次数最多的标签，这样即完成了一个简单的 kNN 算法。</p>
 </section>
 <section id="创建训练集" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="创建训练集">创建训练集</h3>
@@ -304,25 +304,25 @@ div.column-margin+hr.dinkus {
 <figcaption class="margin-caption">训练集</figcaption>
 </figure>
 </div>
-<p>我们创建了一个简单的训练集，有4组数据，每组数据有两个我们已知的属性/特征值。向量labels包含了每个数据的标签信息，labels包含的元素个数等于group矩阵行数。</p>
+<p>我们创建了一个简单的训练集，有 4 组数据，每组数据有两个我们已知的属性/特征值。向量 labels 包含了每个数据的标签信息，labels 包含的元素个数等于 group 矩阵行数。</p>
 </section>
 <section id="运行knn" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="运行knn">运行kNN</h3>
-<p>我们需要在脚本中导入两个模块NumPy和运算符operator（kNN执行排序操作时使用到）：</p>
+<p>我们需要在脚本中导入两个模块 <code>NumPy</code> 和运算符 <code>operator</code>（kNN 执行排序操作时使用到）：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201502739.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">import modules</figcaption>
 </figure>
 </div>
-<p>保存脚本文件，改变当前路径到存储脚本文件位置，进入Python：</p>
+<p>保存脚本文件，改变当前路径到存储脚本文件位置，进入 Python：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201503020.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">run kNN</figcaption>
 </figure>
 </div>
-<p>输出结果应该是B，也可以改变输入数据运行。这样，我们已经构造了一个简单的kNN分类器。</p>
+<p>输出结果应该是 B，也可以改变输入数据运行。这样，我们已经构造了一个简单的 kNN 分类器。</p>
 
 
 <!-- -->
@@ -839,31 +839,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="al">![kNN](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201500514.jpeg)</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>classify()函数有4个输入参数：待分类的输入向量inX，训练集dataSet，训练集标签向量labels，参数k为选择最近数据点个数，其中，inX维度为1xN，dataSet维度为MxN，labels维度为1xM，k为奇数。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="in">`classify()`</span> 函数有 4 个输入参数：待分类的输入向量 inX ，训练集 dataSet，训练集标签向量 labels，参数 k 为选择最近数据点个数，其中，inX 维度为 <span class="in">`1*N`</span>，dataSet 维度为 <span class="in">`M*N`</span>，labels 维度为 <span class="in">`1*M`</span>，k 为奇数。</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>dataSet.shape以元组形式返回训练集维度(M, N)，dataSetsize为训练集的样本个数M。这里距离度量采用欧式距离，因而tile函数将输入数据重复M行1列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>dataSet.shape 以元组形式返回训练集维度 (M, N)，dataSetsize 为训练集的样本个数 M。这里距离度量采用欧式距离，因而 <span class="in">`tile`</span> 函数将输入数据重复 M 行 1 列（从而与训练集维度相同），分别和训练集中的每个数据点对应特征相减再平方，再按行相加，不保持其二维特性，即得输入数据与训练集中每个数据点之间的欧式距离。</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>计算完距离之后，argsort函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用for循环确定前k个距离最小元素所属的类别voteIlabel，使用get函数按照字典classCount键值取得相应的字典值，如果字典中存在这个键，get函数就返回对应的字典值，如果不存在，则返回0，用这种方式计数k个数据中每个标签出现的次数。因而字典classCount中键值为标签，字典值为k个标签对应的个数。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>计算完距离之后，<span class="in">`argsort`</span> 函数对距离按照从小到大的次序排列，并返回排序后对应的原始索引值。使用 for 循环确定前 k 个距离最小元素所属的类别 voteIlabel，使用 <span class="in">`get`</span> 函数按照字典 classCount 键值取得相应的字典值，如果字典中存在这个键，<span class="in">`get`</span> 函数就返回对应的字典值，如果不存在，则返回 0，用这种方式计数 k 个数据中每个标签出现的次数。因而字典 classCount 中键值为标签，字典值为 k 个标签对应的个数。</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>使用sorted函数对字典classCount进行排序：items函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的key就是排序的规则，关键字函数设置用于排序的关键字。使用operator模块中的itemgetter函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，reverse=True对应降序。所以最后返回sortedClassCount列表中第一个元组的第一个值，即在k个标签中出现次数最多的标签，这样即完成了一个简单的kNN算法。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>使用 <span class="in">`sorted`</span> 函数对字典 classCount 进行排序：<span class="in">`items`</span> 函数同时引用字典的键和值，结果是一个列表，其中包含的是键-值对形式的元组。由于字典没有隐含排序，我们可以按照字典的键或字典值来排序，这里的 key 就是排序的规则，关键字函数设置用于排序的关键字。使用 <span class="in">`operator`</span> 模块中的 <span class="in">`itemgetter`</span> 函数对列表按照每个元组第二个索引位置（即字典值，标签个数）进行排序，<span class="in">`reverse=True`</span> 对应降序。所以最后返回 sortedClassCount 列表中第一个元组的第一个值，即在 k 个标签中出现次数最多的标签，这样即完成了一个简单的 kNN 算法。</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 创建训练集</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="al">![训练集](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201501398.png)</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>我们创建了一个简单的训练集，有4组数据，每组数据有两个我们已知的属性/特征值。向量labels包含了每个数据的标签信息，labels包含的元素个数等于group矩阵行数。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>我们创建了一个简单的训练集，有 4 组数据，每组数据有两个我们已知的属性/特征值。向量 labels 包含了每个数据的标签信息，labels 包含的元素个数等于 group 矩阵行数。</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 运行kNN</span></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>我们需要在脚本中导入两个模块NumPy和运算符operator（kNN执行排序操作时使用到）：</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>我们需要在脚本中导入两个模块 <span class="in">`NumPy`</span> 和运算符 <span class="in">`operator`</span>（kNN 执行排序操作时使用到）：</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="al">![import modules](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201502739.png)</span></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>保存脚本文件，改变当前路径到存储脚本文件位置，进入Python：</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>保存脚本文件，改变当前路径到存储脚本文件位置，进入 Python：</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="al">![run kNN](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201503020.png)</span></span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>输出结果应该是B，也可以改变输入数据运行。这样，我们已经构造了一个简单的kNN分类器。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>输出结果应该是 B，也可以改变输入数据运行。这样，我们已经构造了一个简单的 kNN 分类器。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
