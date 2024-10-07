@@ -281,19 +281,19 @@ div.column-margin+hr.dinkus {
 
 <section id="表示的重要性" class="level3">
 <h3 class="anchored" data-anchor-id="表示的重要性">表示的重要性</h3>
-<p>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立“表示第一，获取第二”的范式。</p>
+<p>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立<code>表示第一，获取第二</code>的范式。</p>
 <p>通常，在寻求一个好的表示方法的过程中，关于如何获取知识的洞见就会自然产生，无论这种洞见是来自数据，还是来自程序员。</p>
 <p>人类的大脑肯定拥有某种简洁的信息表示方式，同时还拥有某种十分有效的程序用以正确解释每个问题，并从存储的信息表示中提取正确答案。我们需要给机器装备同样高效的表示信息和提取答案的算法，因果图和因果推断就派上了用场。</p>
 </section>
 <section id="打破规则" class="level3">
 <h3 class="anchored" data-anchor-id="打破规则">打破规则</h3>
-<p>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解“观察到某事件”和“使某事件发生”之间的区别。</p>
-<p>我们需要告诉计算机：“无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。”这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</p>
+<p>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解<code>观察到某事件</code>和<code>使某事件发生</code>之间的区别。</p>
+<p>我们需要告诉计算机：<code>无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。</code>这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</p>
 <p>计算机能够进行因果推理的前提是，计算机懂得有选择地打破逻辑规则。</p>
 </section>
 <section id="概率的重要性" class="level3">
 <h3 class="anchored" data-anchor-id="概率的重要性">概率的重要性</h3>
-<p>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从X指向Y的箭头时，我们是在暗指，某些概率规则或函数具体说明了“如果X发生改变，Y将如何变化”。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</p>
+<p>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从 X 指向 Y 的箭头时，我们是在暗指，某些概率规则或函数具体说明了<code>如果 X 发生改变，Y 将如何变化</code>。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</p>
 </section>
 <section id="概率与因果关系" class="level3">
 <h3 class="anchored" data-anchor-id="概率与因果关系">概率与因果关系</h3>
@@ -808,7 +808,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 表示的重要性</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立“表示第一，获取第二”的范式。</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>表示问题必须优先于获取问题。如果缺少问题的表示方法，我们也就不知道如何存储信息以供使用。人工智能对认知研究的一个主要贡献就是确立<span class="in">`表示第一，获取第二`</span>的范式。</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>通常，在寻求一个好的表示方法的过程中，关于如何获取知识的洞见就会自然产生，无论这种洞见是来自数据，还是来自程序员。</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
@@ -816,15 +816,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 打破规则</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解“观察到某事件”和“使某事件发生”之间的区别。</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>计算机不能理解因果关系，我们必须教会它如何打破规则，让它理解<span class="in">`观察到某事件`</span>和<span class="in">`使某事件发生`</span>之间的区别。</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>我们需要告诉计算机：“无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。”这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>我们需要告诉计算机：<span class="in">`无论何时，如果你想使某事发生，那就删除因果图中指向该事的所有箭头，之后继续根据逻辑规则进行分析。`</span>这样做的原因很简单：使某事发生就意味着将它从所有其他影响因子中解放出来，并使它受限于唯一的影响因子——能强制其发生的那个因子。</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>计算机能够进行因果推理的前提是，计算机懂得有选择地打破逻辑规则。</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 概率的重要性</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从X指向Y的箭头时，我们是在暗指，某些概率规则或函数具体说明了“如果X发生改变，Y将如何变化”。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>构建因果模型不仅仅是画箭头，箭头背后还隐藏着概率。当我们绘制一个从 X 指向 Y 的箭头时，我们是在暗指，某些概率规则或函数具体说明了<span class="in">`如果 X 发生改变，Y 将如何变化`</span>。在某些情况下我们可能知道这个规则具体是什么，但更多时候，我们不得不根据数据来对这个规则进行估计。因果革命最有趣的特点之一就是，在许多情况下，我们可以对这些完全不确定的数学细节置之不理。通常情况下，因果图自身的结构就足够让我们推测出各种因果关系和反事实关系：简单的或复杂的、确定的或概率的、线性的或非线性的。</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## 概率与因果关系</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
