@@ -11,7 +11,60 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Wed, 02 Oct 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 22 Nov 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>累积风险图（Cumulative Hazard Plot）中的 Y 轴含义</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/11/22/cumulative_hazard/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="问题" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="问题">问题</h3>
+<p>星球里有同学提问：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411221925709.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">cumulative hazard plot</figcaption>
+</figure>
+</div>
+<section id="累积风险函数" class="level4">
+<h4 class="anchored" data-anchor-id="累积风险函数">累积风险函数</h4>
+<p>在时间事件数据中，<strong>累积风险图（cumulative hazard plot）</strong>的 Y 轴表示的是累积风险函数（cumulative hazard function, <img src="https://latex.codecogs.com/png.latex?H(t)">）。<img src="https://latex.codecogs.com/png.latex?H(t)"> 描述的是从起始时间到 <img src="https://latex.codecogs.com/png.latex?t"> 时刻，某个事件发生的<strong>累积风险总和</strong>。它是通过对瞬时风险函数（即危险率，hazard rate, <img src="https://latex.codecogs.com/png.latex?h(t)">）在时间上的积分得到的，公式为 <span class="citation" data-cites="RN529">(Allison 2010)</span>：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH(t)%20=%20%5Cint_%7B0%7D%5E%7Bt%7D%20h(u)%20%5C,%20du%0A"></p>
+<p>其中，<img src="https://latex.codecogs.com/png.latex?h(t)"> 是已生存到 <img src="https://latex.codecogs.com/png.latex?t"> 时刻的对象在 <img src="https://latex.codecogs.com/png.latex?t"> 时刻发生事件的速率。<img src="https://latex.codecogs.com/png.latex?H(t)"> 没有上限值，它随着时间 <img src="https://latex.codecogs.com/png.latex?t"> 的增加而单调递增。</p>
+</section>
+<section id="累积风险与-hr风险比的关系" class="level4">
+<h4 class="anchored" data-anchor-id="累积风险与-hr风险比的关系">累积风险与 HR（风险比）的关系</h4>
+<p>HR 是比较两组（如治疗组与对照组）瞬时风险率 <img src="https://latex.codecogs.com/png.latex?h(t)"> 的比值：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AHR%20=%20%5Cfrac%7Bh_1(t)%7D%7Bh_2(t)%7D%0A"></p>
+<p>它是一个相对指标，表示某组的风险率是另一组的多少倍。对 HR 的理解，可以类比 OR 的概念，只是 HR 是在时间上的比值，而 OR 无时间信息。如果时间对事件的影响较小（比如事件发生概率很低或者随访时间很短），HR 和 OR 的数值可能接近。但在事件发生率较高时，OR 通常会高于 HR，因为 OR 夸大了实际的效应。</p>
+<p>前面的累积风险函数 <img src="https://latex.codecogs.com/png.latex?H(t)"> 与瞬时风险率 <img src="https://latex.codecogs.com/png.latex?h(t)"> 紧密相关，若 HR 在所有时间上恒定（即比例风险假设成立），则累积风险函数之间的关系为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH_1(t)%20=%20HR%20%5Ccdot%20H_2(t)%0A"></p>
+<p>这意味着在比例风险假设成立的情况下，<strong>累积风险图中两组曲线的斜率比值大致等于 HR</strong>，即如果两组的 HR 恒定不变，则累积风险曲线在对数尺度下呈现平行关系。而如果 HR 随时间变化，累积风险曲线的差异会随着时间的推移而增大或缩小。从这个角度看，累积风险图可以通过曲线的趋势和两组曲线间的相对关系直观地展示 HR 的变化。</p>
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-RN529" class="csl-entry">
+Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. Book. Sas Institute.
+</div>
+</div></section></div> ]]></description>
+  <category>surival analysis</category>
+  <category>cumulative hazard plot</category>
+  <category>hazard function</category>
+  <guid>https://leslie-lu.github.io/blog/2024/11/22/cumulative_hazard/</guid>
+  <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411221925709.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>R 中面向对象编程系统选择</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -733,7 +786,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="3556a1ea" class="cell" data-execution_count="1">
+<div id="b71dd937" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -765,7 +818,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="a470747d" class="cell" data-execution_count="2">
+<div id="6dca1bc7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -785,7 +838,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="8da3ec95" class="cell" data-execution_count="3">
+<div id="882ec3c1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -796,7 +849,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="b92f7b24" class="cell" data-execution_count="4">
+<div id="f765a146" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -807,7 +860,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="6cd0c6da" class="cell" data-execution_count="5">
+<div id="ef2c95fe" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -820,7 +873,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="e4c00d9d" class="cell" data-execution_count="6">
+<div id="bc865648" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -843,14 +896,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 4.4151, -2.4293, -0.2045],
-         [ 2.6165,  0.9223, -3.6816]],
+<pre><code>tensor([[[ 4.5841,  1.8093, -0.1065],
+         [-2.2949, -2.5620, -0.6440]],
 
-        [[ 0.8892,  0.6324,  2.1099],
-         [-1.1770,  0.0306, -0.4822]],
+        [[ 0.2962, -2.1731,  1.2265],
+         [ 2.0004, -3.1179, -2.7553]],
 
-        [[ 1.3682,  0.6838,  3.3899],
-         [-1.1033,  0.5835, -1.3919]]])</code></pre>
+        [[ 2.6679, -1.7282, -0.1070],
+         [-1.0270, -0.2842, -0.2478]]])</code></pre>
 </div>
 </div>
 </section>
@@ -3232,7 +3285,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="acb3b84f" class="cell" data-execution_count="1">
+<div id="6e0a02b6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3287,7 +3340,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="bb165884" class="cell" data-execution_count="2">
+<div id="f829cc88" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3327,7 +3380,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="de1874cf" class="cell" data-execution_count="3">
+<div id="a50d7525" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3392,7 +3445,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="f11e2604" class="cell" data-execution_count="4">
+<div id="84d8706b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3457,7 +3510,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="77916675" class="cell" data-execution_count="1">
+<div id="17cc4d2d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -3512,7 +3565,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="c92f962b" class="cell" data-execution_count="2">
+<div id="47e200f7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -3575,7 +3628,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="7e09655b" class="cell" data-execution_count="3">
+<div id="ae8373e3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3636,7 +3689,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="33b45767" class="cell" data-execution_count="4">
+<div id="d2a8f023" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -3743,7 +3796,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="c38f2d93" class="cell" data-execution_count="5">
+<div id="af8c9e1a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -3765,7 +3818,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="ccc6b458" class="cell" data-execution_count="6">
+<div id="55c276a7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -3801,7 +3854,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="7263e5d7" class="cell" data-execution_count="7">
+<div id="d00fab03" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -3957,7 +4010,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="c17deaf3" class="cell" data-execution_count="1">
+<div id="08f224de" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3985,7 +4038,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="7f1d654a" class="cell" data-execution_count="2">
+<div id="1acac467" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4007,7 +4060,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="88611d9a" class="cell" data-execution_count="3">
+<div id="8116693b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4041,7 +4094,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="5da98e0d" class="cell" data-execution_count="4">
+<div id="e2c83e2e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -4075,7 +4128,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="37498cb3" class="cell" data-execution_count="5">
+<div id="a567a05e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4110,7 +4163,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="9f6e041b" class="cell" data-execution_count="6">
+<div id="39a93c54" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4139,7 +4192,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="85987874" class="cell" data-execution_count="7">
+<div id="cbb21cb1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4234,7 +4287,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="e1eac117" class="cell" data-execution_count="8">
+<div id="d47ea71c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4264,7 +4317,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="91b8c4e2" class="cell" data-execution_count="9">
+<div id="426a4874" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4288,12 +4341,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_7088/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_33962/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="94021973" class="cell" data-execution_count="10">
+<div id="6f9c45c5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4323,7 +4376,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="4a7da080" class="cell" data-execution_count="11">
+<div id="8cada41c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5460,47 +5513,6 @@ font-style: inherit;">scoredata4</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2020/02/05/</guid>
   <pubDate>Wed, 05 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>样本量和检验效能的估计问题</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/04/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>统计分析人员经常会被问到这样一个问题：我这个研究到底需要多少个研究对象呢？</p>
-<p>这个问题可以通过检验效能分析或样本量估算来解决，它在实验设计中占有重要地位。检验效能分析可以帮助在给定置信度的情况下，判断检测到给定效应值时所需的样本量；反过来，它也能够在给定置信度水平情况下，计算在某样本量内能检测到给定效应值的概率，如果该概率过低，可以考虑修改或放弃该实验。</p>
-<p>由于检验效能分析针对的是假设检验，我们回顾下假设检验的过程。</p>
-<p>在统计假设检验中，首先要对总体分布参数作出一个假设（无效假设），然后从总体分布中抽样，通过样本计算所得的统计量来对总体参数进行推断。假定无效假设为真，若计算获得观测样本的统计量或更大统计量的概率（p值）非常小，小于预先设定的阈值（检验的显著性水平），便可以拒绝无效假设，接受备择假设。</p>
-<p>科学研究中，越来越强调样本量的估算。确定适当的样本含量可以节约资源，并可防止因为样本含量过少引起的检验效能偏低，出现假阴性错误，这是当前医学研究中值得注意的问题。</p>
-<p>样本量的估算方法很多，不同的统计检验方法使用的计算公式也不一样。一般影响样本量的因素有以下7种：</p>
-<ol type="1">
-<li><p>研究事件的发生率：研究事件预期的发生率越高，所需的样本量越小，反之则越大；</p></li>
-<li><p>研究因素的有效率：有效率越高，即实验组和对照组比较数值差异越大，样本量就可以越小，使用小样本就能够达到统计学上的显著性，反之则越大；</p></li>
-<li><p>设定假设检验的I类错误概率α，即检验水准或显著性，为假阳性错误出现的概率。α越小，所需的样本量越大，反之则越小。α水平由研究者根据具体情况决定，通常α取0.05或0.01；</p></li>
-<li><p>设定假设检验的II类错误概率β，或检验效能1-β。II类错误为假阴性错误，即在特定的α水准下，若总体参数之间确实存在着差别，此时该次实验能发现此差别的概率。检验效能又称把握度，即避免假阴性错误的能力，β越小，检验效能越高，所需的样本量越大，反之就越小。β水平由研究者根据情况决定，通常取β为0.2、0.1或0.05，即1-β=0.8、0.9或0.95，也就是说把握度为80%、90%或95%；</p></li>
-<li><p>了解由样本推断总体的一些信息。总体标准差一般未知，可用样本标准差代替；</p></li>
-<li><p>处理组间差别的估计，即确定容许误差。容许误差越小，需要的样本量越大；</p></li>
-<li><p>采用统计学检验时，当研究结果高于和低于效应指标的界限均有意义时，应该选择双侧检验，所需的样本量就大。当研究结果仅高于或低于效应指标的界限有意义时，则应该选择单侧检验，所需的样本量就小。</p></li>
-</ol>
-<p>在这些影响因素中，确定样本含量最重要的4个因素为I类错误概率、II类错误概率、推断总体的一些信息和容许误差。</p>
-<p>研究者放宽显著性水平时（换句话说，使得拒绝无效假设更容易时），检验功效增加。类似地，样本量增加，检验功效增加。</p>
-<p>通常来说，研究目标是维持一个可接受的显著性水平，尽量使用较少的样本，然后最大化统计检验的功效，也就是说，最大化发现真实效应的概率，并最小化发现错误效应的概率，同时把研究成本控制在合理的范围内。</p>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>sample size</category>
-  <category>power</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/04/</guid>
-  <pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408281607494.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
