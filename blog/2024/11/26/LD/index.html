@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="预测模型星球Journal Club">
+<meta name="description" content="Linkage Disequilibrium, LD">
 
-<title>星球JC | 胃癌早期筛查工具 | Zhen Lu – Zhen Lu</title>
+<title>连锁不平衡 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,10 +123,39 @@ div.column-margin+hr.dinkus {
 }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="floating nav-fixed slimcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,14 +249,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">星球JC | 胃癌早期筛查工具</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">连锁不平衡</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          预测模型星球Journal Club
+          Linkage Disequilibrium, LD
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">journal club</div>
+                <div class="quarto-category">linkage disequilibrium</div>
+                <div class="quarto-category">LD</div>
+                <div class="quarto-category">genetics</div>
               </div>
                   </div>
   </div>
@@ -245,7 +276,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Friday, August 30, 2024</p>
+        <p class="date">Tuesday, November 26, 2024</p>
       </div>
     </div>
     
@@ -260,10 +291,8 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#研究背景" id="toc-研究背景" class="nav-link active" data-scroll-target="#研究背景">研究背景</a></li>
-  <li><a href="#研究方法" id="toc-研究方法" class="nav-link" data-scroll-target="#研究方法">研究方法</a></li>
-  <li><a href="#研究结果" id="toc-研究结果" class="nav-link" data-scroll-target="#研究结果">研究结果</a></li>
-  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
+  <li><a href="#连锁不平衡linkage-disequilibrium-ld" id="toc-连锁不平衡linkage-disequilibrium-ld" class="nav-link active" data-scroll-target="#连锁不平衡linkage-disequilibrium-ld">连锁不平衡（Linkage Disequilibrium, LD）</a></li>
+  <li><a href="#ld的数学描述" id="toc-ld的数学描述" class="nav-link" data-scroll-target="#ld的数学描述"><strong>LD的数学描述</strong></a></li>
   </ul>
 </nav>
 </nav>
@@ -272,101 +301,62 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<blockquote class="blockquote">
-<p>大家好，这一期预测模型星球Journal Club的分享来自中国医科大学的徐林玉同学，分享的是2019年发表在中科院医学1区的顶级期刊Gut上，题为“Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study”的研究论文。</p>
-</blockquote>
-<section id="研究背景" class="level3">
-<h3 class="anchored" data-anchor-id="研究背景">研究背景</h3>
-<p>胃癌是中国第二常见的癌症，早期检测和治疗可以显著降低其死亡率。然而，由于高风险人群庞大，全面的胃镜筛查在经济和操作上都不切实际。当前，中国的国家筛查指南建议对高风险人群从40岁开始进行筛查，但由于高风险人群估计超过3亿人，全面的胃镜筛查并不可行。因此，迫切需要一种风险分层工具，作为胃镜检查前的初步筛查工具，以进一步识别真正的高风险个体；且当前中国国内尚无类似的工具。</p>
-<p>现有的筛查工具主要基于已知的胃癌风险因素，如萎缩性胃炎和幽门螺杆菌感染。虽然有一些方法如ABC方法在日本被开发用于预测未来胃癌的发生，但其在中国高风险人群中的适用性仍存在疑问。此外，现有的生物标志物组合方法虽然在某些研究中表现良好，但其结果可能不适用于中国的高风险人群。因此，这项全国多中心横断面研究的目标是开发一种新的预测规则，用于二级预防（早发现、早诊断、早治疗），作为初步筛查工具，用于在中国无症状人群中识别高风险个体，以便进一步进行诊断性胃镜检查。</p>
+<section id="连锁不平衡linkage-disequilibrium-ld" class="level3">
+<h3 class="anchored" data-anchor-id="连锁不平衡linkage-disequilibrium-ld">连锁不平衡（Linkage Disequilibrium, LD）</h3>
+<p><strong><a href="https://en.wikipedia.org/wiki/Linkage_disequilibrium" title="wiki">连锁不平衡（LD）</a></strong> 是群体遗传学和基因组学中的一个基本概念，用于描述两个或多个遗传标记（通常是单核苷酸多态性，SNP）之间的<strong>非随机关联</strong>。当某些 SNP 的等位基因 （allele）的组合在一个群体中出现的频率高于根据单独等位基因频率计算的预期频率时，这种现象被称为连锁不平衡。LD 是基因组关联分析（GWAS）和基因组选择等研究的重要基础，用于识别与复杂性状相关的遗传变异，并帮助推断遗传位点之间的关系。</p>
+<p>连锁是指基因组中靠得很近的基因或遗传标记倾向于一起遗传的现象，这是由染色体重组的随机性和空间上的接近性引起的。而 LD 则描述了在一个群体中等位基因组合的统计学偏差，如果遗传标记之间的组合频率偏离预期（非随机关联），就表明存在 LD。</p>
 </section>
-<section id="研究方法" class="level3">
-<h3 class="anchored" data-anchor-id="研究方法">研究方法</h3>
-<section id="研究类型" class="level4">
-<h4 class="anchored" data-anchor-id="研究类型">研究类型</h4>
-<p>全国、多中心、横断面研究。</p>
+<section id="ld的数学描述" class="level3">
+<h3 class="anchored" data-anchor-id="ld的数学描述"><strong>LD的数学描述</strong></h3>
+<p>连锁不平衡通常用两个指标来描述：<span class="math inline">\(D'\)</span> 和 <span class="math inline">\(r^2\)</span>。</p>
+<section id="不平衡系数d" class="level4">
+<h4 class="anchored" data-anchor-id="不平衡系数d"><strong>1. 不平衡系数（D）</strong></h4>
+<p>定义两个标记 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 的四种可能等位基因组合及其频率： - <span class="math inline">\(A_1B_1\)</span>, <span class="math inline">\(A_1B_2\)</span>, <span class="math inline">\(A_2B_1\)</span>, <span class="math inline">\(A_2B_2\)</span>，分别表示两位点上的不同等位基因组合。</p>
+<p>设： - <span class="math inline">\(P(A_1B_1)\)</span>：观察到 <span class="math inline">\(A_1\)</span> 和 <span class="math inline">\(B_1\)</span> 同时出现的频率。 - <span class="math inline">\(P(A_1)\)</span>：<span class="math inline">\(A_1\)</span> 的边际频率。 - <span class="math inline">\(P(B_1)\)</span>：<span class="math inline">\(B_1\)</span> 的边际频率。</p>
+<p>则不平衡系数 <span class="math inline">\(D\)</span> 定义为：</p>
+<p><span class="math display">\[
+D = P(A_1B_1) - P(A_1)P(B_1)
+\]</span></p>
+<ul>
+<li>当 <span class="math inline">\(D = 0\)</span> 时，标记之间没有 LD，即独立遗传。</li>
+<li>当 <span class="math inline">\(D \neq 0\)</span> 时，标记之间存在 LD。</li>
+</ul>
+<p>然而，由于 <span class="math inline">\(D\)</span> 的值依赖于等位基因的频率，其绝对值没有固定的范围，因此通常会对其进行标准化。</p>
 </section>
-<section id="研究人群" class="level4">
-<h4 class="anchored" data-anchor-id="研究人群">研究人群</h4>
-<p>年龄在40至80岁之间、无胃肠道症状的个体，符合中国胃癌高风险标准，并前往医院进行胃镜筛查。</p>
+<section id="标准化不平衡系数d" class="level4">
+<h4 class="anchored" data-anchor-id="标准化不平衡系数d"><strong>2. 标准化不平衡系数（<span class="math inline">\(D'\)</span>）</strong></h4>
+<p><span class="math display">\[
+D' = \frac{D}{D_{\text{max}}}
+\]</span></p>
+<p>其中 <span class="math inline">\(D_{\text{max}}\)</span> 是 <span class="math inline">\(D\)</span> 的可能最大值或最小值，取决于等位基因频率。</p>
+<ul>
+<li><span class="math inline">\(D'\)</span> 的范围为 [-1, 1]。</li>
+<li><span class="math inline">\(D' = 1\)</span> 表示完全连锁不平衡。</li>
+</ul>
 </section>
-<section id="数据收集" class="level4">
-<h4 class="anchored" data-anchor-id="数据收集">数据收集</h4>
-<p>通过问卷调查、血清学检测（PG I、PG II、G-17、抗幽门螺杆菌IgG抗体）、胃镜检查和组织学检查收集数据。</p>
-</section>
-<section id="统计分析" class="level4">
-<h4 class="anchored" data-anchor-id="统计分析">统计分析</h4>
-<p>文章对数据的管理采取了中心化的管理，尽可能确保数据质量。参与者按2:1比例被随机分为开发队列和验证队列。开发队列用于模型开发，验证队列用于外部验证。文章利用Logistic回归模型开发预测规则。在开发队列中，通过univariate and multivariate analyses评估危险因素与胃癌的关联，其中，univariate analyses阈值设为p&lt;0.25，且multivariate analyses采用backward stepwise进行进一步的变量筛选。文章预测规则的设定基于regression coefficient-based scoring method（Points were assigned by dividing the regression coefficients by the absolute value of the smallest coefficient in the model and rounding up to the nearest integer）。模型整体性能通过R²和Brier评分进行衡量，区分能力通过AUC和discrimination slope评估，校准能力通过Hosmer-Lemeshow χ2统计量和calibration in the large进行评估。同时，评估模型预测的敏感度、特异度、准确率、阳性预测值（positive predictive value）、阴性预测值（negative predictive value）、阳性似然比（positive likelihood ratio）、阴性似然比（negative likelihood rario）和number needed to screen（defined as the number of participants who would need to undergo gastroscopy for one patient with GC to be identified）。文章对开发队列进行bootstrap抽样1000次作为内部验证，验证队列上进行外部验证。同时，基于u test比较模型在开发队列、验证队列上的AUC表现。此外，文章额外做了一部分工作，即将自身模型与当前现有文献中的预测模型进行效果的对比。数据分析使用IBM SPSS和R软件进行。</p>
-</section>
-</section>
-<section id="研究结果" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="研究结果">研究结果</h3>
-<p>此研究收集了2015年6月至2017年3月期间来自中国115家医院的数据，最终纳入14,929名合格参与者。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">图1 研究对象纳入及定义</figcaption>
-</figure>
-</div>
-<section id="预测规则的开发" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="预测规则的开发">预测规则的开发</h4>
-<p>基于分数的预测规则的开发：采用单因素和多因素分析，确定了包括年龄、性别、PG I/II比率、G-17水平、幽门螺杆菌感染和饮食习惯（腌制和油炸食品消费）在内的7个预测因素。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Table 1</figcaption>
-</figure>
-</div>
-<p>按照0–25分评分范围进行风险分层，将个体分为低风险（≤11）、中风险（12–16）和高风险（17–25）组。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">图2 logistic回归模型中胃癌的预测因素及相关预测规则</figcaption>
-</figure>
-</div>
-<p>其中，中高风险组的胃镜检查检测到70.8%的胃癌病例和70.3%的早期胃癌病例。低风险组的胃镜检查需求减少了66.7%。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Table 4</figcaption>
-</figure>
-</div>
-<p>预测性能：开发的预测规则具有良好的性能表现。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">图3 预测模型的性能指标</figcaption>
-</figure>
-</div>
-</section>
-<section id="与其他预测模型的性能比较" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="与其他预测模型的性能比较">与其他预测模型的性能比较</h4>
-<p>该预测规则表现良好，并显示出显著优于其他三种替代预测方法（即Miki等人的ABC方法、中国的基于ELISA的ABC方法以及Tu等人的五种生物标志物方法）在识别胃癌患者方面的区分能力。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">图4 验证队列中预测模型和替代预测模型的比较</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="take-home-message" class="level3">
-<h3 class="anchored" data-anchor-id="take-home-message">Take home message</h3>
-<ol type="1">
-<li><p>该预测规则在识别中国人群中胃镜检查前的高风险个体方面表现良好。可以作为一种准确且具有成本效益的大规模初步筛查工具，以提高胃癌（包括早期胃癌）的检测率，从而改善胃癌的二级预防。</p></li>
-<li><p>文章不仅比较了自身模型在多中心外部验证中的效果，更是对比了现有模型，且表现均优于现有模型。</p></li>
-<li><p>采用回归赋分的方式，对于人工智能算法解释性较好，能较好地在医院中进行推广应用；此外，采用赋分划分亚组的方式，关注到了模型实际可能带来的收益。</p></li>
-</ol>
+<section id="相关系数r2" class="level4">
+<h4 class="anchored" data-anchor-id="相关系数r2"><strong>3. 相关系数（<span class="math inline">\(r^2\)</span>）</strong></h4>
+<p>但在群体遗传学中，其实我们更常用 <span class="math inline">\(r^2\)</span> 来衡量 LD：</p>
+<p><span class="math display">\[
+r^2 = \frac{D^2}{P(A_1)P(A_2)P(B_1)P(B_2)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(r^2\)</span> 的范围为 [0, 1]。</li>
+<li><span class="math inline">\(r^2 = 0\)</span>：标记之间完全独立。</li>
+<li><span class="math inline">\(r^2 = 1\)</span>：标记之间完全关联。</li>
+<li><span class="math inline">\(r^2\)</span> 的值通常用于评估 GWAS 研究中的 SNP 冗余。</li>
+</ul>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -843,93 +833,86 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "星球JC | 胃癌早期筛查工具"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-08-30</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "预测模型星球Journal Club"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302124427.png"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "连锁不平衡"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-11-26</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Linkage Disequilibrium, LD"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://upload.wikimedia.org/wikipedia/commons/9/92/Linkage_Disequilibrium_Heatmap.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - journal club</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 大家好，这一期预测模型星球Journal Club的分享来自中国医科大学的徐林玉同学，分享的是2019年发表在中科院医学1区的顶级期刊Gut上，题为“Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study”的研究论文。</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linkage disequilibrium</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - LD</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - genetics</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究背景</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 连锁不平衡（Linkage Disequilibrium, LD）</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>胃癌是中国第二常见的癌症，早期检测和治疗可以显著降低其死亡率。然而，由于高风险人群庞大，全面的胃镜筛查在经济和操作上都不切实际。当前，中国的国家筛查指南建议对高风险人群从40岁开始进行筛查，但由于高风险人群估计超过3亿人，全面的胃镜筛查并不可行。因此，迫切需要一种风险分层工具，作为胃镜检查前的初步筛查工具，以进一步识别真正的高风险个体；且当前中国国内尚无类似的工具。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>**[连锁不平衡（LD）](https://en.wikipedia.org/wiki/Linkage_disequilibrium "wiki")** 是群体遗传学和基因组学中的一个基本概念，用于描述两个或多个遗传标记（通常是单核苷酸多态性，SNP）之间的**非随机关联**。当某些 SNP 的等位基因 （allele）的组合在一个群体中出现的频率高于根据单独等位基因频率计算的预期频率时，这种现象被称为连锁不平衡。LD 是基因组关联分析（GWAS）和基因组选择等研究的重要基础，用于识别与复杂性状相关的遗传变异，并帮助推断遗传位点之间的关系。</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>现有的筛查工具主要基于已知的胃癌风险因素，如萎缩性胃炎和幽门螺杆菌感染。虽然有一些方法如ABC方法在日本被开发用于预测未来胃癌的发生，但其在中国高风险人群中的适用性仍存在疑问。此外，现有的生物标志物组合方法虽然在某些研究中表现良好，但其结果可能不适用于中国的高风险人群。因此，这项全国多中心横断面研究的目标是开发一种新的预测规则，用于二级预防（早发现、早诊断、早治疗），作为初步筛查工具，用于在中国无症状人群中识别高风险个体，以便进一步进行诊断性胃镜检查。</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>连锁是指基因组中靠得很近的基因或遗传标记倾向于一起遗传的现象，这是由染色体重组的随机性和空间上的接近性引起的。而 LD 则描述了在一个群体中等位基因组合的统计学偏差，如果遗传标记之间的组合频率偏离预期（非随机关联），就表明存在 LD。</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究方法</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## **LD的数学描述**</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### 研究类型</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>连锁不平衡通常用两个指标来描述：$D'$ 和 $r^2$。</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>全国、多中心、横断面研究。</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### **1. 不平衡系数（D）**</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 研究人群</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>年龄在40至80岁之间、无胃肠道症状的个体，符合中国胃癌高风险标准，并前往医院进行胃镜筛查。</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 数据收集</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>通过问卷调查、血清学检测（PG I、PG II、G-17、抗幽门螺杆菌IgG抗体）、胃镜检查和组织学检查收集数据。</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>定义两个标记 $A$ 和 $B$ 的四种可能等位基因组合及其频率：</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$A_1B_1$, $A_1B_2$, $A_2B_1$, $A_2B_2$，分别表示两位点上的不同等位基因组合。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>设：</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(A_1B_1)$：观察到 $A_1$ 和 $B_1$ 同时出现的频率。</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(A_1)$：$A_1$ 的边际频率。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(B_1)$：$B_1$ 的边际频率。</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### 统计分析</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>则不平衡系数 $D$ 定义为：</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>文章对数据的管理采取了中心化的管理，尽可能确保数据质量。参与者按2:1比例被随机分为开发队列和验证队列。开发队列用于模型开发，验证队列用于外部验证。文章利用Logistic回归模型开发预测规则。在开发队列中，通过univariate and multivariate analyses评估危险因素与胃癌的关联，其中，univariate analyses阈值设为p&lt;0.25，且multivariate analyses采用backward stepwise进行进一步的变量筛选。文章预测规则的设定基于regression coefficient-based scoring method（Points were assigned by dividing the regression coefficients by the absolute value of the smallest coefficient in the model and rounding up to the nearest integer）。模型整体性能通过R²和Brier评分进行衡量，区分能力通过AUC和discrimination slope评估，校准能力通过Hosmer-Lemeshow χ2统计量和calibration in the large进行评估。同时，评估模型预测的敏感度、特异度、准确率、阳性预测值（positive predictive value）、阴性预测值（negative predictive value）、阳性似然比（positive likelihood ratio）、阴性似然比（negative likelihood rario）和number needed to screen（defined as the number of participants who would need to undergo gastroscopy for one patient with GC to be identified）。文章对开发队列进行bootstrap抽样1000次作为内部验证，验证队列上进行外部验证。同时，基于u test比较模型在开发队列、验证队列上的AUC表现。此外，文章额外做了一部分工作，即将自身模型与当前现有文献中的预测模型进行效果的对比。数据分析使用IBM SPSS和R软件进行。</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究结果</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>D = P(A_1B_1) - P(A_1)P(B_1)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>此研究收集了2015年6月至2017年3月期间来自中国115家医院的数据，最终纳入14,929名合格参与者。</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="al">![图1 研究对象纳入及定义](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png)</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### 预测规则的开发</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>基于分数的预测规则的开发：采用单因素和多因素分析，确定了包括年龄、性别、PG I/II比率、G-17水平、幽门螺杆菌感染和饮食习惯（腌制和油炸食品消费）在内的7个预测因素。</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="al">![Table 1](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png)</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>按照0–25分评分范围进行风险分层，将个体分为低风险（≤11）、中风险（12–16）和高风险（17–25）组。</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="al">![图2 logistic回归模型中胃癌的预测因素及相关预测规则](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png)</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>其中，中高风险组的胃镜检查检测到70.8%的胃癌病例和70.3%的早期胃癌病例。低风险组的胃镜检查需求减少了66.7%。</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当 $D = 0$ 时，标记之间没有 LD，即独立遗传。</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当 $D \neq 0$ 时，标记之间存在 LD。</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>然而，由于 $D$ 的值依赖于等位基因的频率，其绝对值没有固定的范围，因此通常会对其进行标准化。</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### **2. 标准化不平衡系数（$D'$）**</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>D' = \frac{D}{D_{\text{max}}}</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>其中 $D_{\text{max}}$ 是 $D$ 的可能最大值或最小值，取决于等位基因频率。</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$D'$ 的范围为 <span class="co">[</span><span class="ot">-1, 1</span><span class="co">]</span>。</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$D' = 1$ 表示完全连锁不平衡。</span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="al">![Table 4](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png)</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### **3. 相关系数（$r^2$）**</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>预测性能：开发的预测规则具有良好的性能表现。</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>但在群体遗传学中，其实我们更常用 $r^2$ 来衡量 LD：</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="al">![图3 预测模型的性能指标](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png)</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### 与其他预测模型的性能比较</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>r^2 = \frac{D^2}{P(A_1)P(A_2)P(B_1)P(B_2)}</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>该预测规则表现良好，并显示出显著优于其他三种替代预测方法（即Miki等人的ABC方法、中国的基于ELISA的ABC方法以及Tu等人的五种生物标志物方法）在识别胃癌患者方面的区分能力。</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="al">![图4 验证队列中预测模型和替代预测模型的比较](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png)</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take home message</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>该预测规则在识别中国人群中胃镜检查前的高风险个体方面表现良好。可以作为一种准确且具有成本效益的大规模初步筛查工具，以提高胃癌（包括早期胃癌）的检测率，从而改善胃癌的二级预防。</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>文章不仅比较了自身模型在多中心外部验证中的效果，更是对比了现有模型，且表现均优于现有模型。</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>采用回归赋分的方式，对于人工智能算法解释性较好，能较好地在医院中进行推广应用；此外，采用赋分划分亚组的方式，关注到了模型实际可能带来的收益。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2$ 的范围为 <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2 = 0$：标记之间完全独立。</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2 = 1$：标记之间完全关联。</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2$ 的值通常用于评估 GWAS 研究中的 SNP 冗余。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
