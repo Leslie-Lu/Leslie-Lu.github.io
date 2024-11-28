@@ -10,8 +10,78 @@
 <atom:link href="https://leslie-lu.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
-<generator>quarto-1.6.38</generator>
-<lastBuildDate>Tue, 26 Nov 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Thu, 28 Nov 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>SAIGE</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/11/28/SAIGE/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="saige" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="saige">SAIGE</h3>
+<p>SAIGE（Scalable and Accurate Implementation of GEneralized mixed models）是一个用于大规模基因组关联研究（GWAS）的 <a href="https://saigegit.github.io/SAIGE-doc/" title="SAIGE">R 包</a>，旨在通过<code>广义混合模型（Generalized Mixed Models, GMM）</code>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE 具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</p>
+<p>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</p>
+<section id="saige-的主要特点" class="level4">
+<h4 class="anchored" data-anchor-id="saige-的主要特点">1. SAIGE 的主要特点</h4>
+<section id="高效的计算方法" class="level5">
+<h5 class="anchored" data-anchor-id="高效的计算方法">1.1 高效的计算方法</h5>
+<p>SAIGE 的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE 通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</p>
+</section>
+<section id="处理样本相关性" class="level5">
+<h5 class="anchored" data-anchor-id="处理样本相关性">1.2 处理样本相关性</h5>
+<p>在 GWAS 中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE 通过<code>基因型关系矩阵（GRM）</code>来处理样本的相关性，使得 GWAS 结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE 都能够有效地调整，避免不必要的假阳性结果。</p>
+</section>
+<section id="支持多种表型类型" class="level5">
+<h5 class="anchored" data-anchor-id="支持多种表型类型">1.3 支持多种表型类型</h5>
+<p>SAIGE 不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<code>Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）</code>来分析稀有变异。</p>
+</section>
+<section id="稀有变异分析的扩展功能saige-gene" class="level5">
+<h5 class="anchored" data-anchor-id="稀有变异分析的扩展功能saige-gene">1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</h5>
+<p>SAIGE-GENE+ 是 SAIGE 的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN 测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</p>
+</section>
+<section id="高度可定制化" class="level5">
+<h5 class="anchored" data-anchor-id="高度可定制化">1.5 高度可定制化</h5>
+<p>SAIGE 允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有 GWAS 信号的基础上进行进一步的变异筛选。</p>
+</section>
+</section>
+<section id="saige-的工作原理" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="saige-的工作原理">2. SAIGE 的工作原理</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">SAIGE 工作流程</figcaption>
+</figure>
+</div>
+<p>SAIGE 使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</p>
+<p>在分析过程中，SAIGE 会先使用 GRM 计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用 <code>REML（限制最大似然法）</code>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP 与表型之间的关联。</p>
+<section id="计算遗传关系矩阵grm" class="level5">
+<h5 class="anchored" data-anchor-id="计算遗传关系矩阵grm">2.1 计算遗传关系矩阵（GRM）</h5>
+<p>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的 GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM 可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM 文件，并将其作为输入提供给 SAIGE。</p>
+</section>
+<section id="模型拟合与关联分析" class="level5">
+<h5 class="anchored" data-anchor-id="模型拟合与关联分析">2.2 模型拟合与关联分析</h5>
+<p>SAIGE 使用 限制最大似然法（REML） 或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth 偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</p>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>SAIGE</category>
+  <category>GWAS</category>
+  <category>genomics</category>
+  <guid>https://leslie-lu.github.io/blog/2024/11/28/SAIGE/</guid>
+  <pubDate>Thu, 28 Nov 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>连锁不平衡</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -850,7 +920,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="1912e853" class="cell" data-execution_count="1">
+<div id="a305067a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -882,7 +952,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="b370f31c" class="cell" data-execution_count="2">
+<div id="d0f04875" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -902,7 +972,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="bfbdbdc7" class="cell" data-execution_count="3">
+<div id="13b37e13" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -913,7 +983,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="3b4ad2d1" class="cell" data-execution_count="4">
+<div id="7d7e9d36" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -924,7 +994,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="b6979db3" class="cell" data-execution_count="5">
+<div id="e8942de8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -937,7 +1007,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="6d7852a2" class="cell" data-execution_count="6">
+<div id="e0939586" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -960,14 +1030,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 1.5422, -2.8978,  0.2143],
-         [-1.0304, -0.4672, -1.3239]],
+<pre><code>tensor([[[-7.2565, -5.9017, -0.3434],
+         [-2.3928, -3.5589,  1.0871]],
 
-        [[ 1.5084, -1.4456,  1.1834],
-         [ 1.0351, -0.2002,  0.6175]],
+        [[-0.3559, -1.1743,  0.3344],
+         [-5.4425,  0.3051, -0.3542]],
 
-        [[ 0.3415,  0.2139,  2.4267],
-         [ 0.2428, -1.8341, -0.3863]]])</code></pre>
+        [[-4.1544,  0.6657,  0.6382],
+         [-3.3604, -0.2143,  1.6636]]])</code></pre>
 </div>
 </div>
 </section>
@@ -3349,7 +3419,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="3965062d" class="cell" data-execution_count="1">
+<div id="a2dd5627" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3404,7 +3474,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="40fff039" class="cell" data-execution_count="2">
+<div id="28d79780" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3444,7 +3514,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="cd875fcb" class="cell" data-execution_count="3">
+<div id="2c80fc96" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3509,7 +3579,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="50adba16" class="cell" data-execution_count="4">
+<div id="09129f48" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3574,7 +3644,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="2cb7c713" class="cell" data-execution_count="1">
+<div id="6d1b25e6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -3629,7 +3699,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="c39285fe" class="cell" data-execution_count="2">
+<div id="8eea28e4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -3692,7 +3762,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="2ada261b" class="cell" data-execution_count="3">
+<div id="c169028e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3753,7 +3823,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="ab43d436" class="cell" data-execution_count="4">
+<div id="8f8ff581" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -3860,7 +3930,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="98634cdc" class="cell" data-execution_count="5">
+<div id="a39bd610" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -3882,7 +3952,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="4e07834f" class="cell" data-execution_count="6">
+<div id="00fe6982" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -3918,7 +3988,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="789f5c89" class="cell" data-execution_count="7">
+<div id="839f4e21" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -4074,7 +4144,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="15af1439" class="cell" data-execution_count="1">
+<div id="f2e8a6b3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4102,7 +4172,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="4b0870ec" class="cell" data-execution_count="2">
+<div id="824f5b3a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4124,7 +4194,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="4a99dc57" class="cell" data-execution_count="3">
+<div id="e3158e11" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4158,7 +4228,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="38713da7" class="cell" data-execution_count="4">
+<div id="4c989d2b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -4192,7 +4262,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="51311c7f" class="cell" data-execution_count="5">
+<div id="00d0f3d3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4227,7 +4297,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="b0c11f84" class="cell" data-execution_count="6">
+<div id="83917caf" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4256,7 +4326,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="cb6a0a41" class="cell" data-execution_count="7">
+<div id="20dcdaa1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4351,7 +4421,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="d728902d" class="cell" data-execution_count="8">
+<div id="aed8da48" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4381,7 +4451,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="86fc3d5e" class="cell" data-execution_count="9">
+<div id="16547b15" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4405,12 +4475,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_5950/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_6029/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="ec5d39c9" class="cell" data-execution_count="10">
+<div id="32e99dd5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4440,7 +4510,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="7634d631" class="cell" data-execution_count="11">
+<div id="86a8165e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4838,705 +4908,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <guid>https://leslie-lu.github.io/blog/2020/02/15/</guid>
   <pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>R语言数据处理分析实例</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/06/</link>
-  <description><![CDATA[ <section id="前言" class="level3"><h3 class="anchored" data-anchor-id="前言">前言</h3>
-<p>R是一种块状结构程序语言，“块”由大括号划分，当“块”只包含一条语句时大括号可以省略。程序语句由换行符或分号分隔。和许多脚本语言一样，R语言不需要“声明”变量。</p>
-<p>接下来我们一起来处理分析一个简单的数据任务。</p>
-</section><section id="实例" class="level3"><h3 class="anchored" data-anchor-id="实例">实例</h3>
-<p>一组学生参加了数学、科学和英语三科考试。为了给所有学生确定一个综合的成绩衡量指标，需要将这些科目的成绩组合起来，将排名在前20%的学生评定为A，接下来20%的学生评定为B，依此类推，最后，按字母顺序对学生进行排序。请试处理分析。</p>
-<p>如下，我们首先创建原始数据框：</p>
-<div class="cell">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">studentname</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"John Davis"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Angela Williams"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Bullwinkle Moose"</span>, </span>
-<span>               <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"David Jones"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Janice Markhammer"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Cheryl Cushing"</span>, </span>
-<span>               <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Reuven Ytzrhak"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Greg Knox"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Joel England"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Mary Rayburn"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">math</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">502</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">600</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">412</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">358</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">495</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">512</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">410</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">625</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">573</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">522</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">science</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">95</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">99</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">82</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">75</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">85</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">95</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">89</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">86</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">English</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">25</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">22</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">18</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">28</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">30</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">27</span>,<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">18</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">studentname</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">math</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">science</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">English</span>, stringsAsFactors<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         studentname math science English
-1         John Davis  502      95      25
-2    Angela Williams  600      99      22
-3   Bullwinkle Moose  412      80      18
-4        David Jones  358      82      15
-5  Janice Markhammer  495      75      20
-6     Cheryl Cushing  512      85      28
-7     Reuven Ytzrhak  410      80      15
-8          Greg Knox  625      95      30
-9       Joel England  573      89      27
-10      Mary Rayburn  522      86      18</code></pre>
-</div>
-</div>
-<p>观察此数据集，马上可以发现一些明显的挑战：首先，三科考试成绩是无法比较的。由于它们的均值和标准差相差很大，对它们求三科的平均成绩是没有意义的。因此，在组合这些考试成绩之前，必须将其转换为可比较的成绩。</p>
-<p>因而，我们做如下处理，将三科成绩进行标准化，这样每科考试成绩都是用单位标准差来表示，而非原始的分值尺度表示：</p>
-<div class="cell">
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">z</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">z</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             math     science     English
- [1,]  0.01269128  1.07806562  0.58685145
- [2,]  1.14336936  1.59143020  0.03667822
- [3,] -1.02568654 -0.84705156 -0.69688609
- [4,] -1.64871324 -0.59036927 -1.24705932
- [5,] -0.06807144 -1.48875728 -0.33010394
- [6,]  0.12806660 -0.20534583  1.13702468
- [7,] -1.04876160 -0.84705156 -1.24705932
- [8,]  1.43180765  1.07806562  1.50380683
- [9,]  0.83185601  0.30801875  0.95363360
-[10,]  0.24344191 -0.07700469 -0.69688609
-attr(,"scaled:center")
-   math science English 
-  500.9    86.6    21.8 
-attr(,"scaled:scale")
-     math   science   English 
-86.673654  7.791734  5.452828 </code></pre>
-</div>
-</div>
-<p>scale函数为数据对象按列进行中心化（center=TRUE）或标准化（center=TRUE, scale=TRUE），默认情况下，函数scale对矩阵或数据框的指定列进行均值为0、标准差为1的标准化，给出各科成绩标准化后的结果以及各科成绩的均值和标准差。</p>
-<p>然后，我们通过mean函数来计算各行的均值以获得三科成绩的综合评价得分，并使用cbind函数将其添加到学生成绩的原始数据框中：</p>
-<div class="cell">
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">z</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">mean</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.5592028  0.9238259 -0.8565414 -1.1620473 -0.6289776  0.3532485
- [7] -1.0476242  1.3378934  0.6978361 -0.1768163</code></pre>
-</div>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         studentname math science English      Score
-1         John Davis  502      95      25  0.5592028
-2    Angela Williams  600      99      22  0.9238259
-3   Bullwinkle Moose  412      80      18 -0.8565414
-4        David Jones  358      82      15 -1.1620473
-5  Janice Markhammer  495      75      20 -0.6289776
-6     Cheryl Cushing  512      85      28  0.3532485
-7     Reuven Ytzrhak  410      80      15 -1.0476242
-8          Greg Knox  625      95      30  1.3378934
-9       Joel England  573      89      27  0.6978361
-10      Mary Rayburn  522      86      18 -0.1768163</code></pre>
-</div>
-</div>
-<p>apply函数可将一个任意函数应用到矩阵、数组、数据框的任何维度上，在矩阵或数据框中，1表示行，2表示列。cbind函数进行列合并，增加列。</p>
-<p>接下来，我们通过函数quantile给出三科成绩综合评价得分的百分位数，将学生的百分位数排名重编码为一个新的类别型成绩变量grade，如下：</p>
-<div class="cell">
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span>,<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>,<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.4</span>,<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       80%        60%        40%        20% 
- 0.7430341  0.4356302 -0.3576808 -0.8947579 </code></pre>
-</div>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"A"</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"B"</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"C"</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"D"</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">grade</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Score</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"E"</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         studentname math science English      Score grade
-1         John Davis  502      95      25  0.5592028     B
-2    Angela Williams  600      99      22  0.9238259     A
-3   Bullwinkle Moose  412      80      18 -0.8565414     D
-4        David Jones  358      82      15 -1.1620473     E
-5  Janice Markhammer  495      75      20 -0.6289776     D
-6     Cheryl Cushing  512      85      28  0.3532485     C
-7     Reuven Ytzrhak  410      80      15 -1.0476242     E
-8          Greg Knox  625      95      30  1.3378934     A
-9       Joel England  573      89      27  0.6978361     B
-10      Mary Rayburn  522      86      18 -0.1768163     C</code></pre>
-</div>
-</div>
-<p>quantile函数求分位数，这里求Score数值型向量的20%、40%、60%和80%分位点。</p>
-<p>接下来，我们使用strsplit函数以空格把学生姓名拆分为姓氏和名字：</p>
-<div class="cell">
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">name</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">studentname</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" "</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">name</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] "John"  "Davis"
-
-[[2]]
-[1] "Angela"   "Williams"
-
-[[3]]
-[1] "Bullwinkle" "Moose"     
-
-[[4]]
-[1] "David" "Jones"
-
-[[5]]
-[1] "Janice"     "Markhammer"
-
-[[6]]
-[1] "Cheryl"  "Cushing"
-
-[[7]]
-[1] "Reuven"  "Ytzrhak"
-
-[[8]]
-[1] "Greg" "Knox"
-
-[[9]]
-[1] "Joel"    "England"
-
-[[10]]
-[1] "Mary"    "Rayburn"</code></pre>
-</div>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">lastname</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">name</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"["</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">firstname</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">name</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"["</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">firstname</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">lastname</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata3</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    firstname   lastname math science English      Score grade
-1        John      Davis  502      95      25  0.5592028     B
-2      Angela   Williams  600      99      22  0.9238259     A
-3  Bullwinkle      Moose  412      80      18 -0.8565414     D
-4       David      Jones  358      82      15 -1.1620473     E
-5      Janice Markhammer  495      75      20 -0.6289776     D
-6      Cheryl    Cushing  512      85      28  0.3532485     C
-7      Reuven    Ytzrhak  410      80      15 -1.0476242     E
-8        Greg       Knox  625      95      30  1.3378934     A
-9        Joel    England  573      89      27  0.6978361     B
-10       Mary    Rayburn  522      86      18 -0.1768163     C</code></pre>
-</div>
-</div>
-<p>strsplit函数应用到一个字符串向量上会返回一个列表，使用sapply函数分别提取列表中每个成分的第一个元素和第二个元素，<code>[</code>是一个可以提取某个对象的一部分的函数，再使用cbind函数将它们添加到学生成绩的原始数据中。</p>
-<p>最后，我们使用order函数依姓氏和名字对数据集进行排序，完成这个数据任务。</p>
-<div class="cell">
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata4</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">[</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">lastname</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">firstname</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span>,<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">]</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">scoredata4</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    firstname   lastname math science English      Score grade
-6      Cheryl    Cushing  512      85      28  0.3532485     C
-1        John      Davis  502      95      25  0.5592028     B
-9        Joel    England  573      89      27  0.6978361     B
-4       David      Jones  358      82      15 -1.1620473     E
-8        Greg       Knox  625      95      30  1.3378934     A
-5      Janice Markhammer  495      75      20 -0.6289776     D
-3  Bullwinkle      Moose  412      80      18 -0.8565414     D
-10       Mary    Rayburn  522      86      18 -0.1768163     C
-2      Angela   Williams  600      99      22  0.9238259     A
-7      Reuven    Ytzrhak  410      80      15 -1.0476242     E</code></pre>
-</div>
-</div>
-
-
-<!-- -->
-
-</section> ]]></description>
-  <category>r</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/06/</guid>
-  <pubDate>Thu, 06 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231513804.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>

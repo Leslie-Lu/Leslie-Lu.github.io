@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="Clinical Prediction Model">
+<meta name="description" content="一种用于大规模基因组关联研究的高效工具">
 
-<title>欢迎加入预测模型星球 | Zhen Lu – Zhen Lu</title>
+<title>SAIGE | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -220,15 +220,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">欢迎加入预测模型星球</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">SAIGE</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          Clinical Prediction Model
+          一种用于大规模基因组关联研究的高效工具
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">workshop</div>
-                <div class="quarto-category">prediction model</div>
+                <div class="quarto-category">SAIGE</div>
+                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">genomics</div>
               </div>
                   </div>
   </div>
@@ -246,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Wednesday, August 14, 2024</p>
+        <p class="date">Thursday, November 28, 2024</p>
       </div>
     </div>
     
@@ -261,8 +262,7 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#由来" id="toc-由来" class="nav-link active" data-scroll-target="#由来">由来</a></li>
-  <li><a href="#预测模型星球" id="toc-预测模型星球" class="nav-link" data-scroll-target="#预测模型星球">预测模型星球</a></li>
+  <li><a href="#saige" id="toc-saige" class="nav-link active" data-scroll-target="#saige">SAIGE</a></li>
   </ul>
 </nav>
 </nav>
@@ -277,50 +277,56 @@ div.column-margin+hr.dinkus {
 
 
 
-<section id="由来" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="由来">由来</h3>
-<p>前面我们给大家推荐了这本几位非常厉害的教授老师主编的<a href="https://mp.weixin.qq.com/s/QQDM3aqyjaOSXXlZznJRDg">《临床预测模型方法与应用》</a>，陆陆续续地，在各个平台上，大家都反馈已经收到了这本书，并且这本书还很大很厚，涵盖了方法学、操作、专题以及案例。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141829108.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">feedback</figcaption>
-</figure>
-</div>
-<p>那这时候，就有同学和我说，按照以往看书的习惯，收到书的前一俩周，还是可以翻翻，但是后面就会慢慢地放在那里，然后就不了了之了。</p>
-<p>所以，我们就想，能不能有一个平台，让大家一起学习这本书，一起讨论、交流，一起进步呢？</p>
+<section id="saige" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="saige">SAIGE</h3>
+<p>SAIGE（Scalable and Accurate Implementation of GEneralized mixed models）是一个用于大规模基因组关联研究（GWAS）的 <a href="https://saigegit.github.io/SAIGE-doc/" title="SAIGE">R 包</a>，旨在通过<code>广义混合模型（Generalized Mixed Models, GMM）</code>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE 具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</p>
+<p>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</p>
+<section id="saige-的主要特点" class="level4">
+<h4 class="anchored" data-anchor-id="saige-的主要特点">1. SAIGE 的主要特点</h4>
+<section id="高效的计算方法" class="level5">
+<h5 class="anchored" data-anchor-id="高效的计算方法">1.1 高效的计算方法</h5>
+<p>SAIGE 的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE 通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</p>
 </section>
-<section id="预测模型星球" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="预测模型星球">预测模型星球</h3>
+<section id="处理样本相关性" class="level5">
+<h5 class="anchored" data-anchor-id="处理样本相关性">1.2 处理样本相关性</h5>
+<p>在 GWAS 中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE 通过<code>基因型关系矩阵（GRM）</code>来处理样本的相关性，使得 GWAS 结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE 都能够有效地调整，避免不必要的假阳性结果。</p>
+</section>
+<section id="支持多种表型类型" class="level5">
+<h5 class="anchored" data-anchor-id="支持多种表型类型">1.3 支持多种表型类型</h5>
+<p>SAIGE 不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<code>Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）</code>来分析稀有变异。</p>
+</section>
+<section id="稀有变异分析的扩展功能saige-gene" class="level5">
+<h5 class="anchored" data-anchor-id="稀有变异分析的扩展功能saige-gene">1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</h5>
+<p>SAIGE-GENE+ 是 SAIGE 的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN 测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</p>
+</section>
+<section id="高度可定制化" class="level5">
+<h5 class="anchored" data-anchor-id="高度可定制化">1.5 高度可定制化</h5>
+<p>SAIGE 允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有 GWAS 信号的基础上进行进一步的变异筛选。</p>
+</section>
+</section>
+<section id="saige-的工作原理" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="saige-的工作原理">2. SAIGE 的工作原理</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">知识星球</figcaption>
+<p><img src="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">SAIGE 工作流程</figcaption>
 </figure>
 </div>
-<p>向大家完整介绍下这个星球，也鼓励更多想要讨论交流的小伙伴进入到我的星球里面，大家一起愉快地学习。</p>
-<ol type="1">
-<li>首先，你要有实体书，不然我们每周讨论学习某一个章节的时候，你可能会有点懵。</li>
-</ol>
-<p>购买的二维码链接在<a href="https://mp.weixin.qq.com/s/QQDM3aqyjaOSXXlZznJRDg">这里</a>。</p>
-<ol start="2" type="1">
-<li>知识星球的目的是和大家一起营造一个国内高质量的预测模型类研究的知识圈，让星球里的人能够受益。</li>
-</ol>
-<p>来到这里你会遇到一群志同道合的人，一起学习、相互交流、共同促进。这个交流圈高度专注于预测类研究领域。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141840460.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">content</figcaption>
-</figure>
-</div>
-<ol start="3" type="1">
-<li><p>我们会每周一起学习讨论这本书的一个章节，每周一次，每次一个小时或一个章节，讨论的内容会包括这一章的重点内容、难点、案例分析等。</p></li>
-<li><p>除了这本书，如果未来人数足够，我们还会不定期地邀请一些同样从事预测类研究的博士生、学者，来和大家分享他们的研究成果、经验、心得等。</p></li>
-</ol>
-<p>后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和<a href="https://t.zsxq.com/5ecjA">星球</a>，我们会在这两个平台上发布最新的信息。</p>
+<p>SAIGE 使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</p>
+<p>在分析过程中，SAIGE 会先使用 GRM 计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用 <code>REML（限制最大似然法）</code>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP 与表型之间的关联。</p>
+<section id="计算遗传关系矩阵grm" class="level5">
+<h5 class="anchored" data-anchor-id="计算遗传关系矩阵grm">2.1 计算遗传关系矩阵（GRM）</h5>
+<p>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的 GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM 可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM 文件，并将其作为输入提供给 SAIGE。</p>
+</section>
+<section id="模型拟合与关联分析" class="level5">
+<h5 class="anchored" data-anchor-id="模型拟合与关联分析">2.2 模型拟合与关联分析</h5>
+<p>SAIGE 使用 限制最大似然法（REML） 或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth 偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</p>
 
 
 <!-- -->
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -797,62 +803,75 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "欢迎加入预测模型星球"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-08-14</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Clinical Prediction Model"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "SAIGE"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-11-28</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "一种用于大规模基因组关联研究的高效工具"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - workshop</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - prediction model</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 由来</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>前面我们给大家推荐了这本几位非常厉害的教授老师主编的<span class="co">[</span><span class="ot">《临床预测模型方法与应用》</span><span class="co">](https://mp.weixin.qq.com/s/QQDM3aqyjaOSXXlZznJRDg)</span>，陆陆续续地，在各个平台上，大家都反馈已经收到了这本书，并且这本书还很大很厚，涵盖了方法学、操作、专题以及案例。</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="al">![feedback](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141829108.jpg)</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>那这时候，就有同学和我说，按照以往看书的习惯，收到书的前一俩周，还是可以翻翻，但是后面就会慢慢地放在那里，然后就不了了之了。</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>所以，我们就想，能不能有一个平台，让大家一起学习这本书，一起讨论、交流，一起进步呢？</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 预测模型星球</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="al">![知识星球](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141822826.jpg)</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>向大家完整介绍下这个星球，也鼓励更多想要讨论交流的小伙伴进入到我的星球里面，大家一起愉快地学习。</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>首先，你要有实体书，不然我们每周讨论学习某一个章节的时候，你可能会有点懵。</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>购买的二维码链接在<span class="co">[</span><span class="ot">这里</span><span class="co">](https://mp.weixin.qq.com/s/QQDM3aqyjaOSXXlZznJRDg)</span>。</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>知识星球的目的是和大家一起营造一个国内高质量的预测模型类研究的知识圈，让星球里的人能够受益。</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>来到这里你会遇到一群志同道合的人，一起学习、相互交流、共同促进。这个交流圈高度专注于预测类研究领域。</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![content](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408141840460.jpg)</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>我们会每周一起学习讨论这本书的一个章节，每周一次，每次一个小时或一个章节，讨论的内容会包括这一章的重点内容、难点、案例分析等。</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>除了这本书，如果未来人数足够，我们还会不定期地邀请一些同样从事预测类研究的博士生、学者，来和大家分享他们的研究成果、经验、心得等。</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>后续我们会根据星球中同学们的需求，不定时地开展更多主题的workshop，具体时间请关注我们的公众号和<span class="co">[</span><span class="ot">星球</span><span class="co">](https://t.zsxq.com/5ecjA)</span>，我们会在这两个平台上发布最新的信息。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - SAIGE</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - genomics</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAIGE</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>SAIGE（Scalable and Accurate Implementation of GEneralized mixed models）是一个用于大规模基因组关联研究（GWAS）的 <span class="co">[</span><span class="ot">R 包</span><span class="co">](https://saigegit.github.io/SAIGE-doc/ "SAIGE")</span>，旨在通过<span class="in">`广义混合模型（Generalized Mixed Models, GMM）`</span>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE 具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. SAIGE 的主要特点</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.1 高效的计算方法</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>SAIGE 的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE 通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.2 处理样本相关性</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>在 GWAS 中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE 通过<span class="in">`基因型关系矩阵（GRM）`</span>来处理样本的相关性，使得 GWAS 结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE 都能够有效地调整，避免不必要的假阳性结果。</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.3 支持多种表型类型</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>SAIGE 不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<span class="in">`Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）`</span>来分析稀有变异。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>SAIGE-GENE+ 是 SAIGE 的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN 测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.5 高度可定制化</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>SAIGE 允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有 GWAS 信号的基础上进行进一步的变异筛选。</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. SAIGE 的工作原理</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="al">![SAIGE 工作流程](https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>SAIGE 使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>在分析过程中，SAIGE 会先使用 GRM 计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用 <span class="in">`REML（限制最大似然法）`</span>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP 与表型之间的关联。</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2.1 计算遗传关系矩阵（GRM）</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的 GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM 可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM 文件，并将其作为输入提供给 SAIGE。</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2.2 模型拟合与关联分析</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>SAIGE 使用 限制最大似然法（REML） 或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth 偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
