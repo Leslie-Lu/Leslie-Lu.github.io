@@ -11,7 +11,793 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Thu, 28 Nov 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 29 Nov 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>星球 JC | 解读 TRIPOD-AI</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/11/29/TRIPOD_AI/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<blockquote class="blockquote">
+<p>大家好，这一期预测模型星球 Journal Club 的分享来自中国医科大学的陈奕含同学。</p>
+</blockquote>
+<section id="tripod-ai-的制定" class="level3">
+<h3 class="anchored" data-anchor-id="tripod-ai-的制定">TRIPOD-AI 的制定</h3>
+<p>TRIPOD 协作组于 2015 年公布了《个体预后或诊断的多变量预测模型透明报告》（Transparent Reporting of a Multivariable Prediction Model for Individual Prognosis or Diagnosis，TRIPOD），用以规范预测模型的报告过程；随后为进一步提高报告质量评价的客观性及一致性，协作组于 2019 年公布了 TRIPOD 报告规范依从性评判标准，此标准也可作为提高研究报告准确性和完整性的指导文件。</p>
+<p>由于人工智能与机器学习的发展，更多研究将人工智能算法应用于预测模型的开发，因此在前期工作的基础上，TRIPOD 协作组于 2024 年发表了名为 TRIPOD-AI：updated guidance for reporting clinical prediction models that use regression or machine learning methods《TRIPOD-AI：报告使用回归或机器学习方法的临床预测模型的更新指南》的文章，取代 TRIPOD 2015，以此来指导预测模型类文章的报告，提高报告规范性。协作组成员在 TRIPOD 2015 的基础上，结合其他报告中的条目与系统评价的结果，构建了一个唯一候选条目的最终列表，进而进行德尔菲专家修订。通过两轮德尔菲专家会议，包含不同领域的专家。此外，还进行了公众参与会议和共识会议，最终确定了 TRIPOD+AI 声明。</p>
+</section>
+<section id="tripodai-声明条目" class="level3">
+<h3 class="anchored" data-anchor-id="tripodai-声明条目">TRIPOD+AI 声明条目</h3>
+<p>TRIPOD+AI 清单包括标题、摘要、引言、方法、开放科学实践、患者和公众参与、结果和讨论等 27 个主要条目。部分条目包含多个子条目，共计 52 个清单子条目。其涵盖了描述预测模型开发、预测模型性能评估(验证)或两者兼而有之的研究。其中，任何项记为 D；E 适用于所有研究，无论是开发预测模型还是评估预测模型的性能。检查表中的 D 项适用于描述预测模型开发的研究，而 E 项适用于评估预测模型性能的研究。对于开发和评估预测模型性能的研究，所有检查表项都适用。</p>
+<p>TRIPOD+AI 也为预测模型研究的期刊或会议摘要提供了单独的核查表，并与 TRIPOD+AI 保持一致。另外，PROBAST+AI 用来评估预测模型的质量和偏倚风险。需要注意的是，TRIPOD+AI 中包含的建议是最低限度的报告建议，作者还应提供额外的信息，如在补充材料中报告和引用一些所要求的或补充的信息。TRIPOD+AI 强调了整个清单的公平性，其意味着预测模型的设计和使用方式不会对任何特定群体的个人产生不利的歧视，也不会造成或加剧现有的医疗服务或患者结果方面的不平等。公平性的一个重要方面是确保用于开发或评估预测模型的数据具有代表性和多样性（这些差异应该能够代表预测模型所要使用的人群），并在模型开发过程中承认、处理和缓解数据偏差的限制。为了实现公平目标，清单在背景(项目 3c)、方法(项目 5a、7、8a、8b、9c、12f、14)、结果(项 20b、23a)和讨论(第 25、26 项)中都嵌入了相关内容。</p>
+<p>TRIPOD+AI 也添加了开放科学实践的内容，有助于促进透明度、可重复性和研究人员之间的合作。通过注册研究并使研究材料(如协议、数据、代码和预测模型)公开，使其他研究人员可以在新数据中验证研究结果并评估模型性能，以确保模型准确，并评估模型的安全性。在人工智能的背景下，开放科学部分涵盖了资助申报、利益冲突、协议可获得性、研究注册、数据共享、代码共享等方面。</p>
+<p><strong>Table 2 预测模型研究报告的 TRIPOD+AI 清单</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>段落/主题</th>
+<th>条目</th>
+<th>开发/评估</th>
+<th>清单条目</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>标题</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>标题</td>
+<td>1</td>
+<td>D；E</td>
+<td>将研究确定为开发或评估多变量预测模型的性能、目标人群和待预测结果</td>
+</tr>
+<tr class="odd">
+<td><strong>摘要</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>摘要</td>
+<td>2</td>
+<td>D；E</td>
+<td>摘要检查表见 TRIPOD+AI</td>
+</tr>
+<tr class="odd">
+<td><strong>介绍</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>背景</td>
+<td>3a</td>
+<td>D；E</td>
+<td>解释医疗保健背景(包括无论是诊断性还是预后性)以及开发或评估预测模型的理由，包括对现有模型的参考</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3b</td>
+<td>D；E</td>
+<td>描述照护路径情境下预测模型的目标人群和意向目的，包括其意向用户(例如,医疗保健专业人员、患者、公众等)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3c</td>
+<td>D；E</td>
+<td>描述任何已知的社会人口群体之间的健康不平等</td>
+</tr>
+<tr class="odd">
+<td>目的</td>
+<td>4</td>
+<td>D；E</td>
+<td>明确研究目的，包括研究是否描述了预测模型的开发或验证(或两者兼而有之)</td>
+</tr>
+<tr class="even">
+<td><strong>方法</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>数据</td>
+<td>5a</td>
+<td>D；E</td>
+<td>分别描述开发和评估数据集(例如,随机试验,队列,常规护理或登记数据)的数据来源、使用这些数据的理由以及数据的代表性</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5b</td>
+<td>D；E</td>
+<td>指定收集到的参与者数据的日期，包括参与者计提的开始日期和结束日期；并且，如果适用，则结束随访</td>
+</tr>
+<tr class="odd">
+<td>研究对象</td>
+<td>6a</td>
+<td>D；E</td>
+<td>指定研究设置(例如,初级保健、次级保健、普通人群)的关键要素，包括中心的数量和位置</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6b</td>
+<td>D；E</td>
+<td>描述研究参与者的合格标准</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6c</td>
+<td>D；E</td>
+<td>给出接受的任何治疗的细节，以及在模型开发或评估过程中如何处理，如果相关</td>
+</tr>
+<tr class="even">
+<td>数据准备</td>
+<td>7</td>
+<td>D；E</td>
+<td>描述任何数据预处理和质量检查，包括在相关的社会人口统计群体中是否类似</td>
+</tr>
+<tr class="odd">
+<td>结局</td>
+<td>8a</td>
+<td>D；E</td>
+<td>明确定义正在预测的结果和时间范围，包括如何评估和何时评估，选择该结果的理由，以及结果评估的方法是否在社会人口统计学群体中保持一致</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8b</td>
+<td>D；E</td>
+<td>如果结果评估需要主观解释，请描述结果评估者的资质和人口学特征</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8c</td>
+<td>D；E</td>
+<td>报告任何盲目评估预测结局的行为</td>
+</tr>
+<tr class="even">
+<td>预测因子</td>
+<td>9a</td>
+<td>D</td>
+<td>描述初始预测因子(例如,文献,以前的模型,所有可用的预测器)的选择，以及在模型建立之前对预测因子的任何预选择</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>9b</td>
+<td>D；E</td>
+<td>明确定义所有预测因子，包括如何和何时测量(以及对结果和其他预测因素进行盲法评估的任何行动)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>9c</td>
+<td>D；E</td>
+<td>如果预测器测量需要主观解释，则描述预测器评估师的资格和人口统计学特征</td>
+</tr>
+<tr class="odd">
+<td>样本量</td>
+<td>10</td>
+<td>D；E</td>
+<td>说明研究规模是如何达到(分别进行开发和评估)的，并证明研究规模足以回答研究问题。包括任何样本量计算的细节</td>
+</tr>
+<tr class="even">
+<td>缺失数据</td>
+<td>11</td>
+<td>D；E</td>
+<td>描述缺失数据是如何处理的。提供省略任何数据的理由</td>
+</tr>
+<tr class="odd">
+<td>分析方法</td>
+<td>12a</td>
+<td>D</td>
+<td>描述数据在分析中如何使用(例如,模型性能的开发和评估)，包括是否对数据进行分区，考虑任何样本量要求</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>12b</td>
+<td>D</td>
+<td>根据模型的类型，描述在(函数形式,重新标度,转换,或任何标准化)分析中如何处理预测因子</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>12c</td>
+<td>D</td>
+<td>指定模型的类型，基本原理，所有模型构建步骤，包括任何超参数的调整，以及内部验证的方法</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>12d</td>
+<td>D；E</td>
+<td>描述是否以及如何在集群(例如,医院、国家)中处理和量化模型参数值和模型性能的估计中的任何异质性。其他考虑参见 TRIPOD-Cluster</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>12e</td>
+<td>D；E</td>
+<td>指定所有用于评估模型性能的(及其理论基础)和用于比较多个模型的(如区分度、校准度、临床实用性等) (如果相关)的指标和图</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>12f</td>
+<td>E</td>
+<td>描述由于模型评估而产生的任何模型更新(例如,重新校准)，无论是总体还是针对特定的社会人口群体或设置</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>12g</td>
+<td>E</td>
+<td>对于模型评估，描述如何计算模型预测的(例如,公式、代码、对象、应用程序编程接口等)</td>
+</tr>
+<tr class="even">
+<td>类别不均衡</td>
+<td>13</td>
+<td>D；E</td>
+<td>如果使用了类别不平衡方法，说明为什么这样做，如何这样做，以及后续任何重新校准模型或模型预测的方法</td>
+</tr>
+<tr class="odd">
+<td>公平性</td>
+<td>14</td>
+<td>D；E</td>
+<td>描述任何用于解决模型公平性的方法及其原理</td>
+</tr>
+<tr class="even">
+<td>模型输出</td>
+<td>15</td>
+<td>D</td>
+<td>指定预测模型(例如,概率,分类)的输出。为任何分类以及如何确定阈值提供详细信息和理由</td>
+</tr>
+<tr class="odd">
+<td>训练与评估</td>
+<td>16</td>
+<td>D；E</td>
+<td>确定开发和评估数据在医疗保健环境、合格标准、结果和预测因素之间的任何差异</td>
+</tr>
+<tr class="even">
+<td>伦理批准</td>
+<td>17</td>
+<td>D；E</td>
+<td>命名批准该研究的机构研究委员会或伦理委员会，并描述参与者知情同意或伦理委员会放弃知情同意的情况</td>
+</tr>
+<tr class="odd">
+<td><strong>开放科学</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>资助</td>
+<td>18a</td>
+<td>D；E</td>
+<td>给出本研究的资金来源和资助者的角色</td>
+</tr>
+<tr class="odd">
+<td>利益冲突方</td>
+<td>18b</td>
+<td>D；E</td>
+<td>声明所有作者的利益冲突和财务披露</td>
+</tr>
+<tr class="even">
+<td>计划书</td>
+<td>18c</td>
+<td>D；E</td>
+<td>说明研究方案可在何处获取或声明方案未准备好</td>
+</tr>
+<tr class="odd">
+<td>注册</td>
+<td>18d</td>
+<td>D；E</td>
+<td>为研究提供注册信息，包括注册名和注册号，或者说明研究未进行注册</td>
+</tr>
+<tr class="even">
+<td>数据共享</td>
+<td>18e</td>
+<td>D；E</td>
+<td>详细说明研究数据的可获得性</td>
+</tr>
+<tr class="odd">
+<td>代码共享</td>
+<td>18f</td>
+<td>D；E</td>
+<td>提供分析代码可用性的详细信息</td>
+</tr>
+<tr class="even">
+<td><strong>患者和公众参与</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>患者和公众参与</td>
+<td>19</td>
+<td>D；E</td>
+<td>在研究的设计、进行、报告、解释或传播过程中提供任何患者和公众参与的详细信息，或陈述没有参与的情况</td>
+</tr>
+<tr class="even">
+<td><strong>结果</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>参与者</td>
+<td>20a</td>
+<td>D；E</td>
+<td>描述研究过程中参与者的流动情况，包括有结果和没有结果的参与者人数，如果适用，则对随访时间进行总结。一张图可能会有帮助</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20b</td>
+<td>D；E</td>
+<td>报告每个数据源或设置的总体和适用的特征，包括关键日期、关键预测因素(包括人口统计特征)、接受的治疗、样本量、结果事件数、随访时间和缺失数据的数量。一张表可能是有帮助的。报告关键人口群体之间的差异</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>20c</td>
+<td>E</td>
+<td>对于模型评估，展示了与开发数据分布的重要预测因子(人口统计学,预测因素和结果)的比较</td>
+</tr>
+<tr class="even">
+<td>模型开发</td>
+<td>21</td>
+<td>D；E</td>
+<td>指定每个分析(例如,模型开发、超参数调优、模型评估等)中参与者和结果事件的数量</td>
+</tr>
+<tr class="odd">
+<td>模型规范</td>
+<td>22</td>
+<td>D</td>
+<td>提供完整预测模型(例如,公式、代码、对象、应用程序编程接口等)的详细信息，允许在新的个体中进行预测，并允许第三方评估和实施，包括访问或重用(例如,免费的,专有的)的任何限制</td>
+</tr>
+<tr class="even">
+<td>模型表现</td>
+<td>23a</td>
+<td>D；E</td>
+<td>报告模型性能估计的置信区间，包括对任何关键子组的(例如,社会人口学)。考虑情节来辅助呈现</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>23b</td>
+<td>D；E</td>
+<td>如果检查，报告了跨集群的模型性能的任何异质性的结果。详情见 TRIPOD-Cluster</td>
+</tr>
+<tr class="even">
+<td>模型更新</td>
+<td>24</td>
+<td>E</td>
+<td>报告任何模型更新的结果，包括更新后的模型和随后的性能</td>
+</tr>
+<tr class="odd">
+<td><strong>讨论</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>解释</td>
+<td>25</td>
+<td>D；E</td>
+<td>对主要结果进行总体解释，包括目标和先前研究背景下的公平问题</td>
+</tr>
+<tr class="odd">
+<td>局限性</td>
+<td>26</td>
+<td>D；E</td>
+<td>讨论研究(如非代表性样本、样本量、过拟合、缺失数据等)的任何局限性及其对任何偏倚、统计不确定性和可推广性的影响</td>
+</tr>
+<tr class="even">
+<td>该模型在当前护理背景下的可用性</td>
+<td>27a</td>
+<td>D</td>
+<td>描述在实现预测模型时，应该如何评估和处理质量差或不可用的输入数据(例如,预测值)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>27b</td>
+<td>D</td>
+<td>指定在处理输入数据或使用模型时是否需要用户进行交互，以及需要用户具备何种水平的专业知识</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>27c</td>
+<td>D；E</td>
+<td>讨论了未来研究的下一步工作，特别关注模型的适用性和通用性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 3 期刊或会议摘要中预测模型研究的必要报告项目</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>段落和条目</th>
+<th>清单表条目</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>标题</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>将研究确定为开发或评估多变量预测模型的性能、目标人群和待预测结果</td>
+</tr>
+<tr class="odd">
+<td><strong>背景</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>对医疗保健背景进行简要解释，并为开发或评估所有模型的性能提供理论依据</td>
+</tr>
+<tr class="odd">
+<td><strong>目的</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>明确研究目标，包括研究是否描述模型开发、评价，或者两者兼而有之</td>
+</tr>
+<tr class="odd">
+<td><strong>方法</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>描述数据的来源</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>描述数据收集的合格标准和地点</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>明确模型所要预测的结果，包括预后模型情况下预测的时间范围</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>说明模型类型，总结模型建立步骤，以及内部验证的方法</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>明确用于评估模型性能的度量指标(如区分度、校准度、临床实用性等)</td>
+</tr>
+<tr class="odd">
+<td><strong>结果</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>报告参与人数和结果事件</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>汇总最终模型中的预测因子</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>报告模型性能估计(带置信区间)</td>
+</tr>
+<tr class="odd">
+<td><strong>讨论</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>对主要结果进行了整体解释</td>
+</tr>
+<tr class="odd">
+<td><strong>注册</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>给出注册表或存储库的注册号和名称</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="实例" class="level3">
+<h3 class="anchored" data-anchor-id="实例">实例</h3>
+<section id="标题将研究确定为开发或评估多变量预测模型的性能目标人群和待预测结果de" class="level4">
+<h4 class="anchored" data-anchor-id="标题将研究确定为开发或评估多变量预测模型的性能目标人群和待预测结果de">1 标题：将研究确定为开发或评估多变量预测模型的性能、目标人群和待预测结果。D；E</h4>
+<p>信息丰富的标题有助于潜在读者和系统审阅者识别预测模型研究；报告信息丰富的标题，提供有关目标人群和模型预测结果的关键信息。</p>
+<p>实例 1 的标题为《Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia：基于多模态机器学习的标志物可以实现高尿酸血症的早期检测和预后预测》，不能直接从标题得知是模型的开发、验证还是二者兼有的研究，“预测”表明该研究是一篇临床预测模型类文章，“高尿酸血症”显示预测结局为发生高尿酸血症，但并未在标题中表明研究的目标人群，根据正文内容可知其目标人群为医院就医的患者，无其他特殊限定。但若研究人群为罹患某一疾病或具备某一特征的人群，则应在标题中体现，能进一步反映出模型的适用范围和研究的临床价值。</p>
+</section>
+<section id="摘要摘要检查表见-tripodai-摘要清单de" class="level4">
+<h4 class="anchored" data-anchor-id="摘要摘要检查表见-tripodai-摘要清单de">2 摘要：摘要检查表见 TRIPOD+AI 摘要清单。D；E</h4>
+<p>报告针对TRIPOD+AI for Abstracts检查表中每个项目的摘要。</p>
+<p>根据 TRIPOD+AI for Abstracts，在采用结构式摘要，报告研究背景、目的、方法（数据来源、收集情况、预测结果、模型类型及性能度量指标）、结果（样本量和结果事件、预测因子和模型性能）、讨论及注册情况。实例 1 对研究背景略做阐述，并报告数据情况（英国生物库与南方医院队列）、结局事件（ISHUA）、模型性能（报告了相关数值），简略提及基因与临床数据两大类预测因子、但未提及度量指标类别及注册情况。</p>
+</section>
+<section id="背景" class="level4">
+<h4 class="anchored" data-anchor-id="背景">3 背景</h4>
+<section id="解释医疗保健背景包括无论是诊断性还是预后性以及开发或评估预测模型的理由包括对现有模型的参考de" class="level5">
+<h5 class="anchored" data-anchor-id="解释医疗保健背景包括无论是诊断性还是预后性以及开发或评估预测模型的理由包括对现有模型的参考de">3.1：解释医疗保健背景(包括无论是诊断性还是预后性)以及开发或评估预测模型的理由，包括对现有模型的参考。D；E</h5>
+<p>描述打算使用或需要模型的医疗保健环境；在现有预测模型可用的情况下，提供开发新模型的明确理由；对于评估现有模型的研究，提供评估的理由，并提供所有正在评估的模型的参考资料。</p>
+<p>实例 2《Use of Machine Learning Models to Predict Death After Acute Myocardial Infarction：利用机器学习模型预测急性心肌梗死后死亡》中对于准备开发的模型需求和明确理由做出了清晰叙述。</p>
+</section>
+<section id="描述照护路径情境下预测模型的目标人群和意向目的包括其意向用户例如医疗保健专业人员患者公众等de" class="level5">
+<h5 class="anchored" data-anchor-id="描述照护路径情境下预测模型的目标人群和意向目的包括其意向用户例如医疗保健专业人员患者公众等de">3.2：描述照护路径情境下预测模型的目标人群和意向目的，包括其意向用户(例如,医疗保健专业人员、患者、公众等)。D；E</h5>
+<p>描述谁是开发或评估模型的目标人群，例如，特定年龄、特定国家/地区或患有特定疾病的人；描述模型的预期目的，包括模型旨在支持的临床决策或指导（例如，转诊进行进一步检测或入院，分诊、开始治疗或改变生活方式）以及该模型在护理路径中的预期使用点；描述该模型的预期用户是谁，以及该模型是否适用于医疗保健专业人员、患者、公众或其他。</p>
+<p>实例 3《Explainable machine-learning predictions for the prevention of hypoxaemia during surgery：可解释的机器学习预测用于预防手术中的低氧血症》一文中在背景中阐述了希望应用的医疗群体与应用场景。</p>
+</section>
+<section id="描述任何已知的社会人口群体之间的健康不平等de" class="level5">
+<h5 class="anchored" data-anchor-id="描述任何已知的社会人口群体之间的健康不平等de">3.3：描述任何已知的社会人口群体之间的健康不平等。D；E</h5>
+<p>在打算使用该模型的医疗保健环境中，描述目标人群中社会人口群体之间的任何已知健康不平等（以及支持健康不平等的引文）。</p>
+</section>
+</section>
+<section id="目的明确研究目的包括研究是否描述了预测模型的开发或验证或两者兼而有之de" class="level4">
+<h4 class="anchored" data-anchor-id="目的明确研究目的包括研究是否描述了预测模型的开发或验证或两者兼而有之de">4 目的：明确研究目的，包括研究是否描述了预测模型的开发或验证(或两者兼而有之)。D；E</h4>
+<p>提供研究所有目标的明确陈述，描述研究是开发预测模型、评估预测模型的性能，还是同时评估两者。</p>
+<p>实例4《Construction of a risk prediction model for detecting postintensive care syndrome—mental disorders：重症监护后综合征-精神障碍风险预测模型的构建》在背景部分明确提及该研究构建模型的类型。</p>
+</section>
+<section id="数据" class="level4">
+<h4 class="anchored" data-anchor-id="数据">5 数据</h4>
+<section id="分别描述开发和评估数据集例如随机试验队列常规护理或登记数据的数据来源使用这些数据的理由以及数据的代表性de" class="level5">
+<h5 class="anchored" data-anchor-id="分别描述开发和评估数据集例如随机试验队列常规护理或登记数据的数据来源使用这些数据的理由以及数据的代表性de">5.1：分别描述开发和评估数据集(例如,随机试验,队列,常规护理或登记数据)的数据来源、使用这些数据的理由以及数据的代表性。D；E</h5>
+<p>提供用于模型开发和模型性能评估的数据来源的描述，包括数据是否（例如）来自随机试验、队列、登记处或电子常规医疗记录；说明研究是使用现有数据还是前瞻性地收集新数据以用于预测模型研究；使用现有数据的位置（即它们最初是出于不同的目的收集的），提供使用这些数据的理由，并评论这些数据的适用性（特别是如果数据是从不同的环境或国家/地区使用到预期目标人群的）和这些数据相对于预期目标人群和背景的代表性；应为所有数据集提供数据源的描述，并单独用于开发和评估；如果使用了任何合成数据，请说明原因，并提供有关如何创建合成数据（和代码，参见第 18f 项）并在研究中使用的所有详细信息。</p>
+<p>实例1《Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia：基于多模态机器学习的标志物可以实现高尿酸血症的早期检测和预后预测》。</p>
+</section>
+<section id="指定收集到的参与者数据的日期包括参与者计提的开始日期和结束日期并且如果适用则结束随访de" class="level5">
+<h5 class="anchored" data-anchor-id="指定收集到的参与者数据的日期包括参与者计提的开始日期和结束日期并且如果适用则结束随访de">5.2：指定收集到的参与者数据的日期，包括参与者计提的开始日期和结束日期；并且，如果适用，则结束随访。D；E</h5>
+<p>指定选择参与者或使用数据的期间的开始和结束日期；对于预测预后的模型，随访持续时间很重要，因此请报告随访结束的日期。</p>
+<p>实例5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+</section>
+<section id="参与者" class="level4">
+<h4 class="anchored" data-anchor-id="参与者">6 参与者</h4>
+<section id="明确研究环境的关键要素例如初级保健二级保健一般人群包括中心的数量和位置de" class="level5">
+<h5 class="anchored" data-anchor-id="明确研究环境的关键要素例如初级保健二级保健一般人群包括中心的数量和位置de">6.1：明确研究环境的关键要素（例如，初级保健、二级保健、一般人群），包括中心的数量和位置。D；E</h5>
+<p>描述医疗保健场景，以及研究参与者的招募地点；报告研究的地理位置（至少是国家/地区）和中心（包括中心的数量）。</p>
+<p>实例 6《Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study：在中国高危人群中建立和验证胃癌风险预测规则：一项全国性多中心研究》。</p>
+</section>
+<section id="描述研究参与者的合格标准de" class="level5">
+<h5 class="anchored" data-anchor-id="描述研究参与者的合格标准de">6.2：描述研究参与者的合格标准。D；E</h5>
+<p>应报告参与者的资格标准，以了解预测模型的潜在适用性和普遍性；这包括报告连续变量的任何限制，例如，用于定义纳入参与者资格的年龄范围。</p>
+<p>实例 4《Construction of a risk prediction model for detecting postintensive care syndrome—mental disorders：重症监护后综合征-精神障碍风险预测模型的构建》。</p>
+</section>
+<section id="给出接受的任何治疗的细节以及在模型开发或评估过程中如何处理如果相关de" class="level5">
+<h5 class="anchored" data-anchor-id="给出接受的任何治疗的细节以及在模型开发或评估过程中如何处理如果相关de">6.3：给出接受的任何治疗的细节，以及在模型开发或评估过程中如何处理，如果相关。D；E</h5>
+<p>应报告在随访之前或开始时接受的任何治疗，以及在预测模型的开发或评估期间是否以及如何处理这些治疗（如果相关）；在使用预测模型和测量结果之间接受的任何治疗，这可能会改变结果的概率，应报告（如果相关）。</p>
+<p>实例 7《Utility of Machine Learning Algorithms in Predicting Preoperative Lymph Node Metastasis in Patients With Rectal Cancer Based on Three-Dimensional Endorectal Ultrasound and Clinical and Laboratory Data：基于三维直肠腔内超声和临床及实验室数据的机器学习算法在预测直肠癌患者术前淋巴结转移中的应用》。</p>
+</section>
+</section>
+<section id="数据准备描述任何数据预处理和质量检查包括在相关的社会人口统计群体中是否类似de" class="level4">
+<h4 class="anchored" data-anchor-id="数据准备描述任何数据预处理和质量检查包括在相关的社会人口统计群体中是否类似de">7 数据准备：描述任何数据预处理和质量检查，包括在相关的社会人口统计群体中是否类似。D；E</h4>
+<p>描述任何数据清理步骤，包括任何特征工程、原始数据转换、特征缩减和数据质量检查。所有用于数据清理的代码都应该可用（参见第18f项）；对于使用来自多个来源的数据（例如，来自不同研究、队列或注册库的数据）的分析，请描述任何协调（例如，结果和预测因子）；确认关键社会人口群体的所有数据预处理/数据清理步骤是否相似（如果相关）；如果数据预处理/数据清理步骤广泛，考虑在补充材料中报告此信息。</p>
+<p>实例 8《Machine Learning for Predicting Risk and Prognosis of Acute Kidney Disease in Critically Ill Elderly Patients During Hospitalization: Internet-Based and Interpretable Model Study：机器学习预测老年危重症患者住院期间急性肾脏病的风险和预后：基于互联网和可解释模型的研究》。</p>
+</section>
+<section id="结局" class="level4">
+<h4 class="anchored" data-anchor-id="结局">8 结局</h4>
+<section id="明确定义正在预测的结果和时间范围包括如何评估和何时评估选择该结果的理由以及结果评估的方法是否在社会人口统计学群体中保持一致de" class="level5">
+<h5 class="anchored" data-anchor-id="明确定义正在预测的结果和时间范围包括如何评估和何时评估选择该结果的理由以及结果评估的方法是否在社会人口统计学群体中保持一致de">8.1：明确定义正在预测的结果和时间范围，包括如何评估和何时评估，选择该结果的理由，以及结果评估的方法是否在社会人口统计学群体中保持一致。D；E</h5>
+<p>对于诊断预测模型，应明确定义结果，包括是否使用（广泛接受的）参考标准（真实情况）来确定结果的存在与否；对于预后模型，即预测未来结果的模型，作者应报告结果预测的时间范围。例如，预测心胸手术后28天的死亡风险，或骨质疏松症患者10年的骨折风险。此外，应报告随访期间结果评估的频率；如果使用标准定义，例如使用ICD1代码，则应说明和引用；应报告社会人口群体之间结果评估的任何差异；在某些情况下，可能需要确认没有使用预测因子来定义结果或作为结果的代理。</p>
+<p>实例 5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+<section id="如果结果评估需要主观解释请描述结果评估者的资质和人口学特征de" class="level5">
+<h5 class="anchored" data-anchor-id="如果结果评估需要主观解释请描述结果评估者的资质和人口学特征de">8.2：如果结果评估需要主观解释，请描述结果评估者的资质和人口学特征。D；E</h5>
+<p>对于需要主观解释的结局（例如，解释影像学检查的结果，描述结局评价者的数量、资格和人口统计学特征）；如果结果的测量和解释需要（额外的）培训或具体说明，则应报告这些；如果内容广泛，请考虑在补充材料中报告此信息。</p>
+<p>实例 7《Utility of Machine Learning Algorithms in Predicting Preoperative Lymph Node Metastasis in Patients With Rectal Cancer Based on Three-Dimensional Endorectal Ultrasound and Clinical and Laboratory Data：基于三维直肠腔内超声和临床及实验室数据的机器学习算法在预测直肠癌患者术前淋巴结转移中的应用》。</p>
+</section>
+<section id="报告任何盲目评估预测结局的行为de" class="level5">
+<h5 class="anchored" data-anchor-id="报告任何盲目评估预测结局的行为de">8.3：报告任何盲目评估预测结局的行为。D；E</h5>
+<p>预测的结果应该对预测因子的信息不知情地进行评估——特别是与需要主观解释的结果相关，从而避免数据（标签）泄漏；如果合适，作者应描述结果评估者可以获得哪些信息，并报告任何对结果评估盲法的具体行动。</p>
+</section>
+</section>
+<section id="预测因子" class="level4">
+<h4 class="anchored" data-anchor-id="预测因子">9 预测因子</h4>
+<section id="描述初始预测因子例如文献以前的模型所有可用的预测因子的选择以及在模型建立之前对预测因子的任何预选择d" class="level5">
+<h5 class="anchored" data-anchor-id="描述初始预测因子例如文献以前的模型所有可用的预测因子的选择以及在模型建立之前对预测因子的任何预选择d">9.1：描述初始预测因子(例如,文献,以前的模型,所有可用的预测因子)的选择，以及在模型建立之前对预测因子的任何预选择。D</h5>
+<p>提供有关如何考虑将初始预测因子列表包含在模型构建中的详细信息，以及它们是根据文献的（系统）回顾、临床输入（领域专家）选择的，或者只是使用可用数据中的所有预测因子；如果在模型构建之前进行了任何预测因子的预选，然后提供此操作的详细信息。例如，由于大量缺失数据而在模型构建中遗漏了预测变量，或者预测变量被认为与预测结果不合理（临床）相关；初始预测变量的列表可能很广泛，在这些情况下，建议在补充材料中报告这些预测变量。</p>
+</section>
+<section id="明确定义所有预测因子包括如何和何时测量以及对结果和其他预测因素进行盲法评估的任何行动de" class="level5">
+<h5 class="anchored" data-anchor-id="明确定义所有预测因子包括如何和何时测量以及对结果和其他预测因素进行盲法评估的任何行动de">9.2：明确定义所有预测因子，包括如何和何时测量(以及对结果和其他预测因素进行盲法评估的任何行动)。D；E</h5>
+<p>应明确定义建模中包含的所有预测变量，以及度量单位和分类预测变量的所有类别，以便读者和其他人可以复制、实施或评估模型的性能；有关如何以及何时测量预测变量值的详细信息。请注意，预测变量应在打算使用模型之前或之时进行测量；对于需要主观解释的预测变量，将其盲解释为建模中考虑的其他预测变量的值可能很重要（例如，避免数据泄漏）。作者应报告任何使预测变量测量的评估对其他预测变量不知情的行为；特别是对于诊断模型，预测变量的测量应在不了解个体结果的情况下进行，因为这可能会人为地夸大预测变量与结果之间的关联。作者应报告任何使预测因子测量值的评估对结果值视而不见的操作；在某些情况下，预测因子的数量可能非常大，因此在主要手稿中报告它们都是无益的，在这些情况下，明确定义所有预测因子仍然很重要，应考虑在补充材料中报告这一点。</p>
+<p>实例 9《A clinical prediction model based on interpretable machine learning algorithms for prolonged hospital stay in acute ischemic stroke patients: a real-world study：基于可解释性机器学习算法的急性缺血性卒中患者住院时间延长的临床预测模型：真实世界研究》。</p>
+</section>
+<section id="如果预测因子测量需要主观解释则描述预测因子评估者的资格和人口统计学特征de" class="level5">
+<h5 class="anchored" data-anchor-id="如果预测因子测量需要主观解释则描述预测因子评估者的资格和人口统计学特征de">9.3：如果预测因子测量需要主观解释，则描述预测因子评估者的资格和人口统计学特征。D；E</h5>
+<p>对于需要主观解释的预测因子（例如，解释影像学检查的结果），应报告预测因子评估者的资格和人口统计学特征；如果测量和解释需要（额外）培训或具体说明，则应报告这些。这可以在补充材料中报告。</p>
+</section>
+</section>
+<section id="样本量说明研究规模是如何达到分别进行开发和评估的并证明研究规模足以回答研究问题包括任何样本量计算的细节de" class="level4">
+<h4 class="anchored" data-anchor-id="样本量说明研究规模是如何达到分别进行开发和评估的并证明研究规模足以回答研究问题包括任何样本量计算的细节de">10 样本量：说明研究规模是如何达到(分别进行开发和评估)的，并证明研究规模足以回答研究问题。包括任何样本量计算的细节。D；E</h4>
+<p>描述样本量是如何确定的—这应该单独进行，以确定模型开发所需的样本量和评估模型性能所需的样本量，无论数据是前瞻性收集的还是使用现有数据；提供任何样本量计算中使用的详细信息和所有估计值；如果没有进行正式的样本量计算，例如，使用了所有可用数据，提供数据大小是否足以回答研究问题的理由。</p>
+</section>
+<section id="缺失数据描述缺失数据是如何处理的提供省略任何数据的理由de" class="level4">
+<h4 class="anchored" data-anchor-id="缺失数据描述缺失数据是如何处理的提供省略任何数据的理由de">11 缺失数据：描述缺失数据是如何处理的。提供省略任何数据的理由。D；E</h4>
+<p>数据缺失是一个无处不在的问题。作者应报告正在考虑包含在模型中的每个预测变量的缺失值数量；应报告缺失值的处理情况，包括对缺失原因的任何假设；如果个体（或预测变量）由于缺失值而被遗漏，则应报告此情况，并给出原因；如果已估算缺失值，那么应报告插补任何缺失值的方法的完整详细信息；如果已插补缺失值，请确认它是针对训练和任何测试数据单独完成的（即避免泄漏）。</p>
+<p>实例 2《Use of Machine Learning Models to Predict Death After Acute Myocardial Infarction：利用机器学习模型预测急性心肌梗死后死亡》。</p>
+</section>
+<section id="分析方法" class="level4">
+<h4 class="anchored" data-anchor-id="分析方法">12 分析方法</h4>
+<section id="描述数据在分析中如何使用例如模型性能的开发和评估包括是否对数据进行分区考虑任何样本量要求d" class="level5">
+<h5 class="anchored" data-anchor-id="描述数据在分析中如何使用例如模型性能的开发和评估包括是否对数据进行分区考虑任何样本量要求d">12.1：描述数据在分析中如何使用(例如,模型性能的开发和评估)，包括是否对数据进行分区，考虑任何样本量要求。D</h5>
+<p>描述如何使用可用数据来开发模型和评估模型性能，包括是否以及如何对数据进行分区，以及对数据进行分区的原因（例如，模型开发、超参数调整、评估模型性能、内部和外部交叉验证）；如果数据已分区，请报告在分区过程中是否考虑了样本量要求（参见第10项）， 以及分区数据的大小是否足以进行分析和回答研究问题；如果数据已经被划分为训练（包括任何超参数调优数据）和测试数据，请确认没有数据泄漏；如果数据包含来自同一个体的多个记录或样本，并且数据已分区为训练（包括任何超参数优化数据）和测试数据，请确认任何分区数据中没有个体泄漏，如果没有，请如何描述在分析中如何处理这种情况（参见第12c项）。</p>
+<p>实例 9《Machine Learning for Predicting Risk and Prognosis of Acute Kidney Disease in Critically Ill Elderly Patients During Hospitalization: Internet-Based and Interpretable Model Study：机器学习预测老年危重症患者住院期间急性肾脏病的风险和预后：基于互联网和可解释模型的研究》。</p>
+</section>
+<section id="根据模型的类型描述在函数形式重新标度转换或任何标准化分析中如何处理预测因子d" class="level5">
+<h5 class="anchored" data-anchor-id="根据模型的类型描述在函数形式重新标度转换或任何标准化分析中如何处理预测因子d">12.2：根据模型的类型，描述在(函数形式,重新标度,转换,或任何标准化)分析中如何处理预测因子。D</h5>
+<p>对于在分析过程中转换（即重新缩放或标准化）的任何预测变量，请描述这是如何完成的；对于任何已进行类别折叠的分类预测变量，例如，由于样本量小/结果事件太少，请提供详细信息和原因。</p>
+</section>
+<section id="指定模型的类型基本原理所有模型构建步骤包括任何超参数的调整以及内部验证的方法d" class="level5">
+<h5 class="anchored" data-anchor-id="指定模型的类型基本原理所有模型构建步骤包括任何超参数的调整以及内部验证的方法d">12.3：指定模型的类型，基本原理，所有模型构建步骤，包括任何超参数的调整，以及内部验证的方法。D</h5>
+<p>明确说明正在开发的模型类型（例如，逻辑回归、Cox回归、随机森林、神经网络），并提供使用每种模型构建方法的基本原理——考虑预测结果的类型以及预测模型在实践中将如何实施；对于每个模型，清楚地描述模型构建中的所有步骤，包括任何超参数优化、已优化的超参数以及调整方式。如果应用了许多模型构建方法，并且字数限制禁止完整描述，则使用补充材料提供详细信息；对于正在开发多个模型的研究（例如，使用不同的模型构建方法），清楚地描述选择哪个模型的标准（如果有），请参阅关于模型性能的第12e项和第23项）；模型开发过程中的内部验证方法（评估模型性能）应该清楚地描述，例如，是否使用了k折叠交叉验证或引导。阐明在内部评估方法期间是否重放了所有模型构建步骤（包括超参数调整）；清楚地描述用于检查模型稳定性（例如，bootstrapping）（例如，在预测因子选择、预测性能和个体预测方面））；如果数据包含来自同一个体的多个记录或样本，描述在模型构建和内部验证中如何处理此问题（例如，如果使用K折交叉验证，请确认某个人的所有记录/样本是否都包含在同一折中（例如，避免数据泄露）。</p>
+<p>实例 10《Construction of a clinical prediction model for complicated appendicitis based on machine learning techniques：基于机器学习技术的复杂性阑尾炎临床预测模型构建》。</p>
+</section>
+<section id="描述是否以及如何在跨集群例如医院国家中处理和量化模型参数值和模型性能的估计中的任何异质性其他考虑参见tripod-clusterde" class="level5">
+<h5 class="anchored" data-anchor-id="描述是否以及如何在跨集群例如医院国家中处理和量化模型参数值和模型性能的估计中的任何异质性其他考虑参见tripod-clusterde">12.4：描述是否以及如何在跨集群(例如,医院、国家)中处理和量化模型参数值和模型性能的估计中的任何异质性。其他考虑参见TRIPOD-Cluster。D；E</h5>
+<p>如果在模型开发或模型性能评估期间，分析考虑了数据中的任何聚类（例如，通过组合来自多项研究的个体参与者数据，或按医疗中心/医院或国家聚类的数据），则应清楚地描述用于解释聚类的基本原理和方法；对于预测模型研究的具体报告建议，这些研究考虑了模型参数值的聚类和异质性，并且性能，作者应查阅TRIPOD-Cluster检查表。</p>
+</section>
+<section id="指定所有用于评估模型性能的及其理论基础和用于比较多个模型的如区分度校准度临床实用性等-如果相关的指标和图de" class="level5">
+<h5 class="anchored" data-anchor-id="指定所有用于评估模型性能的及其理论基础和用于比较多个模型的如区分度校准度临床实用性等-如果相关的指标和图de">12.5：指定所有用于评估模型性能的(及其理论基础)和用于比较多个模型的(如区分度、校准度、临床实用性等) (如果相关)的指标和图。D；E</h5>
+<p>报告用于评估模型性能的所有度量。通常预计至少会提供模型判别和校准（包括校准图）；如果预测模型预测的是事件发生时间结果，则清楚地描述用于解释事件发生时间性质（即删失）的措施和方法。同样，还应说明对任何竞争风险的处理（如果适用）；对于预后模型，报告评估模型预测性能的所有时间点；报告用于图形显示模型性能的方法，例如校准图（具有平滑的校准曲线）和决策曲线；如果正在比较多个模型，即，与现有模型进行比较或比较多种建模方法，那么应清楚地解释用于比较这些模型的方法，以及对卓越性能做出任何判断的标准。</p>
+<p>实例 5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+<section id="描述由于模型评估而产生的任何模型更新例如重新校准无论是总体还是针对特定的社会人口群体或设置e" class="level5">
+<h5 class="anchored" data-anchor-id="描述由于模型评估而产生的任何模型更新例如重新校准无论是总体还是针对特定的社会人口群体或设置e">12.6：描述由于模型评估而产生的任何模型更新(例如,重新校准)，无论是总体还是针对特定的社会人口群体或设置。E</h5>
+<p>如果模型在验证后更新，例如重新校准或重新拟合——无论是在整个队列中还是在特定的社会人口群体中，请提供有关用于更新模型的方法的详细信息。</p>
+</section>
+<section id="对于模型评估描述如何计算模型预测的例如公式代码对象应用程序编程接口等e" class="level5">
+<h5 class="anchored" data-anchor-id="对于模型评估描述如何计算模型预测的例如公式代码对象应用程序编程接口等e">12.7：对于模型评估，描述如何计算模型预测的(例如,公式、代码、对象、应用程序编程接口等)。E</h5>
+<p>对于在单独的数据集中评估现有模型的研究（即外部验证研究），请提供有关如何计算模型的单个预测的详细信息。如果模型不是免费/公开可用的，请解释预测是如何获得的；如果正在评估回归模型方程，请提供该方程的详细信息（例如，考虑提出此方程，提供对开发该方程的原始研究的引用）；对于评估没有方程的预测模型（例如，神经网络、随机森林）的研究，请提供有关如何进行预测的详细信息，例如，代码、软件对象、API，以及在哪里可以找到这些信息（即URL、DOI）；如果模型的单个预测用于创建风险组或分类（在模型开发中未指定），则应报告有关如何以及为何执行此操作的详细信息（参见第15项）。</p>
+<p>实例 5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+</section>
+<section id="类别不均衡如果使用了类别不平衡方法说明为什么这样做如何这样做以及后续任何重新校准模型或模型预测的方法de" class="level4">
+<h4 class="anchored" data-anchor-id="类别不均衡如果使用了类别不平衡方法说明为什么这样做如何这样做以及后续任何重新校准模型或模型预测的方法de">13 类别不均衡：如果使用了类别不平衡方法，说明为什么这样做，如何这样做，以及后续任何重新校准模型或模型预测的方法。D；E</h4>
+<p>如果使用了类不平衡方法（例如，欠/超采样、SMOTE），则提供这样做的理由，以及如何做到这一点——考虑到对样本量的任何影响（例如，对于欠采样方法）；不平衡校正对模型校准有影响，得出的概率估计值太高（这也对定义任何风险组有影响），描述了用于重新校准模型或模型预测的方法。</p>
+<p>实例 11《机器学习基于不平衡数据预测急性新发缺血性卒中患者院内死亡模型研究》。</p>
+</section>
+<section id="公平性描述任何用于解决模型公平性的方法及其原理de" class="level4">
+<h4 class="anchored" data-anchor-id="公平性描述任何用于解决模型公平性的方法及其原理de">14 公平性：描述任何用于解决模型公平性的方法及其原理。D；E</h4>
+<p>公平性是指确保预测模型不歧视个人或群体，例如基于种族、性别、年龄等个人属性，所有用于解决公平性的方法都应清楚地解释其基本原理；在开发模型和评估其性能时，确保数据包含代表性群体（目标人群）非常重要，研究人员应尝试证明这一点；如果预测模型是使用代表性不足的群体或未包括的特定群体的数据开发的，那么需要在代表性数据中对这些群体进行评估，以评估这些群体中的模型，以提高对发展和评价数据之外的更多个体群体的普遍性。</p>
+</section>
+<section id="模型输出指定预测模型例如概率分类的输出为任何分类以及如何确定阈值提供详细信息和理由d" class="level4">
+<h4 class="anchored" data-anchor-id="模型输出指定预测模型例如概率分类的输出为任何分类以及如何确定阈值提供详细信息和理由d">15 模型输出：指定预测模型(例如,概率,分类)的输出。为任何分类以及如何确定阈值提供详细信息和理由。D</h4>
+<p>大多数模型输出个体的概率估计，而一些模型将输出转化为分类（例如，分为低风险或高风险组），这应该明确说明。如果已经创建了分类或风险组，则应在护理路径的背景下这样做的基本原理以及这些风险组如何为任何临床决策提供信息；对于生成分类或风险组的模型，应明确报告，并应指定任何阈值（例如，定义组的估计概率范围）（这些是否基于文献， 临床指南、统计考虑或 ad-hoc）；如果已经提供了单个预测模型输出的不确定性区间，则提供有关如何完成此操作的详细信息（例如，使用参数估计的方差-协方差矩阵或共形预测）。</p>
+<p>实例 1《Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia：基于多模态机器学习的标志物可以实现高尿酸血症的早期检测和预后预测》。</p>
+</section>
+<section id="训练与评估确定开发和评估数据在医疗保健环境合格标准结果和预测因素之间的任何差异de" class="level4">
+<h4 class="anchored" data-anchor-id="训练与评估确定开发和评估数据在医疗保健环境合格标准结果和预测因素之间的任何差异de">16 训练与评估：确定开发和评估数据在医疗保健环境、合格标准、结果和预测因素之间的任何差异。D；E</h4>
+<p>在一个环境、中心或国家开发的预测模型不一定对不同的环境、中心或国家有用。来自不同来源的数据之间的资格标准、结果和预测因子定义可能（故意）不同。描述开发数据与用于评估模型性能的数据之间的任何差异，有助于理解和解释模型在原始模型开发数据上下文中的性能和泛化性。</p>
+</section>
+<section id="伦理批准命名批准该研究的机构研究委员会或伦理委员会并描述参与者知情同意或伦理委员会放弃知情同意的情况de" class="level4">
+<h4 class="anchored" data-anchor-id="伦理批准命名批准该研究的机构研究委员会或伦理委员会并描述参与者知情同意或伦理委员会放弃知情同意的情况de">17 伦理批准：命名批准该研究的机构研究委员会或伦理委员会，并描述参与者知情同意或伦理委员会放弃知情同意的情况。D；E</h4>
+<p>如果该研究没有机构研究委员会或伦理批准，那么请明确说明，并说明原因。</p>
+<p>例 7《Utility of Machine Learning Algorithms in Predicting Preoperative Lymph Node Metastasis in Patients With Rectal Cancer Based on Three-Dimensional Endorectal Ultrasound and Clinical and Laboratory Data：基于三维直肠腔内超声和临床及实验室数据的机器学习算法在预测直肠癌患者术前淋巴结转移中的应用》。</p>
+</section>
+<section id="开放科学" class="level4">
+<h4 class="anchored" data-anchor-id="开放科学">18 开放科学</h4>
+<section id="资助给出本研究的资金来源和资助者的角色de" class="level5">
+<h5 class="anchored" data-anchor-id="资助给出本研究的资金来源和资助者的角色de">18.1 资助：给出本研究的资金来源和资助者的角色。D；E</h5>
+<p>提供有关研究是否获得资助的详细信息，并提供有关资助者在研究中的作用的任何详细信息；为所有作者提供任何其他资金来源。</p>
+<p>实例 5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+<section id="利益冲突方声明所有作者的利益冲突和财务披露de" class="level5">
+<h5 class="anchored" data-anchor-id="利益冲突方声明所有作者的利益冲突和财务披露de">18.2 利益冲突方：声明所有作者的利益冲突和财务披露。D；E</h5>
+<p>披露读者可能认为相关或可能影响研究设计、实施、解释或报告的任何作者关系或活动。</p>
+<p>实例 5《Machine learning-based prediction of composite risk of cardiovascular events in patients with stable angina pectoris combined with coronary heart disease: development and validation of a clinical prediction model for Chinese patients：基于机器学习的稳定型心绞痛合并冠心病患者心血管事件复合风险预测：中国患者临床预测模型的开发与验证》。</p>
+</section>
+<section id="计划书说明研究方案可在何处获取或声明方案未准备好de" class="level5">
+<h5 class="anchored" data-anchor-id="计划书说明研究方案可在何处获取或声明方案未准备好de">18.3 计划书：说明研究方案可在何处获取或声明方案未准备好。D；E</h5>
+<p>提供有关研究方案可用性的所有详细信息，包括可以找到研究方案的位置（例如，出版物详细信息、补充材料、在存储库中公开提供，例如在开放科学框架上），包括URL或DOI；明确说明是否未制定或未公开提供研究方案（以及原因）；如果与研究方案中规定的内容有任何显着偏差， 提供偏差的摘要和原因。</p>
+<p>实例 12《Development and validation of a multimodal feature fusion prognostic model for lumbar degenerative disease based on machine learning: a study protocol：基于机器学习的腰椎退行性疾病多模态特征融合预后模型的开发与验证：研究方案》。</p>
+</section>
+<section id="注册为研究提供注册信息包括注册名和注册号或者说明研究未进行注册de" class="level5">
+<h5 class="anchored" data-anchor-id="注册为研究提供注册信息包括注册名和注册号或者说明研究未进行注册de">18.4 注册：为研究提供注册信息，包括注册名和注册号，或者说明研究未进行注册。D；E</h5>
+<p>如果研究已注册（例如，在clinicaltrials.gov上，开放科学框架），请提供有关注册号、注册名称和注册链接（包括任何DOI）的详细信息；明确说明研究是否尚未注册。</p>
+</section>
+<section id="数据共享详细说明研究数据的可获得性de" class="level5">
+<h5 class="anchored" data-anchor-id="数据共享详细说明研究数据的可获得性de">18.5 数据共享：详细说明研究数据的可获得性。D；E</h5>
+<p>提供有关研究数据可用性的详细信息，包括可以找到数据的位置（例如，公共存储库、URL、DOI）、如何检索数据、获取和使用数据的任何条件或限制。任何共享数据都应附带数据字典；如果无法共享数据，请提供原因；避免使用陈词滥调，例如“根据合理请求提供数据”，而不指定构成合理请求的条件。</p>
+</section>
+<section id="代码共享提供分析代码可用性的详细信息de" class="level5">
+<h5 class="anchored" data-anchor-id="代码共享提供分析代码可用性的详细信息de">18.6 代码共享：提供分析代码可用性的详细信息▲。D；E</h5>
+<p>提供有关分析代码可用性的所有详细信息（以及如何运行代码的文档），包括可以找到代码的位置（例如，代码存储库、DOI、链接）、如何检索代码、应报告获取和使用代码的任何条件或许可（和版本）；分析代码是复制（原则上）研究的所有报告结果和发现所需的所有代码（包括数据清理）。应报告（原则上）重现研究结果所需的软件和任何软件包（包括任何版本号）。在某些情况下，可能需要报告有关计算环境的更多详细信息（例如，硬件、操作系统、CPU、RAM）。</p>
+</section>
+</section>
+<section id="患者和公众参与在研究的设计进行报告解释或传播过程中提供任何患者和公众参与的详细信息或陈述没有参与的情况de" class="level4">
+<h4 class="anchored" data-anchor-id="患者和公众参与在研究的设计进行报告解释或传播过程中提供任何患者和公众参与的详细信息或陈述没有参与的情况de">19 患者和公众参与：在研究的设计、进行、报告、解释或传播过程中提供任何患者和公众参与的详细信息，或陈述没有参与的情况。D；E</h4>
+<p>描述患者或公众如何参与研究及其结果的规划、设计、实施、报告或传播；研究结果是否向患者或公众展示？；考虑使用 GRIPP2 声明来报告患者和公众对研究的参与情况；如果没有患者或公众参与研究的任何方面，请明确说明。</p>
+</section>
+<section id="参与者-1" class="level4">
+<h4 class="anchored" data-anchor-id="参与者-1">20 参与者</h4>
+<section id="描述研究过程中参与者的流动情况包括有结果和没有结果的参与者人数如果适用则对随访时间进行总结一张图可能会有帮助de" class="level5">
+<h5 class="anchored" data-anchor-id="描述研究过程中参与者的流动情况包括有结果和没有结果的参与者人数如果适用则对随访时间进行总结一张图可能会有帮助de">20.1：描述研究过程中参与者的流动情况，包括有结果和没有结果的参与者人数，如果适用，则对随访时间进行总结。一张图可能会有帮助。D；E</h5>
+<p>流程图可用于描述参与者通过研究的流程，其中流程图的入口点是参与者的来源，然后后续步骤可以与资格标准、后续行动（如果适用）相关。和数据可用性；流程图中要呈现的其他有用信息包括缺失值的参与者数量和结果事件的数量；对于延迟参考测试的预后或诊断研究，应报告随访时间的摘要（例如，中位随访和范围）。</p>
+<p>实例 9《Machine Learning for Predicting Risk and Prognosis of Acute Kidney Disease in Critically Ill Elderly Patients During Hospitalization: Internet-Based and Interpretable Model Study：机器学习预测老年危重症患者住院期间急性肾脏病的风险和预后：基于互联网和可解释模型的研究》。</p>
+</section>
+<section id="报告每个数据源或设置的总体和适用的特征包括关键日期关键预测因素包括人口统计特征接受的治疗样本量结果事件数随访时间和缺失数据的数量一张表可能是有帮助的报告关键人口群体之间的差异de" class="level5">
+<h5 class="anchored" data-anchor-id="报告每个数据源或设置的总体和适用的特征包括关键日期关键预测因素包括人口统计特征接受的治疗样本量结果事件数随访时间和缺失数据的数量一张表可能是有帮助的报告关键人口群体之间的差异de">20.2：报告每个数据源或设置的总体和适用的特征，包括关键日期、关键预测因素(包括人口统计特征)、接受的治疗、样本量、结果事件数、随访时间和缺失数据的数量。一张表可能是有帮助的。报告关键人口群体之间的差异。D；E</h5>
+<p>报告（可能使用表格）使用的所有数据集的摘要，包括结果的分布、预测因子（例如，平均值/中位数、标准差/四分位数范围、频率）、接受的任何治疗、样本量（和结果事件的数量、随访时间的摘要，以及每个预测因子的缺失值的数量和比例；如果相关， 报告感兴趣的关键人口统计群体之间的任何差异可能很有用。</p>
+<p>实例 7《Utility of Machine Learning Algorithms in Predicting Preoperative Lymph Node Metastasis in Patients With Rectal Cancer Based on Three-Dimensional Endorectal Ultrasound and Clinical and Laboratory Data：基于三维直肠腔内超声和临床及实验室数据的机器学习算法在预测直肠癌患者术前淋巴结转移中的应用》。</p>
+</section>
+<section id="对于模型评估展示了与开发数据分布的重要预测因子人口统计学预测因素和结果的比较e" class="level5">
+<h5 class="anchored" data-anchor-id="对于模型评估展示了与开发数据分布的重要预测因子人口统计学预测因素和结果的比较e">20.3：对于模型评估，展示了与开发数据分布的重要预测因子(人口统计学,预测因素和结果)的比较。E</h5>
+<p>对于评估现有模型性能的研究（包括模型开发研究中的模型），提供重要变量（例如，平均值/中位数、标准差/四分位数范围、频率）分布的比较，例如人口统计学、模型中的预测变量和结果，包括缺失值的比例。这可能最好以表格形式呈现，并考虑按结果状态报告。</p>
+<p>实例 6《Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study：在中国高危人群中建立和验证胃癌风险预测规则：一项全国性多中心研究》。</p>
+</section>
+</section>
+<section id="模型开发指定每个分析例如模型开发超参数调优模型评估等中参与者和结果事件的数量de" class="level4">
+<h4 class="anchored" data-anchor-id="模型开发指定每个分析例如模型开发超参数调优模型评估等中参与者和结果事件的数量de">21 模型开发：指定每个分析(例如,模型开发、超参数调优、模型评估等)中参与者和结果事件的数量。D；E</h4>
+<p>应为每次分析（即每个模型开发、每个模型评估）报告样本量（包括结果事件的数量），因为它们在预测模型研究的不同分析中通常会有所不同（例如，在数据分区、模型超参数调整之后），尤其是在存在缺失数据的情况下；如果数据包含单个报告的多个样本或记录，也报告个体数量。</p>
+</section>
+<section id="模型规范提供完整预测模型例如公式代码对象应用程序编程接口等的详细信息允许在新的个体中进行预测并允许第三方评估和实施包括访问或重用例如免费的专有的的任何限制d" class="level4">
+<h4 class="anchored" data-anchor-id="模型规范提供完整预测模型例如公式代码对象应用程序编程接口等的详细信息允许在新的个体中进行预测并允许第三方评估和实施包括访问或重用例如免费的专有的的任何限制d">22 模型规范：提供完整预测模型(例如,公式、代码、对象、应用程序编程接口等)的详细信息，允许在新的个体中进行预测，并允许第三方评估和实施，包括访问或重用(例如,免费的,专有的)的任何限制★。D</h4>
+<p>预测模型开发研究的“产品product”是预测模型。因此，提供有关模型的详细信息以及如何使用它来预测新个体非常重要。例如，为回归模型提供方程，对于使用模型无法“写下”为方程的方法开发的模型，提供有关代码、软件对象或API可用性的详细信息，以便其他人可以在自己的数据中评估此模型，或在日常实践中实施它；如果开发了多个模型， 然后提供有关所有模型可用性的详细信息；解释如何使用该模型允许其他人对新个体进行预测；提供任何硬件要求和软件（和软件包）的详细信息，以实现第三方测试、实施和监控；如果模型无法公开可用（例如，出于商业原因），则应明确报告，并报告访问模型以计算新个体和第三方评估的预测的任何条件。</p>
+<p>实例 6《Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study：在中国高危人群中建立和验证胃癌风险预测规则：一项全国性多中心研究》。</p>
+</section>
+<section id="模型表现" class="level4">
+<h4 class="anchored" data-anchor-id="模型表现">23 模型表现</h4>
+<section id="报告模型性能估计的置信区间包括对任何关键子组的例如社会人口学考虑情节来辅助呈现de" class="level5">
+<h5 class="anchored" data-anchor-id="报告模型性能估计的置信区间包括对任何关键子组的例如社会人口学考虑情节来辅助呈现de">23.1：报告模型性能估计的置信区间，包括对任何关键子组的(例如,社会人口学)。考虑情节来辅助呈现。D；E</h5>
+<p>应将第 12e 项中描述的所有模型性能度量的估计值与置信区间一起呈现；报告总体和任何感兴趣关键群体（例如，性别、种族）（例如，作为公平性检查的一部分）的模型性能估计值，以及置信区间；使用图表来呈现和辅助评估，例如校准图（具有平滑的校准曲线和预测值的分布）和决策曲线；报告所有评估的性能估计值（例如，在开发数据中;在评估数据中;来自内部验证过程等），包括检查的每个时间点（用于预后模型）；报告模型稳定性的任何检查，例如，在自举样本中开发的模型中的性能估计和单个预测的可变性方面；清楚地指出哪些数据已被用于呈现每个性能估计。</p>
+<p>实例 13《Interpretable machine learning-based clinical prediction model for predicting lymph node metastasis in patients with intrahepatic cholangiocarcinoma：可解释的基于机器学习的临床预测模型用于预测肝内胆管癌患者的淋巴结转移》。</p>
+</section>
+<section id="如果检查报告了跨集群的模型性能的任何异质性的结果详情见tripod-clusterde" class="level5">
+<h5 class="anchored" data-anchor-id="如果检查报告了跨集群的模型性能的任何异质性的结果详情见tripod-clusterde">23.2：如果检查，报告了跨集群的模型性能的任何异质性的结果。详情见TRIPOD-Cluster。D；E</h5>
+<p>如果模型性能的评估考虑了数据中的任何聚类（例如，来自组合来自多项研究的个体参与者数据，或按中心/医院或国家聚类的数据），则应报告结果以及置信区间（参见第23a项）；关预测模型研究的具体报告建议，这些研究考虑了模型性能的聚类和异质性， 作者应查阅TRIPOD-cluster清单。</p>
+</section>
+</section>
+<section id="模型更新报告任何模型更新的结果包括更新后的模型和随后的性能e" class="level4">
+<h4 class="anchored" data-anchor-id="模型更新报告任何模型更新的结果包括更新后的模型和随后的性能e">24 模型更新：报告任何模型更新的结果，包括更新后的模型和随后的性能。E</h4>
+<p>如果预测模型在验证后进行了更新（例如，重新校准、重新拟合），则应报告更新后的预测模型的详细信息，以便进行第三方评估和实施，包括对访问或重复使用的任何限制（见第22项）；应报告更新模型的性能（参见第23a项，可能第23b项）。</p>
+</section>
+<section id="解释对主要结果进行总体解释包括目标和先前研究背景下的公平问题de" class="level4">
+<h4 class="anchored" data-anchor-id="解释对主要结果进行总体解释包括目标和先前研究背景下的公平问题de">25 解释：对主要结果进行总体解释，包括目标和先前研究背景下的公平问题。D；E</h4>
+<p>对研究结果的解释将研究结果置于其他证据的背景下。如果存在现有模型，则在这些现有研究的背景下讨论结果；对于评估现有预测模型性能的研究，如果现有研究已经评估了模型的性能，那么讨论和总结这些结果并将其置于上下文中非常重要；确保对结果的解释不会超出模型开发和评估报告的结果，以防止过度解释或“旋转”；了解模型在评估数据中的性能与该模型的任何其他评估研究中模型的性能进行比较是有用的。当结果出现分歧时，应讨论模型性能差异的可能原因。</p>
+<p>实例 13《Interpretable machine learning-based clinical prediction model for predicting lymph node metastasis in patients with intrahepatic cholangiocarcinoma：可解释的基于机器学习的临床预测模型用于预测肝内胆管癌患者的淋巴结转移》。</p>
+</section>
+<section id="局限性讨论研究如非代表性样本样本量过拟合缺失数据等的任何局限性及其对任何偏倚统计不确定性和可推广性的影响de" class="level4">
+<h4 class="anchored" data-anchor-id="局限性讨论研究如非代表性样本样本量过拟合缺失数据等的任何局限性及其对任何偏倚统计不确定性和可推广性的影响de">26 局限性：讨论研究(如非代表性样本、样本量、过拟合、缺失数据等)的任何局限性及其对任何偏倚、统计不确定性和可推广性的影响。D；E</h4>
+<p>承认局限性是任何科学论文的一个重要方面——可以指研究设计、实施或分析的任何方面。对研究局限性进行有意义的讨论，考虑与分析中使用的数据的代表性、样本量、过度拟合和缺失数据/数据质量相关的任何问题。</p>
+<p>实例 13《Interpretable machine learning-based clinical prediction model for predicting lymph node metastasis in patients with intrahepatic cholangiocarcinoma：可解释的基于机器学习的临床预测模型用于预测肝内胆管癌患者的淋巴结转移》。</p>
+</section>
+<section id="该模型在当前照护背景下的可用性" class="level4">
+<h4 class="anchored" data-anchor-id="该模型在当前照护背景下的可用性">27 该模型在当前照护背景下的可用性</h4>
+<section id="描述在实现预测模型时应该如何评估和处理质量差或不可用的输入数据例如预测值d" class="level5">
+<h5 class="anchored" data-anchor-id="描述在实现预测模型时应该如何评估和处理质量差或不可用的输入数据例如预测值d">27.1：描述在实现预测模型时，应该如何评估和处理质量差或不可用的输入数据(例如,预测值)。D</h5>
+<p>作者应该评论如何在模型打算用作日常实践中护理路径的一部分时处理不可用的预测变量值。还应评估在打算使用模型时估算缺失值的任何策略（因此在方法和结果中提到）；同样，在实施时，作者应讨论（如果相关）处理质量差的输入数据（例如，图像分辨率、数据格式）。</p>
+<p>实例 14《Risk factors for severe respiratory syncytial virus infection during the first year of life: development and validation of a clinical prediction model：生命第1年发生严重呼吸道合胞病毒感染的危险因素：临床预测模型的建立与验证》。</p>
+</section>
+<section id="指定在处理输入数据或使用模型时是否需要用户进行交互以及需要用户具备何种水平的专业知识d" class="level5">
+<h5 class="anchored" data-anchor-id="指定在处理输入数据或使用模型时是否需要用户进行交互以及需要用户具备何种水平的专业知识d">27.2：指定在处理输入数据或使用模型时是否需要用户进行交互，以及需要用户具备何种水平的专业知识。D</h5>
+<p>提供有关预期或要求用户如何与预测模型交互以按预期使用模型的详细信息，例如处理输入数据的任何注意事项；使用模型、处理或收集输入数据是否需要或需要任何专业知识或培训，如果需要，请提供详细信息。</p>
+</section>
+<section id="讨论未来研究的任何后续步骤具体了解模型的适用性和可推广e" class="level5">
+<h5 class="anchored" data-anchor-id="讨论未来研究的任何后续步骤具体了解模型的适用性和可推广e">27.3：讨论未来研究的任何后续步骤，具体了解模型的适用性和可推广。E</h5>
+<p>是否需要对模型进行进一步评估，例如，在不同的人群或亚组中，或者模型是否准备好在临床试验中进行评估，或作为护理途径的一部分实施。</p>
+<p>实例 14《Risk factors for severe respiratory syncytial virus infection during the first year of life: development and validation of a clinical prediction model：生命第1年发生严重呼吸道合胞病毒感染的危险因素：临床预测模型的建立与验证》。</p>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>JC</category>
+  <category>TRIPOD</category>
+  <category>AI</category>
+  <guid>https://leslie-lu.github.io/blog/2024/11/29/TRIPOD_AI/</guid>
+  <pubDate>Fri, 29 Nov 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411291930779.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>SAIGE</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -920,7 +1706,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="a305067a" class="cell" data-execution_count="1">
+<div id="54a074ef" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -952,7 +1738,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="d0f04875" class="cell" data-execution_count="2">
+<div id="ee849009" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -972,7 +1758,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="13b37e13" class="cell" data-execution_count="3">
+<div id="97f0f9ab" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -983,7 +1769,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="7d7e9d36" class="cell" data-execution_count="4">
+<div id="46eae5ce" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -994,7 +1780,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="e8942de8" class="cell" data-execution_count="5">
+<div id="d0e75342" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -1007,7 +1793,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="e0939586" class="cell" data-execution_count="6">
+<div id="ad976660" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -1030,14 +1816,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-7.2565, -5.9017, -0.3434],
-         [-2.3928, -3.5589,  1.0871]],
+<pre><code>tensor([[[-1.8852, -0.6730,  0.5971],
+         [ 2.0088, -0.4662,  0.6945]],
 
-        [[-0.3559, -1.1743,  0.3344],
-         [-5.4425,  0.3051, -0.3542]],
+        [[-2.1900, -0.0759, -0.6581],
+         [-7.3558, -0.0695, -0.5635]],
 
-        [[-4.1544,  0.6657,  0.6382],
-         [-3.3604, -0.2143,  1.6636]]])</code></pre>
+        [[ 0.3463, -1.6335, -1.5598],
+         [ 0.5033,  1.4241,  1.5075]]])</code></pre>
 </div>
 </div>
 </section>
@@ -3419,7 +4205,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="a2dd5627" class="cell" data-execution_count="1">
+<div id="4fa1c3a8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3474,7 +4260,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="28d79780" class="cell" data-execution_count="2">
+<div id="13d90af7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3514,7 +4300,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="2c80fc96" class="cell" data-execution_count="3">
+<div id="ab773a1c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3579,7 +4365,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="09129f48" class="cell" data-execution_count="4">
+<div id="212585e5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3644,7 +4430,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="6d1b25e6" class="cell" data-execution_count="1">
+<div id="96c0591b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -3699,7 +4485,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="8eea28e4" class="cell" data-execution_count="2">
+<div id="8f1d859d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -3762,7 +4548,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="c169028e" class="cell" data-execution_count="3">
+<div id="80eeae9b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3823,7 +4609,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="8f8ff581" class="cell" data-execution_count="4">
+<div id="973bd0ca" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -3930,7 +4716,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="a39bd610" class="cell" data-execution_count="5">
+<div id="e34cf23c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -3952,7 +4738,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="00fe6982" class="cell" data-execution_count="6">
+<div id="94701edc" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -3988,7 +4774,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="839f4e21" class="cell" data-execution_count="7">
+<div id="28e7ed87" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -4144,7 +4930,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="f2e8a6b3" class="cell" data-execution_count="1">
+<div id="6bcae75e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4172,7 +4958,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="824f5b3a" class="cell" data-execution_count="2">
+<div id="70cd0389" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4194,7 +4980,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="e3158e11" class="cell" data-execution_count="3">
+<div id="f0fd6e61" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4228,7 +5014,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="4c989d2b" class="cell" data-execution_count="4">
+<div id="3c26d93c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -4262,7 +5048,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="00d0f3d3" class="cell" data-execution_count="5">
+<div id="f70d4e92" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4297,7 +5083,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="83917caf" class="cell" data-execution_count="6">
+<div id="d7efe4ca" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4326,7 +5112,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="20dcdaa1" class="cell" data-execution_count="7">
+<div id="066e3a79" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4421,7 +5207,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="aed8da48" class="cell" data-execution_count="8">
+<div id="f14b37c1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4451,7 +5237,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="16547b15" class="cell" data-execution_count="9">
+<div id="a4a83081" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4475,12 +5261,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6029/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_5904/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="32e99dd5" class="cell" data-execution_count="10">
+<div id="95fd5fdb" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4510,7 +5296,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="86a8165e" class="cell" data-execution_count="11">
+<div id="b00fa9a1" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4862,51 +5648,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <category>anova</category>
   <guid>https://leslie-lu.github.io/blog/2020/02/17/</guid>
   <pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>方差分析</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/15/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="方差分析" class="level3">
-<h3 class="anchored" data-anchor-id="方差分析">方差分析</h3>
-<p>t检验和u检验不适用于多个样本均数的比较，而用方差分析比较多个样本均数，可以有效地控制I类错误。</p>
-<p>方差分析（analysis of variance，ANOVA）由英国统计学家R.A.Fisher首先提出，以F命名其统计量，故方差分析又称F检验。</p>
-<p>方差分析的基本思想是根据研究的目的和设计类型，将总变异的离均差平方和SS及其自由度v分别分解成相应的若干部分，然后求各相应部分的变异（数理统计证明，总的离均差平方和等于各部分离均差平方和之和）；再用各部分的变异与组内（或误差）变异进行比较，得出统计量F值；最后根据F值的大小确定p值，作出统计推断。</p>
-<p>方差分析的用途很广，包括两个或多个样本均数间的比较，分析两个或多个因素间的交互作用，回归方程的线性假设检验，多元线性回归分析中偏回归系数的假设检验，两样本的方差齐性检验等。</p>
-<p>方差分析的应用条件为：各样本需是相互独立的随机样本；各样本来自正态分布总体；各总体方差相等，即方差齐性。</p>
-</section>
-<section id="方差分析基本术语" class="level3">
-<h3 class="anchored" data-anchor-id="方差分析基本术语">方差分析基本术语</h3>
-<p>实验设计和方差分析都有自己相应的语言。</p>
-<p>以研究某药物对某癌细胞株增殖影响的研究为例，现有两种药物：新研究药物（Treatdrug）和对照组药物（Controldrug）。</p>
-<p>我们提取培养10个某癌细胞株作为研究对象，随机分配一半癌细胞株接受为期96h的Treatdrug治疗，另一半接受为期96h的Controldrug治疗。研究结束时，对两组细胞株的细胞抑制率进行评估。</p>
-<p>在这个实验设计中，治疗方案是两水平（Treatdrug和Controldrug）的组间因子，之所以称作组间因子是因为每个患者都仅被分配到一个组别中，没有患者同时接受Treatdrug和Controldrug。</p>
-<p>细胞抑制率是因变量，治疗方案是自变量。由于在每种治疗方案下观测数相等，因此这种设计也称为均衡设计；若观测数不同，则称为非均衡设计。</p>
-<p>因为仅有一个类别型变量，这种设计又称为单因子方差分析或进一步称为单因子组间方差分析。</p>
-<p>方差分析主要是通过F检验来进行效果评测，若治疗方案的F检验显著，则说明96h后两种药物的细胞抑制率均值不同。</p>
-<p>假设只对Treatdrug的效果感兴趣，则需要将10个癌细胞株都放在Treatdrug组中，然后在治疗24h和96h后分别评估疗效。此时，时间是两水平（24h和96h）的组内因子，因为每个癌细胞株在时间的所有水平下都进行了测量，因此这种设计称为单因子组内方差分析；又由于每个癌细胞株都不止一次被测量，也称作重复测量方差分析。若时间的F检验显著，则说明细胞抑制率在24h和96h间发生了改变。</p>
-<p>现假设对治疗方案差异和它随时间的改变都感兴趣，则可以将两个设计结合起来：随机分配一半癌细胞株到Treatdrug组，另一半到Controldrug组，在24h和96h分别评估它们的细胞抑制率。治疗方案和时间都作为因子时，既可以分析治疗方案的影响和时间的影响，也可以分析治疗方案和时间的交互作用。前两个为主效应，交互部分为交互效应。在这种情况下，需要进行3次F检验，治疗方案因素1次，时间因素1次，两者的交互因素1次。若治疗方案显著，说明Treatdrug和Controldrug对癌细胞的抑制效果不同；若时间显著，表明细胞抑制率在24h和96h间发生了改变；若两种因素交互效应显著，说明两种药物随着时间变化对癌细胞的一直效果不同（即细胞抑制率从24h到96h的改变程度在Treatdrug和Controldrug之间是不同的）。</p>
-<p>当设计中包含两个甚至更多因子时，便是多因子方差分析设计。两个因子时称为双因子方差分析，三因子时称为三因子方差分析。若因子设计包括组内因子和组间因子，又称为混合模型方差分析。</p>
-<p>这里，即使不同的癌细胞株被随机分配到不同的治疗方案中，但在研究开始时两组癌细胞株的增殖速度可能不同，治疗后的差异可能是最初的增殖速度不同导致的，而不是实验方案的影响。增殖速度也可以解释因变量的组间差异，因此它常被称为混杂因素。如果我们在评测治疗方案类型的影响前，对组建的统计学差异进行统计性调整，将初始增殖速度作为协变量，这样的设计称为协方差分析。</p>
-<p>当因变量不止一个时，该设计被称为多元方差分析，若还存在协变量，则称为多元协方差分析。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/15/</guid>
-  <pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
