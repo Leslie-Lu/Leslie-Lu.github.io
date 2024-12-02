@@ -11,7 +11,255 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Fri, 29 Nov 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 02 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>使用 SAIGE 进行 GWAS 分析的详细流程</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/02/SAIGE_GWAS/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://documentation.dnanexus.com/science/scientific-guides/saige-gwas-walkthrough" title="SAIGE GWAS">本文</a>介绍如何基于 UK Biobank 数据和 DNAnexus 平台，使用 <strong>SAIGE</strong> 工具在大规模基因组关联研究（GWAS）中分析遗传变异与性状之间的关联。SAIGE 的简要介绍参考<a href="https://mp.weixin.qq.com/s/pCfu0tJxvvRIHqtbK9eSug">这里</a>。</p>
+<section id="流程概览" class="level3">
+<h3 class="anchored" data-anchor-id="流程概览"><strong>流程概览</strong></h3>
+<p>SAIGE GWAS 分析分为以下步骤：</p>
+<ol type="1">
+<li><strong>准备数据：合并自测基因型数据</strong></li>
+<li><strong>生成 GRM 模型和方差比文件</strong></li>
+<li><strong>执行单变异关联测试</strong></li>
+<li><strong>（可选）合并结果文件</strong></li>
+</ol>
+</section>
+<section id="step-1-合并自测基因型数据" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-合并自测基因型数据"><strong>Step 1: 合并自测基因型数据</strong></h3>
+<p>在第一步中，我们将 22 条常染色体的基因型数据文件合并为 PLINK 格式的文件集（<code>.bim</code>, <code>.bed</code>, <code>.fam</code>），为后续分析生成输入文件。</p>
+<section id="使用-swiss-army-knife-sak-应用" class="level4">
+<h4 class="anchored" data-anchor-id="使用-swiss-army-knife-sak-应用"><strong>使用 Swiss Army Knife (SAK) 应用</strong></h4>
+<p>在 DNAnexus 平台上，使用 <strong>Swiss Army Knife (SAK)</strong> 应用完成文件合并：</p>
+<ol type="1">
+<li><strong>输入文件</strong>：上传或选择包含染色体 1 至 22 的 PLINK 文件。</li>
+<li><strong>命令行代码</strong>：</li>
+</ol>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>.bed <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sed</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'s/.bed//g'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> files_to_merge.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span>
+<span id="cb1-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">plink</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--merge-list</span> files_to_merge.txt <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--make-bed</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--out</span> ukb_cal_chr1_22_v2_merged<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rm</span> files_to_merge.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span></code></pre></div>
+<p>这段代码会创建一个包含所有待合并文件的列表，并使用 PLINK 将其合并为单一文件集。</p>
+<ol start="3" type="1">
+<li><strong>输出</strong>：<code>ukb_cal_chr1_22_v2_merged.bed</code>、<code>.bim</code>&nbsp;和&nbsp;<code>.fam</code>&nbsp;文件，作为下一步的输入。</li>
+</ol>
+</section>
+</section>
+<section id="step-2-生成-grm-模型和方差比文件" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-生成-grm-模型和方差比文件"><strong>Step 2: 生成 GRM 模型和方差比文件</strong></h3>
+<p>使用 <strong><code>saige_gwas_grm</code></strong> 应用生成遗传相关矩阵（GRM）模型文件和方差比文件。这些文件用于混合模型的拟合和关联测试。</p>
+<section id="输入文件" class="level4">
+<h4 class="anchored" data-anchor-id="输入文件"><strong>输入文件</strong></h4>
+<ol type="1">
+<li><p><strong>PLINK 文件集</strong>：<code>ukb_cal_chr1_22_v2_merged</code> 文件。</p></li>
+<li><p><strong>表型文件</strong>：包含样本 ID、表型和协变量（如性别、年龄）的文件，要求与基因型数据匹配。</p></li>
+</ol>
+</section>
+<section id="命令实例" class="level4">
+<h4 class="anchored" data-anchor-id="命令实例">命令实例</h4>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dx</span> run saige_gwas_grm <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb2-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-igenotype_file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ukb_cal_chr1_22_v2_merged.bed <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb2-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-iphenotype_file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>phenotype.txt <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb2-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-icovariate_columns</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>age,sex <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb2-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-imem_instance</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mem3_ssd1_v2_x32</span></code></pre></div>
+</section>
+</section>
+<section id="step-3-执行单变异关联测试" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-执行单变异关联测试"><strong>Step 3: 执行单变异关联测试</strong></h3>
+<p>单变异关联测试使用 <strong><code>saige_gwas_svat</code></strong> 应用逐染色体进行分析，计算每个变异与表型之间的关联。</p>
+<section id="批量运行" class="level4">
+<h4 class="anchored" data-anchor-id="批量运行"><strong>批量运行</strong></h4>
+<p>对于 UK Biobank 数据，每条染色体的数据存储在单独的 BGEN 文件中，可以使用批量模式运行：</p>
+<ol type="1">
+<li><p><strong>选择 BGEN 文件和索引文件</strong>：每条染色体的 <strong><code>.bgen</code></strong> 和 <strong><code>.bgen.bgi</code></strong> 文件。</p></li>
+<li><p><strong>运行命令</strong>：</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dx</span> run saige_gwas_svat <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-igenotypes_bgen</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>chr<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>.bgen <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-igenotypes_bgen_index</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>chr<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>.bgen.bgi <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-imodel_rda</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>model.rda <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-ivariance_ratio_txt</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>variance_ratio.txt <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-iphenotype_file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>phenotype.txt <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb3-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-imem_instance</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mem3_ssd3_v2_x24</span></code></pre></div></li>
+</ol>
+</section>
+<section id="输出文件" class="level4">
+<h4 class="anchored" data-anchor-id="输出文件"><strong>输出文件</strong></h4>
+<ul>
+<li>每条染色体的关联结果文件，例如：<code>saige_step2_ukb_imp_chr1_v3.txt</code>。</li>
+</ul>
+</section>
+</section>
+<section id="step-4-合并结果文件" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-合并结果文件"><strong>Step 4: 合并结果文件</strong></h3>
+<p>可选地将所有染色体的结果文件合并为单一文件，以便进一步分析（如显著性筛选和孟德尔随机化分析）。</p>
+<section id="使用-sak-应用" class="level4">
+<h4 class="anchored" data-anchor-id="使用-sak-应用"><strong>使用 SAK 应用</strong></h4>
+<p>在 SAK 的命令行中执行以下代码：</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-1</span> saige_step2_ukb_imp_chr1_v3.txt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> saige_step2_ukb_imp_all_chr.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tail</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> +2 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-q</span> saige_step2_ukb_imp_chr<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>_v3.txt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;&gt;</span> saige_step2_ukb_imp_all_chr.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span>
+<span id="cb4-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gzip</span> saige_step2_ukb_imp_all_chr.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span></span></code></pre></div>
+</section>
+</section>
+<section id="后续分析" class="level3">
+<h3 class="anchored" data-anchor-id="后续分析"><strong>后续分析</strong></h3>
+<ol type="1">
+<li><p><strong>显著性筛选</strong>：根据 GWAS 的统计学标准筛选显著变异（如 p 值 &lt;5×10<sup>−8</sup>）。</p></li>
+<li><p><strong>下游分析</strong>：</p></li>
+</ol>
+<ul>
+<li>使用显著变异进行孟德尔随机化分析。</li>
+<li>进行生物学功能注释，识别潜在的致病基因或路径。</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>SAIGE</category>
+  <category>GWAS</category>
+  <category>genomics</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/02/SAIGE_GWAS/</guid>
+  <pubDate>Mon, 02 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>星球 JC | 解读 TRIPOD-AI</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -1706,7 +1954,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="54a074ef" class="cell" data-execution_count="1">
+<div id="f9ae1f9d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -1738,7 +1986,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="ee849009" class="cell" data-execution_count="2">
+<div id="7dd1855c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -1758,7 +2006,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="97f0f9ab" class="cell" data-execution_count="3">
+<div id="40ae8302" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -1769,7 +2017,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="46eae5ce" class="cell" data-execution_count="4">
+<div id="745812a3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -1780,7 +2028,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="d0e75342" class="cell" data-execution_count="5">
+<div id="de361dea" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -1793,7 +2041,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="ad976660" class="cell" data-execution_count="6">
+<div id="85cac27d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -1816,14 +2064,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-1.8852, -0.6730,  0.5971],
-         [ 2.0088, -0.4662,  0.6945]],
+<pre><code>tensor([[[-0.0480,  2.3622,  2.0668],
+         [ 4.6727, -0.3071, -2.5821]],
 
-        [[-2.1900, -0.0759, -0.6581],
-         [-7.3558, -0.0695, -0.5635]],
+        [[-1.1169, -0.9628, -0.5497],
+         [ 3.1865,  3.1159,  1.4728]],
 
-        [[ 0.3463, -1.6335, -1.5598],
-         [ 0.5033,  1.4241,  1.5075]]])</code></pre>
+        [[ 0.2373,  0.4220, -0.7643],
+         [ 1.3083, -1.4881, -1.3095]]])</code></pre>
 </div>
 </div>
 </section>
@@ -4205,7 +4453,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="4fa1c3a8" class="cell" data-execution_count="1">
+<div id="4cee6e28" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4260,7 +4508,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="13d90af7" class="cell" data-execution_count="2">
+<div id="d920f043" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4300,7 +4548,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="ab773a1c" class="cell" data-execution_count="3">
+<div id="d848fb43" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4365,7 +4613,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="212585e5" class="cell" data-execution_count="4">
+<div id="7f00a6c0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4430,7 +4678,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="96c0591b" class="cell" data-execution_count="1">
+<div id="29c421be" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -4485,7 +4733,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="8f1d859d" class="cell" data-execution_count="2">
+<div id="869ecace" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -4548,7 +4796,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="80eeae9b" class="cell" data-execution_count="3">
+<div id="7d4ca467" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4609,7 +4857,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="973bd0ca" class="cell" data-execution_count="4">
+<div id="f40c0c45" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -4716,7 +4964,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="e34cf23c" class="cell" data-execution_count="5">
+<div id="d4df94e6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -4738,7 +4986,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="94701edc" class="cell" data-execution_count="6">
+<div id="d48ce965" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -4774,7 +5022,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="28e7ed87" class="cell" data-execution_count="7">
+<div id="1b1ed7a8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -4930,7 +5178,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="6bcae75e" class="cell" data-execution_count="1">
+<div id="2bac3f9f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4958,7 +5206,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="70cd0389" class="cell" data-execution_count="2">
+<div id="30206172" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -4980,7 +5228,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="f0fd6e61" class="cell" data-execution_count="3">
+<div id="38a6fe40" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5014,7 +5262,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="3c26d93c" class="cell" data-execution_count="4">
+<div id="120b126d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -5048,7 +5296,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="f70d4e92" class="cell" data-execution_count="5">
+<div id="ce85c6a4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5083,7 +5331,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="d7efe4ca" class="cell" data-execution_count="6">
+<div id="c9330c7b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5112,7 +5360,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="066e3a79" class="cell" data-execution_count="7">
+<div id="8057a2b6" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5207,7 +5455,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="f14b37c1" class="cell" data-execution_count="8">
+<div id="161e5f18" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5237,7 +5485,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="a4a83081" class="cell" data-execution_count="9">
+<div id="3761cc66" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5261,12 +5509,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_5904/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_5970/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="95fd5fdb" class="cell" data-execution_count="10">
+<div id="8b7a5669" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5296,7 +5544,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="b00fa9a1" class="cell" data-execution_count="11">
+<div id="d00ae472" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5611,43 +5859,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <category>anova</category>
   <guid>https://leslie-lu.github.io/blog/2020/02/18/</guid>
   <pubDate>Tue, 18 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>试验设计与方差分析（1）</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/17/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="完全随机设计" class="level3">
-<h3 class="anchored" data-anchor-id="完全随机设计">完全随机设计</h3>
-<p>完全随机设计采用完全随机化的分组方法，将全部试验对象分配到k个处理组，各组分别接受不同的处理，试验结束后比较各组均数之间的差别有无统计学意义，推断处理因素的效应。</p>
-<p>在方差分析中，常称上述的处理因素为因子，用A、B、C等表示因子在试验中所处的不同情况或状态称为水平。</p>
-<p>方差分析解决问题的思路是：从所有观测值的总变异（总方差）中分析出系统误差和随机误差，并用数量表示，在一定意义下比较系统误差和随机误差，若两者的差别不大，说明试验条件的变化（因素水平的不同）对试验结果影响不大；若两者相差较大，且系统误差大得多，说明系统条件变化引出的误差不可忽视。</p>
-</section>
-<section id="随机区组设计" class="level3">
-<h3 class="anchored" data-anchor-id="随机区组设计">随机区组设计</h3>
-<p>随机区组设计是根据局部控制和随机排列的原理进行的：将研究的对象按照不同的性质划分为等于重复次数的区组，例如将试验土地按土壤肥力程度等不同的性质划分为等于重复次数的区组，使区组内环境差异最小，而区组间环境允许存在差异，每个区组即为一次完整的重复，区组内的各处理都独立地随机排列，这是随机排列设计中最常用最基本的设计。</p>
-<p>随机区组设计的优点：富于伸缩性，单因素、复因素以及综合试验等都可应用；能提供无偏的误差估计，在大区域试验中能有效地降低非处理因素等试验条件的单向差异，降低误差；对试验地的地形要求不严，只对每个区组内的非处理因素等试验条件要求尽量一致，因此不同区组可分散设置在不同地段上。</p>
-<p>随机区组设计的缺点：这种设计方法不允许处理数太多，处理数过多，区组必然增大，局部控制的效率会降低，所以处理数一般不超过20个，最好在10个左右。</p>
-<p>随机区组设计考虑了个体差异的影响，可分析处理因素和个体差异对试验效应的影响，所以又称为两因素实验设计，比完全随机设计的检验效率高。</p>
-<p>该设计是将受试对象先按配比条件配成配伍组（如动物试验时，可按同窝别、同性别、体重相近等进行配伍），每个配伍组有3个或以上的受试对象，再按随机化原则分别将各配伍组中的受试对象分配到各个处理组。</p>
-<p>在进行单因素随机区组试验结果的统计分析时，可将处理看作A因素，区组看作B因素，剩余部分则为试验误差。总平方和=区组间平方和+处理间平方和+试验误差平方和，总自由度=区组自由度+处理自由度+误差自由度。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/17/</guid>
-  <pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
