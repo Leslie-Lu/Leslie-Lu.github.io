@@ -11,7 +11,173 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Mon, 02 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 03 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Swiss Army Knife 工具运行 R 的 log 记录</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/03/DNAnexus_log/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>用 DNAnexus 平台上的 Swiss Army Knife 工具运行了下 R，记录下运行的 log。</p>
+<p>这个日志记录了任务的执行过程，其中涉及到多个文件的下载、解压和执行。下面是对这个日志的详细解释：</p>
+<section id="初始化日志记录" class="level4">
+<h4 class="anchored" data-anchor-id="初始化日志记录">1. 初始化日志记录</h4>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Logging</span> initialized <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">priority</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb1-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Logging</span> initialized <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">bulk</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span></code></pre></div>
+<p>以上表示日志记录系统已经初始化，准备开始记录任务的执行情况。<code>priority</code> 和 <code>bulk</code> 表示不同级别或不同类型的日志记录。</p>
+</section>
+<section id="下载和解压文件" class="level4">
+<h4 class="anchored" data-anchor-id="下载和解压文件">2. 下载和解压文件</h4>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Downloading</span> bundled file resources.tar.gz</span>
+<span id="cb2-2"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;&gt;&gt;</span> Unpacking <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">resources.tar.gz</span> to /</span>
+<span id="cb2-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">tar:</span> Removing leading <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">`</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">' from member names</span></span></code></pre></div>
+<p>省略了一些类似的 log 输出，表明有多个文件（如 <code>resources.tar.gz</code>, <code>qctool.tar.gz</code>, <code>plink.tar.gz</code> 等）被依次下载并解压。<code>tar: Removing leading '/' from member names</code>：这是 <code>tar</code> 解压时的标准行为，表示会删除文件路径中的首个 <code>/</code>，避免解压到根目录（<code>/</code>）而覆盖系统文件。</p>
+</section>
+<section id="设置-ssh-公钥" class="level4">
+<h4 class="anchored" data-anchor-id="设置-ssh-公钥">3. 设置 SSH 公钥</h4>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Setting</span> SSH public key</span></code></pre></div>
+<p>这里系统设置了一个 SSH 公钥，可能用于与远程服务器的连接。</p>
+</section>
+<section id="安装和运行环境信息" class="level4">
+<h4 class="anchored" data-anchor-id="安装和运行环境信息">4. 安装和运行环境信息</h4>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dxpy/0.385.0</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Linux-5.15.0-1072-aws-x86_64-with-glibc2.29</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Python/3.8.10</span></span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bash</span> running <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">job</span> ID job-xxxx<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span></code></pre></div>
+<p><code>dxpy</code> 是用于与 DNAnexus 平台交互的 Python 库。运行环境是 Linux（版本 5.15.0-1072-aws），使用 Python 3.8.10。作业 ID 是 <code>job-xxxx</code>，表示当前任务在平台上的唯一标识符。</p>
+</section>
+<section id="下载文件到本地文件系统" class="level4">
+<h4 class="anchored" data-anchor-id="下载文件到本地文件系统">5. 下载文件到本地文件系统</h4>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">downloading</span> file: file-xxxx to filesystem: /home/dnanexus/in/in/0/hello_world.r</span></code></pre></div>
+<p>从 DNAnexus 平台下载了名为 <code>hello_world.r</code> 的文件，并将其保存到 <code>/home/dnanexus/in/in/0/</code> 目录。</p>
+</section>
+<section id="dxfuse-版本信息和文件系统守护进程" class="level4">
+<h4 class="anchored" data-anchor-id="dxfuse-版本信息和文件系统守护进程">6. dxfuse 版本信息和文件系统守护进程</h4>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Using</span> dxfuse version v1.4.0</span>
+<span id="cb6-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">The</span> log file is located at /root/.dxfuse/dxfuse.log</span>
+<span id="cb6-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">starting</span> fs daemon</span>
+<span id="cb6-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">wait</span> for ready</span>
+<span id="cb6-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Daemon</span> started successfully</span></code></pre></div>
+<p>使用 <code>dxfuse</code> （一个用于将 DNAnexus 文件系统挂载到本地文件系统的工具）版本 1.4.0。启动了文件系统守护进程，用于与 DNAnexus 文件系统进行交互。</p>
+</section>
+<section id="下载文件使用多个线程" class="level4">
+<h4 class="anchored" data-anchor-id="下载文件使用多个线程">7. 下载文件使用多个线程</h4>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Downloading</span> files using 4 threads+ [[ <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span> == <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span> ]]</span></code></pre></div>
+<p>文件的下载是并行进行的，使用了 4 个线程来加速下载。</p>
+</section>
+<section id="执行-r-脚本" class="level4">
+<h4 class="anchored" data-anchor-id="执行-r-脚本">8. 执行 R 脚本</h4>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">+</span> eval <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Rscript hello_world.r'</span></span>
+<span id="cb8-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">++</span> Rscript hello_world.r</span>
+<span id="cb8-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[1]</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hello, world!"</span></span></code></pre></div>
+<p>执行了 R 脚本 hello_world.r，并成功输出了 “Hello, world!”，表明脚本运行成功。</p>
+</section>
+<section id="完成任务" class="level4">
+<h4 class="anchored" data-anchor-id="完成任务">9. 完成任务</h4>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">+</span> set +x</span></code></pre></div>
+<p>这是一个 Shell 命令，表示关闭命令回显模式。+x 表示在执行时打印每条命令的详细信息，关闭后将不再显示。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>DNAnexus</category>
+  <category>R</category>
+  <category>log</category>
+  <category>Swiss Army Knife</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/03/DNAnexus_log/</guid>
+  <pubDate>Tue, 03 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412032312284.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>使用 SAIGE 进行 GWAS 分析的详细流程</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -1954,7 +2120,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="f9ae1f9d" class="cell" data-execution_count="1">
+<div id="efbaa47d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -1986,7 +2152,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="7dd1855c" class="cell" data-execution_count="2">
+<div id="12add106" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -2006,7 +2172,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="40ae8302" class="cell" data-execution_count="3">
+<div id="c7c9419c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -2017,7 +2183,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="745812a3" class="cell" data-execution_count="4">
+<div id="af060eca" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -2028,7 +2194,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="de361dea" class="cell" data-execution_count="5">
+<div id="b11a1f5f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -2041,7 +2207,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="85cac27d" class="cell" data-execution_count="6">
+<div id="ec61c95a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -2064,14 +2230,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-0.0480,  2.3622,  2.0668],
-         [ 4.6727, -0.3071, -2.5821]],
+<pre><code>tensor([[[ 1.9567,  3.3531,  0.0595],
+         [-2.2974,  3.1800, -1.8610]],
 
-        [[-1.1169, -0.9628, -0.5497],
-         [ 3.1865,  3.1159,  1.4728]],
+        [[ 1.5850, -0.4422, -0.6868],
+         [ 2.2855,  0.4900,  1.4136]],
 
-        [[ 0.2373,  0.4220, -0.7643],
-         [ 1.3083, -1.4881, -1.3095]]])</code></pre>
+        [[-2.8229, -1.7614,  0.2699],
+         [-1.1219,  0.5161, -0.1923]]])</code></pre>
 </div>
 </div>
 </section>
@@ -4453,7 +4619,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="4cee6e28" class="cell" data-execution_count="1">
+<div id="95aeb703" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4508,7 +4674,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="d920f043" class="cell" data-execution_count="2">
+<div id="d9238467" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4548,7 +4714,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="d848fb43" class="cell" data-execution_count="3">
+<div id="429b4022" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4613,7 +4779,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="7f00a6c0" class="cell" data-execution_count="4">
+<div id="8cfe562a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4678,7 +4844,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="29c421be" class="cell" data-execution_count="1">
+<div id="1956c502" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -4733,7 +4899,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="869ecace" class="cell" data-execution_count="2">
+<div id="73737ca7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -4796,7 +4962,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="7d4ca467" class="cell" data-execution_count="3">
+<div id="5436a04c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4857,7 +5023,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="f40c0c45" class="cell" data-execution_count="4">
+<div id="23683461" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -4964,7 +5130,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="d4df94e6" class="cell" data-execution_count="5">
+<div id="13f24757" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -4986,7 +5152,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="d48ce965" class="cell" data-execution_count="6">
+<div id="9190fd25" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -5022,7 +5188,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="1b1ed7a8" class="cell" data-execution_count="7">
+<div id="661cb25e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -5178,7 +5344,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="2bac3f9f" class="cell" data-execution_count="1">
+<div id="738b4448" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5206,7 +5372,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="30206172" class="cell" data-execution_count="2">
+<div id="cf0c7c70" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5228,7 +5394,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="38a6fe40" class="cell" data-execution_count="3">
+<div id="4dfe0f86" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5262,7 +5428,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="120b126d" class="cell" data-execution_count="4">
+<div id="4fa7dbde" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -5296,7 +5462,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="ce85c6a4" class="cell" data-execution_count="5">
+<div id="075439a0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5331,7 +5497,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="c9330c7b" class="cell" data-execution_count="6">
+<div id="ee58b774" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5360,7 +5526,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="8057a2b6" class="cell" data-execution_count="7">
+<div id="022e1ed1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5455,7 +5621,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="161e5f18" class="cell" data-execution_count="8">
+<div id="006f0d2e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5485,7 +5651,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="3761cc66" class="cell" data-execution_count="9">
+<div id="22729325" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5509,12 +5675,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_5970/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_5916/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="8b7a5669" class="cell" data-execution_count="10">
+<div id="8b5b7eb1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5544,7 +5710,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="d00ae472" class="cell" data-execution_count="11">
+<div id="8acf8e65" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5806,59 +5972,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <category>anova</category>
   <guid>https://leslie-lu.github.io/blog/2020/02/20/</guid>
   <pubDate>Thu, 20 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>试验设计与方差分析（2）</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/18/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="拉丁方设计" class="level3">
-<h3 class="anchored" data-anchor-id="拉丁方设计">拉丁方设计</h3>
-<p>完全随机设计只涉及一个处理因素，随机区组设计涉及一个处理因素、一个区组因素/配伍因素。若实验研究涉及一个处理因素和两个控制因素，每个因素的类别数或水平数相等，此时可采用拉丁方设计来安排试验，将两个控制因素分别安排在拉丁方设计的行和列上。</p>
-<p>将k个不同符号排成k行k列，使得每一个符号在每一行、每一列都只出现一次的方阵，叫做k*k拉丁方。</p>
-<p>拉丁方设计就是将处理从纵横两个方向排列为区组/重复，使每个处理在每一行和每一列中出现的次数相等（通常为1次），即在行和列两个方向都进行局部控制，所以它是比随机区组多一个方向局部控制的随机排列设计，因而具有较高精确性。</p>
-<p>拉丁方设计的特点是处理数、重复数、行数、列数都相等，即处理数=行区组数=列区组数=重复次数，它的每一行和每一列都是一个区组或一次重复，而每一个处理在每一行或每一列都只出现1次</p>
-<p>拉丁方试验设计的步骤：</p>
-<ol type="1">
-<li><p>选择标准方：标准方是指代表处理因素水平的字母。在进行拉丁方设计时，首先要根据试验处理水平数k从标准方表中选定一个k*k的标准方，随后要对选定的标准方的行、列和处理进行随机化排列；</p></li>
-<li><p>列随机</p></li>
-<li><p>行随机</p></li>
-<li><p>处理随机</p></li>
-</ol>
-<p>拉丁方设计的特点是纵横两个方向都设了区组，从而可在两个方向上对土壤等差异（指田间试验时）进行局部控制。试验有k个处理，便有k*k个观测值。进行方差分析时，从总变异方差中除了分解出处理间方差和误差项方差外，还可以分解出纵横两个区组的方差，这样可使误差项方差进一步减小，所以拉丁方试验的精确度比随机区组试验更高。</p>
-<p>拉丁方设计的优点是：精确度高；缺点是：由于重复数与处理数必须相等，使得两者之间相互制约，缺乏伸缩性。因此采用拉丁方设计时试验的处理数不能太多，一般以4～10个为宜。</p>
-</section>
-<section id="析因设计" class="level3">
-<h3 class="anchored" data-anchor-id="析因设计">析因设计</h3>
-<p>单因素方差分析只涉及一个处理因素，该因素至少有两个水平，只是根据试验对象的属性和控制试验误差的需要，采用的试验设计方法有所不同。如比较注射4种不同剂量雌激素对大白鼠子宫重量的影响，处理因素是注射不同剂量的雌激素，有4个水平。完全随机设计是将n只白鼠随机分4组，随机区组设计是将n只白鼠按出生体重相近的原则，4只一组配成区组后，每个区组内随机分配4个处理水平，拉丁方设计则是在随机区组设计的基础上增加了一个列区组，如白鼠有4个种系（行区组），每个种系的4只白鼠按体重分成4个级别（列区组）。可以看出，完全随机设计、随机区组设计和拉丁方设计的处理因素没有变化，都是比较注射4种不同剂量雌激素带来的差别，只是改变了设计的方法，在同样的试验条件下，通过改进试验设计方法可以大大提高试验的效率，如上述试验，白鼠按体重配成区组后再施加处理（随机区组设计），试验的误差均方通常小于完全随机设计。</p>
-<p>而上述介绍的各种试验设计方法，严格地说，它们仅适用于只有1个处理因素的试验问题之中，其他因素都属于区组因素，即与处理因素无交互作用。若试验所涉及的处理因素的个数为2或以上，当各因素在试验中所处的地位基本平等，且因素之间存在1级（即2因素之间）、2级（即3因素之间）乃至更复杂的交互作用时，则需选用析因设计。</p>
-<p>在评价药物疗效时，除需知道A药和B药各剂量的疗效外（主效应），还需知道两种药同时使用的协同疗效，析因设计及其相应的方差分析用于分析药物的单独效应、主效应和交互效应。</p>
-<p>主效应：某因素各水平的平均效应；单独效应：在每个B水平，A的效应；或在每个A水平，B的效应；交互效应：某因素各水平的单独效应随另一因素水平变化而变化，则称两因素之间存在交互效应，包括协同、拮抗作用。</p>
-<p>析因设计有交互作用的二因子方差分析将总偏差平方和做如下分解：</p>
-<ul>
-<li><p>误差偏差平方和：反映随机误差对试验结果的影响；</p></li>
-<li><p>因子A引起的偏差平方和：除含有误差波动外，反映因子A对试验结果的影响；</p></li>
-<li><p>因子B引起的偏差平方和：除含有误差波动外，反映因子B对试验结果的影响；</p></li>
-<li><p>因子A与B的交互作用的偏差平方和：反映因子A与B的交互作用对试验结果的影响。</p></li>
-</ul>
-<p>如果不存在交互效应，则只需考虑各因素的主效应；在方差分析中，如果存在交互效应，解释结果时，要逐一分析各因素的单独效应，找出最优搭配。在两因素析因设计时，只需考虑一阶交互效应；3个因素及以上时，除一阶交互效应外，还需考虑二阶、三阶等高阶交互效应，解释将更复杂。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/18/</guid>
-  <pubDate>Tue, 18 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
