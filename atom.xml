@@ -11,7 +11,176 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Tue, 03 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 04 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Ubuntu 20.04 上安装 R</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/04/install_r_on_ubuntu/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>如果你是 Ubuntu 用户，并且打算安装 R 语言环境来进行数据分析、统计计算或者数据科学工作，本文将为你提供一个详细的安装步骤。</p>
+<p>从下载源代码到配置必要的依赖项，我们将一步步带你完成整个过程。</p>
+<section id="更新系统包管理器" class="level3">
+<h3 class="anchored" data-anchor-id="更新系统包管理器">1. 更新系统包管理器</h3>
+<p>首先，我们需要确保系统包管理器是最新的。运行以下命令来更新 APT 源，并执行系统的全面升级。</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt update</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt full-upgrade</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt autoremove</span></code></pre></div>
+<p>这三条命令将会更新你的软件包列表，升级现有软件包，并移除不再需要的包，保持系统整洁。</p>
+</section>
+<section id="下载-r-源代码" class="level3">
+<h3 class="anchored" data-anchor-id="下载-r-源代码">2. 下载 R 源代码</h3>
+<p>由于 R 的最新版本可以通过源代码安装，这里我们选择手动下载 R 4.4.2 版本的源代码包，并解压。</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">wget</span> https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tar</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-xvzf</span> R-4.4.2.tar.gz</span></code></pre></div>
+<p>解压完成后，你会看到一个名为 R-4.4.2 的文件夹。</p>
+</section>
+<section id="安装必要的依赖项" class="level3">
+<h3 class="anchored" data-anchor-id="安装必要的依赖项">3. 安装必要的依赖项</h3>
+<p>R 的编译需要一些库和工具，所以需要先安装依赖项。运行以下命令来安装缺失的库：</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span> libx11-dev libxext-dev libxmu-dev libxt-dev</span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span> libdeflate-dev texinfo texlive-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-base texlive-latex-extra latexmk libcurl4-openssl-dev libxml2-dev libxt-dev pandoc ghostscript</span></code></pre></div>
+</section>
+<section id="编译-r" class="level3">
+<h3 class="anchored" data-anchor-id="编译-r">4. 编译 R</h3>
+<p>在安装完所有依赖项之后，我们可以开始编译 R。首先创建一个目录来存放 R 的安装文件：</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> ~/software/r/r-4.4.2</span></code></pre></div>
+<p>然后进入到 R 的源代码目录，使用 <code>./configure</code> 命令来配置编译选项，然后使用 <code>make</code> 命令开始编译：</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">cd</span> R-4.4.2/</span>
+<span id="cb5-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./configure</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--prefix</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$HOME</span>/software/r/r-4.4.2</span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make</span></span></code></pre></div>
+<p>这一步可能需要一些时间，具体时间取决于你的机器配置。</p>
+</section>
+<section id="安装-java-环境可选" class="level3">
+<h3 class="anchored" data-anchor-id="安装-java-环境可选">5. 安装 Java 环境（可选）</h3>
+<p>如果你需要在 R 中运行与 Java 相关的功能，比如使用 rJava 包，可能需要安装 Java。可以运行以下命令来检查 Java 版本并安装 OpenJDK 11：</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">java</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-version</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> apt install openjdk-11-jre-headless</span></code></pre></div>
+<p>然后设置 Java 的环境变量：</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$JAVA_HOME</span></span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> update-alternatives <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--config</span> java</span></code></pre></div>
+<p>编辑 <code>~/.bashrc</code> 文件，添加 JAVA_HOME 变量的配置：</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">vi</span> ~/.bashrc</span>
+<span id="cb8-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 在文件末尾添加如下内容：</span></span>
+<span id="cb8-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">JAVA_HOME</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/usr/lib/jvm/java-11-openjdk-amd64 <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#具体路径根据你的安装路径而定</span></span>
+<span id="cb8-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PATH</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$JAVA_HOME</span>/bin:<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PATH</span></span></code></pre></div>
+<p>保存并退出后，使用以下命令使更改生效：</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">source</span> ~/.bashrc</span></code></pre></div>
+</section>
+<section id="完成-r-安装" class="level3">
+<h3 class="anchored" data-anchor-id="完成-r-安装">6. 完成 R 安装</h3>
+<p>在完成所有必要的配置后，可以将 R 安装到指定目录。然后，进入到 <code>R-4.4.2</code> 的文件夹中，运行以下命令来安装 R：</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> make install</span></code></pre></div>
+</section>
+<section id="验证安装" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="验证安装">7. 验证安装</h3>
+<p>安装完成后，可以通过运行以下命令来验证 R 是否安装成功：</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">R</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div>
+<p>如果返回的是 R 的版本信息，那么说明安装已经成功。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412042352774.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">R 安装成功</figcaption>
+</figure>
+</div>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>Ubuntu</category>
+  <category>Linux</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/04/install_r_on_ubuntu/</guid>
+  <pubDate>Wed, 04 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412042352774.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Swiss Army Knife 工具运行 R 的 log 记录</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -2120,7 +2289,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="efbaa47d" class="cell" data-execution_count="1">
+<div id="1ad5d0e3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -2152,7 +2321,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="12add106" class="cell" data-execution_count="2">
+<div id="56363682" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -2172,7 +2341,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="c7c9419c" class="cell" data-execution_count="3">
+<div id="2e742c18" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -2183,7 +2352,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="af060eca" class="cell" data-execution_count="4">
+<div id="dc1dfed4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -2194,7 +2363,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="b11a1f5f" class="cell" data-execution_count="5">
+<div id="402b153e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -2207,7 +2376,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="ec61c95a" class="cell" data-execution_count="6">
+<div id="aabad060" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -2230,14 +2399,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 1.9567,  3.3531,  0.0595],
-         [-2.2974,  3.1800, -1.8610]],
+<pre><code>tensor([[[-3.7069,  1.5486,  1.7457],
+         [-2.2852, -0.4740,  0.6271]],
 
-        [[ 1.5850, -0.4422, -0.6868],
-         [ 2.2855,  0.4900,  1.4136]],
+        [[-0.6496,  1.4604,  0.1194],
+         [ 0.3186, -1.9591, -0.7975]],
 
-        [[-2.8229, -1.7614,  0.2699],
-         [-1.1219,  0.5161, -0.1923]]])</code></pre>
+        [[-0.2857, -0.4055,  2.1729],
+         [-0.3364,  0.6414, -0.1436]]])</code></pre>
 </div>
 </div>
 </section>
@@ -4619,7 +4788,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="95aeb703" class="cell" data-execution_count="1">
+<div id="f4fa30fa" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4674,7 +4843,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="d9238467" class="cell" data-execution_count="2">
+<div id="413b8945" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4714,7 +4883,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="429b4022" class="cell" data-execution_count="3">
+<div id="1cbd4378" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4779,7 +4948,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="8cfe562a" class="cell" data-execution_count="4">
+<div id="ebf3bb04" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4844,7 +5013,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="1956c502" class="cell" data-execution_count="1">
+<div id="72ac0447" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -4899,7 +5068,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="73737ca7" class="cell" data-execution_count="2">
+<div id="ab454525" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -4962,7 +5131,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="5436a04c" class="cell" data-execution_count="3">
+<div id="a21d35fc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5023,7 +5192,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="23683461" class="cell" data-execution_count="4">
+<div id="94fb13c1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -5130,7 +5299,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="13f24757" class="cell" data-execution_count="5">
+<div id="8007f419" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -5152,7 +5321,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="9190fd25" class="cell" data-execution_count="6">
+<div id="b7546df7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -5188,7 +5357,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="661cb25e" class="cell" data-execution_count="7">
+<div id="22cc8e98" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -5344,7 +5513,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="738b4448" class="cell" data-execution_count="1">
+<div id="2fbc76cf" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5372,7 +5541,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="cf0c7c70" class="cell" data-execution_count="2">
+<div id="501809d1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5394,7 +5563,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="4dfe0f86" class="cell" data-execution_count="3">
+<div id="0b344e93" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5428,7 +5597,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="4fa7dbde" class="cell" data-execution_count="4">
+<div id="915bb460" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -5462,7 +5631,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="075439a0" class="cell" data-execution_count="5">
+<div id="3efaee64" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5497,7 +5666,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="ee58b774" class="cell" data-execution_count="6">
+<div id="82cbd12e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5526,7 +5695,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="022e1ed1" class="cell" data-execution_count="7">
+<div id="ccc949d0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5621,7 +5790,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="006f0d2e" class="cell" data-execution_count="8">
+<div id="fdf62592" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5651,7 +5820,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="22729325" class="cell" data-execution_count="9">
+<div id="e7200e6d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5675,12 +5844,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_5916/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_5886/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="8b5b7eb1" class="cell" data-execution_count="10">
+<div id="1a689fe4" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5710,7 +5879,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="8acf8e65" class="cell" data-execution_count="11">
+<div id="177953b9" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5920,58 +6089,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <category>anova</category>
   <guid>https://leslie-lu.github.io/blog/2020/02/22/</guid>
   <pubDate>Sat, 22 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>试验设计与方差分析（3）</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/20/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="正交设计" class="level3">
-<h3 class="anchored" data-anchor-id="正交设计">正交设计</h3>
-<p>析因设计的缺点是当因素个数较多时（3个因素以上），所需试验单位数、处理组数、试验次数和方差分析的计算量会剧增。减少多因素试验次数的有效方法是采用正交试验设计。</p>
-<p>当析因设计要求的试验次数太多时，一个非常自然的想法就是从析因设计的全部水平组合中选择一部分有代表性的水平组合进行试验，因此就出现了分式析因设计。但是对于试验设计知识较少的实际工作者而言，选择适当的分式析因设计还是比较困难的，而正交试验设计是研究多因素多水平的又一种试验设计方法。</p>
-<p>它是根据正交性从全部的试验组合中挑选出部分有代表性的水平组合进行试验，这些有代表性的水平组合具备均匀分散、齐整可比的特点。正交试验设计是分式析因设计的主要方法，高效、快速、经济。日本著名统计学家田口玄一将正交试验选择的水平组合列成表格，称为正交表。</p>
-<p>例如做一个3因素3水平的试验，按全面试验要求，需进行3<em>3</em>3=27种水平组合的试验，且尚未考虑每一组合的重复数，而正交试验设计可以大大减少工作量。</p>
-<p>正交设计在医学研究中的用途相当广泛，在具体的操作上，也比析因设计简单，可寻找疗效好的药物配方、医疗仪器多个参数的优化组合、医疗产品的生成工艺、生物体的培养条件等。</p>
-<p>假定在一个农业试验中要考察3个小麦品种、3种不同的肥料和3种播种方式对小麦产量的影响，并假定有9个地力基本相同的试验小区。在这个问题中，有3个可能影响小麦产量的因子：品种、肥料和播种方式，每个因子有3个水平，如果要做完全试验，就需要3<em>3</em>3=27个小区，而实际上总共只有9个小区，显然，完全试验在当前的情况下行不通。</p>
-<p>因此我们可退一步考虑，按照上述正交设计的想法，设计要求品种、肥料和播种方式中的任意两个的不同水平的搭配都出现一次，满足这种性质的试验设计就是正交试验。</p>
-<p>下面给出正交设计的一般性陈述：考虑设计一个试验，安排m个因子，做n次试验，若它满足以下两个条件，则其为正交试验：</p>
-<ol type="1">
-<li><p>每一因子的不同水平在试验中出现相同的次数（均衡性）；</p></li>
-<li><p>任意两因子的不同水平组合在试验中出现相同的次数（正交性）。</p></li>
-</ol>
-<p>就定义来说，等重复的完全试验显然满足上述两个条件，因此当然也是正交试验设计。但由于其要求的试验次数太多，所以实际上很难实施。我们通常所说的正交试验设计，是指既满足上述两条件，同时试验次数n又远远小于N的设计。</p>
-<p>正交试验设计的方案可以用一张表来表示，这张表就被称为正交设计表。一般来说，正交设计表的第1行为表头，标明每列所代表的因子，最左一列标明试验的序号，由1到n。注意：试验的序号并不表示试验的时间先后顺序，先后顺序要按照随机化原则来安排。表中每列的数字代表相应因子的水平序号，每行的数字代表在相应试验中各因子的水平序号，有：</p>
-<ol type="1">
-<li><p>每列中不同数字出现的次数相同（试验的均衡性）；</p></li>
-<li><p>每两列中不同的数字组合出现的次数相同（试验的正交性）。</p></li>
-</ol>
-<p>假定因子对响应变量的影响无交互效应（许多实际情况正是这样），正交试验的优点是在很少的试验次数（与全面试验相比）中，所得数据可以简便而有效地对因子效应进行参数估计和方差分析。</p>
-<p>其方法可一般地归纳如下：</p>
-<ul>
-<li><p>总均值的估计=试验数据的总平均值</p></li>
-<li><p>某因子的某个主效应的估计=该因子的该主效应所出现的试验数据的平均值-总平均值</p></li>
-<li><p>总平方和=（试验数据-总平均值）的平方和，自由度=n-1</p></li>
-<li><p>某因子的主效应平方和=重复数*参数估计的平方和，自由度=水平数-1</p></li>
-<li><p>残差平方和=总平方和-因子效应平方和的和，自由度=总平方和-因子效应自由度的和</p></li>
-</ul>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>anova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/20/</guid>
-  <pubDate>Thu, 20 Feb 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
