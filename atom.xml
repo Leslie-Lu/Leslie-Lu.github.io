@@ -83,6 +83,404 @@
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111909627.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>感知机：人工神经网络的起点</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/16/perceptron/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="感知机的诞生人工神经网络的起点" class="level3">
+<h3 class="anchored" data-anchor-id="感知机的诞生人工神经网络的起点">感知机的诞生：人工神经网络的起点</h3>
+<p>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<a href="https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjU2NGZlYWNlYzNlYmRmYWE3MzExYjlkOGU3M2M0MjgxOGYyOTEyNjQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU5MDc3MzAxNTU3Mzg0OTM5NTAiLCJlbWFpbCI6Imxlc2xpZWx1aHJibXVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTczNDE4OTAxMSwibmFtZSI6Ikxlc2xpZSBMdSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKbVExRmRMQ2F2eklvZHVhcE9FQWh5SmtKMmRjWmlwV0lISjZEdlJGZ1NCcjR1U2c9czk2LWMiLCJnaXZlbl9uYW1lIjoiTGVzbGllIiwiZmFtaWx5X25hbWUiOiJMdSIsImlhdCI6MTczNDE4OTMxMSwiZXhwIjoxNzM0MTkyOTExLCJqdGkiOiI2MDE2ZDJhNjhlNzc5OGNlOGE4MmU4MWIxZjVjZTlkYmEyMDNlZGY0In0.SxvXbqaF3FIYDojbiJkLnqa506pTkD9in2vzvogrfCScDEXMIeh_eGF7PpF2uQzegGohf-byTAhio4eLjPXYLCNZKSDwR4DxYJUels_MbcZDKQVzzbHm1xu8ylriSoPJR_l_uqX9B56O-dW-P5GQk3qepWftGx6Wv2JcqxznuuuihSEiWpQh_rthN0SmqsuPmFDPJfb_jJhrSm1gd7ZR3pWckDylaRIulbjFPVXepiY37_F9JVyoTWQQd6wtQoD7UTV6F842TGgBMmYVARJKR14l1dFHniFxA0HDR9rm8BDsmu6l5SmrDMTY4Q3RsZdYo-d3xaFk7FT31FyfatQ_Zg" title="medium">过程</a>。</p>
+<section id="核心思想" class="level4">
+<h4 class="anchored" data-anchor-id="核心思想">核心思想</h4>
+<p>感知机的基本功能是进行线性分类。它通过将输入值加权求和后与阈值比较，来决定输出属于哪个类别。简单来说，感知机的输出是一个二元值（如 0 或 1 ），用来表示输入数据所属的类别。</p>
+</section>
+<section id="数学模型" class="level4">
+<h4 class="anchored" data-anchor-id="数学模型">数学模型</h4>
+<p>感知机基于以下公式：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ay%20=%20f%5Cleft(%5Csum_%7Bi=1%7D%5E%7Bn%7D%20w_i%20x_i%20+%20b%5Cright)%0A"></p>
+</section>
+</section>
+<section id="感知机的局限性xor-问题的挑战" class="level3">
+<h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
+<p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
+<div id="d473c888" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> Perceptron:</span>
+<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, input_size, learning_rate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, epochs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>):</span>
+<span id="cb1-3">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Initialize weights to zeros, with one extra weight for the bias</span></span>
+<span id="cb1-4">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.weights <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.zeros(input_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># +1 for the bias</span></span>
+<span id="cb1-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> learning_rate  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Learning rate controls weight updates</span></span>
+<span id="cb1-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> epochs  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Number of iterations over the training data</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> activation_function(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x):</span>
+<span id="cb1-9">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Apply step function: return 1 if x &gt;= 0, else return 0</span></span>
+<span id="cb1-10">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb1-11"></span>
+<span id="cb1-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> predict(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x):</span>
+<span id="cb1-13">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compute the weighted sum (dot product), including bias</span></span>
+<span id="cb1-14">        z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.weights.T.dot(np.insert(x, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Insert bias term into input</span></span>
+<span id="cb1-15">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.activation_function(z)</span>
+<span id="cb1-16"></span>
+<span id="cb1-17">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> train(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, X, y):</span>
+<span id="cb1-18">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs):</span>
+<span id="cb1-19">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> xi, target <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(X, y):</span>
+<span id="cb1-20">                prediction <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.predict(xi)</span>
+<span id="cb1-21">                error <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> target <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> prediction</span>
+<span id="cb1-22">                update <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> error</span>
+<span id="cb1-23">                </span>
+<span id="cb1-24">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.weights[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> update <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> xi </span>
+<span id="cb1-25">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.weights[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> update</span>
+<span id="cb1-26"></span>
+<span id="cb1-27"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Training data (XOR logic)</span></span>
+<span id="cb1-28">X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]])</span>
+<span id="cb1-29">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])</span></code></pre></div>
+</div>
+</section>
+<section id="多层感知机mlp的出现突破局限" class="level3">
+<h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
+<p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
+<div id="b331e957" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Sequential</span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> tensorflow.keras.layers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Dense, Input</span>
+<span id="cb2-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> tensorflow.keras.optimizers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Adam</span>
+<span id="cb2-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> MLPerceptron:</span>
+<span id="cb2-5">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, input_size, learning_rate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>, epochs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2000</span>):</span>
+<span id="cb2-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.input_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> input_size</span>
+<span id="cb2-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> learning_rate</span>
+<span id="cb2-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> epochs</span>
+<span id="cb2-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Sequential()</span>
+<span id="cb2-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.add(Input((input_size,)))  </span>
+<span id="cb2-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.add(Dense(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, activation<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tanh"</span>, ))  </span>
+<span id="cb2-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.add(Dense(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, activation<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sigmoid"</span>)) </span>
+<span id="cb2-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">compile</span>(</span>
+<span id="cb2-14">            loss<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"binary_crossentropy"</span>, optimizer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"adam"</span>, metrics<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"accuracy"</span>]</span>
+<span id="cb2-15">        )</span>
+<span id="cb2-16"></span>
+<span id="cb2-17">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> train(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, X, y):</span>
+<span id="cb2-18">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.fit(X, y, epochs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs, verbose<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb2-19"></span>
+<span id="cb2-20">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> predict(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x):</span>
+<span id="cb2-21">        prediction <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.predict(np.array([x]))</span>
+<span id="cb2-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> prediction <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>  </span></code></pre></div>
+</div>
+</section>
+<section id="感知机的现代继承者" class="level3">
+<h3 class="anchored" data-anchor-id="感知机的现代继承者">感知机的现代继承者</h3>
+<p>虽然感知机本身不再是当前人工智能的核心技术，但它为后续技术的发展奠定了重要基础。现代深度学习模型（如卷积神经网络、循环神经网络）可以被视为感知机的扩展和进化。多层感知机推动了深度神经网络的研究热潮，尤其是在 2010 年代 GPU 计算力提升后，深度学习应用于图像识别、自然语言处理等领域。感知机的提出使得研究者开始探索机器如何<code>学习</code>这一基本问题，也激发了人工智能领域的快速发展。</p>
+</section>
+<section id="感知机的意义与启示" class="level3">
+<h3 class="anchored" data-anchor-id="感知机的意义与启示">感知机的意义与启示</h3>
+<p>感知机的历史体现了技术发展的非线性特性：早期的技术突破可能因为局限性而受到批评，但它们却是后续更复杂技术的基石。感知机虽然简单，但它的概念推动了我们对人类学习过程和计算机模拟的理解。虽然感知机的局限曾导致人工智能研究进入<code>低谷期</code>（AI冬天），但最终多层感知机证明了它的价值。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>perceptron</category>
+  <category>artificial neural network</category>
+  <category>machine learning</category>
+  <category>deep learning</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/16/perceptron/</guid>
+  <pubDate>Wed, 11 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://miro.medium.com/v2/resize:fit:828/format:webp/1*6OkGcBSlGpA5TtlRxhF6zA.png" medium="image" type="image/png"/>
+</item>
+<item>
   <title>Ubuntu 20.04 上安装 R</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2024/12/04/install_r_on_ubuntu/</link>
@@ -2359,7 +2757,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="10b3cded" class="cell" data-execution_count="1">
+<div id="5ce43bcf" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -2391,7 +2789,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="690ef32d" class="cell" data-execution_count="2">
+<div id="293a9c61" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -2411,7 +2809,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="325a3286" class="cell" data-execution_count="3">
+<div id="d169f189" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -2422,7 +2820,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="a6a9f536" class="cell" data-execution_count="4">
+<div id="acf56b35" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -2433,7 +2831,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="763c65b1" class="cell" data-execution_count="5">
+<div id="bb21dc7a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -2446,7 +2844,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="aef92c6e" class="cell" data-execution_count="6">
+<div id="712dbbf9" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -2469,14 +2867,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 6.0628,  1.5834, -1.5237],
-         [ 2.4603, -0.4566, -2.5010]],
+<pre><code>tensor([[[-5.3573, -2.0300, -2.9675],
+         [ 3.1660,  0.1237, -1.3171]],
 
-        [[-0.1323, -3.0310, -2.1337],
-         [-3.1054,  3.6811, -1.3880]],
+        [[-2.3027, -3.5391,  4.5439],
+         [ 1.9515,  0.7175,  0.1914]],
 
-        [[-3.4200, -1.6294, -0.6536],
-         [ 0.7070, -3.7852, -2.3933]]])</code></pre>
+        [[ 0.7259, -1.6082,  0.9503],
+         [-2.0996, -1.2803, -1.0700]]])</code></pre>
 </div>
 </div>
 </section>
@@ -4858,7 +5256,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="15a88da5" class="cell" data-execution_count="1">
+<div id="6b7d41e1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4913,7 +5311,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="fca8db09" class="cell" data-execution_count="2">
+<div id="9c78843f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4953,7 +5351,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="e8846012" class="cell" data-execution_count="3">
+<div id="a5466ad2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5018,7 +5416,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="ec8b44e0" class="cell" data-execution_count="4">
+<div id="5787be34" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5083,7 +5481,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="5cb2e72c" class="cell" data-execution_count="1">
+<div id="cf19cf14" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -5138,7 +5536,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="990b16dd" class="cell" data-execution_count="2">
+<div id="9bf3abe8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -5201,7 +5599,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="933344b8" class="cell" data-execution_count="3">
+<div id="ddb7b03e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5262,7 +5660,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="5a8712b7" class="cell" data-execution_count="4">
+<div id="1744e952" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -5369,7 +5767,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="403704ea" class="cell" data-execution_count="5">
+<div id="24283d7e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -5391,7 +5789,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="5688bf29" class="cell" data-execution_count="6">
+<div id="9d0dfa71" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -5427,7 +5825,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="1c6fb493" class="cell" data-execution_count="7">
+<div id="5fceb1fc" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -5583,7 +5981,7 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="17feae8a" class="cell" data-execution_count="1">
+<div id="a828a8ff" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5611,7 +6009,7 @@ font-style: inherit;">print</span>(a)</span></code></pre></div>
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="fbf197dc" class="cell" data-execution_count="2">
+<div id="161b696c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5633,7 +6031,7 @@ font-style: inherit;">#从程序的运行结果来看，确实是无效的</span
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="2ad07cdc" class="cell" data-execution_count="3">
+<div id="2c4491db" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5667,7 +6065,7 @@ font-style: inherit;">#列向量本身就是二维表示的</span></span></code>
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="681126e8" class="cell" data-execution_count="4">
+<div id="c6abb37f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
@@ -5701,7 +6099,7 @@ font-style: inherit;">#此时可以直接通过行向量转置的方法生成对
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="4800c3d5" class="cell" data-execution_count="5">
+<div id="382df976" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5736,7 +6134,7 @@ font-style: inherit;">+</span>v)</span></code></pre></div>
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="eafe933b" class="cell" data-execution_count="6">
+<div id="53e7409b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5765,7 +6163,7 @@ font-style: inherit;">*</span>u)</span></code></pre></div>
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="9ddea80d" class="cell" data-execution_count="7">
+<div id="25c10e75" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5860,7 +6258,7 @@ background-color: null;
 font-style: inherit;">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="d01fbb25" class="cell" data-execution_count="8">
+<div id="6c696377" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5890,7 +6288,7 @@ font-style: inherit;">#二维乘二维，结果还是二维</span></span></code>
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="e0f18299" class="cell" data-execution_count="9">
+<div id="21b94162" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5914,12 +6312,12 @@ font-style: inherit;">#一维乘一维，结果还是一维</span></span></code>
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6077/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_5974/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="b798e101" class="cell" data-execution_count="10">
+<div id="5c79caa1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5949,7 +6347,7 @@ font-style: inherit;">print</span>(np.cross(x,y))</span></code></pre></div>
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="c84cf24e" class="cell" data-execution_count="11">
+<div id="361c9d8d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">u<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -6082,42 +6480,6 @@ font-style: inherit;">#报错，带有第二个维度无法进行向量内积</s
   <guid>https://leslie-lu.github.io/blog/2020/03/10/</guid>
   <pubDate>Tue, 10 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>协方差分析</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/02/23/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>医学试验设计一个很重要的目的就是为了排除非处理因素的干扰影响，使试验误差的估计降到最低限度，从而可以准确地获得处理因素的试验效应。但在某些实际问题中，有些因素在目前还不能控制或难以控制。如在动物饲养试验中，各组动物所增加的平均体重不仅仅与各种饲料营养价值高低有关，还与各动物的进食量有关，甚至与各动物的初始体重等因素及其交互作用都有关系。如果直接进行方差分析，会因为混杂因素的影响而无法得出正确的结论。</p>
-<p>协方差分析是将回归分析与方差分析结合起来使用的一种分析方法。在协方差分析中，先将定量的影响因素（即难以控制的混杂因素）看作自变量/协变量，建立因变量随自变量变化的回归方程，利用回归方程把因变量的变化中受不易控制的定量因素的影响扣除掉，从而能够较合理地比较定性的影响因素处在不同水平下，经回归分析手段修正以后的因变量的总体均数之间是否有显著性的差别，这就是协方差分析的基本思想。</p>
-<p>协方差分析用于比较一个变量Y在一个或几个因素不同水平上的差异，但Y在受这些因素影响的同时，还受到另一个变量X的影响，且X变量的取值难以人为控制，不能作为方差分析中的一个因素处理。此时如果X与Y之间可以建立回归关系，则可以用协方差分析的方法排除X对Y的影响，然后再用方差分析的方法对各因素水平的差异进行统计推断。在协方差分析中，我们称Y为因变量，X为协变量，即在方差分析中用来校正因变量的数值型变量。</p>
-<p>也许有人会问随机因素的影响也是不能人为控制的，为什么不能把X作为一种随机因素处理呢？</p>
-<p>这里的差异主要在于作为随机因素处理时，虽然每一水平的影响是不能人为控制的，但我们至少可以得到几个属于同一水平的重复，因此可以把它们分别用另一因素的不同水平处理，最后在方差分析时，我们才能排除这一随机因素的影响，对另一因素的各水平进行比较。</p>
-<p>例如，当我们考虑动物窝别对增重的影响时，一般可把它当作随机因素处理。一方面是由于它不易数量化，另一方面是同一窝一般有几只动物，可分别接受另一因素不同水平的处理。如果我们考虑试验开始时动物初始体重的影响，这时一般的方法是选初始体重相同的动物作为一组，分别接受另一因素的不同水平处理，此时用方差分析没有问题。但显然，这种方法往往是很困难的，一般需要很大的样本。若可供试验的动物样本很少，初始体重又有明显差异，无法选出体重相当的动物，那就只好认为初始体重X与最终体重Y有回归关系，采用协方差分析的方法排除初始体重的影响，再来比较其他因素如饲料种类、数量对增重的影响。协方差分析既利用了回归分析的基本方法，又用到了方差分析的基本方法，这就是协方差分析的基本思想。</p>
-<p>消除初始体重影响的另一种方法是对最终体重与初始体重的差值进行统计分析，这种方法与协方差分析的生物学意义是不同的。对差值进行分析的生物学假设是初始体重对以后的体重增量没有任何影响，而协方差分析则是假设体重增量中包含初始体重的影响（不仅仅是初始体重对最终体重的影响），这种影响的大小与初始体重成正比，如果这一比值为1，协方差分析与对差值进行方差分析是相同的。但如果比值不为1，它们的结果将是不同的。也就是说，协方差分析假设使初始体重不同的因素在以后的生长过程中也会发挥作用，而对差值进行方差分析则是假设这些因素以后不再发挥作用，这两种生物学假设是有很大区别的。</p>
-<p>在学习中需要注意统计学知识背后的研究假设。由于协方差分析包含了对协变量影响是否存在及其大小等一系列统计检验与估计，它显然比对差值进行分析等方法有更广泛的适用范围，因此除非有明显的证据说明对差值进行分析的生物学假设是正确的，一般情况下还是应采用协方差分析方法。</p>
-<p>在医学研究中，很多情况下都需要借助协方差分析来排除非处理因素的干扰，从而准确地估计处理因素的试验效应。如，评价3种药物治疗高脂血症的效果，寻求各方面自然条件基本相同的受试者是很困难的，但是把患者的年龄、体重指数、用药前的血脂水平等作为协变量进行协方差分析，就简单很多。同样，比较几种不同营养奶粉对婴幼儿体重增长的作用差异，把研究对象的性别、年龄、基线体重等混杂因子作为协变量进行协方差分析，则是非常有效的统计分析方法。</p>
-<p>和方差分析一样，协方差分析也属于参数分析，因变量Y应当满足以下假设条件：</p>
-<ol type="1">
-<li><p>在效应因子的每一个水平上，因变量Y服从正态分布，且方差相等；</p></li>
-<li><p>在效应因子的每一个水平上，因变量Y和协变量X呈线性关系，且斜率相同。</p></li>
-</ol>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>ancova</category>
-  <guid>https://leslie-lu.github.io/blog/2020/02/23/</guid>
-  <pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
