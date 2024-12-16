@@ -313,7 +313,7 @@ window.Quarto = {
 
 <section id="感知机的诞生人工神经网络的起点" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的诞生人工神经网络的起点">感知机的诞生：人工神经网络的起点</h3>
-<p>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<a href="https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjU2NGZlYWNlYzNlYmRmYWE3MzExYjlkOGU3M2M0MjgxOGYyOTEyNjQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU5MDc3MzAxNTU3Mzg0OTM5NTAiLCJlbWFpbCI6Imxlc2xpZWx1aHJibXVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTczNDE4OTAxMSwibmFtZSI6Ikxlc2xpZSBMdSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKbVExRmRMQ2F2eklvZHVhcE9FQWh5SmtKMmRjWmlwV0lISjZEdlJGZ1NCcjR1U2c9czk2LWMiLCJnaXZlbl9uYW1lIjoiTGVzbGllIiwiZmFtaWx5X25hbWUiOiJMdSIsImlhdCI6MTczNDE4OTMxMSwiZXhwIjoxNzM0MTkyOTExLCJqdGkiOiI2MDE2ZDJhNjhlNzc5OGNlOGE4MmU4MWIxZjVjZTlkYmEyMDNlZGY0In0.SxvXbqaF3FIYDojbiJkLnqa506pTkD9in2vzvogrfCScDEXMIeh_eGF7PpF2uQzegGohf-byTAhio4eLjPXYLCNZKSDwR4DxYJUels_MbcZDKQVzzbHm1xu8ylriSoPJR_l_uqX9B56O-dW-P5GQk3qepWftGx6Wv2JcqxznuuuihSEiWpQh_rthN0SmqsuPmFDPJfb_jJhrSm1gd7ZR3pWckDylaRIulbjFPVXepiY37_F9JVyoTWQQd6wtQoD7UTV6F842TGgBMmYVARJKR14l1dFHniFxA0HDR9rm8BDsmu6l5SmrDMTY4Q3RsZdYo-d3xaFk7FT31FyfatQ_Zg" title="medium">过程</a>。</p>
+<p>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<a href="https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96" title="medium">过程</a>。</p>
 <section id="核心思想" class="level4">
 <h4 class="anchored" data-anchor-id="核心思想">核心思想</h4>
 <p>感知机的基本功能是进行线性分类。它通过将输入值加权求和后与阈值比较，来决定输出属于哪个类别。简单来说，感知机的输出是一个二元值（如 0 或 1 ），用来表示输入数据所属的类别。</p>
@@ -329,7 +329,7 @@ y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="d473c888" class="cell" data-execution_count="1">
+<div id="805866e0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Perceptron:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_size, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span><span class="dv">1000</span>):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Initialize weights to zeros, with one extra weight for the bias</span></span>
@@ -364,7 +364,7 @@ y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="b331e957" class="cell" data-execution_count="2">
+<div id="06a7d1a8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Sequential</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense, Input</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.optimizers <span class="im">import</span> Adam</span>
@@ -905,7 +905,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## 感知机的诞生：人工神经网络的起点</span></span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<span class="co">[</span><span class="ot">过程</span><span class="co">](https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjU2NGZlYWNlYzNlYmRmYWE3MzExYjlkOGU3M2M0MjgxOGYyOTEyNjQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU5MDc3MzAxNTU3Mzg0OTM5NTAiLCJlbWFpbCI6Imxlc2xpZWx1aHJibXVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTczNDE4OTAxMSwibmFtZSI6Ikxlc2xpZSBMdSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKbVExRmRMQ2F2eklvZHVhcE9FQWh5SmtKMmRjWmlwV0lISjZEdlJGZ1NCcjR1U2c9czk2LWMiLCJnaXZlbl9uYW1lIjoiTGVzbGllIiwiZmFtaWx5X25hbWUiOiJMdSIsImlhdCI6MTczNDE4OTMxMSwiZXhwIjoxNzM0MTkyOTExLCJqdGkiOiI2MDE2ZDJhNjhlNzc5OGNlOGE4MmU4MWIxZjVjZTlkYmEyMDNlZGY0In0.SxvXbqaF3FIYDojbiJkLnqa506pTkD9in2vzvogrfCScDEXMIeh_eGF7PpF2uQzegGohf-byTAhio4eLjPXYLCNZKSDwR4DxYJUels_MbcZDKQVzzbHm1xu8ylriSoPJR_l_uqX9B56O-dW-P5GQk3qepWftGx6Wv2JcqxznuuuihSEiWpQh_rthN0SmqsuPmFDPJfb_jJhrSm1gd7ZR3pWckDylaRIulbjFPVXepiY37_F9JVyoTWQQd6wtQoD7UTV6F842TGgBMmYVARJKR14l1dFHniFxA0HDR9rm8BDsmu6l5SmrDMTY4Q3RsZdYo-d3xaFk7FT31FyfatQ_Zg "medium")</span>。</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<span class="co">[</span><span class="ot">过程</span><span class="co">](https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96 "medium")</span>。</span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 核心思想</span></span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
