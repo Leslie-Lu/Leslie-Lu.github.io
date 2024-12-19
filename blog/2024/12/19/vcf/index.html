@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="linear algebra">
+<meta name="description" content="Variant Call Format">
 
-<title>矩阵的运算 | Zhen Lu – Zhen Lu</title>
+<title>深入了解 VCF/VCF.GZ/VCF.GZ.TBI 文件 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,25 +59,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../..//files/favicon-512.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -133,7 +133,7 @@ div.column-margin+hr.dinkus {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
   </div>
@@ -144,37 +144,37 @@ div.column-margin+hr.dinkus {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../blog/index.html"> 
+    <a class="nav-link" href="../../../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../talks/index.html"> 
+    <a class="nav-link" href="../../../../../talks/index.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../publications/index.html"> 
+    <a class="nav-link" href="../../../../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../cv/index.html"> 
+    <a class="nav-link" href="../../../../../cv/index.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../news/index.html"> 
+    <a class="nav-link" href="../../../../../news/index.html"> 
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../uses/index.html"> 
+    <a class="nav-link" href="../../../../../uses/index.html"> 
 <span class="menu-text">Uses</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../atom.xml"> 
+    <a class="nav-link" href="../../../../../atom.xml"> 
 <span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
@@ -220,16 +220,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">矩阵的运算</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">深入了解 VCF/VCF.GZ/VCF.GZ.TBI 文件</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          linear algebra
+          Variant Call Format
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">linear algebra</div>
-                <div class="quarto-category">matrix</div>
-                <div class="quarto-category">python</div>
+                <div class="quarto-category">vcf</div>
+                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">genetics</div>
               </div>
                   </div>
   </div>
@@ -247,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, April 27, 2020</p>
+        <p class="date">Thursday, December 19, 2024</p>
       </div>
     </div>
     
@@ -262,10 +262,11 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#矩阵的加法运算" id="toc-矩阵的加法运算" class="nav-link active" data-scroll-target="#矩阵的加法运算">矩阵的加法运算</a></li>
-  <li><a href="#矩阵的数量乘法运算" id="toc-矩阵的数量乘法运算" class="nav-link" data-scroll-target="#矩阵的数量乘法运算">矩阵的数量乘法运算</a></li>
-  <li><a href="#矩阵与矩阵的乘法" id="toc-矩阵与矩阵的乘法" class="nav-link" data-scroll-target="#矩阵与矩阵的乘法">矩阵与矩阵的乘法</a></li>
-  <li><a href="#矩阵乘以向量" id="toc-矩阵乘以向量" class="nav-link" data-scroll-target="#矩阵乘以向量">矩阵乘以向量</a></li>
+  <li><a href="#什么是-vcf-文件" id="toc-什么是-vcf-文件" class="nav-link active" data-scroll-target="#什么是-vcf-文件">什么是 VCF 文件？</a></li>
+  <li><a href="#vcf-文件的结构" id="toc-vcf-文件的结构" class="nav-link" data-scroll-target="#vcf-文件的结构">VCF 文件的结构</a></li>
+  <li><a href="#vcf.gz-文件为什么要压缩" id="toc-vcf.gz-文件为什么要压缩" class="nav-link" data-scroll-target="#vcf.gz-文件为什么要压缩">VCF.GZ 文件：为什么要压缩？</a></li>
+  <li><a href="#vcf.gz.tbi-文件加速随机访问的关键" id="toc-vcf.gz.tbi-文件加速随机访问的关键" class="nav-link" data-scroll-target="#vcf.gz.tbi-文件加速随机访问的关键">VCF.GZ.TBI 文件：加速随机访问的关键</a></li>
+  <li><a href="#vcfvcf.gzvcf.gz.tbi-在实际中的应用" id="toc-vcfvcf.gzvcf.gz.tbi-在实际中的应用" class="nav-link" data-scroll-target="#vcfvcf.gzvcf.gz.tbi-在实际中的应用">VCF/VCF.GZ/VCF.GZ.TBI 在实际中的应用</a></li>
   </ul>
 </nav>
 </nav>
@@ -280,94 +281,83 @@ div.column-margin+hr.dinkus {
 
 
 
-<section id="矩阵的加法运算" class="level3">
-<h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
-<p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="c1171211" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">10</span>, <span class="dv">20</span>],</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">30</span>, <span class="dv">40</span>],</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">50</span>, <span class="dv">60</span>]])</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A<span class="op">+</span>B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[11 22]
- [33 44]
- [55 66]]</code></pre>
-</div>
-</div>
+<p>在生物信息学研究中，变异数据的存储和分析是核心任务之一。而 VCF 文件（Variant Call Format）作为广泛使用的文件格式，几乎贯穿了从测序数据到变异注释和分析的整个流程。这里，我们将深入探讨 VCF 及其相关的压缩文件（VCF.GZ）和索引文件（VCF.GZ.TBI），帮助大家更好地理解这些文件及其应用场景。</p>
+<section id="什么是-vcf-文件" class="level3">
+<h3 class="anchored" data-anchor-id="什么是-vcf-文件">什么是 VCF 文件？</h3>
+<p>VCF（Variant Call Format）文件是一种专为存储基因组变异数据设计的文件格式，它可以记录不同个体或样本中的突变信息，包括单核苷酸变异（SNP）、插入和缺失（InDels）以及结构变异（SVs）。</p>
+<p>VCF文件具有以下主要特点： - 文本格式：易于读取和解析，便于集成到各种分析工具中。 - 可扩展性：支持通过 INFO 字段存储额外的变异注释。 - 标准化：通过一致的格式定义，保证跨研究和工具的兼容性。</p>
 </section>
-<section id="矩阵的数量乘法运算" class="level3">
-<h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
-<p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="0ad709aa" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">4</span>],</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="dv">5</span>],</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">6</span>]])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span><span class="op">*</span>A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[ 2  8]
- [ 4 10]
- [ 6 12]]</code></pre>
-</div>
-</div>
+<section id="vcf-文件的结构" class="level3">
+<h3 class="anchored" data-anchor-id="vcf-文件的结构">VCF 文件的结构</h3>
+<p>一个典型的 VCF 文件由两部分组成：</p>
+<section id="header头部" class="level4">
+<h4 class="anchored" data-anchor-id="header头部">Header（头部）</h4>
+<p>以#开头，包含文件的元信息，如 VCF 版本、参考基因组、字段定义等。例如：</p>
+<pre class="{bash}"><code>#fileformat=VCFv4.2
+##reference=GRCh38
+##INFO=&lt;ID=AF,Number=A,Type=Float,Description="Allele Frequency"&gt;
+#CHROM POS ID REF ALT QUAL FILTER INFO FORMAT SAMPLE1 SAMPLE2</code></pre>
+<p><code>#CHROM</code>：染色体编号；<code>POS</code>：变异在基因组上的位置；<code>ID</code>：变异的标识符（如 rsID）；<code>REF</code> 和 <code>ALT</code>：参考等位基因和替代等位基因。</p>
 </section>
-<section id="矩阵与矩阵的乘法" class="level3">
-<h3 class="anchored" data-anchor-id="矩阵与矩阵的乘法">矩阵与矩阵的乘法</h3>
-<p>不是随意两个矩阵都可以相乘，乘法运算对两个矩阵的形态是有特定要求的，主要有以下3条：</p>
-<ol type="1">
-<li><p>左边矩阵的列数和右边矩阵的行数必须相等</p></li>
-<li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
-<li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
-</ol>
-<div id="cb47da72" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>],</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(A, B))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[ 14  17  20  23]
- [ 30  37  44  51]
- [ 46  57  68  79]
- [ 62  77  92 107]]</code></pre>
-</div>
-</div>
+<section id="data数据部分" class="level4">
+<h4 class="anchored" data-anchor-id="data数据部分">Data（数据部分）</h4>
+<p>存储实际的变异信息，每行记录一个变异。例如：</p>
+<pre class="{bash}"><code>1  123456  rs123456  A  G  50  PASS  AF=0.1  GT:AD:DP  0/1:5,10:15  0/0:20,0:20</code></pre>
+<p>这里记录了第 1 号染色体上第 123456 位的一个 SNP，参考碱基是 A，突变碱基是 G。</p>
 </section>
-<section id="矩阵乘以向量" class="level3">
-<h3 class="anchored" data-anchor-id="矩阵乘以向量">矩阵乘以向量</h3>
-<p>矩阵与向量的乘法，一般是将矩阵A写在左边，列向量x写在右边，这种 Ax 形式的写法便于描述向量x的空间位置在矩阵A的作用下进行变换的过程。</p>
-<p>正如前面文章所讲，矩阵与向量的乘法可以看作是矩阵与矩阵乘法的一种特殊形式，只不过位于后面的是一个列数为1的特殊矩阵而已。</p>
-<p>对应前面矩阵与矩阵的乘法规则，矩阵与向量的乘法规则主要有：</p>
-<ol type="1">
-<li><p>矩阵在左，列向量在右，矩阵的列数和列向量的维数必须相等</p></li>
-<li><p>矩阵和列向量相乘的结果也是一个列向量</p></li>
-<li><p>矩阵的行数就是结果向量的维数</p></li>
-<li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
-</ol>
-<div id="768e319b" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">5</span>]]).T</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(A, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[14]
- [32]
- [50]]</code></pre>
-</div>
-</div>
-<p>从结果来看，原始向量表示二维平面上的一个点，其平面坐标为(4,5)，经过矩阵A的乘法作用，最终将原始点转化为三维空间中的一个新的目标点，其空间坐标为(14,32,50)。</p>
-<p>从这个例子中，我们可以总结出矩阵所发挥的重要作用：在指定矩阵的乘法作用下，原始空间中的向量被映射转换到了目标空间中的新坐标，向量的空间位置由此发生了变化，甚至在映射后，目标空间的维数相较于原始空间都有可能发生改变。</p>
-<p>具体这些空间位置的改变的规律，以及其背后更深层次的内涵，我们会在后面的文章中一起讨论学习。</p>
+</section>
+<section id="vcf.gz-文件为什么要压缩" class="level3">
+<h3 class="anchored" data-anchor-id="vcf.gz-文件为什么要压缩">VCF.GZ 文件：为什么要压缩？</h3>
+<p>由于全基因组测序数据的规模庞大，原始的 VCF 文件往往非常大，这给存储和传输带来了不小的负担。因此，生物信息学领域通常会对 VCF 文件进行压缩，生成 VCF.GZ 文件。</p>
+<p>VCF.GZ的特点：</p>
+<ul>
+<li>基于 Gzip 压缩：VCF.GZ 文件采用 Gzip 算法压缩，具有良好的压缩率。</li>
+<li>兼容性强：绝大多数生物信息学工具（如 bcftools、GATK、vcftools 等）都支持直接读取 VCF.GZ 文件。</li>
+<li>便于存储和共享：相比未压缩的 VCF 文件，VCF.GZ 文件体积更小，减少了存储成本，并加快了传输速度。</li>
+</ul>
+<p>要生成VCF.GZ文件，可以使用以下命令：</p>
+<pre class="{bash}"><code>bgzip -c input.vcf &gt; input.vcf.gz</code></pre>
+</section>
+<section id="vcf.gz.tbi-文件加速随机访问的关键" class="level3">
+<h3 class="anchored" data-anchor-id="vcf.gz.tbi-文件加速随机访问的关键">VCF.GZ.TBI 文件：加速随机访问的关键</h3>
+<p>对于全基因组数据，快速定位某个染色体区域的变异是一项基本需求。索引文件（VCF.GZ.TBI）正是为了解决这一问题而设计的。</p>
+<p>VCF.GZ.TBI的作用：</p>
+<ul>
+<li>快速检索：VCF.GZ.TBI 文件为 VCF.GZ 文件生成了索引，使得工具可以快速定位到特定染色体区域的变异记录。</li>
+<li>支持分区分析：在多样本和多染色体的情况下，索引文件显著提升了并行处理的效率。</li>
+</ul>
+<p>生成索引文件可以使用以下命令：</p>
+<pre class="{bash}"><code>tabix -p vcf input.vcf.gz</code></pre>
+<p>完成后，会生成一个名为 input.vcf.gz.tbi 的索引文件。</p>
+</section>
+<section id="vcfvcf.gzvcf.gz.tbi-在实际中的应用" class="level3">
+<h3 class="anchored" data-anchor-id="vcfvcf.gzvcf.gz.tbi-在实际中的应用">VCF/VCF.GZ/VCF.GZ.TBI 在实际中的应用</h3>
+<section id="存储与共享变异数据" class="level4">
+<h4 class="anchored" data-anchor-id="存储与共享变异数据">存储与共享变异数据</h4>
+<p>未压缩的 VCF 文件便于直接查看，但更适用于小规模数据集。VCF.GZ 文件更适合大规模数据的存储和共享。</p>
+</section>
+<section id="加速基因组区域检索" class="level4">
+<h4 class="anchored" data-anchor-id="加速基因组区域检索">加速基因组区域检索</h4>
+<p>索引文件（VCF.GZ.TBI）在大规模队列分析中尤为重要。如使用 bcftools view 仅提取某条染色体上的特定区域：</p>
+<pre class="{bash}"><code>bcftools view -r chr1:100000-200000 input.vcf.gz</code></pre>
+</section>
+<section id="兼容主流生信工具" class="level4">
+<h4 class="anchored" data-anchor-id="兼容主流生信工具">兼容主流生信工具</h4>
+<p>几乎所有主流的变异分析工具都支持 VCF 格式及其压缩和索引版本。例如：</p>
+<ul>
+<li>GATK：进行变异过滤和注释。</li>
+<li>vcftools：计算等位基因频率、进行样本过滤。</li>
+<li>bcftools：快速子集提取和格式转换。</li>
+</ul>
+</section>
+<section id="云环境中的应用" class="level4">
+<h4 class="anchored" data-anchor-id="云环境中的应用">云环境中的应用</h4>
+<p>通过压缩后的 VCF.GZ 文件和索引，配合分布式计算框架（如 Spark SQL），可以在云端快速处理大规模变异数据。</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -843,110 +833,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "矩阵的运算"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-04-27</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "linear algebra"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051637211.webp"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linear algebra</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - matrix</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## 矩阵的加法运算</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">10</span>, <span class="dv">20</span>],</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">30</span>, <span class="dv">40</span>],</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">50</span>, <span class="dv">60</span>]])</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A<span class="op">+</span>B)</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## 矩阵的数量乘法运算</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">4</span>],</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="dv">5</span>],</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">6</span>]])</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span><span class="op">*</span>A)</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 矩阵与矩阵的乘法</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>不是随意两个矩阵都可以相乘，乘法运算对两个矩阵的形态是有特定要求的，主要有以下3条：</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>左边矩阵的列数和右边矩阵的行数必须相等</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>左边矩阵的行数决定最终结果矩阵的行数</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>右边矩阵的列数决定最终结果矩阵的列数</span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>],</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(A, B))</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 矩阵乘以向量</span></span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>矩阵与向量的乘法，一般是将矩阵A写在左边，列向量x写在右边，这种 Ax 形式的写法便于描述向量x的空间位置在矩阵A的作用下进行变换的过程。</span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>正如前面文章所讲，矩阵与向量的乘法可以看作是矩阵与矩阵乘法的一种特殊形式，只不过位于后面的是一个列数为1的特殊矩阵而已。</span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>对应前面矩阵与矩阵的乘法规则，矩阵与向量的乘法规则主要有：</span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>矩阵在左，列向量在右，矩阵的列数和列向量的维数必须相等</span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>矩阵和列向量相乘的结果也是一个列向量</span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>矩阵的行数就是结果向量的维数</span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">5</span>]]).T</span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(A, x))</span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>从结果来看，原始向量表示二维平面上的一个点，其平面坐标为(4,5)，经过矩阵A的乘法作用，最终将原始点转化为三维空间中的一个新的目标点，其空间坐标为(14,32,50)。</span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>从这个例子中，我们可以总结出矩阵所发挥的重要作用：在指定矩阵的乘法作用下，原始空间中的向量被映射转换到了目标空间中的新坐标，向量的空间位置由此发生了变化，甚至在映射后，目标空间的维数相较于原始空间都有可能发生改变。</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>具体这些空间位置的改变的规律，以及其背后更深层次的内涵，我们会在后面的文章中一起讨论学习。</span>
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "深入了解 VCF/VCF.GZ/VCF.GZ.TBI 文件"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-19</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Variant Call Format"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.researchgate.net%2Ffigure%2Fariant-Call-Format-VCF-file-This-is-a-text-file-that-stores-genomic-information-in_fig1_318713795&amp;psig=AOvVaw0whKLmVe5dS-t2uXmuE-2p&amp;ust=1734692607827000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBQQjRxqFwoTCKDr39jXs4oDFQAAAAAdAAAAABAE"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - vcf</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - genetics</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>在生物信息学研究中，变异数据的存储和分析是核心任务之一。而 VCF 文件（Variant Call Format）作为广泛使用的文件格式，几乎贯穿了从测序数据到变异注释和分析的整个流程。这里，我们将深入探讨 VCF 及其相关的压缩文件（VCF.GZ）和索引文件（VCF.GZ.TBI），帮助大家更好地理解这些文件及其应用场景。</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 VCF 文件？</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>VCF（Variant Call Format）文件是一种专为存储基因组变异数据设计的文件格式，它可以记录不同个体或样本中的突变信息，包括单核苷酸变异（SNP）、插入和缺失（InDels）以及结构变异（SVs）。</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>VCF文件具有以下主要特点：</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>文本格式：易于读取和解析，便于集成到各种分析工具中。</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>可扩展性：支持通过 INFO 字段存储额外的变异注释。</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>标准化：通过一致的格式定义，保证跨研究和工具的兼容性。</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## VCF 文件的结构</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>一个典型的 VCF 文件由两部分组成：</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### Header（头部）</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>以#开头，包含文件的元信息，如 VCF 版本、参考基因组、字段定义等。例如：</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#fileformat=VCFv4.2</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">##reference=GRCh38</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">##INFO=&lt;ID=AF,Number=A,Type=Float,Description="Allele Frequency"&gt;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#CHROM POS ID REF ALT QUAL FILTER INFO FORMAT SAMPLE1 SAMPLE2</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">`#CHROM`</span>：染色体编号；<span class="in">`POS`</span>：变异在基因组上的位置；<span class="in">`ID`</span>：变异的标识符（如 rsID）；<span class="in">`REF`</span> 和 <span class="in">`ALT`</span>：参考等位基因和替代等位基因。</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data（数据部分）</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>存储实际的变异信息，每行记录一个变异。例如：</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>  123456  rs123456  A  G  50  PASS  AF=0.1  GT:AD:DP  0/1:5,10:15  0/0:20,0:20</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>这里记录了第 1 号染色体上第 123456 位的一个 SNP，参考碱基是 A，突变碱基是 G。</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## VCF.GZ 文件：为什么要压缩？</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>由于全基因组测序数据的规模庞大，原始的 VCF 文件往往非常大，这给存储和传输带来了不小的负担。因此，生物信息学领域通常会对 VCF 文件进行压缩，生成 VCF.GZ 文件。</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>VCF.GZ的特点：</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基于 Gzip 压缩：VCF.GZ 文件采用 Gzip 算法压缩，具有良好的压缩率。</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>兼容性强：绝大多数生物信息学工具（如 bcftools、GATK、vcftools 等）都支持直接读取 VCF.GZ 文件。</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>便于存储和共享：相比未压缩的 VCF 文件，VCF.GZ 文件体积更小，减少了存储成本，并加快了传输速度。</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>要生成VCF.GZ文件，可以使用以下命令：</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> input.vcf <span class="op">&gt;</span> input.vcf.gz</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## VCF.GZ.TBI 文件：加速随机访问的关键</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>对于全基因组数据，快速定位某个染色体区域的变异是一项基本需求。索引文件（VCF.GZ.TBI）正是为了解决这一问题而设计的。</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>VCF.GZ.TBI的作用：</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>快速检索：VCF.GZ.TBI 文件为 VCF.GZ 文件生成了索引，使得工具可以快速定位到特定染色体区域的变异记录。</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>支持分区分析：在多样本和多染色体的情况下，索引文件显著提升了并行处理的效率。</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>生成索引文件可以使用以下命令：</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-p</span> vcf input.vcf.gz</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>完成后，会生成一个名为 input.vcf.gz.tbi 的索引文件。</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## VCF/VCF.GZ/VCF.GZ.TBI 在实际中的应用</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### 存储与共享变异数据</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>未压缩的 VCF 文件便于直接查看，但更适用于小规模数据集。VCF.GZ 文件更适合大规模数据的存储和共享。</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="fu">### 加速基因组区域检索</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>索引文件（VCF.GZ.TBI）在大规模队列分析中尤为重要。如使用 bcftools view 仅提取某条染色体上的特定区域：</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-r</span> chr1:100000-200000 input.vcf.gz</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### 兼容主流生信工具</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>几乎所有主流的变异分析工具都支持 VCF 格式及其压缩和索引版本。例如：</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GATK：进行变异过滤和注释。</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vcftools：计算等位基因频率、进行样本过滤。</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>bcftools：快速子集提取和格式转换。</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### 云环境中的应用</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>通过压缩后的 VCF.GZ 文件和索引，配合分布式计算框架（如 Spark SQL），可以在云端快速处理大规模变异数据。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
