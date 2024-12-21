@@ -11,7 +11,157 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Fri, 20 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 21 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>理解 PLINK格式</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/21/plink/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://github.com/Cloufield/GWASTutorial/assets/40289485/70dc5c9c-5096-41af-95ee-4f925483a93c.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">PLINK</figcaption>
+</figure>
+</div>
+<section id="plink-数据的基本组成" class="level3">
+<h3 class="anchored" data-anchor-id="plink-数据的基本组成">PLINK 数据的基本组成</h3>
+<p>在 PLINK 中，基因型数据的存储由三部分信息组成：</p>
+<ul>
+<li>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</li>
+<li>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</li>
+<li>基因型矩阵：每个样本在每个位点上的基因型数据。</li>
+</ul>
+<p>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</p>
+</section>
+<section id="数据格式及其特点" class="level3">
+<h3 class="anchored" data-anchor-id="数据格式及其特点">数据格式及其特点</h3>
+<section id="pedmap-格式" class="level4">
+<h4 class="anchored" data-anchor-id="pedmap-格式">ped/map 格式</h4>
+<p>这是 <a href="https://www.cog-genomics.org/plink/1.9/formats" title="plink 1.9">PLINK</a> 的原始标准文本格式，用于存储完整的基因型数据表。</p>
+<section id="ped-文件" class="level5">
+<h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
+<p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#| eval: false</span></span>
+<span id="cb1-2"><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span> G G T T A A G A C C</span>
+<span id="cb1-3"><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> HG00404 <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
+<p>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <code>G G</code> 表示基因型为 GG）。</p>
+</section>
+<section id="map-文件" class="level5">
+<h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
+<p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1">1       1:13273:G:C     0       13273</span>
+<span id="cb2-2">1       1:14599:T:A     0       14599</span></code></pre></div>
+<p>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</p>
+<p>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</p>
+</section>
+</section>
+<section id="fambimbed-格式" class="level4">
+<h4 class="anchored" data-anchor-id="fambimbed-格式">fam/bim/bed 格式</h4>
+<p>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</p>
+<section id="fam-文件" class="level5">
+<h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
+<p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1">0 HG00403 0 0 0 -9</span>
+<span id="cb3-2">0 HG00404 0 0 0 -9</span></code></pre></div>
+</section>
+<section id="bim-文件" class="level5">
+<h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
+<p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1">1       1:13273:G:C     0       13273   C       G</span>
+<span id="cb4-2">1       1:14599:T:A     0       14599   A       T</span></code></pre></div>
+</section>
+<section id="bed-文件" class="level5">
+<h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
+<p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb5-1">00 6c 1b 01 ff ff bf bf ff ff ff ef fb ff ff ff fe</span></code></pre></div>
+<p>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</p>
+</section>
+</section>
+<section id="psampvarpgen-格式" class="level4">
+<h4 class="anchored" data-anchor-id="psampvarpgen-格式">psam/pvar/pgen 格式</h4>
+<p>这是 <a href="https://www.cog-genomics.org/plink/2.0/" title="plink 2">PLINK2</a> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</p>
+<p>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</p>
+</section>
+</section>
+<section id="格式的适用场景" class="level3">
+<h3 class="anchored" data-anchor-id="格式的适用场景">格式的适用场景</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 36%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式集合</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ped/map</td>
+<td>文本格式，直观易读，但占用空间大</td>
+<td>数据检查、数据格式初学者</td>
+</tr>
+<tr class="even">
+<td>fam/bim/bed</td>
+<td>二进制格式，存储高效，需借助软件解析</td>
+<td>大规模数据分析，如GWAS</td>
+</tr>
+<tr class="odd">
+<td>psam/pvar/pgen</td>
+<td>PLINK2格式，兼容性强，处理速度快</td>
+<td>需要复杂分析和高性能计算时</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>plink</category>
+  <category>GWAS</category>
+  <category>bioinformatics</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/21/plink/</guid>
+  <pubDate>Sat, 21 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/Cloufield/GWASTutorial/assets/40289485/70dc5c9c-5096-41af-95ee-4f925483a93c" medium="image"/>
+</item>
 <item>
   <title>从基因到疾病：等位基因频率与效应大小的关系</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -219,7 +369,7 @@
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="561028ac" class="cell" data-execution_count="1">
+<div id="c95588ab" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -423,7 +573,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="4e8d03aa" class="cell" data-execution_count="2">
+<div id="988d8bd9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -2938,7 +3088,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="24fcfc1c" class="cell" data-execution_count="1">
+<div id="8e500295" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -2970,7 +3120,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="afde443b" class="cell" data-execution_count="2">
+<div id="65f3f506" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -2990,7 +3140,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="b9508389" class="cell" data-execution_count="3">
+<div id="26042014" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -3001,7 +3151,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="7204e0c2" class="cell" data-execution_count="4">
+<div id="eea1cece" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -3012,7 +3162,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="eb162b8a" class="cell" data-execution_count="5">
+<div id="eb9a992b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -3025,7 +3175,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="74fa6d69" class="cell" data-execution_count="6">
+<div id="2dc49fe8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -3048,14 +3198,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 2.3937, -0.2154, -2.5281],
-         [ 3.5768,  1.2893,  0.7576]],
+<pre><code>tensor([[[ 0.7803, -1.9719,  2.6966],
+         [-0.6943,  0.7456,  0.5293]],
 
-        [[ 0.6832, -0.7785,  0.8889],
-         [ 1.3465, -1.1945,  0.3581]],
+        [[ 0.5502, -1.2039,  1.3674],
+         [-1.1425, -0.6486,  5.0913]],
 
-        [[-0.2761, -0.8874,  0.2300],
-         [-0.5195,  0.0747,  0.0634]]])</code></pre>
+        [[-2.4805, -0.0315, -0.5107],
+         [ 2.8896,  0.1923,  0.0827]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5437,7 +5587,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="9a901419" class="cell" data-execution_count="1">
+<div id="39766f4b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5492,7 +5642,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="0f0890f0" class="cell" data-execution_count="2">
+<div id="22c5ebef" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5532,7 +5682,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="761b96d2" class="cell" data-execution_count="3">
+<div id="1449b369" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5597,7 +5747,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="b54a9d76" class="cell" data-execution_count="4">
+<div id="4f4134ea" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5662,7 +5812,7 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
 <section id="矩阵的python表示" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
 <p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="23b08678" class="cell" data-execution_count="1">
+<div id="ca108716" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的表示：</span></span>
@@ -5717,7 +5867,7 @@ font-style: inherit;"># 这个元组对象包含两个元素：第一个元素�
 </div>
 </div>
 <p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="69b71334" class="cell" data-execution_count="2">
+<div id="381dc943" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
@@ -5780,7 +5930,7 @@ font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
 <ol type="1">
 <li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
 </ol>
-<div id="86e4a7fe" class="cell" data-execution_count="3">
+<div id="5cc7c52c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5841,7 +5991,7 @@ font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
 <p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
 <p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
 </ol>
-<div id="f5d69856" class="cell" data-execution_count="4">
+<div id="cb4978c0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 矩阵的转置：</span></span>
@@ -5948,7 +6098,7 @@ font-style: inherit;">print</span>(S.T)</span></code></pre></div>
 <ol start="3" type="1">
 <li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
 </ol>
-<div id="5bdc7ef4" class="cell" data-execution_count="5">
+<div id="51cbdb96" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
@@ -5970,7 +6120,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 <ol start="4" type="1">
 <li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
 </ol>
-<div id="c128948c" class="cell" data-execution_count="6">
+<div id="ead452a2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
@@ -6006,7 +6156,7 @@ font-style: inherit;">print</span>(A.T)</span></code></pre></div>
 <ol start="5" type="1">
 <li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
 </ol>
-<div id="b6e519f7" class="cell" data-execution_count="7">
+<div id="61c6fe8f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
@@ -6096,60 +6246,6 @@ font-style: inherit;">print</span>(I)</span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2020/03/22/</guid>
   <pubDate>Sun, 22 Mar 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409032123556.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>空间中的向量</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/03/12/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>我们知道，向量的坐标表示方法并不是唯一的，它的具体表示和空间中基底的选择密切相关。</p>
-<section id="向量的坐标" class="level3">
-<h3 class="anchored" data-anchor-id="向量的坐标">向量的坐标</h3>
-<p>向量的坐标依赖于选取的基底。</p>
-<p>对于二维向量u=[4,5]⊤而言，我们一直以来都理所当然地认定一个事实：它表示一条在x轴上投影为4、y轴上投影为5的有向线段，它的坐标是(4,5)。这其实是基于一个没有刻意强调前提：利用方向为x轴、y轴正方向，且长度为1的两个向量，即Ex=[1,0]⊤，Ey=[0,1]⊤作为上述讨论的基础。因此，对于向量u而言，其完整的写法应该为u=4Ex + 5Ey，进一步展开就是u=4[1,0]⊤ + 5[0,1]⊤，这种形式的表意是最完整的。</p>
-<p>这里被选中作为向量u基准的一组向量是Ex和Ey，它们被称为基底。基底的每一个成员向量被称为基向量，而坐标对应的就是各个基向量前的系数。一般情况下，若不做特殊说明，那么基向量都是选取沿着坐标轴正方向且长度为1的向量，这样方便描述和计算。</p>
-<p>关于向量u的完整准确的说法是：在基底(Ex,Ey)下，其坐标是[4,5]⊤。也就是说，坐标必须依托于指定的基底才有意义。因此，要想准确地描述向量，首先就要确定一组基底，然后通过求出向量在各个基向量上的投影值，最后才能确定在这个基上的坐标值。</p>
-</section>
-<section id="向量在不同基底上表示为不同坐标" class="level3">
-<h3 class="anchored" data-anchor-id="向量在不同基底上表示为不同坐标">向量在不同基底上表示为不同坐标</h3>
-<p>一个指定的向量可以在多组不同的基底上进行坐标表示，在不同的基底表示下，坐标自然也是不同的。根据一组基底对应的坐标值去求另一组基底所对应的坐标值，这就是以后我们将会反复用到的坐标变换。</p>
-<p>根据我们之前关于向量内积的介绍，最好是事先把基向量的模长转化为1。这样一来，从向量内积的内涵可以看出，若基向量的模长是1，那么就可以用目标向量内积基向量，从而可以直接获得该向量在这个基向量方向上的对应坐标值。实际上，对于任何一个向量，想要找到同方向上模长为1的向量并不是一件难事，只要让向量的各成分分别除以向量的模长即可，就能使向量的模长为单位1。而向量的坐标就是指定基的对应系数。</p>
-</section>
-<section id="构成基底的条件" class="level3">
-<h3 class="anchored" data-anchor-id="构成基底的条件">构成基底的条件</h3>
-<p>在一个n维空间中，不是随便选取n个向量都能作为一组基底，构成基底的向量必须满足这样的条件：在n维空间中，任意一个向量都可以表示为这一组基向量的线性组合，并且这种线性组合的表示方式（也就是系数）必须是唯一的。</p>
-<ul>
-<li><p>向量数量足够</p>
-<p>若想成为三维空间中的一组基底，首先，其中的每个基向量的维数都必须是3；其次，基向量的个数也必须为3个。若数量不足，如只有两个三维向量a1和a2（假设它们是不共线的两个向量），那么无论对这两个向量怎么进行线性组合，它们都只能表示二者所构成的平面上的任意向量，而三维空间中位于该二维平面上外的任何一个向量，都无法由a1和a2的线性组合进行表示。</p></li>
-<li><p>满足线性无关</p>
-<p>如何确保表示方法的唯一性呢？这里我们引入向量线性无关的概念。一组向量需要满足线性无关的条件，即其中任何一个向量都不能通过其余向量的线性组合的形式进行表示。</p>
-<p>换句话说，当且仅当x1=x2=x3=…=xn=0的等式关系成立时，线性组合x1u1 + x2u2 + x3u3 + … + xnun才能生成零向量，若xi中有非零值存在，那么这一组向量就是线性相关的。一组向量满足线性无关的条件等效于满足线性组合表示方法的唯一性（可以从反证法的角度说明线性无关和表示方法的唯一性是等价的）。</p>
-<p>在这个三维空间中，要求所选取的3个基向量线性无关。若它们线性相关，那么x3就可以表示为x1和x2的线性组合，换句话说，备选的3个向量就处在一个平面上了。这样，自然无法通过线性组合的方法来表示三维空间中位于平面外的任何一个向量了，即3个三维向量之间由于彼此线性相关，因此无法张成整个三维空间，只能张成三维空间中的二维平面甚至是退化为一条直线。</p>
-<p>若三维空间中基向量的个数超过3个，则是不行的。如，假设有4个向量试图成为该空间的一组基向量，任选出其中的3个向量，按照前提，假设它们之间满足线性无关性，那么对于第4个向量，由于它也处于三维空间中，则它一定能够被前3个向量的线性组合所表示。那么，三维空间中的这4个向量显示是线性相关的，无法满足向量构成基底的唯一性条件。</p></li>
-</ul>
-</section>
-<section id="构成基底的条件-1" class="level3">
-<h3 class="anchored" data-anchor-id="构成基底的条件-1">构成基底的条件</h3>
-<p>对于一组向量，由它的所有线性组合所构成的空间称为这一组向量的张成空间。张成空间对所讨论向量的线性无关性没有要求，这些向量可以是线性相关的。</p>
-<p>两个线性无关的二维向量，它们构成了二维空间中的一组基底，因此它们的张成空间就是整个二维空间；两个线性相关的共线二维向量，它们的张成空间是一条穿过原点的一维直线；等。</p>
-<p>向量的个数和维数都不是其张成空间维数及形态的决定因素，具体的情况需要结合向量的线性无关性进行整体考量，这就会涉及秩的相关概念。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatistics</category>
-  <category>linear algebra</category>
-  <guid>https://leslie-lu.github.io/blog/2020/03/12/</guid>
-  <pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409021427240.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>

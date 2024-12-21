@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="Python Training">
+<meta name="description" content="基因型数据存储的基础">
 
-<title>Python基础要素之数值 | Zhen Lu – Zhen Lu</title>
+<title>理解 PLINK格式 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,25 +59,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../..//files/favicon-512.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,14 +126,14 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
   </div>
@@ -144,37 +144,37 @@ div.column-margin+hr.dinkus {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../blog/index.html"> 
+    <a class="nav-link" href="../../../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../talks/index.html"> 
+    <a class="nav-link" href="../../../../../talks/index.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../publications/index.html"> 
+    <a class="nav-link" href="../../../../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../cv/index.html"> 
+    <a class="nav-link" href="../../../../../cv/index.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../news/index.html"> 
+    <a class="nav-link" href="../../../../../news/index.html"> 
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../uses/index.html"> 
+    <a class="nav-link" href="../../../../../uses/index.html"> 
 <span class="menu-text">Uses</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../atom.xml"> 
+    <a class="nav-link" href="../../../../../atom.xml"> 
 <span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
@@ -220,14 +220,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Python基础要素之数值</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">理解 PLINK格式</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          Python Training
+          基因型数据存储的基础
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">python</div>
+                <div class="quarto-category">plink</div>
+                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">bioinformatics</div>
               </div>
                   </div>
   </div>
@@ -245,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, January 6, 2020</p>
+        <p class="date">Saturday, December 21, 2024</p>
       </div>
     </div>
     
@@ -260,9 +262,9 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#数值" id="toc-数值" class="nav-link active" data-scroll-target="#数值">数值</a></li>
-  <li><a href="#format-格式化" id="toc-format-格式化" class="nav-link" data-scroll-target="#format-格式化"><code>.format</code> 格式化</a></li>
-  <li><a href="#type函数" id="toc-type函数" class="nav-link" data-scroll-target="#type函数">type函数</a></li>
+  <li><a href="#plink-数据的基本组成" id="toc-plink-数据的基本组成" class="nav-link active" data-scroll-target="#plink-数据的基本组成">PLINK 数据的基本组成</a></li>
+  <li><a href="#数据格式及其特点" id="toc-数据格式及其特点" class="nav-link" data-scroll-target="#数据格式及其特点">数据格式及其特点</a></li>
+  <li><a href="#格式的适用场景" id="toc-格式的适用场景" class="nav-link" data-scroll-target="#格式的适用场景">格式的适用场景</a></li>
   </ul>
 </nav>
 </nav>
@@ -271,80 +273,112 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</p>
-<section id="数值" class="level3">
-<h3 class="anchored" data-anchor-id="数值">数值</h3>
-<p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
-<p>整数：</p>
-<div id="345fc287" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #4: 9
-Output #5: 81
-Output #6: 4.0</code></pre>
+<p>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://github.com/Cloufield/GWASTutorial/assets/40289485/70dc5c9c-5096-41af-95ee-4f925483a93c.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">PLINK</figcaption>
+</figure>
 </div>
-</div>
-<p>Output #6演示了将数值转换成整数并进行除法运算。</p>
-<p>浮点数：</p>
-<div id="7d97992e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #7: 3.074
-Output #8: 12.0
-Output #9: 2.67
-Output #10: 2.6667</code></pre>
-</div>
-</div>
-<div id="1ad94037" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #11: 20.0855
-Output #12: 1.39
-Output #13: 9.0</code></pre>
-</div>
-</div>
+<section id="plink-数据的基本组成" class="level3">
+<h3 class="anchored" data-anchor-id="plink-数据的基本组成">PLINK 数据的基本组成</h3>
+<p>在 PLINK 中，基因型数据的存储由三部分信息组成：</p>
+<ul>
+<li>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</li>
+<li>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</li>
+<li>基因型矩阵：每个样本在每个位点上的基因型数据。</li>
+</ul>
+<p>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</p>
 </section>
-<section id="format-格式化" class="level3">
-<h3 class="anchored" data-anchor-id="format-格式化"><code>.format</code> 格式化</h3>
-<div id="f379a506" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #2: Four plus five equals 9.
-Output #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']</code></pre>
-</div>
-</div>
+<section id="数据格式及其特点" class="level3">
+<h3 class="anchored" data-anchor-id="数据格式及其特点">数据格式及其特点</h3>
+<section id="pedmap-格式" class="level4">
+<h4 class="anchored" data-anchor-id="pedmap-格式">ped/map 格式</h4>
+<p>这是 <a href="https://www.cog-genomics.org/plink/1.9/formats" title="plink 1.9">PLINK</a> 的原始标准文本格式，用于存储完整的基因型数据表。</p>
+<section id="ped-文件" class="level5">
+<h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
+<p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <code>G G</code> 表示基因型为 GG）。</p>
 </section>
-<section id="type函数" class="level3">
-<h3 class="anchored" data-anchor-id="type函数">type函数</h3>
-<p>Python提供一个名为 <code>type</code> 的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</p>
-<p>函数的语法非常简单：<code>type(variable)</code> 会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</p>
-<p>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用 <code>type</code> 函数，不仅是变量，还有函数、语句等。</p>
+<section id="map-文件" class="level5">
+<h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
+<p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>1       1:13273:G:C     0       13273</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>1       1:14599:T:A     0       14599</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</p>
+<p>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</p>
+</section>
+</section>
+<section id="fambimbed-格式" class="level4">
+<h4 class="anchored" data-anchor-id="fambimbed-格式">fam/bim/bed 格式</h4>
+<p>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</p>
+<section id="fam-文件" class="level5">
+<h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
+<p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>0 HG00403 0 0 0 -9</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>0 HG00404 0 0 0 -9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bim-文件" class="level5">
+<h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
+<p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>1       1:13273:G:C     0       13273   C       G</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>1       1:14599:T:A     0       14599   A       T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bed-文件" class="level5">
+<h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
+<p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>00 6c 1b 01 ff ff bf bf ff ff ff ef fb ff ff ff fe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</p>
+</section>
+</section>
+<section id="psampvarpgen-格式" class="level4">
+<h4 class="anchored" data-anchor-id="psampvarpgen-格式">psam/pvar/pgen 格式</h4>
+<p>这是 <a href="https://www.cog-genomics.org/plink/2.0/" title="plink 2">PLINK2</a> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</p>
+<p>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</p>
+</section>
+</section>
+<section id="格式的适用场景" class="level3">
+<h3 class="anchored" data-anchor-id="格式的适用场景">格式的适用场景</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 36%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式集合</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ped/map</td>
+<td>文本格式，直观易读，但占用空间大</td>
+<td>数据检查、数据格式初学者</td>
+</tr>
+<tr class="even">
+<td>fam/bim/bed</td>
+<td>二进制格式，存储高效，需借助软件解析</td>
+<td>大规模数据分析，如GWAS</td>
+</tr>
+<tr class="odd">
+<td>psam/pvar/pgen</td>
+<td>PLINK2格式，兼容性强，处理速度快</td>
+<td>需要复杂分析和高性能计算时</td>
+</tr>
+</tbody>
+</table>
 
 
 <!-- -->
@@ -824,89 +858,122 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python基础要素之数值"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-01-06</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Python Training"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201435557.webp"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数值</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>整数：</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>Output #6演示了将数值转换成整数并进行除法运算。</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>浮点数：</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## `.format` 格式化</span></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## type函数</span></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>Python提供一个名为 <span class="in">`type`</span> 的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>函数的语法非常简单：<span class="in">`type(variable)`</span> 会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用 <span class="in">`type`</span> 函数，不仅是变量，还有函数、语句等。</span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "理解 PLINK格式"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-21</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "基因型数据存储的基础"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://github.com/Cloufield/GWASTutorial/assets/40289485/70dc5c9c-5096-41af-95ee-4f925483a93c"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="al">![PLINK](https://github.com/Cloufield/GWASTutorial/assets/40289485/70dc5c9c-5096-41af-95ee-4f925483a93c)</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## PLINK 数据的基本组成</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，基因型数据的存储由三部分信息组成：</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基因型矩阵：每个样本在每个位点上的基因型数据。</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据格式及其特点</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### ped/map 格式</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK</span><span class="co">](https://www.cog-genomics.org/plink/1.9/formats "plink 1.9")</span> 的原始标准文本格式，用于存储完整的基因型数据表。</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .ped 文件</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <span class="in">`G G`</span> 表示基因型为 GG）。</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .map 文件</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">```txt</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">1       1:13273:G:C     0       13273</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="in">1       1:14599:T:A     0       14599</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### fam/bim/bed 格式</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .fam 文件</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>样本基本信息，内容与 .ped 文件的前六列一致。</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">```txt</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">0 HG00403 0 0 0 -9</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="in">0 HG00404 0 0 0 -9</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bim 文件</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">```txt</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="in">1       1:13273:G:C     0       13273   C       G</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">1       1:14599:T:A     0       14599   A       T</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bed 文件</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">```txt</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">00 6c 1b 01 ff ff bf bf ff ff ff ef fb ff ff ff fe</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### psam/pvar/pgen 格式</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK2</span><span class="co">](https://www.cog-genomics.org/plink/2.0/ "plink 2")</span> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## 格式的适用场景</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>| 格式集合         | 特点                             | 适用场景                               |</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>|------------------|----------------------------------|----------------------------------------|</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>| ped/map          | 文本格式，直观易读，但占用空间大 | 数据检查、数据格式初学者               |</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>| fam/bim/bed      | 二进制格式，存储高效，需借助软件解析 | 大规模数据分析，如GWAS                |</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>| psam/pvar/pgen   | PLINK2格式，兼容性强，处理速度快 | 需要复杂分析和高性能计算时             |</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
