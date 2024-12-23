@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="基因型数据存储的基础">
+<meta name="description" content="plink">
 
-<title>理解 PLINK格式 | Zhen Lu – Zhen Lu</title>
+<title>PLINK 常用命令介绍 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed slimcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,10 +220,10 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">理解 PLINK格式</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">PLINK 常用命令介绍</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          基因型数据存储的基础
+          plink
         </div>
       </div>
                           <div class="quarto-categories">
@@ -247,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 21, 2024</p>
+        <p class="date">Monday, December 23, 2024</p>
       </div>
     </div>
     
@@ -262,9 +262,13 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#plink-数据的基本组成" id="toc-plink-数据的基本组成" class="nav-link active" data-scroll-target="#plink-数据的基本组成">PLINK 数据的基本组成</a></li>
-  <li><a href="#数据格式及其特点" id="toc-数据格式及其特点" class="nav-link" data-scroll-target="#数据格式及其特点">数据格式及其特点</a></li>
-  <li><a href="#格式的适用场景" id="toc-格式的适用场景" class="nav-link" data-scroll-target="#格式的适用场景">格式的适用场景</a></li>
+  <li><a href="#基本文件操作命令" id="toc-基本文件操作命令" class="nav-link active" data-scroll-target="#基本文件操作命令">1. 基本文件操作命令</a></li>
+  <li><a href="#数据过滤命令" id="toc-数据过滤命令" class="nav-link" data-scroll-target="#数据过滤命令">2. 数据过滤命令</a></li>
+  <li><a href="#关联分析命令" id="toc-关联分析命令" class="nav-link" data-scroll-target="#关联分析命令">3. 关联分析命令</a></li>
+  <li><a href="#质量控制命令" id="toc-质量控制命令" class="nav-link" data-scroll-target="#质量控制命令">4. 质量控制命令</a></li>
+  <li><a href="#文件合并命令" id="toc-文件合并命令" class="nav-link" data-scroll-target="#文件合并命令">5. 文件合并命令</a></li>
+  <li><a href="#数据导出命令" id="toc-数据导出命令" class="nav-link" data-scroll-target="#数据导出命令">6. 数据导出命令</a></li>
+  <li><a href="#并行化命令" id="toc-并行化命令" class="nav-link" data-scroll-target="#并行化命令">7. 并行化命令</a></li>
   </ul>
 </nav>
 </nav>
@@ -273,125 +277,121 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">PLINK</figcaption>
-</figure>
-</div>
-<section id="plink-数据的基本组成" class="level3">
-<h3 class="anchored" data-anchor-id="plink-数据的基本组成">PLINK 数据的基本组成</h3>
-<p>在 PLINK 中，基因型数据的存储由三部分信息组成：</p>
-<ul>
-<li>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</li>
-<li>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</li>
-<li>基因型矩阵：每个样本在每个位点上的基因型数据。</li>
-</ul>
-<p>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</p>
+<p>PLINK 是一个广泛使用的基因组学分析工具，尤其适用于大规模遗传数据分析。无论是进行全基因组关联研究（GWAS），还是进行简单的基因型数据质量控制，PLINK 都是研究人员的重要工具之一。这里，我们将介绍 PLINK 中一些常用的命令，帮助大家更高效地处理和分析基因型数据。</p>
+<section id="基本文件操作命令" class="level3">
+<h3 class="anchored" data-anchor-id="基本文件操作命令">1. 基本文件操作命令</h3>
+<section id="make-bed" class="level4">
+<h4 class="anchored" data-anchor-id="make-bed">–make-bed</h4>
+<p>将现有的文本格式数据（如 .ped 和 .map 文件）转换为二进制格式（.bed, .bim, .fam 文件），以便提高数据处理速度。</p>
+<pre class="{bash}"><code>plink --ped input.ped --map input.map --make-bed --out output</code></pre>
+<p>这条命令将 input.ped 和 input.map 文件转换为二进制格式，并保存为 output.bed、output.bim 和 output.fam 文件。</p>
 </section>
-<section id="数据格式及其特点" class="level3">
-<h3 class="anchored" data-anchor-id="数据格式及其特点">数据格式及其特点</h3>
-<section id="pedmap-格式" class="level4">
-<h4 class="anchored" data-anchor-id="pedmap-格式">ped/map 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/1.9/formats" title="plink 1.9">PLINK</a> 的原始标准文本格式，用于存储完整的基因型数据表。</p>
-<section id="ped-文件" class="level5">
-<h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
-<p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="5edb6492" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <code>G G</code> 表示基因型为 GG）。</p>
-</section>
-<section id="map-文件" class="level5">
-<h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
-<p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="099d8a18" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</p>
-<p>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</p>
+<section id="bfile" class="level4">
+<h4 class="anchored" data-anchor-id="bfile">–bfile</h4>
+<p>在进行 PLINK 命令时，可以通过指定 .bed、.bim 和 .fam 文件前缀来加载二进制格式的数据文件。</p>
+<pre class="{bash}"><code>plink --bfile mydata --freq</code></pre>
+<p>该命令加载 mydata.bed、mydata.bim 和 mydata.fam 文件，并计算 SNP 频率。</p>
 </section>
 </section>
-<section id="fambimbed-格式" class="level4">
-<h4 class="anchored" data-anchor-id="fambimbed-格式">fam/bim/bed 格式</h4>
-<p>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</p>
-<section id="fam-文件" class="level5">
-<h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
-<p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="d5ff31ee" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="数据过滤命令" class="level3">
+<h3 class="anchored" data-anchor-id="数据过滤命令">2. 数据过滤命令</h3>
+<section id="keep-和-remove" class="level4">
+<h4 class="anchored" data-anchor-id="keep-和-remove">–keep 和 –remove</h4>
+<p><code>--keep</code> 用于保留指定样本，<code>--remove</code> 用于排除指定样本。这两个命令接受一个包含样本 ID 的文件。</p>
+<pre class="{bash}"><code>plink --bfile mydata --keep keep_list.txt --make-bed --out filtered_data</code></pre>
+<p>这个命令将 keep_list.txt 文件中的样本保留在数据集中，并生成新的二进制文件 filtered_data.bed。</p>
 </section>
-<section id="bim-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
-<p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="7fd3222f" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="extract-和-exclude" class="level4">
+<h4 class="anchored" data-anchor-id="extract-和-exclude">–extract 和 –exclude</h4>
+<p><code>--extract</code> 用于选择指定的 SNPs（通过 .txt 文件列出），而 <code>--exclude</code> 用于排除某些 SNPs。</p>
+<pre class="{bash}"><code>plink --bfile mydata --extract snp_list.txt --make-bed --out selected_snps</code></pre>
+<p>此命令将 snp_list.txt 文件中的 SNPs 提取出来，并保存为新的二进制文件 selected_snps.bed。</p>
 </section>
-<section id="bed-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
-<p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="040c1716" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</p>
+<section id="maf-和-geno" class="level4">
+<h4 class="anchored" data-anchor-id="maf-和-geno">–maf 和 –geno</h4>
+<p><code>--maf</code> 用于设置最小等位基因频率（Minor Allele Frequency），<code>--geno</code> 用于排除缺失率较高的 SNP。</p>
+<pre class="{bash}"><code>plink --bfile mydata --maf 0.01 --geno 0.05 --make-bed --out filtered_data</code></pre>
+<p>这个命令将过滤掉 MAF 小于 1% 或缺失率大于 5%的 SNP。</p>
 </section>
 </section>
-<section id="psampvarpgen-格式" class="level4">
-<h4 class="anchored" data-anchor-id="psampvarpgen-格式">psam/pvar/pgen 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/2.0/" title="plink 2">PLINK2</a> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</p>
-<p>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</p>
+<section id="关联分析命令" class="level3">
+<h3 class="anchored" data-anchor-id="关联分析命令">3. 关联分析命令</h3>
+<section id="assoc" class="level4">
+<h4 class="anchored" data-anchor-id="assoc">–assoc</h4>
+<p>进行简单的关联分析，计算每个 SNP 和表型之间的关联性。</p>
+<pre class="{bash}"><code>plink --bfile mydata --assoc --out association_results</code></pre>
+<p>该命令将进行每个 SNP 和表型的关联分析，并将结果保存为 association_results.assoc 文件。</p>
+</section>
+<section id="linear" class="level4">
+<h4 class="anchored" data-anchor-id="linear">–linear</h4>
+<p>进行线性回归分析，适用于连续表型。</p>
+<pre class="{bash}"><code>plink --bfile mydata --linear --out linear_results</code></pre>
+<p>此命令进行线性回归分析，输出与表型相关的 SNP 及其统计信息。</p>
+</section>
+<section id="logistic" class="level4">
+<h4 class="anchored" data-anchor-id="logistic">–logistic</h4>
+<p>进行 logistic 回归分析，适用于二分类表型（如病例对照研究）。</p>
+<pre class="{bash}"><code>plink --bfile mydata --logistic --out logistic_results</code></pre>
+<p>此命令进行 logistic 回归分析，输出 SNP 与表型的关系。</p>
 </section>
 </section>
-<section id="格式的适用场景" class="level3">
-<h3 class="anchored" data-anchor-id="格式的适用场景">格式的适用场景</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 40%">
-<col style="width: 39%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>格式集合</th>
-<th>特点</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ped/map</td>
-<td>文本格式，直观易读，但占用空间大</td>
-<td>数据检查、数据格式初学者</td>
-</tr>
-<tr class="even">
-<td>fam/bim/bed</td>
-<td>二进制格式，存储高效，需借助软件解析</td>
-<td>大规模数据分析，如GWAS</td>
-</tr>
-<tr class="odd">
-<td>psam/pvar/pgen</td>
-<td>PLINK2格式，兼容性强，处理速度快</td>
-<td>需要复杂分析和高性能计算时</td>
-</tr>
-</tbody>
-</table>
+<section id="质量控制命令" class="level3">
+<h3 class="anchored" data-anchor-id="质量控制命令">4. 质量控制命令</h3>
+<section id="check-sex" class="level4">
+<h4 class="anchored" data-anchor-id="check-sex">–check-sex</h4>
+<p>用于检查样本的性别是否与遗传数据一致。</p>
+<pre class="{bash}"><code>plink --bfile mydata --check-sex --out sex_check</code></pre>
+<p>该命令将检查数据集中所有样本的性别，并生成 sex_check.sexcheck 文件。</p>
+</section>
+<section id="missing" class="level4">
+<h4 class="anchored" data-anchor-id="missing">–missing</h4>
+<p>用于计算样本和 SNP 的缺失情况，帮助识别潜在的质量问题。</p>
+<pre class="{bash}"><code>plink --bfile mydata --missing --out missing_data</code></pre>
+<p>这个命令将生成一个包含缺失数据统计的文件 missing_data.lmiss 和 missing_data.imiss。</p>
+</section>
+</section>
+<section id="文件合并命令" class="level3">
+<h3 class="anchored" data-anchor-id="文件合并命令">5. 文件合并命令</h3>
+<section id="merge-和-bmerge" class="level4">
+<h4 class="anchored" data-anchor-id="merge-和-bmerge">–merge 和 –bmerge</h4>
+<p><code>--merge</code> 合并多个 PLINK 数据集，<code>--bmerge</code> 与 <code>--merge</code> 类似，但适用于二进制文件。</p>
+<pre class="{bash}"><code>plink --bfile data1 --bmerge data2.bed data2.bim data2.fam --make-bed --out merged_data</code></pre>
+<p>这个命令将二进制文件 data1 和 data2 合并，并保存为新的 merged_data.bed 文件。</p>
+</section>
+</section>
+<section id="数据导出命令" class="level3">
+<h3 class="anchored" data-anchor-id="数据导出命令">6. 数据导出命令</h3>
+<section id="recode" class="level4">
+<h4 class="anchored" data-anchor-id="recode">–recode</h4>
+<p>将数据从二进制格式转换为其他格式，例如 .ped 格式。</p>
+<pre class="{bash}"><code>plink --bfile mydata --recode --out ped_format</code></pre>
+<p>该命令将 mydata 数据集转换为 .ped 和 .map 文件格式，并保存为 ped_format.ped 和 ped_format.map。</p>
+</section>
+<section id="recode-vcf" class="level4">
+<h4 class="anchored" data-anchor-id="recode-vcf">–recode vcf</h4>
+<p>将 PLINK 二进制数据转换为 VCF 格式。</p>
+<pre class="{bash}"><code>plink --bfile mydata --recode vcf --out vcf_output</code></pre>
+<p>此命令将 mydata 数据集转换为 .vcf 格式，并输出为 vcf_output.vcf 文件。</p>
+</section>
+</section>
+<section id="并行化命令" class="level3">
+<h3 class="anchored" data-anchor-id="并行化命令">7. 并行化命令</h3>
+<section id="threads" class="level4">
+<h4 class="anchored" data-anchor-id="threads">–threads</h4>
+<p>指定 PLINK 使用的线程数，从而加速计算。</p>
+<pre class="{bash}"><code>plink --bfile mydata --assoc --threads 4 --out assoc_results</code></pre>
+<p>该命令将在进行关联分析时使用 4 个线程，以加速处理。</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -867,126 +867,188 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "理解 PLINK格式"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-21</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "基因型数据存储的基础"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="al">![PLINK](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png)</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## PLINK 数据的基本组成</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，基因型数据的存储由三部分信息组成：</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基因型矩阵：每个样本在每个位点上的基因型数据。</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据格式及其特点</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### ped/map 格式</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK</span><span class="co">](https://www.cog-genomics.org/plink/1.9/formats "plink 1.9")</span> 的原始标准文本格式，用于存储完整的基因型数据表。</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .ped 文件</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <span class="in">`G G`</span> 表示基因型为 GG）。</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .map 文件</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### fam/bim/bed 格式</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .fam 文件</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>样本基本信息，内容与 .ped 文件的前六列一致。</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bim 文件</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bed 文件</span></span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### psam/pvar/pgen 格式</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK2</span><span class="co">](https://www.cog-genomics.org/plink/2.0/ "plink 2")</span> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## 格式的适用场景</span></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>| 格式集合         | 特点                             | 适用场景                               |</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>|------------------|-------------------------------------|------------------------------------|</span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>| ped/map          | 文本格式，直观易读，但占用空间大 | 数据检查、数据格式初学者               |</span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>| fam/bim/bed      | 二进制格式，存储高效，需借助软件解析 | 大规模数据分析，如GWAS                |</span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>| psam/pvar/pgen   | PLINK2格式，兼容性强，处理速度快 | 需要复杂分析和高性能计算时             |</span>
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "PLINK 常用命令介绍"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-23</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "plink"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232113560.png"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>PLINK 是一个广泛使用的基因组学分析工具，尤其适用于大规模遗传数据分析。无论是进行全基因组关联研究（GWAS），还是进行简单的基因型数据质量控制，PLINK 都是研究人员的重要工具之一。这里，我们将介绍 PLINK 中一些常用的命令，帮助大家更高效地处理和分析基因型数据。</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 基本文件操作命令</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### --make-bed</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>将现有的文本格式数据（如 .ped 和 .map 文件）转换为二进制格式（.bed, .bim, .fam 文件），以便提高数据处理速度。</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--ped</span> input.ped <span class="at">--map</span> input.map <span class="at">--make-bed</span> <span class="at">--out</span> output</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>这条命令将 input.ped 和 input.map 文件转换为二进制格式，并保存为 output.bed、output.bim 和 output.fam 文件。</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### --bfile</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>在进行 PLINK 命令时，可以通过指定 .bed、.bim 和 .fam 文件前缀来加载二进制格式的数据文件。</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--freq</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>该命令加载 mydata.bed、mydata.bim 和 mydata.fam 文件，并计算 SNP 频率。</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 数据过滤命令</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### --keep 和 --remove</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="in">`--keep`</span> 用于保留指定样本，<span class="in">`--remove`</span> 用于排除指定样本。这两个命令接受一个包含样本 ID 的文件。</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--keep</span> keep_list.txt <span class="at">--make-bed</span> <span class="at">--out</span> filtered_data</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>这个命令将 keep_list.txt 文件中的样本保留在数据集中，并生成新的二进制文件 filtered_data.bed。</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### --extract 和 --exclude</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="in">`--extract`</span> 用于选择指定的 SNPs（通过 .txt 文件列出），而 <span class="in">`--exclude`</span> 用于排除某些 SNPs。</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--extract</span> snp_list.txt <span class="at">--make-bed</span> <span class="at">--out</span> selected_snps</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>此命令将 snp_list.txt 文件中的 SNPs 提取出来，并保存为新的二进制文件 selected_snps.bed。</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### --maf 和 --geno</span></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="in">`--maf`</span> 用于设置最小等位基因频率（Minor Allele Frequency），<span class="in">`--geno`</span> 用于排除缺失率较高的 SNP。</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--maf</span> 0.01 <span class="at">--geno</span> 0.05 <span class="at">--make-bed</span> <span class="at">--out</span> filtered_data</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>这个命令将过滤掉 MAF 小于 1% 或缺失率大于 5%的 SNP。</span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 关联分析命令</span></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### --assoc</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>进行简单的关联分析，计算每个 SNP 和表型之间的关联性。</span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--assoc</span> <span class="at">--out</span> association_results</span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a>该命令将进行每个 SNP 和表型的关联分析，并将结果保存为 association_results.assoc 文件。</span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### --linear</span></span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>进行线性回归分析，适用于连续表型。</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--linear</span> <span class="at">--out</span> linear_results</span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a>此命令进行线性回归分析，输出与表型相关的 SNP 及其统计信息。</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="fu">### --logistic</span></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a>进行 logistic 回归分析，适用于二分类表型（如病例对照研究）。</span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--logistic</span> <span class="at">--out</span> logistic_results</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>此命令进行 logistic 回归分析，输出 SNP 与表型的关系。</span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. 质量控制命令</span></span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a><span class="fu">### --check-sex</span></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a>用于检查样本的性别是否与遗传数据一致。</span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--check-sex</span> <span class="at">--out</span> sex_check</span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>该命令将检查数据集中所有样本的性别，并生成 sex_check.sexcheck 文件。</span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="fu">### --missing</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>用于计算样本和 SNP 的缺失情况，帮助识别潜在的质量问题。</span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--missing</span> <span class="at">--out</span> missing_data</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a>这个命令将生成一个包含缺失数据统计的文件 missing_data.lmiss 和 missing_data.imiss。</span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 文件合并命令</span></span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### --merge 和 --bmerge</span></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="in">`--merge`</span> 合并多个 PLINK 数据集，<span class="in">`--bmerge`</span> 与 <span class="in">`--merge`</span> 类似，但适用于二进制文件。</span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> data1 <span class="at">--bmerge</span> data2.bed data2.bim data2.fam <span class="at">--make-bed</span> <span class="at">--out</span> merged_data</span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a>这个命令将二进制文件 data1 和 data2 合并，并保存为新的 merged_data.bed 文件。</span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 数据导出命令</span></span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### --recode</span></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a>将数据从二进制格式转换为其他格式，例如 .ped 格式。</span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--recode</span> <span class="at">--out</span> ped_format</span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a>该命令将 mydata 数据集转换为 .ped 和 .map 文件格式，并保存为 ped_format.ped 和 ped_format.map。</span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### --recode vcf</span></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a>将 PLINK 二进制数据转换为 VCF 格式。</span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--recode</span> vcf <span class="at">--out</span> vcf_output</span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a>此命令将 mydata 数据集转换为 .vcf 格式，并输出为 vcf_output.vcf 文件。</span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. 并行化命令</span></span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### --threads</span></span>
+<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a>指定 PLINK 使用的线程数，从而加速计算。</span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> mydata <span class="at">--assoc</span> <span class="at">--threads</span> 4 <span class="at">--out</span> assoc_results</span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a>该命令将在进行关联分析时使用 4 个线程，以加速处理。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
