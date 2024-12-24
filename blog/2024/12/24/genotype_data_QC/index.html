@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="基因型数据存储的基础">
+<meta name="description" content="genotype data QC">
 
-<title>理解 PLINK格式 | Zhen Lu – Zhen Lu</title>
+<title>预 GWAS 阶段的基因型数据 QC 流程 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,10 +123,39 @@ div.column-margin+hr.dinkus {
 }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="floating nav-fixed slimcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,16 +249,18 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">理解 PLINK格式</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">预 GWAS 阶段的基因型数据 QC 流程</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          基因型数据存储的基础
+          genotype data QC
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">plink</div>
                 <div class="quarto-category">GWAS</div>
                 <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">genotype data</div>
+                <div class="quarto-category">QC</div>
               </div>
                   </div>
   </div>
@@ -247,7 +278,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 21, 2024</p>
+        <p class="date">Tuesday, December 24, 2024</p>
       </div>
     </div>
     
@@ -262,9 +293,13 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#plink-数据的基本组成" id="toc-plink-数据的基本组成" class="nav-link active" data-scroll-target="#plink-数据的基本组成">PLINK 数据的基本组成</a></li>
-  <li><a href="#数据格式及其特点" id="toc-数据格式及其特点" class="nav-link" data-scroll-target="#数据格式及其特点">数据格式及其特点</a></li>
-  <li><a href="#格式的适用场景" id="toc-格式的适用场景" class="nav-link" data-scroll-target="#格式的适用场景">格式的适用场景</a></li>
+  <li><a href="#计算缺失率missing-rate与呼叫率call-rate" id="toc-计算缺失率missing-rate与呼叫率call-rate" class="nav-link active" data-scroll-target="#计算缺失率missing-rate与呼叫率call-rate">1. 计算缺失率（Missing Rate）与呼叫率（Call Rate）</a></li>
+  <li><a href="#计算等位基因频率allele-frequency" id="toc-计算等位基因频率allele-frequency" class="nav-link" data-scroll-target="#计算等位基因频率allele-frequency">2. 计算等位基因频率（Allele Frequency）</a></li>
+  <li><a href="#hardy-weinberg-平衡精确检验hardy-weinberg-equilibrium-test" id="toc-hardy-weinberg-平衡精确检验hardy-weinberg-equilibrium-test" class="nav-link" data-scroll-target="#hardy-weinberg-平衡精确检验hardy-weinberg-equilibrium-test">3. Hardy-Weinberg 平衡精确检验（Hardy-Weinberg Equilibrium Test）</a></li>
+  <li><a href="#ld-pruning" id="toc-ld-pruning" class="nav-link" data-scroll-target="#ld-pruning">4. LD-Pruning</a></li>
+  <li><a href="#计算近交系数-finbreeding-f-coefficient" id="toc-计算近交系数-finbreeding-f-coefficient" class="nav-link" data-scroll-target="#计算近交系数-finbreeding-f-coefficient">5. 计算近交系数 F（Inbreeding F coefficient）</a></li>
+  <li><a href="#数据管理make-bed-recode" id="toc-数据管理make-bed-recode" class="nav-link" data-scroll-target="#数据管理make-bed-recode">6. 数据管理（make-bed / recode）</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结">总结</a></li>
   </ul>
 </nav>
 </nav>
@@ -273,121 +308,58 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">PLINK</figcaption>
-</figure>
-</div>
-<section id="plink-数据的基本组成" class="level3">
-<h3 class="anchored" data-anchor-id="plink-数据的基本组成">PLINK 数据的基本组成</h3>
-<p>在 PLINK 中，基因型数据的存储由三部分信息组成：</p>
-<ul>
-<li>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</li>
-<li>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</li>
-<li>基因型矩阵：每个样本在每个位点上的基因型数据。</li>
-</ul>
-<p>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</p>
+<p>在进行全基因组关联研究（GWAS）前，数据质量的控制（QC）是至关重要的一步。</p>
+<p>预处理和质量控制可以确保我们使用的数据集干净、可靠，避免潜在的偏倚和错误。这里，我们将介绍如何在 GWAS 前进行基因型数据的 QC，确保数据的准确性和可靠性。</p>
+<section id="计算缺失率missing-rate与呼叫率call-rate" class="level3">
+<h3 class="anchored" data-anchor-id="计算缺失率missing-rate与呼叫率call-rate">1. 计算缺失率（Missing Rate）与呼叫率（Call Rate）</h3>
+<p>在 GWAS 分析中，缺失数据可能会影响结果的准确性。基因型数据的质量首先需要评估每个样本和每个 SNP 的缺失率。</p>
+<p>缺失率表示某个样本在所有标记位点的基因型缺失的比例；呼叫率表示某个 SNP 在所有样本中的基因型被成功识别的比例。样本缺失率：样本的基因型数据可能因技术问题、平台差异等因素缺失，需要计算每个样本的缺失率，并根据预设的阈值剔除缺失过多的样本。SNP 呼叫率：类似地，每个SNP的呼叫率需要计算。如果某些 SNP 在大多数样本中都没有成功呼叫，可以考虑排除这些 SNP。</p>
+<p>在 PLINK 中，可以使用以下命令来计算样本的缺失率和 SNP 的呼叫率：</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --missing --out plink_missing</code></pre>
 </section>
-<section id="数据格式及其特点" class="level3">
-<h3 class="anchored" data-anchor-id="数据格式及其特点">数据格式及其特点</h3>
-<section id="pedmap-格式" class="level4">
-<h4 class="anchored" data-anchor-id="pedmap-格式">ped/map 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/1.9/formats" title="plink 1.9">PLINK</a> 的原始标准文本格式，用于存储完整的基因型数据表。</p>
-<section id="ped-文件" class="level5">
-<h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
-<p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="e819a560" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <code>G G</code> 表示基因型为 GG）。</p>
+<section id="计算等位基因频率allele-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="计算等位基因频率allele-frequency">2. 计算等位基因频率（Allele Frequency）</h3>
+<p>等位基因频率是 GWAS 中重要的统计量，它表示某个特定等位基因在样本中的出现频率。为了确保我们分析的是常见的变异，我们通常会设置最小等位基因频率（MAF）阈值。通常，筛选出 MAF 低于 1% 的 SNP 是合理的，因为低频变异可能会增加假阳性。</p>
+<p>在 PLINK 中，计算等位基因频率非常简单：</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --freq --out plink_freq</code></pre>
 </section>
-<section id="map-文件" class="level5">
-<h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
-<p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="309fd45d" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</p>
-<p>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</p>
+<section id="hardy-weinberg-平衡精确检验hardy-weinberg-equilibrium-test" class="level3">
+<h3 class="anchored" data-anchor-id="hardy-weinberg-平衡精确检验hardy-weinberg-equilibrium-test">3. Hardy-Weinberg 平衡精确检验（Hardy-Weinberg Equilibrium Test）</h3>
+<p>Hardy-Weinberg 平衡（HWE）检验是 GWAS 中常用的一种质量控制手段。根据 HWE 定律，如果一个群体处于均衡状态，则基因型的分布应该符合预期的频率。如果某个 SNP 的基因型偏离了 HWE，可能是因为样本污染、系统性错误或者是与某些表型相关的变异。通常，对于病例对照研究，HWE检验的p值阈值设定为<span class="math inline">\(10^{-6}\)</span>。</p>
+<p>使用 PLINK 执行 HWE 检验：</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --hwe 1e-6 --out plink_hwe</code></pre>
 </section>
+<section id="ld-pruning" class="level3">
+<h3 class="anchored" data-anchor-id="ld-pruning">4. LD-Pruning</h3>
+<p>连锁不平衡（LD）修剪是为了去除那些高度相关的 SNP，减少冗余，确保分析中使用的 SNP 具有独立性。若 SNP 之间存在高度的 LD，它们可能会影响 GWAS 结果的准确性。通常使用 LD-pruning 来去除相关性高的 SNP。</p>
+<p>在 PLINK 中，常用的 LD-pruning 命令如下：</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --indep-pairwise 50 5 0.2 --out plink_results</code></pre>
+<p>该命令会根据给定的窗口大小（50 个 SNP）、步长（每次移动 5 个 SNP）和 <span class="math inline">\(r^{2}\)</span> 阈值（0.2），进行 LD 修剪。</p>
 </section>
-<section id="fambimbed-格式" class="level4">
-<h4 class="anchored" data-anchor-id="fambimbed-格式">fam/bim/bed 格式</h4>
-<p>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</p>
-<section id="fam-文件" class="level5">
-<h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
-<p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="15eaa094" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="计算近交系数-finbreeding-f-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="计算近交系数-finbreeding-f-coefficient">5. 计算近交系数 F（Inbreeding F coefficient）</h3>
+<p>近交系数 F（F coefficient）用于衡量样本中的近交程度。较高的 F 值可能表示样本存在近交，而较低的 F 值可能表示样本污染。计算 F 值时，可以使用 PLINK 的 <code>--het</code> 命令，它会生成每个样本的观测和期望纯合子基因型数量，并计算 F 值。</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --het --out plink_results</code></pre>
+<p>输出结果中，F 值较高的样本可以考虑进一步检查或排除。常见的处理方法是将 F 值超过 3 个标准差（SD）的样本排除。</p>
 </section>
-<section id="bim-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
-<p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="e70a9adc" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="数据管理make-bed-recode" class="level3">
+<h3 class="anchored" data-anchor-id="数据管理make-bed-recode">6. 数据管理（make-bed / recode）</h3>
+<p>为了便于后续分析，PLINK 提供了多种数据格式转换工具。最常用的格式是 BED 格式，它是 PLINK 的二进制格式，能够大大提高存储和计算效率。<code>make-bed</code> 将原始的 PED/MAP 文件转换为 BED 格式。通常在预处理数据时使用该命令。</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --make-bed --out plink_bed</code></pre>
+<p>bash</p>
+<p><code>recode</code> 如果你需要将数据转回 PED 格式或其他格式，可以使用 <code>recode</code> 命令。</p>
+<pre class="{bash}"><code>plink --bfile ${genotypeFile} --recode --out plink_recode</code></pre>
+<p>这些命令帮助将数据从一种格式转换为另一种格式，确保数据可以被其他分析工具有效读取。</p>
 </section>
-<section id="bed-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
-<p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="37d89093" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</p>
-</section>
-</section>
-<section id="psampvarpgen-格式" class="level4">
-<h4 class="anchored" data-anchor-id="psampvarpgen-格式">psam/pvar/pgen 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/2.0/" title="plink 2">PLINK2</a> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</p>
-<p>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</p>
-</section>
-</section>
-<section id="格式的适用场景" class="level3">
-<h3 class="anchored" data-anchor-id="格式的适用场景">格式的适用场景</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 40%">
-<col style="width: 39%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>格式集合</th>
-<th>特点</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ped/map</td>
-<td>文本格式，直观易读，但占用空间大</td>
-<td>数据检查、数据格式初学者</td>
-</tr>
-<tr class="even">
-<td>fam/bim/bed</td>
-<td>二进制格式，存储高效，需借助软件解析</td>
-<td>大规模数据分析，如GWAS</td>
-</tr>
-<tr class="odd">
-<td>psam/pvar/pgen</td>
-<td>PLINK2格式，兼容性强，处理速度快</td>
-<td>需要复杂分析和高性能计算时</td>
-</tr>
-</tbody>
-</table>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>基因型数据的 QC 是 GWAS 分析中的基础步骤，它确保数据的可靠性和准确性。通过执行上述步骤，你可以在 GWAS 分析前排除掉缺失值过多、低频变异、偏离 Hardy-Weinberg 平衡的 SNP，以及冗余的高度 LD SNP。高质量的数据是可靠分析的前提，只有确保数据质量，才能得出科学、可靠的结果。</p>
 
 
 <!-- -->
@@ -867,126 +839,113 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "理解 PLINK格式"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-21</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "基因型数据存储的基础"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="al">![PLINK](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png)</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## PLINK 数据的基本组成</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，基因型数据的存储由三部分信息组成：</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基因型矩阵：每个样本在每个位点上的基因型数据。</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据格式及其特点</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### ped/map 格式</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK</span><span class="co">](https://www.cog-genomics.org/plink/1.9/formats "plink 1.9")</span> 的原始标准文本格式，用于存储完整的基因型数据表。</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .ped 文件</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <span class="in">`G G`</span> 表示基因型为 GG）。</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .map 文件</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### fam/bim/bed 格式</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .fam 文件</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>样本基本信息，内容与 .ped 文件的前六列一致。</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bim 文件</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bed 文件</span></span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### psam/pvar/pgen 格式</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK2</span><span class="co">](https://www.cog-genomics.org/plink/2.0/ "plink 2")</span> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## 格式的适用场景</span></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>| 格式集合         | 特点                             | 适用场景                               |</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>|------------------|-------------------------------------|------------------------------------|</span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>| ped/map          | 文本格式，直观易读，但占用空间大 | 数据检查、数据格式初学者               |</span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>| fam/bim/bed      | 二进制格式，存储高效，需借助软件解析 | 大规模数据分析，如GWAS                |</span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>| psam/pvar/pgen   | PLINK2格式，兼容性强，处理速度快 | 需要复杂分析和高性能计算时             |</span>
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "预 GWAS 阶段的基因型数据 QC 流程"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-24</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "genotype data QC"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412241722219.png"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - genotype data</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - QC</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>在进行全基因组关联研究（GWAS）前，数据质量的控制（QC）是至关重要的一步。</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>预处理和质量控制可以确保我们使用的数据集干净、可靠，避免潜在的偏倚和错误。这里，我们将介绍如何在 GWAS 前进行基因型数据的 QC，确保数据的准确性和可靠性。</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 计算缺失率（Missing Rate）与呼叫率（Call Rate）</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，缺失数据可能会影响结果的准确性。基因型数据的质量首先需要评估每个样本和每个 SNP 的缺失率。</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>缺失率表示某个样本在所有标记位点的基因型缺失的比例；呼叫率表示某个 SNP 在所有样本中的基因型被成功识别的比例。样本缺失率：样本的基因型数据可能因技术问题、平台差异等因素缺失，需要计算每个样本的缺失率，并根据预设的阈值剔除缺失过多的样本。SNP 呼叫率：类似地，每个SNP的呼叫率需要计算。如果某些 SNP 在大多数样本中都没有成功呼叫，可以考虑排除这些 SNP。</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令来计算样本的缺失率和 SNP 的呼叫率：</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--missing</span> <span class="at">--out</span> plink_missing</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 计算等位基因频率（Allele Frequency）</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>等位基因频率是 GWAS 中重要的统计量，它表示某个特定等位基因在样本中的出现频率。为了确保我们分析的是常见的变异，我们通常会设置最小等位基因频率（MAF）阈值。通常，筛选出 MAF 低于 1% 的 SNP 是合理的，因为低频变异可能会增加假阳性。</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，计算等位基因频率非常简单：</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--freq</span> <span class="at">--out</span> plink_freq</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Hardy-Weinberg 平衡精确检验（Hardy-Weinberg Equilibrium Test）</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>Hardy-Weinberg 平衡（HWE）检验是 GWAS 中常用的一种质量控制手段。根据 HWE 定律，如果一个群体处于均衡状态，则基因型的分布应该符合预期的频率。如果某个 SNP 的基因型偏离了 HWE，可能是因为样本污染、系统性错误或者是与某些表型相关的变异。通常，对于病例对照研究，HWE检验的p值阈值设定为$10^{-6}$。</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>使用 PLINK 执行 HWE 检验：</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--hwe</span> 1e-6 <span class="at">--out</span> plink_hwe</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. LD-Pruning</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>连锁不平衡（LD）修剪是为了去除那些高度相关的 SNP，减少冗余，确保分析中使用的 SNP 具有独立性。若 SNP 之间存在高度的 LD，它们可能会影响 GWAS 结果的准确性。通常使用 LD-pruning 来去除相关性高的 SNP。</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，常用的 LD-pruning 命令如下：</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="at">--out</span> plink_results</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>该命令会根据给定的窗口大小（50 个 SNP）、步长（每次移动 5 个 SNP）和 $r^{2}$ 阈值（0.2），进行 LD 修剪。</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 计算近交系数 F（Inbreeding F coefficient）</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>近交系数 F（F coefficient）用于衡量样本中的近交程度。较高的 F 值可能表示样本存在近交，而较低的 F 值可能表示样本污染。计算 F 值时，可以使用 PLINK 的 <span class="in">`--het`</span> 命令，它会生成每个样本的观测和期望纯合子基因型数量，并计算 F 值。</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--het</span> <span class="at">--out</span> plink_results</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>输出结果中，F 值较高的样本可以考虑进一步检查或排除。常见的处理方法是将 F 值超过 3 个标准差（SD）的样本排除。</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 数据管理（make-bed / recode）</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>为了便于后续分析，PLINK 提供了多种数据格式转换工具。最常用的格式是 BED 格式，它是 PLINK 的二进制格式，能够大大提高存储和计算效率。<span class="in">`make-bed`</span> 将原始的 PED/MAP 文件转换为 BED 格式。通常在预处理数据时使用该命令。</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--make-bed</span> <span class="at">--out</span> plink_bed</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>bash</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="in">`recode`</span> 如果你需要将数据转回 PED 格式或其他格式，可以使用 <span class="in">`recode`</span> 命令。</span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--recode</span> <span class="at">--out</span> plink_recode</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>这些命令帮助将数据从一种格式转换为另一种格式，确保数据可以被其他分析工具有效读取。</span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>基因型数据的 QC 是 GWAS 分析中的基础步骤，它确保数据的可靠性和准确性。通过执行上述步骤，你可以在 GWAS 分析前排除掉缺失值过多、低频变异、偏离 Hardy-Weinberg 平衡的 SNP，以及冗余的高度 LD SNP。高质量的数据是可靠分析的前提，只有确保数据质量，才能得出科学、可靠的结果。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
