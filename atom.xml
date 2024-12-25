@@ -11,7 +11,101 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Tue, 24 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 25 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>GWAS 前 PCA 步骤详解</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/25/pca/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>基因组广泛关联研究（GWAS）旨在探索遗传变异与表型特征之间的关系，但由于群体结构（即不同人群间的遗传差异）和样本亲缘关系的影响，可能会导致假阳性或假阴性结果。为了控制这些偏差，<strong>主成分分析（PCA）</strong>成为了 GWAS 前的重要步骤。</p>
+<p>这里，我们将详细介绍 GWAS 前 PCA 的原因以及如何通过一系列步骤有效进行 PCA 分析。</p>
+<section id="为什么要进行-pca" class="level3">
+<h3 class="anchored" data-anchor-id="为什么要进行-pca">为什么要进行 PCA？</h3>
+<section id="去除群体结构的影响" class="level4">
+<h4 class="anchored" data-anchor-id="去除群体结构的影响">1. 去除群体结构的影响</h4>
+<p>在多种族或多地区样本的 GWAS 中，样本的群体结构可能会影响分析结果。例如，不同的群体可能拥有不同的基因频率，这种结构性差异如果不加以控制，可能会误导结果，导致某些表型与基因变异之间的假相关。</p>
+</section>
+<section id="去除亲缘关系的干扰" class="level4">
+<h4 class="anchored" data-anchor-id="去除亲缘关系的干扰">2. 去除亲缘关系的干扰</h4>
+<p>如果样本中存在亲缘关系（如父母-子女、兄弟姐妹等），这些亲缘关系会增加样本间的相关性，从而影响 GWAS 的准确性。PCA 能够帮助识别并去除这些干扰，确保样本的独立性。</p>
+</section>
+<section id="降低计算复杂度" class="level4">
+<h4 class="anchored" data-anchor-id="降低计算复杂度">3. 降低计算复杂度</h4>
+<p>PCA 能够通过减少数据的维度来降低后续分析的计算复杂度，并帮助更清晰地理解数据的结构。</p>
+</section>
+</section>
+<section id="pca-的步骤" class="level3">
+<h3 class="anchored" data-anchor-id="pca-的步骤">PCA 的步骤</h3>
+<p>进行 PCA 时，主要分为以下几个关键步骤：</p>
+<section id="ld剪枝ld-pruning" class="level4">
+<h4 class="anchored" data-anchor-id="ld剪枝ld-pruning">1. LD剪枝（LD-Pruning）</h4>
+<p>在进行 PCA 前，我们通常会进行 LD 剪枝，即去除那些高度相关（连锁不平衡，LD）变异位点。这样做的目的是减少冗余信息，使得 PCA 能够更准确地反映独立的遗传变异。</p>
+<p>在 PLINK 中，可以使用以下命令进行 LD 剪枝：</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --indep-pairwise 50 5 0.2 \
+       --out ${outPrefix}.prune</code></pre>
+<p><code>--indep-pairwise 50 5 0.2</code> 进行 LD 剪枝，窗口大小为 50 个 SNP，步长为 5，LD 阈值为 0.2，表示去除那些与其他 SNP 高度相关的 SNP。<code>--out</code> 指定输出文件的前缀。这将生成一个包含独立 SNP 的文件 <code>${outPrefix}.prune.in</code>，后续将用于 PCA 计算。</p>
+</section>
+<section id="去除亲缘关系样本" class="level4">
+<h4 class="anchored" data-anchor-id="去除亲缘关系样本">2. 去除亲缘关系样本</h4>
+<p>PCA 计算时需要去除亲缘关系较近的样本，通常是 2 度以内的亲属。PLINK 的 <code>--king-cutoff</code> 命令可以用来筛选样本，并去除与其他样本亲缘关系过近的样本。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --king-cutoff 0.0884 \
+       --out ${outPrefix}.king.cutoff</code></pre>
+<p><code>--king-cutoff 0.0884</code> 此命令通过阈值 0.0884（约对应亲缘关系为 2 度的样本）去除亲缘关系过近的样本。这会生成两个文件：<code>plink_results_king.king.cutoff.in.id</code>（保留的样本 ID）和 <code>plink_results_king.king.cutoff.out.id</code>（被排除的样本 ID）。</p>
+</section>
+<section id="使用无亲缘关系样本和独立-snp-进行-pca" class="level4">
+<h4 class="anchored" data-anchor-id="使用无亲缘关系样本和独立-snp-进行-pca">3. 使用无亲缘关系样本和独立 SNP 进行 PCA</h4>
+<p>接下来，使用去除亲缘关系的样本和独立 SNP 来运行 PCA。PCA 计算的目的是识别样本间最显著的遗传变异。我们可以使用 PLINK 中的 <code>--pca</code> 命令来进行 PCA 计算。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --keep ${outPrefix}.king.cutoff.in.id \
+       --extract ${outPrefix}.prune.in \
+       --freq counts \
+       --threads ${threads} \
+       --pca approx allele-wts 10 \
+       --out ${outPrefix}.pca</code></pre>
+<p><code>--keep ${outPrefix}.king.cutoff.in.id</code> 指定只使用无亲缘关系的样本，<code>--extract ${outPrefix}.prune.in</code> 指定仅使用经过 LD 剪枝的独立 SNP。<code>--freq counts</code> 计算等位基因频率，<code>--pca approx allele-wts 10</code> 请求进行 PCA 计算，并输出前 10 个主成分的等位基因权重。此命令会生成多个输出文件，包括主成分得分文件（<code>.eigenvec</code>）、主成分方差解释比例文件（<code>.eigenval</code>）等。</p>
+</section>
+<section id="将-pca-结果投影到所有样本" class="level4">
+<h4 class="anchored" data-anchor-id="将-pca-结果投影到所有样本">4. 将 PCA 结果投影到所有样本</h4>
+<p>完成 PCA 后，我们可以将主成分的得分投影到所有样本中。这样可以确保即使是在 PCA 分析后没有被直接计算的样本，也能够获得与前几个主成分的关联。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --threads ${threads} \
+       --read-freq ${outPrefix}.acount \
+       --score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize \
+       --score-col-nums 7-16 \
+       --out ${outPrefix}_projected</code></pre>
+<p><code>--read-freq ${outPrefix}.acount</code> 读取计算过的等位基因频率，<code>--score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize</code> 使用主成分分析的结果对所有样本进行投影，<code>--score-col-nums 7-16</code> 指定投影的主成分列。投影后的结果可以用于进一步的 GWAS 分析，确保将群体结构和亲缘关系的影响考虑在内。</p>
+</section>
+<section id="分析和解释-pca-结果" class="level4">
+<h4 class="anchored" data-anchor-id="分析和解释-pca-结果">5. 分析和解释 PCA 结果</h4>
+<p>完成 PCA 分析后，我们可以查看每个主成分的解释比例，了解各个主成分对于遗传变异的贡献。通常，前几个主成分会解释大部分的方差，因此我们关注的是这些主成分的贡献。</p>
+<p>在 PLINK 的输出文件中，<code>.eigenval</code> 文件包含每个主成分的特征值，这些特征值表示该主成分对于数据方差的贡献比例。通过查看这些值，我们可以判断哪些主成分最能解释数据中的变异。</p>
+</section>
+</section>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>PCA 是 GWAS 分析中的一个关键步骤，能够有效去除群体结构和亲缘关系的影响，从而提高 GWAS 结果的可靠性和准确性。通过 PCA，我们不仅能去除数据中的噪声，还能更好地理解样本之间的遗传结构，为 GWAS 的成功开展奠定坚实基础。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>plink</category>
+  <category>GWAS</category>
+  <category>bioinformatics</category>
+  <category>pca</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/25/pca/</guid>
+  <pubDate>Wed, 25 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412252318097.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>预 GWAS 阶段的基因型数据 QC 流程</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -248,7 +342,7 @@
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="e819a560" class="cell" data-execution_count="1">
+<div id="f225ec37" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -281,7 +375,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="309fd45d" class="cell" data-execution_count="2">
+<div id="8de6209f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -315,7 +409,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="15eaa094" class="cell" data-execution_count="3">
+<div id="6e5dfe71" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -347,7 +441,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="e70a9adc" class="cell" data-execution_count="4">
+<div id="829a7978" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -375,7 +469,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="37d89093" class="cell" data-execution_count="5">
+<div id="6ac5978f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -655,7 +749,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="3273ca3d" class="cell" data-execution_count="1">
+<div id="8aed6d18" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -859,7 +953,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="3eb9c54a" class="cell" data-execution_count="2">
+<div id="8b12cd91" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -3374,7 +3468,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="bbabdc42" class="cell" data-execution_count="1">
+<div id="02f8c543" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -3406,7 +3500,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="bade495d" class="cell" data-execution_count="2">
+<div id="29303ed0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -3426,7 +3520,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="3483c55c" class="cell" data-execution_count="3">
+<div id="ccdf8b41" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -3437,7 +3531,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="a80b4904" class="cell" data-execution_count="4">
+<div id="f26e4fb1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -3448,7 +3542,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="c7927234" class="cell" data-execution_count="5">
+<div id="6634f913" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -3461,7 +3555,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="38fe45e2" class="cell" data-execution_count="6">
+<div id="08ed9bcd" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -3484,14 +3578,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 1.5944, -1.0767, -4.7861],
-         [ 2.7677, -0.8886,  1.1940]],
+<pre><code>tensor([[[-2.5924, -0.6693, -0.0572],
+         [ 1.9637,  1.6498, -0.5807]],
 
-        [[-1.4287,  0.0398, -3.2183],
-         [ 0.5368, -0.4651, -0.6582]],
+        [[-0.4865, -0.2525,  0.2846],
+         [-2.9478, -2.9723,  2.6694]],
 
-        [[-0.0382,  0.1750, -0.5104],
-         [ 2.5525,  0.1177,  1.7633]]])</code></pre>
+        [[ 2.3635,  0.7754, -1.1510],
+         [ 2.1286, -0.2565, -1.1789]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5873,7 +5967,7 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="190c0399" class="cell" data-execution_count="1">
+<div id="5d04fdc9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5928,7 +6022,7 @@ font-style: inherit;">+</span>B)</span></code></pre></div>
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="0e078958" class="cell" data-execution_count="2">
+<div id="819c3041" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5968,7 +6062,7 @@ font-style: inherit;">*</span>A)</span></code></pre></div>
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="e1d708ef" class="cell" data-execution_count="3">
+<div id="82ac84c7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -6033,7 +6127,7 @@ font-style: inherit;">print</span>(np.dot(A, B))</span></code></pre></div>
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="7cacf6d8" class="cell" data-execution_count="4">
+<div id="c50e58f3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -6083,395 +6177,6 @@ font-style: inherit;">print</span>(np.dot(A, x))</span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2020/04/27/</guid>
   <pubDate>Mon, 27 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051637211.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Python与矩阵</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/26/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>矩阵可以被看作是排列的向量或堆放在一起的数字。矩阵的意义非常重要，它可以作用在一个具体的向量上，使向量空间位置发生变换。</p>
-<section id="矩阵的python表示" class="level3">
-<h3 class="anchored" data-anchor-id="矩阵的python表示">矩阵的Python表示</h3>
-<p>对于矩阵而言，最直观的描述就是一个<code>m*n</code>的数字方阵，它可以看作是n个m维列向量从左到右并排摆放，也可以看作是m个n维行向量从上到下进行叠放。</p>
-<div id="1db20d39" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 矩阵的表示：</span></span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-3">A <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>],</span>
-<span id="cb1-4">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>],</span>
-<span id="cb1-5">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span>],</span>
-<span id="cb1-6">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>]])</span>
-<span id="cb1-7"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A)</span>
-<span id="cb1-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 在形容矩阵的形状和规模时，一般采用其行数和列数来进行描述</span></span>
-<span id="cb1-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A.shape)</span>
-<span id="cb1-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 通过矩阵A的shape属性，可以获取一个表示矩阵规模的元组对象</span></span>
-<span id="cb1-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 这个元组对象包含两个元素：第一个元素表示行数，第二个表示列数</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1 2]
- [3 4]
- [5 6]
- [7 8]]
-(4, 2)</code></pre>
-</div>
-</div>
-<p>前面提到，n维的行向量可以看作是一个<code>1*n</code>的特殊矩阵；同理，n维的列向量也同样可以看作是一个<code>n*1</code>的特殊矩阵。这样，一方面，可以将矩阵和向量的Python表示方法统一起来；另一方面，在接下来要介绍的矩阵与向量的乘法运算中，可以将其看作是矩阵与矩阵之间乘法的一种特殊形式，从而统一运算方式。</p>
-<div id="87300701" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">B<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#行向量；用生成矩阵的方法生成了一个1*4的矩阵，用来表示一个四维的行向量</span></span>
-<span id="cb3-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(B.shape)</span>
-<span id="cb3-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(B.T) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#转置成列向量；因为是矩阵形式，所以可以用转置方法，得到对应的四维列向量</span></span>
-<span id="cb3-4">C<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>],</span>
-<span id="cb3-5">            [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>],</span>
-<span id="cb3-6">            [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>],</span>
-<span id="cb3-7">            [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#列向量</span></span>
-<span id="cb3-8"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(C)</span>
-<span id="cb3-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(C.shape)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(1, 4)
-[[1]
- [2]
- [3]
- [4]]
-[[1]
- [2]
- [3]
- [4]]
-(4, 1)</code></pre>
-</div>
-</div>
-</section>
-<section id="特殊形态的矩阵" class="level3">
-<h3 class="anchored" data-anchor-id="特殊形态的矩阵">特殊形态的矩阵</h3>
-<ol type="1">
-<li>方阵：行数和列数相等的一类矩阵，称为方阵，其行数或列数称为它的阶数。</li>
-</ol>
-<div id="7e8204bc" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">A <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>],</span>
-<span id="cb5-2">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>],</span>
-<span id="cb5-3">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>],</span>
-<span id="cb5-4">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>]]) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#4阶方阵</span></span>
-<span id="cb5-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A)</span>
-<span id="cb5-6"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A.shape)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1 1 1 1]
- [2 2 2 2]
- [3 3 3 3]
- [4 4 4 4]]
-(4, 4)</code></pre>
-</div>
-</div>
-<ol start="2" type="1">
-<li><p>对称矩阵：开始介绍对称矩阵之前，先说明一下矩阵转置的概念。</p>
-<p>对于指定的矩阵，若将其行和列上的元素进行位置互换，即原行元素作新列，原列元素作新行，即可得到一个全新的矩阵，这个新矩阵称为原矩阵的转置矩阵，行和列互换的矩阵操作就称为矩阵的转置。</p>
-<p>若原矩阵和转置后新得到的矩阵相等，那么将原矩阵称为对称矩阵。由此可见，矩阵对称的前提条件是该矩阵首先必须是一个方阵；此外，对称矩阵的一个典型特征为：沿着从左上到右下的对角线，关于这条对角线相互对称的元素都是彼此相等的。</p>
-<p>可以说，对称矩阵是最重要的矩阵，在矩阵的相关分析中扮演极其重要的角色。</p></li>
-</ol>
-<div id="78d1d165" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 矩阵的转置：</span></span>
-<span id="cb7-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb7-3">A <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>],</span>
-<span id="cb7-4">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>]])</span>
-<span id="cb7-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A)</span>
-<span id="cb7-6"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A.T)</span>
-<span id="cb7-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 对称矩阵：</span></span>
-<span id="cb7-8"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb7-9">S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>],</span>
-<span id="cb7-10">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>],</span>
-<span id="cb7-11">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>],</span>
-<span id="cb7-12">              [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>]])</span>
-<span id="cb7-13"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(S)</span>
-<span id="cb7-14"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(S.T)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1 2 3 4]
- [5 6 7 8]]
-[[1 5]
- [2 6]
- [3 7]
- [4 8]]
-[[1 2 3 4]
- [2 5 6 7]
- [3 6 8 9]
- [4 7 9 0]]
-[[1 2 3 4]
- [2 5 6 7]
- [3 6 8 9]
- [4 7 9 0]]</code></pre>
-</div>
-</div>
-<ol start="3" type="1">
-<li>零矩阵：所有元素均为0的矩阵，称为零矩阵。</li>
-</ol>
-<div id="2465ac1c" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">A <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros([<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>])</span>
-<span id="cb9-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[0. 0. 0.]
- [0. 0. 0.]
- [0. 0. 0.]
- [0. 0. 0.]
- [0. 0. 0.]]</code></pre>
-</div>
-</div>
-<ol start="4" type="1">
-<li>对角矩阵：若方阵在非对角线位置上元素全部为0，则称为对角矩阵，0元素的位置可以省去不写。</li>
-</ol>
-<div id="c865009e" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.diag([<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>])</span>
-<span id="cb11-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A)</span>
-<span id="cb11-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(A.T)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1 0 0 0 0]
- [0 2 0 0 0]
- [0 0 3 0 0]
- [0 0 0 4 0]
- [0 0 0 0 5]]
-[[1 0 0 0 0]
- [0 2 0 0 0]
- [0 0 3 0 0]
- [0 0 0 4 0]
- [0 0 0 0 5]]</code></pre>
-</div>
-</div>
-<ol start="5" type="1">
-<li>单位矩阵/单位阵：对角位置上元素全部为1，其余位置元素均为0的特殊对角矩阵，称为单位矩阵。</li>
-</ol>
-<div id="76a37b71" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">I <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.eye(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>)</span>
-<span id="cb13-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(I)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1. 0. 0. 0. 0.]
- [0. 1. 0. 0. 0.]
- [0. 0. 1. 0. 0.]
- [0. 0. 0. 1. 0.]
- [0. 0. 0. 0. 1.]]</code></pre>
-</div>
-</div>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>linear algebra</category>
-  <category>matrix</category>
-  <category>python</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/26/</guid>
-  <pubDate>Sun, 26 Apr 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409041318020.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="Python Training">
+<meta name="description" content="a typical genomic PCA analysis">
 
-<title>Python基础要素之数值 | Zhen Lu – Zhen Lu</title>
+<title>GWAS 前 PCA 步骤详解 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,25 +59,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../..//files/favicon-512.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dd08061cb7210c315e315379d94beb87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-56813874012d7e2d26cb5a32d9ca9364.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -133,7 +133,7 @@ div.column-margin+hr.dinkus {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
   </div>
@@ -144,37 +144,37 @@ div.column-margin+hr.dinkus {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../blog/index.html"> 
+    <a class="nav-link" href="../../../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../talks/index.html"> 
+    <a class="nav-link" href="../../../../../talks/index.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../publications/index.html"> 
+    <a class="nav-link" href="../../../../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../cv/index.html"> 
+    <a class="nav-link" href="../../../../../cv/index.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../news/index.html"> 
+    <a class="nav-link" href="../../../../../news/index.html"> 
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../uses/index.html"> 
+    <a class="nav-link" href="../../../../../uses/index.html"> 
 <span class="menu-text">Uses</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../atom.xml"> 
+    <a class="nav-link" href="../../../../../atom.xml"> 
 <span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
@@ -220,14 +220,17 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Python基础要素之数值</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">GWAS 前 PCA 步骤详解</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          Python Training
+          a typical genomic PCA analysis
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">python</div>
+                <div class="quarto-category">plink</div>
+                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">pca</div>
               </div>
                   </div>
   </div>
@@ -245,7 +248,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, January 6, 2020</p>
+        <p class="date">Wednesday, December 25, 2024</p>
       </div>
     </div>
     
@@ -260,9 +263,9 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#数值" id="toc-数值" class="nav-link active" data-scroll-target="#数值">数值</a></li>
-  <li><a href="#format-格式化" id="toc-format-格式化" class="nav-link" data-scroll-target="#format-格式化"><code>.format</code> 格式化</a></li>
-  <li><a href="#type函数" id="toc-type函数" class="nav-link" data-scroll-target="#type函数">type函数</a></li>
+  <li><a href="#为什么要进行-pca" id="toc-为什么要进行-pca" class="nav-link active" data-scroll-target="#为什么要进行-pca">为什么要进行 PCA？</a></li>
+  <li><a href="#pca-的步骤" id="toc-pca-的步骤" class="nav-link" data-scroll-target="#pca-的步骤">PCA 的步骤</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结">总结</a></li>
   </ul>
 </nav>
 </nav>
@@ -277,74 +280,75 @@ div.column-margin+hr.dinkus {
 
 
 
-<p>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</p>
-<section id="数值" class="level3">
-<h3 class="anchored" data-anchor-id="数值">数值</h3>
-<p>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</p>
-<p>整数：</p>
-<div id="ce6cbef0" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #4: 9
-Output #5: 81
-Output #6: 4.0</code></pre>
-</div>
-</div>
-<p>Output #6演示了将数值转换成整数并进行除法运算。</p>
-<p>浮点数：</p>
-<div id="b03b369b" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #7: 3.074
-Output #8: 12.0
-Output #9: 2.67
-Output #10: 2.6667</code></pre>
-</div>
-</div>
-<div id="47226231" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #11: 20.0855
-Output #12: 1.39
-Output #13: 9.0</code></pre>
-</div>
-</div>
+<p>基因组广泛关联研究（GWAS）旨在探索遗传变异与表型特征之间的关系，但由于群体结构（即不同人群间的遗传差异）和样本亲缘关系的影响，可能会导致假阳性或假阴性结果。为了控制这些偏差，<strong>主成分分析（PCA）</strong>成为了 GWAS 前的重要步骤。</p>
+<p>这里，我们将详细介绍 GWAS 前 PCA 的原因以及如何通过一系列步骤有效进行 PCA 分析。</p>
+<section id="为什么要进行-pca" class="level3">
+<h3 class="anchored" data-anchor-id="为什么要进行-pca">为什么要进行 PCA？</h3>
+<section id="去除群体结构的影响" class="level4">
+<h4 class="anchored" data-anchor-id="去除群体结构的影响">1. 去除群体结构的影响</h4>
+<p>在多种族或多地区样本的 GWAS 中，样本的群体结构可能会影响分析结果。例如，不同的群体可能拥有不同的基因频率，这种结构性差异如果不加以控制，可能会误导结果，导致某些表型与基因变异之间的假相关。</p>
 </section>
-<section id="format-格式化" class="level3">
-<h3 class="anchored" data-anchor-id="format-格式化"><code>.format</code> 格式化</h3>
-<div id="ddb0dfc2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Output #2: Four plus five equals 9.
-Output #3: [1, 2, 3, 4], ['first', 'second', 'third', 'fourth'], [1, 2, 3, 4, 'first', 'second', 'third', 'fourth']</code></pre>
-</div>
-</div>
+<section id="去除亲缘关系的干扰" class="level4">
+<h4 class="anchored" data-anchor-id="去除亲缘关系的干扰">2. 去除亲缘关系的干扰</h4>
+<p>如果样本中存在亲缘关系（如父母-子女、兄弟姐妹等），这些亲缘关系会增加样本间的相关性，从而影响 GWAS 的准确性。PCA 能够帮助识别并去除这些干扰，确保样本的独立性。</p>
 </section>
-<section id="type函数" class="level3">
-<h3 class="anchored" data-anchor-id="type函数">type函数</h3>
-<p>Python提供一个名为 <code>type</code> 的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</p>
-<p>函数的语法非常简单：<code>type(variable)</code> 会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</p>
-<p>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用 <code>type</code> 函数，不仅是变量，还有函数、语句等。</p>
+<section id="降低计算复杂度" class="level4">
+<h4 class="anchored" data-anchor-id="降低计算复杂度">3. 降低计算复杂度</h4>
+<p>PCA 能够通过减少数据的维度来降低后续分析的计算复杂度，并帮助更清晰地理解数据的结构。</p>
+</section>
+</section>
+<section id="pca-的步骤" class="level3">
+<h3 class="anchored" data-anchor-id="pca-的步骤">PCA 的步骤</h3>
+<p>进行 PCA 时，主要分为以下几个关键步骤：</p>
+<section id="ld剪枝ld-pruning" class="level4">
+<h4 class="anchored" data-anchor-id="ld剪枝ld-pruning">1. LD剪枝（LD-Pruning）</h4>
+<p>在进行 PCA 前，我们通常会进行 LD 剪枝，即去除那些高度相关（连锁不平衡，LD）变异位点。这样做的目的是减少冗余信息，使得 PCA 能够更准确地反映独立的遗传变异。</p>
+<p>在 PLINK 中，可以使用以下命令进行 LD 剪枝：</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --indep-pairwise 50 5 0.2 \
+       --out ${outPrefix}.prune</code></pre>
+<p><code>--indep-pairwise 50 5 0.2</code> 进行 LD 剪枝，窗口大小为 50 个 SNP，步长为 5，LD 阈值为 0.2，表示去除那些与其他 SNP 高度相关的 SNP。<code>--out</code> 指定输出文件的前缀。这将生成一个包含独立 SNP 的文件 <code>${outPrefix}.prune.in</code>，后续将用于 PCA 计算。</p>
+</section>
+<section id="去除亲缘关系样本" class="level4">
+<h4 class="anchored" data-anchor-id="去除亲缘关系样本">2. 去除亲缘关系样本</h4>
+<p>PCA 计算时需要去除亲缘关系较近的样本，通常是 2 度以内的亲属。PLINK 的 <code>--king-cutoff</code> 命令可以用来筛选样本，并去除与其他样本亲缘关系过近的样本。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --king-cutoff 0.0884 \
+       --out ${outPrefix}.king.cutoff</code></pre>
+<p><code>--king-cutoff 0.0884</code> 此命令通过阈值 0.0884（约对应亲缘关系为 2 度的样本）去除亲缘关系过近的样本。这会生成两个文件：<code>plink_results_king.king.cutoff.in.id</code>（保留的样本 ID）和 <code>plink_results_king.king.cutoff.out.id</code>（被排除的样本 ID）。</p>
+</section>
+<section id="使用无亲缘关系样本和独立-snp-进行-pca" class="level4">
+<h4 class="anchored" data-anchor-id="使用无亲缘关系样本和独立-snp-进行-pca">3. 使用无亲缘关系样本和独立 SNP 进行 PCA</h4>
+<p>接下来，使用去除亲缘关系的样本和独立 SNP 来运行 PCA。PCA 计算的目的是识别样本间最显著的遗传变异。我们可以使用 PLINK 中的 <code>--pca</code> 命令来进行 PCA 计算。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --keep ${outPrefix}.king.cutoff.in.id \
+       --extract ${outPrefix}.prune.in \
+       --freq counts \
+       --threads ${threads} \
+       --pca approx allele-wts 10 \
+       --out ${outPrefix}.pca</code></pre>
+<p><code>--keep ${outPrefix}.king.cutoff.in.id</code> 指定只使用无亲缘关系的样本，<code>--extract ${outPrefix}.prune.in</code> 指定仅使用经过 LD 剪枝的独立 SNP。<code>--freq counts</code> 计算等位基因频率，<code>--pca approx allele-wts 10</code> 请求进行 PCA 计算，并输出前 10 个主成分的等位基因权重。此命令会生成多个输出文件，包括主成分得分文件（<code>.eigenvec</code>）、主成分方差解释比例文件（<code>.eigenval</code>）等。</p>
+</section>
+<section id="将-pca-结果投影到所有样本" class="level4">
+<h4 class="anchored" data-anchor-id="将-pca-结果投影到所有样本">4. 将 PCA 结果投影到所有样本</h4>
+<p>完成 PCA 后，我们可以将主成分的得分投影到所有样本中。这样可以确保即使是在 PCA 分析后没有被直接计算的样本，也能够获得与前几个主成分的关联。</p>
+<pre class="{bash}"><code>plink2 --bfile ${genotypeFile} \
+       --threads ${threads} \
+       --read-freq ${outPrefix}.acount \
+       --score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize \
+       --score-col-nums 7-16 \
+       --out ${outPrefix}_projected</code></pre>
+<p><code>--read-freq ${outPrefix}.acount</code> 读取计算过的等位基因频率，<code>--score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize</code> 使用主成分分析的结果对所有样本进行投影，<code>--score-col-nums 7-16</code> 指定投影的主成分列。投影后的结果可以用于进一步的 GWAS 分析，确保将群体结构和亲缘关系的影响考虑在内。</p>
+</section>
+<section id="分析和解释-pca-结果" class="level4">
+<h4 class="anchored" data-anchor-id="分析和解释-pca-结果">5. 分析和解释 PCA 结果</h4>
+<p>完成 PCA 分析后，我们可以查看每个主成分的解释比例，了解各个主成分对于遗传变异的贡献。通常，前几个主成分会解释大部分的方差，因此我们关注的是这些主成分的贡献。</p>
+<p>在 PLINK 的输出文件中，<code>.eigenval</code> 文件包含每个主成分的特征值，这些特征值表示该主成分对于数据方差的贡献比例。通过查看这些值，我们可以判断哪些主成分最能解释数据中的变异。</p>
+</section>
+</section>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>PCA 是 GWAS 分析中的一个关键步骤，能够有效去除群体结构和亲缘关系的影响，从而提高 GWAS 结果的可靠性和准确性。通过 PCA，我们不仅能去除数据中的噪声，还能更好地理解样本之间的遗传结构，为 GWAS 的成功开展奠定坚实基础。</p>
 
 
 <!-- -->
@@ -824,88 +828,122 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python基础要素之数值"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-01-06</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Python Training"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201435557.webp"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>前面我们已经了解了如何创建、运行脚本，接下来我们了解下Python中最常用的数据类型。</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数值</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>Python中最主要的4种数值类型分别是整数、浮点数、长整数和复数，这里只介绍整数和浮点数（即带小数点的数）。</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>整数：</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #4: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(x))</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #5: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="dv">3</span><span class="op">**</span><span class="dv">4</span>))</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #6: </span><span class="sc">{0}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">int</span>(<span class="fl">8.3</span>)<span class="op">/</span><span class="bu">int</span>(<span class="fl">2.7</span>)))</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>Output #6演示了将数值转换成整数并进行除法运算。</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>浮点数：</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #7: </span><span class="sc">{0:.3f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.3</span><span class="op">/</span><span class="fl">2.7</span>))</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span><span class="op">*</span><span class="fl">4.8</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #8: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(y))</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">8</span><span class="op">/</span><span class="bu">float</span>(<span class="dv">3</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #9: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r))</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #10: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="fl">8.0</span><span class="op">/</span><span class="dv">3</span>))</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> exp, log, sqrt</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #11: </span><span class="sc">{0:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(exp(<span class="dv">3</span>)))</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #12: </span><span class="sc">{0:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(log(<span class="dv">4</span>)))</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #13: </span><span class="sc">{0:.1f}</span><span class="st">"</span>.<span class="bu">format</span>(sqrt(<span class="dv">81</span>)))</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## `.format` 格式化</span></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two numbers together</span></span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #2: Four plus five equals </span><span class="sc">{0:d}</span><span class="st">."</span>.<span class="bu">format</span>(z))</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two lists together</span></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="st">"first"</span>, <span class="st">"second"</span>, <span class="st">"third"</span>, <span class="st">"fourth"</span>]</span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Output #3: </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">"</span>.<span class="bu">format</span>(a, b, c))</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## type函数</span></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>Python提供一个名为 <span class="in">`type`</span> 的函数，可以对所有对象调用这个函数，来获得关于Python如何处理这个对象的更多信息。</span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>函数的语法非常简单：<span class="in">`type(variable)`</span> 会返回Python中的数据类型。如果你对一个数值变量调用这个函数，它会告诉你这个数值是整数还是浮点数，还会告诉你这个数值是否能当作字符串进行处理。</span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>此外，由于Python同样是面向对象的语言，所以你可以对Python中所有命名对象调用 <span class="in">`type`</span> 函数，不仅是变量，还有函数、语句等。</span>
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "GWAS 前 PCA 步骤详解"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-25</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "a typical genomic PCA analysis"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412252318097.png"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - pca</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>基因组广泛关联研究（GWAS）旨在探索遗传变异与表型特征之间的关系，但由于群体结构（即不同人群间的遗传差异）和样本亲缘关系的影响，可能会导致假阳性或假阴性结果。为了控制这些偏差，**主成分分析（PCA）**成为了 GWAS 前的重要步骤。</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>这里，我们将详细介绍 GWAS 前 PCA 的原因以及如何通过一系列步骤有效进行 PCA 分析。</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么要进行 PCA？</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 去除群体结构的影响</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>在多种族或多地区样本的 GWAS 中，样本的群体结构可能会影响分析结果。例如，不同的群体可能拥有不同的基因频率，这种结构性差异如果不加以控制，可能会误导结果，导致某些表型与基因变异之间的假相关。</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系的干扰</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>如果样本中存在亲缘关系（如父母-子女、兄弟姐妹等），这些亲缘关系会增加样本间的相关性，从而影响 GWAS 的准确性。PCA 能够帮助识别并去除这些干扰，确保样本的独立性。</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 降低计算复杂度</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>PCA 能够通过减少数据的维度来降低后续分析的计算复杂度，并帮助更清晰地理解数据的结构。</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## PCA 的步骤</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>进行 PCA 时，主要分为以下几个关键步骤：</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. LD剪枝（LD-Pruning）</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>在进行 PCA 前，我们通常会进行 LD 剪枝，即去除那些高度相关（连锁不平衡，LD）变异位点。这样做的目的是减少冗余信息，使得 PCA 能够更准确地反映独立的遗传变异。</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令进行 LD 剪枝：</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>       <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="dt">\</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.prune</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">`--indep-pairwise 50 5 0.2`</span> 进行 LD 剪枝，窗口大小为 50 个 SNP，步长为 5，LD 阈值为 0.2，表示去除那些与其他 SNP 高度相关的 SNP。<span class="in">`--out`</span> 指定输出文件的前缀。这将生成一个包含独立 SNP 的文件 <span class="in">`${outPrefix}.prune.in`</span>，后续将用于 PCA 计算。</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系样本</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>PCA 计算时需要去除亲缘关系较近的样本，通常是 2 度以内的亲属。PLINK 的 <span class="in">`--king-cutoff`</span> 命令可以用来筛选样本，并去除与其他样本亲缘关系过近的样本。</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>       <span class="at">--king-cutoff</span> 0.0884 <span class="dt">\</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.king.cutoff</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">`--king-cutoff 0.0884`</span> 此命令通过阈值 0.0884（约对应亲缘关系为 2 度的样本）去除亲缘关系过近的样本。这会生成两个文件：<span class="in">`plink_results_king.king.cutoff.in.id`</span>（保留的样本 ID）和 <span class="in">`plink_results_king.king.cutoff.out.id`</span>（被排除的样本 ID）。</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 使用无亲缘关系样本和独立 SNP 进行 PCA</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>接下来，使用去除亲缘关系的样本和独立 SNP 来运行 PCA。PCA 计算的目的是识别样本间最显著的遗传变异。我们可以使用 PLINK 中的 <span class="in">`--pca`</span> 命令来进行 PCA 计算。</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>       <span class="at">--keep</span> <span class="va">${outPrefix}</span>.king.cutoff.in.id <span class="dt">\</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>       <span class="at">--extract</span> <span class="va">${outPrefix}</span>.prune.in <span class="dt">\</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>       <span class="at">--freq</span> counts <span class="dt">\</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>       <span class="at">--pca</span> approx allele-wts 10 <span class="dt">\</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.pca</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">`--keep ${outPrefix}.king.cutoff.in.id`</span> 指定只使用无亲缘关系的样本，<span class="in">`--extract ${outPrefix}.prune.in`</span> 指定仅使用经过 LD 剪枝的独立 SNP。<span class="in">`--freq counts`</span> 计算等位基因频率，<span class="in">`--pca approx allele-wts 10`</span> 请求进行 PCA 计算，并输出前 10 个主成分的等位基因权重。此命令会生成多个输出文件，包括主成分得分文件（<span class="in">`.eigenvec`</span>）、主成分方差解释比例文件（<span class="in">`.eigenval`</span>）等。</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 将 PCA 结果投影到所有样本</span></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>完成 PCA 后，我们可以将主成分的得分投影到所有样本中。这样可以确保即使是在 PCA 分析后没有被直接计算的样本，也能够获得与前几个主成分的关联。</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>       <span class="at">--read-freq</span> <span class="va">${outPrefix}</span>.acount <span class="dt">\</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score</span> <span class="va">${outPrefix}</span>.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize <span class="dt">\</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score-col-nums</span> 7-16 <span class="dt">\</span></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>_projected</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">`--read-freq ${outPrefix}.acount`</span> 读取计算过的等位基因频率，<span class="in">`--score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize`</span> 使用主成分分析的结果对所有样本进行投影，<span class="in">`--score-col-nums 7-16`</span> 指定投影的主成分列。投影后的结果可以用于进一步的 GWAS 分析，确保将群体结构和亲缘关系的影响考虑在内。</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分析和解释 PCA 结果</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>完成 PCA 分析后，我们可以查看每个主成分的解释比例，了解各个主成分对于遗传变异的贡献。通常，前几个主成分会解释大部分的方差，因此我们关注的是这些主成分的贡献。</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>在 PLINK 的输出文件中，<span class="in">`.eigenval`</span> 文件包含每个主成分的特征值，这些特征值表示该主成分对于数据方差的贡献比例。通过查看这些值，我们可以判断哪些主成分最能解释数据中的变异。</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>PCA 是 GWAS 分析中的一个关键步骤，能够有效去除群体结构和亲缘关系的影响，从而提高 GWAS 结果的可靠性和准确性。通过 PCA，我们不仅能去除数据中的噪声，还能更好地理解样本之间的遗传结构，为 GWAS 的成功开展奠定坚实基础。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
