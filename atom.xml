@@ -11,7 +11,124 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Thu, 26 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 28 Dec 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>掌握 Hail</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/12/28/hail/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在生物信息学领域，处理大规模基因组数据尤其是 VCF（Variant Call Format）格式的数据常常是一个挑战。传统的处理方法可能面临性能瓶颈，而 Hail 作为一个专为大规模基因组数据分析设计的工具，其高效性和可扩展性使其在基因组学界得到了广泛应用。</p>
+<p>这里，我们将介绍 Hail 的基本使用技巧，并探讨如何在 DNAnexus 平台上导入和处理 pVCF 数据。</p>
+<section id="什么是hail" class="level3">
+<h3 class="anchored" data-anchor-id="什么是hail">什么是Hail？</h3>
+<p>Hail 是一个开源的、专为基因组数据分析而设计的 Python 库，特别适合用于处理大规模的 VCF 文件。它在处理和分析基因组数据时，提供了比传统工具（如 GATK）更高效的性能，尤其在进行大规模 GWAS（基因组全关联研究）、变异注释和基因型分析时，它能够显著提高计算效率。</p>
+<p>Hail 的核心优势在于其对分布式计算的支持，能够利用 Spark 集群进行大数据的并行处理。此外，Hail 也与很多常见的生物信息学工具兼容，比如 VCF 工具、Plink 等，使得它能够轻松集成到现有的生物信息学分析管道中。</p>
+</section>
+<section id="hail-在-dnanexus-平台上的应用" class="level3">
+<h3 class="anchored" data-anchor-id="hail-在-dnanexus-平台上的应用">Hail 在 DNAnexus 平台上的应用</h3>
+<p>在 DNAnexus 平台上，我们可以直接使用 Hail 进行大规模基因组数据分析。平台提供了一个强大的计算环境，可以通过 Hail 轻松地读取、处理和分析 VCF 文件。以下是一些常见的应用场景和技巧：</p>
+<section id="使用hail加载和处理vcf文件" class="level4">
+<h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
+<p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
+<div id="1ae80948" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> hl</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 加载VCF文件</span></span>
+<span id="cb1-4">vcf_file <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'gs://my_bucket/my_data.vcf.bgz'</span></span>
+<span id="cb1-5">mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
+</div>
+<p>在这个示例中，我们使用 <code>hl.import_vcf()</code> 方法来加载 VCF 文件，<code>gs://</code> 是 Google Cloud Storage（GCS）路径格式，在 DNAnexus 平台上，我们也可以使用相应的路径来引用存储在平台上的 VCF 文件。</p>
+</section>
+<section id="使用-hail-进行数据质量控制" class="level4">
+<h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
+<p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
+<p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
+<div id="d4b97ab1" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 过滤低质量变异</span></span>
+<span id="cb2-2">mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mt.filter_rows(mt.qual <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>)</span></code></pre></div>
+</div>
+<p>通过这样的操作，我们可以去除低质量的变异，保证后续分析结果的准确性。</p>
+</section>
+<section id="基于-hail-进行群体遗传学分析" class="level4">
+<h4 class="anchored" data-anchor-id="基于-hail-进行群体遗传学分析">3. 基于 Hail 进行群体遗传学分析</h4>
+<p>Hail 还广泛应用于群体遗传学分析，例如计算群体间的变异频率、构建群体的基因型矩阵、进行 GWAS 分析等。Hail 的高效数据处理能力使其能够轻松处理海量数据，并进行并行计算，极大地提升了数据分析的效率。</p>
+</section>
+</section>
+<section id="pvcf-数据导入教程" class="level3">
+<h3 class="anchored" data-anchor-id="pvcf-数据导入教程">pVCF 数据导入教程</h3>
+<p>在基因组学中，VCF 文件是常见的变异数据格式，而 pVCF（partitioned VCF）格式则在处理极大规模数据时显得尤为重要。pVCF 将数据分割成多个小文件，避免了单个文件过大导致的内存问题，并使得数据处理更加灵活高效。</p>
+<p>在 DNAnexus 平台上，我们可以利用 Hail 来导入 pVCF 数据，具体步骤如下：</p>
+<section id="启动-hail-应用" class="level4">
+<h4 class="anchored" data-anchor-id="启动-hail-应用">1. 启动 Hail 应用</h4>
+<p>在 DNAnexus 平台上，首先需要启动一个 Hail 集群环境。我们可以使用 dx 命令行工具或通过平台的应用界面启动 Hail 应用。</p>
+</section>
+<section id="加载-pvcf-文件" class="level4">
+<h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
+<p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
+<div id="50c6fee6" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> hl</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 导入pVCF文件</span></span>
+<span id="cb3-4">mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hl.import_vcf(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'gs://my_bucket/my_pvcf_file.part*'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="数据分析与处理" class="level4">
+<h4 class="anchored" data-anchor-id="数据分析与处理">3. 数据分析与处理</h4>
+<p>加载 pVCF 数据后，我们可以利用 Hail 提供的各种功能对数据进行分析。常见的分析操作包括数据过滤、变异注释和群体遗传学分析等。</p>
+<blockquote class="blockquote">
+<p>小技巧：在 DNAnexus 平台上，我们可以利用分布式计算资源加速分析过程。Hail 与 Apache Spark 紧密集成，可以在集群上并行处理数据，从而大大缩短分析时间。</p>
+</blockquote>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>hail</category>
+  <category>bioinformatics</category>
+  <category>DNAnexus</category>
+  <category>genomics</category>
+  <guid>https://leslie-lu.github.io/blog/2024/12/28/hail/</guid>
+  <pubDate>Sat, 28 Dec 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>使用 Eigensoft 中的 smartPCA 进行 PCA 分析</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -426,7 +543,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="0986c720" class="cell" data-execution_count="1">
+<div id="dc06a916" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -459,7 +576,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="5124ee62" class="cell" data-execution_count="2">
+<div id="0aeee03a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -493,7 +610,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="f49b3da1" class="cell" data-execution_count="3">
+<div id="383fce46" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -525,7 +642,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="b821d8ec" class="cell" data-execution_count="4">
+<div id="ed32ad9c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -553,7 +670,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="3c4d6077" class="cell" data-execution_count="5">
+<div id="69055215" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -833,7 +950,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="a0e7c340" class="cell" data-execution_count="1">
+<div id="51b867bc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1037,7 +1154,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="c62ab940" class="cell" data-execution_count="2">
+<div id="4ebf2c5f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -3552,7 +3669,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="a26b31ac" class="cell" data-execution_count="1">
+<div id="a0dea4ab" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -3584,7 +3701,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="c1d0da41" class="cell" data-execution_count="2">
+<div id="9a330c3f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -3604,7 +3721,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="b63628cf" class="cell" data-execution_count="3">
+<div id="91b882a2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -3615,7 +3732,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="9d49193e" class="cell" data-execution_count="4">
+<div id="ee1c2ad6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -3626,7 +3743,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="cd3bcf65" class="cell" data-execution_count="5">
+<div id="b092f768" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -3639,7 +3756,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="546c9877" class="cell" data-execution_count="6">
+<div id="b17fac59" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -3662,14 +3779,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-3.7274, -2.1701, -2.2190],
-         [-1.0250, -1.4078, -2.5440]],
+<pre><code>tensor([[[-3.4812,  0.1180, -0.1131],
+         [-0.3962,  3.4052, -0.8012]],
 
-        [[ 1.5037,  2.1895,  1.6568],
-         [-4.7194,  3.2301,  0.8873]],
+        [[-0.2121, -0.2740, -1.1375],
+         [ 3.0693, -0.5427,  0.5002]],
 
-        [[ 0.5697,  0.8885, -3.2007],
-         [ 0.5726, -0.6441,  1.1058]]])</code></pre>
+        [[-2.2470, -0.1250,  2.9949],
+         [-0.5045, -0.0598, -2.8208]]])</code></pre>
 </div>
 </div>
 </section>
@@ -6009,34 +6126,6 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
   <guid>https://leslie-lu.github.io/blog/2020/04/29/</guid>
   <pubDate>Wed, 29 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051637211.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>如何理解残差与误差</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/28/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>线性回归因变量的观测值是样本真实数据，估计值是回归模型估计出来的预测值，二者的差别称为残差。误差项表示对因变量而言，模型自变量无法解释的部分，通常假定误差服从均值为0的分布。</p>
-<p>注意：残差与误差项不同，残差是针对样本真实数据而言，可以视为对总体模型中误差项的估计。</p>
-<p>残差越小，说明拟合的回归模型越好，模型的预测值更加贴近实际值。</p>
-<p>虽然我们可能会更关心回归系数的大小，但实际上残差能告诉我们这些系数的估计值是否可靠，而这一点更为重要，回归系数无论表现多好，如果其不能稳定可靠，我们的计算和预测是没有意义的。</p>
-<p>因此，在数据分析中一定要学会观察残差图，任何模型拟合的问题基本上都能在残差图中体现出来。</p>
-<p>一条对数据点拟合较好的回归线必然穿过所有数据点的中央，所有的点围绕这条线随机波动，反映在残差中就应该是围绕0随机波动，不应该有任何趋势。如果残差能看出趋势，则说明模型拟合肯定有问题。</p>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>biostatisitcs</category>
-  <category>residual error</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/28/</guid>
-  <pubDate>Tue, 28 Apr 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
