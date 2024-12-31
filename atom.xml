@@ -11,7 +11,320 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 28 Dec 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 01 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>使用 Hail 输出 PLINK 文件：一步到位</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/01/01/export_plink/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在现代基因组学研究中，数据的处理和转换是至关重要的一环。PLINK 文件（包括 .bed, .bim, .fam 三个文件）是遗传学研究中的标准文件格式之一，经常用于 GWAS（全基因组关联研究）等分析。对于研究人员来说，将原始数据转换为 PLINK 文件格式是分析过程中的关键步骤。而 Hail，作为一个处理大规模基因数据的高效工具，提供了方便的方法来导出这些文件。</p>
+<p>前面，我们介绍了如何<a href="https://mp.weixin.qq.com/s/rujbT3WC821spr1AKg5AzQ">掌握 Hail</a>，这里，我们将介绍如何使用 Hail 的 export_plink 功能，轻松导出 PLINK 文件，并深入探讨如何在数据预处理和分析过程中使用它。</p>
+<section id="使用-hail-导出-plink-文件" class="level3">
+<h3 class="anchored" data-anchor-id="使用-hail-导出-plink-文件">使用 Hail 导出 PLINK 文件</h3>
+<p>Hail 提供了一个非常便利的函数 <code>export_plink()</code>，能够将 Hail MatrixTable 格式的数据导出为 PLINK 所需的三种文件格式：<code>.bed</code>、<code>.bim</code> 和 <code>.fam</code>。这些文件是 PLINK 软件包用于处理和分析基因型数据的标准文件格式。</p>
+<section id="载入数据" class="level4">
+<h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
+<p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
+<div id="f6589b62" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> hl</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hl.import_vcf(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, reference_genome<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="数据注释" class="level4">
+<h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
+<p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
+<div id="7ee325b9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mt.annotate_cols(</span>
+<span id="cb2-2">    pat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'0'</span>,         <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 父代 ID</span></span>
+<span id="cb2-3">    mat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'0'</span>,         <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 母代 ID</span></span>
+<span id="cb2-4">    is_female<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 是否为女性</span></span>
+<span id="cb2-5">    pheno<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
+<span id="cb2-6">)</span></code></pre></div>
+</div>
+<p>在这个例子中，我们为每个样本添加了父母 ID、性别和表型信息。</p>
+</section>
+<section id="导出为-plink-文件" class="level4">
+<h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
+<p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
+<div id="79ca415d" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
+<span id="cb3-2">    mt, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'output/example'</span>, </span>
+<span id="cb3-3">    fam_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.s,       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 样本的 ID</span></span>
+<span id="cb3-4">    ind_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.s,       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 样本的 ID</span></span>
+<span id="cb3-5">    pat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.pat_id,  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 父代 ID</span></span>
+<span id="cb3-6">    mat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.mat_id,  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 母代 ID</span></span>
+<span id="cb3-7">    is_female<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.is_female, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 性别信息</span></span>
+<span id="cb3-8">    pheno<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.pheno     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 表型信息</span></span>
+<span id="cb3-9">)</span></code></pre></div>
+</div>
+<p>参数解析： - fam_id: 样本的家族 ID，通常使用样本的 ID（即 mt.s）。 - ind_id: 样本的个体 ID，这里使用 mt.s 作为样本 ID。 - pat_id 和 mat_id: 分别代表父母的 ID，通常可以使用默认值 0 表示没有父母信息，或者根据数据 - is_female: 样本的性别信息，Hail 会根据性别表达为 1（男性）或 2（女性）。这里通过注释 is_female 字段来指示性别。 - pheno: 表型数据，可以是布尔值（如是否患病）或者是数值型数据（如身高、体重等）。</p>
+<p>导出的文件会包含以下三部分：</p>
+<ul>
+<li><code>output/example.bed</code>: 存储基因型数据（二进制格式）。</li>
+<li><code>output/example.bim</code>: 包含变异信息，如染色体、位置、参考和变异等。</li>
+<li><code>output/example.fam</code>: 包含样本信息，如家族 ID、个体 ID、父母 ID、性别和表型。</li>
+</ul>
+</section>
+</section>
+<section id="进阶功能批量导出与错误处理" class="level3">
+<h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
+<p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
+<div id="9f39ec5f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> subprocess</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 批量导出并上传</span></span>
+<span id="cb4-4">batch_files <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'batch1.vcf'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'batch2.vcf'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'batch3.vcf'</span>]  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 示例批次</span></span>
+<span id="cb4-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> batch_file <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> batch_files:</span>
+<span id="cb4-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 导入 VCF 文件并处理</span></span>
+<span id="cb4-7">    mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hl.import_vcf(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'file://</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>batch_file<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>, force_bgz<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, reference_genome<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'GRCh38'</span>)</span>
+<span id="cb4-8">    mt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mt.annotate_cols(</span>
+<span id="cb4-9">        pat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'0'</span>,</span>
+<span id="cb4-10">        mat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'0'</span>,</span>
+<span id="cb4-11">        is_female<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb4-12">        pheno<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span></span>
+<span id="cb4-13">    )</span>
+<span id="cb4-14">    </span>
+<span id="cb4-15">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 导出 PLINK 文件</span></span>
+<span id="cb4-16">    hl.export_plink(mt, <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'output/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>batch_file<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"."</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>, fam_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.s, ind_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.s, pat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.pat_id, mat_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.mat_id, is_female<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.is_female, pheno<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mt.pheno)</span>
+<span id="cb4-17"></span>
+<span id="cb4-18">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 上传到远程存储</span></span>
+<span id="cb4-19">    subprocess.run([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dx'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'upload'</span>, <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'output/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>batch_file<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"."</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.bed'</span>])</span>
+<span id="cb4-20">    subprocess.run([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dx'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'upload'</span>, <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'output/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>batch_file<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"."</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.bim'</span>])</span>
+<span id="cb4-21">    subprocess.run([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dx'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'upload'</span>, <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'output/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>batch_file<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"."</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.fam'</span>])</span></code></pre></div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>hail</category>
+  <category>bioinformatics</category>
+  <category>DNAnexus</category>
+  <category>genomics</category>
+  <category>PLINK</category>
+  <category>VCF</category>
+  <guid>https://leslie-lu.github.io/blog/2025/01/01/export_plink/</guid>
+  <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>掌握 Hail</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -35,7 +348,7 @@
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="1ae80948" class="cell" data-execution_count="1">
+<div id="ff644980" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -60,7 +373,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="d4b97ab1" class="cell" data-execution_count="2">
+<div id="d69d22b1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -90,7 +403,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="50c6fee6" class="cell" data-execution_count="3">
+<div id="fac8f30a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -543,7 +856,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="dc06a916" class="cell" data-execution_count="1">
+<div id="14ce04e0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -576,7 +889,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="0aeee03a" class="cell" data-execution_count="2">
+<div id="e628f486" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -610,7 +923,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="383fce46" class="cell" data-execution_count="3">
+<div id="aa5b118d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -642,7 +955,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="ed32ad9c" class="cell" data-execution_count="4">
+<div id="7bca35ac" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -670,7 +983,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="69055215" class="cell" data-execution_count="5">
+<div id="657327d9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -950,7 +1263,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="51b867bc" class="cell" data-execution_count="1">
+<div id="5b289cb8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1154,7 +1467,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="4ebf2c5f" class="cell" data-execution_count="2">
+<div id="653ddeb5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -3669,7 +3982,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="a0dea4ab" class="cell" data-execution_count="1">
+<div id="cc016890" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -3701,7 +4014,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="9a330c3f" class="cell" data-execution_count="2">
+<div id="8a3acfff" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -3721,7 +4034,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="91b882a2" class="cell" data-execution_count="3">
+<div id="02b86d9d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -3732,7 +4045,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="ee1c2ad6" class="cell" data-execution_count="4">
+<div id="a74bc759" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -3743,7 +4056,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="b092f768" class="cell" data-execution_count="5">
+<div id="077f34ea" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -3756,7 +4069,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="b17fac59" class="cell" data-execution_count="6">
+<div id="b1515a68" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -3779,14 +4092,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-3.4812,  0.1180, -0.1131],
-         [-0.3962,  3.4052, -0.8012]],
+<pre><code>tensor([[[-0.1652, -0.4051, -2.0120],
+         [-0.2348,  1.5288, -2.4533]],
 
-        [[-0.2121, -0.2740, -1.1375],
-         [ 3.0693, -0.5427,  0.5002]],
+        [[ 2.7248,  0.5144,  0.7363],
+         [ 1.1786,  0.6744,  3.5072]],
 
-        [[-2.2470, -0.1250,  2.9949],
-         [-0.5045, -0.0598, -2.8208]]])</code></pre>
+        [[ 0.4310, -0.3772, -0.3620],
+         [ 4.0111, -2.7339, -0.7117]]])</code></pre>
 </div>
 </div>
 </section>
@@ -6093,39 +6406,6 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
   <guid>https://leslie-lu.github.io/blog/2020/04/30/</guid>
   <pubDate>Thu, 30 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>矩阵乘向量的新视角：空间映射</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/29/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>我们前面提到：在指定矩阵的乘法作用下，原始空间中的向量被映射转换到了目标空间中的新坐标，向量的空间位置由此发生了变化，甚至在映射之后，目标空间的维数相较于原始空间都有可能发生改变。</p>
-<p>这就引入了矩阵乘向量的一个新视角。</p>
-<p>我们知道，向量需要设定一组具体的基底来进行自身的坐标表示。而实际上，矩阵与向量的乘法，本质上可以看作是对向量坐标表示的基底的一种改变。</p>
-<p>当我们从列的角度来审视矩阵A与向量x的乘法运算，会发现本质上，是对矩阵A的各个列向量进行线性组合的过程，每个列向量的组合系数就是向量x的各个对应成分。</p>
-<p>于是，可以按照列的角度重新把矩阵A写成一组列向量并排的形式，然后将其再与向量x进行乘法运算，这样一看，它所包含的几何意义就更加清楚了。即，一个矩阵和一个列向量相乘的过程可以理解为对位于原矩阵各列的列向量重新进行线性组合的过程。</p>
-<p>向量的坐标表示需要依托于基底的选取，只有明确了基底，向量的坐标表示才有实际意义。如，我们说一个二维列向量的坐标是x和y，我们其实已经默认它的基底是二维平面的x轴和y轴正方向上的单位向量。</p>
-<p>而矩阵与向量相乘后，我们发现，列向量的基底被变换为新的基底，正是矩阵的各列，矩阵的各列称为新的基向量。</p>
-<p>总结一般的情况：矩阵A是m*n的一般矩阵，其中，m不等于n，而向量x是一个n维列向量，没有任何的特殊性，映射前后，列向量x的基向量维数发生了变化：原始的n维列向量x被变换了n个m维列向量线性组合的形式，最终的运算结果是一个m维的列向量。</p>
-<p>由此可以看出，映射后的向量维数和原始向量维数的关系取决于矩阵维数m和n的关系：若m大于n，那么映射后的目标向量维数就大于原始列向量的维数，注意：即使矩阵的n个列向量线性无关，由于n个列向量不能张成m维空间，不能表示m维空间中的所有向量，所以称为m维目标空间的基底是不妥当的；若m小于n，那么目标向量的维数就小于原始列向量的维数，注意：由于列向量实现了降维，显然这n个m维列向量线性相关，因此准确地来说，不能构成基底；若m=n，则列向量的维数保持不变，此时，若n个m维向量线性无关，此时，矩阵的各列向量才能称为目标空间中的一组新基底。</p>
-<p>矩阵A的各个列是列向量x默认基底经过转换后的目标向量，正因为存在维度和线性相关性方面的多种不同情况，所以这组目标向量的张成空间和原始列向量所在的原始空间之间就存在着多种不同的对应关系。</p>
-<p>这也是我们后面所要介绍的空间映射的内容。</p>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>linear algebra</category>
-  <category>matrix</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/29/</guid>
-  <pubDate>Wed, 29 Apr 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051637211.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
