@@ -11,7 +11,99 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Wed, 01 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 02 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>探索 AWK</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/01/02/awk/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在大数据分析和生物信息学领域，处理文本数据是一项常见的任务。awk 是一种功能强大的文本处理工具，它允许用户对文本文件进行灵活的模式匹配、过滤、计算和格式化。</p>
+<p>这里，我们将介绍 awk 的基本概念、常用命令及其在实际数据处理中的应用。</p>
+<section id="什么是-awk" class="level3">
+<h3 class="anchored" data-anchor-id="什么是-awk">什么是 AWK</h3>
+<p>awk 是一种编程语言，用于处理和分析文本文件，尤其是在数据处理和报告生成方面非常有用。其名称来源于其三位创造者的姓氏首字母：Alfred Aho、Peter Weinberger 和 Brian Kernighan。</p>
+<p>awk 处理文本文件时，会将文件的每一行视为一个记录，每一行中的字段（由空格或制表符分隔）作为字段。通过指定模式和动作，awk 可以对文件内容进行筛选、处理并输出结果。</p>
+</section>
+<section id="awk-的基本语法" class="level3">
+<h3 class="anchored" data-anchor-id="awk-的基本语法">AWK 的基本语法</h3>
+<p>awk 命令的基本语法如下：</p>
+<pre class="{bash}"><code>awk [OPTION] 'CONDITION {PROCESS}' FILENAME</code></pre>
+<p>在 AWK 中，有一些内建的变量非常实用： - $0 : 表示当前行的所有字段。 - $n : 表示第n列字段。比如 $1 表示第一列，$4 表示第四列。 - NR : 当前处理的行号（记录号）。 - NF : 当前行的字段数。</p>
+<p>例如，以下命令会打印出文件中所有的行：</p>
+<pre class="{bash}"><code>awk '{ print }' filename</code></pre>
+<p>如果我们只想打印文件中第二列的数据，可以这样写：</p>
+<pre class="{bash}"><code>awk '{ print $2 }' filename</code></pre>
+<p>其中，$2 代表第二列，$1 代表第一列，依此类推。</p>
+</section>
+<section id="常用-awk-命令" class="level3">
+<h3 class="anchored" data-anchor-id="常用-awk-命令">常用 AWK 命令</h3>
+<section id="打印特定字段" class="level4">
+<h4 class="anchored" data-anchor-id="打印特定字段">1. 打印特定字段</h4>
+<p>打印某一列的内容是 awk 最常见的用途之一。选择染色体 2 上的变异（保留表头）：</p>
+<pre class="{bash}"><code>awk 'NR==1 || $1==2 {print $0}' sumstats.txt | head</code></pre>
+<p><code>NR==1</code> 如果是第一行（通常是表头），打印。<code>$1==2</code> 如果第一列是染色体号为 2 的变异，打印这一行。这段代码保留了表头，并筛选出染色体 2 上的所有变异。</p>
+</section>
+<section id="使用条件语句筛选数据" class="level4">
+<h4 class="anchored" data-anchor-id="使用条件语句筛选数据">2. 使用条件语句筛选数据</h4>
+<p>我们可以使用 if 语句来根据特定条件筛选数据。例如，选择全基因组显著的变异（p 值 &lt; 5e-8）：</p>
+<pre class="{bash}"><code>awk 'NR==1 || $13&lt;5e-8 {print $0}' sumstats.txt | head</code></pre>
+<p><code>$13&lt;5e-8</code> 选择第 13 列（P 值列）小于 5e-8 的行。这个命令用于筛选全基因组显著的变异数据。</p>
+</section>
+<section id="计算和统计" class="level4">
+<h4 class="anchored" data-anchor-id="计算和统计">3. 计算和统计</h4>
+<p>awk 还可以用于计算数据，比如求和、平均值等。假设我们有一个文件，每行代表一个学生的成绩，我们想计算总成绩：</p>
+<pre class="{bash}"><code>awk '{ sum += $2 } END { print sum }' grades.txt</code></pre>
+<p>在这个例子中，$2 是成绩列，sum += $2 会累加第二列的所有成绩，END 是在所有数据处理完后执行的操作。</p>
+</section>
+<section id="格式化输出" class="level4">
+<h4 class="anchored" data-anchor-id="格式化输出">4. 格式化输出</h4>
+<p>awk 还支持格式化输出，类似于 <code>C 语言</code>中的 <code>printf</code>。例如，想要将数据格式化为固定宽度，可以这样做：</p>
+<pre class="{bash}"><code>awk '{ printf "%-10s %-5s %-8s\n", $1, $2, $3 }' data.txt</code></pre>
+<p>这会将每一行的三列数据按指定格式输出，其中 %s 表示字符串，-10 表示左对齐并占用 10 个字符宽度。</p>
+</section>
+<section id="多文件处理" class="level4">
+<h4 class="anchored" data-anchor-id="多文件处理">5. 多文件处理</h4>
+<p>awk 也可以同时处理多个文件，甚至将不同文件的内容组合起来。例如：</p>
+<pre class="{bash}"><code>awk '{ print FILENAME ": " $0 }' file1.txt file2.txt</code></pre>
+<p>这里，FILENAME 是 awk 内置的变量，表示当前处理的文件名。<code>$0</code> 表示当前行的内容（即整行数据）。<code>print FILENAME ": " $0</code> 这部分的作用是打印文件名后跟一个冒号和当前行的内容。</p>
+</section>
+</section>
+<section id="awk-在生物信息学中的应用" class="level3">
+<h3 class="anchored" data-anchor-id="awk-在生物信息学中的应用">AWK 在生物信息学中的应用</h3>
+<p>在生物信息学数据分析中，awk 被广泛应用于处理基因组学数据、GWAS 数据、RNA-Seq 数据等。这些数据通常包含数百万行，我们可以使用 awk 来快速筛选、过滤、提取特定信息。例如，以下是一些常见的应用场景：</p>
+<section id="从-vcf-文件中提取信息" class="level4">
+<h4 class="anchored" data-anchor-id="从-vcf-文件中提取信息">1. 从 VCF 文件中提取信息</h4>
+<p>VCF（Variant Call Format）文件是基因组变异的标准存储格式，通常包含变异位点的各种信息。如果我们想提取 VCF 文件中所有发生变异的基因，可以使用以下命令：</p>
+<pre class="{bash}"><code>awk '$1 !~ /^#/ { print $1, $2, $4, $5 }' variants.vcf</code></pre>
+<p>这条命令会跳过以 <code>#</code> 开头的注释行，输出变异位点的染色体位置、参考碱基和变异碱基。</p>
+</section>
+<section id="清洗-rna-seq-数据" class="level4">
+<h4 class="anchored" data-anchor-id="清洗-rna-seq-数据">2. 清洗 RNA-Seq 数据</h4>
+<p>RNA-Seq 数据的处理通常需要将表达量数据中的低表达基因或特定条件下的数据进行筛选。比如，删除表达量小于某一阈值的基因：</p>
+<pre class="{bash}"><code>awk '$2 &gt; 10 { print $1, $2 }' gene_expression.txt</code></pre>
+<p>这里，$2 &gt; 10 表示筛选出表达量大于 10 的基因。</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>bioinformatics</category>
+  <category>tools</category>
+  <category>programming</category>
+  <category>awk</category>
+  <category>linux</category>
+  <guid>https://leslie-lu.github.io/blog/2025/01/02/awk/</guid>
+  <pubDate>Thu, 02 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202501021926596.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>使用 Hail 输出 PLINK 文件：一步到位</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -30,7 +122,7 @@
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="f6589b62" class="cell" data-execution_count="1">
+<div id="ac47f280" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -55,7 +147,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="7ee325b9" class="cell" data-execution_count="2">
+<div id="01e0b198" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -94,7 +186,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="79ca415d" class="cell" data-execution_count="3">
+<div id="29ec0cc1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -143,7 +235,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="9f39ec5f" class="cell" data-execution_count="4">
+<div id="846d8076" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -348,7 +440,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="ff644980" class="cell" data-execution_count="1">
+<div id="3885a27a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -373,7 +465,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="d69d22b1" class="cell" data-execution_count="2">
+<div id="98e0d74d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -403,7 +495,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="fac8f30a" class="cell" data-execution_count="3">
+<div id="0ca8bee5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -856,7 +948,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="14ce04e0" class="cell" data-execution_count="1">
+<div id="6a9ef332" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -889,7 +981,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="e628f486" class="cell" data-execution_count="2">
+<div id="6f61f227" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -923,7 +1015,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="aa5b118d" class="cell" data-execution_count="3">
+<div id="48b867c0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -955,7 +1047,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="7bca35ac" class="cell" data-execution_count="4">
+<div id="c1567298" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -983,7 +1075,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="657327d9" class="cell" data-execution_count="5">
+<div id="90cffa71" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -1263,7 +1355,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="5b289cb8" class="cell" data-execution_count="1">
+<div id="e347708a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1467,7 +1559,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="653ddeb5" class="cell" data-execution_count="2">
+<div id="0b0de496" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -3982,7 +4074,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="cc016890" class="cell" data-execution_count="1">
+<div id="8b4b12b0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4014,7 +4106,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="8a3acfff" class="cell" data-execution_count="2">
+<div id="e7b0bed3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4034,7 +4126,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="02b86d9d" class="cell" data-execution_count="3">
+<div id="f5938db3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4045,7 +4137,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="a74bc759" class="cell" data-execution_count="4">
+<div id="d2977cac" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4056,7 +4148,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="077f34ea" class="cell" data-execution_count="5">
+<div id="471906f5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4069,7 +4161,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="b1515a68" class="cell" data-execution_count="6">
+<div id="b396ddf8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4092,14 +4184,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-0.1652, -0.4051, -2.0120],
-         [-0.2348,  1.5288, -2.4533]],
+<pre><code>tensor([[[ 1.6611,  1.0492, -1.1138],
+         [-1.4915, -1.2589,  0.4782]],
 
-        [[ 2.7248,  0.5144,  0.7363],
-         [ 1.1786,  0.6744,  3.5072]],
+        [[-0.8223, -1.6513,  1.8624],
+         [-1.1600, -5.2076,  2.8474]],
 
-        [[ 0.4310, -0.3772, -0.3620],
-         [ 4.0111, -2.7339, -0.7117]]])</code></pre>
+        [[-3.1802, -1.1773, -1.7195],
+         [-2.7774,  0.7876, -0.6477]]])</code></pre>
 </div>
 </div>
 </section>
@@ -6346,66 +6438,6 @@ font-style: inherit;">print</span>(confusion_matrix(yvalid, yhat))</span></code>
   <guid>https://leslie-lu.github.io/blog/2024/05/11/optimal_threshold/</guid>
   <pubDate>Sat, 11 May 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405112020810.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>一文搞懂如何选择卡方检验</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2020/04/30/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>在实际进行数据处理过程中，我发现有的时候，会有小伙伴在选择何种检验方法时，存在一定的疑问。今天咱们梳理一下究竟如何选择卡方检验及其相关检验方法。</p>
-<section id="四格表资料卡方检验" class="level3">
-<h3 class="anchored" data-anchor-id="四格表资料卡方检验">四格表资料卡方检验</h3>
-<ul>
-<li><p>非配对设计时</p>
-<ol type="1">
-<li><p>当总样本量n&gt;=40且所有理论数T&gt;=5时，用普通的Pearson卡方检验，若所得的P约等于检验水准，改用确切概率法；</p></li>
-<li><p>当总样本量n&gt;=40但有1&lt;=T&lt;5时，用连续性校正的卡方检验；</p></li>
-<li><p>当总样本量n&lt;40或有理论数T&lt;1时，不能用卡方检验，改用确切概率法。</p></li>
-</ol></li>
-<li><p>配对设计时</p>
-<ol type="1">
-<li><p>四格表配对卡方检验对称性检验：McNemar检验；</p></li>
-<li><p>配对卡方检验的一致性检验：Kappa一致性检验。</p></li>
-</ol></li>
-</ul>
-</section>
-<section id="rc-表资料卡方检验" class="level3">
-<h3 class="anchored" data-anchor-id="rc-表资料卡方检验">R*C 表资料卡方检验</h3>
-<p>R*C 表资料可以分为双向无序、单向有序、双向有序属性相同和双向有序属性不同4类：</p>
-<ol type="1">
-<li><p>双向无序R*C表：表中两个分类变量皆为无序分类变量，对于该类资料：</p>
-<ol type="a">
-<li><p>若研究目的为多个样本率或构成比的比较，可用行*列表资料的卡方检验；</p></li>
-<li><p>若研究目的为分析两个分类变量之间有无关联性以及关系的密切程度，可用行*列表资料的卡方检验，以及Pearson列联系数进行分析</p></li>
-</ol></li>
-<li><p>单向有序R*C表有两种形式：一种是R*C表中的分组变量有序、指标变量无序，此种单向有序R*C表可用行*列表资料的卡方检验；另一种是R*C表中的分组变量无序、指标变量有序，此种单向有序R*C表宜用秩和检验或行均分检验进行分析。</p>
-<p>具体采用哪种检验方法，需要重点关注谁为指标变量、谁为分组变量以及指标变量是否有序。</p></li>
-<li><p>双向有序属性相同的R*C表，表中的两个分类变量皆为有序且属性相同，研究目的通常是分析两种方法的一致性，实际上是2*2配对设计的扩展，此时宜用Kappa一致性检验，也可以用特殊模型分析方法。一致性检验与处理配对设计2*2表的思路一样。</p>
-<p>除了对该方表资料作一致性检验外，还可以对两种方法的结果不一致的部分作比较，此时称为对称性检验。</p></li>
-<li><p>双向有序属性不同的R*C表，表中的两个分类变量皆为有序且属性不同。对于此类资料，有3种分析目的，所以也就有3种相应的统计分析方法：</p>
-<ol type="a">
-<li><p>只关心试验分组变量取不同水平时，有序的指标结果变量之间的差别是否有显著性差异，可用单向有序列联表的第二种行均分检验；</p></li>
-<li><p>希望研究两个有序变量之间是否有相关关系，需要运用定性资料的相关分析方法，包括Spearman秩相关分析和典型相关分析；</p></li>
-<li><p>若两个有序变量之间有相关关系，但不能推断两个变量之间是否是线性相关，是否呈直线变化关系，还需要进一步研究两个变量之间是否呈直线变化关系，即两个有序分类变量间是否存在线性变化趋势，还需要进一步进行线性趋势检验即趋势卡方检验，以判断两变量是否线性相关。</p></li>
-</ol></li>
-</ol>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostatisitcs</category>
-  <category>chi-square test</category>
-  <guid>https://leslie-lu.github.io/blog/2020/04/30/</guid>
-  <pubDate>Thu, 30 Apr 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408291336046.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>

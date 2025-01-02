@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="在 DNAnexus 平台上高效处理基因组数据">
+<meta name="description" content="强大的文本处理工具">
 
-<title>掌握 Hail | Zhen Lu – Zhen Lu</title>
+<title>探索 AWK | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -220,17 +220,18 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">掌握 Hail</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">探索 AWK</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          在 DNAnexus 平台上高效处理基因组数据
+          强大的文本处理工具
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">hail</div>
                 <div class="quarto-category">bioinformatics</div>
-                <div class="quarto-category">DNAnexus</div>
-                <div class="quarto-category">genomics</div>
+                <div class="quarto-category">tools</div>
+                <div class="quarto-category">programming</div>
+                <div class="quarto-category">awk</div>
+                <div class="quarto-category">linux</div>
               </div>
                   </div>
   </div>
@@ -248,7 +249,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 28, 2024</p>
+        <p class="date">Thursday, January 2, 2025</p>
       </div>
     </div>
     
@@ -263,9 +264,10 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#什么是hail" id="toc-什么是hail" class="nav-link active" data-scroll-target="#什么是hail">什么是Hail？</a></li>
-  <li><a href="#hail-在-dnanexus-平台上的应用" id="toc-hail-在-dnanexus-平台上的应用" class="nav-link" data-scroll-target="#hail-在-dnanexus-平台上的应用">Hail 在 DNAnexus 平台上的应用</a></li>
-  <li><a href="#pvcf-数据导入教程" id="toc-pvcf-数据导入教程" class="nav-link" data-scroll-target="#pvcf-数据导入教程">pVCF 数据导入教程</a></li>
+  <li><a href="#什么是-awk" id="toc-什么是-awk" class="nav-link active" data-scroll-target="#什么是-awk">什么是 AWK</a></li>
+  <li><a href="#awk-的基本语法" id="toc-awk-的基本语法" class="nav-link" data-scroll-target="#awk-的基本语法">AWK 的基本语法</a></li>
+  <li><a href="#常用-awk-命令" id="toc-常用-awk-命令" class="nav-link" data-scroll-target="#常用-awk-命令">常用 AWK 命令</a></li>
+  <li><a href="#awk-在生物信息学中的应用" id="toc-awk-在生物信息学中的应用" class="nav-link" data-scroll-target="#awk-在生物信息学中的应用">AWK 在生物信息学中的应用</a></li>
   </ul>
 </nav>
 </nav>
@@ -280,67 +282,71 @@ div.column-margin+hr.dinkus {
 
 
 
-<p>在生物信息学领域，处理大规模基因组数据尤其是 VCF（Variant Call Format）格式的数据常常是一个挑战。传统的处理方法可能面临性能瓶颈，而 Hail 作为一个专为大规模基因组数据分析设计的工具，其高效性和可扩展性使其在基因组学界得到了广泛应用。</p>
-<p>这里，我们将介绍 Hail 的基本使用技巧，并探讨如何在 DNAnexus 平台上导入和处理 pVCF 数据。</p>
-<section id="什么是hail" class="level3">
-<h3 class="anchored" data-anchor-id="什么是hail">什么是Hail？</h3>
-<p>Hail 是一个开源的、专为基因组数据分析而设计的 Python 库，特别适合用于处理大规模的 VCF 文件。它在处理和分析基因组数据时，提供了比传统工具（如 GATK）更高效的性能，尤其在进行大规模 GWAS（基因组全关联研究）、变异注释和基因型分析时，它能够显著提高计算效率。</p>
-<p>Hail 的核心优势在于其对分布式计算的支持，能够利用 Spark 集群进行大数据的并行处理。此外，Hail 也与很多常见的生物信息学工具兼容，比如 VCF 工具、Plink 等，使得它能够轻松集成到现有的生物信息学分析管道中。</p>
+<p>在大数据分析和生物信息学领域，处理文本数据是一项常见的任务。awk 是一种功能强大的文本处理工具，它允许用户对文本文件进行灵活的模式匹配、过滤、计算和格式化。</p>
+<p>这里，我们将介绍 awk 的基本概念、常用命令及其在实际数据处理中的应用。</p>
+<section id="什么是-awk" class="level3">
+<h3 class="anchored" data-anchor-id="什么是-awk">什么是 AWK</h3>
+<p>awk 是一种编程语言，用于处理和分析文本文件，尤其是在数据处理和报告生成方面非常有用。其名称来源于其三位创造者的姓氏首字母：Alfred Aho、Peter Weinberger 和 Brian Kernighan。</p>
+<p>awk 处理文本文件时，会将文件的每一行视为一个记录，每一行中的字段（由空格或制表符分隔）作为字段。通过指定模式和动作，awk 可以对文件内容进行筛选、处理并输出结果。</p>
 </section>
-<section id="hail-在-dnanexus-平台上的应用" class="level3">
-<h3 class="anchored" data-anchor-id="hail-在-dnanexus-平台上的应用">Hail 在 DNAnexus 平台上的应用</h3>
-<p>在 DNAnexus 平台上，我们可以直接使用 Hail 进行大规模基因组数据分析。平台提供了一个强大的计算环境，可以通过 Hail 轻松地读取、处理和分析 VCF 文件。以下是一些常见的应用场景和技巧：</p>
-<section id="使用hail加载和处理vcf文件" class="level4">
-<h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
-<p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="3885a27a" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载VCF文件</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="op">=</span> <span class="st">'gs://my_bucket/my_data.vcf.bgz'</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(vcf_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>在这个示例中，我们使用 <code>hl.import_vcf()</code> 方法来加载 VCF 文件，<code>gs://</code> 是 Google Cloud Storage（GCS）路径格式，在 DNAnexus 平台上，我们也可以使用相应的路径来引用存储在平台上的 VCF 文件。</p>
+<section id="awk-的基本语法" class="level3">
+<h3 class="anchored" data-anchor-id="awk-的基本语法">AWK 的基本语法</h3>
+<p>awk 命令的基本语法如下：</p>
+<pre class="{bash}"><code>awk [OPTION] 'CONDITION {PROCESS}' FILENAME</code></pre>
+<p>在 AWK 中，有一些内建的变量非常实用： - $0 : 表示当前行的所有字段。 - $n : 表示第n列字段。比如 $1 表示第一列，$4 表示第四列。 - NR : 当前处理的行号（记录号）。 - NF : 当前行的字段数。</p>
+<p>例如，以下命令会打印出文件中所有的行：</p>
+<pre class="{bash}"><code>awk '{ print }' filename</code></pre>
+<p>如果我们只想打印文件中第二列的数据，可以这样写：</p>
+<pre class="{bash}"><code>awk '{ print $2 }' filename</code></pre>
+<p>其中，$2 代表第二列，$1 代表第一列，依此类推。</p>
 </section>
-<section id="使用-hail-进行数据质量控制" class="level4">
-<h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
-<p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
-<p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="98e0d74d" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 过滤低质量变异</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.filter_rows(mt.qual <span class="op">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>通过这样的操作，我们可以去除低质量的变异，保证后续分析结果的准确性。</p>
+<section id="常用-awk-命令" class="level3">
+<h3 class="anchored" data-anchor-id="常用-awk-命令">常用 AWK 命令</h3>
+<section id="打印特定字段" class="level4">
+<h4 class="anchored" data-anchor-id="打印特定字段">1. 打印特定字段</h4>
+<p>打印某一列的内容是 awk 最常见的用途之一。选择染色体 2 上的变异（保留表头）：</p>
+<pre class="{bash}"><code>awk 'NR==1 || $1==2 {print $0}' sumstats.txt | head</code></pre>
+<p><code>NR==1</code> 如果是第一行（通常是表头），打印。<code>$1==2</code> 如果第一列是染色体号为 2 的变异，打印这一行。这段代码保留了表头，并筛选出染色体 2 上的所有变异。</p>
 </section>
-<section id="基于-hail-进行群体遗传学分析" class="level4">
-<h4 class="anchored" data-anchor-id="基于-hail-进行群体遗传学分析">3. 基于 Hail 进行群体遗传学分析</h4>
-<p>Hail 还广泛应用于群体遗传学分析，例如计算群体间的变异频率、构建群体的基因型矩阵、进行 GWAS 分析等。Hail 的高效数据处理能力使其能够轻松处理海量数据，并进行并行计算，极大地提升了数据分析的效率。</p>
+<section id="使用条件语句筛选数据" class="level4">
+<h4 class="anchored" data-anchor-id="使用条件语句筛选数据">2. 使用条件语句筛选数据</h4>
+<p>我们可以使用 if 语句来根据特定条件筛选数据。例如，选择全基因组显著的变异（p 值 &lt; 5e-8）：</p>
+<pre class="{bash}"><code>awk 'NR==1 || $13&lt;5e-8 {print $0}' sumstats.txt | head</code></pre>
+<p><code>$13&lt;5e-8</code> 选择第 13 列（P 值列）小于 5e-8 的行。这个命令用于筛选全基因组显著的变异数据。</p>
+</section>
+<section id="计算和统计" class="level4">
+<h4 class="anchored" data-anchor-id="计算和统计">3. 计算和统计</h4>
+<p>awk 还可以用于计算数据，比如求和、平均值等。假设我们有一个文件，每行代表一个学生的成绩，我们想计算总成绩：</p>
+<pre class="{bash}"><code>awk '{ sum += $2 } END { print sum }' grades.txt</code></pre>
+<p>在这个例子中，$2 是成绩列，sum += $2 会累加第二列的所有成绩，END 是在所有数据处理完后执行的操作。</p>
+</section>
+<section id="格式化输出" class="level4">
+<h4 class="anchored" data-anchor-id="格式化输出">4. 格式化输出</h4>
+<p>awk 还支持格式化输出，类似于 <code>C 语言</code>中的 <code>printf</code>。例如，想要将数据格式化为固定宽度，可以这样做：</p>
+<pre class="{bash}"><code>awk '{ printf "%-10s %-5s %-8s\n", $1, $2, $3 }' data.txt</code></pre>
+<p>这会将每一行的三列数据按指定格式输出，其中 %s 表示字符串，-10 表示左对齐并占用 10 个字符宽度。</p>
+</section>
+<section id="多文件处理" class="level4">
+<h4 class="anchored" data-anchor-id="多文件处理">5. 多文件处理</h4>
+<p>awk 也可以同时处理多个文件，甚至将不同文件的内容组合起来。例如：</p>
+<pre class="{bash}"><code>awk '{ print FILENAME ": " $0 }' file1.txt file2.txt</code></pre>
+<p>这里，FILENAME 是 awk 内置的变量，表示当前处理的文件名。<code>$0</code> 表示当前行的内容（即整行数据）。<code>print FILENAME ": " $0</code> 这部分的作用是打印文件名后跟一个冒号和当前行的内容。</p>
 </section>
 </section>
-<section id="pvcf-数据导入教程" class="level3">
-<h3 class="anchored" data-anchor-id="pvcf-数据导入教程">pVCF 数据导入教程</h3>
-<p>在基因组学中，VCF 文件是常见的变异数据格式，而 pVCF（partitioned VCF）格式则在处理极大规模数据时显得尤为重要。pVCF 将数据分割成多个小文件，避免了单个文件过大导致的内存问题，并使得数据处理更加灵活高效。</p>
-<p>在 DNAnexus 平台上，我们可以利用 Hail 来导入 pVCF 数据，具体步骤如下：</p>
-<section id="启动-hail-应用" class="level4">
-<h4 class="anchored" data-anchor-id="启动-hail-应用">1. 启动 Hail 应用</h4>
-<p>在 DNAnexus 平台上，首先需要启动一个 Hail 集群环境。我们可以使用 dx 命令行工具或通过平台的应用界面启动 Hail 应用。</p>
+<section id="awk-在生物信息学中的应用" class="level3">
+<h3 class="anchored" data-anchor-id="awk-在生物信息学中的应用">AWK 在生物信息学中的应用</h3>
+<p>在生物信息学数据分析中，awk 被广泛应用于处理基因组学数据、GWAS 数据、RNA-Seq 数据等。这些数据通常包含数百万行，我们可以使用 awk 来快速筛选、过滤、提取特定信息。例如，以下是一些常见的应用场景：</p>
+<section id="从-vcf-文件中提取信息" class="level4">
+<h4 class="anchored" data-anchor-id="从-vcf-文件中提取信息">1. 从 VCF 文件中提取信息</h4>
+<p>VCF（Variant Call Format）文件是基因组变异的标准存储格式，通常包含变异位点的各种信息。如果我们想提取 VCF 文件中所有发生变异的基因，可以使用以下命令：</p>
+<pre class="{bash}"><code>awk '$1 !~ /^#/ { print $1, $2, $4, $5 }' variants.vcf</code></pre>
+<p>这条命令会跳过以 <code>#</code> 开头的注释行，输出变异位点的染色体位置、参考碱基和变异碱基。</p>
 </section>
-<section id="加载-pvcf-文件" class="level4">
-<h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
-<p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="0ca8bee5" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 导入pVCF文件</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'gs://my_bucket/my_pvcf_file.part*'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="数据分析与处理" class="level4">
-<h4 class="anchored" data-anchor-id="数据分析与处理">3. 数据分析与处理</h4>
-<p>加载 pVCF 数据后，我们可以利用 Hail 提供的各种功能对数据进行分析。常见的分析操作包括数据过滤、变异注释和群体遗传学分析等。</p>
-<blockquote class="blockquote">
-<p>小技巧：在 DNAnexus 平台上，我们可以利用分布式计算资源加速分析过程。Hail 与 Apache Spark 紧密集成，可以在集群上并行处理数据，从而大大缩短分析时间。</p>
-</blockquote>
+<section id="清洗-rna-seq-数据" class="level4">
+<h4 class="anchored" data-anchor-id="清洗-rna-seq-数据">2. 清洗 RNA-Seq 数据</h4>
+<p>RNA-Seq 数据的处理通常需要将表达量数据中的低表达基因或特定条件下的数据进行筛选。比如，删除表达量小于某一阈值的基因：</p>
+<pre class="{bash}"><code>awk '$2 &gt; 10 { print $1, $2 }' gene_expression.txt</code></pre>
+<p>这里，$2 &gt; 10 表示筛选出表达量大于 10 的基因。</p>
 
 
 <!-- -->
@@ -821,108 +827,146 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "掌握 Hail"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-28</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "在 DNAnexus 平台上高效处理基因组数据"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - hail</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - DNAnexus</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - genomics</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>在生物信息学领域，处理大规模基因组数据尤其是 VCF（Variant Call Format）格式的数据常常是一个挑战。传统的处理方法可能面临性能瓶颈，而 Hail 作为一个专为大规模基因组数据分析设计的工具，其高效性和可扩展性使其在基因组学界得到了广泛应用。</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>这里，我们将介绍 Hail 的基本使用技巧，并探讨如何在 DNAnexus 平台上导入和处理 pVCF 数据。</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是Hail？</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>Hail 是一个开源的、专为基因组数据分析而设计的 Python 库，特别适合用于处理大规模的 VCF 文件。它在处理和分析基因组数据时，提供了比传统工具（如 GATK）更高效的性能，尤其在进行大规模 GWAS（基因组全关联研究）、变异注释和基因型分析时，它能够显著提高计算效率。</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>Hail 的核心优势在于其对分布式计算的支持，能够利用 Spark 集群进行大数据的并行处理。此外，Hail 也与很多常见的生物信息学工具兼容，比如 VCF 工具、Plink 等，使得它能够轻松集成到现有的生物信息学分析管道中。</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hail 在 DNAnexus 平台上的应用</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，我们可以直接使用 Hail 进行大规模基因组数据分析。平台提供了一个强大的计算环境，可以通过 Hail 轻松地读取、处理和分析 VCF 文件。以下是一些常见的应用场景和技巧：</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 使用Hail加载和处理VCF文件</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载VCF文件</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="op">=</span> <span class="st">'gs://my_bucket/my_data.vcf.bgz'</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(vcf_file)</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>在这个示例中，我们使用 <span class="in">`hl.import_vcf()`</span> 方法来加载 VCF 文件，<span class="in">`gs://`</span> 是 Google Cloud Storage（GCS）路径格式，在 DNAnexus 平台上，我们也可以使用相应的路径来引用存储在平台上的 VCF 文件。</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 使用 Hail 进行数据质量控制</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co"># 过滤低质量变异</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.filter_rows(mt.qual <span class="op">&gt;</span> <span class="dv">30</span>)</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>通过这样的操作，我们可以去除低质量的变异，保证后续分析结果的准确性。</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 基于 Hail 进行群体遗传学分析</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>Hail 还广泛应用于群体遗传学分析，例如计算群体间的变异频率、构建群体的基因型矩阵、进行 GWAS 分析等。Hail 的高效数据处理能力使其能够轻松处理海量数据，并进行并行计算，极大地提升了数据分析的效率。</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## pVCF 数据导入教程</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>在基因组学中，VCF 文件是常见的变异数据格式，而 pVCF（partitioned VCF）格式则在处理极大规模数据时显得尤为重要。pVCF 将数据分割成多个小文件，避免了单个文件过大导致的内存问题，并使得数据处理更加灵活高效。</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，我们可以利用 Hail 来导入 pVCF 数据，具体步骤如下：</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 启动 Hail 应用</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，首先需要启动一个 Hail 集群环境。我们可以使用 dx 命令行工具或通过平台的应用界面启动 Hail 应用。</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 加载 pVCF 文件</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>使用 Hail 的 <span class="in">`import_vcf`</span> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="co"># 导入pVCF文件</span></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'gs://my_bucket/my_pvcf_file.part*'</span>)</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 数据分析与处理</span></span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>加载 pVCF 数据后，我们可以利用 Hail 提供的各种功能对数据进行分析。常见的分析操作包括数据过滤、变异注释和群体遗传学分析等。</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 小技巧：在 DNAnexus 平台上，我们可以利用分布式计算资源加速分析过程。Hail 与 Apache Spark 紧密集成，可以在集群上并行处理数据，从而大大缩短分析时间。</span></span>
+<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "探索 AWK"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-02</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "强大的文本处理工具"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202501021926596.png"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - tools</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - programming</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - awk</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - linux</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>在大数据分析和生物信息学领域，处理文本数据是一项常见的任务。awk 是一种功能强大的文本处理工具，它允许用户对文本文件进行灵活的模式匹配、过滤、计算和格式化。</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>这里，我们将介绍 awk 的基本概念、常用命令及其在实际数据处理中的应用。</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 AWK</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>awk 是一种编程语言，用于处理和分析文本文件，尤其是在数据处理和报告生成方面非常有用。其名称来源于其三位创造者的姓氏首字母：Alfred Aho、Peter Weinberger 和 Brian Kernighan。</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>awk 处理文本文件时，会将文件的每一行视为一个记录，每一行中的字段（由空格或制表符分隔）作为字段。通过指定模式和动作，awk 可以对文件内容进行筛选、处理并输出结果。</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## AWK 的基本语法</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>awk 命令的基本语法如下：</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> <span class="st">'CONDITION {PROCESS}'</span> FILENAME</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>在 AWK 中，有一些内建的变量非常实用：</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$0 : 表示当前行的所有字段。</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$n : 表示第n列字段。比如 $1 表示第一列，$4 表示第四列。</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>NR : 当前处理的行号（记录号）。</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>NF : 当前行的字段数。</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>例如，以下命令会打印出文件中所有的行：</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ print }'</span> filename</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>如果我们只想打印文件中第二列的数据，可以这样写：</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ print $2 }'</span> filename</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>其中，$2 代表第二列，$1 代表第一列，依此类推。</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常用 AWK 命令</span></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 打印特定字段</span></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>打印某一列的内容是 awk 最常见的用途之一。选择染色体 2 上的变异（保留表头）：</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR==1 || $1==2 {print $0}'</span> sumstats.txt <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">`NR==1`</span> 如果是第一行（通常是表头），打印。<span class="in">`$1==2`</span> 如果第一列是染色体号为 2 的变异，打印这一行。这段代码保留了表头，并筛选出染色体 2 上的所有变异。</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 使用条件语句筛选数据</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>我们可以使用 if 语句来根据特定条件筛选数据。例如，选择全基因组显著的变异（p 值 &lt; 5e-8）：</span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR==1 || $13&lt;5e-8 {print $0}'</span> sumstats.txt <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="in">`$13&lt;5e-8`</span> 选择第 13 列（P 值列）小于 5e-8 的行。这个命令用于筛选全基因组显著的变异数据。</span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 计算和统计</span></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>awk 还可以用于计算数据，比如求和、平均值等。假设我们有一个文件，每行代表一个学生的成绩，我们想计算总成绩：</span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ sum += $2 } END { print sum }'</span> grades.txt</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>在这个例子中，$2 是成绩列，sum += $2 会累加第二列的所有成绩，END 是在所有数据处理完后执行的操作。</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 格式化输出</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>awk 还支持格式化输出，类似于 <span class="in">`C 语言`</span>中的 <span class="in">`printf`</span>。例如，想要将数据格式化为固定宽度，可以这样做：</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ printf "%-10s %-5s %-8s\n", $1, $2, $3 }'</span> data.txt</span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a>这会将每一行的三列数据按指定格式输出，其中 %s 表示字符串，-10 表示左对齐并占用 10 个字符宽度。</span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 多文件处理</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a>awk 也可以同时处理多个文件，甚至将不同文件的内容组合起来。例如：</span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ print FILENAME ": " $0 }'</span> file1.txt file2.txt</span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>这里，FILENAME 是 awk 内置的变量，表示当前处理的文件名。<span class="in">`$0`</span> 表示当前行的内容（即整行数据）。<span class="in">`print FILENAME ": " $0`</span> 这部分的作用是打印文件名后跟一个冒号和当前行的内容。</span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## AWK 在生物信息学中的应用</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a>在生物信息学数据分析中，awk 被广泛应用于处理基因组学数据、GWAS 数据、RNA-Seq 数据等。这些数据通常包含数百万行，我们可以使用 awk 来快速筛选、过滤、提取特定信息。例如，以下是一些常见的应用场景：</span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 从 VCF 文件中提取信息</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a>VCF（Variant Call Format）文件是基因组变异的标准存储格式，通常包含变异位点的各种信息。如果我们想提取 VCF 文件中所有发生变异的基因，可以使用以下命令：</span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$1 !~ /^#/ { print $1, $2, $4, $5 }'</span> variants.vcf</span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>这条命令会跳过以 <span class="in">`#`</span> 开头的注释行，输出变异位点的染色体位置、参考碱基和变异碱基。</span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 清洗 RNA-Seq 数据</span></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a>RNA-Seq 数据的处理通常需要将表达量数据中的低表达基因或特定条件下的数据进行筛选。比如，删除表达量小于某一阈值的基因：</span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$2 &gt; 10 { print $1, $2 }'</span> gene_expression.txt</span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a>这里，$2 &gt; 10 表示筛选出表达量大于 10 的基因。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
