@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="Einstein Summation">
+<meta name="description" content="twstats">
 
-<title>爱因斯坦求和 | Zhen Lu – Zhen Lu</title>
+<title>Tracy-Widom Statistics | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,35 +123,6 @@ div.column-margin+hr.dinkus {
 }
 </style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -249,16 +220,16 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">爱因斯坦求和</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">Tracy-Widom Statistics</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          Einstein Summation
+          twstats
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">linear algebra</div>
-                <div class="quarto-category">deep learning</div>
-                <div class="quarto-category">tensor</div>
+                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">biostatistics</div>
+                <div class="quarto-category">pca</div>
               </div>
                   </div>
   </div>
@@ -276,7 +247,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, September 9, 2024</p>
+        <p class="date">Tuesday, January 7, 2025</p>
       </div>
     </div>
     
@@ -291,8 +262,8 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#什么是爱因斯坦求和" id="toc-什么是爱因斯坦求和" class="nav-link active" data-scroll-target="#什么是爱因斯坦求和">什么是爱因斯坦求和？</a></li>
-  <li><a href="#为什么爱因斯坦求和如此重要" id="toc-为什么爱因斯坦求和如此重要" class="nav-link" data-scroll-target="#为什么爱因斯坦求和如此重要">为什么爱因斯坦求和如此重要？</a></li>
+  <li><a href="#什么是-tracy-widom-统计量" id="toc-什么是-tracy-widom-统计量" class="nav-link active" data-scroll-target="#什么是-tracy-widom-统计量">什么是 Tracy-Widom 统计量</a></li>
+  <li><a href="#twstats-程序与-tracy-widom-统计量" id="toc-twstats-程序与-tracy-widom-统计量" class="nav-link" data-scroll-target="#twstats-程序与-tracy-widom-统计量">twstats 程序与 Tracy-Widom 统计量</a></li>
   </ul>
 </nav>
 </nav>
@@ -307,91 +278,27 @@ window.Quarto = {
 
 
 
-<p>在物理学、机器学习、科学计算等领域，张量的操作是常见而又复杂的。而在张量操作中，有一种优雅的数学简化工具，即爱因斯坦求和约定（Einstein Summation Convention），它极大地减少了公式的复杂性，特别是在高维张量的运算中。</p>
-<section id="什么是爱因斯坦求和" class="level3">
-<h3 class="anchored" data-anchor-id="什么是爱因斯坦求和">什么是爱因斯坦求和？</h3>
-<p>爱因斯坦求和约定是由著名物理学家阿尔伯特·爱因斯坦提出的一种简化公式的符号约定。根据这一约定，当一个表达式中有重复的索引变量时，默认对该索引进行求和运算，而不需要显式地写出求和符号。</p>
-<p>例如，两个矩阵 (A) 和 (B) 的乘法可以通过爱因斯坦求和简化。通常，矩阵乘法公式为：</p>
-<p><span class="math display">\[
-C_{ik} = \sum_{j} A_{ij} B_{jk}
-\]</span></p>
-<p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
-<p><span class="math display">\[
-C_{ik} = A_{ij} B_{jk}
-\]</span></p>
-<p>我们用torch实现这个例子：</p>
-<div id="00ed0f6c" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.arange(<span class="dv">15</span>).reshape(<span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ik,kj-&gt;ij'</span>, [a, b])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>tensor([[ 25,  28,  31,  34,  37],
-        [ 70,  82,  94, 106, 118]])</code></pre>
-</div>
-</div>
-<section id="column-sum" class="level4">
-<h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="f21f43a1" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;j'</span>, [a])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>tensor([3, 5, 7])</code></pre>
-</div>
-</div>
+<p>在现代基因组学和统计学中，Tracy-Widom 统计量（Tracy-Widom statistics）是一个广泛应用于分析主成分分析（PCA）结果的重要工具。尤其在遗传学、群体学和数据科学等领域，Tracy-Widom 统计量可以帮助研究者评估主成分的统计显著性，为后续的研究分析提供强有力的支持。</p>
+<p>这里，我们将带大家深入了解 Tracy-Widom 统计量的概念、应用以及如何通过 twstats 程序进行计算。</p>
+<section id="什么是-tracy-widom-统计量" class="level3">
+<h3 class="anchored" data-anchor-id="什么是-tracy-widom-统计量">什么是 Tracy-Widom 统计量</h3>
+<p>Tracy-Widom 统计量来源于随机矩阵理论，它用于描述随机矩阵的特征值分布，尤其是最大特征值的行为。在大规模数据分析中，Tracy-Widom 分布成为评估主成分显著性的标准工具。</p>
+<p>具体来说，Tracy-Widom统计量用于检验 PCA 中主成分的显著性。我们前面讲过<a href="https://mp.weixin.qq.com/s/C_41H2pcDHlYMODcb3S9ew">使用 Eigensoft 中的 smartPCA 进行 PCA 分析</a>。PCA 通常会计算各主成分的方差，并根据这些方差来筛选重要的主成分。然而，如何判断哪些主成分是由于数据的真实结构而非随机噪声引起的呢？这正是Tracy-Widom统计量能够发挥作用的地方，Tracy-Widom 统计量可以帮助我们判断哪些主成分是统计显著的。</p>
+<p>Tracy-Widom分布的核心思想是：如果我们从一个高维随机矩阵中提取主成分，那么最大主成分的值将服从特定的统计分布。通过计算 Tracy-Widom统计量，研究者可以对 PCA 中的每个主成分进行显著性检验，评估其是否真的反映了数据的结构，而非偶然性噪声。</p>
 </section>
-<section id="row-sum" class="level4">
-<h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="d3160113" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;i'</span>, [a])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>tensor([ 3, 12])</code></pre>
-</div>
-</div>
-</section>
-<section id="sum" class="level4">
-<h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="fdd23305" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;'</span>, [a])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>tensor(15)</code></pre>
-</div>
-</div>
-</section>
-<section id="transpose" class="level4">
-<h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="a3767696" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;ji'</span>, [a])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>tensor([[0, 3],
-        [1, 4],
-        [2, 5]])</code></pre>
-</div>
-</div>
-</section>
-<section id="batch-matrix-multiplication" class="level4">
-<h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="8da0f419" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-3.6739, -1.7950,  3.3452],
-         [ 0.7546,  1.9174, -2.2636]],
+<section id="twstats-程序与-tracy-widom-统计量" class="level3">
+<h3 class="anchored" data-anchor-id="twstats-程序与-tracy-widom-统计量">twstats 程序与 Tracy-Widom 统计量</h3>
+<p>Eigensoft 中的 twstats 程序可以用来计算 Tracy-Widom 统计量。twstats 程序通过计算给定数据集的特征值分布，具体来说，twstats 程序会根据 Tracy-Widom 分布为每个主成分计算一个 p 值，从而帮助研究者判断哪些主成分是值得关注的。</p>
+<p>twstats 适用于随机标记数据，但不适用于含有祖先信息标记（ancestry-informative markers）的数据。它假设数据集是由随机标记构成，这意味着在分析过程中不应该包含任何可能揭示祖先信息的标记（如遗传标记）。因为在包含祖先信息的标记数据中，可能会出现基因组混合 LD（连锁不平衡），这会违背Tracy-Widom统计量的基本假设。如果数据集含有祖先信息标记，Tracy-Widom 统计量的结果可能会不准确。</p>
+<p>Eigensoft 中的 twstats 程序示例如下：</p>
+<pre class="{perl}"><code>#!/usr/bin/perl
 
-        [[ 1.8952,  1.1338, -0.9556],
-         [-1.0034, -3.3956,  1.1673]],
-
-        [[ 0.3253, -1.2478, -2.1950],
-         [-0.3714,  1.4251, -2.5308]]])</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="为什么爱因斯坦求和如此重要" class="level3">
-<h3 class="anchored" data-anchor-id="为什么爱因斯坦求和如此重要">为什么爱因斯坦求和如此重要？</h3>
-<p>爱因斯坦求和的核心优势在于它可以极大地简化复杂的张量运算，特别是在涉及高维度张量时。这种简洁的符号不仅减少了书写和理解的困难，还可以避免出错，因为我们不再需要反复地书写求和符号。</p>
-<p>在物理学中，尤其是在广义相对论和量子力学中，张量的运算无处不在，而爱因斯坦求和约定为这些运算提供了极大的便利。</p>
+$command = "../bin/twstats";
+$command .= " -t twtable ";
+$command .= " -i twexample.eval ";
+$command .= " -o twexample.out";
+print("$command\n");
+system("$command");</code></pre>
 
 
 <!-- -->
@@ -871,100 +778,63 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "爱因斯坦求和"</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-09-09</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Einstein Summation"</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409092357183.png"</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linear algebra</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - deep learning</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - tensor</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>在物理学、机器学习、科学计算等领域，张量的操作是常见而又复杂的。而在张量操作中，有一种优雅的数学简化工具，即爱因斯坦求和约定（Einstein Summation Convention），它极大地减少了公式的复杂性，特别是在高维张量的运算中。</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是爱因斯坦求和？</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>爱因斯坦求和约定是由著名物理学家阿尔伯特·爱因斯坦提出的一种简化公式的符号约定。根据这一约定，当一个表达式中有重复的索引变量时，默认对该索引进行求和运算，而不需要显式地写出求和符号。</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>例如，两个矩阵 <span class="sc">\(</span>A<span class="sc">\)</span> 和 <span class="sc">\(</span>B<span class="sc">\)</span> 的乘法可以通过爱因斯坦求和简化。通常，矩阵乘法公式为：</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>C_{ik} = \sum_{j} A_{ij} B_{jk}</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>在爱因斯坦求和的符号下，重复出现的索引 <span class="sc">\(</span>j<span class="sc">\)</span> 表示对其求和，因此公式可以写为：</span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>C_{ik} = A_{ij} B_{jk}</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>我们用torch实现这个例子：</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.arange(<span class="dv">15</span>).reshape(<span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ik,kj-&gt;ij'</span>, [a, b])</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### column sum</span></span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;j'</span>, [a])</span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### row sum</span></span>
-<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;i'</span>, [a])</span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### sum</span></span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;'</span>, [a])</span>
-<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### transpose</span></span>
-<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;ji'</span>, [a])</span>
-<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### batch matrix multiplication</span></span>
-<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ijk,ikl-&gt;ijl'</span>, [a, b])</span>
-<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么爱因斯坦求和如此重要？</span></span>
-<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>爱因斯坦求和的核心优势在于它可以极大地简化复杂的张量运算，特别是在涉及高维度张量时。这种简洁的符号不仅减少了书写和理解的困难，还可以避免出错，因为我们不再需要反复地书写求和符号。</span>
-<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>在物理学中，尤其是在广义相对论和量子力学中，张量的运算无处不在，而爱因斯坦求和约定为这些运算提供了极大的便利。</span>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Tracy-Widom Statistics"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-07</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "twstats"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412262344320.png"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostatistics</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - pca</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>在现代基因组学和统计学中，Tracy-Widom 统计量（Tracy-Widom statistics）是一个广泛应用于分析主成分分析（PCA）结果的重要工具。尤其在遗传学、群体学和数据科学等领域，Tracy-Widom 统计量可以帮助研究者评估主成分的统计显著性，为后续的研究分析提供强有力的支持。</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>这里，我们将带大家深入了解 Tracy-Widom 统计量的概念、应用以及如何通过 twstats 程序进行计算。</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 Tracy-Widom 统计量</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Tracy-Widom 统计量来源于随机矩阵理论，它用于描述随机矩阵的特征值分布，尤其是最大特征值的行为。在大规模数据分析中，Tracy-Widom 分布成为评估主成分显著性的标准工具。</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>具体来说，Tracy-Widom统计量用于检验 PCA 中主成分的显著性。我们前面讲过<span class="co">[</span><span class="ot">使用 Eigensoft 中的 smartPCA 进行 PCA 分析</span><span class="co">](https://mp.weixin.qq.com/s/C_41H2pcDHlYMODcb3S9ew)</span>。PCA 通常会计算各主成分的方差，并根据这些方差来筛选重要的主成分。然而，如何判断哪些主成分是由于数据的真实结构而非随机噪声引起的呢？这正是Tracy-Widom统计量能够发挥作用的地方，Tracy-Widom 统计量可以帮助我们判断哪些主成分是统计显著的。</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Tracy-Widom分布的核心思想是：如果我们从一个高维随机矩阵中提取主成分，那么最大主成分的值将服从特定的统计分布。通过计算 Tracy-Widom统计量，研究者可以对 PCA 中的每个主成分进行显著性检验，评估其是否真的反映了数据的结构，而非偶然性噪声。</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## twstats 程序与 Tracy-Widom 统计量</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序可以用来计算 Tracy-Widom 统计量。twstats 程序通过计算给定数据集的特征值分布，具体来说，twstats 程序会根据 Tracy-Widom 分布为每个主成分计算一个 p 值，从而帮助研究者判断哪些主成分是值得关注的。</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>twstats 适用于随机标记数据，但不适用于含有祖先信息标记（ancestry-informative markers）的数据。它假设数据集是由随机标记构成，这意味着在分析过程中不应该包含任何可能揭示祖先信息的标记（如遗传标记）。因为在包含祖先信息的标记数据中，可能会出现基因组混合 LD（连锁不平衡），这会违背Tracy-Widom统计量的基本假设。如果数据集含有祖先信息标记，Tracy-Widom 统计量的结果可能会不准确。</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序示例如下：</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{perl}</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="kw">#!/usr/bin/perl</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> = <span class="ot">"</span><span class="st">../bin/twstats</span><span class="ot">"</span>;</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -t twtable </span><span class="ot">"</span>;</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -i twexample.eval </span><span class="ot">"</span>;</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -o twexample.out</span><span class="ot">"</span>;</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ch">\n</span><span class="ot">"</span>);</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ot">"</span>);</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
