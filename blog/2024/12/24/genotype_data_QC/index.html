@@ -257,10 +257,10 @@ window.Quarto = {
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">plink</div>
-                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">gwas</div>
                 <div class="quarto-category">bioinformatics</div>
                 <div class="quarto-category">genotype data</div>
-                <div class="quarto-category">QC</div>
+                <div class="quarto-category">qc</div>
               </div>
                   </div>
   </div>
@@ -840,112 +840,104 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "预 GWAS 阶段的基因型数据 QC 流程"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u9884 GWAS \u9636\u6BB5\u7684\u57FA\u56E0\u578B\u6570\u636E QC \u6D41\u7A0B"</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-24</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "genotype data QC"</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412241722219.png"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> genotype data QC</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412241722219.png</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - genotype data</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - QC</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">- plink</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">- gwas</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">- genotype data</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">- qc</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>在进行全基因组关联研究（GWAS）前，数据质量的控制（QC）是至关重要的一步。</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>预处理和质量控制可以确保我们使用的数据集干净、可靠，避免潜在的偏倚和错误。这里，我们将介绍如何在 GWAS 前进行基因型数据的 QC，确保数据的准确性和可靠性。</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 计算缺失率（Missing Rate）与呼叫率（Call Rate）</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，缺失数据可能会影响结果的准确性。基因型数据的质量首先需要评估每个样本和每个 SNP 的缺失率。</span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>在进行全基因组关联研究（GWAS）前，数据质量的控制（QC）是至关重要的一步。</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>缺失率表示某个样本在所有标记位点的基因型缺失的比例；呼叫率表示某个 SNP 在所有样本中的基因型被成功识别的比例。样本缺失率：样本的基因型数据可能因技术问题、平台差异等因素缺失，需要计算每个样本的缺失率，并根据预设的阈值剔除缺失过多的样本。SNP 呼叫率：类似地，每个SNP的呼叫率需要计算。如果某些 SNP 在大多数样本中都没有成功呼叫，可以考虑排除这些 SNP。</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>预处理和质量控制可以确保我们使用的数据集干净、可靠，避免潜在的偏倚和错误。这里，我们将介绍如何在 GWAS 前进行基因型数据的 QC，确保数据的准确性和可靠性。</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令来计算样本的缺失率和 SNP 的呼叫率：</span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 计算缺失率（Missing Rate）与呼叫率（Call Rate）</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，缺失数据可能会影响结果的准确性。基因型数据的质量首先需要评估每个样本和每个 SNP 的缺失率。</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>缺失率表示某个样本在所有标记位点的基因型缺失的比例；呼叫率表示某个 SNP 在所有样本中的基因型被成功识别的比例。样本缺失率：样本的基因型数据可能因技术问题、平台差异等因素缺失，需要计算每个样本的缺失率，并根据预设的阈值剔除缺失过多的样本。SNP 呼叫率：类似地，每个SNP的呼叫率需要计算。如果某些 SNP 在大多数样本中都没有成功呼叫，可以考虑排除这些 SNP。</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--missing</span> <span class="at">--out</span> plink_missing</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令来计算样本的缺失率和 SNP 的呼叫率：</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 计算等位基因频率（Allele Frequency）</span></span>
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--missing</span> <span class="at">--out</span> plink_missing</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 计算等位基因频率（Allele Frequency）</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>等位基因频率是 GWAS 中重要的统计量，它表示某个特定等位基因在样本中的出现频率。为了确保我们分析的是常见的变异，我们通常会设置最小等位基因频率（MAF）阈值。通常，筛选出 MAF 低于 1% 的 SNP 是合理的，因为低频变异可能会增加假阳性。</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>等位基因频率是 GWAS 中重要的统计量，它表示某个特定等位基因在样本中的出现频率。为了确保我们分析的是常见的变异，我们通常会设置最小等位基因频率（MAF）阈值。通常，筛选出 MAF 低于 1% 的 SNP 是合理的，因为低频变异可能会增加假阳性。</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，计算等位基因频率非常简单：</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--freq</span> <span class="at">--out</span> plink_freq</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，计算等位基因频率非常简单：</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Hardy-Weinberg 平衡精确检验（Hardy-Weinberg Equilibrium Test）</span></span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--freq</span> <span class="at">--out</span> plink_freq</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Hardy-Weinberg 平衡精确检验（Hardy-Weinberg Equilibrium Test）</span></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>Hardy-Weinberg 平衡（HWE）检验是 GWAS 中常用的一种质量控制手段。根据 HWE 定律，如果一个群体处于均衡状态，则基因型的分布应该符合预期的频率。如果某个 SNP 的基因型偏离了 HWE，可能是因为样本污染、系统性错误或者是与某些表型相关的变异。通常，对于病例对照研究，HWE检验的p值阈值设定为$10^{-6}$。</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>Hardy-Weinberg 平衡（HWE）检验是 GWAS 中常用的一种质量控制手段。根据 HWE 定律，如果一个群体处于均衡状态，则基因型的分布应该符合预期的频率。如果某个 SNP 的基因型偏离了 HWE，可能是因为样本污染、系统性错误或者是与某些表型相关的变异。通常，对于病例对照研究，HWE检验的p值阈值设定为$10^{-6}$。</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>使用 PLINK 执行 HWE 检验：</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--hwe</span> 1e-6 <span class="at">--out</span> plink_hwe</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>使用 PLINK 执行 HWE 检验：</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. LD-Pruning</span></span>
 <span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--hwe</span> 1e-6 <span class="at">--out</span> plink_hwe</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. LD-Pruning</span></span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>连锁不平衡（LD）修剪是为了去除那些高度相关的 SNP，减少冗余，确保分析中使用的 SNP 具有独立性。若 SNP 之间存在高度的 LD，它们可能会影响 GWAS 结果的准确性。通常使用 LD-pruning 来去除相关性高的 SNP。</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>连锁不平衡（LD）修剪是为了去除那些高度相关的 SNP，减少冗余，确保分析中使用的 SNP 具有独立性。若 SNP 之间存在高度的 LD，它们可能会影响 GWAS 结果的准确性。通常使用 LD-pruning 来去除相关性高的 SNP。</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，常用的 LD-pruning 命令如下：</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="at">--out</span> plink_results</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，常用的 LD-pruning 命令如下：</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>该命令会根据给定的窗口大小（50 个 SNP）、步长（每次移动 5 个 SNP）和 $r^{2}$ 阈值（0.2），进行 LD 修剪。</span>
 <span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="at">--out</span> plink_results</span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>该命令会根据给定的窗口大小（50 个 SNP）、步长（每次移动 5 个 SNP）和 $r^{2}$ 阈值（0.2），进行 LD 修剪。</span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 计算近交系数 F（Inbreeding F coefficient）</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 计算近交系数 F（Inbreeding F coefficient）</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>近交系数 F（F coefficient）用于衡量样本中的近交程度。较高的 F 值可能表示样本存在近交，而较低的 F 值可能表示样本污染。计算 F 值时，可以使用 PLINK 的 <span class="in">`--het`</span> 命令，它会生成每个样本的观测和期望纯合子基因型数量，并计算 F 值。</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--het</span> <span class="at">--out</span> plink_results</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>近交系数 F（F coefficient）用于衡量样本中的近交程度。较高的 F 值可能表示样本存在近交，而较低的 F 值可能表示样本污染。计算 F 值时，可以使用 PLINK 的 <span class="in">`--het`</span> 命令，它会生成每个样本的观测和期望纯合子基因型数量，并计算 F 值。</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>输出结果中，F 值较高的样本可以考虑进一步检查或排除。常见的处理方法是将 F 值超过 3 个标准差（SD）的样本排除。</span>
 <span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--het</span> <span class="at">--out</span> plink_results</span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>输出结果中，F 值较高的样本可以考虑进一步检查或排除。常见的处理方法是将 F 值超过 3 个标准差（SD）的样本排除。</span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 数据管理（make-bed / recode）</span></span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>为了便于后续分析，PLINK 提供了多种数据格式转换工具。最常用的格式是 BED 格式，它是 PLINK 的二进制格式，能够大大提高存储和计算效率。<span class="in">`make-bed`</span> 将原始的 PED/MAP 文件转换为 BED 格式。通常在预处理数据时使用该命令。</span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--make-bed</span> <span class="at">--out</span> plink_bed</span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>bash</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 数据管理（make-bed / recode）</span></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>为了便于后续分析，PLINK 提供了多种数据格式转换工具。最常用的格式是 BED 格式，它是 PLINK 的二进制格式，能够大大提高存储和计算效率。<span class="in">`make-bed`</span> 将原始的 PED/MAP 文件转换为 BED 格式。通常在预处理数据时使用该命令。</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--make-bed</span> <span class="at">--out</span> plink_bed</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>bash</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="in">`recode`</span> 如果你需要将数据转回 PED 格式或其他格式，可以使用 <span class="in">`recode`</span> 命令。</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--recode</span> <span class="at">--out</span> plink_recode</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="in">`recode`</span> 如果你需要将数据转回 PED 格式或其他格式，可以使用 <span class="in">`recode`</span> 命令。</span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>这些命令帮助将数据从一种格式转换为另一种格式，确保数据可以被其他分析工具有效读取。</span>
 <span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="at">--recode</span> <span class="at">--out</span> plink_recode</span>
-<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>这些命令帮助将数据从一种格式转换为另一种格式，确保数据可以被其他分析工具有效读取。</span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
-<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>基因型数据的 QC 是 GWAS 分析中的基础步骤，它确保数据的可靠性和准确性。通过执行上述步骤，你可以在 GWAS 分析前排除掉缺失值过多、低频变异、偏离 Hardy-Weinberg 平衡的 SNP，以及冗余的高度 LD SNP。高质量的数据是可靠分析的前提，只有确保数据质量，才能得出科学、可靠的结果。</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>基因型数据的 QC 是 GWAS 分析中的基础步骤，它确保数据的可靠性和准确性。通过执行上述步骤，你可以在 GWAS 分析前排除掉缺失值过多、低频变异、偏离 Hardy-Weinberg 平衡的 SNP，以及冗余的高度 LD SNP。高质量的数据是可靠分析的前提，只有确保数据质量，才能得出科学、可靠的结果。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -227,7 +227,7 @@ div.column-margin+hr.dinkus {
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">DNAnexus</div>
+                <div class="quarto-category">dnanexus</div>
                 <div class="quarto-category">phenotype</div>
                 <div class="quarto-category">table exporter</div>
               </div>
@@ -804,65 +804,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DNAnexus 表型数据提取"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DNAnexus \u8868\u578B\u6570\u636E\u63D0\u53D6"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-11</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Table exporter"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111909627.png"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> Table exporter</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111909627.png</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - DNAnexus</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - phenotype</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - table exporter</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">- dnanexus</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">- phenotype</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">- table exporter</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>自从 UK Biobank 数据必须在 DNAnexus 上操作后，我们不得不使用 UKB 的付费平台。DNAnexus 是一个功能强大的云平台，提供了多种工具来处理、分析和可视化大规模基因组数据。在研究中，表型数据（如疾病状态、实验测量值、临床记录等）是理解基因与环境因素相互作用的重要资源。DNAnexus 提供了 <span class="in">`Table Exporter`</span> 工具以及 <span class="in">`dx extract_dataset`</span>，帮助研究人员从数据库中高效提取表型数据，并将其导出为可分析的格式。</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>在这篇文章中，我们将介绍如何在 DNAnexus 上使用 Table Exporter 提取表型数据。</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table Exporter 简介</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="al">![Table Exporter](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111909627.png)</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>自从 UK Biobank 数据必须在 DNAnexus 上操作后，我们不得不使用 UKB 的付费平台。DNAnexus 是一个功能强大的云平台，提供了多种工具来处理、分析和可视化大规模基因组数据。在研究中，表型数据（如疾病状态、实验测量值、临床记录等）是理解基因与环境因素相互作用的重要资源。DNAnexus 提供了 <span class="in">`Table Exporter`</span> 工具以及 <span class="in">`dx extract_dataset`</span>，帮助研究人员从数据库中高效提取表型数据，并将其导出为可分析的格式。</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Table Exporter 是 DNAnexus 提供的一项功能，允许用户从项目中提取存储的表型数据，并根据需要导出为 CSV、TSV 或 SQL 格式的文件。这些文件可以包含参与者的各种表型信息，如年龄、性别、疾病状态、基因型等。该工具的灵活性使得它不仅适用于小规模数据提取，还能够处理大规模的数据集，支持定制化字段的选择，以及针对特定需求的格式化输出。</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>在这篇文章中，我们将介绍如何在 DNAnexus 上使用 Table Exporter 提取表型数据。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何使用 Table Exporter 提取数据</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table Exporter 简介</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 1：登录 DNAnexus 平台</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![Table Exporter](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111909627.png)</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>首先，确保你已经拥有 DNAnexus 帐号并登录。若没有帐户，可以在 DNAnexus 官方网站申请注册。登录后，你将进入 Project Dashboard，即你的项目仪表板。</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Table Exporter 是 DNAnexus 提供的一项功能，允许用户从项目中提取存储的表型数据，并根据需要导出为 CSV、TSV 或 SQL 格式的文件。这些文件可以包含参与者的各种表型信息，如年龄、性别、疾病状态、基因型等。该工具的灵活性使得它不仅适用于小规模数据提取，还能够处理大规模的数据集，支持定制化字段的选择，以及针对特定需求的格式化输出。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 2：选择项目 </span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何使用 Table Exporter 提取数据</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>在仪表板中，选择包含你需要提取表型数据的项目。你可以选择已有的项目，或者新建一个项目。</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 1：登录 DNAnexus 平台</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 3：配置 Table Exporter </span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>首先，确保你已经拥有 DNAnexus 帐号并登录。若没有帐户，可以在 DNAnexus 官方网站申请注册。登录后，你将进入 Project Dashboard，即你的项目仪表板。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>在项目中找到 Table Exporter 工具，并点击进入配置界面。</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 2：选择项目 </span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="al">![Table Exporter 配置](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111911044.png)</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>在仪表板中，选择包含你需要提取表型数据的项目。你可以选择已有的项目，或者新建一个项目。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>在此界面中，你需要选择要导出的表型数据字段。这些字段通常是与研究目标相关的变量，例如： 年龄、性别、疾病状态、身高、体重等基本信息。Table Exporter 支持将数据导出为不同格式：CSV：适用于大多数数据分析工具（如 Excel、R、Python 等），能够以表格形式查看。TSV：适合更大数据量的处理，且与数据库中的表格数据兼容性更高。SQL：如果你希望导出为 SQL 查询格式，用于后续数据库查询，可以选择此格式。选择适合你需求的导出格式后，点击 Next 进入下一步。在导出时，Table Exporter 还提供了一些额外的输出选项：字段名称（Field Names）：你可以选择导出数据时是否包括字段名称作为表头。数据过滤（Data Filtering）：根据需要，可以设置过滤条件，仅导出符合条件的数据。</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### 步骤 3：配置 Table Exporter </span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="al">![advanced option](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111915368.png)</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>在项目中找到 Table Exporter 工具，并点击进入配置界面。</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>配置完成后，点击 Start Export 按钮，DNAnexus 将开始生成导出的数据文件。根据数据量的不同，可能需要一些时间来处理。你可以在 Job History（作业历史）中查看任务进度。</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="al">![Table Exporter 配置](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111911044.png)</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>在此界面中，你需要选择要导出的表型数据字段。这些字段通常是与研究目标相关的变量，例如： 年龄、性别、疾病状态、身高、体重等基本信息。Table Exporter 支持将数据导出为不同格式：CSV：适用于大多数数据分析工具（如 Excel、R、Python 等），能够以表格形式查看。TSV：适合更大数据量的处理，且与数据库中的表格数据兼容性更高。SQL：如果你希望导出为 SQL 查询格式，用于后续数据库查询，可以选择此格式。选择适合你需求的导出格式后，点击 Next 进入下一步。在导出时，Table Exporter 还提供了一些额外的输出选项：字段名称（Field Names）：你可以选择导出数据时是否包括字段名称作为表头。数据过滤（Data Filtering）：根据需要，可以设置过滤条件，仅导出符合条件的数据。</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="al">![advanced option](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111915368.png)</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>配置完成后，点击 Start Export 按钮，DNAnexus 将开始生成导出的数据文件。根据数据量的不同，可能需要一些时间来处理。你可以在 Job History（作业历史）中查看任务进度。</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="al">![job history](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111917226.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="al">![job history](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412111917226.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

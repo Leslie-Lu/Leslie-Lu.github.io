@@ -228,7 +228,7 @@ div.column-margin+hr.dinkus {
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">plink</div>
-                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">gwas</div>
                 <div class="quarto-category">bioinformatics</div>
                 <div class="quarto-category">pca</div>
               </div>
@@ -829,121 +829,113 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "GWAS 前 PCA 步骤详解"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "GWAS \u524D PCA \u6B65\u9AA4\u8BE6\u89E3"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-25</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "a typical genomic PCA analysis"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412252318097.png"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> a typical genomic PCA analysis</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412252318097.png</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - plink</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - pca</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">- plink</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">- gwas</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">- pca</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>基因组广泛关联研究（GWAS）旨在探索遗传变异与表型特征之间的关系，但由于群体结构（即不同人群间的遗传差异）和样本亲缘关系的影响，可能会导致假阳性或假阴性结果。为了控制这些偏差，**主成分分析（PCA）**成为了 GWAS 前的重要步骤。</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>这里，我们将详细介绍 GWAS 前 PCA 的原因以及如何通过一系列步骤有效进行 PCA 分析。</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么要进行 PCA？</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 去除群体结构的影响</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>基因组广泛关联研究（GWAS）旨在探索遗传变异与表型特征之间的关系，但由于群体结构（即不同人群间的遗传差异）和样本亲缘关系的影响，可能会导致假阳性或假阴性结果。为了控制这些偏差，**主成分分析（PCA）**成为了 GWAS 前的重要步骤。</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>在多种族或多地区样本的 GWAS 中，样本的群体结构可能会影响分析结果。例如，不同的群体可能拥有不同的基因频率，这种结构性差异如果不加以控制，可能会误导结果，导致某些表型与基因变异之间的假相关。</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>这里，我们将详细介绍 GWAS 前 PCA 的原因以及如何通过一系列步骤有效进行 PCA 分析。</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系的干扰</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么要进行 PCA？</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>如果样本中存在亲缘关系（如父母-子女、兄弟姐妹等），这些亲缘关系会增加样本间的相关性，从而影响 GWAS 的准确性。PCA 能够帮助识别并去除这些干扰，确保样本的独立性。</span>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 去除群体结构的影响</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 降低计算复杂度</span></span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>在多种族或多地区样本的 GWAS 中，样本的群体结构可能会影响分析结果。例如，不同的群体可能拥有不同的基因频率，这种结构性差异如果不加以控制，可能会误导结果，导致某些表型与基因变异之间的假相关。</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>PCA 能够通过减少数据的维度来降低后续分析的计算复杂度，并帮助更清晰地理解数据的结构。</span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系的干扰</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## PCA 的步骤</span></span>
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>如果样本中存在亲缘关系（如父母-子女、兄弟姐妹等），这些亲缘关系会增加样本间的相关性，从而影响 GWAS 的准确性。PCA 能够帮助识别并去除这些干扰，确保样本的独立性。</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>进行 PCA 时，主要分为以下几个关键步骤：</span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 降低计算复杂度</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. LD剪枝（LD-Pruning）</span></span>
 <span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>PCA 能够通过减少数据的维度来降低后续分析的计算复杂度，并帮助更清晰地理解数据的结构。</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>在进行 PCA 前，我们通常会进行 LD 剪枝，即去除那些高度相关（连锁不平衡，LD）变异位点。这样做的目的是减少冗余信息，使得 PCA 能够更准确地反映独立的遗传变异。</span>
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## PCA 的步骤</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令进行 LD 剪枝：</span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>进行 PCA 时，主要分为以下几个关键步骤：</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. LD剪枝（LD-Pruning）</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>在进行 PCA 前，我们通常会进行 LD 剪枝，即去除那些高度相关（连锁不平衡，LD）变异位点。这样做的目的是减少冗余信息，使得 PCA 能够更准确地反映独立的遗传变异。</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，可以使用以下命令进行 LD 剪枝：</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>       <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="dt">\</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.prune</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>       <span class="at">--indep-pairwise</span> 50 5 0.2 <span class="dt">\</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.prune</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">`--indep-pairwise 50 5 0.2`</span> 进行 LD 剪枝，窗口大小为 50 个 SNP，步长为 5，LD 阈值为 0.2，表示去除那些与其他 SNP 高度相关的 SNP。<span class="in">`--out`</span> 指定输出文件的前缀。这将生成一个包含独立 SNP 的文件 <span class="in">`${outPrefix}.prune.in`</span>，后续将用于 PCA 计算。</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系样本</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>PCA 计算时需要去除亲缘关系较近的样本，通常是 2 度以内的亲属。PLINK 的 <span class="in">`--king-cutoff`</span> 命令可以用来筛选样本，并去除与其他样本亲缘关系过近的样本。</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="in">`--indep-pairwise 50 5 0.2`</span> 进行 LD 剪枝，窗口大小为 50 个 SNP，步长为 5，LD 阈值为 0.2，表示去除那些与其他 SNP 高度相关的 SNP。<span class="in">`--out`</span> 指定输出文件的前缀。这将生成一个包含独立 SNP 的文件 <span class="in">`${outPrefix}.prune.in`</span>，后续将用于 PCA 计算。</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 去除亲缘关系样本</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>PCA 计算时需要去除亲缘关系较近的样本，通常是 2 度以内的亲属。PLINK 的 <span class="in">`--king-cutoff`</span> 命令可以用来筛选样本，并去除与其他样本亲缘关系过近的样本。</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>       <span class="at">--king-cutoff</span> 0.0884 <span class="dt">\</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.king.cutoff</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>       <span class="at">--king-cutoff</span> 0.0884 <span class="dt">\</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.king.cutoff</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">`--king-cutoff 0.0884`</span> 此命令通过阈值 0.0884（约对应亲缘关系为 2 度的样本）去除亲缘关系过近的样本。这会生成两个文件：<span class="in">`plink_results_king.king.cutoff.in.id`</span>（保留的样本 ID）和 <span class="in">`plink_results_king.king.cutoff.out.id`</span>（被排除的样本 ID）。</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 使用无亲缘关系样本和独立 SNP 进行 PCA</span></span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>接下来，使用去除亲缘关系的样本和独立 SNP 来运行 PCA。PCA 计算的目的是识别样本间最显著的遗传变异。我们可以使用 PLINK 中的 <span class="in">`--pca`</span> 命令来进行 PCA 计算。</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>       <span class="at">--keep</span> <span class="va">${outPrefix}</span>.king.cutoff.in.id <span class="dt">\</span></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>       <span class="at">--extract</span> <span class="va">${outPrefix}</span>.prune.in <span class="dt">\</span></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>       <span class="at">--freq</span> counts <span class="dt">\</span></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>       <span class="at">--pca</span> approx allele-wts 10 <span class="dt">\</span></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.pca</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">`--keep ${outPrefix}.king.cutoff.in.id`</span> 指定只使用无亲缘关系的样本，<span class="in">`--extract ${outPrefix}.prune.in`</span> 指定仅使用经过 LD 剪枝的独立 SNP。<span class="in">`--freq counts`</span> 计算等位基因频率，<span class="in">`--pca approx allele-wts 10`</span> 请求进行 PCA 计算，并输出前 10 个主成分的等位基因权重。此命令会生成多个输出文件，包括主成分得分文件（<span class="in">`.eigenvec`</span>）、主成分方差解释比例文件（<span class="in">`.eigenval`</span>）等。</span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 将 PCA 结果投影到所有样本</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>完成 PCA 后，我们可以将主成分的得分投影到所有样本中。这样可以确保即使是在 PCA 分析后没有被直接计算的样本，也能够获得与前几个主成分的关联。</span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>       <span class="at">--read-freq</span> <span class="va">${outPrefix}</span>.acount <span class="dt">\</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score</span> <span class="va">${outPrefix}</span>.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize <span class="dt">\</span></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score-col-nums</span> 7-16 <span class="dt">\</span></span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>_projected</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="in">`--king-cutoff 0.0884`</span> 此命令通过阈值 0.0884（约对应亲缘关系为 2 度的样本）去除亲缘关系过近的样本。这会生成两个文件：<span class="in">`plink_results_king.king.cutoff.in.id`</span>（保留的样本 ID）和 <span class="in">`plink_results_king.king.cutoff.out.id`</span>（被排除的样本 ID）。</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 使用无亲缘关系样本和独立 SNP 进行 PCA</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>接下来，使用去除亲缘关系的样本和独立 SNP 来运行 PCA。PCA 计算的目的是识别样本间最显著的遗传变异。我们可以使用 PLINK 中的 <span class="in">`--pca`</span> 命令来进行 PCA 计算。</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>       <span class="at">--keep</span> <span class="va">${outPrefix}</span>.king.cutoff.in.id <span class="dt">\</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>       <span class="at">--extract</span> <span class="va">${outPrefix}</span>.prune.in <span class="dt">\</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>       <span class="at">--freq</span> counts <span class="dt">\</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>       <span class="at">--pca</span> approx allele-wts 10 <span class="dt">\</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>.pca</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a><span class="in">`--keep ${outPrefix}.king.cutoff.in.id`</span> 指定只使用无亲缘关系的样本，<span class="in">`--extract ${outPrefix}.prune.in`</span> 指定仅使用经过 LD 剪枝的独立 SNP。<span class="in">`--freq counts`</span> 计算等位基因频率，<span class="in">`--pca approx allele-wts 10`</span> 请求进行 PCA 计算，并输出前 10 个主成分的等位基因权重。此命令会生成多个输出文件，包括主成分得分文件（<span class="in">`.eigenvec`</span>）、主成分方差解释比例文件（<span class="in">`.eigenval`</span>）等。</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 将 PCA 结果投影到所有样本</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>完成 PCA 后，我们可以将主成分的得分投影到所有样本中。这样可以确保即使是在 PCA 分析后没有被直接计算的样本，也能够获得与前几个主成分的关联。</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> <span class="va">${genotypeFile}</span> <span class="dt">\</span></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>       <span class="at">--threads</span> <span class="va">${threads}</span> <span class="dt">\</span></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>       <span class="at">--read-freq</span> <span class="va">${outPrefix}</span>.acount <span class="dt">\</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score</span> <span class="va">${outPrefix}</span>.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize <span class="dt">\</span></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>       <span class="at">--score-col-nums</span> 7-16 <span class="dt">\</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${outPrefix}</span>_projected</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="in">`--read-freq ${outPrefix}.acount`</span> 读取计算过的等位基因频率，<span class="in">`--score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize`</span> 使用主成分分析的结果对所有样本进行投影，<span class="in">`--score-col-nums 7-16`</span> 指定投影的主成分列。投影后的结果可以用于进一步的 GWAS 分析，确保将群体结构和亲缘关系的影响考虑在内。</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分析和解释 PCA 结果</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>完成 PCA 分析后，我们可以查看每个主成分的解释比例，了解各个主成分对于遗传变异的贡献。通常，前几个主成分会解释大部分的方差，因此我们关注的是这些主成分的贡献。</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>在 PLINK 的输出文件中，<span class="in">`.eigenval`</span> 文件包含每个主成分的特征值，这些特征值表示该主成分对于数据方差的贡献比例。通过查看这些值，我们可以判断哪些主成分最能解释数据中的变异。</span>
 <span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">`--read-freq ${outPrefix}.acount`</span> 读取计算过的等位基因频率，<span class="in">`--score ${outPrefix}.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize`</span> 使用主成分分析的结果对所有样本进行投影，<span class="in">`--score-col-nums 7-16`</span> 指定投影的主成分列。投影后的结果可以用于进一步的 GWAS 分析，确保将群体结构和亲缘关系的影响考虑在内。</span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
 <span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分析和解释 PCA 结果</span></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>完成 PCA 分析后，我们可以查看每个主成分的解释比例，了解各个主成分对于遗传变异的贡献。通常，前几个主成分会解释大部分的方差，因此我们关注的是这些主成分的贡献。</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>在 PLINK 的输出文件中，<span class="in">`.eigenval`</span> 文件包含每个主成分的特征值，这些特征值表示该主成分对于数据方差的贡献比例。通过查看这些值，我们可以判断哪些主成分最能解释数据中的变异。</span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## 总结</span></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>PCA 是 GWAS 分析中的一个关键步骤，能够有效去除群体结构和亲缘关系的影响，从而提高 GWAS 结果的可靠性和准确性。通过 PCA，我们不仅能去除数据中的噪声，还能更好地理解样本之间的遗传结构，为 GWAS 的成功开展奠定坚实基础。</span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>PCA 是 GWAS 分析中的一个关键步骤，能够有效去除群体结构和亲缘关系的影响，从而提高 GWAS 结果的可靠性和准确性。通过 PCA，我们不仅能去除数据中的噪声，还能更好地理解样本之间的遗传结构，为 GWAS 的成功开展奠定坚实基础。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
