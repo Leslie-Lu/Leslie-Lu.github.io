@@ -45,6 +45,83 @@
   <media:content url="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>R 中项目环境管理</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/01/19/renv_in_r/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在 R 语言的项目开发和数据分析过程中，管理包的依赖关系一直是一个挑战。每个项目可能依赖不同版本的R包，而不同项目间的包依赖往往互相冲突。为了避免这些问题，renv 包应运而生，其相当于 python 中的 virtualenv，帮助 R 用户高效地管理和隔离项目的依赖环境。</p>
+<p>这里，我们将介绍 renv 包的基本功能及使用方法，帮助大家更好地管理 R 项目的包依赖。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">renv</figcaption>
+</figure>
+</div>
+<section id="什么是-renv-包" class="level3">
+<h3 class="anchored" data-anchor-id="什么是-renv-包">什么是 renv 包</h3>
+<p>renv（R Environment）是一个用于管理 R 项目环境的工具。它允许为每个 R 项目创建一个独立的虚拟环境，从而确保每个项目拥有独立且隔离的 R 包依赖。通过使用 renv，我们可以避免包版本冲突，并且可以轻松地复制和共享项目环境，确保项目在不同的机器或不同的时间点上能够重现。</p>
+</section>
+<section id="renv-的核心优势" class="level3">
+<h3 class="anchored" data-anchor-id="renv-的核心优势">renv 的核心优势</h3>
+<ul>
+<li>隔离环境：每个项目有独立的库，包的版本不会相互干扰。即使我们在一个项目中更新了某个包的版本，其他项目依然可以使用旧版本。</li>
+<li>项目可重现性：通过保存和共享项目的依赖信息（如包的版本），其他开发者可以使用相同的环境重新创建项目，确保研究的可重现性。</li>
+<li>便捷的依赖管理：renv 会自动创建和维护 renv.lock 文件，记录项目依赖的包及其版本。这个文件是重现项目环境的关键，确保在不同机器或时间点运行时，依赖的版本完全一致。</li>
+</ul>
+</section>
+<section id="如何在-r-中使用-renv-包" class="level3">
+<h3 class="anchored" data-anchor-id="如何在-r-中使用-renv-包">如何在 R 中使用 renv 包</h3>
+<section id="初始化项目" class="level4">
+<h4 class="anchored" data-anchor-id="初始化项目">1. 初始化项目</h4>
+<p>首先，我们需要安装并加载 renv 包。在一个新的 R 项目中，我们可以使用 <code>renv::init()</code> 来初始化 renv 环境。这将会创建一个新的 renv 文件夹并生成 renv.lock 文件。初始化后，项目中会有一个专门的库（renv/library）存放该项目所需的所有 R 包，同时生成 renv.lock 文件，这个文件记录了所有依赖包的具体版本。</p>
+</section>
+<section id="安装依赖包" class="level4">
+<h4 class="anchored" data-anchor-id="安装依赖包">2. 安装依赖包</h4>
+<p>当我们开始开发项目时，可以通过 <code>install.packages()</code> 安装所需的 R 包，renv 会将这些包安装到项目的独立环境中。</p>
+<p>例如，安装 ggplot2` 包后，renv 会自动更新 renv.lock 文件，记录包的安装信息及其版本。</p>
+</section>
+<section id="恢复项目环境" class="level4">
+<h4 class="anchored" data-anchor-id="恢复项目环境">3. 恢复项目环境</h4>
+<p>如果我们或者其他人需要在另一个环境中重新运行该项目，renv 允许我们通过 <code>renv::restore()</code> 命令恢复项目的所有依赖包。这个命令会根据 renv.lock 文件自动安装所有所需的包及其指定版本，从而确保每次运行时的包版本一致，避免了环境问题。</p>
+</section>
+<section id="查看并更新项目依赖" class="level4">
+<h4 class="anchored" data-anchor-id="查看并更新项目依赖">4. 查看并更新项目依赖</h4>
+<p>如果我们需要查看项目当前依赖的所有包，可以使用 <code>renv::status()</code> 命令，它会列出所有包及其状态。而当我们需要更新项目中的某个包时，可以使用 <code>renv::update()</code> 命令，它会根据当前最新的包版本进行更新，并更新 renv.lock 文件。</p>
+</section>
+<section id="分享项目" class="level4">
+<h4 class="anchored" data-anchor-id="分享项目">5. 分享项目</h4>
+<p>当我们完成项目后，可以将 renv.lock 文件和源代码一起通过 github 分享给其他人，其他人只需要使用 <code>renv::restore()</code> 来恢复项目环境，无需担心包依赖的问题。</p>
+</section>
+</section>
+<section id="renv-与-packrat-的对比" class="level3">
+<h3 class="anchored" data-anchor-id="renv-与-packrat-的对比">renv 与 packrat 的对比</h3>
+<p>在 renv 之前，R 中有一个较为类似的包叫做 packrat，它也提供环境管理的功能。然而，renv 相比于 packrat 有几个优势：</p>
+<ul>
+<li>更简洁：renv 比 packrat 更轻量，易于使用和理解。</li>
+<li>更强的兼容性：renv 与 R 版本的兼容性更好，适应性更强，能够更好地处理依赖关系。</li>
+<li>性能更高：renv 在项目初始化、恢复和更新时速度更快。</li>
+</ul>
+<p>因此，renv 在目前 R 项目环境管理中得到了更广泛的使用。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>r</category>
+  <category>tools</category>
+  <category>version control</category>
+  <guid>https://leslie-lu.github.io/blog/2025/01/19/renv_in_r/</guid>
+  <pubDate>Sun, 19 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://rstudio.github.io/renv/articles/renv.png" medium="image" type="image/png"/>
+</item>
+<item>
   <title>Tracy-Widom Statistics</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2025/01/07/tracy_widom_test/</link>
@@ -329,7 +406,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="dfc7d76b" class="cell" data-execution_count="1">
+<div id="16dfa649" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -354,7 +431,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="a28ef0f2" class="cell" data-execution_count="2">
+<div id="7cd04b3d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -393,7 +470,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="1b9ab366" class="cell" data-execution_count="3">
+<div id="527fed13" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -442,7 +519,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="17850405" class="cell" data-execution_count="4">
+<div id="48bd01ed" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -647,7 +724,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="978cea05" class="cell" data-execution_count="1">
+<div id="626c22e5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -672,7 +749,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="6b065e9e" class="cell" data-execution_count="2">
+<div id="2f251cae" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -702,7 +779,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="b07c40fd" class="cell" data-execution_count="3">
+<div id="0dd116f5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1155,7 +1232,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="dac1bb67" class="cell" data-execution_count="1">
+<div id="387c748a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1188,7 +1265,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="ba69119c" class="cell" data-execution_count="2">
+<div id="14a2ed78" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1222,7 +1299,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="c0b2a2a0" class="cell" data-execution_count="3">
+<div id="0e4b36e0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1254,7 +1331,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="2039d958" class="cell" data-execution_count="4">
+<div id="50f956a7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1282,7 +1359,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="80208857" class="cell" data-execution_count="5">
+<div id="22896849" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -1562,7 +1639,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="31509458" class="cell" data-execution_count="1">
+<div id="a3373824" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1766,7 +1843,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="4ea5eb0f" class="cell" data-execution_count="2">
+<div id="e0403802" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -4280,7 +4357,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="7a123dbb" class="cell" data-execution_count="1">
+<div id="00bbeefa" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4312,7 +4389,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="e2bb534e" class="cell" data-execution_count="2">
+<div id="305e15be" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4332,7 +4409,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="dc020968" class="cell" data-execution_count="3">
+<div id="a80522ca" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4343,7 +4420,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="5c1d9b49" class="cell" data-execution_count="4">
+<div id="692d878c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4354,7 +4431,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="518ad128" class="cell" data-execution_count="5">
+<div id="cc6501e4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4367,7 +4444,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="46fd5b4f" class="cell" data-execution_count="6">
+<div id="922260b1" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4390,14 +4467,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-0.2088, -2.8794,  5.6406],
-         [-0.6803, -0.7261,  2.1171]],
+<pre><code>tensor([[[ 0.0963, -0.1019, -2.4313],
+         [-0.8053,  0.4343, -1.8121]],
 
-        [[ 1.5082,  1.3536,  1.1388],
-         [ 5.8266,  2.1341,  0.3766]],
+        [[-0.8806,  3.1382, -2.5189],
+         [-1.5990,  2.0106, -1.0686]],
 
-        [[-1.2202,  3.6653, -0.0580],
-         [-0.2381, -0.9318, -0.6846]]])</code></pre>
+        [[ 0.1167, -0.2948,  2.0728],
+         [ 0.4921,  1.0562,  0.1813]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5554,121 +5631,6 @@ font-style: inherit;">)</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/06/23/JCR_2023/</guid>
   <pubDate>Sun, 23 Jun 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406231731181.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>常用损失函数</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="loss-function" class="level3">
-<h3 class="anchored" data-anchor-id="loss-function">loss function</h3>
-<p>在机器学习/深度学习任务中，衡量模型预测值与真实值之间的差异的指标称为损失函数。损失函数是模型训练的关键组成部分，它可以帮助我们优化模型参数，使得模型的预测值更加接近真实值。预测任务的目标也是最小化损失函数，如，我们利用反向传播算法等方法，通过更新损失函数相对于模型参数的梯度来最小化损失函数，提高模型的预测能力。此外，有效的损失函数还可以帮助我们平衡模型的偏差和方差，提高模型的泛化能力。</p>
-<p>依据预测任务的不同，损失函数可以分为回归任务和分类任务两大类。回归任务的损失函数通常是均方误差（MSE）或平均绝对误差（MAE），而分类任务的损失函数则有交叉熵损失函数、Hinge损失函数等。本文将介绍常用的损失函数及其应用场景。</p>
-<section id="均方误差mse" class="level4">
-<h4 class="anchored" data-anchor-id="均方误差mse">均方误差（MSE）</h4>
-<p>均方误差（Mean Squared Error，MSE）是回归任务中最常用的损失函数之一，它衡量模型预测值与真实值之间的差异。MSE的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AMSE%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(y_i%20-%20%5Chat%7By%7D_i)%5E2%0A"></p>
-<p>可以看到，MSE是预测值与真实值之间差值的平方和的均值，它对较大差异分配更高的惩罚。MSE非负，越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。MSE对异常值敏感，因为它是差值的平方和，异常值的平方会放大差异，导致模型的预测能力下降。</p>
-<p>其在pytorch中的实现：</p>
-<div id="mse" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">torch.nn.MSELoss(reduction<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mean'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="平均绝对误差mae" class="level4">
-<h4 class="anchored" data-anchor-id="平均绝对误差mae">平均绝对误差（MAE）</h4>
-<p>平均绝对误差（Mean Absolute Error，MAE）是回归任务中另一种常用的损失函数。MAE的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AMAE%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%7Cy_i%20-%20%5Chat%7By%7D_i%7C%0A"></p>
-<p>相比于MSE，MAE是预测值与真实值之间差值的绝对值的均值，它对异常值不敏感，因为它是差值的绝对值的和，不会对某一异常值的差异分配过高的权重。MAE的值越小，说明模型的预测值与真实值之间的差异越小，模型的预测能力越好。</p>
-<p>针对MAE和MSE的优缺点，我们可以根据具体的任务需求选择合适的损失函数。如果任务需要重点关注异常值，可以选择MSE，否则选择MAE。</p>
-<div id="mae" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">torch.nn.L1Loss(reduction<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mean'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="huber-loss" class="level4">
-<h4 class="anchored" data-anchor-id="huber-loss">Huber loss</h4>
-<p>Huber loss是一种结合了MSE和MAE的损失函数，它在差值较小的情况下使用MSE，差值较大的情况下使用MAE。Huber loss的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AL_%7B%5Cdelta%7D(y,%20%5Chat%7By%7D)%20=%20%5Cleft%5C%7B%0A%5Cbegin%7Barray%7D%7Bll%7D%0A%5Cfrac%7B1%7D%7B2%7D(y%20-%20%5Chat%7By%7D)%5E2,%20&amp;%20%5Ctext%7Bif%20%7D%20%7Cy%20-%20%5Chat%7By%7D%7C%20%5Cleq%20%5Cdelta%20%5C%5C%0A%5Cdelta%20%7Cy%20-%20%5Chat%7By%7D%7C%20-%20%5Cfrac%7B1%7D%7B2%7D%20%5Cdelta%5E2,%20&amp;%20%5Ctext%7Botherwise%7D%0A%5Cend%7Barray%7D%0A%5Cright.%0A"></p>
-<p>其中，<img src="https://latex.codecogs.com/png.latex?%5Cdelta">是一个超参数，用于控制MSE和MAE之间的平衡。Huber loss对异常值不敏感，同时保留了MSE的平滑性，是一种较为稳健的损失函数。</p>
-<div id="smoothl1loss" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">torch.nn.SmoothL1Loss(reduction<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mean'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="二元交叉熵损失函数binary-cross-entropy-loss" class="level4">
-<h4 class="anchored" data-anchor-id="二元交叉熵损失函数binary-cross-entropy-loss">二元交叉熵损失函数（Binary Cross Entropy Loss）</h4>
-<p>交叉熵损失函数（Cross Entropy Loss）是二分类任务中最常用的损失函数之一，我们前面也以及<a href="https://mp.weixin.qq.com/s/y2gZKXebDv3tKha7Hu5Djw">介绍过</a>。交叉熵损失函数的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20-%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20y_i%20%5Clog(%5Chat%7By%7D_i)%20+%20(1%20-%20y_i)%20%5Clog(1%20-%20%5Chat%7By%7D_i)%0A"></p>
-<p>其中，<img src="https://latex.codecogs.com/png.latex?y_i">是真实标签，<img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_i">是模型预测的概率值。交叉熵损失函数对于模型预测的概率值和真实标签之间的差异进行了惩罚，使得模型更加关注预测正确的类别。交叉熵损失函数是一种凸函数，可以通过梯度下降等方法进行优化。</p>
-<div id="bce" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">torch.nn.BCELoss(weight<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>, reduction<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mean'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="多类交叉熵损失函数categorical-cross-entropy-loss" class="level4">
-<h4 class="anchored" data-anchor-id="多类交叉熵损失函数categorical-cross-entropy-loss">多类交叉熵损失函数（Categorical Cross Entropy Loss）</h4>
-<p>多类交叉熵损失函数是多分类任务中常用的损失函数之一，它是交叉熵损失函数的扩展。多类交叉熵损失函数的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20-%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Csum_%7Bj=1%7D%5E%7Bm%7D%20y_%7Bij%7D%20%5Clog(%5Chat%7By%7D_%7Bij%7D)%0A"></p>
-<p>其中，<img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D">是真实标签，<img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_%7Bij%7D">是模型预测的概率值。</p>
-<div id="ce" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.nn.CrossEntropyLoss(weight<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>,ignore_index<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span>, reduction<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mean'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="hinge损失函数" class="level4">
-<h4 class="anchored" data-anchor-id="hinge损失函数">Hinge损失函数</h4>
-<p>Hinge损失函数是支持向量机（SVM）中常用的损失函数之一，它适用于二分类任务。Hinge损失函数的计算公式如下：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AL(y,%20%5Chat%7By%7D)%20=%20%5Cmax(0,%201%20-%20y%20%5Ccdot%20%5Chat%7By%7D)%0A"></p>
-<p>Hinge损失函数旨在最大化决策边界的间隔，即使得正确分类的样本距离决策边界的距离尽可能大。Hinge损失函数对于误分类的样本进行了惩罚，使得模型更加关注分类边界附近的样本，从而尽可能把数据点推向远离决策边界的方向。</p>
-<p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>machine learning</category>
-  <category>deep learning</category>
-  <category>loss function</category>
-  <guid>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</guid>
-  <pubDate>Fri, 07 Jun 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406072019199.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
