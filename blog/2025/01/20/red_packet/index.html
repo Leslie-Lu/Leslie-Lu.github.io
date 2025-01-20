@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="在 DNAnexus 平台上高效处理基因组数据">
+<meta name="description" content="making the WeChat red packet cover with r">
 
-<title>掌握 Hail | Zhen Lu – Zhen Lu</title>
+<title>新年红包封面来了 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -220,17 +220,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">掌握 Hail</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">新年红包封面来了</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          在 DNAnexus 平台上高效处理基因组数据
+          making the WeChat red packet cover with r
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">hail</div>
-                <div class="quarto-category">bioinformatics</div>
-                <div class="quarto-category">dnanexus</div>
-                <div class="quarto-category">genomics</div>
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">tools</div>
+                <div class="quarto-category">red packet</div>
               </div>
                   </div>
   </div>
@@ -248,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 28, 2024</p>
+        <p class="date">Monday, January 20, 2025</p>
       </div>
     </div>
     
@@ -259,94 +258,32 @@ div.column-margin+hr.dinkus {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#什么是hail" id="toc-什么是hail" class="nav-link active" data-scroll-target="#什么是hail">什么是Hail？</a></li>
-  <li><a href="#hail-在-dnanexus-平台上的应用" id="toc-hail-在-dnanexus-平台上的应用" class="nav-link" data-scroll-target="#hail-在-dnanexus-平台上的应用">Hail 在 DNAnexus 平台上的应用</a></li>
-  <li><a href="#pvcf-数据导入教程" id="toc-pvcf-数据导入教程" class="nav-link" data-scroll-target="#pvcf-数据导入教程">pVCF 数据导入教程</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>在生物信息学领域，处理大规模基因组数据尤其是 VCF（Variant Call Format）格式的数据常常是一个挑战。传统的处理方法可能面临性能瓶颈，而 Hail 作为一个专为大规模基因组数据分析设计的工具，其高效性和可扩展性使其在基因组学界得到了广泛应用。</p>
-<p>这里，我们将介绍 Hail 的基本使用技巧，并探讨如何在 DNAnexus 平台上导入和处理 pVCF 数据。</p>
-<section id="什么是hail" class="level3">
-<h3 class="anchored" data-anchor-id="什么是hail">什么是Hail？</h3>
-<p>Hail 是一个开源的、专为基因组数据分析而设计的 Python 库，特别适合用于处理大规模的 VCF 文件。它在处理和分析基因组数据时，提供了比传统工具（如 GATK）更高效的性能，尤其在进行大规模 GWAS（基因组全关联研究）、变异注释和基因型分析时，它能够显著提高计算效率。</p>
-<p>Hail 的核心优势在于其对分布式计算的支持，能够利用 Spark 集群进行大数据的并行处理。此外，Hail 也与很多常见的生物信息学工具兼容，比如 VCF 工具、Plink 等，使得它能够轻松集成到现有的生物信息学分析管道中。</p>
-</section>
-<section id="hail-在-dnanexus-平台上的应用" class="level3">
-<h3 class="anchored" data-anchor-id="hail-在-dnanexus-平台上的应用">Hail 在 DNAnexus 平台上的应用</h3>
-<p>在 DNAnexus 平台上，我们可以直接使用 Hail 进行大规模基因组数据分析。平台提供了一个强大的计算环境，可以通过 Hail 轻松地读取、处理和分析 VCF 文件。以下是一些常见的应用场景和技巧：</p>
-<section id="使用hail加载和处理vcf文件" class="level4">
-<h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
-<p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="978cea05" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载VCF文件</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="op">=</span> <span class="st">'gs://my_bucket/my_data.vcf.bgz'</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(vcf_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://mp.weixin.qq.com/s/uTjQbwg2AVU4ZwhiGHboOQ">一年一度的事情</a>，用 R 几行代码简单画个微信红包封面，一共发放 6000 个，感谢大家一直以来对我们公众号的关注和支持！</p>
+<p><a href="https://mp.weixin.qq.com/s/tsVJsqrzOJXZhmv_PhraGA">请进入公众号文章领取</a>。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">2025_happy_newyear</figcaption>
+</figure>
 </div>
-<p>在这个示例中，我们使用 <code>hl.import_vcf()</code> 方法来加载 VCF 文件，<code>gs://</code> 是 Google Cloud Storage（GCS）路径格式，在 DNAnexus 平台上，我们也可以使用相应的路径来引用存储在平台上的 VCF 文件。</p>
-</section>
-<section id="使用-hail-进行数据质量控制" class="level4">
-<h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
-<p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
-<p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="6b065e9e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 过滤低质量变异</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.filter_rows(mt.qual <span class="op">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>通过这样的操作，我们可以去除低质量的变异，保证后续分析结果的准确性。</p>
-</section>
-<section id="基于-hail-进行群体遗传学分析" class="level4">
-<h4 class="anchored" data-anchor-id="基于-hail-进行群体遗传学分析">3. 基于 Hail 进行群体遗传学分析</h4>
-<p>Hail 还广泛应用于群体遗传学分析，例如计算群体间的变异频率、构建群体的基因型矩阵、进行 GWAS 分析等。Hail 的高效数据处理能力使其能够轻松处理海量数据，并进行并行计算，极大地提升了数据分析的效率。</p>
-</section>
-</section>
-<section id="pvcf-数据导入教程" class="level3">
-<h3 class="anchored" data-anchor-id="pvcf-数据导入教程">pVCF 数据导入教程</h3>
-<p>在基因组学中，VCF 文件是常见的变异数据格式，而 pVCF（partitioned VCF）格式则在处理极大规模数据时显得尤为重要。pVCF 将数据分割成多个小文件，避免了单个文件过大导致的内存问题，并使得数据处理更加灵活高效。</p>
-<p>在 DNAnexus 平台上，我们可以利用 Hail 来导入 pVCF 数据，具体步骤如下：</p>
-<section id="启动-hail-应用" class="level4">
-<h4 class="anchored" data-anchor-id="启动-hail-应用">1. 启动 Hail 应用</h4>
-<p>在 DNAnexus 平台上，首先需要启动一个 Hail 集群环境。我们可以使用 dx 命令行工具或通过平台的应用界面启动 Hail 应用。</p>
-</section>
-<section id="加载-pvcf-文件" class="level4">
-<h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
-<p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="b07c40fd" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 导入pVCF文件</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'gs://my_bucket/my_pvcf_file.part*'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="数据分析与处理" class="level4">
-<h4 class="anchored" data-anchor-id="数据分析与处理">3. 数据分析与处理</h4>
-<p>加载 pVCF 数据后，我们可以利用 Hail 提供的各种功能对数据进行分析。常见的分析操作包括数据过滤、变异注释和群体遗传学分析等。</p>
-<blockquote class="blockquote">
-<p>小技巧：在 DNAnexus 平台上，我们可以利用分布式计算资源加速分析过程。Hail 与 Apache Spark 紧密集成，可以在集群上并行处理数据，从而大大缩短分析时间。</p>
-</blockquote>
+<p>用了 magick，ggplot2，showtext 几个包，代码直接已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以去看看。</p>
 
 
 <!-- -->
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -821,102 +758,40 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u638C\u63E1 Hail"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-28</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "\u5728 DNAnexus \u5E73\u53F0\u4E0A\u9AD8\u6548\u5904\u7406\u57FA\u56E0\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">  \u7EC4\u6570\u636E"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">- hail</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">- dnanexus</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">- genomics</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>在生物信息学领域，处理大规模基因组数据尤其是 VCF（Variant Call Format）格式的数据常常是一个挑战。传统的处理方法可能面临性能瓶颈，而 Hail 作为一个专为大规模基因组数据分析设计的工具，其高效性和可扩展性使其在基因组学界得到了广泛应用。</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>这里，我们将介绍 Hail 的基本使用技巧，并探讨如何在 DNAnexus 平台上导入和处理 pVCF 数据。</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是Hail？</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>Hail 是一个开源的、专为基因组数据分析而设计的 Python 库，特别适合用于处理大规模的 VCF 文件。它在处理和分析基因组数据时，提供了比传统工具（如 GATK）更高效的性能，尤其在进行大规模 GWAS（基因组全关联研究）、变异注释和基因型分析时，它能够显著提高计算效率。</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>Hail 的核心优势在于其对分布式计算的支持，能够利用 Spark 集群进行大数据的并行处理。此外，Hail 也与很多常见的生物信息学工具兼容，比如 VCF 工具、Plink 等，使得它能够轻松集成到现有的生物信息学分析管道中。</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hail 在 DNAnexus 平台上的应用</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，我们可以直接使用 Hail 进行大规模基因组数据分析。平台提供了一个强大的计算环境，可以通过 Hail 轻松地读取、处理和分析 VCF 文件。以下是一些常见的应用场景和技巧：</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 使用Hail加载和处理VCF文件</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载VCF文件</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="op">=</span> <span class="st">'gs://my_bucket/my_data.vcf.bgz'</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(vcf_file)</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>在这个示例中，我们使用 <span class="in">`hl.import_vcf()`</span> 方法来加载 VCF 文件，<span class="in">`gs://`</span> 是 Google Cloud Storage（GCS）路径格式，在 DNAnexus 平台上，我们也可以使用相应的路径来引用存储在平台上的 VCF 文件。</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 使用 Hail 进行数据质量控制</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 过滤低质量变异</span></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.filter_rows(mt.qual <span class="op">&gt;</span> <span class="dv">30</span>)</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>通过这样的操作，我们可以去除低质量的变异，保证后续分析结果的准确性。</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 基于 Hail 进行群体遗传学分析</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>Hail 还广泛应用于群体遗传学分析，例如计算群体间的变异频率、构建群体的基因型矩阵、进行 GWAS 分析等。Hail 的高效数据处理能力使其能够轻松处理海量数据，并进行并行计算，极大地提升了数据分析的效率。</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## pVCF 数据导入教程</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>在基因组学中，VCF 文件是常见的变异数据格式，而 pVCF（partitioned VCF）格式则在处理极大规模数据时显得尤为重要。pVCF 将数据分割成多个小文件，避免了单个文件过大导致的内存问题，并使得数据处理更加灵活高效。</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，我们可以利用 Hail 来导入 pVCF 数据，具体步骤如下：</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 启动 Hail 应用</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>在 DNAnexus 平台上，首先需要启动一个 Hail 集群环境。我们可以使用 dx 命令行工具或通过平台的应用界面启动 Hail 应用。</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 加载 pVCF 文件</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>使用 Hail 的 <span class="in">`import_vcf`</span> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co"># 导入pVCF文件</span></span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'gs://my_bucket/my_pvcf_file.part*'</span>)</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 数据分析与处理</span></span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>加载 pVCF 数据后，我们可以利用 Hail 提供的各种功能对数据进行分析。常见的分析操作包括数据过滤、变异注释和群体遗传学分析等。</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 小技巧：在 DNAnexus 平台上，我们可以利用分布式计算资源加速分析过程。Hail 与 Apache Spark 紧密集成，可以在集群上并行处理数据，从而大大缩短分析时间。</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "新年红包封面来了"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-20</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "making the WeChat red packet cover with r"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - tools</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - red packet</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">一年一度的事情</span><span class="co">](https://mp.weixin.qq.com/s/uTjQbwg2AVU4ZwhiGHboOQ)</span>，用 R 几行代码简单画个微信红包封面，一共发放 6000 个，感谢大家一直以来对我们公众号的关注和支持！</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">请进入公众号文章领取</span><span class="co">](https://mp.weixin.qq.com/s/tsVJsqrzOJXZhmv_PhraGA)</span>。</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="al">![2025_happy_newyear](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>用了 magick，ggplot2，showtext 几个包，代码直接已经放进了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里，感兴趣的同学可以去看看。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

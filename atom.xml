@@ -11,7 +11,39 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Tue, 07 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 20 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>新年红包封面来了</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/01/20/red_packet/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://mp.weixin.qq.com/s/uTjQbwg2AVU4ZwhiGHboOQ">一年一度的事情</a>，用 R 几行代码简单画个微信红包封面，一共发放 6000 个，感谢大家一直以来对我们公众号的关注和支持！</p>
+<p><a href="https://mp.weixin.qq.com/s/tsVJsqrzOJXZhmv_PhraGA">请进入公众号文章领取</a>。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">2025_happy_newyear</figcaption>
+</figure>
+</div>
+<p>用了 magick，ggplot2，showtext 几个包，代码直接已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以去看看。</p>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>r</category>
+  <category>tools</category>
+  <category>red packet</category>
+  <guid>https://leslie-lu.github.io/blog/2025/01/20/red_packet/</guid>
+  <pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Tracy-Widom Statistics</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -297,7 +329,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="5802e70f" class="cell" data-execution_count="1">
+<div id="dfc7d76b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -322,7 +354,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="c1ffca3c" class="cell" data-execution_count="2">
+<div id="a28ef0f2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -361,7 +393,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="eda808b5" class="cell" data-execution_count="3">
+<div id="1b9ab366" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -410,7 +442,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="e162c87d" class="cell" data-execution_count="4">
+<div id="17850405" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -615,7 +647,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="66d6324e" class="cell" data-execution_count="1">
+<div id="978cea05" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -640,7 +672,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="3dbf51aa" class="cell" data-execution_count="2">
+<div id="6b065e9e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -670,7 +702,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="392ef87b" class="cell" data-execution_count="3">
+<div id="b07c40fd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1123,7 +1155,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="9d81e918" class="cell" data-execution_count="1">
+<div id="dac1bb67" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1156,7 +1188,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="f8c8df09" class="cell" data-execution_count="2">
+<div id="ba69119c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1190,7 +1222,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="eecca467" class="cell" data-execution_count="3">
+<div id="c0b2a2a0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1222,7 +1254,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="e70b0bc8" class="cell" data-execution_count="4">
+<div id="2039d958" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1250,7 +1282,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="b6a8f3c9" class="cell" data-execution_count="5">
+<div id="80208857" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -1530,7 +1562,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="83f72d0e" class="cell" data-execution_count="1">
+<div id="31509458" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1734,7 +1766,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="702102d3" class="cell" data-execution_count="2">
+<div id="4ea5eb0f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -4248,7 +4280,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="8db1f9f2" class="cell" data-execution_count="1">
+<div id="7a123dbb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4280,7 +4312,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="573c9765" class="cell" data-execution_count="2">
+<div id="e2bb534e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4300,7 +4332,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="5aa2189d" class="cell" data-execution_count="3">
+<div id="dc020968" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4311,7 +4343,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="73ff9448" class="cell" data-execution_count="4">
+<div id="5c1d9b49" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4322,7 +4354,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="87e79dbe" class="cell" data-execution_count="5">
+<div id="518ad128" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4335,7 +4367,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="2d0a18f8" class="cell" data-execution_count="6">
+<div id="46fd5b4f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4358,14 +4390,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 0.0595, -1.6332,  2.6063],
-         [ 0.9071, -1.9664,  2.3377]],
+<pre><code>tensor([[[-0.2088, -2.8794,  5.6406],
+         [-0.6803, -0.7261,  2.1171]],
 
-        [[ 3.4982, -0.8751,  0.0103],
-         [-1.1510,  1.4060, -0.9108]],
+        [[ 1.5082,  1.3536,  1.1388],
+         [ 5.8266,  2.1341,  0.3766]],
 
-        [[ 3.0641,  0.4825, -0.4552],
-         [-1.4296,  0.6824,  0.4225]]])</code></pre>
+        [[-1.2202,  3.6653, -0.0580],
+         [-0.2381, -0.9318, -0.6846]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5637,158 +5669,6 @@ font-style: inherit;">'mean'</span>)</span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/06/07/loss_function/</guid>
   <pubDate>Fri, 07 Jun 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202406072019199.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>Python中机器学习模型的校准</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/05/17/calibration/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="calibration" class="level3">
-<h3 class="anchored" data-anchor-id="calibration">calibration</h3>
-<p>在我们利用机器学习模型来建模分类预测时，首要关注的指标能力当然是dircrimination，即模型的预测区分能力。常见的指标有sensitivity、specificity、AUROC等。我们在上一篇<a href="https://mp.weixin.qq.com/s/wolSW-kdUU8IC293KR9gKg">文章</a>中介绍了如何选择最优分类阈值，这里我们接着介绍在选择了最优阈值后，如何评估模型的<a href="https://mp.weixin.qq.com/s/OdSDu3XXXTbTz_-lYirs5w">校准能力</a>。</p>
-<p>所谓校准能力，即模型预测的概率与实际发生的概率<strong>一致</strong>。</p>
-<p>通俗来解释这个事情：比如说，我们模型预测某个病人患病的概率是0.8，那么，按照概率定义理解，模型预测概率为0.8时，100个人中应该有80个人最终患病，这个结果体现了模型的校准能力和稳定性。如果模型预测概率为0.8时，实际只有20个人患病，那么，模型的校准能力就不够好，你也不会信任这个模型在实际应用中的预测结果。这就是校准能力的重要性，即你的模型最终输出的概率值要准确反映出事件实际发生的概率。</p>
-</section>
-<section id="如何评价calibration" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="如何评价calibration">如何评价calibration</h3>
-<section id="calibration-plot" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="calibration-plot">calibration plot</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171632445.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">calibration curve</figcaption>
-</figure>
-</div>
-<p>上图是一个典型的calibration curve，也是我们在文章中常见的图。</p>
-<p>我们将模型预测概率cut或者quantile成5或者10个区间（bin），每个区间预测概率的均值作为x轴，每个区间实际发生的概率作为y轴，然后画出来这个曲线。这个图是评价模型校准能力的一个直观指标。python中可以轻松实现这个工作：</p>
-<div id="calibration--plot" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.calibration <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> calibration_curve</span>
-<span id="cb1-2">y_means, pred_means <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> calibration_curve(y_true, y_pred, n_bins<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>,strategy)</span></code></pre></div>
-</div>
-<p>理想情况下，所有点都在对角线上，即模型预测的概率与实际发生的概率完全一致。如果点在对角线上方，说明模型低估，反之，高估。</p>
-<p>calibration level的定义有：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171653641.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">calibration level<span class="citation" data-cites="RN410">(Alonzo 2009)</span></figcaption>
-</figure>
-</div>
-</section>
-<section id="其他指标" class="level4">
-<h4 class="anchored" data-anchor-id="其他指标">其他指标</h4>
-<p>除了calibration plot，我们还可以用其他指标来评价模型的校准能力，比如说Brier score、Hosmer-Lemeshow test、calibration in the large等。这里不做详细介绍。</p>
-<p>我们感兴趣的是，当我们通过上述方法评价了模型的校准能力后，如果发现模型的校准能力不够好，我们应该怎么办？</p>
-</section>
-</section>
-<section id="calibrate-model" class="level3">
-<h3 class="anchored" data-anchor-id="calibrate-model">calibrate model</h3>
-<p>我们已经发现，模型输出值并不能代表概率。python中一般有<strong>predict_proba</strong>方法，即这个方法其实并不能保证输出的概率是真实的概率。</p>
-<div id="predict_proba" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.ensemble <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> RandomForestClassifier</span>
-<span id="cb2-2">model<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> RandomForestClassifier().fit(X_train, y_train)</span>
-<span id="cb2-3">y_pred <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model.predict_proba(X_test)[:,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]</span></code></pre></div>
-</div>
-<p>所以，我们需要对模型进行校准。</p>
-<section id="platt-scaling" class="level4">
-<h4 class="anchored" data-anchor-id="platt-scaling">Platt scaling</h4>
-<p>Platt scaling是一种常见的校准方法，其原理是对模型输出的概率以及真实标签，用一个logistic regression模型来拟合，从而实现对模型输出的概率进行校准，拿到最终的概率。</p>
-<div id="platt-scaling" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.calibration <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> CalibratedClassifierCV</span>
-<span id="cb3-2">calibrated <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> CalibratedClassifierCV(model, method<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'sigmoid'</span>, cv<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>)</span>
-<span id="cb3-3">calibrated.fit(X_train, y_train)</span></code></pre></div>
-</div>
-</section>
-<section id="isotonic-regression" class="level4">
-<h4 class="anchored" data-anchor-id="isotonic-regression">Isotonic regression</h4>
-<p>Isotonic regression是另一种校准方法，其原理是对模型输出的概率以及真实标签，用一个isotonic regression模型来拟合，从而实现对模型输出的概率进行校准。</p>
-<div id="isotonic-regression" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.isotonic <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> IsotonicRegression</span>
-<span id="cb4-2">ir <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> IsotonicRegression().fit(y_pred, y_test)</span></code></pre></div>
-</div>
-</section>
-<section id="bayesian-binning-into-quantiles" class="level4">
-<h4 class="anchored" data-anchor-id="bayesian-binning-into-quantiles">bayesian binning into quantiles</h4>
-<p>BBQ是一种基于贝叶斯的校准方法，其原理是将预测概率分成若干个区间，然后在每个区间内对概率进行校准。该方法结合了分箱（binning）和贝叶斯推断的优点，可以在样本量较小时仍然保持较好的校准效果。</p>
-<p>还有其他方法可以供尝试。</p>
-</section>
-</section>
-<section id="take-home-message" class="level3">
-<h3 class="anchored" data-anchor-id="take-home-message">take home message</h3>
-<p>在利用机器学习模型进行分类预测时，我们不可忽视模型的校准能力。</p>
-<p>代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
-
-
-<!-- -->
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-RN410" class="csl-entry">
-Alonzo, T. A. 2009. <span>“Clinical Prediction Models: A Practical Approach to Development, Validation, and Updating: By Ewout w. Steyerberg.”</span> Generic. Oxford University Press.
-</div>
-</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lu2024,
-  author = {Lu, Zhen},
-  title = {Python中机器学习模型的校准},
-  date = {2024-05-17},
-  url = {https://leslie-lu.github.io/blog/2024/05/17/calibration/},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lu2024" class="csl-entry quarto-appendix-citeas">
-Lu, Zhen. 2024. <span>“Python中机器学习模型的校准.”</span> May 17, 2024.
-<a href="https://leslie-lu.github.io/blog/2024/05/17/calibration/">https://leslie-lu.github.io/blog/2024/05/17/calibration/</a>.
-</div></div></section></div> ]]></description>
-  <category>python</category>
-  <category>machine learning</category>
-  <category>calibration</category>
-  <guid>https://leslie-lu.github.io/blog/2024/05/17/calibration/</guid>
-  <pubDate>Fri, 17 May 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405171632445.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
