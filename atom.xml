@@ -11,7 +11,33 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Tue, 21 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 28 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>祝大家新年快乐！</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/01/28/red_packet/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>大家除夕快乐，感谢大家一直以来对我们公众号的关注和支持！</p>
+<p>新的一年，希望我们继续一起加油进步，共同深度求索更多有价值的内容！</p>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>r</category>
+  <category>tools</category>
+  <category>red packet</category>
+  <category>happy new year</category>
+  <guid>https://leslie-lu.github.io/blog/2025/01/28/red_packet/</guid>
+  <pubDate>Tue, 28 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>公众号智能回复功能终于上线</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -444,7 +470,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="47b2f784" class="cell" data-execution_count="1">
+<div id="d0fecb7c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -469,7 +495,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="66f2c995" class="cell" data-execution_count="2">
+<div id="ba295d23" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -508,7 +534,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="3f025c30" class="cell" data-execution_count="3">
+<div id="3bb597f8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -557,7 +583,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="6c495158" class="cell" data-execution_count="4">
+<div id="a80abb82" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -762,7 +788,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="a909a6e3" class="cell" data-execution_count="1">
+<div id="116a8cc7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -787,7 +813,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="f8a33d3c" class="cell" data-execution_count="2">
+<div id="a7c8c7a2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -817,7 +843,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="0582a06b" class="cell" data-execution_count="3">
+<div id="ae35f99f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1270,7 +1296,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="143d2127" class="cell" data-execution_count="1">
+<div id="00430a2c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1303,7 +1329,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="3d9d62aa" class="cell" data-execution_count="2">
+<div id="a1a73631" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1337,7 +1363,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="b7b50d3f" class="cell" data-execution_count="3">
+<div id="f27b32bd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1369,7 +1395,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="9a01abee" class="cell" data-execution_count="4">
+<div id="9bdf4375" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1397,7 +1423,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="1f5a00a0" class="cell" data-execution_count="5">
+<div id="02de90c8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -1677,7 +1703,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="d705c6ac" class="cell" data-execution_count="1">
+<div id="d1b6c6d5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1881,7 +1907,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="39a4cede" class="cell" data-execution_count="2">
+<div id="dc250497" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -4395,7 +4421,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="7db44497" class="cell" data-execution_count="1">
+<div id="729c4e40" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4427,7 +4453,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="1fd94b4e" class="cell" data-execution_count="2">
+<div id="7857703c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4447,7 +4473,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="253d2911" class="cell" data-execution_count="3">
+<div id="f3826db3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4458,7 +4484,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="6e818ddf" class="cell" data-execution_count="4">
+<div id="147045eb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4469,7 +4495,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="a880828c" class="cell" data-execution_count="5">
+<div id="248b0425" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4482,7 +4508,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="39f902b2" class="cell" data-execution_count="6">
+<div id="6f75058a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4505,14 +4531,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-2.7803,  2.8950, -3.0164],
-         [ 0.6677,  2.6575,  3.3553]],
+<pre><code>tensor([[[-0.0187, -0.0059,  0.0056],
+         [ 0.9777,  0.8423,  1.2691]],
 
-        [[ 2.0062,  2.0574,  2.1512],
-         [-0.2954,  1.1795,  2.2601]],
+        [[ 2.5987,  0.4607, -4.1991],
+         [-1.3067, -0.8758,  2.1780]],
 
-        [[ 1.7231,  0.5413,  0.9491],
-         [-1.4701,  0.5012,  1.1734]]])</code></pre>
+        [[-1.5519,  0.1757, -0.1828],
+         [ 0.4775, -0.6160, -3.9264]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5577,59 +5603,6 @@ font-style: inherit;">)</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</guid>
   <pubDate>Sat, 03 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>预测模型领域新书推荐</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/07/19/new_book/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<blockquote class="blockquote">
-<p>首先，今天这篇不是软文哦。</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FlaDOPwuw67QXR1EG_dIwX858yNM.jpg!large.webp" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">临床预测模型方法与应用</figcaption>
-</figure>
-</div>
-<p>非常高兴向大家推荐和我们课题组一直保持良好合作的荷兰 Utrecht University <a href="https://www.uu.nl/staff/JWang6">王俊峰教授</a>参与主编的新书《<a href="https://shop19174385.m.youzan.com/wscgoods/detail/3f2t7uivrox5lr1?scan=1&amp;activity=none&amp;from=kdt&amp;qr=directgoods_4268678081&amp;shopAutoEnter=1&amp;is_share=1&amp;from_uuid=4760198145&amp;goodsImg=https%3A%2F%2Fimg01.yzcdn.cn%2Fupload_files%2F2024%2F07%2F19%2FFlaDOPwuw67QXR1EG_dIwX858yNM.jpg&amp;sf=wx_sm&amp;share_cmpt=native_wechat">临床预测模型方法与应用</a>》。</p>
-<p>王老师是临床预测模型领域内的专家，大家感兴趣的可以去看王老师的<a href="https://scholar.google.com/citations?hl=en&amp;user=00iVjcAAAAAJ">google scolar</a>。在和王老师合作做项目的过程中，我也是收获很多，扫除了一些知识上的盲点和疑区。因而，对于关注我的同学们而言，如果有对临床预测模型感兴趣的，我也是非常推荐这本书。</p>
-<p>这本书由南京医科大学公共卫生学院的陈峰教授作序，主编人员都是在预测模型、生物统计领域内有着丰富经验和深刻见解的科研人员，王老师在我们合作的项目文章里也给与了我悉心的指导，北京天坛医院<a href="https://scholar.google.com/citations?user=lRMQ1TQAAAAJ&amp;hl=en">谷鸿秋教授</a>也是刚刚作为一作发表了<a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2400314">NEJM</a>，这本书可以说是大咖云集了。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FhenV4zyYep1OLarEbPTNGwBTxQE.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">序言</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://img01.yzcdn.cn/upload_files/2024/07/19/FgbP3FuafNrK00Art1Rl0ocpCIZ7.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">序言</figcaption>
-</figure>
-</div>
-<p>相信很多做科研的同学，一直想找一本这个方向领域的权威且全面的中文书，这本书应该是一个不错的选择。如果是对预测模型感兴趣的小伙伴可以直接下单预定啦，也可以关注下8月份王老师在北大、复旦的讲座。这本书8月份会正式上市，目前可以扫码下图进行预定。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202407191947983.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">预定</figcaption>
-</figure>
-</div>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>prediction model</category>
-  <category>book</category>
-  <guid>https://leslie-lu.github.io/blog/2024/07/19/new_book/</guid>
-  <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://img01.yzcdn.cn/upload_files/2024/07/19/FlaDOPwuw67QXR1EG_dIwX858yNM.jpg!large.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
