@@ -289,7 +289,7 @@ div.column-margin+hr.dinkus {
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="d0fecb7c" class="cell" data-execution_count="1">
+<div id="63cd4da6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -298,7 +298,7 @@ div.column-margin+hr.dinkus {
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="ba295d23" class="cell" data-execution_count="2">
+<div id="ce3bd9b6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.annotate_cols(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 父代 ID</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 母代 ID</span></span>
@@ -311,7 +311,7 @@ div.column-margin+hr.dinkus {
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="3bb597f8" class="cell" data-execution_count="3">
+<div id="de342a9f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hl.export_plink(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    mt, <span class="st">'output/example'</span>, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fam_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
@@ -334,7 +334,7 @@ div.column-margin+hr.dinkus {
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="a80abb82" class="cell" data-execution_count="4">
+<div id="e57c4977" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量导出并上传</span></span>
