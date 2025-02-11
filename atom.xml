@@ -11,7 +11,89 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Tue, 28 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>一文读懂 Dosage 文件</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/02/11/dosage/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>在基因组关联分析（GWAS）中，基因型数据的准确性和高效处理是核心挑战，准确的基因型数据是发现遗传变异与性状关联的关键。传统方法使用硬判型（Hard Call）数据（如 0/1/2 编码），但随着测序技术的发展，Dosage 文件因其对基因型不确定性的量化能力，逐渐成为 GWAS 分析的新标准。而 <a href="https://mp.weixin.qq.com/s/pCfu0tJxvvRIHqtbK9eSug">SAIGE</a> 作为混合模型 GWAS 的明星工具，对 Dosage 文件的支持更是备受关注。</p>
+<section id="dosage文件基因型数据的概率化革命" class="level3">
+<h3 class="anchored" data-anchor-id="dosage文件基因型数据的概率化革命">Dosage文件：基因型数据的概率化革命</h3>
+<section id="什么是-dosage-文件" class="level4">
+<h4 class="anchored" data-anchor-id="什么是-dosage-文件">1.1 什么是 Dosage 文件？</h4>
+<p>Dosage 文件记录的是每个样本在某个位点的<strong>剂量</strong>（Dosage），即基因型为杂合（如 0/1）或风险等位基因（如 1/1）的期望值（Expected Value）。其取值范围通常为 0.0~2.0，表示从<em>无风险等位基因</em>到<em>两个风险等位基因</em>的概率分布。</p>
+<p>数学定义：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ADosage%20=%20P(0/0)%20%5Ctimes%200%20+%20P(0/1)%20%5Ctimes%201%20+%20P(1/1)%20%5Ctimes%202%0A"></p>
+<p>其中 <img src="https://latex.codecogs.com/png.latex?P"> 表示基因型的概率。基于这些概率，可以计算出 dosage 值，也就是参考等位基因的期望拷贝数。</p>
+</section>
+<section id="dosage-vs-hard-call为什么更科学" class="level4">
+<h4 class="anchored" data-anchor-id="dosage-vs-hard-call为什么更科学">1.2 Dosage vs Hard Call：为什么更科学？</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>对比维度</th>
+<th>Hard Call</th>
+<th>Dosage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>数据本质</td>
+<td>离散（0/1/2）</td>
+<td>连续（0.0~2.0）</td>
+</tr>
+<tr class="even">
+<td>低深度测序处理</td>
+<td>易丢失信息（强制二分类）</td>
+<td>保留不确定性（概率加权）</td>
+</tr>
+<tr class="odd">
+<td>统计功效</td>
+<td>可能低估关联信号</td>
+<td>提高检测灵敏度</td>
+</tr>
+</tbody>
+</table>
+<p>举个例子，若某位点的测序深度低，Hard Call 可能强制判为 0/0，而 Dosage 可记录为 0.2（更接近真实生物学状态）。</p>
+</section>
+</section>
+<section id="saige为何偏爱-dosage-文件" class="level3">
+<h3 class="anchored" data-anchor-id="saige为何偏爱-dosage-文件">SAIGE为何偏爱 Dosage 文件？</h3>
+<p>SAIGE采用基于混合线性模型（Mixed Linear Model, MLM）的算法，通过引入<a href="https://mp.weixin.qq.com/s/QF-0DEPZkD3MeHn3vkqWMg">遗传关系矩阵（GRM）</a>控制群体结构。而 Dosage 文件的优势在于，其连续型变量可直接作为协变量输入，避免离散化导致的信息损失，提高模型对微弱信号的捕捉能力。相比于简单的 hard call，dosage 数据充分利用了 imputation 的概率信息，使得关联分析更敏感、更准确。不过需要注意的是，dosage 文件在使用前必须经过严格的质量控制，确保 imputation 的准确性，以避免低质量数据对分析结果的干扰。</p>
+</section>
+<section id="dosage-文件的生成与使用" class="level3">
+<h3 class="anchored" data-anchor-id="dosage-文件的生成与使用">Dosage 文件的生成与使用</h3>
+<p>生成 Dosage 文件的常用工具有 PLINK、BEAGLE、IMPUTE2 等。以 PLINK 为例，通过以下命令将 VCF 文件转换为 Dosage 文件：</p>
+<pre class="{bash}"><code># 从VCF转换为Dosage格式
+plink --vcf input.vcf --dosage DS --write-snplist --out output</code></pre>
+<p>生成的 output.dosage 文件格式如下：</p>
+<pre class="{bash}"><code>CHR SNP POS A1 A2 DOSAGE_1 DOSAGE_2 ... DOSAGE_N
+1 rs123 1000 A T 0.98 1.76 ... 0.02</code></pre>
+</section>
+<section id="take-home-message" class="level3">
+<h3 class="anchored" data-anchor-id="take-home-message">Take-Home Message</h3>
+<p>dosage 文件作为基因型 imputation 的产物，在 GWAS 分析中发挥着至关重要的作用。通过充分利用 dosage 数据中的概率信息，SAIGE 等工具能够更准确地捕捉到基因型与性状之间的微妙关联，为我们揭示遗传机制提供了有力支持。在数据质量和格式得到充分保障的前提下，正确使用 dosage 文件将大大提升 GWAS 分析的精度和效率。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>genetics</category>
+  <category>bioinformatics</category>
+  <category>dosage</category>
+  <category>saige</category>
+  <guid>https://leslie-lu.github.io/blog/2025/02/11/dosage/</guid>
+  <pubDate>Tue, 11 Feb 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250211205010.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>祝大家新年快乐！</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -470,7 +552,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="963a03ec" class="cell" data-execution_count="1">
+<div id="6ab6f68e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -495,7 +577,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="ca5e14f2" class="cell" data-execution_count="2">
+<div id="d8181c43" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -534,7 +616,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="3c9651e1" class="cell" data-execution_count="3">
+<div id="42fe1479" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -583,7 +665,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="0e86db11" class="cell" data-execution_count="4">
+<div id="f2330cf0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -788,7 +870,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="5d2aa2e2" class="cell" data-execution_count="1">
+<div id="30cef446" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -813,7 +895,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="5a315054" class="cell" data-execution_count="2">
+<div id="56778cb8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -843,7 +925,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="ada360dc" class="cell" data-execution_count="3">
+<div id="3e006f1c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1296,7 +1378,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="7f31c319" class="cell" data-execution_count="1">
+<div id="cd26c22c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1329,7 +1411,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="6fc065cf" class="cell" data-execution_count="2">
+<div id="05b4a8ea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1363,7 +1445,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="5d8e99e3" class="cell" data-execution_count="3">
+<div id="8e108b4b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1395,7 +1477,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="d8e5dd4a" class="cell" data-execution_count="4">
+<div id="4c863ce8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1423,7 +1505,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="5ec0fde1" class="cell" data-execution_count="5">
+<div id="c0a54dd3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -1703,7 +1785,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="21a4cafb" class="cell" data-execution_count="1">
+<div id="9352e927" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1907,7 +1989,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="3787de05" class="cell" data-execution_count="2">
+<div id="b366be4b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -4421,7 +4503,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="59f54060" class="cell" data-execution_count="1">
+<div id="3b74e6ac" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4453,7 +4535,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="712f33c0" class="cell" data-execution_count="2">
+<div id="7047f488" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4473,7 +4555,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="ac0083b1" class="cell" data-execution_count="3">
+<div id="2e4059e4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4484,7 +4566,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="13ed6a2c" class="cell" data-execution_count="4">
+<div id="b7169837" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4495,7 +4577,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="8c1d3e41" class="cell" data-execution_count="5">
+<div id="2be3f184" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4508,7 +4590,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="55acdae3" class="cell" data-execution_count="6">
+<div id="cc4fe405" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4531,14 +4613,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[-1.7879,  1.1895, -0.4042],
-         [ 0.2688, -1.6113, -1.6903]],
+<pre><code>tensor([[[ 0.5525, -0.7652,  0.0691],
+         [-2.7961,  0.9216,  1.3812]],
 
-        [[-0.9290,  5.5729,  2.0475],
-         [ 1.9193,  4.7948, -1.0746]],
+        [[-1.4680, -5.6426, -0.6058],
+         [ 0.9365, -1.2712,  0.3559]],
 
-        [[ 1.7128, -1.7604, -2.1698],
-         [-1.0817,  1.9670, -0.2778]]])</code></pre>
+        [[ 4.8169,  4.6358, -0.2923],
+         [ 1.4629,  2.6518, -2.6730]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5491,118 +5573,6 @@ font-style: inherit;">)</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/08/04/workshop_001/</guid>
   <pubDate>Sun, 04 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408041637573.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>倾向性评分加权</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="背景介绍" class="level3">
-<h3 class="anchored" data-anchor-id="背景介绍">背景介绍</h3>
-<p>对于非RCT类的观察性研究，由于分组的非随机性，导致了研究偏倚的存在，致使观察到的效应很多时候往往并不可用。为了解决这个问题，研究者们提出了倾向性评分的方法，通过倾向性评分的计算，可以使得试验组和对照组之间的分布更加接近，从而减少了研究偏倚的影响。</p>
-<p>我们公众号以往有过五篇类似的介绍内容，分别是：</p>
-<ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/S5nd__7fflKBekeOKCJQEQ">倾向性评分分析</a></li>
-<li><a href="https://mp.weixin.qq.com/s/HuyE_79VJMY1e0VoRgcLbA">倾向性评分分析的统计学考虑</a></li>
-<li><a href="https://mp.weixin.qq.com/s/j8olCbIDN06UCHgWirzq3g">倾向性评分匹配的生存分析怎么做</a></li>
-<li><a href="https://mp.weixin.qq.com/s/hMXiND44bFGD57c7t7wGaw">倾向性评分overlapping weighting的SAS实现（一）</a></li>
-<li><a href="https://mp.weixin.qq.com/s/fxqrH0Im2y_oqfg3K63Epw">生存资料倾向性评分OW的SAS实现（二）</a></li>
-</ol>
-<p>其中，后面两篇文章提到了倾向性评分加权中的overlapping weighting方法，这篇文章将对倾向性评分加权的方法进行详细介绍。</p>
-</section>
-<section id="因果效应" class="level3">
-<h3 class="anchored" data-anchor-id="因果效应">因果效应</h3>
-<p>首先，我们来看下几种因果效应。</p>
-<p>ATE即平均处理效应（average treatment effect），是指在试验组和对照组之间的处理效应的差异。理想情况下，随机对照试验估计出来的效应即ATE，但是在实际研究中，由于种种原因，我们往往无法进行随机对照试验。由于ATE的估计人群是试验组和对照组的总体，ATE假设两组受试者是有相同的概率/机会接受某一种处理的，然而，实际研究中，研究者往往更加关注的是ATE的局部估计，即在某一特定的人群中（一般是接受治疗的试验组），处理的效应是多少，而这个效应即为ATT（average treatment effect on the treated）。由于ATT只需要对处理组人群估计因果处理效应，对于RCT而言，潜在的治疗效果和治疗组分配是相互独立的，因此，ATT即为ATE；然而，对于非RCT类研究而言，二者是不同的。</p>
-<p>我们还可以计算ATC（average treatment effect on the control），即对于未接受治疗的人群，如果接受治疗，其效应是多少。此外，还有ATM（average treatment effect among the evenly matchable），即在对照组中，找到与试验组相匹配的人群，计算在这个匹配的总体人群中的治疗效应；ATO（average treatment effect among the overlap population），即在试验组和对照组的重叠人群中，计算治疗效应。相比于ATM，ATO有着更好的方差属性，由于其不像ATM那样匹配要求，转而是选择两组重叠的中间人群，因此，ATO的估计更加稳健。</p>
-</section>
-<section id="倾向性评分加权" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="倾向性评分加权">倾向性评分加权</h3>
-<p>针对以上五种因果效应，我们可以通过倾向性评分加权的方法来进行相应的估计。这里直接给出五种权重的计算公式：</p>
-<ol type="1">
-<li>ATE：<img src="https://latex.codecogs.com/png.latex?w_%7BATE%7D%20=%20%5Cfrac%7BZ_i%7D%7Be_i%7D%20+%20%5Cfrac%7B1%20-%20Z_i%7D%7B1%20-%20e_i%7D"></li>
-<li>ATT：<img src="https://latex.codecogs.com/png.latex?w_%7BATT%7D%20=%20%5Cfrac%7Be_iZ_i%7D%7Be_i%7D%20+%20%5Cfrac%7Be_i(1-Z_i)%7D%7B1-e_i%7D"></li>
-<li>ATC：<img src="https://latex.codecogs.com/png.latex?w_%7BATC%7D%20=%20%5Cfrac%7B(1-e_i)Z_i%7D%7Be_i%7D%20+%20%5Cfrac%7B(1-e_i)%20(1-Z_i)%7D%7B1%20-%20e_i%7D"></li>
-<li>ATM：<img src="https://latex.codecogs.com/png.latex?w_%7BATC%7D%20=%20%5Cfrac%7B(1-e_i)Z_i%7D%7Be_i%7D%20+%20%5Cfrac%7B(1-e_i)%20(1-Z_i)%7D%7B1%20-%20e_i%7D"></li>
-<li>ATO：<img src="https://latex.codecogs.com/png.latex?w_%7BAT0%7D%20=%20(1-e_i)Z_i%20+%20e_i(1-Z_i)"></li>
-</ol>
-<p>以上五种加权的示例以及具体实现的全部代码，我们已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
-<p>这里我们展示下加权后人群的分布情况。</p>
-<section id="原始人群的ps分布" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="原始人群的ps分布">原始人群的ps分布</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031942417.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ps of original population</figcaption>
-</figure>
-</div>
-</section>
-<section id="ate" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="ate">ATE</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031944764.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ATE</figcaption>
-</figure>
-</div>
-</section>
-<section id="att" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="att">ATT</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031945648.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ATT</figcaption>
-</figure>
-</div>
-</section>
-<section id="atc" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="atc">ATC</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946706.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ATC</figcaption>
-</figure>
-</div>
-</section>
-<section id="atm" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="atm">ATM</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031946718.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ATM</figcaption>
-</figure>
-</div>
-</section>
-<section id="ato" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="ato">ATO</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ATO</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="总结" class="level3">
-<h3 class="anchored" data-anchor-id="总结">总结</h3>
-<p>相信通过以上可视化的展示，大家会更容易理解倾向性评分加权的方法对目标人群的选择以及治疗效应的解释。借助于合适的效应加权，我们可以估计出治疗效应并对于以上五种治疗效应的估计值。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>propensity score</category>
-  <category>weighting</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/03/propensity_score_weighting/</guid>
-  <pubDate>Sat, 03 Aug 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408031947889.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
