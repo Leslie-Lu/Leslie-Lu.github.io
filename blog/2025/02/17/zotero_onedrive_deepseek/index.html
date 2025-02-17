@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="轻松处理基因数据">
+<meta name="description" content="Zotero + OneDrive + DeepSeek">
 
-<title>使用 Hail 输出 PLINK 文件：一步到位 | Zhen Lu – Zhen Lu</title>
+<title>Zotero + OneDrive + DeepSeek：构建个人文献阅读管理系统 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,19 +220,17 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">使用 Hail 输出 PLINK 文件：一步到位</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">Zotero + OneDrive + DeepSeek：构建个人文献阅读管理系统</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          轻松处理基因数据
+          Zotero + OneDrive + DeepSeek
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">hail</div>
-                <div class="quarto-category">bioinformatics</div>
-                <div class="quarto-category">dnanexus</div>
-                <div class="quarto-category">genomics</div>
-                <div class="quarto-category">plink</div>
-                <div class="quarto-category">vcf</div>
+                <div class="quarto-category">zotero</div>
+                <div class="quarto-category">onedrive</div>
+                <div class="quarto-category">deepseek</div>
+                <div class="quarto-category">tools</div>
               </div>
                   </div>
   </div>
@@ -250,7 +248,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Wednesday, January 1, 2025</p>
+        <p class="date">Monday, February 17, 2025</p>
       </div>
     </div>
     
@@ -265,8 +263,8 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#使用-hail-导出-plink-文件" id="toc-使用-hail-导出-plink-文件" class="nav-link active" data-scroll-target="#使用-hail-导出-plink-文件">使用 Hail 导出 PLINK 文件</a></li>
-  <li><a href="#进阶功能批量导出与错误处理" id="toc-进阶功能批量导出与错误处理" class="nav-link" data-scroll-target="#进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</a></li>
+  <li><a href="#zotero-onedrive" id="toc-zotero-onedrive" class="nav-link active" data-scroll-target="#zotero-onedrive">Zotero + OneDrive</a></li>
+  <li><a href="#zotero-deepseek" id="toc-zotero-deepseek" class="nav-link" data-scroll-target="#zotero-deepseek">Zotero + DeepSeek</a></li>
   </ul>
 </nav>
 </nav>
@@ -275,88 +273,78 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>在现代基因组学研究中，数据的处理和转换是至关重要的一环。PLINK 文件（包括 .bed, .bim, .fam 三个文件）是遗传学研究中的标准文件格式之一，经常用于 GWAS（全基因组关联研究）等分析。对于研究人员来说，将原始数据转换为 PLINK 文件格式是分析过程中的关键步骤。而 Hail，作为一个处理大规模基因数据的高效工具，提供了方便的方法来导出这些文件。</p>
-<p>前面，我们介绍了如何<a href="https://mp.weixin.qq.com/s/rujbT3WC821spr1AKg5AzQ">掌握 Hail</a>，这里，我们将介绍如何使用 Hail 的 export_plink 功能，轻松导出 PLINK 文件，并深入探讨如何在数据预处理和分析过程中使用它。</p>
-<section id="使用-hail-导出-plink-文件" class="level3">
-<h3 class="anchored" data-anchor-id="使用-hail-导出-plink-文件">使用 Hail 导出 PLINK 文件</h3>
-<p>Hail 提供了一个非常便利的函数 <code>export_plink()</code>，能够将 Hail MatrixTable 格式的数据导出为 PLINK 所需的三种文件格式：<code>.bed</code>、<code>.bim</code> 和 <code>.fam</code>。这些文件是 PLINK 软件包用于处理和分析基因型数据的标准文件格式。</p>
-<section id="载入数据" class="level4">
-<h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
-<p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="752eb52a" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>最近 DeepSeek 大火，看到有人分享用它来阅读管理文献，非常好用。我自己一直用的是 EndNote，但是似乎不支持接入 Deepseek，所以我决定暂时转投 Zotero 阵营，实现文献管理和阅读的一体化。</p>
+<section id="zotero-onedrive" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="zotero-onedrive">Zotero + OneDrive</h3>
+<p>Zotero 是一个开源的文献管理工具，但是它有一个缺点，只有 300MB 的免费存储空间。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217003538.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Storage</figcaption>
+</figure>
 </div>
-</section>
-<section id="数据注释" class="level4">
-<h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
-<p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="745464a8" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 父代 ID</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 母代 ID</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span><span class="va">True</span>,     <span class="co"># 是否为女性</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=-</span><span class="dv">9</span>            <span class="co"># 表型（-9 表示缺失值）</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>我之前的 EndNote 没有存储空间限制的焦虑，为了防止以后 Zotero 的存储空间不够用，我决定顺手把 Zotero 的文献库放到 OneDrive 云上，这样就可以在不同设备上同步，且不适用 Zotero 自带的存储空间。</p>
+<p>对于 Zotero 放到云上的设置，可以参考：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004027.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Sync</figcaption>
+</figure>
 </div>
-<p>在这个例子中，我们为每个样本添加了父母 ID、性别和表型信息。</p>
-</section>
-<section id="导出为-plink-文件" class="level4">
-<h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
-<p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="b5fe98d2" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hl.export_plink(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    mt, <span class="st">'output/example'</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fam_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ind_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span>mt.pat_id,  <span class="co"># 父代 ID</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span>mt.mat_id,  <span class="co"># 母代 ID</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span>mt.is_female, <span class="co"># 性别信息</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=</span>mt.pheno     <span class="co"># 表型信息</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004125.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Files and Folders</figcaption>
+</figure>
 </div>
-<p>参数解析： - fam_id: 样本的家族 ID，通常使用样本的 ID（即 mt.s）。 - ind_id: 样本的个体 ID，这里使用 mt.s 作为样本 ID。 - pat_id 和 mat_id: 分别代表父母的 ID，通常可以使用默认值 0 表示没有父母信息，或者根据数据 - is_female: 样本的性别信息，Hail 会根据性别表达为 1（男性）或 2（女性）。这里通过注释 is_female 字段来指示性别。 - pheno: 表型数据，可以是布尔值（如是否患病）或者是数值型数据（如身高、体重等）。</p>
-<p>导出的文件会包含以下三部分：</p>
-<ul>
-<li><code>output/example.bed</code>: 存储基因型数据（二进制格式）。</li>
-<li><code>output/example.bim</code>: 包含变异信息，如染色体、位置、参考和变异等。</li>
-<li><code>output/example.fam</code>: 包含样本信息，如家族 ID、个体 ID、父母 ID、性别和表型。</li>
-</ul>
+<p>只需要将 Zotero 的 Storage 文件夹软链接到 OneDrive 云上，然后在 Zotero 的设置中设置数据文件夹的路径即可。</p>
+<p>这样，对于有 Microsoft 365 家庭版订阅的用户，就可以免费使用 1TB 的 OneDrive 存储空间来存储 Zotero 的文献库了。</p>
 </section>
-</section>
-<section id="进阶功能批量导出与错误处理" class="level3">
-<h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
-<p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="c818d61e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量导出并上传</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>batch_files <span class="op">=</span> [<span class="st">'batch1.vcf'</span>, <span class="st">'batch2.vcf'</span>, <span class="st">'batch3.vcf'</span>]  <span class="co"># 示例批次</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch_file <span class="kw">in</span> batch_files:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导入 VCF 文件并处理</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> hl.import_vcf(<span class="ss">f'file://</span><span class="sc">{</span>batch_file<span class="sc">}</span><span class="ss">'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        pat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        mat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        is_female<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        pheno<span class="op">=-</span><span class="dv">9</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导出 PLINK 文件</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    hl.export_plink(mt, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>, fam_id<span class="op">=</span>mt.s, ind_id<span class="op">=</span>mt.s, pat_id<span class="op">=</span>mt.pat_id, mat_id<span class="op">=</span>mt.mat_id, is_female<span class="op">=</span>mt.is_female, pheno<span class="op">=</span>mt.pheno)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 上传到远程存储</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bed'</span>])</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bim'</span>])</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.fam'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="zotero-deepseek" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="zotero-deepseek">Zotero + DeepSeek</h3>
+<p>DeepSeek 最近已经火到不需要我再多做介绍了。Deepseek 之前是给每位用户送了 10元 的 API：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004626.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">DeepSeek</figcaption>
+</figure>
 </div>
+<p>但是是一个月的有效期，且目前 DeepSeek 的 API 已经无法购买了。我们转向使用硅基流动提供的 API，它也赠送了 14元：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005346.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">SiliconCloud</figcaption>
+</figure>
+</div>
+<p>那接下来就是在 Zotero 中设置硅基流动中模型的 API 了，这里我们选择的是模型 deepseek-ai/DeepSeek-R1-Distill-Qwen-32B：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005652.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">DeepSeek-R1-Distill-Qwen-32B</figcaption>
+</figure>
+</div>
+<p>浏览下它的 API 文档，我们在 Zotero 的 Awesome GPT 插件中设置好 API 即可，这个插件可以通过 GitHub 下载：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005852.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">API</figcaption>
+</figure>
+</div>
+<p>通过了 test 之后（我这里图片上的 error 可以忽略），我们就可以使用 DeepSeek 来阅读文献了。</p>
+<p>首先必须读一篇经典文献：Attention is All You Need。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/88c471b106c67bcb6bca973e2a5803a.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Transformer</figcaption>
+</figure>
+</div>
+<p>感兴趣的同学可以参考我们的教程开始使用 DeepSeek 助力自己的科研了。</p>
 
 
 <!-- -->
@@ -836,123 +824,79 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u4F7F\u7528 Hail \u8F93\u51FA PLINK \u6587\u4EF6\uFF1A\u4E00\u6B65\u5230\u4F4D"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-01</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "\u8F7B\u677E\u5904\u7406\u57FA\u56E0\u6570\u636E"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">- hail</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">- dnanexus</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">- genomics</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">- plink</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">- vcf</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>在现代基因组学研究中，数据的处理和转换是至关重要的一环。PLINK 文件（包括 .bed, .bim, .fam 三个文件）是遗传学研究中的标准文件格式之一，经常用于 GWAS（全基因组关联研究）等分析。对于研究人员来说，将原始数据转换为 PLINK 文件格式是分析过程中的关键步骤。而 Hail，作为一个处理大规模基因数据的高效工具，提供了方便的方法来导出这些文件。</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>前面，我们介绍了如何<span class="co">[</span><span class="ot">掌握 Hail</span><span class="co">](https://mp.weixin.qq.com/s/rujbT3WC821spr1AKg5AzQ)</span>，这里，我们将介绍如何使用 Hail 的 export_plink 功能，轻松导出 PLINK 文件，并深入探讨如何在数据预处理和分析过程中使用它。</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 使用 Hail 导出 PLINK 文件</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>Hail 提供了一个非常便利的函数 <span class="in">`export_plink()`</span>，能够将 Hail MatrixTable 格式的数据导出为 PLINK 所需的三种文件格式：<span class="in">`.bed`</span>、<span class="in">`.bim`</span> 和 <span class="in">`.fam`</span>。这些文件是 PLINK 软件包用于处理和分析基因型数据的标准文件格式。</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 载入数据</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <span class="in">`import_vcf()`</span> 函数，可以轻松导入 VCF 文件。</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 数据注释</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <span class="in">`annotate_cols()`</span> 函数完成。</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 父代 ID</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 母代 ID</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span><span class="va">True</span>,     <span class="co"># 是否为女性</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=-</span><span class="dv">9</span>            <span class="co"># 表型（-9 表示缺失值）</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>在这个例子中，我们为每个样本添加了父母 ID、性别和表型信息。</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 导出为 PLINK 文件</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>现在，数据已经准备好，可以使用 <span class="in">`export_plink()`</span> 函数将其导出为 PLINK 所需的 <span class="in">`.bed`</span>, <span class="in">`.bim`</span>, <span class="in">`.fam`</span> 文件。</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>hl.export_plink(</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    mt, <span class="st">'output/example'</span>, </span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    fam_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    ind_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span>mt.pat_id,  <span class="co"># 父代 ID</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span>mt.mat_id,  <span class="co"># 母代 ID</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span>mt.is_female, <span class="co"># 性别信息</span></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=</span>mt.pheno     <span class="co"># 表型信息</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>参数解析：</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fam_id: 样本的家族 ID，通常使用样本的 ID（即 mt.s）。</span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ind_id: 样本的个体 ID，这里使用 mt.s 作为样本 ID。</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pat_id 和 mat_id: 分别代表父母的 ID，通常可以使用默认值 0 表示没有父母信息，或者根据数据</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>is_female: 样本的性别信息，Hail 会根据性别表达为 1（男性）或 2（女性）。这里通过注释 is_female 字段来指示性别。</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pheno: 表型数据，可以是布尔值（如是否患病）或者是数值型数据（如身高、体重等）。</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>导出的文件会包含以下三部分：</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.bed`</span>: 存储基因型数据（二进制格式）。</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.bim`</span>: 包含变异信息，如染色体、位置、参考和变异等。</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.fam`</span>: 包含样本信息，如家族 ID、个体 ID、父母 ID、性别和表型。</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 进阶功能：批量导出与错误处理</span></span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量导出并上传</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>batch_files <span class="op">=</span> [<span class="st">'batch1.vcf'</span>, <span class="st">'batch2.vcf'</span>, <span class="st">'batch3.vcf'</span>]  <span class="co"># 示例批次</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch_file <span class="kw">in</span> batch_files:</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导入 VCF 文件并处理</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> hl.import_vcf(<span class="ss">f'file://</span><span class="sc">{</span>batch_file<span class="sc">}</span><span class="ss">'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>        pat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>        mat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        is_female<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>        pheno<span class="op">=-</span><span class="dv">9</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导出 PLINK 文件</span></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>    hl.export_plink(mt, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>, fam_id<span class="op">=</span>mt.s, ind_id<span class="op">=</span>mt.s, pat_id<span class="op">=</span>mt.pat_id, mat_id<span class="op">=</span>mt.mat_id, is_female<span class="op">=</span>mt.is_female, pheno<span class="op">=</span>mt.pheno)</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 上传到远程存储</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bed'</span>])</span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bim'</span>])</span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.fam'</span>])</span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Zotero + OneDrive + DeepSeek：构建个人文献阅读管理系统"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-02-17</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Zotero + OneDrive + DeepSeek"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/88c471b106c67bcb6bca973e2a5803a.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - zotero</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - onedrive</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - deepseek</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - tools</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>最近 DeepSeek 大火，看到有人分享用它来阅读管理文献，非常好用。我自己一直用的是 EndNote，但是似乎不支持接入 Deepseek，所以我决定暂时转投 Zotero 阵营，实现文献管理和阅读的一体化。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zotero + OneDrive</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Zotero 是一个开源的文献管理工具，但是它有一个缺点，只有 300MB 的免费存储空间。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="al">![Storage](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217003538.png)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>我之前的 EndNote 没有存储空间限制的焦虑，为了防止以后 Zotero 的存储空间不够用，我决定顺手把 Zotero 的文献库放到 OneDrive 云上，这样就可以在不同设备上同步，且不适用 Zotero 自带的存储空间。</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>对于 Zotero 放到云上的设置，可以参考：</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="al">![Sync](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004027.png)</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="al">![Files and Folders](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004125.png)</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>只需要将 Zotero 的 Storage 文件夹软链接到 OneDrive 云上，然后在 Zotero 的设置中设置数据文件夹的路径即可。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>这样，对于有 Microsoft 365 家庭版订阅的用户，就可以免费使用 1TB 的 OneDrive 存储空间来存储 Zotero 的文献库了。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zotero + DeepSeek</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>DeepSeek 最近已经火到不需要我再多做介绍了。Deepseek 之前是给每位用户送了 10元 的 API：</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="al">![DeepSeek](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217004626.png)</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>但是是一个月的有效期，且目前 DeepSeek 的 API 已经无法购买了。我们转向使用硅基流动提供的 API，它也赠送了 14元：</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="al">![SiliconCloud](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005346.png)</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>那接下来就是在 Zotero 中设置硅基流动中模型的 API 了，这里我们选择的是模型 deepseek-ai/DeepSeek-R1-Distill-Qwen-32B：</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="al">![DeepSeek-R1-Distill-Qwen-32B](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005652.png)</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>浏览下它的 API 文档，我们在 Zotero 的 Awesome GPT 插件中设置好 API 即可，这个插件可以通过 GitHub 下载：</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="al">![API](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250217005852.png)</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>通过了 test 之后（我这里图片上的 error 可以忽略），我们就可以使用 DeepSeek 来阅读文献了。</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>首先必须读一篇经典文献：Attention is All You Need。</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="al">![Transformer](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/88c471b106c67bcb6bca973e2a5803a.png)</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>感兴趣的同学可以参考我们的教程开始使用 DeepSeek 助力自己的科研了。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
