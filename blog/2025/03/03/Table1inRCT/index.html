@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="tencent finnaly released the intelligent reply function">
+<meta name="description" content="Table 1 in RCT">
 
-<title>公众号智能回复功能终于上线 | Zhen Lu – Zhen Lu</title>
+<title>临床试验中基线数据p值真的有意义吗？ | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,16 +220,17 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">公众号智能回复功能终于上线</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">临床试验中基线数据p值真的有意义吗？</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          tencent finnaly released the intelligent reply function
+          Table 1 in RCT
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">r</div>
-                <div class="quarto-category">tools</div>
-                <div class="quarto-category">red packet</div>
+                <div class="quarto-category">RCT</div>
+                <div class="quarto-category">Table 1</div>
+                <div class="quarto-category">Baseline</div>
+                <div class="quarto-category">p value</div>
               </div>
                   </div>
   </div>
@@ -247,7 +248,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Tuesday, January 21, 2025</p>
+        <p class="date">Monday, March 3, 2025</p>
       </div>
     </div>
     
@@ -258,7 +259,15 @@ div.column-margin+hr.dinkus {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#随机化的完美幻觉基线表格里的-p-值" id="toc-随机化的完美幻觉基线表格里的-p-值" class="nav-link active" data-scroll-target="#随机化的完美幻觉基线表格里的-p-值">随机化的完美幻觉：基线表格里的 p 值</a></li>
+  <li><a href="#当组间均衡性遭遇挑战何时该调整协变量" id="toc-当组间均衡性遭遇挑战何时该调整协变量" class="nav-link" data-scroll-target="#当组间均衡性遭遇挑战何时该调整协变量">当组间均衡性遭遇挑战：何时该调整协变量？</a></li>
+  <li><a href="#结语回归医学研究的本质" id="toc-结语回归医学研究的本质" class="nav-link" data-scroll-target="#结语回归医学研究的本质">结语：回归医学研究的本质</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -271,25 +280,55 @@ div.column-margin+hr.dinkus {
 
 
 
+<p>在临床试验的结果表格中，你是否经常见到<strong>患者人口学与基线特征</strong>的统计表，附带一堆 <code>p</code> 值？这些 <code>p</code> 值到底在验证什么？是证明随机化的成功，还是暴露试验设计的漏洞？</p>
+<p>这里，我们试图用一篇文章来讨论下这个问题。</p>
+<section id="随机化的完美幻觉基线表格里的-p-值" class="level3">
+<h3 class="anchored" data-anchor-id="随机化的完美幻觉基线表格里的-p-值">随机化的完美幻觉：基线表格里的 p 值</h3>
+<p>临床试验的核心是随机化分配（Randomization），它试图通过<strong>不可预测</strong>的分组消除混杂因素。然而，许多论文在结果部分展示基线数据时，会针对性别、年龄等变量计算治疗组间的 p 值。这看似严谨的操作，实则暗藏争议。</p>
+<p>我们争议的焦点在于：</p>
+<section id="无意义论" class="level4">
+<h4 class="anchored" data-anchor-id="无意义论">1. 无意义论</h4>
+<p>如果试验已声明进行了<strong>随机化</strong>，则所有基线差异（无处理效应）的 p 值本质上反映的是随机误差，而非真实效应。任何由极小 p 值提示的统计显著性都是第一类错误，毫无意义。例如，在 100 次基线比较中，即使完全随机，按 5% 显著性水平也会出现 5 次<strong>假阳性</strong>。</p>
+</section>
+<section id="验真派" class="level4">
+<h4 class="anchored" data-anchor-id="验真派">2. 验真派</h4>
+<p>认为 p 值可用于验证随机化是否真实执行。比如，若基线变量显示系统性差异（如年龄显著不均衡），可能暗示分配过程存在人为干扰。</p>
+</section>
+</section>
+<section id="当组间均衡性遭遇挑战何时该调整协变量" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="当组间均衡性遭遇挑战何时该调整协变量">当组间均衡性遭遇挑战：何时该调整协变量？</h3>
+<p>随机化的理想情况是治疗组间基线完全均衡，但现实往往骨感。当某个预后因素（如疾病严重程度）不均衡时，该如何处理？这里，我们一般的逻辑是：</p>
+<section id="不调整也能成立" class="level4">
+<h4 class="anchored" data-anchor-id="不调整也能成立">1. 不调整也能成立</h4>
+<p>即使基线不均衡，对于真正的随机化试验，我们仍然可以相信在没有纳入任何协变量的情况下，处理效应主分析的直接结果。无论观察到的处理与协变量之间的关联性如何，主效应分析的结果仍然是有效的。从这个角度看，基线表格里的 p 值是毫无必要的。</p>
+</section>
+<section id="调整会更高效" class="level4">
+<h4 class="anchored" data-anchor-id="调整会更高效">2. 调整会更高效</h4>
+<p>而另一方面，若某变量与结局强相关且组间不均衡，纳入协变量分析（如 <code>ANCOVA</code> 模型）可减少误差、提升统计效能。</p>
+</section>
+<section id="实战指南如何科学设计基线表格" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="实战指南如何科学设计基线表格">实战指南：如何科学设计基线表格？</h4>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250120204739.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">公众号智能回复</figcaption>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250303165121.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">NEJM</figcaption>
 </figure>
 </div>
-<p>腾讯终于在公众号后台上线了智能回复功能。</p>
-<p>公众号以往发表的文章成为 AI 学习的知识库，用于自动回复用户在后台提出的问题，这也是鹅厂的腾讯元器做的事情。不过，我自己试了一下，鹅厂大模型效果一般，有时候回答的问题不是很准确，还是需要人工干预。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/155cfc03b2e6f4eea482f500c46d3f9.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">test</figcaption>
-</figure>
-</div>
-<p>欢迎大家后台体验。</p>
+<p>这里，我们给研究者的具体建议是：</p>
+<ul>
+<li><p>简化p值展示：随机化试验中，基线p值无必要，直接呈现变量分布即可。</p></li>
+<li><p>关注临床意义：若关键变量（如年龄、疾病分期）组间差异超过10%，需讨论是否调整分析模型。</p></li>
+</ul>
+</section>
+</section>
+<section id="结语回归医学研究的本质" class="level3">
+<h3 class="anchored" data-anchor-id="结语回归医学研究的本质">结语：回归医学研究的本质</h3>
+<p>临床试验的终极目标是评估治疗效应，而非追求表格的 <code>完美对齐</code>。基线可比性应靠科学设计保障，而非事后修补。当一篇论文用大量 p 值自证清白时，我们或许更该追问：它的随机化是否真正无懈可击？分配过程是否足够盲态？毕竟，在医学进步的征途上，随机化需要的是技术硬核，而非统计学 p 值。</p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -765,41 +804,76 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "公众号智能回复功能终于上线"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-21</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "tencent finnaly released the intelligent reply function"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250120204739.png"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "临床试验中基线数据p值真的有意义吗？"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-03-03</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Table 1 in RCT"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ""</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - tools</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - red packet</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="al">![公众号智能回复](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/20250120204739.png)</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>腾讯终于在公众号后台上线了智能回复功能。</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>公众号以往发表的文章成为 AI 学习的知识库，用于自动回复用户在后台提出的问题，这也是鹅厂的腾讯元器做的事情。不过，我自己试了一下，鹅厂大模型效果一般，有时候回答的问题不是很准确，还是需要人工干预。</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![test](https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/img_2025/155cfc03b2e6f4eea482f500c46d3f9.jpg)</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>欢迎大家后台体验。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - RCT</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - Table 1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - Baseline</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - p value</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>在临床试验的结果表格中，你是否经常见到**患者人口学与基线特征**的统计表，附带一堆 <span class="in">`p`</span> 值？这些 <span class="in">`p`</span> 值到底在验证什么？是证明随机化的成功，还是暴露试验设计的漏洞？</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>这里，我们试图用一篇文章来讨论下这个问题。</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机化的完美幻觉：基线表格里的 p 值</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>临床试验的核心是随机化分配（Randomization），它试图通过**不可预测**的分组消除混杂因素。然而，许多论文在结果部分展示基线数据时，会针对性别、年龄等变量计算治疗组间的 p 值。这看似严谨的操作，实则暗藏争议。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>我们争议的焦点在于：</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 无意义论</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>如果试验已声明进行了**随机化**，则所有基线差异（无处理效应）的 p 值本质上反映的是随机误差，而非真实效应。任何由极小 p 值提示的统计显著性都是第一类错误，毫无意义。例如，在 100 次基线比较中，即使完全随机，按 5% 显著性水平也会出现 5 次**假阳性**。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 验真派</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>认为 p 值可用于验证随机化是否真实执行。比如，若基线变量显示系统性差异（如年龄显著不均衡），可能暗示分配过程存在人为干扰。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## 当组间均衡性遭遇挑战：何时该调整协变量？</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>随机化的理想情况是治疗组间基线完全均衡，但现实往往骨感。当某个预后因素（如疾病严重程度）不均衡时，该如何处理？这里，我们一般的逻辑是：</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 不调整也能成立</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>即使基线不均衡，对于真正的随机化试验，我们仍然可以相信在没有纳入任何协变量的情况下，处理效应主分析的直接结果。无论观察到的处理与协变量之间的关联性如何，主效应分析的结果仍然是有效的。从这个角度看，基线表格里的 p 值是毫无必要的。</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 调整会更高效</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>而另一方面，若某变量与结局强相关且组间不均衡，纳入协变量分析（如 <span class="in">`ANCOVA`</span> 模型）可减少误差、提升统计效能。</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### 实战指南：如何科学设计基线表格？</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="al">![NEJM](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250303165121.png)</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>这里，我们给研究者的具体建议是：</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>简化p值展示：随机化试验中，基线p值无必要，直接呈现变量分布即可。</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>关注临床意义：若关键变量（如年龄、疾病分期）组间差异超过10%，需讨论是否调整分析模型。</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## 结语：回归医学研究的本质</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>临床试验的终极目标是评估治疗效应，而非追求表格的 <span class="in">`完美对齐`</span>。基线可比性应靠科学设计保障，而非事后修补。当一篇论文用大量 p 值自证清白时，我们或许更该追问：它的随机化是否真正无懈可击？分配过程是否足够盲态？毕竟，在医学进步的征途上，随机化需要的是技术硬核，而非统计学 p 值。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
