@@ -11,7 +11,137 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 03 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 07 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>配对样本t检验的统计学效率</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/03/07/pairedttest/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="引言" class="level3">
+<h3 class="anchored" data-anchor-id="引言">引言</h3>
+<p>复习独立样本 t 检验和配对样本 t 检验的统计量，并证明配对样本 t 检验的统计学效率高于独立样本 t 检验。</p>
+<p>统计学效率通常指在相同的显著性水平和样本量下，检验检测真实差异（效应量）的能力（即检验功效 power）更高，或者在达到相同power时所需样本量更小。</p>
+</section>
+<section id="两种t检验的定义与适用场景" class="level3">
+<h3 class="anchored" data-anchor-id="两种t检验的定义与适用场景">两种t检验的定义与适用场景</h3>
+<ul>
+<li><p><strong>配对样本t检验</strong>：适用于同一组个体在两个不同条件下的测量结果，或配对设计的实验。其核心思想是计算每对观测值的差异 <img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">，然后检验这些差异的均值是否为零。</p></li>
+<li><p><strong>独立样本t检验</strong>：适用于两个独立组的均值比较，例如实验组和对照组的测量结果完全独立。</p></li>
+</ul>
+</section>
+<section id="两种检验的基本公式" class="level3">
+<h3 class="anchored" data-anchor-id="两种检验的基本公式">两种检验的基本公式</h3>
+<section id="配对样本t检验" class="level4">
+<h4 class="anchored" data-anchor-id="配对样本t检验">配对样本t检验</h4>
+<p>假设有<img src="https://latex.codecogs.com/png.latex?n">对配对观测值<img src="https://latex.codecogs.com/png.latex?(X_1,%20Y_1),%20(X_2,%20Y_2),%20%5Cldots,%20(X_n,%20Y_n)">，定义差异<img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">。目标是检验原假设<img src="https://latex.codecogs.com/png.latex?H_0:%20%5Cmu_D%20=%200">对备择假设<img src="https://latex.codecogs.com/png.latex?H_1:%20%5Cmu_D%20%5Cneq%200">。统计量为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B%5Cbar%7BD%7D%7D%7Bs_D%20/%20%5Csqrt%7Bn%7D%7D%0A"></p>
+<p>其中：</p>
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5En%20D_i"> 是差异的样本均值，</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?s_D%20=%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn-1%7D%20%5Csum_%7Bi=1%7D%5En%20(D_i%20-%20%5Cbar%7BD%7D)%5E2%7D"> 是差异的样本标准差，</p></li>
+<li><p>自由度为<img src="https://latex.codecogs.com/png.latex?n%20-%201">。</p></li>
+</ul>
+</section>
+<section id="独立样本t检验" class="level4">
+<h4 class="anchored" data-anchor-id="独立样本t检验">独立样本t检验</h4>
+<p>假设有两个独立样本，样本1为<img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cldots,%20X_%7Bn_1%7D">，样本2为<img src="https://latex.codecogs.com/png.latex?Y_1,%20Y_2,%20%5Cldots,%20Y_%7Bn_2%7D">，均值分别为<img src="https://latex.codecogs.com/png.latex?%5Cmu_X">和<img src="https://latex.codecogs.com/png.latex?%5Cmu_Y">。目标是检验<img src="https://latex.codecogs.com/png.latex?H_0:%20%5Cmu_X%20=%20%5Cmu_Y">对<img src="https://latex.codecogs.com/png.latex?H_1:%20%5Cmu_X%20%5Cneq%20%5Cmu_Y">。统计量为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D%7D%7Bs_p%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D%7D%7D%0A"></p>
+<p>其中：</p>
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D"> 和 <img src="https://latex.codecogs.com/png.latex?%5Cbar%7BY%7D"> 分别是两个样本的均值，</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?s_p%5E2%20=%20%5Cfrac%7B(n_1%20-%201)s_X%5E2%20+%20(n_2%20-%201)s_Y%5E2%7D%7Bn_1%20+%20n_2%20-%202%7D"> 是合并方差（假设两组方差相等），</p></li>
+<li><p>自由度为<img src="https://latex.codecogs.com/png.latex?n_1%20+%20n_2%20-%202">。</p></li>
+</ul>
+</section>
+</section>
+<section id="统计学效率的比较框架" class="level3">
+<h3 class="anchored" data-anchor-id="统计学效率的比较框架">统计学效率的比较框架</h3>
+<p>为公平比较两种检验的效率，我们假设：</p>
+<ul>
+<li><p>总观测次数相同。例如，配对样本t检验有<img src="https://latex.codecogs.com/png.latex?n">对（共<img src="https://latex.codecogs.com/png.latex?2n">个观测值），独立样本t检验有两个各有<img src="https://latex.codecogs.com/png.latex?n">个观测值的独立样本（共<img src="https://latex.codecogs.com/png.latex?2n">个观测值）。</p></li>
+<li><p>配对样本中的<img src="https://latex.codecogs.com/png.latex?X_i">和<img src="https://latex.codecogs.com/png.latex?Y_i">之间存在相关性，相关系数为<img src="https://latex.codecogs.com/png.latex?%5Crho">（通常<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">，即非负相关性，因为配对设计常用于控制个体差异）。</p></li>
+<li><p>两组的总体方差均为<img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">，效应量（均值差异）为<img src="https://latex.codecogs.com/png.latex?%5Cdelta">。</p></li>
+</ul>
+<p>统计学效率的关键在于估计量的方差和检验效能的比较。我们通过计算估计量的方差和非中心参数来证明配对样本t检验的优势。</p>
+</section>
+<section id="估计量的方差比较" class="level3">
+<h3 class="anchored" data-anchor-id="估计量的方差比较">估计量的方差比较</h3>
+<section id="配对样本t检验-1" class="level4">
+<h4 class="anchored" data-anchor-id="配对样本t检验-1">配对样本t检验</h4>
+<p>配对差异<img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">的方差为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(D_i)%20=%20%5Ctext%7BVar%7D(X_i)%20+%20%5Ctext%7BVar%7D(Y_i)%20-%202%20%5Ctext%7BCov%7D(X_i,%20Y_i)%0A"></p>
+<p>假设<img src="https://latex.codecogs.com/png.latex?%5Ctext%7BVar%7D(X_i)%20=%20%5Ctext%7BVar%7D(Y_i)%20=%20%5Csigma%5E2">，且<img src="https://latex.codecogs.com/png.latex?%5Ctext%7BCov%7D(X_i,%20Y_i)%20=%20%5Crho%20%5Csigma%5E2">，则：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(D_i)%20=%202%20%5Csigma%5E2%20(1%20-%20%5Crho)%0A"></p>
+<p>差异均值<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D">的方差为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7BD%7D)%20=%20%5Cfrac%7B%5Ctext%7BVar%7D(D_i)%7D%7Bn%7D%20=%20%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%0A"></p>
+<p>标准误为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSE%7D(%5Cbar%7BD%7D)%20=%20%5Csqrt%7B%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%7D%0A"></p>
+</section>
+<section id="独立样本t检验-1" class="level4">
+<h4 class="anchored" data-anchor-id="独立样本t检验-1">独立样本t检验</h4>
+<p>对于两个各有<img src="https://latex.codecogs.com/png.latex?n">个观测值的独立样本，<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D">的方差为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%20=%20%5Ctext%7BVar%7D(%5Cbar%7BX%7D)%20+%20%5Ctext%7BVar%7D(%5Cbar(Y))%20=%20%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%0A"></p>
+<p>标准误为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSE%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%20=%20%5Csqrt%7B%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%7D%0A"></p>
+</section>
+<section id="方差比较" class="level4">
+<h4 class="anchored" data-anchor-id="方差比较">方差比较</h4>
+<ul>
+<li><p>配对样本t检验的方差：<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D"></p></li>
+<li><p>独立样本t检验的方差：<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D"></p></li>
+</ul>
+<p>当<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">时，<img src="https://latex.codecogs.com/png.latex?1%20-%20%5Crho%20%3C%201">，因此：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%20%3C%20%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%0A"></p>
+<p>这表明配对样本t检验的估计量<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D">比独立样本t检验的估计量<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D">具有更小的方差。两者的检验统计量分子相同（即效应量），但配对样本t检验的分母（标准误）更小，估计越精确，检验越有可能检测到真实的差异，相应地更容易拒绝原假设，因此具有更高的power，统计学效率更高。</p>
+</section>
+</section>
+<section id="power与非中心参数" class="level3">
+<h3 class="anchored" data-anchor-id="power与非中心参数">power与非中心参数</h3>
+<p>power 是检验在备择假设为真时拒绝原假设的概率，power 与统计量的非中心参数相关。非中心参数越大，power 越高。</p>
+<section id="配对样本t检验-2" class="level4">
+<h4 class="anchored" data-anchor-id="配对样本t检验-2">配对样本t检验</h4>
+<p>在备择假设<img src="https://latex.codecogs.com/png.latex?%5Cmu_D%20=%20%5Cdelta">下，非中心参数为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda_p%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Ctext%7BSE%7D(%5Cbar%7BD%7D)%7D%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%20(1%20-%20%5Crho)%7D%7D%0A"></p>
+</section>
+<section id="独立样本t检验-2" class="level4">
+<h4 class="anchored" data-anchor-id="独立样本t检验-2">独立样本t检验</h4>
+<p>在备择假设<img src="https://latex.codecogs.com/png.latex?%5Cmu_X%20-%20%5Cmu_Y%20=%20%5Cdelta">下，非中心参数为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda_i%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Ctext%7BSE%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%7D%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%7D%7D%0A"></p>
+</section>
+<section id="非中心参数比较" class="level4">
+<h4 class="anchored" data-anchor-id="非中心参数比较">非中心参数比较</h4>
+<p>比较<img src="https://latex.codecogs.com/png.latex?%5Clambda_p">和<img src="https://latex.codecogs.com/png.latex?%5Clambda_i">：</p>
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Clambda_p%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%20(1%20-%20%5Crho)%7D%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Clambda_i%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%7D%7D"></p></li>
+</ul>
+<p>当<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">时，<img src="https://latex.codecogs.com/png.latex?%5Clambda_p%20%3E%20%5Clambda_i">，表明配对样本t检验在相同条件下具有更高的 power。</p>
+</section>
+</section>
+<section id="结论" class="level2">
+<h2 class="anchored" data-anchor-id="结论">结论</h2>
+<p>通过估计量方差和非中心参数的比较，证明了当配对观测值正相关时，配对样本t检验的统计学效率高于独立样本t检验。这也是为什么在实验设计中，当可以控制个体差异时，优先选择配对设计的原因。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>RCT</category>
+  <category>Statistics</category>
+  <category>Hypothesis Testing</category>
+  <category>t-test</category>
+  <category>power analysis</category>
+  <guid>https://leslie-lu.github.io/blog/2025/03/07/pairedttest/</guid>
+  <pubDate>Fri, 07 Mar 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/statistical-power-chart.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>临床试验中基线数据p值真的有意义吗？</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -79,7 +209,7 @@
   <category>p value</category>
   <guid>https://leslie-lu.github.io/blog/2025/03/03/Table1inRCT/</guid>
   <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://leslie-lu.github.io/blog/2025/03/03/Table1inRCT" medium="image"/>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250303165121.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Zotero + OneDrive + DeepSeek：构建个人文献阅读管理系统</title>
@@ -793,7 +923,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="ea61fe76" class="cell" data-execution_count="1">
+<div id="94892dc3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -818,7 +948,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="a0a45fb4" class="cell" data-execution_count="2">
+<div id="cc14292d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -857,7 +987,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="c6eb403c" class="cell" data-execution_count="3">
+<div id="db58244e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -906,7 +1036,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="d7daae5c" class="cell" data-execution_count="4">
+<div id="cb1d52eb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -1111,7 +1241,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="6bedea4c" class="cell" data-execution_count="1">
+<div id="cd533cff" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1136,7 +1266,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="a85cdcf0" class="cell" data-execution_count="2">
+<div id="1b17a566" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -1166,7 +1296,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="96c101ba" class="cell" data-execution_count="3">
+<div id="171340e8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1619,7 +1749,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="70603a22" class="cell" data-execution_count="1">
+<div id="b5033d5f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1652,7 +1782,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="7762e536" class="cell" data-execution_count="2">
+<div id="cb0f920d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1686,7 +1816,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="052f2ba3" class="cell" data-execution_count="3">
+<div id="d7fcaf95" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1718,7 +1848,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="96258fa9" class="cell" data-execution_count="4">
+<div id="4014c5c1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1746,7 +1876,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="f71276ed" class="cell" data-execution_count="5">
+<div id="231feeb1" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -2026,7 +2156,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="ba16915d" class="cell" data-execution_count="1">
+<div id="f1806009" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2230,7 +2360,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="8f86042f" class="cell" data-execution_count="2">
+<div id="e0a126b3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -4744,7 +4874,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="b91733b1" class="cell" data-execution_count="1">
+<div id="0b900061" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -4776,7 +4906,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="b599d066" class="cell" data-execution_count="2">
+<div id="e365b60a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -4796,7 +4926,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="089619e0" class="cell" data-execution_count="3">
+<div id="e8710b3a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -4807,7 +4937,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="d0b344b8" class="cell" data-execution_count="4">
+<div id="7efc1bb1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -4818,7 +4948,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="928a7d44" class="cell" data-execution_count="5">
+<div id="ee33e6d8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -4831,7 +4961,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="074cac0e" class="cell" data-execution_count="6">
+<div id="0b16b141" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -4854,14 +4984,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 5.8092e-01, -4.8531e+00, -2.0848e+00],
-         [ 2.1287e+00, -1.9449e+00, -1.1736e+00]],
+<pre><code>tensor([[[-0.7752, -1.5962, -3.1253],
+         [-1.1574, -1.6407, -2.3878]],
 
-        [[-5.0152e-01,  7.1398e-02, -3.9962e+00],
-         [ 4.3099e-03,  3.3589e-01,  2.9811e+00]],
+        [[-2.3484, -0.7706, -1.6506],
+         [ 2.5088, -1.7607, -0.6840]],
 
-        [[-2.8685e+00, -1.8998e+00,  1.2759e-01],
-         [-4.8683e+00, -1.2392e+00, -8.4902e-01]]])</code></pre>
+        [[ 5.2783, -1.4124,  3.3687],
+         [-0.6295, -3.5306, -1.4648]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5431,236 +5561,6 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/08/29/docker/</guid>
   <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408292348890.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>大图嵌小图</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</link>
-  <description><![CDATA[ <section id="由来" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="由来">由来</h3>
-<p>星球里不断有同学问到如何在一个大图中嵌入小图，这里简单介绍一下。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200018820.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Q1</figcaption></figure>
-</div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200019279.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Q2</figcaption></figure>
-</div>
-<p>我们使用生存曲线及risk table作为例子，其中生存曲线是大图，risk table是小图。常见的图形为：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200042969.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">survival curve</figcaption></figure>
-</div>
-<p>想要把risk table嵌入到生存曲线中。</p>
-</section><section id="方法一" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法一">方法一</h3>
-<p>使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。</p>
-<div class="cell">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">subvp</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">viewport</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>width <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.35</span>, height <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.35</span>, x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.75</span>, y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.75</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">plot</span></span>
-<span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">table</span>, vp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">subvp</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-</div>
-<p>viewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 1</figcaption></figure>
-</div>
-</section><section id="方法二" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法二">方法二</h3>
-<p>使用annotation_custom函数，它可以在图形中添加自定义的图形元素。</p>
-<div class="cell">
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">plot</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">annotation_custom</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplotGrob</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">table</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span>, xmin<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1900</span>, xmax<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3000</span>, ymin<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, ymax<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-</div>
-<p>ggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200037108.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 2</figcaption></figure>
-</div>
-</section><section id="方法三" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法三">方法三</h3>
-<p>使用ggpp包。</p>
-<div class="cell">
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">sub_plot</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span></span>
-<span>    x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">.98</span>, y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">.98</span>, plot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">table</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ggsurv</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">plot</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span>    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_plot_npc</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">sub_plot</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>npcx <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">x</span>, npcy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">y</span>, label <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">plot</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-</div>
-<p>使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full"><p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">option 3</figcaption></figure>
-</div>
-<p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
-
-
-<!-- -->
-
-</section> ]]></description>
-  <category>r</category>
-  <category>ggplot2</category>
-  <guid>https://leslie-lu.github.io/blog/2024/08/20/nested_layout/</guid>
-  <pubDate>Tue, 20 Aug 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200034399.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
