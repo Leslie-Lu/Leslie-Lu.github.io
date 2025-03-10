@@ -11,109 +11,7 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 10 Mar 2025 00:00:00 GMT</lastBuildDate>
-<item>
-  <title>证明平衡设计与非平衡设计的统计学效率</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/03/10/balanced_design/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="引言" class="level3">
-<h3 class="anchored" data-anchor-id="引言">引言</h3>
-<p>比较两独立样本在主要疗效指标为定量指标的前提下，平衡设计和非平衡设计的统计学效率。</p>
-</section>
-<section id="方差相等背景" class="level3">
-<h3 class="anchored" data-anchor-id="方差相等背景">方差相等背景</h3>
-<p>证明：在两独立样本的主要疗效指标方差相等的前提下，平衡设计的统计学效率高于非平衡设计。</p>
-<p>假设有两个独立样本：</p>
-<ul>
-<li><p><strong>样本1</strong>：均值为 <img src="https://latex.codecogs.com/png.latex?%5Cmu_1">，方差为 <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">，样本量为 <img src="https://latex.codecogs.com/png.latex?n_1">；</p></li>
-<li><p><strong>样本2</strong>：均值为 <img src="https://latex.codecogs.com/png.latex?%5Cmu_2">，方差为 <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">（假设两样本结局变量的方差相等），样本量为 <img src="https://latex.codecogs.com/png.latex?n_2">。</p></li>
-</ul>
-<p>总样本量固定为 <img src="https://latex.codecogs.com/png.latex?N%20=%20n_1%20+%20n_2">。</p>
-<p>设计类型如下：</p>
-<ul>
-<li><p><strong>平衡设计</strong>：<img src="https://latex.codecogs.com/png.latex?n_1%20=%20n_2%20=%20%5Cfrac%7BN%7D%7B2%7D">。</p></li>
-<li><p><strong>非平衡设计</strong>：<img src="https://latex.codecogs.com/png.latex?n_1%20%5Cneq%20n_2">，但 <img src="https://latex.codecogs.com/png.latex?n_1%20+%20n_2%20=%20N">。</p></li>
-</ul>
-<p>假设 <img src="https://latex.codecogs.com/png.latex?N"> 足够大，可以采用基于标准正态分布的 <img src="https://latex.codecogs.com/png.latex?Z"> 检验代替 <img src="https://latex.codecogs.com/png.latex?t"> 检验。</p>
-<section id="估计量的方差精度" class="level4">
-<h4 class="anchored" data-anchor-id="估计量的方差精度">估计量的方差（精度）</h4>
-<p>对于两个独立样本，均值差的估计量为 <img src="https://latex.codecogs.com/png.latex?%5Cbar%7Bx%7D_1%20-%20%5Cbar%7Bx%7D_2">。由于样本独立且方差相等，其方差为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7Bx%7D_1%20-%20%5Cbar%7Bx%7D_2)%20=%20%5Ctext%7BVar%7D(%5Cbar%7Bx%7D_1)%20+%20%5Ctext%7BVar%7D(%5Cbar%7Bx%7D_2)%20=%20%5Cfrac%7B%5Csigma%5E2%7D%7Bn_1%7D%20+%20%5Cfrac%7B%5Csigma%5E2%7D%7Bn_2%7D%20=%20%5Csigma%5E2%20%5Cleft(%20%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D%20%5Cright)%0A"></p>
-<p>我们需要证明，在 <img src="https://latex.codecogs.com/png.latex?n_1%20+%20n_2%20=%20N"> 固定的情况下，<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D"> 在 <img src="https://latex.codecogs.com/png.latex?n_1%20=%20n_2%20=%20%5Cfrac%7BN%7D%7B2%7D"> 时取得最小值。</p>
-<p>令 <img src="https://latex.codecogs.com/png.latex?n_2%20=%20N%20-%20n_1">，则：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D%20=%20%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7BN%20-%20n_1%7D%20=%20%5Cfrac%7BN%7D%7Bn_1%20(N%20-%20n_1)%7D%0A"></p>
-<p>定义函数：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(n_1)%20=%20%5Cfrac%7BN%7D%7Bn_1%20(N%20-%20n_1)%7D%0A"></p>
-<p>其中 <img src="https://latex.codecogs.com/png.latex?N"> 为常数，<img src="https://latex.codecogs.com/png.latex?n_1"> 的取值范围为 <img src="https://latex.codecogs.com/png.latex?0%20%3C%20n_1%20%3C%20N">。目标是找到使 <img src="https://latex.codecogs.com/png.latex?f(n_1)"> 最小的 <img src="https://latex.codecogs.com/png.latex?n_1">。</p>
-<p>为了简化，考虑最大化分母 <img src="https://latex.codecogs.com/png.latex?g(n_1)%20=%20n_1%20(N%20-%20n_1)">，因为 <img src="https://latex.codecogs.com/png.latex?f(n_1)%20=%20%5Cfrac%7BN%7D%7Bg(n_1)%7D">，当 <img src="https://latex.codecogs.com/png.latex?g(n_1)"> 最大时，<img src="https://latex.codecogs.com/png.latex?f(n_1)"> 最小。</p>
-<p>计算 <img src="https://latex.codecogs.com/png.latex?g(n_1)"> 的导数：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag(n_1)%20=%20n_1%20N%20-%20n_1%5E2%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag'(n_1)%20=%20N%20-%202n_1%0A"></p>
-<p>令 <img src="https://latex.codecogs.com/png.latex?g'(n_1)%20=%200">：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AN%20-%202n_1%20=%200%20%5Cimplies%20n_1%20=%20%5Cfrac%7BN%7D%7B2%7D%0A"></p>
-<p>计算二阶导数以验证极值：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag''(n_1)%20=%20-2%20%3C%200%0A"></p>
-<p>由于二阶导数为负，<img src="https://latex.codecogs.com/png.latex?n_1%20=%20%5Cfrac%7BN%7D%7B2%7D"> 时 <img src="https://latex.codecogs.com/png.latex?g(n_1)"> 取得最大值，因此 <img src="https://latex.codecogs.com/png.latex?f(n_1)"> 取得最小值。</p>
-<p>代入 <img src="https://latex.codecogs.com/png.latex?n_1%20=%20n_2%20=%20%5Cfrac%7BN%7D%7B2%7D">：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D%20=%20%5Cfrac%7B1%7D%7B%5Cfrac%7BN%7D%7B2%7D%7D%20+%20%5Cfrac%7B1%7D%7B%5Cfrac%7BN%7D%7B2%7D%7D%20=%20%5Cfrac%7B2%7D%7B%5Cfrac%7BN%7D%7B2%7D%7D%20=%20%5Cfrac%7B4%7D%7BN%7D%0A"></p>
-<p>在 <img src="https://latex.codecogs.com/png.latex?n_1%20=%20n_2"> 时方差最小，表明平衡设计下估计量的精度最高。</p>
-</section>
-</section>
-<section id="方差不相等背景" class="level3">
-<h3 class="anchored" data-anchor-id="方差不相等背景">方差不相等背景</h3>
-<p>证明：在两独立样本的主要疗效指标方差不相等的前提下，非平衡设计的统计学效率高于平衡设计。 估 ### 估计量的方差（精度）</p>
-<p>延用上面的推导，假设两组的方差分别为 <img src="https://latex.codecogs.com/png.latex?%5Csigma_1%5E2"> 和 <img src="https://latex.codecogs.com/png.latex?%5Csigma_2%5E2">，则两组均值差的 估计量 <img src="https://latex.codecogs.com/png.latex?%5Cbar%7Bx%7D_1%20-%20%5Cbar%7Bx%7D_2"> 的方差为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7Bx%7D_1%20-%20%5Cbar%7Bx%7D_2)%20=%20%5Cfrac%7B%5Csigma_1%5E2%7D%7Bn_1%7D%20+%20%5Cfrac%7B%5Csigma_2%5E2%7D%7Bn_2%7D%0A"></p>
-<p>设 <img src="https://latex.codecogs.com/png.latex?n_2%20=%20N%20-%20n_1">，目标函数：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(n_1)%20=%20%5Cfrac%7B%5Csigma_1%5E2%7D%7Bn_1%7D%20+%20%5Cfrac%7B%5Csigma_2%5E2%7D%7BN%20-%20n_1%7D%0A"></p>
-<p>求导并令 <img src="https://latex.codecogs.com/png.latex?f'(n_1)%20=%200">：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A-%5Cfrac%7B%5Csigma_1%5E2%7D%7Bn_1%5E2%7D%20+%20%5Cfrac%7B%5Csigma_2%5E2%7D%7B(N%20-%20n_1)%5E2%7D%20=%200%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0An_1%20=%20%5Cfrac%7BN%20%5Csigma_1%7D%7B%5Csigma_1%20+%20%5Csigma_2%7D,%20%5Cquad%20n_2%20=%20%5Cfrac%7BN%20%5Csigma_2%7D%7B%5Csigma_1%20+%20%5Csigma_2%7D%0A"></p>
-<p>我们可以看到，最优分配比例为 <img src="https://latex.codecogs.com/png.latex?n_1%20:%20n_2%20=%20%5Csigma_1%20:%20%5Csigma_2"> 。这也表明，当方差不相等时，最优设计是非平衡的，而上面方差相等的情况是一种特例。</p>
-<ul>
-<li><strong>非平衡设计方差</strong>：</li>
-</ul>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D_%7B%5Ctext%7Bopt%7D%7D%20=%20%5Cfrac%7B(%5Csigma_1%20+%20%5Csigma_2)%5E2%7D%7BN%7D%0A"></p>
-<ul>
-<li><strong>平衡设计方差</strong>：</li>
-</ul>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D_%7B%5Ctext%7Bbal%7D%7D%20=%20%5Cfrac%7B2%20(%5Csigma_1%5E2%20+%20%5Csigma_2%5E2)%7D%7BN%7D%0A"></p>
-<p>二者差值：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D_%7B%5Ctext%7Bbal%7D%7D%20-%20%5Ctext%7BVar%7D_%7B%5Ctext%7Bopt%7D%7D%20=%20%5Cfrac%7B(%5Csigma_1%20-%20%5Csigma_2)%5E2%7D%7BN%7D%20%3E%200%20%5Cquad%20(%5Ctext%7B%E5%BD%93%7D%20%5Csigma_1%20%5Cneq%20%5Csigma_2)%0A"></p>
-<p>这也表明非平衡设计方差更小，效率更高。</p>
-<p>当在某些情况下为了更多获得新药的信息，可能会在设计时考虑非平衡设计，此种情况下，提高方差较大组受试者的样本量，可以提高试验的统计学效率。</p>
-</section>
-<section id="结论" class="level3">
-<h3 class="anchored" data-anchor-id="结论">结论</h3>
-<p>综合以上分析：</p>
-<ul>
-<li><p>在两独立样本的方差相等且总样本量固定的前提下，<strong>平衡设计的统计学效率高于非平衡设计</strong>。</p></li>
-<li><p>在两独立样本的方差不相等的前提下，<strong>非平衡设计的统计学效率高于平衡设计</strong>。</p></li>
-</ul>
-<p>更加一般地，除了上面的 <img src="https://latex.codecogs.com/png.latex?Z"> 检验和 <img src="https://latex.codecogs.com/png.latex?t"> 检验，包括 <img src="https://latex.codecogs.com/png.latex?Wald%20%5Cquad%20test"> 和 <img src="https://latex.codecogs.com/png.latex?score%20%5Cquad%20test"> 等，均符合上述结论。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>RCT</category>
-  <category>Statistics</category>
-  <category>Methodology</category>
-  <category>balanced design</category>
-  <category>power analysis</category>
-  <category>allocation</category>
-  <guid>https://leslie-lu.github.io/blog/2025/03/10/balanced_design/</guid>
-  <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250310153136.png" medium="image" type="image/png"/>
-</item>
+<lastBuildDate>Sat, 08 Mar 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>证明随机化和盲法消除向均值回归偏倚</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -1102,7 +1000,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="ab173f04" class="cell" data-execution_count="1">
+<div id="a8cb755b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1127,7 +1025,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="b6ee05ec" class="cell" data-execution_count="2">
+<div id="cb15c355" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -1166,7 +1064,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="4067aeaf" class="cell" data-execution_count="3">
+<div id="eecec563" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -1215,7 +1113,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="b073deef" class="cell" data-execution_count="4">
+<div id="f81c3ded" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -1420,7 +1318,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="3ab15f01" class="cell" data-execution_count="1">
+<div id="72de2743" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1445,7 +1343,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="8cca6a51" class="cell" data-execution_count="2">
+<div id="514c6010" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -1475,7 +1373,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="056f1a2f" class="cell" data-execution_count="3">
+<div id="3c2531b9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -1928,7 +1826,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="3d2a6828" class="cell" data-execution_count="1">
+<div id="49da5b57" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -1961,7 +1859,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="e789adf2" class="cell" data-execution_count="2">
+<div id="b0f7160d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -1995,7 +1893,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="1a079fce" class="cell" data-execution_count="3">
+<div id="d6911097" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -2027,7 +1925,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="3f55f28a" class="cell" data-execution_count="4">
+<div id="e70c54b9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -2055,7 +1953,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="e375dc4c" class="cell" data-execution_count="5">
+<div id="3ae5c662" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -2335,7 +2233,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="a8b0b232" class="cell" data-execution_count="1">
+<div id="a79785b2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2539,7 +2437,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="380c7c33" class="cell" data-execution_count="2">
+<div id="50cec276" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -5053,7 +4951,7 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <p>在爱因斯坦求和的符号下，重复出现的索引 (j) 表示对其求和，因此公式可以写为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC_%7Bik%7D%20=%20A_%7Bij%7D%20B_%7Bjk%7D%0A"></p>
 <p>我们用torch实现这个例子：</p>
-<div id="22ec2c16" class="cell" data-execution_count="1">
+<div id="c573d191" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> torch</span>
@@ -5085,7 +4983,7 @@ font-style: inherit;">'ik,kj-&gt;ij'</span>, [a, b])</span></code></pre></div>
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="025f1b5b" class="cell" data-execution_count="2">
+<div id="7a31de05" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -5105,7 +5003,7 @@ font-style: inherit;">'ij-&gt;j'</span>, [a])</span></code></pre></div>
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="b130c40d" class="cell" data-execution_count="3">
+<div id="86abc8b2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
@@ -5116,7 +5014,7 @@ font-style: inherit;">'ij-&gt;i'</span>, [a])</span></code></pre></div>
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="7786c056" class="cell" data-execution_count="4">
+<div id="1f933a57" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
@@ -5127,7 +5025,7 @@ font-style: inherit;">'ij-&gt;'</span>, [a])</span></code></pre></div>
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="3d9a156c" class="cell" data-execution_count="5">
+<div id="0e093114" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">torch.einsum(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
@@ -5140,7 +5038,7 @@ font-style: inherit;">'ij-&gt;ji'</span>, [a])</span></code></pre></div>
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="12557d13" class="cell" data-execution_count="6">
+<div id="8ac03df0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -5163,14 +5061,14 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 4.1677, -3.2515,  4.2891],
-         [ 3.6677,  0.1926, -1.6781]],
+<pre><code>tensor([[[ 0.9696, -1.4390, -2.7926],
+         [-0.4483, -1.2634, -3.4300]],
 
-        [[-1.1320, -0.2473,  0.7925],
-         [-0.6286, -1.8743, -1.2094]],
+        [[ 2.2440,  0.8872, -0.2066],
+         [ 0.5914,  1.7287, -2.3058]],
 
-        [[ 3.3330, -0.3248, -1.1768],
-         [ 3.5171, -2.6363, -2.8069]]])</code></pre>
+        [[ 1.6999, -0.1602,  5.0925],
+         [-0.7404,  0.6274, -1.9708]]])</code></pre>
 </div>
 </div>
 </section>
@@ -5415,6 +5313,113 @@ Inference）.”</span> September 4, 2024. <a href="https://leslie-lu.github.io/
   <guid>https://leslie-lu.github.io/blog/2024/09/04/casual_inference/</guid>
   <pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409051340717.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>星球JC | 胃癌早期筛查工具</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2024/08/30/jc/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<blockquote class="blockquote">
+<p>大家好，这一期预测模型星球Journal Club的分享来自中国医科大学的徐林玉同学，分享的是2019年发表在中科院医学1区的顶级期刊Gut上，题为“Development and validation of a prediction rule for estimating gastric cancer risk in the Chinese high-risk population: a nationwide multicentre study”的研究论文。</p>
+</blockquote>
+<section id="研究背景" class="level3">
+<h3 class="anchored" data-anchor-id="研究背景">研究背景</h3>
+<p>胃癌是中国第二常见的癌症，早期检测和治疗可以显著降低其死亡率。然而，由于高风险人群庞大，全面的胃镜筛查在经济和操作上都不切实际。当前，中国的国家筛查指南建议对高风险人群从40岁开始进行筛查，但由于高风险人群估计超过3亿人，全面的胃镜筛查并不可行。因此，迫切需要一种风险分层工具，作为胃镜检查前的初步筛查工具，以进一步识别真正的高风险个体；且当前中国国内尚无类似的工具。</p>
+<p>现有的筛查工具主要基于已知的胃癌风险因素，如萎缩性胃炎和幽门螺杆菌感染。虽然有一些方法如ABC方法在日本被开发用于预测未来胃癌的发生，但其在中国高风险人群中的适用性仍存在疑问。此外，现有的生物标志物组合方法虽然在某些研究中表现良好，但其结果可能不适用于中国的高风险人群。因此，这项全国多中心横断面研究的目标是开发一种新的预测规则，用于二级预防（早发现、早诊断、早治疗），作为初步筛查工具，用于在中国无症状人群中识别高风险个体，以便进一步进行诊断性胃镜检查。</p>
+</section>
+<section id="研究方法" class="level3">
+<h3 class="anchored" data-anchor-id="研究方法">研究方法</h3>
+<section id="研究类型" class="level4">
+<h4 class="anchored" data-anchor-id="研究类型">研究类型</h4>
+<p>全国、多中心、横断面研究。</p>
+</section>
+<section id="研究人群" class="level4">
+<h4 class="anchored" data-anchor-id="研究人群">研究人群</h4>
+<p>年龄在40至80岁之间、无胃肠道症状的个体，符合中国胃癌高风险标准，并前往医院进行胃镜筛查。</p>
+</section>
+<section id="数据收集" class="level4">
+<h4 class="anchored" data-anchor-id="数据收集">数据收集</h4>
+<p>通过问卷调查、血清学检测（PG I、PG II、G-17、抗幽门螺杆菌IgG抗体）、胃镜检查和组织学检查收集数据。</p>
+</section>
+<section id="统计分析" class="level4">
+<h4 class="anchored" data-anchor-id="统计分析">统计分析</h4>
+<p>文章对数据的管理采取了中心化的管理，尽可能确保数据质量。参与者按2:1比例被随机分为开发队列和验证队列。开发队列用于模型开发，验证队列用于外部验证。文章利用Logistic回归模型开发预测规则。在开发队列中，通过univariate and multivariate analyses评估危险因素与胃癌的关联，其中，univariate analyses阈值设为p&lt;0.25，且multivariate analyses采用backward stepwise进行进一步的变量筛选。文章预测规则的设定基于regression coefficient-based scoring method（Points were assigned by dividing the regression coefficients by the absolute value of the smallest coefficient in the model and rounding up to the nearest integer）。模型整体性能通过R²和Brier评分进行衡量，区分能力通过AUC和discrimination slope评估，校准能力通过Hosmer-Lemeshow χ2统计量和calibration in the large进行评估。同时，评估模型预测的敏感度、特异度、准确率、阳性预测值（positive predictive value）、阴性预测值（negative predictive value）、阳性似然比（positive likelihood ratio）、阴性似然比（negative likelihood rario）和number needed to screen（defined as the number of participants who would need to undergo gastroscopy for one patient with GC to be identified）。文章对开发队列进行bootstrap抽样1000次作为内部验证，验证队列上进行外部验证。同时，基于u test比较模型在开发队列、验证队列上的AUC表现。此外，文章额外做了一部分工作，即将自身模型与当前现有文献中的预测模型进行效果的对比。数据分析使用IBM SPSS和R软件进行。</p>
+</section>
+</section>
+<section id="研究结果" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="研究结果">研究结果</h3>
+<p>此研究收集了2015年6月至2017年3月期间来自中国115家医院的数据，最终纳入14,929名合格参与者。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302129019.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图1 研究对象纳入及定义</figcaption>
+</figure>
+</div>
+<section id="预测规则的开发" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="预测规则的开发">预测规则的开发</h4>
+<p>基于分数的预测规则的开发：采用单因素和多因素分析，确定了包括年龄、性别、PG I/II比率、G-17水平、幽门螺杆菌感染和饮食习惯（腌制和油炸食品消费）在内的7个预测因素。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302131409.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Table 1</figcaption>
+</figure>
+</div>
+<p>按照0–25分评分范围进行风险分层，将个体分为低风险（≤11）、中风险（12–16）和高风险（17–25）组。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302132079.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图2 logistic回归模型中胃癌的预测因素及相关预测规则</figcaption>
+</figure>
+</div>
+<p>其中，中高风险组的胃镜检查检测到70.8%的胃癌病例和70.3%的早期胃癌病例。低风险组的胃镜检查需求减少了66.7%。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133117.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Table 4</figcaption>
+</figure>
+</div>
+<p>预测性能：开发的预测规则具有良好的性能表现。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302133591.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图3 预测模型的性能指标</figcaption>
+</figure>
+</div>
+</section>
+<section id="与其他预测模型的性能比较" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="与其他预测模型的性能比较">与其他预测模型的性能比较</h4>
+<p>该预测规则表现良好，并显示出显著优于其他三种替代预测方法（即Miki等人的ABC方法、中国的基于ELISA的ABC方法以及Tu等人的五种生物标志物方法）在识别胃癌患者方面的区分能力。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302134991.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图4 验证队列中预测模型和替代预测模型的比较</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="take-home-message" class="level3">
+<h3 class="anchored" data-anchor-id="take-home-message">Take home message</h3>
+<ol type="1">
+<li><p>该预测规则在识别中国人群中胃镜检查前的高风险个体方面表现良好。可以作为一种准确且具有成本效益的大规模初步筛查工具，以提高胃癌（包括早期胃癌）的检测率，从而改善胃癌的二级预防。</p></li>
+<li><p>文章不仅比较了自身模型在多中心外部验证中的效果，更是对比了现有模型，且表现均优于现有模型。</p></li>
+<li><p>采用回归赋分的方式，对于人工智能算法解释性较好，能较好地在医院中进行推广应用；此外，采用赋分划分亚组的方式，关注到了模型实际可能带来的收益。</p></li>
+</ol>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>journal club</category>
+  <guid>https://leslie-lu.github.io/blog/2024/08/30/jc/</guid>
+  <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408302124427.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
