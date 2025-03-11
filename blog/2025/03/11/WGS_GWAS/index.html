@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="randomization and blindness">
+<meta name="description" content="WGS-GWAS vs.&nbsp;traditional GWAS">
 
 <title>全基因组测序GWAS vs.&nbsp;传统GWAS | Zhen Lu – Zhen Lu</title>
 <style>
@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -126,7 +146,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -223,7 +243,7 @@ div.column-margin+hr.dinkus {
       <div class="quarto-title-block"><div><h1 class="title">全基因组测序GWAS vs.&nbsp;传统GWAS</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          randomization and blindness
+          WGS-GWAS vs.&nbsp;traditional GWAS
         </div>
       </div>
                           <div class="quarto-categories">
@@ -275,16 +295,23 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<section id="引言" class="level3">
+<section id="引言" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="引言">引言</h3>
 <p>全基因组关联分析（Genome-Wide Association Study, GWAS）是遗传学领域研究复杂性状和疾病遗传基础的强大工具。传统GWAS主要依赖SNP芯片技术，而随着测序技术的飞速发展，全基因组测序（Whole-Genome Sequencing, WGS）逐渐成为GWAS研究的新选择。</p>
 <p>WGS-GWAS相比传统GWAS到底有哪些优势呢？</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250311233414.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Interconnected techniques in genome-wide association studies (GWAS) research<span class="citation" data-cites="RN1159">(<a href="#ref-RN1159" role="doc-biblioref">Omidiran et al. 2024</a>)</span></figcaption>
+</figure>
+</div>
+<p>图片来自：<a href="https://doi.org/10.1016/j.jbi.2021.103837" title="Interconnected techniques in genome-wide association studies (GWAS) research">Interconnected techniques in genome-wide association studies (GWAS) research</a></p>
 </section>
 <section id="传统gwas的局限性" class="level3">
 <h3 class="anchored" data-anchor-id="传统gwas的局限性">传统GWAS的局限性</h3>
@@ -344,9 +371,14 @@ div.column-margin+hr.dinkus {
 
 <!-- -->
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-RN1159" class="csl-entry" role="listitem">
+Omidiran, Oluwaferanmi, Aashna Patel, Sarah Usman, Ishani Mhatre, Habiba Abdelhalim, William Degroat, Rishabh Narayanan, Kritika Singh, Dinesh Mendhe, and Zeeshan Ahmed. 2024. <span>“GWAS Advancements to Investigate Disease Associations and Biological Mechanisms.”</span> Journal Article. <em>Clinical and Translational Discovery</em> 4 (3). <a href="https://doi.org/10.1002/ctd2.296">https://doi.org/10.1002/ctd2.296</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -822,8 +854,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "全基因组测序GWAS vs. 传统GWAS"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-03-08</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "randomization and blindness"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250307224129.png"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "WGS-GWAS vs. traditional GWAS"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250311233414.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - bioinformatics</span></span>
@@ -853,67 +885,71 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>WGS-GWAS相比传统GWAS到底有哪些优势呢？</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 传统GWAS的局限性</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">Interconnected techniques in genome-wide association studies (GWAS) research[@RN1159]</span><span class="co">](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250311233414.png)</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>传统GWAS使用SNP芯片技术，虽然在过去取得了巨大成功，但也存在一些明显的局限性：</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>图片来自：<span class="co">[</span><span class="ot">Interconnected techniques in genome-wide association studies (GWAS) research</span><span class="co">]</span>(https://doi.org/10.1016/j.jbi.2021.103837 "Interconnected techniques in genome-wide association studies (GWAS) research")</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**变异覆盖有限**：SNP芯片只能检测预先设计的常见变异位点（SNP），无法发现新的或罕见的遗传变异。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 传统GWAS的局限性</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**分辨率低**：由于芯片探针数量有限，难以精确定位与疾病相关的具体变异。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>传统GWAS使用SNP芯片技术，虽然在过去取得了巨大成功，但也存在一些明显的局限性：</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**罕见变异检测能力弱**：主要针对常见变异（MAF &gt; 0.05），对罕见变异（MAF &lt; 0.01）的捕捉能力不足。</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**变异覆盖有限**：SNP芯片只能检测预先设计的常见变异位点（SNP），无法发现新的或罕见的遗传变异。</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**因果变异难识别**：通常只能找到与疾病相关的标记SNP，而非真正的致病变异。</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**分辨率低**：由于芯片探针数量有限，难以精确定位与疾病相关的具体变异。</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**结构变异检测受限**：SNP芯片专注于单核苷酸变异，对插入、删除等结构变异的检测能力较差。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**罕见变异检测能力弱**：主要针对常见变异（MAF &gt; 0.05），对罕见变异（MAF &lt; 0.01）的捕捉能力不足。</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**群体特异性问题**：芯片设计基于特定人群数据，可能不适用于其他群体。</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**因果变异难识别**：通常只能找到与疾病相关的标记SNP，而非真正的致病变异。</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**数据质量依赖技术**：依赖杂交技术，易受杂交误差影响。</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**结构变异检测受限**：SNP芯片专注于单核苷酸变异，对插入、删除等结构变异的检测能力较差。</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**灵活性低**：分析局限于芯片预设的变异类型和范围。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**群体特异性问题**：芯片设计基于特定人群数据，可能不适用于其他群体。</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>这些局限性使得传统GWAS在研究复杂疾病的遗传机制时受到一定制约。</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**数据质量依赖技术**：依赖杂交技术，易受杂交误差影响。</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## WGS-GWAS的优势</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**灵活性低**：分析局限于芯片预设的变异类型和范围。</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>相比之下，使用全基因组测序数据进行GWAS（WGS-GWAS）带来了革命性的改进，以下是其主要优势：</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>这些局限性使得传统GWAS在研究复杂疾病的遗传机制时受到一定制约。</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. **全面的遗传变异覆盖**</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## WGS-GWAS的优势</span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>WGS能够测定整个基因组的DNA序列，覆盖所有类型的遗传变异，包括SNP、罕见变异以及插入、删除等结构变异。</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>相比之下，使用全基因组测序数据进行GWAS（WGS-GWAS）带来了革命性的改进，以下是其主要优势：</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. **更高的分辨率**</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. **全面的遗传变异覆盖**</span></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>WGS的分辨率可以精确到单个碱基对级别，帮助研究者更准确地定位与性状或疾病相关的遗传变异，避免传统GWAS中模糊定位的问题。</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>WGS能够测定整个基因组的DNA序列，覆盖所有类型的遗传变异，包括SNP、罕见变异以及插入、删除等结构变异。</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. **罕见变异的检测能力**</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. **更高的分辨率**</span></span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>罕见变异（MAF &lt; 0.01）在复杂疾病中可能扮演重要角色。WGS能够全面捕捉这些低频变异，为研究提供新的突破口。</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>WGS的分辨率可以精确到单个碱基对级别，帮助研究者更准确地定位与性状或疾病相关的遗传变异，避免传统GWAS中模糊定位的问题。</span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. **直接识别因果变异**</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. **罕见变异的检测能力**</span></span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>传统GWAS通常找到的是与疾病关联的标记位点，而WGS可以直接检测潜在的因果变异，提升对疾病机制的理解。</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>罕见变异（MAF &lt; 0.01）在复杂疾病中可能扮演重要角色。WGS能够全面捕捉这些低频变异，为研究提供新的突破口。</span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. **结构变异的捕捉**</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. **直接识别因果变异**</span></span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>WGS不仅限于SNP，还能检测插入、删除、倒位等结构变异，这些变异可能对性状和疾病有重要影响。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>传统GWAS通常找到的是与疾病关联的标记位点，而WGS可以直接检测潜在的因果变异，提升对疾病机制的理解。</span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. **群体特异性变异的研究**</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. **结构变异的捕捉**</span></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>WGS不受芯片设计的群体偏见限制，能发现特定人群特有的变异，为跨人群遗传研究提供支持。</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>WGS不仅限于SNP，还能检测插入、删除、倒位等结构变异，这些变异可能对性状和疾病有重要影响。</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. **更高的数据质量**</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. **群体特异性变异的研究**</span></span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>WGS通过直接测序DNA生成数据，相比SNP芯片的杂交技术，减少了技术误差，结果更可靠。</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>WGS不受芯片设计的群体偏见限制，能发现特定人群特有的变异，为跨人群遗传研究提供支持。</span>
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8. **分析灵活性**</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. **更高的数据质量**</span></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>WGS数据包含整个基因组信息，研究者可以根据需要选择不同的变异类型和分析策略，灵活性远超传统GWAS。</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>WGS通过直接测序DNA生成数据，相比SNP芯片的杂交技术，减少了技术误差，结果更可靠。</span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take-Home Message</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8. **分析灵活性**</span></span>
 <span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>总的来说，使用全基因组测序数据进行GWAS在变异覆盖、分辨率、罕见变异检测、因果变异识别、结构变异分析、群体特异性、数据质量和灵活性等方面都显著优于传统GWAS。这些优势使得WGS-GWAS在探索复杂性状和疾病遗传基础时展现出更大的潜力，为精准医学和遗传学研究开辟了新的可能性。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>WGS数据包含整个基因组信息，研究者可以根据需要选择不同的变异类型和分析策略，灵活性远超传统GWAS。</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take-Home Message</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>总的来说，使用全基因组测序数据进行GWAS在变异覆盖、分辨率、罕见变异检测、因果变异识别、结构变异分析、群体特异性、数据质量和灵活性等方面都显著优于传统GWAS。这些优势使得WGS-GWAS在探索复杂性状和疾病遗传基础时展现出更大的潜力，为精准医学和遗传学研究开辟了新的可能性。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
