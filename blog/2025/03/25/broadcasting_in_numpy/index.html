@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="轻松处理基因数据">
+<meta name="description" content="broadcasting in numpy">
 
-<title>使用 Hail 输出 PLINK 文件：一步到位 | Zhen Lu – Zhen Lu</title>
+<title>NumPy 广播机制详解 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -220,19 +220,16 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">使用 Hail 输出 PLINK 文件：一步到位</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">NumPy 广播机制详解</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          轻松处理基因数据
+          broadcasting in numpy
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">hail</div>
-                <div class="quarto-category">bioinformatics</div>
-                <div class="quarto-category">dnanexus</div>
-                <div class="quarto-category">genomics</div>
-                <div class="quarto-category">plink</div>
-                <div class="quarto-category">vcf</div>
+                <div class="quarto-category">python</div>
+                <div class="quarto-category">numpy</div>
+                <div class="quarto-category">broadcasting</div>
               </div>
                   </div>
   </div>
@@ -250,7 +247,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Wednesday, January 1, 2025</p>
+        <p class="date">Tuesday, March 25, 2025</p>
       </div>
     </div>
     
@@ -265,8 +262,10 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#使用-hail-导出-plink-文件" id="toc-使用-hail-导出-plink-文件" class="nav-link active" data-scroll-target="#使用-hail-导出-plink-文件">使用 Hail 导出 PLINK 文件</a></li>
-  <li><a href="#进阶功能批量导出与错误处理" id="toc-进阶功能批量导出与错误处理" class="nav-link" data-scroll-target="#进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</a></li>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言">引言</a></li>
+  <li><a href="#背景与定义" id="toc-背景与定义" class="nav-link" data-scroll-target="#背景与定义">背景与定义</a></li>
+  <li><a href="#广播规则详解" id="toc-广播规则详解" class="nav-link" data-scroll-target="#广播规则详解">广播规则详解</a></li>
+  <li><a href="#常见陷阱与优化建议" id="toc-常见陷阱与优化建议" class="nav-link" data-scroll-target="#常见陷阱与优化建议">常见陷阱与优化建议</a></li>
   </ul>
 </nav>
 </nav>
@@ -275,92 +274,105 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>在现代基因组学研究中，数据的处理和转换是至关重要的一环。PLINK 文件（包括 .bed, .bim, .fam 三个文件）是遗传学研究中的标准文件格式之一，经常用于 GWAS（全基因组关联研究）等分析。对于研究人员来说，将原始数据转换为 PLINK 文件格式是分析过程中的关键步骤。而 Hail，作为一个处理大规模基因数据的高效工具，提供了方便的方法来导出这些文件。</p>
-<p>前面，我们介绍了如何<a href="https://mp.weixin.qq.com/s/rujbT3WC821spr1AKg5AzQ">掌握 Hail</a>，这里，我们将介绍如何使用 Hail 的 export_plink 功能，轻松导出 PLINK 文件，并深入探讨如何在数据预处理和分析过程中使用它。</p>
-<section id="使用-hail-导出-plink-文件" class="level3">
-<h3 class="anchored" data-anchor-id="使用-hail-导出-plink-文件">使用 Hail 导出 PLINK 文件</h3>
-<p>Hail 提供了一个非常便利的函数 <code>export_plink()</code>，能够将 Hail MatrixTable 格式的数据导出为 PLINK 所需的三种文件格式：<code>.bed</code>、<code>.bim</code> 和 <code>.fam</code>。这些文件是 PLINK 软件包用于处理和分析基因型数据的标准文件格式。</p>
-<section id="载入数据" class="level4">
-<h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
-<p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="83cd875b" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="引言" class="level3">
+<h3 class="anchored" data-anchor-id="引言">引言</h3>
+<p>这里我们介绍 NumPy 中的广播机制，这一功能是 NumPy 库的核心特性之一，特别适用于数据科学和数值计算领域，其允许不同形状的数组进行算术操作，显著简化代码并提升计算效率。</p>
 </section>
-<section id="数据注释" class="level4">
-<h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
-<p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="beea158d" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 父代 ID</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 母代 ID</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span><span class="va">True</span>,     <span class="co"># 是否为女性</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=-</span><span class="dv">9</span>            <span class="co"># 表型（-9 表示缺失值）</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>在这个例子中，我们为每个样本添加了父母 ID、性别和表型信息。</p>
+<section id="背景与定义" class="level3">
+<h3 class="anchored" data-anchor-id="背景与定义">背景与定义</h3>
+<p>NumPy 是 Python 中用于高效数组操作的库，广泛应用于科学计算、机器学习和数据分析。广播机制是指 NumPy 在算术操作中处理不同形状数组的能力，通过<strong>扩展</strong>较小数组的维度，使其与较大数组匹配，从而进行逐元素操作。</p>
+<p>例如，将标量 2 加到数组 [1, 2, 3] 上，结果为 [3, 4, 5]，标量 2 被概念上扩展为 [2, 2, 2]。这种机制不仅节省内存（不实际复制数据），还避免了手动循环，显著提高了计算效率，尤其在处理大型数据集时。</p>
 </section>
-<section id="导出为-plink-文件" class="level4">
-<h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
-<p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="c2ebd3ef" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hl.export_plink(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    mt, <span class="st">'output/example'</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fam_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ind_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span>mt.pat_id,  <span class="co"># 父代 ID</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span>mt.mat_id,  <span class="co"># 母代 ID</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span>mt.is_female, <span class="co"># 性别信息</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=</span>mt.pheno     <span class="co"># 表型信息</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>参数解析： - fam_id: 样本的家族 ID，通常使用样本的 ID（即 mt.s）。 - ind_id: 样本的个体 ID，这里使用 mt.s 作为样本 ID。 - pat_id 和 mat_id: 分别代表父母的 ID，通常可以使用默认值 0 表示没有父母信息，或者根据数据 - is_female: 样本的性别信息，Hail 会根据性别表达为 1（男性）或 2（女性）。这里通过注释 is_female 字段来指示性别。 - pheno: 表型数据，可以是布尔值（如是否患病）或者是数值型数据（如身高、体重等）。</p>
-<p>导出的文件会包含以下三部分：</p>
+<section id="广播规则详解" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="广播规则详解">广播规则详解</h3>
+<p>广播的实现依赖于以下规则，确保数组形状兼容：</p>
 <ul>
-<li><code>output/example.bed</code>: 存储基因型数据（二进制格式）。</li>
-<li><code>output/example.bim</code>: 包含变异信息，如染色体、位置、参考和变异等。</li>
-<li><code>output/example.fam</code>: 包含样本信息，如家族 ID、个体 ID、父母 ID、性别和表型。</li>
+<li><p>维度对齐：比较两个数组的形状，从右向左（尾部维度开始）。如果维度数不同，较小数组会在左侧补齐维度 1。例如，形状 (3,) 的数组可视为 (1, 3)。</p></li>
+<li><p>形状兼容性：如果对应维度大小相等，直接操作。如果一个维度为 1，NumPy 会<strong>拉伸</strong>该维度，使其匹配另一个维度的大小。例如，形状 (1, 3) 的数组与 (2, 3) 相加，前者会被重复为 (2, 3)。如果对应维度既不等也不为 1，操作失败，抛出 ValueError，提示 <code>operands could not be broadcast together</code>。</p></li>
 </ul>
-</section>
-</section>
-<section id="进阶功能批量导出与错误处理" class="level3">
-<h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
-<p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="541c7e6f" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量导出并上传</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>batch_files <span class="op">=</span> [<span class="st">'batch1.vcf'</span>, <span class="st">'batch2.vcf'</span>, <span class="st">'batch3.vcf'</span>]  <span class="co"># 示例批次</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch_file <span class="kw">in</span> batch_files:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导入 VCF 文件并处理</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> hl.import_vcf(<span class="ss">f'file://</span><span class="sc">{</span>batch_file<span class="sc">}</span><span class="ss">'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        pat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        mat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        is_female<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        pheno<span class="op">=-</span><span class="dv">9</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导出 PLINK 文件</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    hl.export_plink(mt, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>, fam_id<span class="op">=</span>mt.s, ind_id<span class="op">=</span>mt.s, pat_id<span class="op">=</span>mt.pat_id, mat_id<span class="op">=</span>mt.mat_id, is_female<span class="op">=</span>mt.is_female, pheno<span class="op">=</span>mt.pheno)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 上传到远程存储</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bed'</span>])</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bim'</span>])</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.fam'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/broadcasting_2.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">broadcasting</figcaption>
+</figure>
 </div>
+<ul>
+<li>结果形状：广播后的结果形状取每个维度的最大值，缺失维度视为 1。</li>
+</ul>
+<p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
+<p>以下是几个具体例子，展示广播机制的应用：</p>
+<div id="4e1dc14b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>scalar <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> arr <span class="op">+</span> scalar</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[3 4 5]</code></pre>
+</div>
+</div>
+<p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
+<div id="5951b477" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>arr1 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                 [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> arr1 <span class="op">+</span> arr2</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[11 22 33]
+ [14 25 36]]</code></pre>
+</div>
+</div>
+<p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
+<p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
+<div id="a10a5f48" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> np.array([[[<span class="fl">0.8</span>, <span class="fl">2.9</span>, <span class="fl">3.9</span>],</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                   [<span class="fl">52.4</span>, <span class="fl">23.6</span>, <span class="fl">36.5</span>]],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                  [[<span class="fl">55.2</span>, <span class="fl">31.7</span>, <span class="fl">23.9</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="fl">14.4</span>, <span class="fl">11.0</span>, <span class="fl">4.9</span>]]])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">8</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>scaled_image <span class="op">=</span> image <span class="op">*</span> scale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>scale 被广播为 (2, 2, 3)，每个像素的通道值分别乘以 [3, 3, 8]。这种操作在数据标准化或特征缩放中非常常见。</p>
+</section>
+<section id="常见陷阱与优化建议" class="level3">
+<h3 class="anchored" data-anchor-id="常见陷阱与优化建议">常见陷阱与优化建议</h3>
+<p>尽管广播强大，但有以下常见问题需要注意：</p>
+<ul>
+<li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
+<li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
+</ul>
+<div id="654a485b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">5</span>,<span class="dv">6</span>]])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>a[:, np.newaxis] <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>array([[4, 5],
+       [7, 8]])</code></pre>
+</div>
+</div>
+<ul>
+<li>性能问题：对于大型数组，广播可能创建临时数组，增加内存使用。在内存受限情况下，考虑使用循环或显式重塑。</li>
+</ul>
+<section id="优化建议" class="level4">
+<h4 class="anchored" data-anchor-id="优化建议">优化建议：</h4>
+<ul>
+<li><p>使用 np.newaxis 或 reshape 显式控制维度，例如 arr[:, np.newaxis] 将一维数组转为列向量。</p></li>
+<li><p>检查数组形状，确保符合预期。</p></li>
+<li><p>对于超大型数据集，评估广播是否会导致内存瓶颈，可能需要替代方案。</p></li>
+</ul>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -836,122 +848,116 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u4F7F\u7528 Hail \u8F93\u51FA PLINK \u6587\u4EF6\uFF1A\u4E00\u6B65\u5230\u4F4D"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-01-01</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "\u8F7B\u677E\u5904\u7406\u57FA\u56E0\u6570\u636E"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412282307896.png</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">- hail</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">- dnanexus</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">- genomics</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">- plink</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">- vcf</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>在现代基因组学研究中，数据的处理和转换是至关重要的一环。PLINK 文件（包括 .bed, .bim, .fam 三个文件）是遗传学研究中的标准文件格式之一，经常用于 GWAS（全基因组关联研究）等分析。对于研究人员来说，将原始数据转换为 PLINK 文件格式是分析过程中的关键步骤。而 Hail，作为一个处理大规模基因数据的高效工具，提供了方便的方法来导出这些文件。</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>前面，我们介绍了如何<span class="co">[</span><span class="ot">掌握 Hail</span><span class="co">](https://mp.weixin.qq.com/s/rujbT3WC821spr1AKg5AzQ)</span>，这里，我们将介绍如何使用 Hail 的 export_plink 功能，轻松导出 PLINK 文件，并深入探讨如何在数据预处理和分析过程中使用它。</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 使用 Hail 导出 PLINK 文件</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>Hail 提供了一个非常便利的函数 <span class="in">`export_plink()`</span>，能够将 Hail MatrixTable 格式的数据导出为 PLINK 所需的三种文件格式：<span class="in">`.bed`</span>、<span class="in">`.bim`</span> 和 <span class="in">`.fam`</span>。这些文件是 PLINK 软件包用于处理和分析基因型数据的标准文件格式。</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 载入数据</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <span class="in">`import_vcf()`</span> 函数，可以轻松导入 VCF 文件。</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hail <span class="im">as</span> hl</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> hl.import_vcf(<span class="st">'file://path_to_vcf_data.vcf'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 数据注释</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <span class="in">`annotate_cols()`</span> 函数完成。</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 父代 ID</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span><span class="st">'0'</span>,         <span class="co"># 母代 ID</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span><span class="va">True</span>,     <span class="co"># 是否为女性</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=-</span><span class="dv">9</span>            <span class="co"># 表型（-9 表示缺失值）</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>在这个例子中，我们为每个样本添加了父母 ID、性别和表型信息。</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 导出为 PLINK 文件</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>现在，数据已经准备好，可以使用 <span class="in">`export_plink()`</span> 函数将其导出为 PLINK 所需的 <span class="in">`.bed`</span>, <span class="in">`.bim`</span>, <span class="in">`.fam`</span> 文件。</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>hl.export_plink(</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    mt, <span class="st">'output/example'</span>, </span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    fam_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    ind_id<span class="op">=</span>mt.s,       <span class="co"># 样本的 ID</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    pat_id<span class="op">=</span>mt.pat_id,  <span class="co"># 父代 ID</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    mat_id<span class="op">=</span>mt.mat_id,  <span class="co"># 母代 ID</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    is_female<span class="op">=</span>mt.is_female, <span class="co"># 性别信息</span></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    pheno<span class="op">=</span>mt.pheno     <span class="co"># 表型信息</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>参数解析：</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fam_id: 样本的家族 ID，通常使用样本的 ID（即 mt.s）。</span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ind_id: 样本的个体 ID，这里使用 mt.s 作为样本 ID。</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pat_id 和 mat_id: 分别代表父母的 ID，通常可以使用默认值 0 表示没有父母信息，或者根据数据</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>is_female: 样本的性别信息，Hail 会根据性别表达为 1（男性）或 2（女性）。这里通过注释 is_female 字段来指示性别。</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pheno: 表型数据，可以是布尔值（如是否患病）或者是数值型数据（如身高、体重等）。</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>导出的文件会包含以下三部分：</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.bed`</span>: 存储基因型数据（二进制格式）。</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.bim`</span>: 包含变异信息，如染色体、位置、参考和变异等。</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`output/example.fam`</span>: 包含样本信息，如家族 ID、个体 ID、父母 ID、性别和表型。</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 进阶功能：批量导出与错误处理</span></span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量导出并上传</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>batch_files <span class="op">=</span> [<span class="st">'batch1.vcf'</span>, <span class="st">'batch2.vcf'</span>, <span class="st">'batch3.vcf'</span>]  <span class="co"># 示例批次</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch_file <span class="kw">in</span> batch_files:</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导入 VCF 文件并处理</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> hl.import_vcf(<span class="ss">f'file://</span><span class="sc">{</span>batch_file<span class="sc">}</span><span class="ss">'</span>, force_bgz<span class="op">=</span><span class="va">True</span>, reference_genome<span class="op">=</span><span class="st">'GRCh38'</span>)</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> mt.annotate_cols(</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>        pat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>        mat_id<span class="op">=</span><span class="st">'0'</span>,</span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        is_female<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>        pheno<span class="op">=-</span><span class="dv">9</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 导出 PLINK 文件</span></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>    hl.export_plink(mt, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>, fam_id<span class="op">=</span>mt.s, ind_id<span class="op">=</span>mt.s, pat_id<span class="op">=</span>mt.pat_id, mat_id<span class="op">=</span>mt.mat_id, is_female<span class="op">=</span>mt.is_female, pheno<span class="op">=</span>mt.pheno)</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 上传到远程存储</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bed'</span>])</span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.bim'</span>])</span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>    subprocess.run([<span class="st">'dx'</span>, <span class="st">'upload'</span>, <span class="ss">f'output/</span><span class="sc">{</span>batch_file<span class="sc">.</span>split(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.fam'</span>])</span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "NumPy 广播机制详解"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-03-25</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "broadcasting in numpy"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/broadcasting_2.png"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - numpy</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - broadcasting</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 引言</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>这里我们介绍 NumPy 中的广播机制，这一功能是 NumPy 库的核心特性之一，特别适用于数据科学和数值计算领域，其允许不同形状的数组进行算术操作，显著简化代码并提升计算效率。</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 背景与定义</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>NumPy 是 Python 中用于高效数组操作的库，广泛应用于科学计算、机器学习和数据分析。广播机制是指 NumPy 在算术操作中处理不同形状数组的能力，通过**扩展**较小数组的维度，使其与较大数组匹配，从而进行逐元素操作。</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>例如，将标量 2 加到数组 <span class="co">[</span><span class="ot">1, 2, 3</span><span class="co">]</span> 上，结果为 <span class="co">[</span><span class="ot">3, 4, 5</span><span class="co">]</span>，标量 2 被概念上扩展为 <span class="co">[</span><span class="ot">2, 2, 2</span><span class="co">]</span>。这种机制不仅节省内存（不实际复制数据），还避免了手动循环，显著提高了计算效率，尤其在处理大型数据集时。</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 广播规则详解</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>广播的实现依赖于以下规则，确保数组形状兼容：</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>维度对齐：比较两个数组的形状，从右向左（尾部维度开始）。如果维度数不同，较小数组会在左侧补齐维度 1。例如，形状 (3,) 的数组可视为 (1, 3)。</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>形状兼容性：如果对应维度大小相等，直接操作。如果一个维度为 1，NumPy 会**拉伸**该维度，使其匹配另一个维度的大小。例如，形状 (1, 3) 的数组与 (2, 3) 相加，前者会被重复为 (2, 3)。如果对应维度既不等也不为 1，操作失败，抛出 ValueError，提示 <span class="in">`operands could not be broadcast together`</span>。</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="al">![broadcasting](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/broadcasting_2.png)</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>结果形状：广播后的结果形状取每个维度的最大值，缺失维度视为 1。</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>以下是几个具体例子，展示广播机制的应用：</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>scalar <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> arr <span class="op">+</span> scalar</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>这里，标量 2 被广播为 <span class="co">[</span><span class="ot">2, 2, 2</span><span class="co">]</span>，与 <span class="co">[</span><span class="ot">1, 2, 3</span><span class="co">]</span> 逐元素相加。效率高，因为不实际创建新数组。</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>arr1 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>                 [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>])</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> arr1 <span class="op">+</span> arr2</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [<span class="co">[</span><span class="ot">10, 20, 30</span><span class="co">]</span>, <span class="co">[</span><span class="ot">10, 20, 30</span><span class="co">]</span>]。结果为逐元素相加，符合预期。</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> np.array([[[<span class="fl">0.8</span>, <span class="fl">2.9</span>, <span class="fl">3.9</span>],</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>                   [<span class="fl">52.4</span>, <span class="fl">23.6</span>, <span class="fl">36.5</span>]],</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>                  [[<span class="fl">55.2</span>, <span class="fl">31.7</span>, <span class="fl">23.9</span>],</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>                   [<span class="fl">14.4</span>, <span class="fl">11.0</span>, <span class="fl">4.9</span>]]])</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">8</span>])</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>scaled_image <span class="op">=</span> image <span class="op">*</span> scale</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>scale 被广播为 (2, 2, 3)，每个像素的通道值分别乘以 <span class="co">[</span><span class="ot">3, 3, 8</span><span class="co">]</span>。这种操作在数据标准化或特征缩放中非常常见。</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见陷阱与优化建议</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>尽管广播强大，但有以下常见问题需要注意：</span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array(<span class="co">[</span><span class="ot">1,2</span><span class="co">]</span>) + np.array([<span class="co">[</span><span class="ot">3,4</span><span class="co">]</span>,<span class="co">[</span><span class="ot">5,6</span><span class="co">]</span>]) 需要注意广播方向。</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>])</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">5</span>,<span class="dv">6</span>]])</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>a[:, np.newaxis] <span class="op">+</span> b</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>性能问题：对于大型数组，广播可能创建临时数组，增加内存使用。在内存受限情况下，考虑使用循环或显式重塑。</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### 优化建议：</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>使用 np.newaxis 或 reshape 显式控制维度，例如 arr<span class="co">[</span><span class="ot">:, np.newaxis</span><span class="co">]</span> 将一维数组转为列向量。</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>检查数组形状，确保符合预期。</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>对于超大型数据集，评估广播是否会导致内存瓶颈，可能需要替代方案。</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
