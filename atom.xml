@@ -11,7 +11,563 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.43</generator>
-<lastBuildDate>Wed, 09 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 17 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Conventional Commits 规范详解</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/04/17/Conventional_Commits/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="背景" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="背景">背景</h3>
+<p>在软件开发中，版本控制是一个至关重要的环节。Git 是最流行的版本控制系统之一，而 Git 提交信息（commit message）则是记录代码变更的重要方式。而我们经常会遇见：</p>
+<ul>
+<li><p>查看项目 Git 日志时，提交信息杂乱无章，完全看不懂每个提交的意图。</p></li>
+<li><p>手动编写 CHANGELOG 耗时费力，还容易遗漏重要变更。</p></li>
+<li><p>团队协作中，成员提交风格不一，代码审查效率低下</p></li>
+</ul>
+<p>为了提高 Git 提交信息的可读性和一致性，Conventional Commits 规范（地址：https://www.conventionalcommits.org/en/v1.0.0/）应运而生。这是一套被 Angular、Vue 等顶级开源项目广泛采用的 Git 提交规范，能将提交信息从混乱的草稿变为清晰的文档。</p>
+<p>这里，我们将详细介绍 Conventional Commits 规范的定义、格式、使用场景以及一些最佳实践。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250417174052.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Conventional Commits</figcaption>
+</figure>
+</div>
+</section>
+<section id="conventional-commits-规范" class="level3">
+<h3 class="anchored" data-anchor-id="conventional-commits-规范">Conventional Commits 规范</h3>
+<p>Conventional Commits 是一套基于 Git 提交消息的轻量级约定，旨在通过结构化格式提升提交信息的可读性和自动化处理能力。它的核心目标包括：</p>
+<ul>
+<li><p>人类可读：清晰描述提交的意图和影响范围。</p></li>
+<li><p>机器友好：支持自动化生成 CHANGELOG 和语义化版本（SemVer）。</p></li>
+<li><p>团队协作：统一提交风格，减少沟通成本。</p></li>
+</ul>
+</section>
+<section id="格式结构" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="格式结构">格式结构</h3>
+<p>一条规范的提交消息需包含以下部分（部分可选）：</p>
+<pre class="{plaintext}"><code>&lt;类型&gt;[可选范围]: &lt;简短描述&gt;
+
+[可选正文]
+
+[可选脚注]</code></pre>
+<section id="类型type" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="类型type">1. 类型（type）</h4>
+<p>类型是提交的核心部分，表示提交的目的和性质。常见的类型包括：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>用途</th>
+<th>对应 SemVer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>feat</td>
+<td>新增功能</td>
+<td>MINOR（次版本）</td>
+</tr>
+<tr class="even">
+<td>fix</td>
+<td>修复 Bug</td>
+<td>PATCH（补丁版本）</td>
+</tr>
+<tr class="odd">
+<td>BREAKING CHANGE</td>
+<td>破坏性变更（如 API 不兼容）</td>
+<td>MAJOR（主版本）</td>
+</tr>
+<tr class="even">
+<td>docs</td>
+<td>文档更新</td>
+<td>-（不影响版本）</td>
+</tr>
+<tr class="odd">
+<td>style</td>
+<td>代码格式调整（如缩进、空格）</td>
+<td>-（不影响版本）</td>
+</tr>
+<tr class="even">
+<td>refactor</td>
+<td>代码重构（不新增功能或修复 Bug）</td>
+<td>-（不影响版本）</td>
+</tr>
+</tbody>
+</table>
+<p>其他推荐类型有：build（构建系统）、ci（持续集成）、test（测试用例）等。</p>
+<p>这里我们插一句，对于版本号的控制，可以参考以下规则：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/7d015e4e53587fc795168c70981bbfb.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">版本号控制</figcaption>
+</figure>
+</div>
+</section>
+<section id="可选范围scope" class="level4">
+<h4 class="anchored" data-anchor-id="可选范围scope">2. 可选范围（scope）</h4>
+<p>可选范围用于指定提交影响的模块或功能区域。它可以是一个具体的模块名、文件名或其他标识符。范围有助于快速定位问题和理解变更的上下文。</p>
+<p>例如：<code>feat(auth): add JWT authentication</code> 表示在 <code>auth</code> 模块中新增了 JWT 身份验证功能。</p>
+</section>
+<section id="简短描述subject" class="level4">
+<h4 class="anchored" data-anchor-id="简短描述subject">3. 简短描述（subject）</h4>
+<p>简短描述是对提交内容的简要说明，通常不超过 72 个字符。它应以小写字母开头，并使用祈使句（imperative mood）来描述变更的目的。</p>
+<p>例如：<code>fix: correct typo in README</code> 表示修复了 README 文件中的拼写错误。</p>
+</section>
+<section id="可选正文body" class="level4">
+<h4 class="anchored" data-anchor-id="可选正文body">4. 可选正文（body）</h4>
+<p>可选正文用于详细描述提交的内容和背景信息。它可以包含多行文本，通常用于解释为什么要进行此更改、如何实现等。正文应与简短描述之间空一行。</p>
+<p>例如：</p>
+<pre class="{plaintext}"><code>feat: 支持多语言切换  
+  
+新增中英文切换按钮，默认跟随系统语言。  
+依赖第三方库 `i18n-utils`，需运行 `npm install` 安装。  </code></pre>
+</section>
+<section id="可选脚注footer" class="level4">
+<h4 class="anchored" data-anchor-id="可选脚注footer">5. 可选脚注（footer）</h4>
+<p>可选脚注用于记录与提交相关的其他信息，如关联的任务、问题或破坏性变更。它通常以 <code>BREAKING CHANGE:</code> 开头，后跟详细说明。脚注也可以包含引用的 issue 编号或链接。</p>
+<p>例如：</p>
+<pre class="{plaintext}"><code>BREAKING CHANGE:
+- 更新了 API 接口，删除了 `getUser` 方法，改为 `fetchUser`。
+- 需要更新客户端代码以适应新接口。
+Closes #123
+Review by @zhenlu</code></pre>
+</section>
+</section>
+<section id="为什么推荐使用" class="level3">
+<h3 class="anchored" data-anchor-id="为什么推荐使用">为什么推荐使用</h3>
+<section id="自动化工具支持" class="level4">
+<h4 class="anchored" data-anchor-id="自动化工具支持">1. 自动化工具支持</h4>
+<ul>
+<li><p>生成 CHANGELOG：工具（如 standard-version）可自动从提交历史提取内容生成变更日志。</p></li>
+<li><p>语义化版本控制：根据提交类型自动升级版本号（feat → MINOR，fix → PATCH，BREAKING CHANGE → MAJOR）。</p></li>
+<li><p>代码审查加速：通过类型快速定位提交意图，减少沟通成本。</p></li>
+</ul>
+</section>
+<section id="团队协作效率提升" class="level4">
+<h4 class="anchored" data-anchor-id="团队协作效率提升">2. 团队协作效率提升</h4>
+<ul>
+<li><p>统一提交风格：团队成员遵循相同的提交规范，减少沟通障碍，避免风格混乱。</p></li>
+<li><p>清晰的历史记录：通过结构化的提交信息，团队成员可以快速了解项目进展和变更。</p></li>
+<li><p>问题追溯：通过关联的 issue 编号和脚注，快速定位问题和变更历史。</p></li>
+</ul>
+</section>
+<section id="开源项目友好性" class="level4">
+<h4 class="anchored" data-anchor-id="开源项目友好性">3. 开源项目友好性</h4>
+<ul>
+<li><p>开源项目通常需要清晰的文档和变更记录，Conventional Commits 规范可以帮助维护者和用户快速了解项目的演变。</p></li>
+<li><p>社区贡献者可以通过遵循规范的提交信息，轻松参与项目开发，降低贡献门槛。</p></li>
+</ul>
+</section>
+</section>
+<section id="takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="takeaway">Takeaway</h3>
+<p>Conventional Commits 不仅是技术规范，更是团队协作的沟通协议。通过标准化提交信息，它能将 Git 日志从杂乱的历史记录升级为项目演进的清晰路线图。无论是个人项目还是大型团队，尽早引入这一规范都将显著提升开发效率和代码质量。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>git</category>
+  <category>git-commit</category>
+  <category>conventional-commits</category>
+  <category>git-flow</category>
+  <guid>https://leslie-lu.github.io/blog/2025/04/17/Conventional_Commits/</guid>
+  <pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250417174052.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>大模型翻译个人博客post</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/04/16/llm_translator/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="背景" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="背景">背景</h3>
+<p>前一段时间，大家想必已经在小红书上感受到了大模型双语翻译的魅力，应该来讲，信达雅的程度已经相当高了。对于一些个人技术博客网站而言，依靠大模型中英文翻译的能力，我们已经可以实现快速发布中英文双语版本的博客文章。</p>
+<p>受到 <code>Rico00121/hugo-translator</code> 项目的启发（地址：https://github.com/Rico00121/hugo-translator），我们利用 python 和 deepseek 对自己依靠 quarto 构建的个人网站上的文章进行了全部的自动翻译，下面是翻译的效果：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/aa.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">中英本双语版本对比</figcaption>
+</figure>
+</div>
+</section>
+<section id="实现" class="level3">
+<h3 class="anchored" data-anchor-id="实现">实现</h3>
+<section id="api-接入" class="level4">
+<h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
+<p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
+<div id="fcd1511a" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># load the env file</span></span>
+<span id="cb1-2">    load_dotenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Python/materials/.env'</span>, override<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb1-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> os.path.exists(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Python/materials/.env'</span>):</span>
+<span id="cb1-4">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'The file .env does not exist.'</span>)</span>
+<span id="cb1-5">        sys.exit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> os.getenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'OPENAI_API_KEY'</span>):</span>
+<span id="cb1-7">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'The OPENAI_API_KEY is not set.'</span>)</span>
+<span id="cb1-8">        sys.exit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-9">    </span>
+<span id="cb1-10">    client<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb1-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> llm_type<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'openai'</span>:</span>
+<span id="cb1-12">        client<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> openai.OpenAI(api_key<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.getenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'OPENAI_API_KEY'</span>))</span>
+<span id="cb1-13">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Using OpenAI to translate the post...'</span>)</span>
+<span id="cb1-14">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb1-15">        client<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> openai.OpenAI(</span>
+<span id="cb1-16">            api_key<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.getenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'OPENAI_API_KEY'</span>),</span>
+<span id="cb1-17">            base_url<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.getenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'DEEPSEEK_API_URL'</span>)</span>
+<span id="cb1-18">        )</span>
+<span id="cb1-19">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></code></pre></div>
+</div>
+<p>这里，提醒大家，注意通过 <code>.env</code> 文件管理 API 密钥，避免 hard code 造成泄露风险。关于硅基流动的 API 使用，大家可以参考他们的官方文档或者我们之前的这篇<a href="https://mp.weixin.qq.com/s/aVknGB4hCdEhYxEseV1YnQ">文章</a>。</p>
+</section>
+<section id="读取-qmd-文件" class="level4">
+<h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
+<p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
+<div id="4b8d6c89" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Load the QMD file</span></span>
+<span id="cb2-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(file_path, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'r'</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'utf-8'</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb2-3">    post <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> frontmatter.load(f)</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get the title and content of the post</span></span>
+<span id="cb2-6">title <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post.metadata.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'title'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Untitled'</span>)</span>
+<span id="cb2-7">content <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post.content</span>
+<span id="cb2-8"></span>
+<span id="cb2-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Translate the title and content</span></span>
+<span id="cb2-10">en_title <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> translate_title(title, llm_type)</span>
+<span id="cb2-11">en_content <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> translate_text(content, llm_type)</span>
+<span id="cb2-12"></span>
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Prepare metadata for the translated post</span></span>
+<span id="cb2-14">en_metadata <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post.metadata.copy()</span>
+<span id="cb2-15">en_metadata[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'title'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> en_title</span>
+<span id="cb2-16"></span>
+<span id="cb2-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create a new post with translated content</span></span>
+<span id="cb2-18">en_post <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> frontmatter.Post(content<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>en_content, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>en_metadata)</span>
+<span id="cb2-19"></span>
+<span id="cb2-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Save the translated post to a new file</span></span>
+<span id="cb2-21">en_file_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> file_path.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.qmd'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'_en.qmd'</span>)</span>
+<span id="cb2-22"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(en_file_path, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"w"</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb2-23">    f.write(frontmatter.dumps(en_post))</span>
+<span id="cb2-24"></span>
+<span id="cb2-25"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Successfully translated the post to </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>en_file_path<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="翻译函数" class="level4">
+<h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
+<p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
+<div id="42d1d171" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> translate_text(text, llm_type):</span>
+<span id="cb3-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb3-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    translate text to english using llm</span></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    """</span></span>
+<span id="cb3-5">    total_length<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(text)</span>
+<span id="cb3-6">    translated_text<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span></span>
+<span id="cb3-7"></span>
+<span id="cb3-8">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Start translating the main text...'</span>)</span>
+<span id="cb3-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># translate in chunks to show progress</span></span>
+<span id="cb3-10">    chunk_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb3-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, total_length, chunk_size):</span>
+<span id="cb3-12">        chunk<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> text[i:i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>chunk_size]</span>
+<span id="cb3-13">        translated_text<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> get_translation(llm_type,</span>
+<span id="cb3-14">                                          [</span>
+<span id="cb3-15">                                              {</span>
+<span id="cb3-16">                                                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'role'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'system'</span>, </span>
+<span id="cb3-17">                                                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'content'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'You are a professional translator. '</span></span>
+<span id="cb3-18">                                                   <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Translate the following Chinese text into English. '</span></span>
+<span id="cb3-19">                                                   <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Strictly preserve the original text format in qmd file, including line breaks, indentation, and any special characters for inserting codes. '</span></span>
+<span id="cb3-20">                                                   <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Do not add, remove, or modify any content. '</span></span>
+<span id="cb3-21">                                                   <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Only return the translated text without any additional explanation, comments, or extra content.'</span></span>
+<span id="cb3-22">                                              },</span>
+<span id="cb3-23">                                              {</span>
+<span id="cb3-24">                                                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'role'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'user'</span>, </span>
+<span id="cb3-25">                                                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'content'</span>: chunk</span>
+<span id="cb3-26">                                              }</span>
+<span id="cb3-27">                                          ]</span>
+<span id="cb3-28">                                         )</span>
+<span id="cb3-29">        progress<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>((i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>chunk_size)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total_length<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>)</span>
+<span id="cb3-30">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Tranlation progress: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>progress<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">: .2f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">%'</span>)</span>
+<span id="cb3-31">    </span>
+<span id="cb3-32">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> translated_text</span></code></pre></div>
+</div>
+<p>这里我们同样采取了分块翻译的方式，避免大模型的 token 长度限制。最终效果前面已经展示。最终输出的格式完美的英文 <code>.qmd</code> 文件，我们可以直接部署到 GitHub Pages。完整 python 代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+</section>
+</section>
+<section id="takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="takeaway">Takeaway</h3>
+<p>基于这种方式，对于需要中英文双语的 API 文档、个人技术教程、博客论文等，我们可以实现快速的中英文双语版本的生成。对于一些需要定期更新的内容，我们可以通过定时任务，自动化的实现中英文双语版本的更新。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>llm</category>
+  <category>translator</category>
+  <category>qmd</category>
+  <category>large-language-model</category>
+  <guid>https://leslie-lu.github.io/blog/2025/04/16/llm_translator/</guid>
+  <pubDate>Wed, 16 Apr 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/aa.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>PE0003: Largest Prime Factor</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -35,7 +591,7 @@
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="0a29df2f" class="cell" data-execution_count="1">
+<div id="9de98c89" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -131,7 +687,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="7449e942" class="cell" data-execution_count="2">
+<div id="d1e69595" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -275,7 +831,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="e4c72a8c" class="cell" data-execution_count="3">
+<div id="8a802e28" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -555,7 +1111,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="fcbe067b" class="cell" data-execution_count="1">
+<div id="28dd38e1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -622,7 +1178,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="2c227577" class="cell" data-execution_count="2">
+<div id="32768400" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -714,7 +1270,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="d56694c7" class="cell" data-execution_count="3">
+<div id="1346d080" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -838,7 +1394,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="069949ca" class="cell" data-execution_count="1">
+<div id="ec8d61b1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -904,7 +1460,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="40b03884" class="cell" data-execution_count="2">
+<div id="18a8317e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -1054,7 +1610,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="31b02f26" class="cell" data-execution_count="1">
+<div id="b6dd7780" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1087,7 +1643,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="be13c802" class="cell" data-execution_count="2">
+<div id="464de83e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -1128,7 +1684,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="60c8ca16" class="cell" data-execution_count="3">
+<div id="bf63c01c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -1183,7 +1739,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="6563f816" class="cell" data-execution_count="4">
+<div id="7802a204" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2353,7 +2909,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="e32e1100" class="cell" data-execution_count="1">
+<div id="e96e310e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -2378,7 +2934,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="0a5bbc12" class="cell" data-execution_count="2">
+<div id="526e30a4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -2417,7 +2973,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="05e1fb14" class="cell" data-execution_count="3">
+<div id="30f90055" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -2466,7 +3022,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="b68e70ec" class="cell" data-execution_count="4">
+<div id="f4f156a2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -2671,7 +3227,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="283b55f1" class="cell" data-execution_count="1">
+<div id="a9da8fcc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -2696,7 +3252,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="1b7d4b13" class="cell" data-execution_count="2">
+<div id="0b127373" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -2726,7 +3282,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="6ab9654a" class="cell" data-execution_count="3">
+<div id="9e4925e3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -3179,7 +3735,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="95b39db1" class="cell" data-execution_count="1">
+<div id="45c71f10" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3212,7 +3768,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="8b1fd1e8" class="cell" data-execution_count="2">
+<div id="383ef7cd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3246,7 +3802,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="358ab868" class="cell" data-execution_count="3">
+<div id="5bb2b085" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3278,7 +3834,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="34e96f04" class="cell" data-execution_count="4">
+<div id="1e06ba83" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3306,7 +3862,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="b0c90faa" class="cell" data-execution_count="5">
+<div id="93f167e6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -3586,7 +4142,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="711b90ac" class="cell" data-execution_count="1">
+<div id="98c18377" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3790,7 +4346,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="21d9b4c3" class="cell" data-execution_count="2">
+<div id="f19f8cb2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -5529,455 +6085,6 @@ font-style: inherit;">;</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/11/26/LD/</guid>
   <pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/92/Linkage_Disequilibrium_Heatmap.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>累积风险图（Cumulative Hazard Plot）中的 Y 轴含义</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/11/22/cumulative_hazard/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="问题" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="问题">问题</h3>
-<p><a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里有同学提问：</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411221925709.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">cumulative hazard plot</figcaption>
-</figure>
-</div>
-<section id="累积风险函数" class="level4">
-<h4 class="anchored" data-anchor-id="累积风险函数">累积风险函数</h4>
-<p>在时间事件数据中，<strong>累积风险图（cumulative hazard plot）</strong>的 Y 轴表示的是累积风险函数（cumulative hazard function, <img src="https://latex.codecogs.com/png.latex?H(t)">）。<img src="https://latex.codecogs.com/png.latex?H(t)"> 描述的是从起始时间到 <img src="https://latex.codecogs.com/png.latex?t"> 时刻，某个事件发生的<strong>累积风险总和</strong>。它是通过对瞬时风险函数（即危险率，hazard rate, <img src="https://latex.codecogs.com/png.latex?h(t)">）在时间上的积分得到的，公式为 <span class="citation" data-cites="RN529">(Allison 2010)</span>：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AH(t)%20=%20%5Cint_%7B0%7D%5E%7Bt%7D%20h(u)%20%5C,%20du%0A"></p>
-<p>其中，<img src="https://latex.codecogs.com/png.latex?h(t)"> 是已生存到 <img src="https://latex.codecogs.com/png.latex?t"> 时刻的对象在 <img src="https://latex.codecogs.com/png.latex?t"> 时刻发生事件的速率。<img src="https://latex.codecogs.com/png.latex?H(t)"> 没有上限值，它随着时间 <img src="https://latex.codecogs.com/png.latex?t"> 的增加而单调递增。</p>
-</section>
-<section id="累积风险与-hr风险比的关系" class="level4">
-<h4 class="anchored" data-anchor-id="累积风险与-hr风险比的关系">累积风险与 HR（风险比）的关系</h4>
-<p>HR 是比较两组（如治疗组与对照组）瞬时风险率 <img src="https://latex.codecogs.com/png.latex?h(t)"> 的比值：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AHR%20=%20%5Cfrac%7Bh_1(t)%7D%7Bh_2(t)%7D%0A"></p>
-<p>它是一个相对指标，表示某组的风险率是另一组的多少倍。对 HR 的理解，可以类比 OR 的概念，只是 HR 是在时间上的比值，而 OR 无时间信息。如果时间对事件的影响较小（比如事件发生概率很低或者随访时间很短），HR 和 OR 的数值可能接近。但在事件发生率较高时，OR 通常会高于 HR，因为 OR 夸大了实际的效应。</p>
-<p>前面的累积风险函数 <img src="https://latex.codecogs.com/png.latex?H(t)"> 与瞬时风险率 <img src="https://latex.codecogs.com/png.latex?h(t)"> 紧密相关，若 HR 在所有时间上恒定（即比例风险假设成立），则累积风险函数之间的关系为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AH_1(t)%20=%20HR%20%5Ccdot%20H_2(t)%0A"></p>
-<p>这意味着在比例风险假设成立的情况下，<strong>累积风险图中两组曲线的斜率比值大致等于 HR</strong>，即如果两组的 HR 恒定不变，则累积风险曲线在对数尺度下呈现平行关系。而如果 HR 随时间变化，累积风险曲线的差异会随着时间的推移而增大或缩小。从这个角度看，累积风险图可以通过曲线的趋势和两组曲线间的相对关系直观地展示 HR 的变化。</p>
-
-
-<!-- -->
-
-
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-RN529" class="csl-entry">
-Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. Book. Sas Institute.
-</div>
-</div></section></div> ]]></description>
-  <category>surival analysis</category>
-  <category>cumulative hazard plot</category>
-  <category>hazard function</category>
-  <guid>https://leslie-lu.github.io/blog/2024/11/22/cumulative_hazard/</guid>
-  <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411221925709.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>R 中面向对象编程系统选择</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/10/02/oop/</link>
-  <description><![CDATA[ <blockquote class="blockquote">
-<p>我们在很久以前稍微介绍过 <a href="https://mp.weixin.qq.com/s/Y5qaF5pPnY3DS2FTm4njkA">R 语言的面向对象编程</a>，但是没有深入对比。今天我们将讨论 R 语言中的面向对象编程系统，包括 S3、S4 和 R6。</p>
-</blockquote>
-<p>在R语言中，面向对象编程（OOP，object oriented programming）提供了多种系统供用户选择。每种系统都有其独特的特点、优缺点以及适用场景。</p>
-<section id="oop系统概述" class="level3"><h3 class="anchored" data-anchor-id="oop系统概述">OOP系统概述</h3>
-<p>R主要有三种面向对象编程系统：</p>
-<ol type="1">
-<li><p><strong>S3</strong></p></li>
-<li><p><strong>S4</strong></p></li>
-<li><p><strong>R6</strong></p></li>
-</ol>
-<section id="s3-系统" class="level4"><h4 class="anchored" data-anchor-id="s3-系统">S3 系统</h4>
-<p>S3 是一种轻量级的面向对象系统，主要通过使用属性来实现。它的优点在于简单易用，适合快速开发。</p>
-<section id="特点" class="level5"><h5 class="anchored" data-anchor-id="特点">特点</h5>
-<ul>
-<li><p><strong>灵活性</strong>: S3 允许任意对象成为类。</p></li>
-<li><p><strong>简洁性</strong>: 类定义和方法定义非常简单。</p></li>
-<li><p><strong>动态性</strong>: 可以在运行时添加方法和属性。</p></li>
-</ul></section><section id="示例代码" class="level5"><h5 class="anchored" data-anchor-id="示例代码">示例代码</h5>
-<div class="cell">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">my_s3_class</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span></span>
-<span>  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>value <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span>, class <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"my_class"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">print.my_class</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span></span>
-<span>  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"The value is:"</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"\n"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">my_s3_class</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The value is: 10 </code></pre>
-</div>
-</div>
-</section></section><section id="s4系统" class="level4"><h4 class="anchored" data-anchor-id="s4系统">S4系统</h4>
-<p>S4 系统比 S3 更严格，支持正式的类定义和方法。适合需要高可靠性的应用。</p>
-<section id="特点-1" class="level5"><h5 class="anchored" data-anchor-id="特点-1">特点</h5>
-<ul>
-<li><p><strong>严格性</strong>: 类和方法都需要明确定义。</p></li>
-<li><p><strong>类型检查</strong>: 提供更好的类型安全性。</p></li>
-<li><p><strong>多重继承</strong>: 支持多重继承，增加灵活性。</p></li>
-</ul></section><section id="示例代码-1" class="level5"><h5 class="anchored" data-anchor-id="示例代码-1">示例代码</h5>
-<div class="cell">
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">setClass</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"myS4Class"</span>, slots <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>value <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"numeric"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span></span>
-<span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">setMethod</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"show"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"myS4Class"</span>, <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">object</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span></span>
-<span>  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"The value is:"</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">object</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">@</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"\n"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">new</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"myS4Class"</span>, value <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">show</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The value is: 20 </code></pre>
-</div>
-</div>
-</section></section><section id="r6-系统" class="level4"><h4 class="anchored" data-anchor-id="r6-系统">R6 系统</h4>
-<p>R6 是最新的 OOP 系统，支持封装、私有字段和方法，使得代码更模块化。</p>
-<section id="特点-2" class="level5"><h5 class="anchored" data-anchor-id="特点-2">特点</h5>
-<ul>
-<li><p><strong>封装性</strong>: 支持私有字段和方法。</p></li>
-<li><p><strong>简洁性</strong>: 语法与其他 OOP 语言相似。</p></li>
-<li><p><strong>高效性</strong>: 对性能有较好的优化。</p></li>
-</ul></section><section id="示例代码-2" class="level5"><h5 class="anchored" data-anchor-id="示例代码-2">示例代码</h5>
-<div class="cell">
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;"><a href="https://r6.r-lib.org">R6</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">MyR6Class</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MyR6Class"</span>,</span>
-<span>  public <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span></span>
-<span>    value <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>,</span>
-<span>    initialize <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span></span>
-<span>      <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span></span>
-<span>    <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span>,</span>
-<span>    print_value <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span></span>
-<span>      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"The value is:"</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">value</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"\n"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span>    <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span></span>
-<span>  <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">MyR6Class</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">new</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">30</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span>
-<span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">obj</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">print_value</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The value is: 30 </code></pre>
-</div>
-</div>
-</section></section></section><section id="选择合适的系统" class="level3"><h3 class="anchored" data-anchor-id="选择合适的系统">选择合适的系统</h3>
-<p>在选择 R 中的 OOP 系统时，考虑项目的复杂性、可维护性及团队的熟悉程度是关键。</p>
-<ul>
-<li><p>S3: 适合快速开发和简单应用。适合初学者或小型项目。</p></li>
-<li><p>S4: 适合需要严格类型检查和复杂结构的应用。常用于研究领域或需要高可靠性的项目。</p></li>
-<li><p>R6: 适合需要封装和私有成员的场景。适合大型项目和复杂数据结构的开发。</p></li>
-</ul>
-<p>完整代码已经放在了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里，感兴趣的同学可以自行查看。</p>
-
-
-<!-- -->
-
-</section> ]]></description>
-  <category>r</category>
-  <category>object oriented programming</category>
-  <guid>https://leslie-lu.github.io/blog/2024/10/02/oop/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://d2jdgazzki9vjm.cloudfront.net/tutorial/r/images/r-object-oriented-programming.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
