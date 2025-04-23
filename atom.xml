@@ -11,7 +11,62 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.6.43</generator>
-<lastBuildDate>Thu, 17 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 22 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>脱发就诊</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/04/23/hair_loss/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="背景" class="level3">
+<h3 class="anchored" data-anchor-id="背景">背景</h3>
+<p>头发容易出油，头皮屑多，发际线后移。</p>
+</section>
+<section id="就诊" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="就诊">就诊</h3>
+<p>2025年4月22日，去医院美容皮肤科就诊。</p>
+<p>皮肤镜检测诊断 119￥：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/53127b7cf0231efed796e6253161f7d.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">皮肤镜检查报告单</figcaption>
+</figure>
+</div>
+<p>临床诊断：雄激素性脱发，脂溢性皮炎。</p>
+</section>
+<section id="治疗" class="level3">
+<h3 class="anchored" data-anchor-id="治疗">治疗</h3>
+<ol type="1">
+<li>二硫化硒洗剂 1瓶 230g 80￥，治疗头皮屑和头皮脂溢性皮炎。</li>
+</ol>
+<p>用法：</p>
+<ul>
+<li><p>每周2次，一个疗程2-4周。</p></li>
+<li><p>先用洗发水洗头，冲洗干净后再用二硫化硒洗剂。</p></li>
+<li><p>二硫化硒洗剂取 5-10克，涂抹在湿发及头皮上，轻揉至出泡沫，待3-5分钟后用温水冲洗干净。必要时可重复一次。</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p>米诺地尔泡沫剂 2瓶 396￥。用法：每天两次。</p></li>
+<li><p>激光疗法（1200￥）+ 红光治疗(300￥)。</p></li>
+<li><p>口服非那雄胺片 1mg*84片 148.96￥。用法：每天一次，一次一片。</p></li>
+</ol>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>daily life</category>
+  <category>health</category>
+  <guid>https://leslie-lu.github.io/blog/2025/04/23/hair_loss/</guid>
+  <pubDate>Tue, 22 Apr 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://leslie-lu.github.io/blog/2025/04/23/hair_loss" medium="image"/>
+</item>
 <item>
   <title>Conventional Commits 规范详解</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -209,7 +264,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="fcd1511a" class="cell" data-execution_count="1">
+<div id="e63ca91e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -309,7 +364,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="4b8d6c89" class="cell" data-execution_count="2">
+<div id="a5d870ae" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -420,7 +475,7 @@ font-style: inherit;">'</span>)</span></code></pre></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="42d1d171" class="cell" data-execution_count="3">
+<div id="fe8ba5a6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -591,7 +646,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div>
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="9de98c89" class="cell" data-execution_count="1">
+<div id="39925670" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -687,7 +742,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="d1e69595" class="cell" data-execution_count="2">
+<div id="7e26172d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -831,7 +886,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="8a802e28" class="cell" data-execution_count="3">
+<div id="d6ae0f69" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1111,7 +1166,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="28dd38e1" class="cell" data-execution_count="1">
+<div id="96b5c825" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1178,7 +1233,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="32768400" class="cell" data-execution_count="2">
+<div id="3491e262" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -1270,7 +1325,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="1346d080" class="cell" data-execution_count="3">
+<div id="915316e3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1394,7 +1449,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="ec8d61b1" class="cell" data-execution_count="1">
+<div id="b4e45236" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -1460,7 +1515,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="18a8317e" class="cell" data-execution_count="2">
+<div id="1c929886" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -1610,7 +1665,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="b6dd7780" class="cell" data-execution_count="1">
+<div id="4c97e281" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1643,7 +1698,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="464de83e" class="cell" data-execution_count="2">
+<div id="4af01278" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -1684,7 +1739,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="bf63c01c" class="cell" data-execution_count="3">
+<div id="3ede041d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -1739,7 +1794,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="7802a204" class="cell" data-execution_count="4">
+<div id="07dfab2a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2909,7 +2964,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="e96e310e" class="cell" data-execution_count="1">
+<div id="633acdda" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -2934,7 +2989,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="526e30a4" class="cell" data-execution_count="2">
+<div id="d7c26e66" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -2973,7 +3028,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="30f90055" class="cell" data-execution_count="3">
+<div id="4894d34d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -3022,7 +3077,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="f4f156a2" class="cell" data-execution_count="4">
+<div id="c85ae833" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -3227,7 +3282,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="a9da8fcc" class="cell" data-execution_count="1">
+<div id="e6a45795" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -3252,7 +3307,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="0b127373" class="cell" data-execution_count="2">
+<div id="fb171f13" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -3282,7 +3337,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="9e4925e3" class="cell" data-execution_count="3">
+<div id="dc431d1a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -3735,7 +3790,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="45c71f10" class="cell" data-execution_count="1">
+<div id="88d0c3b5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3768,7 +3823,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="383ef7cd" class="cell" data-execution_count="2">
+<div id="5bdd1fc2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3802,7 +3857,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="5bb2b085" class="cell" data-execution_count="3">
+<div id="535af847" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3834,7 +3889,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="1e06ba83" class="cell" data-execution_count="4">
+<div id="89ea83e1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3862,7 +3917,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="93f167e6" class="cell" data-execution_count="5">
+<div id="1e6c19a5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -4142,7 +4197,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="98c18377" class="cell" data-execution_count="1">
+<div id="d9075c8b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4346,7 +4401,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="f19f8cb2" class="cell" data-execution_count="2">
+<div id="9fc5ec94" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -6022,69 +6077,6 @@ font-style: inherit;">;</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/11/28/SAIGE/</guid>
   <pubDate>Thu, 28 Nov 2024 00:00:00 GMT</pubDate>
   <media:content url="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>连锁不平衡</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/11/26/LD/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="连锁不平衡linkage-disequilibrium-ld" class="level3">
-<h3 class="anchored" data-anchor-id="连锁不平衡linkage-disequilibrium-ld">连锁不平衡（Linkage Disequilibrium, LD）</h3>
-<p><strong><a href="https://en.wikipedia.org/wiki/Linkage_disequilibrium" title="wiki">连锁不平衡（LD）</a></strong> 是群体遗传学和基因组学中的一个基本概念，用于描述两个或多个遗传标记（通常是单核苷酸多态性，SNP）之间的<strong>非随机关联</strong>。当某些 SNP 的等位基因 （allele）的组合在一个群体中出现的频率高于根据单独等位基因频率计算的预期频率时，这种现象被称为连锁不平衡。LD 是基因组关联分析（GWAS）和基因组选择等研究的重要基础，用于识别与复杂性状相关的遗传变异，并帮助推断遗传位点之间的关系。</p>
-<p>连锁是指基因组中靠得很近的基因或遗传标记倾向于一起遗传的现象，这是由染色体重组的随机性和空间上的接近性引起的。而 LD 则描述了在一个群体中等位基因组合的统计学偏差，如果遗传标记之间的组合频率偏离预期（非随机关联），就表明存在 LD。</p>
-</section>
-<section id="ld的数学描述" class="level3">
-<h3 class="anchored" data-anchor-id="ld的数学描述"><strong>LD的数学描述</strong></h3>
-<p>连锁不平衡通常用两个指标来描述：<img src="https://latex.codecogs.com/png.latex?D'"> 和 <img src="https://latex.codecogs.com/png.latex?r%5E2">。</p>
-<section id="不平衡系数d" class="level4">
-<h4 class="anchored" data-anchor-id="不平衡系数d"><strong>1. 不平衡系数（D）</strong></h4>
-<p>定义两个标记 <img src="https://latex.codecogs.com/png.latex?A"> 和 <img src="https://latex.codecogs.com/png.latex?B"> 的四种可能等位基因组合及其频率： - <img src="https://latex.codecogs.com/png.latex?A_1B_1">, <img src="https://latex.codecogs.com/png.latex?A_1B_2">, <img src="https://latex.codecogs.com/png.latex?A_2B_1">, <img src="https://latex.codecogs.com/png.latex?A_2B_2">，分别表示两位点上的不同等位基因组合。</p>
-<p>设： - <img src="https://latex.codecogs.com/png.latex?P(A_1B_1)">：观察到 <img src="https://latex.codecogs.com/png.latex?A_1"> 和 <img src="https://latex.codecogs.com/png.latex?B_1"> 同时出现的频率。 - <img src="https://latex.codecogs.com/png.latex?P(A_1)">：<img src="https://latex.codecogs.com/png.latex?A_1"> 的边际频率。 - <img src="https://latex.codecogs.com/png.latex?P(B_1)">：<img src="https://latex.codecogs.com/png.latex?B_1"> 的边际频率。</p>
-<p>则不平衡系数 <img src="https://latex.codecogs.com/png.latex?D"> 定义为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AD%20=%20P(A_1B_1)%20-%20P(A_1)P(B_1)%0A"></p>
-<ul>
-<li>当 <img src="https://latex.codecogs.com/png.latex?D%20=%200"> 时，标记之间没有 LD，即独立遗传。</li>
-<li>当 <img src="https://latex.codecogs.com/png.latex?D%20%5Cneq%200"> 时，标记之间存在 LD。</li>
-</ul>
-<p>然而，由于 <img src="https://latex.codecogs.com/png.latex?D"> 的值依赖于等位基因的频率，其绝对值没有固定的范围，因此通常会对其进行标准化。</p>
-</section>
-<section id="标准化不平衡系数d" class="level4">
-<h4 class="anchored" data-anchor-id="标准化不平衡系数d"><strong>2. 标准化不平衡系数（<img src="https://latex.codecogs.com/png.latex?D'">）</strong></h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AD'%20=%20%5Cfrac%7BD%7D%7BD_%7B%5Ctext%7Bmax%7D%7D%7D%0A"></p>
-<p>其中 <img src="https://latex.codecogs.com/png.latex?D_%7B%5Ctext%7Bmax%7D%7D"> 是 <img src="https://latex.codecogs.com/png.latex?D"> 的可能最大值或最小值，取决于等位基因频率。</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?D'"> 的范围为 [-1, 1]。</li>
-<li><img src="https://latex.codecogs.com/png.latex?D'%20=%201"> 表示完全连锁不平衡。</li>
-</ul>
-</section>
-<section id="相关系数r2" class="level4">
-<h4 class="anchored" data-anchor-id="相关系数r2"><strong>3. 相关系数（<img src="https://latex.codecogs.com/png.latex?r%5E2">）</strong></h4>
-<p>但在群体遗传学中，其实我们更常用 <img src="https://latex.codecogs.com/png.latex?r%5E2"> 来衡量 LD：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ar%5E2%20=%20%5Cfrac%7BD%5E2%7D%7BP(A_1)P(A_2)P(B_1)P(B_2)%7D%0A"></p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?r%5E2"> 的范围为 [0, 1]。</li>
-<li><img src="https://latex.codecogs.com/png.latex?r%5E2%20=%200">：标记之间完全独立。</li>
-<li><img src="https://latex.codecogs.com/png.latex?r%5E2%20=%201">：标记之间完全关联。</li>
-<li><img src="https://latex.codecogs.com/png.latex?r%5E2"> 的值通常用于评估 GWAS 研究中的 SNP 冗余。</li>
-</ul>
-
-
-<!-- -->
-
-</section>
-</section>
-
- ]]></description>
-  <category>linkage disequilibrium</category>
-  <category>genetics</category>
-  <guid>https://leslie-lu.github.io/blog/2024/11/26/LD/</guid>
-  <pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/92/Linkage_Disequilibrium_Heatmap.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
