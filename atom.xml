@@ -11,7 +11,1384 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.7.29</generator>
-<lastBuildDate>Tue, 22 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 04 May 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>手写 Transformer</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/05/04/transformer/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="引言" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="引言">引言</h3>
+<p>Transfomer 是一种用于自然语言处理（NLP）任务的深度学习模型架构。它在2017年由 Vaswani 等人提出，并在论文《Attention is All You Need》中首次介绍。Transformer 模型的核心思想是使用自注意力机制来捕捉输入序列中不同位置之间的依赖关系，而不依赖于传统的循环神经网络（RNN）或卷积神经网络（CNN）。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504183843.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Attention is All You Need</figcaption>
+</figure>
+</div>
+<p>这里，我们将手动搭建并实现该论文中的 Transformer 模型。我们将使用 PyTorch 框架来实现该模型，并逐步解释每个组件的功能和实现细节。</p>
+<blockquote class="blockquote">
+<p>本文代码实现参考哈佛大学 <a href="https://nlp.seas.harvard.edu/annotated-transformer/#prelims" title="The Annotated Transformer">The Annotated Transformer</a>，特别致谢 Ashish Vaswani 等原论文作者。</p>
+</blockquote>
+</section>
+<section id="模型架构全景" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="模型架构全景">模型架构全景</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504184016.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Transfomer</figcaption>
+</figure>
+</div>
+</section>
+<section id="核心模块" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="核心模块">核心模块</h3>
+<section id="多头注意力机制multi-head-attention" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="多头注意力机制multi-head-attention">1. 多头注意力机制（Multi-Head Attention）</h4>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504184542.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Multi-Head Attention</figcaption>
+</figure>
+</div>
+<p>注意力公式为：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
+<p>代码实现：</p>
+<div id="892c441b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> MultiHeaderAttention(nn.Module):</span>
+<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, h, d_model, dropout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>):</span>
+<span id="cb1-3">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Take in model size and number of heads."</span></span>
+<span id="cb1-4">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb1-5">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> d_model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> h <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb1-6">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Assume d_v always equals d_k</span></span>
+<span id="cb1-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.d_k<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> d_model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//</span> h</span>
+<span id="cb1-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.h<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> h</span>
+<span id="cb1-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.linears<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> clones(nn.Linear(d_model, d_model), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb1-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb1-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dropout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.Dropout(p<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dropout)</span>
+<span id="cb1-12"></span>
+<span id="cb1-13">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, query, key, value, mask<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>):</span>
+<span id="cb1-14">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> mask <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb1-15">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Same mask applied to all h heads.</span></span>
+<span id="cb1-16">            mask<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mask.unsqueeze(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-17">        nbatches<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> query.size(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb1-18"></span>
+<span id="cb1-19">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1) Do all the linear projections in batch from d_model =&gt; h x d_k</span></span>
+<span id="cb1-20">        query, key, value<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb1-21">            lin(x).view(nbatches, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.h, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.d_k).transpose(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-22">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> lin, x <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.linears, (query, key, value))</span>
+<span id="cb1-23">        ]</span>
+<span id="cb1-24"></span>
+<span id="cb1-25">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2) Apply attention on all the prokjected vectors in batch.</span></span>
+<span id="cb1-26">        x, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> attention(</span>
+<span id="cb1-27">            query, key, value, mask<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> mask, dropout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dropout</span>
+<span id="cb1-28">        )</span>
+<span id="cb1-29"></span>
+<span id="cb1-30">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3) Concat using a view and apply a final linear.</span></span>
+<span id="cb1-31">        x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb1-32">            x.transpose(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-33">            .contiguous()</span>
+<span id="cb1-34">            .view(nbatches, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.h <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.d_k)</span>
+<span id="cb1-35">        )</span>
+<span id="cb1-36">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">del</span> query</span>
+<span id="cb1-37">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">del</span> key</span>
+<span id="cb1-38">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">del</span> value</span>
+<span id="cb1-39">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.linears[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>](x)</span></code></pre></div>
+</div>
+<p>其中，<code>h=8</code> 表示头数，为原文默认设置，<code>d_model=512</code> 表示模型的维度。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504184650.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Annotation</figcaption>
+</figure>
+</div>
+</section>
+<section id="位置编码positional-encoding" class="level4">
+<h4 class="anchored" data-anchor-id="位置编码positional-encoding">2. 位置编码（Positional Encoding）</h4>
+<p>数学公式：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
+<p>代码实现：</p>
+<div id="06358c43" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> PositionalEncoding(nn.Module):</span>
+<span id="cb2-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Implement the PE function."</span></span>
+<span id="cb2-3"></span>
+<span id="cb2-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, d_model, dropout, max_len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5000</span>):</span>
+<span id="cb2-5">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb2-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dropout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.Dropout(p<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dropout)</span>
+<span id="cb2-7"></span>
+<span id="cb2-8">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compute the positional endcodings once in log sapce.</span></span>
+<span id="cb2-9">        pe<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.zeros(max_len, d_model)</span>
+<span id="cb2-10">        position<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, max_len).unsqueeze(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-11">        div_term<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.exp(</span>
+<span id="cb2-12">            torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, d_model, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>(math.log(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000.0</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>d_model)</span>
+<span id="cb2-13">        )</span>
+<span id="cb2-14">        pe[:,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>::<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.sin(position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> div_term)</span>
+<span id="cb2-15">        pe[:,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>::<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.cos(position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> div_term)</span>
+<span id="cb2-16">        pe<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pe.unsqueeze(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb2-17">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.register_buffer(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pe'</span>, pe)</span>
+<span id="cb2-18"></span>
+<span id="cb2-19">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x):</span>
+<span id="cb2-20">        x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pe[:,:x.size(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)].requires_grad_(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb2-21">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dropout(x)</span></code></pre></div>
+</div>
+</section>
+<section id="编码器层encoder-layer" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="编码器层encoder-layer">3. 编码器层（Encoder Layer）</h4>
+<p>架构组成：</p>
+<ul>
+<li><p>自注意力子层</p></li>
+<li><p>前馈神经网络子层</p></li>
+<li><p>残差连接和层归一化</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504185554.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Encoder block</figcaption>
+</figure>
+</div>
+<p>代码实现：</p>
+<div id="205418c4" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> EncoderLayer(nn.Module):</span>
+<span id="cb3-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Encoder is made up of self-attn and feed forward."</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, size, self_attn, feed_forward, dropout):</span>
+<span id="cb3-5">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb3-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.self_attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> self_attn</span>
+<span id="cb3-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.feed_forward<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> feed_forward</span>
+<span id="cb3-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> clones(SublayerConnection(size, dropout), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb3-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> size</span>
+<span id="cb3-10"></span>
+<span id="cb3-11">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x, mask):</span>
+<span id="cb3-12">        x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>](x, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> x: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.self_attn(x, x, x, mask))</span>
+<span id="cb3-13">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>](x, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
+</div>
+</section>
+<section id="解码器层decoder-layer" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="解码器层decoder-layer">4. 解码器层（Decoder Layer）</h4>
+<p>架构组成：</p>
+<ul>
+<li><p>带掩码的自注意力子层</p></li>
+<li><p>编码器-解码器注意力子层</p></li>
+<li><p>前馈神经网络子层</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504185838.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Decoder block</figcaption>
+</figure>
+</div>
+<p>代码实现：</p>
+<div id="a53f1b1b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> DecoderLayer(nn.Module):</span>
+<span id="cb4-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Decoder is made of self-attn, src-attn, and feed forward"</span></span>
+<span id="cb4-3"></span>
+<span id="cb4-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, size, self_attn, src_attn, feed_forward, dropout):</span>
+<span id="cb4-5">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb4-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> size</span>
+<span id="cb4-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.self_attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> self_attn</span>
+<span id="cb4-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.src_attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> src_attn</span>
+<span id="cb4-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.feed_forward<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> feed_forward</span>
+<span id="cb4-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> clones(SublayerConnection(size, dropout), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb4-11"></span>
+<span id="cb4-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x, memory, src_mask, tgt_mask):</span>
+<span id="cb4-13">        m<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> memory</span>
+<span id="cb4-14">        x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>](x, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> x: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.self_attn(x, x, x, tgt_mask))</span>
+<span id="cb4-15">        x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>](x, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> x: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.src_attn(x, m, m, src_mask))</span>
+<span id="cb4-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.sublayer[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>](x, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
+</div>
+<p>其中，掩码生成函数如下：</p>
+<div id="1180efe5" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> subsequent_mask(size):</span>
+<span id="cb5-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Mask out subsequent positions."</span></span>
+<span id="cb5-3">    attn_shape<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, size, size)</span>
+<span id="cb5-4">    subsequent_mask<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.triu(torch.ones(attn_shape, dtype<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>torch.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">bool</span>), diagonal<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb5-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>subsequent_mask</span></code></pre></div>
+</div>
+<p>借助于 <code>subsequent_mask</code> 函数，我们可以生成一个上三角矩阵，用于掩码掉后续位置的注意力权重。</p>
+</section>
+<section id="模型初始化与参数设置" class="level4">
+<h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
+<div id="2652e85c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> make_model(</span>
+<span id="cb6-2">    src_vocab, tgt_vocab, N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, d_model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>, d_ff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2048</span>, h<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, dropout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span></span>
+<span id="cb6-3">):</span>
+<span id="cb6-4">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"Helper: Construct a model from hyperparameters."</span></span>
+<span id="cb6-5">    c<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> copy.deepcopy</span>
+<span id="cb6-6">    attn<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> MultiHeaderAttention(h, d_model)</span>
+<span id="cb6-7">    ff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> PositionWiseFeedForward(d_model, d_ff, dropout)</span>
+<span id="cb6-8">    position<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> PositionalEncoding(d_model, dropout)</span>
+<span id="cb6-9">    model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> EncoderDecoder(</span>
+<span id="cb6-10">        Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), N),</span>
+<span id="cb6-11">        Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), N),</span>
+<span id="cb6-12">        nn.Sequential(Embeddings(d_model, src_vocab), c(position)),</span>
+<span id="cb6-13">        nn.Sequential(Embeddings(d_model, tgt_vocab), c(position)),</span>
+<span id="cb6-14">        Generator(d_model, tgt_vocab)</span>
+<span id="cb6-15">    )</span>
+<span id="cb6-16"></span>
+<span id="cb6-17">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Initiailize parameters with Glorot / fan_avg.</span></span>
+<span id="cb6-18">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> p <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.parameters():</span>
+<span id="cb6-19">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> p.dim() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:</span>
+<span id="cb6-20">            nn.init.xavier_uniform_(p)</span>
+<span id="cb6-21">    </span>
+<span id="cb6-22">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> model</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="训练过程" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="训练过程">训练过程</h3>
+<section id="动态学习率调整" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="动态学习率调整">1. 动态学习率调整</h4>
+<p>公式：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
+<p>代码实现：</p>
+<div id="25282cf6" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> rate(step, model_size, factor, warmup):</span>
+<span id="cb7-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb7-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    We have to default the step to 1 for LambdaLR function to avoid zero rasing to negative power.</span></span>
+<span id="cb7-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    """</span></span>
+<span id="cb7-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb7-6">        step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb7-7">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> factor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (model_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>(step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> warmup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>)</span></code></pre></div>
+</div>
+<p>学习率变化曲线：</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504190612.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">lr</figcaption>
+</figure>
+</div>
+<p>前4000步线性增长，之后指数衰减。</p>
+</section>
+<section id="标签平滑label-smoothing" class="level4">
+<h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
+<p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
+<p>代码实现：</p>
+<div id="ce791c95" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> LabelSmoothing(nn.Module):</span>
+<span id="cb8-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb8-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    Implement label smoothing.</span></span>
+<span id="cb8-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    """</span></span>
+<span id="cb8-5"></span>
+<span id="cb8-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, size, padding_idx, smoothing<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>):</span>
+<span id="cb8-7">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb8-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.criterion<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.KLDivLoss(reduction<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sum'</span>)</span>
+<span id="cb8-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.padding_idx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> padding_idx</span>
+<span id="cb8-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.confidence<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> smoothing</span>
+<span id="cb8-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.smoothing<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> smoothing</span>
+<span id="cb8-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> size</span>
+<span id="cb8-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.true_dist<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb8-14"></span>
+<span id="cb8-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x, target):</span>
+<span id="cb8-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> x.size(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.size <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># vocab_size</span></span>
+<span id="cb8-17">        true_dist<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> x.data.clone() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># clone the data to avoid in-place operation</span></span>
+<span id="cb8-18">        true_dist.fill_(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.smoothing <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb8-19">        true_dist.scatter_(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, target.data.unsqueeze(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.confidence)</span>
+<span id="cb8-20">        true_dist[:, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.padding_idx]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># ignore the category of padding_idx</span></span>
+<span id="cb8-21">        mask<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.nonzero(target <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.padding_idx)</span>
+<span id="cb8-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> mask.dim() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb8-23">            true_dist.index_fill_(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, mask.squeeze(), <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>)</span>
+<span id="cb8-24">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.true_dist<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> true_dist</span>
+<span id="cb8-25">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span></code></pre></div>
+</div>
+</section>
+<section id="分布式训练加速" class="level4">
+<h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
+<p>多 GPU 训练：</p>
+<div id="feb9e8bf" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> train_worker(</span>
+<span id="cb9-2">    gpu,</span>
+<span id="cb9-3">    ngpus_per_node,</span>
+<span id="cb9-4">    vocab_src,</span>
+<span id="cb9-5">    vocab_tgt,</span>
+<span id="cb9-6">    spacy_de,</span>
+<span id="cb9-7">    spacy_en,</span>
+<span id="cb9-8">    config,</span>
+<span id="cb9-9">    is_distributed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="cb9-10">):</span>
+<span id="cb9-11">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Train worker process using GPU: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gpu<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> for training'</span>, flush<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb9-12">    torch.cuda.set_device(gpu)</span>
+<span id="cb9-13"></span>
+<span id="cb9-14">    pad_idx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> vocab_tgt[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;blank&gt;"</span>]</span>
+<span id="cb9-15">    d_model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span></span>
+<span id="cb9-16">    model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> make_model(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(vocab_src), <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(vocab_tgt), N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>)</span>
+<span id="cb9-17">    model.cuda(gpu)</span>
+<span id="cb9-18">    module<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model</span>
+<span id="cb9-19"></span>
+<span id="cb9-20">    is_main_process<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="cb9-21">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> is_distributed:</span>
+<span id="cb9-22">        dist.init_process_group(</span>
+<span id="cb9-23">            backend<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'nccl'</span>,</span>
+<span id="cb9-24">            init_method<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'env://'</span>,</span>
+<span id="cb9-25">            rank<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>gpu,</span>
+<span id="cb9-26">            world_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ngpus_per_node</span>
+<span id="cb9-27">        )</span>
+<span id="cb9-28">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> DDP(model, device_ids<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[gpu])</span>
+<span id="cb9-29">        module<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.module</span>
+<span id="cb9-30">        is_main_process<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gpu <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb9-31">    </span>
+<span id="cb9-32">    criterion<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> LabelSmoothing(</span>
+<span id="cb9-33">        size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(vocab_tgt),</span>
+<span id="cb9-34">        padding_idx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pad_idx,</span>
+<span id="cb9-35">        smoothing<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span></span>
+<span id="cb9-36">    )</span>
+<span id="cb9-37">    criterion.cuda(gpu)</span>
+<span id="cb9-38"></span>
+<span id="cb9-39">    train_dataloader, valid_dataloader<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> create_dataloaders(</span>
+<span id="cb9-40">        gpu,</span>
+<span id="cb9-41">        vocab_src,</span>
+<span id="cb9-42">        vocab_tgt,</span>
+<span id="cb9-43">        spacy_de,</span>
+<span id="cb9-44">        spacy_en,</span>
+<span id="cb9-45">        batch_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'batch_size'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//</span> ngpus_per_node,</span>
+<span id="cb9-46">        max_padding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'max_padding'</span>],</span>
+<span id="cb9-47">        is_distributed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>is_distributed</span>
+<span id="cb9-48">    )</span>
+<span id="cb9-49"></span>
+<span id="cb9-50">    optimizer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.optim.Adam(</span>
+<span id="cb9-51">        model.parameters(),</span>
+<span id="cb9-52">        lr<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'base_lr'</span>],</span>
+<span id="cb9-53">        betas<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.98</span>),</span>
+<span id="cb9-54">        eps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-9</span></span>
+<span id="cb9-55">    )</span>
+<span id="cb9-56">    lr_scheduler<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> LambdaLR(</span>
+<span id="cb9-57">        optimizer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> optimizer,</span>
+<span id="cb9-58">        lr_lambda<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> step: rate(</span>
+<span id="cb9-59">            step, model_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>d_model,</span>
+<span id="cb9-60">            factor<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, warmup<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'warmup'</span>]</span>
+<span id="cb9-61">        )</span>
+<span id="cb9-62">    )</span>
+<span id="cb9-63">    train_state<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> TrainState()</span>
+<span id="cb9-64"></span>
+<span id="cb9-65">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> epoch <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'num_epochs'</span>]):</span>
+<span id="cb9-66">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> is_distributed:</span>
+<span id="cb9-67">            train_dataloader.sampler.set_epoch(epoch)</span>
+<span id="cb9-68">            valid_dataloader.sampler.set_epoch(epoch)</span>
+<span id="cb9-69"></span>
+<span id="cb9-70">        model.train()</span>
+<span id="cb9-71">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'[GPU </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gpu<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] Epoch </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>epoch<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> Training ===='</span>, flush<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb9-72">        _, train_state<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> run_epoch(</span>
+<span id="cb9-73">            (Batch(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], pad_idx) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> train_dataloader),</span>
+<span id="cb9-74">            model,</span>
+<span id="cb9-75">            SimpleLossCompute(module.generator, criterion),</span>
+<span id="cb9-76">            optimizer,</span>
+<span id="cb9-77">            lr_scheduler,</span>
+<span id="cb9-78">            mode<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'train+log'</span>,</span>
+<span id="cb9-79">            accum_iter<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'accum_iter'</span>],</span>
+<span id="cb9-80">            train_state<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>train_state</span>
+<span id="cb9-81">        )</span>
+<span id="cb9-82"></span>
+<span id="cb9-83">        GPUtil.showUtilization()</span>
+<span id="cb9-84">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> is_main_process:</span>
+<span id="cb9-85">            file_path<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%s%.2d</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.pt'</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> (config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'file_prefix'</span>], epoch)</span>
+<span id="cb9-86">            torch.save(module.state_dict(), file_path)</span>
+<span id="cb9-87">        torch.cuda.empty_cache()</span>
+<span id="cb9-88"></span>
+<span id="cb9-89">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'[GPU </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gpu<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] Epoch </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>epoch<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> Validation ===='</span>, flush<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb9-90">        model.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">eval</span>()</span>
+<span id="cb9-91">        sloss<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> run_epoch(</span>
+<span id="cb9-92">            (Batch(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], pad_idx) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> valid_dataloader),</span>
+<span id="cb9-93">            model,</span>
+<span id="cb9-94">            SimpleLossCompute(module.generator, criterion),</span>
+<span id="cb9-95">            DummyOptimizer,</span>
+<span id="cb9-96">            DummyScheduler,</span>
+<span id="cb9-97">            mode<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'eval'</span></span>
+<span id="cb9-98">        )[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb9-99">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'[GPU </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gpu<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] Epoch </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>epoch<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> Validation Loss: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>sloss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>, flush<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb9-100">        torch.cuda.empty_cache()</span>
+<span id="cb9-101"></span>
+<span id="cb9-102">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> is_main_process:</span>
+<span id="cb9-103">        file_path<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%s</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">final.pt'</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> (config[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'file_prefix'</span>])</span>
+<span id="cb9-104">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Training finished.</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Model saved to </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>file_path<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.pt.'</span>, flush<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb9-105">        torch.save(</span>
+<span id="cb9-106">            module.state_dict(),</span>
+<span id="cb9-107">            file_path</span>
+<span id="cb9-108">        )</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="实例" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="实例">实例</h3>
+<p>我们使用 WMT 2014 英德翻译数据集进行训练，完成德语到英语的翻译任务。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504191540.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Training</figcaption>
+</figure>
+</div>
+<p>完整注释的 python 代码已经放进了<a href="https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg">星球</a>里。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Transformer</category>
+  <category>NLP</category>
+  <category>Deep Learning</category>
+  <category>Machine Learning</category>
+  <category>AI</category>
+  <category>Python</category>
+  <category>PyTorch</category>
+  <guid>https://leslie-lu.github.io/blog/2025/05/04/transformer/</guid>
+  <pubDate>Sun, 04 May 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250504183843.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>脱发就诊</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -65,7 +1442,6 @@
   <category>health</category>
   <guid>https://leslie-lu.github.io/blog/2025/04/23/hair_loss/</guid>
   <pubDate>Tue, 22 Apr 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://leslie-lu.github.io/blog/2025/04/23/hair_loss" medium="image"/>
 </item>
 <item>
   <title>Conventional Commits 规范详解</title>
@@ -264,7 +1640,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="8e3ee302" class="cell" data-execution_count="1">
+<div id="d6645977" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -364,7 +1740,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="25ea3139" class="cell" data-execution_count="2">
+<div id="ccb04d2c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -475,7 +1851,7 @@ font-style: inherit;">'</span>)</span></code></pre></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="286d180d" class="cell" data-execution_count="3">
+<div id="9829f3a5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -646,7 +2022,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div>
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="3175eb08" class="cell" data-execution_count="1">
+<div id="95f6cbe6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -742,7 +2118,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="94229f35" class="cell" data-execution_count="2">
+<div id="605079a7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -886,7 +2262,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="17a806a8" class="cell" data-execution_count="3">
+<div id="c13e7593" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1166,7 +2542,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="6b7dccbd" class="cell" data-execution_count="1">
+<div id="b9d0cbac" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1233,7 +2609,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="f07296f7" class="cell" data-execution_count="2">
+<div id="87384322" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -1325,7 +2701,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="a26e5be2" class="cell" data-execution_count="3">
+<div id="1e34df56" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1449,7 +2825,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="90a047fe" class="cell" data-execution_count="1">
+<div id="ce61879b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -1515,7 +2891,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="134ca631" class="cell" data-execution_count="2">
+<div id="fb64a61d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -1665,7 +3041,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="af61a539" class="cell" data-execution_count="1">
+<div id="5f556c54" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1698,7 +3074,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="c4d4c14e" class="cell" data-execution_count="2">
+<div id="3adab0e9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -1739,7 +3115,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="dd363c2e" class="cell" data-execution_count="3">
+<div id="2110ea2c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -1794,7 +3170,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="170fae2f" class="cell" data-execution_count="4">
+<div id="79744e34" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -2964,7 +4340,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="7eea5e60" class="cell" data-execution_count="1">
+<div id="8f4b4c4b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -2989,7 +4365,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="31bcfd6f" class="cell" data-execution_count="2">
+<div id="f38a7f93" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -3028,7 +4404,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="91b38df7" class="cell" data-execution_count="3">
+<div id="6acd2a38" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -3077,7 +4453,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="ddd66327" class="cell" data-execution_count="4">
+<div id="f3baa1ae" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -3282,7 +4658,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="65f31723" class="cell" data-execution_count="1">
+<div id="623a4cbc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -3307,7 +4683,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="a4946c06" class="cell" data-execution_count="2">
+<div id="3d89eac3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -3337,7 +4713,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="804ea6cc" class="cell" data-execution_count="3">
+<div id="0b5a88d1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -3790,7 +5166,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="d1a0c52e" class="cell" data-execution_count="1">
+<div id="67d15e99" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3823,7 +5199,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="f40c7a16" class="cell" data-execution_count="2">
+<div id="df382651" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3857,7 +5233,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="870dcddf" class="cell" data-execution_count="3">
+<div id="532a22d7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -3889,7 +5265,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="12f286a2" class="cell" data-execution_count="4">
+<div id="61cc5da6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -3917,7 +5293,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="0de077a8" class="cell" data-execution_count="5">
+<div id="6bc52a36" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -4197,7 +5573,7 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
 <section id="感知机的局限性xor-问题的挑战" class="level3">
 <h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
 <p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="77798aa4" class="cell" data-execution_count="1">
+<div id="0303c838" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4401,7 +5777,7 @@ font-style: inherit;">0</span>])</span></code></pre></div>
 <section id="多层感知机mlp的出现突破局限" class="level3">
 <h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
 <p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="3fa6c9a8" class="cell" data-execution_count="2">
+<div id="d410de24" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
@@ -6007,76 +7383,6 @@ font-style: inherit;">;</span></span></code></pre></div>
   <guid>https://leslie-lu.github.io/blog/2024/11/29/TRIPOD_AI/</guid>
   <pubDate>Fri, 29 Nov 2024 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202411291930779.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>SAIGE</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/11/28/SAIGE/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="saige" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="saige">SAIGE</h3>
-<p>SAIGE（Scalable and Accurate Implementation of GEneralized mixed models）是一个用于大规模基因组关联研究（GWAS）的 <a href="https://saigegit.github.io/SAIGE-doc/" title="SAIGE">R 包</a>，旨在通过<code>广义混合模型（Generalized Mixed Models, GMM）</code>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE 具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</p>
-<p>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</p>
-<section id="saige-的主要特点" class="level4">
-<h4 class="anchored" data-anchor-id="saige-的主要特点">1. SAIGE 的主要特点</h4>
-<section id="高效的计算方法" class="level5">
-<h5 class="anchored" data-anchor-id="高效的计算方法">1.1 高效的计算方法</h5>
-<p>SAIGE 的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE 通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</p>
-</section>
-<section id="处理样本相关性" class="level5">
-<h5 class="anchored" data-anchor-id="处理样本相关性">1.2 处理样本相关性</h5>
-<p>在 GWAS 中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE 通过<code>基因型关系矩阵（GRM）</code>来处理样本的相关性，使得 GWAS 结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE 都能够有效地调整，避免不必要的假阳性结果。</p>
-</section>
-<section id="支持多种表型类型" class="level5">
-<h5 class="anchored" data-anchor-id="支持多种表型类型">1.3 支持多种表型类型</h5>
-<p>SAIGE 不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<code>Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）</code>来分析稀有变异。</p>
-</section>
-<section id="稀有变异分析的扩展功能saige-gene" class="level5">
-<h5 class="anchored" data-anchor-id="稀有变异分析的扩展功能saige-gene">1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</h5>
-<p>SAIGE-GENE+ 是 SAIGE 的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN 测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</p>
-</section>
-<section id="高度可定制化" class="level5">
-<h5 class="anchored" data-anchor-id="高度可定制化">1.5 高度可定制化</h5>
-<p>SAIGE 允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有 GWAS 信号的基础上进行进一步的变异筛选。</p>
-</section>
-</section>
-<section id="saige-的工作原理" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="saige-的工作原理">2. SAIGE 的工作原理</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">SAIGE 工作流程</figcaption>
-</figure>
-</div>
-<p>SAIGE 使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</p>
-<p>在分析过程中，SAIGE 会先使用 GRM 计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用 <code>REML（限制最大似然法）</code>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP 与表型之间的关联。</p>
-<section id="计算遗传关系矩阵grm" class="level5">
-<h5 class="anchored" data-anchor-id="计算遗传关系矩阵grm">2.1 计算遗传关系矩阵（GRM）</h5>
-<p>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的 GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM 可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM 文件，并将其作为输入提供给 SAIGE。</p>
-</section>
-<section id="模型拟合与关联分析" class="level5">
-<h5 class="anchored" data-anchor-id="模型拟合与关联分析">2.2 模型拟合与关联分析</h5>
-<p>SAIGE 使用 限制最大似然法（REML） 或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth 偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</p>
-
-
-<!-- -->
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>saige</category>
-  <category>gwas</category>
-  <category>genomics</category>
-  <guid>https://leslie-lu.github.io/blog/2024/11/28/SAIGE/</guid>
-  <pubDate>Thu, 28 Nov 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
