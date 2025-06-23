@@ -11,7 +11,190 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Wed, 18 Jun 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 24 Jun 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>离线跑 VEP 必备：Reference FASTA 文件下载与预处理</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/06/24/vep/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里，我们将详细介绍如何为 Ensembl Variant Effect Predictor (VEP) 离线模式准备本地参考基因组 FASTA，以及为什么要 <code>先解压、再 bgzip 压缩</code>。看完就能举一反三，为任何物种配置 VEP 参考序列。</p>
+<section id="为什么一定要用-ensembl-官方-fasta" class="level3">
+<h3 class="anchored" data-anchor-id="为什么一定要用-ensembl-官方-fasta">1. 为什么一定要用 Ensembl 官方 FASTA？</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>坐标一致</td>
+<td>VEP 只能 100% 保证与同版本 Ensembl 发布的注释（GTF/GFF、缓存）完全匹配。用其他来源 → 坐标或 HGVS 解析可能错位</td>
+</tr>
+<tr class="even">
+<td>目录统一</td>
+<td>Ensembl FTP 采用统一的 …/release-114/fasta/<species>/dna/ 结构，自动化脚本好写</species></td>
+</tr>
+<tr class="odd">
+<td>长期维护</td>
+<td>每个 release 都保留完整历史，且提供 MD5 校验，便于版本溯源</td>
+</tr>
+</tbody>
+</table>
+<p>简言之：想省心，就用 <a href="https://www.ensembl.org/index.html" title="Ensembl">Ensembl FASTA</a> ，且版本号要与当前 VEP 保持一致。</p>
+</section>
+<section id="选哪个文件最合适" class="level3">
+<h3 class="anchored" data-anchor-id="选哪个文件最合适">2. 选哪个文件最合适？</h3>
+<p>进入 …/dna/ 目录后，你会看到一堆后缀类似的压缩包：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 52%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>文件名片段</th>
+<th>含义</th>
+<th>是否推荐做 VEP 参考？</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dna.primary_assembly.fa.gz</td>
+<td>仅含正式染色体 (24 条常染 + XY + M) 及少量 decoy</td>
+<td>✅ 推荐</td>
+</tr>
+<tr class="even">
+<td>dna.toplevel.fa.gz</td>
+<td>primary_assembly + alt contigs + patch</td>
+<td>体积大，注释慢</td>
+</tr>
+<tr class="odd">
+<td>_sm. / _rm.</td>
+<td>soft-mask / repeat-mask</td>
+<td>⛔ 不要（大小写或 N 会影响插件）</td>
+</tr>
+</tbody>
+</table>
+<p>拿 <code>unmasked + primary_assembly</code> 即可。以人类 GRCh38 为例：Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz。</p>
+</section>
+<section id="下载-解压-bgzip-三步走" class="level3">
+<h3 class="anchored" data-anchor-id="下载-解压-bgzip-三步走">3. 下载 ➜ 解压 ➜ bgzip 三步走</h3>
+<pre class="{bash}"><code>#| eval: false
+# 下载记得确认 release 号
+curl -O https://ftp.ensembl.org/pub/release-114/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+# 先完全解压；bgzip 不能直接二次压缩 .gz
+gzip -d Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+# 用 bgzip 重新块压缩，生成可随机索引的 .fa.gz
+bgzip -@ 8 Homo_sapiens.GRCh38.dna.primary_assembly.fa   # -@ 8 = 8 线程
+# （可选）提前生成索引，VEP 第一次跑时也会自动创建
+samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
+<section id="为什么要这么折腾" class="level4">
+<h4 class="anchored" data-anchor-id="为什么要这么折腾">为什么要这么折腾？</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 59%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>纯文本 .fa</td>
+<td>读取最快；占用磁盘大</td>
+<td>本地磁盘富余</td>
+</tr>
+<tr class="even">
+<td>普通 gzip .fa.gz</td>
+<td>空间省，但无法随机访问 ➜ VEP 巨慢</td>
+<td>❌ 不要</td>
+</tr>
+<tr class="odd">
+<td>bgzip .fa.gz</td>
+<td>空间省，又可随机定位 (Bio::DB::HTS::Faidx)</td>
+<td>✅ 推荐</td>
+</tr>
+</tbody>
+</table>
+<p>bgzip 和 samtools 均来自 htslib，conda 安装：<code>conda install -c bioconda htslib samtools</code>。</p>
+<p>其他物种同理，路径里换成对应英文学名即可。</p>
+</section>
+</section>
+<section id="常见报错与解决方案" class="level3">
+<h3 class="anchored" data-anchor-id="常见报错与解决方案">4. 常见报错与解决方案</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 22%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>报错</th>
+<th>原因</th>
+<th>解决</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Can't locate Bio/DB/HTS/Faidx.pm</code></td>
+<td>perl-htslib 缺失</td>
+<td><code>conda install -c bioconda perl-htslib</code></td>
+</tr>
+<tr class="even">
+<td><code>Could not find index file</code></td>
+<td><code>.fai</code> / <code>.gzi</code> 损坏或丢失</td>
+<td>手动 <code>samtools faidx *.fa.gz</code> 重新索引</td>
+</tr>
+<tr class="odd">
+<td>运行速度奇慢 + 单核</td>
+<td>用了普通 gzip 文件</td>
+<td>按上文改用 bgzip</td>
+</tr>
+<tr class="even">
+<td>内存占用飙升</td>
+<td>开太多 <code>--fork</code> 线程</td>
+<td>减少 <code>--fork</code> 或增加 <code>--buffer_size</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="take-home-message" class="level3">
+<h3 class="anchored" data-anchor-id="take-home-message">Take Home Message</h3>
+<p>下载 unmasked primary_assembly → 解压 → bgzip，然后把 .fa.gz 路径传给 –fasta，VEP 离线跑得又快又稳，磁盘占用还能少一半以上。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>VEP</category>
+  <category>reference genome</category>
+  <category>bioinformatics</category>
+  <category>variant annotation</category>
+  <category>genomics</category>
+  <guid>https://leslie-lu.github.io/blog/2025/06/24/vep/</guid>
+  <pubDate>Tue, 24 Jun 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250624022739.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>2024年度期刊影响因子 JCR2024 公布</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -233,7 +416,7 @@
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="1971445f" class="cell" data-execution_count="1">
+<div id="70220437" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -302,7 +485,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="05de6ba4" class="cell" data-execution_count="2">
+<div id="c61efdd9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -441,7 +624,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="941cc402" class="cell" data-execution_count="3">
+<div id="1eb68909" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -517,7 +700,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="a0b0cb6b" class="cell" data-execution_count="4">
+<div id="60dd2dc9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -601,7 +784,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="5c213fb6" class="cell" data-execution_count="5">
+<div id="2cb08d4f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -713,7 +896,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="55b3eba2" class="cell" data-execution_count="6">
+<div id="7972a6c5" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -882,7 +1065,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="cfdc9ccb" class="cell" data-execution_count="1">
+<div id="6d3a96d3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1100,7 +1283,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="fdf5af90" class="cell" data-execution_count="2">
+<div id="9a3b0471" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1233,7 +1416,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="e2749795" class="cell" data-execution_count="3">
+<div id="f22de209" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1323,7 +1506,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="1272e7f5" class="cell" data-execution_count="4">
+<div id="36c25895" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1418,7 +1601,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="95247d44" class="cell" data-execution_count="5">
+<div id="56fdb349" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1453,7 +1636,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="35f9cd14" class="cell" data-execution_count="6">
+<div id="92b613f5" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1539,7 +1722,7 @@ font-style: inherit;">return</span> model</span></code></pre></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="0fe8a474" class="cell" data-execution_count="7">
+<div id="f96e953c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1610,7 +1793,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="58525884" class="cell" data-execution_count="8">
+<div id="4e9acf29" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1769,7 +1952,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="d6c7de09" class="cell" data-execution_count="9">
+<div id="48eafcb9" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2464,7 +2647,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="3e56da90" class="cell" data-execution_count="1">
+<div id="7eedf0ca" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -2564,7 +2747,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="87b44ee3" class="cell" data-execution_count="2">
+<div id="16134ba5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -2675,7 +2858,7 @@ font-style: inherit;">'</span>)</span></code></pre></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="8dfa2bc8" class="cell" data-execution_count="3">
+<div id="ac87125c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2846,7 +3029,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div>
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="bda9ed56" class="cell" data-execution_count="1">
+<div id="c07fa344" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -2942,7 +3125,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="49806c19" class="cell" data-execution_count="2">
+<div id="ef0234b8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3086,7 +3269,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="e495dd4b" class="cell" data-execution_count="3">
+<div id="b68fe110" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3366,7 +3549,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="f943ef38" class="cell" data-execution_count="1">
+<div id="3e9520ad" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3433,7 +3616,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="39c0f9f8" class="cell" data-execution_count="2">
+<div id="0b75d89b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -3525,7 +3708,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="84110bb4" class="cell" data-execution_count="3">
+<div id="f1983b70" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3649,7 +3832,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="102579b7" class="cell" data-execution_count="1">
+<div id="fde72fde" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -3715,7 +3898,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="e7e61fe3" class="cell" data-execution_count="2">
+<div id="9dafe3a6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -3865,7 +4048,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="c3c99818" class="cell" data-execution_count="1">
+<div id="f5dfa229" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3898,7 +4081,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="9e56b3e5" class="cell" data-execution_count="2">
+<div id="ed36fff9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -3939,7 +4122,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="d07f4cd6" class="cell" data-execution_count="3">
+<div id="b4a01033" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -3994,7 +4177,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="79222265" class="cell" data-execution_count="4">
+<div id="33b504e0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5164,7 +5347,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="ec4c5635" class="cell" data-execution_count="1">
+<div id="0a408f54" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -5189,7 +5372,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="5c1dc4b7" class="cell" data-execution_count="2">
+<div id="8bb16d21" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -5228,7 +5411,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="366fbffe" class="cell" data-execution_count="3">
+<div id="5d2bb145" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -5277,7 +5460,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="d04cb4c6" class="cell" data-execution_count="4">
+<div id="973b801d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -5482,7 +5665,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="bebf96be" class="cell" data-execution_count="1">
+<div id="09b20e97" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -5507,7 +5690,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="89ba7719" class="cell" data-execution_count="2">
+<div id="d7d4a3a6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -5537,7 +5720,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="d3bd5c6a" class="cell" data-execution_count="3">
+<div id="de5aa9fe" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -5990,7 +6173,7 @@ numthreads: 1</code></pre>
 <section id="ped-文件" class="level5">
 <h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
 <p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="de76575c" class="cell" data-execution_count="1">
+<div id="84d8bd65" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -6023,7 +6206,7 @@ font-style: inherit;">9</span> G G T T A A G A T C</span></code></pre></div>
 <section id="map-文件" class="level5">
 <h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
 <p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="ef552e07" class="cell" data-execution_count="2">
+<div id="d09e9ebb" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -6057,7 +6240,7 @@ font-style: inherit;">14599</span></span></code></pre></div>
 <section id="fam-文件" class="level5">
 <h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
 <p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="d68a795b" class="cell" data-execution_count="3">
+<div id="2274eacc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> HG00403 <span class="dv" style="color: #AD0000;
@@ -6089,7 +6272,7 @@ font-style: inherit;">9</span></span></code></pre></div>
 <section id="bim-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
 <p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="6221afad" class="cell" data-execution_count="4">
+<div id="fe38e791" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>       <span class="dv" style="color: #AD0000;
@@ -6117,7 +6300,7 @@ font-style: inherit;">14599</span>   A       T</span></code></pre></div>
 <section id="bed-文件" class="level5">
 <h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
 <p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="5512866e" class="cell" data-execution_count="5">
+<div id="84699472" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">00</span> <span class="dv" style="color: #AD0000;
@@ -6370,404 +6553,6 @@ font-style: inherit;">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></co
   <guid>https://leslie-lu.github.io/blog/2024/12/19/vcf/</guid>
   <pubDate>Thu, 19 Dec 2024 00:00:00 GMT</pubDate>
   <media:content url="https://www.researchgate.net/publication/318713795/figure/fig1/AS:520537769877504@1501117283765/ariant-Call-Format-VCF-file-This-is-a-text-file-that-stores-genomic-information-in.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>感知机：人工神经网络的起点</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2024/12/16/perceptron/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="感知机的诞生人工神经网络的起点" class="level3">
-<h3 class="anchored" data-anchor-id="感知机的诞生人工神经网络的起点">感知机的诞生：人工神经网络的起点</h3>
-<p>1958年，弗兰克·罗森布拉特（Frank Rosenblatt）在康奈尔大学航空实验室提出了感知机，这是第一个模拟人脑神经元功能的算法模型。感知机的设计灵感来自人脑的神经元连接方式，目标是通过数学模型模仿人类学习的<a href="https://medium.com/@vincentlambert0/it-all-started-with-a-perceptron-86bd0fb80b96" title="medium">过程</a>。</p>
-<section id="核心思想" class="level4">
-<h4 class="anchored" data-anchor-id="核心思想">核心思想</h4>
-<p>感知机的基本功能是进行线性分类。它通过将输入值加权求和后与阈值比较，来决定输出属于哪个类别。简单来说，感知机的输出是一个二元值（如 0 或 1 ），用来表示输入数据所属的类别。</p>
-</section>
-<section id="数学模型" class="level4">
-<h4 class="anchored" data-anchor-id="数学模型">数学模型</h4>
-<p>感知机基于以下公式：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ay%20=%20f%5Cleft(%5Csum_%7Bi=1%7D%5E%7Bn%7D%20w_i%20x_i%20+%20b%5Cright)%0A"></p>
-</section>
-</section>
-<section id="感知机的局限性xor-问题的挑战" class="level3">
-<h3 class="anchored" data-anchor-id="感知机的局限性xor-问题的挑战">感知机的局限性：XOR 问题的挑战</h3>
-<p>尽管感知机在某些任务中表现良好，但其能力受到线性可分性限制。1969年，著名的《Perceptrons》一书由马文·明斯基（Marvin Minsky）和西摩·帕珀特（Seymour Papert）撰写，他们指出感知机无法解决非线性可分的问题，例如XOR问题。感知机只能通过一条直线分割两个类别的数据点。当数据分布无法用一条直线区分（如 XOR 问题），感知机便无能为力。这一挑战让研究者认识到，单层感知机无法胜任复杂任务，需要更复杂的多层结构来解决。</p>
-<div id="208ec5d0" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> Perceptron:</span>
-<span id="cb1-2">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, input_size, learning_rate<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.01</span>, epochs<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000</span>):</span>
-<span id="cb1-3">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialize weights to zeros, with one extra weight for the bias</span></span>
-<span id="cb1-4">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.weights <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros(input_size <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># +1 for the bias</span></span>
-<span id="cb1-5">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> learning_rate  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Learning rate controls weight updates</span></span>
-<span id="cb1-6">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epochs <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> epochs  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Number of iterations over the training data</span></span>
-<span id="cb1-7"></span>
-<span id="cb1-8">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> activation_function(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, x):</span>
-<span id="cb1-9">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Apply step function: return 1 if x &gt;= 0, else return 0</span></span>
-<span id="cb1-10">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb1-11"></span>
-<span id="cb1-12">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> predict(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, x):</span>
-<span id="cb1-13">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute the weighted sum (dot product), including bias</span></span>
-<span id="cb1-14">        z <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.weights.T.dot(np.insert(x, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Insert bias term into input</span></span>
-<span id="cb1-15">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.activation_function(z)</span>
-<span id="cb1-16"></span>
-<span id="cb1-17">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> train(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, X, y):</span>
-<span id="cb1-18">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epochs):</span>
-<span id="cb1-19">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> xi, target <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">zip</span>(X, y):</span>
-<span id="cb1-20">                prediction <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.predict(xi)</span>
-<span id="cb1-21">                error <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> target <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> prediction</span>
-<span id="cb1-22">                update <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> error</span>
-<span id="cb1-23">                </span>
-<span id="cb1-24">                <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.weights[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> update <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> xi </span>
-<span id="cb1-25">                <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.weights[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> update</span>
-<span id="cb1-26"></span>
-<span id="cb1-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Training data (XOR logic)</span></span>
-<span id="cb1-28">X <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>], [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>], [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>], [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]])</span>
-<span id="cb1-29">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>])</span></code></pre></div>
-</div>
-</section>
-<section id="多层感知机mlp的出现突破局限" class="level3">
-<h3 class="anchored" data-anchor-id="多层感知机mlp的出现突破局限">多层感知机（MLP）的出现：突破局限</h3>
-<p>为了克服单层感知机的局限性，研究者提出了多层感知机（Multi-Layer Perceptron, MLP）。它通过引入隐藏层和非线性激活函数（如 sigmoid 函数），实现了对复杂数据的学习能力。1986 年，David Rumelhart等人提出了反向传播（Backpropagation）算法，这使得训练多层感知机变得可行。该算法通过梯度下降更新权重，优化了模型性能。此外，隐藏层中的非线性激活函数打破了单层感知机的线性限制，使模型能够处理复杂的非线性关系。</p>
-<div id="7bc2f5e6" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> tensorflow.keras.models <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> Sequential</span>
-<span id="cb2-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> tensorflow.keras.layers <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> Dense, Input</span>
-<span id="cb2-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> tensorflow.keras.optimizers <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> Adam</span>
-<span id="cb2-4"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> MLPerceptron:</span>
-<span id="cb2-5">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, input_size, learning_rate<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span>, epochs<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2000</span>):</span>
-<span id="cb2-6">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.input_size <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> input_size</span>
-<span id="cb2-7">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.learning_rate <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> learning_rate</span>
-<span id="cb2-8">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epochs <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> epochs</span>
-<span id="cb2-9">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Sequential()</span>
-<span id="cb2-10">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.add(Input((input_size,)))  </span>
-<span id="cb2-11">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.add(Dense(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, activation<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"tanh"</span>, ))  </span>
-<span id="cb2-12">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.add(Dense(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, activation<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sigmoid"</span>)) </span>
-<span id="cb2-13">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">compile</span>(</span>
-<span id="cb2-14">            loss<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"binary_crossentropy"</span>, optimizer<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"adam"</span>, metrics<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"accuracy"</span>]</span>
-<span id="cb2-15">        )</span>
-<span id="cb2-16"></span>
-<span id="cb2-17">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> train(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, X, y):</span>
-<span id="cb2-18">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.fit(X, y, epochs<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epochs, verbose<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb2-19"></span>
-<span id="cb2-20">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> predict(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, x):</span>
-<span id="cb2-21">        prediction <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.predict(np.array([x]))</span>
-<span id="cb2-22">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> prediction <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>  </span></code></pre></div>
-</div>
-</section>
-<section id="感知机的现代继承者" class="level3">
-<h3 class="anchored" data-anchor-id="感知机的现代继承者">感知机的现代继承者</h3>
-<p>虽然感知机本身不再是当前人工智能的核心技术，但它为后续技术的发展奠定了重要基础。现代深度学习模型（如卷积神经网络、循环神经网络）可以被视为感知机的扩展和进化。多层感知机推动了深度神经网络的研究热潮，尤其是在 2010 年代 GPU 计算力提升后，深度学习应用于图像识别、自然语言处理等领域。感知机的提出使得研究者开始探索机器如何<code>学习</code>这一基本问题，也激发了人工智能领域的快速发展。</p>
-</section>
-<section id="感知机的意义与启示" class="level3">
-<h3 class="anchored" data-anchor-id="感知机的意义与启示">感知机的意义与启示</h3>
-<p>感知机的历史体现了技术发展的非线性特性：早期的技术突破可能因为局限性而受到批评，但它们却是后续更复杂技术的基石。感知机虽然简单，但它的概念推动了我们对人类学习过程和计算机模拟的理解。虽然感知机的局限曾导致人工智能研究进入<code>低谷期</code>（AI冬天），但最终多层感知机证明了它的价值。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>perceptron</category>
-  <category>artificial neural network</category>
-  <category>machine learning</category>
-  <category>deep learning</category>
-  <guid>https://leslie-lu.github.io/blog/2024/12/16/perceptron/</guid>
-  <pubDate>Mon, 16 Dec 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://miro.medium.com/v2/resize:fit:828/format:webp/1*6OkGcBSlGpA5TtlRxhF6zA.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
