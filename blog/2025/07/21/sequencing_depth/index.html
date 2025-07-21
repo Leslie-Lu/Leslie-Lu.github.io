@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="linux">
+<meta name="description" content="how sequencing depth affects GWAS and multi-omics research">
 
-<title>计算机概论5 | Zhen Lu – Zhen Lu</title>
+<title>测序深度如何影响GWAS及多组学研究 | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,29 +57,49 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../..//files/favicon-512.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-9f30c2c2d2429ed22c1cf9f617479b3b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-61c22eea911bb73ea9518257874a7908.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-9f30c2c2d2429ed22c1cf9f617479b3b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-61c22eea911bb73ea9518257874a7908.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,7 +155,7 @@ div.column-margin+hr.dinkus {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
   </div>
@@ -146,37 +166,37 @@ div.column-margin+hr.dinkus {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../blog/index.html"> 
+    <a class="nav-link" href="../../../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../talks/index.html"> 
+    <a class="nav-link" href="../../../../../talks/index.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../publications/index.html"> 
+    <a class="nav-link" href="../../../../../publications/index.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../cv/index.html"> 
+    <a class="nav-link" href="../../../../../cv/index.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../news/index.html"> 
+    <a class="nav-link" href="../../../../../news/index.html"> 
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../uses/index.html"> 
+    <a class="nav-link" href="../../../../../uses/index.html"> 
 <span class="menu-text">Uses</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../atom.xml"> 
+    <a class="nav-link" href="../../../../../atom.xml"> 
 <span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
@@ -222,14 +242,17 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">计算机概论5</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">测序深度如何影响GWAS及多组学研究</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          linux
+          how sequencing depth affects GWAS and multi-omics research
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">linux</div>
+                <div class="quarto-category">sequencing depth</div>
+                <div class="quarto-category">GWAS</div>
+                <div class="quarto-category">multi-omics</div>
+                <div class="quarto-category">Mendelian randomization</div>
               </div>
                   </div>
   </div>
@@ -247,7 +270,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Friday, January 31, 2020</p>
+        <p class="date">Monday, July 21, 2025</p>
       </div>
     </div>
     
@@ -262,9 +285,10 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#cmos与bios" id="toc-cmos与bios" class="nav-link active" data-scroll-target="#cmos与bios">CMOS与BIOS</a></li>
-  <li><a href="#设备io地址与irq中断请求" id="toc-设备io地址与irq中断请求" class="nav-link" data-scroll-target="#设备io地址与irq中断请求">设备I/O地址与IRQ中断请求</a></li>
-  <li><a href="#数据表示方法" id="toc-数据表示方法" class="nav-link" data-scroll-target="#数据表示方法">数据表示方法</a></li>
+  <li><a href="#什么是测序深度" id="toc-什么是测序深度" class="nav-link active" data-scroll-target="#什么是测序深度">什么是测序深度？</a></li>
+  <li><a href="#测序深度对-gwas-分析的影响" id="toc-测序深度对-gwas-分析的影响" class="nav-link" data-scroll-target="#测序深度对-gwas-分析的影响">测序深度对 GWAS 分析的影响</a></li>
+  <li><a href="#测序深度在多组学研究中的重要性" id="toc-测序深度在多组学研究中的重要性" class="nav-link" data-scroll-target="#测序深度在多组学研究中的重要性">测序深度在多组学研究中的重要性</a></li>
+  <li><a href="#如何确定合适的测序深度" id="toc-如何确定合适的测序深度" class="nav-link" data-scroll-target="#如何确定合适的测序深度">如何确定合适的测序深度？</a></li>
   </ul>
 </nav>
 </nav>
@@ -279,26 +303,54 @@ div.column-margin+hr.dinkus {
 
 
 
-<section id="cmos与bios" class="level3">
-<h3 class="anchored" data-anchor-id="cmos与bios">CMOS与BIOS</h3>
-<p>前面我们提过CMOS与BIOS的功能：CMOS主要记录主板上面的重要参数，包括系统时间、CPU电压与频率、各项设备的I/O地址与IRQ等。BIOS是写入到主板上某一块flash的程序，它可以在计算机启动的时候执行，以加载CMOS当中的参数，并尝试调用存储设备中的引导程序，进一步进入操作系统当中。BIOS程序可以修改CMOS中的数据，每种主板进入BIOS设置程序的按键都不同，一般桌面电脑常见的是使用[Del]按键进入BIOS设置界面。</p>
+<p>随着基因组学技术的进步，越来越多的研究采用测序技术进行遗传变异的检测与分析。测序深度（Sequencing Depth）是影响基因组学数据质量的重要指标之一，它直接关系到遗传变异的准确识别以及后续 GWAS 和多组学研究的结果可靠性。</p>
+<section id="什么是测序深度" class="level3">
+<h3 class="anchored" data-anchor-id="什么是测序深度">什么是测序深度？</h3>
+<p>测序深度通常用「X」表示，它指的是基因组中每个碱基位置被测序读取（Reads）的平均次数。比如，10X测序深度意味着每个位点平均被测序10次。</p>
+<p>更高的测序深度通常意味着更可靠的数据，因为位点覆盖次数越多，测序错误的概率越小，变异检测的准确性越高。</p>
 </section>
-<section id="设备io地址与irq中断请求" class="level3">
-<h3 class="anchored" data-anchor-id="设备io地址与irq中断请求">设备I/O地址与IRQ中断请求</h3>
-<p>主板是负责各个电脑组件之间的通信，但是电脑组件实在太多，有输出/输入不同的存储设备等，这个时候主板芯片组就需要用到I/O地址与IRQ进行设备间的通信。I/O地址有点类似于每个设备专属的门牌号码，一般来说，不能有两个设备使用同一个I/O地址，否则系统会不知道该运行哪个设备。IRQ可以想成是各个设备门牌连接到邮件中心（CPU）的专门路径，各设备可以通过IRQ中断请求来告知CPU该设备的工作情况，以方便CPU进行工作分配的任务。</p>
+<section id="测序深度对-gwas-分析的影响" class="level3">
+<h3 class="anchored" data-anchor-id="测序深度对-gwas-分析的影响">测序深度对 GWAS 分析的影响</h3>
+<section id="基因型准确性" class="level4">
+<h4 class="anchored" data-anchor-id="基因型准确性">1. 基因型准确性</h4>
+<p>GWAS 需要准确识别个体基因型（Genotype），而基因型准确性直接受测序深度的影响。当测序深度较低（如 0.1x）时，个体基因型可能无法直接可靠地确定，但可以通过群体信息推测（Imputation）。推测准确性通常用 R² 表示，R² 越接近 1，表示推测基因型越可靠。</p>
+<p>例如，Liu, S. et al. <span class="citation" data-cites="RN1360">(<a href="#ref-RN1360" role="doc-biblioref">Liu et al. 2024</a>)</span> 研究直接从群体水平估计等位基因频率与多态性，发现即使测序深度低至 0.1x 超低测序深度（如 NIPT 数据）下，基因型推测的 R² 仍可超过 0.84。这意味着即使测序深度不高，通过推测也可以实现有效样本量的大幅增加，例如 10 万个低深度样本，实际有效样本量仍能达到 8.4 万个。</p>
 </section>
-<section id="数据表示方法" class="level3">
-<h3 class="anchored" data-anchor-id="数据表示方法">数据表示方法</h3>
-<p>事实上我们的电脑只认识0与1，记录的数据也是只能记录0与1而已。早期的电脑使用的是利用通电与否的特性制造的电子管，如果通电就是1，没有通电就是0，后来沿用至今，也就是我们说的二进制（binary）。电脑在表示利用数字时，利用二进制的转换进行对数字的处理。</p>
-<p>而对于文字的记录，事实上文本文件也是被记录为0与1，而这个文件的内容在被读取查看时，必须要经过一个编码系统的处理才行。所谓的编码系统可以看成是一个字码对照表。当我们要写入文件的字符数据时，该文字数据会由编码对照表将该字符转成数字后，再存入文件当中。同样，当我们要将文件内容的数据读出时，也会经过编码对照表将该数字转成对应的字符后，再显示到屏幕中。如果编码对照表写错，导致对照的字符产生误差，就会出现乱码。</p>
-<p>常用的英文编码表为ASCII系统，这个编码系统中，每个符号（英文、数字或符号等）都会占用1字节的记录，因此总共会有2的8次方即256种变化。国际组织ISO/IEC制定了所谓的Unicode编码系统，即我们常常说的UTF-8。这个编码打破了所有国家不同的编码之间的限制，因此目前互联网网站大多以此编码系统为主。</p>
+<section id="避免冗余信号ld聚类" class="level4">
+<h4 class="anchored" data-anchor-id="避免冗余信号ld聚类">2. 避免冗余信号（LD聚类）</h4>
+<p>在 GWAS 分析中，通常会对高度相关的 SNP（连锁不平衡，LD）进行聚类（LD clumping），避免冗余的关联信号。当测序深度不充分时，LD 结构的识别可能不准确，导致聚类失效或误导性结果。因此，适当提高测序深度有助于更准确地揭示 LD 结构，减少假阳性信号。</p>
+</section>
+</section>
+<section id="测序深度在多组学研究中的重要性" class="level3">
+<h3 class="anchored" data-anchor-id="测序深度在多组学研究中的重要性">测序深度在多组学研究中的重要性</h3>
+<section id="单倍型haplotype构建的准确性" class="level4">
+<h4 class="anchored" data-anchor-id="单倍型haplotype构建的准确性">1. 单倍型（Haplotype）构建的准确性</h4>
+<p>高质量的单倍型（High-quality haplotype）构建依赖于较高的测序深度或高质量的数据来源（如长读长测序技术）。单倍型能够帮助更精确地理解遗传变异的连锁关系，在 GWAS、eQTL、孟德尔随机化（MR）分析研究中起关键作用。</p>
+</section>
+<section id="mr-分析" class="level4">
+<h4 class="anchored" data-anchor-id="mr-分析">2. MR 分析</h4>
+<p>孟德尔随机化利用 SNP 作为工具变量，研究暴露因素与疾病结局的因果关系。SNP 的准确识别与基因型调用至关重要，测序深度的提高能大幅提升工具变量的有效性。</p>
+</section>
+</section>
+<section id="如何确定合适的测序深度" class="level3">
+<h3 class="anchored" data-anchor-id="如何确定合适的测序深度">如何确定合适的测序深度？</h3>
+<ul>
+<li><p>研究目的：不同研究需求的测序深度不同，例如全基因组研究推荐≥30X，超低深度测序可能适合大规模群体推测分析。</p></li>
+<li><p>经费限制：高深度测序成本较高，需在精度与成本之间权衡。</p></li>
+<li><p>分析需求：是否需要精细 LD 结构、单倍型精确构建、个体级基因型，决定了所需的测序深度水平。</p></li>
+</ul>
 
 
 <!-- -->
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-RN1360" class="csl-entry" role="listitem">
+Liu, Siyang, Yanhong Liu, Yuqin Gu, Xingchen Lin, Huanhuan Zhu, Hankui Liu, Zhe Xu, et al. 2024. <span>“Utilizing Non-Invasive Prenatal Test Sequencing Data for Human Genetic Investigation.”</span> Journal Article. <em>Cell Genomics</em> 4 (10): 100669. https://doi.org/<a href="https://doi.org/10.1016/j.xgen.2024.100669">https://doi.org/10.1016/j.xgen.2024.100669</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -779,45 +831,70 @@ div.column-margin+hr.dinkus {
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "计算机概论5"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-01-31</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "linux"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231510243.webp"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "测序深度如何影响GWAS及多组学研究"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-07-21</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "how sequencing depth affects GWAS and multi-omics research"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250721174048.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linux</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## CMOS与BIOS</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>前面我们提过CMOS与BIOS的功能：CMOS主要记录主板上面的重要参数，包括系统时间、CPU电压与频率、各项设备的I/O地址与IRQ等。BIOS是写入到主板上某一块flash的程序，它可以在计算机启动的时候执行，以加载CMOS当中的参数，并尝试调用存储设备中的引导程序，进一步进入操作系统当中。BIOS程序可以修改CMOS中的数据，每种主板进入BIOS设置程序的按键都不同，一般桌面电脑常见的是使用<span class="co">[</span><span class="ot">Del</span><span class="co">]</span>按键进入BIOS设置界面。</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 设备I/O地址与IRQ中断请求</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>主板是负责各个电脑组件之间的通信，但是电脑组件实在太多，有输出/输入不同的存储设备等，这个时候主板芯片组就需要用到I/O地址与IRQ进行设备间的通信。I/O地址有点类似于每个设备专属的门牌号码，一般来说，不能有两个设备使用同一个I/O地址，否则系统会不知道该运行哪个设备。IRQ可以想成是各个设备门牌连接到邮件中心（CPU）的专门路径，各设备可以通过IRQ中断请求来告知CPU该设备的工作情况，以方便CPU进行工作分配的任务。</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据表示方法</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>事实上我们的电脑只认识0与1，记录的数据也是只能记录0与1而已。早期的电脑使用的是利用通电与否的特性制造的电子管，如果通电就是1，没有通电就是0，后来沿用至今，也就是我们说的二进制（binary）。电脑在表示利用数字时，利用二进制的转换进行对数字的处理。</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>而对于文字的记录，事实上文本文件也是被记录为0与1，而这个文件的内容在被读取查看时，必须要经过一个编码系统的处理才行。所谓的编码系统可以看成是一个字码对照表。当我们要写入文件的字符数据时，该文字数据会由编码对照表将该字符转成数字后，再存入文件当中。同样，当我们要将文件内容的数据读出时，也会经过编码对照表将该数字转成对应的字符后，再显示到屏幕中。如果编码对照表写错，导致对照的字符产生误差，就会出现乱码。</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>常用的英文编码表为ASCII系统，这个编码系统中，每个符号（英文、数字或符号等）都会占用1字节的记录，因此总共会有2的8次方即256种变化。国际组织ISO/IEC制定了所谓的Unicode编码系统，即我们常常说的UTF-8。这个编码打破了所有国家不同的编码之间的限制，因此目前互联网网站大多以此编码系统为主。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - sequencing depth</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - GWAS</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - multi-omics</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - Mendelian randomization</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>随着基因组学技术的进步，越来越多的研究采用测序技术进行遗传变异的检测与分析。测序深度（Sequencing Depth）是影响基因组学数据质量的重要指标之一，它直接关系到遗传变异的准确识别以及后续 GWAS 和多组学研究的结果可靠性。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是测序深度？</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>测序深度通常用「X」表示，它指的是基因组中每个碱基位置被测序读取（Reads）的平均次数。比如，10X测序深度意味着每个位点平均被测序10次。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>更高的测序深度通常意味着更可靠的数据，因为位点覆盖次数越多，测序错误的概率越小，变异检测的准确性越高。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度对 GWAS 分析的影响</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 基因型准确性</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>GWAS 需要准确识别个体基因型（Genotype），而基因型准确性直接受测序深度的影响。当测序深度较低（如 0.1x）时，个体基因型可能无法直接可靠地确定，但可以通过群体信息推测（Imputation）。推测准确性通常用 R² 表示，R² 越接近 1，表示推测基因型越可靠。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>例如，Liu, S. et al. <span class="co">[</span><span class="ot">@RN1360</span><span class="co">]</span> 研究直接从群体水平估计等位基因频率与多态性，发现即使测序深度低至 0.1x 超低测序深度（如 NIPT 数据）下，基因型推测的 R² 仍可超过 0.84。这意味着即使测序深度不高，通过推测也可以实现有效样本量的大幅增加，例如 10 万个低深度样本，实际有效样本量仍能达到 8.4 万个。</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 避免冗余信号（LD聚类）</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，通常会对高度相关的 SNP（连锁不平衡，LD）进行聚类（LD clumping），避免冗余的关联信号。当测序深度不充分时，LD 结构的识别可能不准确，导致聚类失效或误导性结果。因此，适当提高测序深度有助于更准确地揭示 LD 结构，减少假阳性信号。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度在多组学研究中的重要性</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 单倍型（Haplotype）构建的准确性</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>高质量的单倍型（High-quality haplotype）构建依赖于较高的测序深度或高质量的数据来源（如长读长测序技术）。单倍型能够帮助更精确地理解遗传变异的连锁关系，在 GWAS、eQTL、孟德尔随机化（MR）分析研究中起关键作用。</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. MR 分析</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>孟德尔随机化利用 SNP 作为工具变量，研究暴露因素与疾病结局的因果关系。SNP 的准确识别与基因型调用至关重要，测序深度的提高能大幅提升工具变量的有效性。</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何确定合适的测序深度？</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>研究目的：不同研究需求的测序深度不同，例如全基因组研究推荐≥30X，超低深度测序可能适合大规模群体推测分析。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经费限制：高深度测序成本较高，需在精度与成本之间权衡。</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分析需求：是否需要精细 LD 结构、单倍型精确构建、个体级基因型，决定了所需的测序深度水平。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
