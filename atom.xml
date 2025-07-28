@@ -145,7 +145,6 @@
   <category>subject one exam</category>
   <guid>https://leslie-lu.github.io/blog/2025/07/28/driver_license_test/</guid>
   <pubDate>Mon, 28 Jul 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://leslie-lu.github.io/blog/2025/07/28/driver_license_test" medium="image"/>
 </item>
 <item>
   <title>测序深度如何影响GWAS及多组学研究</title>
@@ -524,7 +523,6 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
   <category>dermatology</category>
   <guid>https://leslie-lu.github.io/blog/2025/06/17/mole/</guid>
   <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://leslie-lu.github.io/blog/2025/06/17/mole" medium="image"/>
 </item>
 <item>
   <title>在DNAnexus平台进行生信分析的省钱攻略</title>
@@ -682,7 +680,7 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="2185fd82" class="cell" data-execution_count="1">
+<div id="8603e7bb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -751,7 +749,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="08fe7e04" class="cell" data-execution_count="2">
+<div id="c25893a9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -890,7 +888,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="4323bc0d" class="cell" data-execution_count="3">
+<div id="3ad6239f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -966,7 +964,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="1cfa048c" class="cell" data-execution_count="4">
+<div id="85b1eaa8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -1050,7 +1048,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="e4c3576d" class="cell" data-execution_count="5">
+<div id="2fbe0adf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -1162,7 +1160,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="f385f2a8" class="cell" data-execution_count="6">
+<div id="0aef6028" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1331,7 +1329,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="422bc558" class="cell" data-execution_count="1">
+<div id="51ba7a6f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1549,7 +1547,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="7877bc7c" class="cell" data-execution_count="2">
+<div id="ee2fcc19" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1682,7 +1680,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="e8627fe5" class="cell" data-execution_count="3">
+<div id="a14639df" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1772,7 +1770,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="921dd208" class="cell" data-execution_count="4">
+<div id="4e8843c5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1867,7 +1865,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="bc8d771c" class="cell" data-execution_count="5">
+<div id="fa078945" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1902,7 +1900,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="b84e4f26" class="cell" data-execution_count="6">
+<div id="91e66414" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1988,7 +1986,7 @@ font-style: inherit;">return</span> model</span></code></pre></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="e2df8888" class="cell" data-execution_count="7">
+<div id="68d0971e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2059,7 +2057,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="e53db9fb" class="cell" data-execution_count="8">
+<div id="b2bfb2b5" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2218,7 +2216,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="6afd215e" class="cell" data-execution_count="9">
+<div id="330dd8a0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2913,7 +2911,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="9a2cb727" class="cell" data-execution_count="1">
+<div id="8896ef46" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -3013,7 +3011,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="9eca5caa" class="cell" data-execution_count="2">
+<div id="a8f23388" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -3124,7 +3122,7 @@ font-style: inherit;">'</span>)</span></code></pre></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="0891e4ae" class="cell" data-execution_count="3">
+<div id="5d8a5fe5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3295,7 +3293,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div>
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="3fd48691" class="cell" data-execution_count="1">
+<div id="c6a67c3d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -3391,7 +3389,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="69ae0dcf" class="cell" data-execution_count="2">
+<div id="7707232c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3535,7 +3533,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="fcaa33c2" class="cell" data-execution_count="3">
+<div id="6b5b76ce" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3815,7 +3813,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="a012cf09" class="cell" data-execution_count="1">
+<div id="bd1a64d5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3882,7 +3880,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="9d93d350" class="cell" data-execution_count="2">
+<div id="7f5946d4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -3974,7 +3972,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="d643400c" class="cell" data-execution_count="3">
+<div id="d5f93d2c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4098,7 +4096,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="2cb2b3fb" class="cell" data-execution_count="1">
+<div id="bc49379b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -4164,7 +4162,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="2d574c89" class="cell" data-execution_count="2">
+<div id="02e7d19c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -4314,7 +4312,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="2fe8779b" class="cell" data-execution_count="1">
+<div id="f0b26bed" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4347,7 +4345,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="40c47610" class="cell" data-execution_count="2">
+<div id="26be161b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -4388,7 +4386,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="d90830f7" class="cell" data-execution_count="3">
+<div id="42d6103b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -4443,7 +4441,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="a07508ef" class="cell" data-execution_count="4">
+<div id="5b44812a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -5613,7 +5611,7 @@ find /path/to/files -name "*.txt" -exec cp {} /path/to/backup \;</code></pre>
 <section id="载入数据" class="level4">
 <h4 class="anchored" data-anchor-id="载入数据">1. 载入数据</h4>
 <p>首先，我们需要加载基因型数据，通常这些数据存储在 VCF 格式的文件中。使用 Hail 的 <code>import_vcf()</code> 函数，可以轻松导入 VCF 文件。</p>
-<div id="00384682" class="cell" data-execution_count="1">
+<div id="4659298c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -5638,7 +5636,7 @@ font-style: inherit;">'GRCh38'</span>)</span></code></pre></div>
 <section id="数据注释" class="level4">
 <h4 class="anchored" data-anchor-id="数据注释">2. 数据注释</h4>
 <p>为了确保导出的 PLINK 文件包含完整的信息，我们通常需要对数据进行注释。例如，标注样本的性别、家族信息等。这可以通过 <code>annotate_cols()</code> 函数完成。</p>
-<div id="727952d7" class="cell" data-execution_count="2">
+<div id="986204f4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">mt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mt.annotate_cols(</span>
@@ -5677,7 +5675,7 @@ font-style: inherit;"># 表型（-9 表示缺失值）</span></span>
 <section id="导出为-plink-文件" class="level4">
 <h4 class="anchored" data-anchor-id="导出为-plink-文件">3. 导出为 PLINK 文件</h4>
 <p>现在，数据已经准备好，可以使用 <code>export_plink()</code> 函数将其导出为 PLINK 所需的 <code>.bed</code>, <code>.bim</code>, <code>.fam</code> 文件。</p>
-<div id="ad8dfddd" class="cell" data-execution_count="3">
+<div id="072f4967" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">hl.export_plink(</span>
 <span id="cb3-2">    mt, <span class="st" style="color: #20794D;
 background-color: null;
@@ -5726,7 +5724,7 @@ font-style: inherit;"># 表型信息</span></span>
 <section id="进阶功能批量导出与错误处理" class="level3">
 <h3 class="anchored" data-anchor-id="进阶功能批量导出与错误处理">进阶功能：批量导出与错误处理</h3>
 <p>当处理大量基因数据时，可能会涉及多个数据批次。在这种情况下，使用批处理来导出 PLINK 文件变得尤为重要。例如，我们可以使用 Python 脚本批量处理多个数据集，并通过适当的异常处理机制确保过程顺利进行。</p>
-<div id="3ff817d8" class="cell" data-execution_count="4">
+<div id="66eb4783" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> subprocess</span>
@@ -5931,7 +5929,7 @@ font-style: inherit;">.fam'</span>])</span></code></pre></div>
 <section id="使用hail加载和处理vcf文件" class="level4">
 <h4 class="anchored" data-anchor-id="使用hail加载和处理vcf文件">1. 使用Hail加载和处理VCF文件</h4>
 <p>在 DNAnexus 平台上，VCF 文件通常存储在项目中，用户可以直接加载到 Hail 中进行处理。Hail 提供了简便的 API 来读取 VCF 文件，下面是一个简单的示例，展示如何在 Hail 中加载 VCF 文件：</p>
-<div id="8f3834ec" class="cell" data-execution_count="1">
+<div id="1cd3b077" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
@@ -5956,7 +5954,7 @@ font-style: inherit;">=</span> hl.import_vcf(vcf_file)</span></code></pre></div>
 <h4 class="anchored" data-anchor-id="使用-hail-进行数据质量控制">2. 使用 Hail 进行数据质量控制</h4>
 <p>在基因组数据分析中，数据质量控制（QC）是不可或缺的一部分，Hail 为此提供了多种功能，例如去除低质量的样本或变异、过滤变异的深度或基因型质量等。</p>
 <p>以下是一个常见的 QC 操作示例，过滤掉低质量的变异：</p>
-<div id="e8de53cb" class="cell" data-execution_count="2">
+<div id="220b6402" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 过滤低质量变异</span></span>
@@ -5986,7 +5984,7 @@ font-style: inherit;">30</span>)</span></code></pre></div>
 <section id="加载-pvcf-文件" class="level4">
 <h4 class="anchored" data-anchor-id="加载-pvcf-文件">2. 加载 pVCF 文件</h4>
 <p>使用 Hail 的 <code>import_vcf</code> 方法加载 pVCF 文件。需要注意的是，pVCF 文件通常由多个分区组成，因此在导入时需要确保指定正确的路径。</p>
-<div id="1aa09d54" class="cell" data-execution_count="3">
+<div id="3f4242ea" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> hail <span class="im" style="color: #00769E;
