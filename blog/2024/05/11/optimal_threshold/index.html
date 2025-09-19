@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
 <script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-437f30c51863257f6a0e3763259ee6fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-45e8e462cd760eca75dbd85b13f1b7a2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-00193093f0ed2ceebd9d09849ed1d13d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/bootstrap/bootstrap-bfe3d73813f22870a4ae276797d2472b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
@@ -135,6 +136,8 @@ div.column-margin+hr.dinkus {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
@@ -285,7 +288,7 @@ div.column-margin+hr.dinkus {
 <h3 class="anchored" data-anchor-id="数据准备和参数选择">数据准备和参数选择</h3>
 <p>首先是数据准备：</p>
 <div id="libraries-n-things" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -305,7 +308,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Xtrain, Xvalid, ytrain, yvalid <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">.20</span>, random_state<span class="op">=</span><span class="dv">516</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Xtrain.shape: </span><span class="sc">{</span>Xtrain<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Xvalid.shape: </span><span class="sc">{</span>Xvalid<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Xvalid.shape: </span><span class="sc">{</span>Xvalid<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Xtrain.shape: (455, 30)
 Xvalid.shape: (114, 30)</code></pre>
@@ -313,7 +316,7 @@ Xvalid.shape: (114, 30)</code></pre>
 </div>
 <p>模型我们这里选择<em>随机森林</em>。超参的选择，基于<code>GridSearchCV</code>，这里也不赘述。有一个点需要说明，由于使用的是肿瘤数据集，在这种情况下，我们更关注的是<code>recall</code>，即尽量减少假阴性的情况。因而，我们在训练模型时，也是将recall作为评价指标。</p>
 <div id="train-model-rf" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
@@ -331,7 +334,7 @@ Xvalid.shape: (114, 30)</code></pre>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>mdl.fit(Xtrain, ytrain)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best parameters: </span><span class="sc">{</span>mdl<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best parameters: </span><span class="sc">{</span>mdl<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>best parameters: {'ccp_alpha': 0, 'min_samples_leaf': 4, 'n_estimators': 100}</code></pre>
 </div>
@@ -341,8 +344,8 @@ Xvalid.shape: (114, 30)</code></pre>
 <h3 class="anchored" data-anchor-id="模型预测">模型预测</h3>
 <p>拿到模型后，自然我们可以开始预测：</p>
 <div id="cell-predict" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> mdl.predict_proba(Xvalid)[:,<span class="dv">1</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ypred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> mdl.predict_proba(Xvalid)[:,<span class="dv">1</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ypred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="predict" class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array([0.005     , 0.82743637, 0.97088095, 0.        , 0.        , 1.        , 0.98020202, 0.67380556, 0.        , 0.99333333, 0.9975    , 0.30048576, 0.9528113 , 0.99666667, 0.04102381, 0.99444444, 1.        , 0.828226  , 0.        , 0.        , 0.97916667, 1.        , 0.99607143, 0.90425163, 0.        , 0.02844156, 0.99333333, 0.98183333, 0.9975    , 0.08869769, 0.97369841, 0.        , 1.        , 0.71100866, 0.96022727, 0.        , 0.71200885, 0.06103175, 0.005     , 0.99490476, 0.1644127 , 0.        , 0.23646934, 1.        , 0.57680164, 0.64901715, 0.9975    , 0.61790818, 0.95509668, 0.99383333, 0.04570455, 0.97575758, 1.        , 0.47115815, 0.92422619, 0.77371415, 0.        , 1.        , 0.26198657, 0.        , 0.28206638, 0.95216162, 0.98761905, 0.99464286, 0.98704762, 0.85579351, 0.10036905, 0.00222222, 0.98011905, 0.99857143, 0.92285967, 0.95180556, 0.97546947, 0.84433189, 0.005     , 0.99833333, 0.83616339, 1.        , 0.9955    , 1.        , 0.99833333, 1.        ,
        0.86399315, 0.9807381 , 0.        , 0.99833333, 0.9975    , 0.        , 0.98733333, 0.96822727, 0.23980827, 0.7914127 , 0.        , 0.98133333, 1.        , 1.        , 0.89251019, 0.9498226 , 0.18943254, 0.83494391, 0.9975    , 1.        , 0.77079113, 0.99722222, 0.30208297, 1.        , 0.92111977, 0.99428571, 0.91936508, 0.47118074, 0.98467172, 0.006     , 0.05750305, 0.96954978])</code></pre>
@@ -350,11 +353,11 @@ Xvalid.shape: (114, 30)</code></pre>
 </div>
 <p>这个时候，我们要讲的东西就来了。一般地，我们会选择0.50作为分类阈值，即大于0.50的为正类，小于0.50的为负类。</p>
 <div id="threshold-0.50" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> mdl.predict_proba(Xvalid)[:,<span class="dv">1</span>].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> mdl.predict_proba(Xvalid)[:,<span class="dv">1</span>].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> mdl.predict(Xvalid).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> np.concatenate([ypred, yhat], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(preds)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0.005      0.        ]
  [0.82743637 1.        ]
@@ -483,16 +486,16 @@ Xvalid.shape: (114, 30)</code></pre>
 <h4 class="anchored" data-anchor-id="阳性类别prevalance">1. 阳性类别prevalance</h4>
 <p>我们看下这个数据集中阳性类别的比例：</p>
 <div id="positive-prevalance" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Proportion of positives in training set: </span><span class="sc">{</span>ytrain<span class="sc">.</span><span class="bu">sum</span>() <span class="op">/</span> ytrain<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Proportion of positives in training set: </span><span class="sc">{</span>ytrain<span class="sc">.</span><span class="bu">sum</span>() <span class="op">/</span> ytrain<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Proportion of positives in training set: 0.62</code></pre>
 </div>
 </div>
 <p>这个toy数据集很夸张哈，达到了0.62。在实际应用中，这个比例可能只有10%或者1%。这里我们只是拿它示例哈，用这个prevalance来作为阈值。</p>
 <div id="threshold-prevalance" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="op">=</span> <span class="dv">1</span><span class="op">-</span> ytrain.<span class="bu">sum</span>() <span class="op">/</span> ytrain.shape[<span class="dv">0</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="op">=</span> <span class="dv">1</span><span class="op">-</span> ytrain.<span class="bu">sum</span>() <span class="op">/</span> ytrain.shape[<span class="dv">0</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> np.where(ypred <span class="op">&lt;=</span> thresh, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[34  4]
  [ 0 76]]</code></pre>
@@ -510,9 +513,9 @@ Xvalid.shape: (114, 30)</code></pre>
 </div>
 <p>F1最高为0.471，我们采用它来进行预测：</p>
 <div id="threshold-f1-predict" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="op">=</span> <span class="fl">.471</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="op">=</span> <span class="fl">.471</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> np.where(ypred <span class="op">&lt;=</span> thresh, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(yvalid, yhat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[34  4]
  [ 0 76]]</code></pre>
@@ -626,13 +629,14 @@ Xvalid.shape: (114, 30)</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1054,7 +1058,7 @@ Xvalid.shape: (114, 30)</code></pre>
   }
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "最优分类阈值"</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-05-11</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "分类问题中阈值的选择"</span></span>
@@ -1279,7 +1283,7 @@ Xvalid.shape: (114, 30)</code></pre>
 <span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>代码已经放进了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里。</span>
 <span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

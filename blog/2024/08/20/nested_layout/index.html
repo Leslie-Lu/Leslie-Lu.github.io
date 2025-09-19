@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Zhen Lu">
 <meta name="description" content="调包">
@@ -65,14 +65,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
 <script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-437f30c51863257f6a0e3763259ee6fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-45e8e462cd760eca75dbd85b13f1b7a2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-00193093f0ed2ceebd9d09849ed1d13d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/bootstrap/bootstrap-bfe3d73813f22870a4ae276797d2472b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script><script id="quarto-search-options" type="application/json">{
@@ -124,6 +125,8 @@ div.column-margin+hr.dinkus {
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
@@ -275,9 +278,9 @@ div.column-margin+hr.dinkus {
 </section><section id="方法一" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法一">方法一</h3>
 <p>使用grid包，借助于grid包中的viewport函数。viewport用于定义一个绘图区域，可以在一个图形设备中创建多个独立的绘图区域，每个区域都有自己的坐标系和尺寸。</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">subvp</span> <span class="op">&lt;-</span> <span class="fu">viewport</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.35</span>, height <span class="op">=</span> <span class="fl">0.35</span>, x <span class="op">=</span> <span class="fl">0.75</span>, y <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">subvp</span> <span class="op">&lt;-</span> <span class="fu">viewport</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.35</span>, height <span class="op">=</span> <span class="fl">0.35</span>, x <span class="op">=</span> <span class="fl">0.75</span>, y <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span>
 <span><span class="va">ggsurv</span><span class="op">$</span><span class="va">plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ggsurv</span><span class="op">$</span><span class="va">table</span>, vp <span class="op">=</span> <span class="va">subvp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ggsurv</span><span class="op">$</span><span class="va">table</span>, vp <span class="op">=</span> <span class="va">subvp</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>viewport创建了一个子视口，它定义了一个相对主视口的区域。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
@@ -287,7 +290,7 @@ div.column-margin+hr.dinkus {
 </section><section id="方法二" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法二">方法二</h3>
 <p>使用annotation_custom函数，它可以在图形中添加自定义的图形元素。</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ggsurv</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span> <span class="fu">annotation_custom</span><span class="op">(</span><span class="fu">ggplotGrob</span><span class="op">(</span><span class="va">ggsurv</span><span class="op">$</span><span class="va">table</span><span class="op">)</span>, xmin<span class="op">=</span><span class="fl">1900</span>, xmax<span class="op">=</span><span class="fl">3000</span>, ymin<span class="op">=</span><span class="fl">0.6</span>, ymax<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ggsurv</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span> <span class="fu">annotation_custom</span><span class="op">(</span><span class="fu">ggplotGrob</span><span class="op">(</span><span class="va">ggsurv</span><span class="op">$</span><span class="va">table</span><span class="op">)</span>, xmin<span class="op">=</span><span class="fl">1900</span>, xmax<span class="op">=</span><span class="fl">3000</span>, ymin<span class="op">=</span><span class="fl">0.6</span>, ymax<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>ggplotGrob将ggsurv$table转换为grob对象，以便在图形中使用。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
@@ -297,11 +300,11 @@ div.column-margin+hr.dinkus {
 </section><section id="方法三" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="方法三">方法三</h3>
 <p>使用ggpp包。</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sub_plot</span><span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sub_plot</span><span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    x<span class="op">=</span> <span class="fl">.98</span>, y<span class="op">=</span> <span class="fl">.98</span>, plot<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ggsurv</span><span class="op">$</span><span class="va">table</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">ggsurv</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span> </span>
-<span>    <span class="fu">geom_plot_npc</span><span class="op">(</span>data <span class="op">=</span> <span class="va">sub_plot</span>, <span class="fu">aes</span><span class="op">(</span>npcx <span class="op">=</span> <span class="va">x</span>, npcy <span class="op">=</span> <span class="va">y</span>, label <span class="op">=</span> <span class="va">plot</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu">geom_plot_npc</span><span class="op">(</span>data <span class="op">=</span> <span class="va">sub_plot</span>, <span class="fu">aes</span><span class="op">(</span>npcx <span class="op">=</span> <span class="va">x</span>, npcy <span class="op">=</span> <span class="va">y</span>, label <span class="op">=</span> <span class="va">plot</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>使用geom_plot_npc函数将子图添加到主图中，label表示要添加的子图。效果如下：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
@@ -364,13 +367,14 @@ div.column-margin+hr.dinkus {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -789,7 +793,7 @@ div.column-margin+hr.dinkus {
   }
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "大图嵌小图"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-08-20</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "调包"</span></span>
@@ -884,7 +888,7 @@ div.column-margin+hr.dinkus {
 <span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="al">![option 3](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408200040329.png)</span></span>
 <span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>完整代码已经放在了<span class="co">[</span><span class="ot">星球</span><span class="co">](https://mp.weixin.qq.com/s/4IR-KMAZ-q2VbI0Fz4fYRg)</span>里，感兴趣的同学可以自行查看。</span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

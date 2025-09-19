@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Zhen Lu">
 <meta name="description" content="R Training">
@@ -65,14 +65,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../..//files/favicon-512.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-437f30c51863257f6a0e3763259ee6fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-45e8e462cd760eca75dbd85b13f1b7a2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-00193093f0ed2ceebd9d09849ed1d13d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-bfe3d73813f22870a4ae276797d2472b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script><script id="quarto-search-options" type="application/json">{
@@ -124,6 +125,8 @@ div.column-margin+hr.dinkus {
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Zhen Lu</span>
     </a>
@@ -260,14 +263,14 @@ div.column-margin+hr.dinkus {
 <p>一组学生参加了数学、科学和英语三科考试。为了给所有学生确定一个综合的成绩衡量指标，需要将这些科目的成绩组合起来，将排名在前20%的学生评定为A，接下来20%的学生评定为B，依此类推，最后，按字母顺序对学生进行排序。请试处理分析。</p>
 <p>如下，我们首先创建原始数据框：</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">studentname</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"John Davis"</span>, <span class="st">"Angela Williams"</span>, <span class="st">"Bullwinkle Moose"</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">studentname</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"John Davis"</span>, <span class="st">"Angela Williams"</span>, <span class="st">"Bullwinkle Moose"</span>, </span>
 <span>               <span class="st">"David Jones"</span>, <span class="st">"Janice Markhammer"</span>, <span class="st">"Cheryl Cushing"</span>, </span>
 <span>               <span class="st">"Reuven Ytzrhak"</span>, <span class="st">"Greg Knox"</span>, <span class="st">"Joel England"</span>, <span class="st">"Mary Rayburn"</span><span class="op">)</span></span>
 <span><span class="va">math</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">502</span>, <span class="fl">600</span>, <span class="fl">412</span>, <span class="fl">358</span>, <span class="fl">495</span>, <span class="fl">512</span>, <span class="fl">410</span>, <span class="fl">625</span>, <span class="fl">573</span>, <span class="fl">522</span><span class="op">)</span></span>
 <span><span class="va">science</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">95</span>, <span class="fl">99</span>, <span class="fl">80</span>, <span class="fl">82</span>, <span class="fl">75</span>, <span class="fl">85</span>, <span class="fl">80</span>, <span class="fl">95</span>, <span class="fl">89</span>, <span class="fl">86</span><span class="op">)</span></span>
 <span><span class="va">English</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">22</span>, <span class="fl">18</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">15</span>, <span class="fl">30</span>, <span class="fl">27</span>,<span class="fl">18</span><span class="op">)</span></span>
 <span><span class="va">scoredata</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">studentname</span>, <span class="va">math</span>, <span class="va">science</span>, <span class="va">English</span>, stringsAsFactors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">scoredata</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">scoredata</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English
 1         John Davis  502      95      25
@@ -285,8 +288,8 @@ div.column-margin+hr.dinkus {
 <p>观察此数据集，马上可以发现一些明显的挑战：首先，三科考试成绩是无法比较的。由于它们的均值和标准差相差很大，对它们求三科的平均成绩是没有意义的。因此，在组合这些考试成绩之前，必须将其转换为可比较的成绩。</p>
 <p>因而，我们做如下处理，将三科成绩进行标准化，这样每科考试成绩都是用单位标准差来表示，而非原始的分值尺度表示：</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">z</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">scoredata</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">z</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">z</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">scoredata</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">z</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             math     science     English
  [1,]  0.01269128  1.07806562  0.58685145
@@ -310,14 +313,14 @@ attr(,"scaled:scale")
 <p>scale函数为数据对象按列进行中心化（center=TRUE）或标准化（center=TRUE, scale=TRUE），默认情况下，函数scale对矩阵或数据框的指定列进行均值为0、标准差为1的标准化，给出各科成绩标准化后的结果以及各科成绩的均值和标准差。</p>
 <p>然后，我们通过mean函数来计算各行的均值以获得三科成绩的综合评价得分，并使用cbind函数将其添加到学生成绩的原始数据框中：</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Score</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">z</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span></span>
-<span><span class="va">Score</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Score</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">z</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span></span>
+<span><span class="va">Score</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0.5592028  0.9238259 -0.8565414 -1.1620473 -0.6289776  0.3532485
  [7] -1.0476242  1.3378934  0.6978361 -0.1768163</code></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata2</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">scoredata</span>, <span class="va">Score</span><span class="op">)</span></span>
-<span><span class="va">scoredata2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata2</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">scoredata</span>, <span class="va">Score</span><span class="op">)</span></span>
+<span><span class="va">scoredata2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English      Score
 1         John Davis  502      95      25  0.5592028
@@ -335,18 +338,18 @@ attr(,"scaled:scale")
 <p>apply函数可将一个任意函数应用到矩阵、数组、数据框的任何维度上，在矩阵或数据框中，1表示行，2表示列。cbind函数进行列合并，增加列。</p>
 <p>接下来，我们通过函数quantile给出三科成绩综合评价得分的百分位数，将学生的百分位数排名重编码为一个新的类别型成绩变量grade，如下：</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Score</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.8</span>,<span class="fl">0.6</span>,<span class="fl">0.4</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Score</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.8</span>,<span class="fl">0.6</span>,<span class="fl">0.4</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       80%        60%        40%        20% 
  0.7430341  0.4356302 -0.3576808 -0.8947579 </code></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&gt;=</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"A"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&gt;=</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"A"</span></span>
 <span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&lt;</span> <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">Score</span> <span class="op">&gt;=</span><span class="va">y</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"B"</span></span>
 <span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&lt;</span> <span class="va">y</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">Score</span> <span class="op">&gt;=</span><span class="va">y</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"C"</span></span>
 <span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&lt;</span> <span class="va">y</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">Score</span> <span class="op">&gt;=</span><span class="va">y</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"D"</span></span>
 <span><span class="va">scoredata2</span><span class="op">$</span><span class="va">grade</span><span class="op">[</span><span class="va">Score</span> <span class="op">&lt;</span> <span class="va">y</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">=</span> <span class="st">"E"</span></span>
-<span><span class="va">scoredata2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">scoredata2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         studentname math science English      Score grade
 1         John Davis  502      95      25  0.5592028     B
@@ -364,8 +367,8 @@ attr(,"scaled:scale")
 <p>quantile函数求分位数，这里求Score数值型向量的20%、40%、60%和80%分位点。</p>
 <p>接下来，我们使用strsplit函数以空格把学生姓名拆分为姓氏和名字：</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">name</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">scoredata2</span><span class="op">$</span><span class="va">studentname</span>, <span class="st">" "</span><span class="op">)</span></span>
-<span><span class="va">name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">name</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">scoredata2</span><span class="op">$</span><span class="va">studentname</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="va">name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "John"  "Davis"
@@ -397,10 +400,10 @@ attr(,"scaled:scale")
 [[10]]
 [1] "Mary"    "Rayburn"</code></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lastname</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"["</span>, <span class="fl">2</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lastname</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"["</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">firstname</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"["</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">scoredata3</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">firstname</span>, <span class="va">lastname</span>, <span class="va">scoredata2</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">scoredata3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">scoredata3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    firstname   lastname math science English      Score grade
 1        John      Davis  502      95      25  0.5592028     B
@@ -418,8 +421,8 @@ attr(,"scaled:scale")
 <p>strsplit函数应用到一个字符串向量上会返回一个列表，使用sapply函数分别提取列表中每个成分的第一个元素和第二个元素，<code>[</code>是一个可以提取某个对象的一部分的函数，再使用cbind函数将它们添加到学生成绩的原始数据中。</p>
 <p>最后，我们使用order函数依姓氏和名字对数据集进行排序，完成这个数据任务。</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata4</span><span class="op">=</span> <span class="va">scoredata3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">lastname</span>, <span class="va">firstname</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="va">scoredata4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scoredata4</span><span class="op">=</span> <span class="va">scoredata3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">lastname</span>, <span class="va">firstname</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">scoredata4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    firstname   lastname math science English      Score grade
 6      Cheryl    Cushing  512      85      28  0.3532485     C
@@ -489,13 +492,14 @@ attr(,"scaled:scale")
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -914,7 +918,7 @@ attr(,"scaled:scale")
   }
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "R语言数据处理分析实例"</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2020-02-06</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "R Training"</span></span>
@@ -1039,7 +1043,7 @@ attr(,"scaled:scale")
 <span id="cb19-137"><a href="#cb19-137" aria-hidden="true" tabindex="-1"></a>scoredata4<span class="ot">=</span> scoredata3[<span class="fu">order</span>(lastname, firstname),]</span>
 <span id="cb19-138"><a href="#cb19-138" aria-hidden="true" tabindex="-1"></a>scoredata4</span>
 <span id="cb19-139"><a href="#cb19-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
