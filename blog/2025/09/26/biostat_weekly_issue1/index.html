@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="预测模型星球Journal Club">
+<meta name="description" content="biostat weekly issue 1">
 
-<title>星球JC | 高尿酸血症及相关代谢疾病风险模型 | Zhen Lu – Zhen Lu</title>
+<title>生统爱好者周刊（第 1 期）：博士后，“太多了”？ | Zhen Lu – Zhen Lu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,27 +57,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -146,39 +126,10 @@ div.column-margin+hr.dinkus {
 }
 </style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="floating nav-fixed slimcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -274,14 +225,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">星球JC | 高尿酸血症及相关代谢疾病风险模型</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 1 期）：博士后，“太多了”？</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          预测模型星球Journal Club
+          biostat weekly issue 1
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">journal club</div>
+                <div class="quarto-category">biostat-weekly</div>
               </div>
                   </div>
   </div>
@@ -299,7 +250,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Wednesday, September 25, 2024</p>
+        <p class="date">Friday, September 26, 2025</p>
       </div>
     </div>
     
@@ -314,10 +265,14 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#研究背景" id="toc-研究背景" class="nav-link active" data-scroll-target="#研究背景">研究背景</a></li>
-  <li><a href="#研究方法" id="toc-研究方法" class="nav-link" data-scroll-target="#研究方法">研究方法</a></li>
-  <li><a href="#研究结果" id="toc-研究结果" class="nav-link" data-scroll-target="#研究结果">研究结果</a></li>
-  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
+  <li><a href="#封面图" id="toc-封面图" class="nav-link active" data-scroll-target="#封面图">封面图</a></li>
+  <li><a href="#本周话题博士后太多了" id="toc-本周话题博士后太多了" class="nav-link" data-scroll-target="#本周话题博士后太多了">本周话题：博士后，“太多了”？</a></li>
+  <li><a href="#生统研究" id="toc-生统研究" class="nav-link" data-scroll-target="#生统研究">生统研究</a></li>
+  <li><a href="#博文资讯" id="toc-博文资讯" class="nav-link" data-scroll-target="#博文资讯">博文资讯</a></li>
+  <li><a href="#工具" id="toc-工具" class="nav-link" data-scroll-target="#工具">工具</a></li>
+  <li><a href="#资源" id="toc-资源" class="nav-link" data-scroll-target="#资源">资源</a></li>
+  <li><a href="#贡献者github-id" id="toc-贡献者github-id" class="nav-link" data-scroll-target="#贡献者github-id">贡献者（GitHub ID）</a></li>
+  <li><a href="#订阅" id="toc-订阅" class="nav-link" data-scroll-target="#订阅">订阅</a></li>
   </ul>
 </nav>
 </nav>
@@ -326,124 +281,133 @@ window.Quarto = {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://pbs.twimg.com/media/G1SqNtrbQAAh2qs?format=jpg&amp;name=large.png" class="img-fluid"></p>
+</section>
+<section id="本周话题博士后太多了" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题博士后太多了">本周话题：<a href="https://mp.weixin.qq.com/s/gIwP5h2eVejnmuYn7z-SJQ">博士后，“太多了”？</a></h3>
 <blockquote class="blockquote">
-<p>大家好，这一期预测模型星球Journal Club的分享来自青岛大学的 hedwig 同学。</p>
+<p>据人力资源和社会保障部消息，经过40年的发展，我国共设立了8800多个博士后科研流动站、工作站，累计招收博士后人员超40万人，2024年招收人数再创新高，达4.2万人。</p>
 </blockquote>
-<p>这篇文章是 2024年 发表在 science 子刊 advanced scicence，题为 Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia <span class="citation" data-cites="RN1343">(<a href="#ref-RN1343" role="doc-biblioref">Zeng et al. 2024</a>)</span>。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251439788.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">title</figcaption>
-</figure>
-</div>
-<section id="研究背景" class="level3">
-<h3 class="anchored" data-anchor-id="研究背景">研究背景</h3>
-<p>高尿酸血症（HUA）是指由于体内尿酸生成增加或排泄减少而导致的血清尿酸（SUA）水平升高。SUA 升高不仅会导致痛风，同时也会增加其他代谢异常风险，如慢性肾病、高血压、心血管疾病以及糖尿病。因此，早期识别HUA和预测痛风风险，能够为提早干预和预后管理提供宝贵见解。</p>
-<p>目前，HUA 或痛风的风险评估主要依赖于临床指标或多基因风险评分（PRSs），缺乏将遗传和临床特征相结合的预测模型。另外，现有模型只是单纯预测 HUA 是否发生，但没有更加具体地量化 HUA 风险。</p>
-<p>本研究旨在结合遗传和临床数据，开发并验证一个叠加的多模态机器学习模型，以便及时识别 HUA，及早预测痛风以及代谢相关疾病。</p>
+<p>博士后作为中国高新科技的一把利器，应当让其得到“磨砺”，而不是“消磨”，在不断扩招的背景下，更要重视博士后的困境与出路，让其能全身心投入到科研事业中，可以充分发挥高层次创新型人才的创造力、创新力、科研力，如此才能在中国科研之路上，披荆斩棘。</p>
 </section>
-<section id="研究方法" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="研究方法">研究方法</h3>
-<section id="研究类型" class="level4">
-<h4 class="anchored" data-anchor-id="研究类型">研究类型</h4>
-<p>多中心研究。</p>
-</section>
-<section id="研究人群" class="level4">
-<h4 class="anchored" data-anchor-id="研究人群">研究人群</h4>
-<p>英国和中国两个队列。</p>
-<p>UKBB 是一项正在进行的前瞻性研究，研究对象为 2006 年至 2010 年间招募的 50 万名年龄在 40-69 岁之间的个体，收集数据包括临床、基因型以及多次随访数据；南方医院数据集包括接受健康体检的参与者的信息。参与者为从 2015 年至 2020 年期间到医院体检的年龄 ≥18 岁的人群。</p>
-</section>
-<section id="模型构建" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="模型构建">模型构建</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251446365.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">study design</figcaption>
-</figure>
-</div>
-<p>UKBB 数据随机按 8:2 分为训练集和内部测试集；南方医院数据作为外部测试集。</p>
-<p>筛选相关临床特征：根据以往文献选择了 10 个重要变量，此外，对于基因数据，采用 LASSO 筛选对 HUA 有预测价值的 SNP。考虑到基因数据和临床特征变量的尺度不同，研究对所有变量进行标准化处理。</p>
-<p>构建预测模型：研究采用集成学习的方式，将多个机器学习模型集成起来，将基分类器输出的预测概率作为 meta-classifier 的输入特征。其中，基分类器包含 7 个模型：Light Gradient-Boosting Machine、classical extreme Gradient Boosting、Categorical Boosting、Random Forest、Adaptive Boosting、Logistic Regression 以及 K-Nearest Neighbor，meta-classifier 为 classical extreme Gradient Boosting。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251448150.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">ensemble learning</figcaption>
-</figure>
-</div>
-<p>预后价值判断：对于 meta-classifier 输出的概率，研究即视为 ISHUA 分值，使用最大约登指数进行 cutoff 的确定（全部使用终点为痛风的 cutoff），依据 ISHUA 的 cutoff 值，研究将人群分为低风险与高风险亚组，进而利用随访数据，使用 KM 生存曲线及 Cox 回归，评价其对痛风及代谢相关疾病预后的预测价值。</p>
-<p>生活方式评价：利用模型划分的风险亚组，估计高风险组中生活方式与痛风及代谢相关疾病发生的相关关系。</p>
-</section>
-</section>
-<section id="研究结果" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="研究结果">研究结果</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251450510.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Table 1</figcaption>
-</figure>
-</div>
-<p>对于临床特征：利用单因素 Logistic 回归分析 10 个临床特征与 HUA 之间的相关关系，筛选的临床特征均与高尿酸血症具有显著相关性。此外使用 Cox 回归分析这 10 个特征与与痛风之间的关系。</p>
-<p>对于基因特征：从 GWAS 分析结果中选择与 SUA 相关（p 值小于 <span class="math inline">\(5\times{10}^5\)</span> 或以往研究报道在跨种族人群中相关）的 SNP，对选中的 SNP 进行注释，并基于确定的 SNP 进行富集分析（GO 和 KEGG 分析）。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251453156.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">enrichment analysis</figcaption>
-</figure>
-</div>
-<section id="模型性能评价" class="level4">
-<h4 class="anchored" data-anchor-id="模型性能评价">模型性能评价</h4>
-<p>在训练集中，使用遗传特征的模型预测 HUA 的 AUC 为 0.703（95%CI：0.700-0.705），使用临床特征的模型预测 HUA 的 AUC 为 0.822（95%CI：0.820-0.824），而结合了遗传和临床特征的堆叠多模态模型 AUC 为 0.859（95%CI：0.857-0.861）。</p>
-<p>在内部测试集和外部测试集中，堆叠多模态模型的预测性能也明显优于单独的遗传或临床模型。此外，基于两个年龄亚组（以 40 岁为界）评价模型表现，发现模型在不同年龄组中均具有较好的性能。</p>
-</section>
-<section id="ishua-的预后评估" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="ishua-的预后评估">ISHUA 的预后评估</h4>
-<p>ISHUA 与已知的 HUA 风险因素（人口统计、临床和遗传）相关性。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251455716.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">association</figcaption>
-</figure>
-</div>
-<p>ISHUA 预测痛风及其他代谢相关性结局（Gout、AF、CAD、DmT2、HF、Hypertension、ESRD、All-cause death），Kaplan-Meier 生存曲线显示，ISHUA 分组能够较好地区分痛风及其他代谢相关性疾病。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251456843.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">prognosis</figcaption>
-</figure>
-</div>
-<p>此外，还探讨了改变生活方式对不良结局的潜在获益。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251457970.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">lifestyle</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="take-home-message" class="level3">
-<h3 class="anchored" data-anchor-id="take-home-message">Take home message</h3>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
 <ol type="1">
-<li><p>文章同时纳入基因和临床特征数据，提升对 HUA 的预测能力；</p></li>
-<li><p>结合长期随访数据，观察模型的风险分组对相关疾病发生发展的预测价值。</p></li>
+<li><a href="https://mp.weixin.qq.com/s/EnRT1wpgwfd0HinFY5PukA">Nature | 大语言模型重新定义疾病预测与健康管理</a></li>
 </ol>
+<p><img src="https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-025-09529-3/MediaObjects/41586_2025_9529_Fig1_HTML.png?as=webp" class="img-fluid"></p>
+<p>随着慢性病和多病共存问题的加剧，传统的疾病预测和健康管理方法难以应对复杂的健康数据，特别是在长期健康变化的监测和个性化预防方面。现有的疾病预测模型通常只聚焦于单一疾病，忽略了疾病之间的相互影响及其时间性进展。该研究的意义在于，Delphi-2M 模型能够全面预测多种疾病并理解疾病之间的相互关系，推动精准医疗的发展，实现个性化健康管理。通过捕捉疾病的时间性进展，模型为长期健康评估提供了新视角，并展示了在不同地区的广泛适用性，能够为全球公共卫生决策提供支持。</p>
+<ul>
+<li>论文链接：https://doi.org/10.1038/s41586-025-09529-3</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/3mim5tTMGkMfR8eDZkPmNw">NEJM | 宫颈癌</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925152141.png" class="img-fluid"></p>
+<p>该综述系统且全面地介绍了宫颈癌的流行病学、筛查与预防、分期、早期宫颈癌的手术治疗、局部晚期宫颈癌的放化疗、局部晚期宫颈癌的免疫治疗及靶向治疗等多个领域。</p>
+<ul>
+<li>论文链接：10.1056/NEJMra2404457</li>
+</ul>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/Piih9-eTVXUPomA8QUU8zw">Nat Rev Clin Oncol | 宫颈癌全病程治疗进展</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155951.png" class="img-fluid"></p>
+<p>该综述从外科治疗、局晚期宫颈癌治疗和药物治疗几个方面系统阐述了宫颈癌治疗的最新进展。</p>
+<ul>
+<li>论文链接：https://doi.org/10.1038/s41571-024-00977-w</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/O7vapgy63jJcLRRE5bLV8w">当 AI 遇到医学统计学</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155214.png" class="img-fluid"></p>
+<p>NEJM 综述深入讨论将 AI 应用于生物医学数据分析时所面临的统计学挑战，以及研究人员如何才既能从数据中尽可能多地获得信息，又能确保数据驱动的结论准确、稳健且可再现。</p>
+<ul>
+<li>论文链接：10.1056/NEJMra2212850</li>
+</ul>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/25w3zdP5xbVHCOvAl3rtZg">存在治疗转组的随机试验中调整总生存期的统计学考虑</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155349.png" class="img-fluid"></p>
+<p>出于伦理考虑，新药的随机临床试验中通常允许治疗转组。当对照组患者转组到实验组并从实验性治疗中获益时，根据病人随机分配的治疗组别对总生存期进行统计推断将存在偏差。如不进行适当的调整，就无法充分解答“治疗是否有利于总生存期“这一临床问题。本文介绍了IPCW､RPSFTM和Two Stage等常见调整总生存期方法的原理，并介绍这些方法在具体临床问题和估计目标中的应用。</p>
+<ol start="6" type="1">
+<li><a href="https://uptimelabs.io/you-vibe-it-you-run-it/?utm_id=FAUN_VarBear495_Link_title" title="关于 Vibe coding 以及 AI 的思考">关于 Vibe coding 以及 AI 的思考</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925160010.png" class="img-fluid"></p>
+<p>如果负责这些 coding 工作的人员从未参与开发，并且几乎没有机会锻炼编写代码所需的技能，那么这些工作在失去 Vibe coding 以及 AI 辅助后只会变得更加困难。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="7" type="1">
+<li><a href="https://www.tug.org/texlive/" title="TeX Live 官方网站">本地TeX Live安装部署 - 告别Overleaf的完美替代方案</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153243.png" class="img-fluid"></p>
+<p>对于生物统计学研究者而言，LaTeX是撰写学术论文的重要工具。虽然Overleaf提供了便捷的在线编译环境，但本地安装TeX Live具有更多优势：完全离线工作、无网络限制、编译速度更快、可自定义配置、支持大型项目管理。TeX Live是最完整的LaTeX发行版，包含所有常用宏包，特别适合生统论文中的数学公式、统计表格、流程图制作。本地部署后可配合VS Code、TeXstudio等编辑器，提供语法高亮、自动补全、实时预览等功能，大幅提升写作效率。对于需要处理敏感数据或大型统计分析报告的研究者，本地环境更安全可靠。</p>
+<ol start="8" type="1">
+<li><a href="https://github.com/cafferychen777/mLLMCelltype" title="mLLMCelltype GitHub">mLLMCelltype: 基于多语言大模型统计共识的单细胞RNA测序细胞类型注释工具</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153342.png" class="img-fluid"></p>
+<p>mLLMCelltype 是一个创新的 Python 框架，专门用于单细胞 RNA 测序 (scRNA-seq) 数据的细胞类型自动注释。该工具通过多个大语言模型的迭代共识算法，显著提高注释准确性并提供可靠的不确定性量化指标。</p>
+<ol start="9" type="1">
+<li><a href="https://thomasthornton.cloud/2025/09/10/github-copilot-custom-chat-modes-ai-personas-that-match-your-needs/?utm_id=FAUN_VarBear495_Link_title" title="自定义 GitHub Copilot 角色">自定义 GitHub Copilot 角色</a></li>
+</ol>
+<p><img src="https://i0.wp.com/thomasthornton.cloud/wp-content/uploads/2025/09/image-1.png?w=522&amp;ssl=1" class="img-fluid"></p>
+<p>推文介绍了如何通过项目中的简单 Markdown 配置文件完成 Copilot Chat 行为方式的自定义。AI 正在向直接嵌入到开发人员工作流程中的方向转变。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="10" type="1">
+<li><a href="https://mp.weixin.qq.com/s/I_3bulaOkD--7yWcURkDBw">学术写作入门必备</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153725.png" class="img-fluid"></p>
+<p>提升学术写作水平不仅需要长期的积累练习，也需要掌握一些系统的写作技巧。</p>
+<ol start="11" type="1">
+<li><a href="https://mp.weixin.qq.com/s/8u72xFuk6OYoa62x0KvQ0A">数据论文国家标准</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155538.png" class="img-fluid"></p>
+<p>新标准对数据论文的组成部分、撰写格式和编排要求提出了明确规范，这一标准标志着数据论文（Data Paper）在我国科研出版中有了统一的编写规范，为推动开放科学和数据共享奠定了重要基础。</p>
+<ol start="12" type="1">
+<li><a href="https://ropensci.org/blog/2025/09/18/markdown-programmatic-parsing/" title="以编程方式编辑或解析 R Markdown / Quarto 文档的所有方法">以编程方式编辑或解析 R Markdown / Quarto 文档的所有方法</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925154425.png" class="img-fluid"></p>
+<p>推文概述一些以编程方式解析和编辑 Markdown 文件（Markdown、R Markdown、Quarto、Hugo 文件等）的方法。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
+<p>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/qrcode_for_gh_395f59db8b4c_258.jpg" class="img-fluid"></p>
+<p>（完）</p>
 
 
 <!-- -->
 
-
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-RN1343" class="csl-entry" role="listitem">
-Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Yan Li, et al. 2024. <span>“Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia.”</span> Journal Article. <em>Advanced Science</em> 11 (34): 2404047. <a href="https://doi.org/10.1002/advs.202404047">https://doi.org/10.1002/advs.202404047</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -925,12 +889,12 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "星球JC | 高尿酸血症及相关代谢疾病风险模型"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-09-25</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "预测模型星球Journal Club"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251439788.png"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 1 期）：博士后，“太多了”？"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-09-26</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 1"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://pbs.twimg.com/media/G1SqNtrbQAAh2qs?format=jpg&amp;name=large"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - journal club</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostat-weekly</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
@@ -949,83 +913,128 @@ Zeng, Lin, Pengcheng Ma, Zeyang Li, Shengxing Liang, Chengkai Wu, Chang Hong, Ya
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 大家好，这一期预测模型星球Journal Club的分享来自青岛大学的 hedwig 同学。</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>这里记录每周值得分享的生统相关内容，周五发布。</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>这篇文章是 2024年 发表在 science 子刊 advanced scicence，题为 Multimodal Machine Learning-Based Marker Enables Early Detection and Prognosis Prediction for Hyperuricemia <span class="co">[</span><span class="ot">@RN1343</span><span class="co">]</span>。</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>本杂志开源（GitHub: <span class="co">[</span><span class="ot">openbiostat/biostat-weekly</span><span class="co">](https://github.com/openbiostat/biostat-weekly "openbiostat/biostat-weekly")</span>），欢迎提交 issue 投稿或推荐生统相关内容。</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="al">![title](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251439788.png)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">「生统爱好者周刊讨论区」</span><span class="co">](https://github.com/openbiostat/biostat-weekly/discussions "生统爱好者周刊讨论区")</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究背景</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 封面图</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>高尿酸血症（HUA）是指由于体内尿酸生成增加或排泄减少而导致的血清尿酸（SUA）水平升高。SUA 升高不仅会导致痛风，同时也会增加其他代谢异常风险，如慢性肾病、高血压、心血管疾病以及糖尿病。因此，早期识别HUA和预测痛风风险，能够为提早干预和预后管理提供宝贵见解。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://pbs.twimg.com/media/G1SqNtrbQAAh2qs?format=jpg&amp;name=large)</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>目前，HUA 或痛风的风险评估主要依赖于临床指标或多基因风险评分（PRSs），缺乏将遗传和临床特征相结合的预测模型。另外，现有模型只是单纯预测 HUA 是否发生，但没有更加具体地量化 HUA 风险。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[博士后，“太多了”？](https://mp.weixin.qq.com/s/gIwP5h2eVejnmuYn7z-SJQ)</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>本研究旨在结合遗传和临床数据，开发并验证一个叠加的多模态机器学习模型，以便及时识别 HUA，及早预测痛风以及代谢相关疾病。</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 据人力资源和社会保障部消息，经过40年的发展，我国共设立了8800多个博士后科研流动站、工作站，累计招收博士后人员超40万人，2024年招收人数再创新高，达4.2万人。</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究方法</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>博士后作为中国高新科技的一把利器，应当让其得到“磨砺”，而不是“消磨”，在不断扩招的背景下，更要重视博士后的困境与出路，让其能全身心投入到科研事业中，可以充分发挥高层次创新型人才的创造力、创新力、科研力，如此才能在中国科研之路上，披荆斩棘。</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### 研究类型</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>多中心研究。</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Nature | 大语言模型重新定义疾病预测与健康管理</span><span class="co">](https://mp.weixin.qq.com/s/EnRT1wpgwfd0HinFY5PukA)</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### 研究人群</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-025-09529-3/MediaObjects/41586_2025_9529_Fig1_HTML.png?as=webp)</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>英国和中国两个队列。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>随着慢性病和多病共存问题的加剧，传统的疾病预测和健康管理方法难以应对复杂的健康数据，特别是在长期健康变化的监测和个性化预防方面。现有的疾病预测模型通常只聚焦于单一疾病，忽略了疾病之间的相互影响及其时间性进展。该研究的意义在于，Delphi-2M 模型能够全面预测多种疾病并理解疾病之间的相互关系，推动精准医疗的发展，实现个性化健康管理。通过捕捉疾病的时间性进展，模型为长期健康评估提供了新视角，并展示了在不同地区的广泛适用性，能够为全球公共卫生决策提供支持。</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>UKBB 是一项正在进行的前瞻性研究，研究对象为 2006 年至 2010 年间招募的 50 万名年龄在 40-69 岁之间的个体，收集数据包括临床、基因型以及多次随访数据；南方医院数据集包括接受健康体检的参与者的信息。参与者为从 2015 年至 2020 年期间到医院体检的年龄 ≥18 岁的人群。</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文链接：https://doi.org/10.1038/s41586-025-09529-3</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型构建</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">NEJM | 宫颈癌</span><span class="co">](https://mp.weixin.qq.com/s/3mim5tTMGkMfR8eDZkPmNw)</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="al">![study design](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251446365.png)</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925152141.png)</span></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>UKBB 数据随机按 8:2 分为训练集和内部测试集；南方医院数据作为外部测试集。</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>该综述系统且全面地介绍了宫颈癌的流行病学、筛查与预防、分期、早期宫颈癌的手术治疗、局部晚期宫颈癌的放化疗、局部晚期宫颈癌的免疫治疗及靶向治疗等多个领域。</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>筛选相关临床特征：根据以往文献选择了 10 个重要变量，此外，对于基因数据，采用 LASSO 筛选对 HUA 有预测价值的 SNP。考虑到基因数据和临床特征变量的尺度不同，研究对所有变量进行标准化处理。</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文链接：10.1056/NEJMra2404457</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>构建预测模型：研究采用集成学习的方式，将多个机器学习模型集成起来，将基分类器输出的预测概率作为 meta-classifier 的输入特征。其中，基分类器包含 7 个模型：Light Gradient-Boosting Machine、classical extreme Gradient Boosting、Categorical Boosting、Random Forest、Adaptive Boosting、Logistic Regression 以及 K-Nearest Neighbor，meta-classifier 为 classical extreme Gradient Boosting。</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">Nat Rev Clin Oncol | 宫颈癌全病程治疗进展</span><span class="co">](https://mp.weixin.qq.com/s/Piih9-eTVXUPomA8QUU8zw)</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="al">![ensemble learning](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251448150.png)</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155951.png)</span></span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>预后价值判断：对于 meta-classifier 输出的概率，研究即视为 ISHUA 分值，使用最大约登指数进行 cutoff 的确定（全部使用终点为痛风的 cutoff），依据 ISHUA 的 cutoff 值，研究将人群分为低风险与高风险亚组，进而利用随访数据，使用 KM 生存曲线及 Cox 回归，评价其对痛风及代谢相关疾病预后的预测价值。</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>该综述从外科治疗、局晚期宫颈癌治疗和药物治疗几个方面系统阐述了宫颈癌治疗的最新进展。</span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>生活方式评价：利用模型划分的风险亚组，估计高风险组中生活方式与痛风及代谢相关疾病发生的相关关系。</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文链接：https://doi.org/10.1038/s41571-024-00977-w</span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究结果</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="al">![Table 1](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251450510.png)</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">当 AI 遇到医学统计学</span><span class="co">](https://mp.weixin.qq.com/s/O7vapgy63jJcLRRE5bLV8w)</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>对于临床特征：利用单因素 Logistic 回归分析 10 个临床特征与 HUA 之间的相关关系，筛选的临床特征均与高尿酸血症具有显著相关性。此外使用 Cox 回归分析这 10 个特征与与痛风之间的关系。</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155214.png)</span></span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>对于基因特征：从 GWAS 分析结果中选择与 SUA 相关（p 值小于 $5\times{10}^5$ 或以往研究报道在跨种族人群中相关）的 SNP，对选中的 SNP 进行注释，并基于确定的 SNP 进行富集分析（GO 和 KEGG 分析）。</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>NEJM 综述深入讨论将 AI 应用于生物医学数据分析时所面临的统计学挑战，以及研究人员如何才既能从数据中尽可能多地获得信息，又能确保数据驱动的结论准确、稳健且可再现。</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="al">![enrichment analysis](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251453156.png)</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文链接：10.1056/NEJMra2212850</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型性能评价</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">存在治疗转组的随机试验中调整总生存期的统计学考虑</span><span class="co">](https://mp.weixin.qq.com/s/25w3zdP5xbVHCOvAl3rtZg)</span></span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>在训练集中，使用遗传特征的模型预测 HUA 的 AUC 为 0.703（95%CI：0.700-0.705），使用临床特征的模型预测 HUA 的 AUC 为 0.822（95%CI：0.820-0.824），而结合了遗传和临床特征的堆叠多模态模型 AUC 为 0.859（95%CI：0.857-0.861）。</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155349.png)</span></span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>在内部测试集和外部测试集中，堆叠多模态模型的预测性能也明显优于单独的遗传或临床模型。此外，基于两个年龄亚组（以 40 岁为界）评价模型表现，发现模型在不同年龄组中均具有较好的性能。</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>出于伦理考虑，新药的随机临床试验中通常允许治疗转组。当对照组患者转组到实验组并从实验性治疗中获益时，根据病人随机分配的治疗组别对总生存期进行统计推断将存在偏差。如不进行适当的调整，就无法充分解答“治疗是否有利于总生存期“这一临床问题。本文介绍了IPCW､RPSFTM和Two Stage等常见调整总生存期方法的原理，并介绍这些方法在具体临床问题和估计目标中的应用。</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">### ISHUA 的预后评估</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span><span class="co">[</span><span class="ot">关于 Vibe coding 以及 AI 的思考</span><span class="co">](https://uptimelabs.io/you-vibe-it-you-run-it/?utm_id=FAUN_VarBear495_Link_title "关于 Vibe coding 以及 AI 的思考")</span></span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>ISHUA 与已知的 HUA 风险因素（人口统计、临床和遗传）相关性。</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925160010.png)</span></span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="al">![association](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251455716.png)</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>如果负责这些 coding 工作的人员从未参与开发，并且几乎没有机会锻炼编写代码所需的技能，那么这些工作在失去 Vibe coding 以及 AI 辅助后只会变得更加困难。</span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>ISHUA 预测痛风及其他代谢相关性结局（Gout、AF、CAD、DmT2、HF、Hypertension、ESRD、All-cause death），Kaplan-Meier 生存曲线显示，ISHUA 分组能够较好地区分痛风及其他代谢相关性疾病。</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="al">![prognosis](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251456843.png)</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span><span class="co">[</span><span class="ot">本地TeX Live安装部署 - 告别Overleaf的完美替代方案</span><span class="co">](https://www.tug.org/texlive/ "TeX Live 官方网站")</span></span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>此外，还探讨了改变生活方式对不良结局的潜在获益。</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153243.png)</span></span>
 <span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="al">![lifestyle](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202409251457970.png)</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>对于生物统计学研究者而言，LaTeX是撰写学术论文的重要工具。虽然Overleaf提供了便捷的在线编译环境，但本地安装TeX Live具有更多优势：完全离线工作、无网络限制、编译速度更快、可自定义配置、支持大型项目管理。TeX Live是最完整的LaTeX发行版，包含所有常用宏包，特别适合生统论文中的数学公式、统计表格、流程图制作。本地部署后可配合VS Code、TeXstudio等编辑器，提供语法高亮、自动补全、实时预览等功能，大幅提升写作效率。对于需要处理敏感数据或大型统计分析报告的研究者，本地环境更安全可靠。</span>
 <span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take home message</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span><span class="co">[</span><span class="ot">mLLMCelltype: 基于多语言大模型统计共识的单细胞RNA测序细胞类型注释工具</span><span class="co">](https://github.com/cafferychen777/mLLMCelltype "mLLMCelltype GitHub")</span></span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>文章同时纳入基因和临床特征数据，提升对 HUA 的预测能力；</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153342.png)</span></span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>结合长期随访数据，观察模型的风险分组对相关疾病发生发展的预测价值。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>mLLMCelltype 是一个创新的 Python 框架，专门用于单细胞 RNA 测序 (scRNA-seq) 数据的细胞类型自动注释。该工具通过多个大语言模型的迭代共识算法，显著提高注释准确性并提供可靠的不确定性量化指标。</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span><span class="co">[</span><span class="ot">自定义 GitHub Copilot 角色</span><span class="co">](https://thomasthornton.cloud/2025/09/10/github-copilot-custom-chat-modes-ai-personas-that-match-your-needs/?utm_id=FAUN_VarBear495_Link_title "自定义 GitHub Copilot 角色")</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://i0.wp.com/thomasthornton.cloud/wp-content/uploads/2025/09/image-1.png?w=522&amp;ssl=1)</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>推文介绍了如何通过项目中的简单 Markdown 配置文件完成 Copilot Chat 行为方式的自定义。AI 正在向直接嵌入到开发人员工作流程中的方向转变。</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span><span class="co">[</span><span class="ot">学术写作入门必备</span><span class="co">](https://mp.weixin.qq.com/s/I_3bulaOkD--7yWcURkDBw)</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925153725.png)</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>提升学术写作水平不仅需要长期的积累练习，也需要掌握一些系统的写作技巧。</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span><span class="co">[</span><span class="ot">数据论文国家标准</span><span class="co">](https://mp.weixin.qq.com/s/8u72xFuk6OYoa62x0KvQ0A)</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925155538.png)</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>新标准对数据论文的组成部分、撰写格式和编排要求提出了明确规范，这一标准标志着数据论文（Data Paper）在我国科研出版中有了统一的编写规范，为推动开放科学和数据共享奠定了重要基础。</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="ss">12. </span><span class="co">[</span><span class="ot">以编程方式编辑或解析 R Markdown / Quarto 文档的所有方法</span><span class="co">](https://ropensci.org/blog/2025/09/18/markdown-programmatic-parsing/ "以编程方式编辑或解析 R Markdown / Quarto 文档的所有方法")</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250925154425.png)</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>推文概述一些以编程方式解析和编辑 Markdown 文件（Markdown、R Markdown、Quarto、Hugo 文件等）的方法。</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/qrcode_for_gh_395f59db8b4c_258.jpg)</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
