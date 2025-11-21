@@ -11,7 +11,131 @@
 <description>A weekly newsletter covering new research and resources in biostatistics, founded by Zhen Lu.</description>
 <language>en</language>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Fri, 14 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 21 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>生统爱好者周刊（第 9 期）：SAS 退出中国：时代变化超出想象</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/11/21/biostat_weekly_issue9/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234936.png" class="img-fluid"></p>
+</section>
+<section id="本周话题sas-退出中国时代变化超出想象" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题sas-退出中国时代变化超出想象">本周话题：<a href="https://mp.weixin.qq.com/s/E7JkROM-loihGPn6-0YMeg">SAS 退出中国：时代变化超出想象</a></h3>
+<blockquote class="blockquote">
+<p>1976 年诞生于美国北卡州的 SAS，是全球最大的私营软件公司，连续 45 年保持盈利。在《财富》500 强前 100 强中，97 家把数据命脉交给了它；149 个国家、金融、医药、零售、制造、公共卫生等关键行业，几乎把“数据分析”写成了 SAS 的同义词。然而，2025 年 10 月最后一天，这家在华深耕 30 年的“隐形冠军”突然注销，社交媒体甚至没有来得及预热。</p>
+</blockquote>
+<p><code>@Leslie-Lu</code> 在 R 语言没被 FDA、EMA、国家卫健委等监管机构纳为成熟的申报递交工具方案之前，国内药企 CRO 出海还是要严重依赖 SAS。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/sJNfywlxVV4asu1pyBDruw">Nature | 空间解析技术绘制与人类复杂性状相关细胞图谱</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120232841.png" class="img-fluid"></p>
+<p>这篇文章提出了一种创新的生物信息学方法—gsMap，通过结合空间转录组学和GWAS数据，在空间层面上揭示了疾病相关细胞的分布及其基因表达特征 。这一方法不仅为理解复杂疾病的病理机制提供了新的工具和视角，还为精准医疗和个体化治疗strategy的开发奠定了基础 。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-025-08757-x</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/yD2deGmHK5eJebM8p9rBGQ">Nature | 超13万人大规模循环代谢标志物与全基因组关联研究</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233047.png" class="img-fluid"></p>
+<p>来自芬兰奥卢大学的Minna K. Karjalainen课题组在Nature上发表了研究论文Genome-wide characterization of circulating metabolic biomarkers，该课题组极大的拓展了之前的研究队列，在该研究中通过对超过13万人的循环代谢特征与全基因组关联研究，发现了400多个独立的基因位点并确定了其中可能的因果基因，样本和参与者特征会影响遗传关联。该文章的发现对于全面表型分子数据的转化具有重要意义，同时也揭示了多种代谢途径的大量遗传多效性，为孟德尔随机化分析提供了理论指导价值。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-024-07148-y</li>
+</ul>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/9eEWxasrV_SQWRrINCOvbw">NEJM | 药食同源，食物营养中的“暗物质”</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233233.png" class="img-fluid"></p>
+<p>越来越多的证据进一步强调了饮食质量在疾病预防中的重要性，尤其是在全球早发性癌症激增的情况下，这是美国国立癌症研究所（National Cancer institute）确定的一个新兴重点研究。事实上，自20世纪90年代以来，尽管遗传性癌症发病率没有变化，但全球50岁以下成年人的癌症发病率有所上升，这一发现强调了环境和生活方式因素的影响。在过去几十年中，生命早期的饮食暴露发生了显著变化，这反映了超重、肥胖和西式饮食的趋势，甚至在儿童和青少年中也是如此。</p>
+<p>2025年5月7日，NEJM 发表题为“Chemical Complexity of Food and Implications for Therapeutics”的文章。人类日常饮食中蕴藏着一个庞大的“营养分子库”（曾称“营养暗物质”，NDM），包含超过13.9万种生物活性分子。这些分子不仅是食物的化学组成部分，更可能是维系健康的关键“密码”，让“食药同源”从经验认知升华为科学探索的新方向。</p>
+<ul>
+<li>论文 DOI：10.1056/NEJMra2413243</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="4" type="1">
+<li><a href="https://www.civo.com/blog/why-gpus-accelerate-ai-learning?utm_id=FAUN_Kala501_Link_title" title="为什么GPU能够加速AI学习">为什么GPU能够加速AI学习</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233419.png" class="img-fluid"></p>
+<p>推文简要介绍了对于模型训练与推理来说，gpu 相比 cpu 的优势。</p>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/f5pRQi1n5TJxNoK4A28ddw">中山大学校内部署 Overleaf</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233557.png" class="img-fluid"></p>
+<p>中山大学校内基于 Overleaf 社区版本二次开发的在线协同 latex 编辑器，便利校内师生使用。平台支持无限数量合作者、无编译时间限制、历史记录、中文支持等功能。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="6" type="1">
+<li><a href="https://cli.github.com/manual/" title="GitHub CLI 手册">GitHub CLI 手册</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233712.png" class="img-fluid"></p>
+<p>GitHub CLI 可以让开发者通过命令行与 GitHub 进行无缝的协同工作，无需离开终端就能操作 GitHub。</p>
+<ol start="7" type="1">
+<li><a href="https://vatlab.github.io/sos-docs/notebook.html" title="SoS Notebook 文档">SoS Notebook 文档</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233827.png" class="img-fluid"></p>
+<p>SoS Notebook 是一个基于 Jupyter 的多语言工作环境，允许你在同一个笔记本中无缝使用多种编程语言。网页具体介绍了入门指南、用户手册、教程、FAQ 等内容。</p>
+<ol start="8" type="1">
+<li><a href="https://infi.cn/app/dashboard/" title="英飞思想家：无限白板的绘图工具">英飞思想家：无限白板的绘图工具</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234133.png" class="img-fluid"></p>
+<p>基于无线画布的在线协作空间，能够在多人协同环境中实时记录与分享灵感与想法。在无线画布中，用户可以通过多种形式进行记录与表达，包括文字、便签、图形等，还能绘制流程图、科研设计图等专业图示。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="9" type="1">
+<li><a href="https://google.github.io/styleguide/pyguide.html" title="Google Python Style Guide">Google Python Style Guide</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234246.png" class="img-fluid"></p>
+<p>编程风格是指代码在命名、缩进与排版、注释与文档、错误处理、模块组织、测试与提交信息等方面的统一约定。好的风格让团队读起来“像同一人写的”，从而降低沟通成本、减少 Bug、提升维护性与可测试性。这里详细给出了 Google Python Style，值得学习。</p>
+<ol start="10" type="1">
+<li><a href="https://github.com/thomas-haslwanter/statsintro_python" title="Python 统计入门">Python 统计入门</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234345.png" class="img-fluid"></p>
+<p>这是 Thomas Haslwanter 教授撰写的《An Introduction to Statistics with Python》一书的配套代码库。该项目是学习如何使用 Python 进行统计学分析和数据科学的不错入门资源。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
+<p>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2025/11/21/biostat_weekly_issue9/</guid>
+  <pubDate>Fri, 21 Nov 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234936.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 8 期）：刷多了社交媒体，AI 也会“脑腐”</title>
   <dc:creator>Zhen Lu</dc:creator>

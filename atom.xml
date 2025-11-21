@@ -11,7 +11,131 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Fri, 14 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 21 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>生统爱好者周刊（第 9 期）：SAS 退出中国：时代变化超出想象</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2025/11/21/biostat_weekly_issue9/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234936.png" class="img-fluid"></p>
+</section>
+<section id="本周话题sas-退出中国时代变化超出想象" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题sas-退出中国时代变化超出想象">本周话题：<a href="https://mp.weixin.qq.com/s/E7JkROM-loihGPn6-0YMeg">SAS 退出中国：时代变化超出想象</a></h3>
+<blockquote class="blockquote">
+<p>1976 年诞生于美国北卡州的 SAS，是全球最大的私营软件公司，连续 45 年保持盈利。在《财富》500 强前 100 强中，97 家把数据命脉交给了它；149 个国家、金融、医药、零售、制造、公共卫生等关键行业，几乎把“数据分析”写成了 SAS 的同义词。然而，2025 年 10 月最后一天，这家在华深耕 30 年的“隐形冠军”突然注销，社交媒体甚至没有来得及预热。</p>
+</blockquote>
+<p><code>@Leslie-Lu</code> 在 R 语言没被 FDA、EMA、国家卫健委等监管机构纳为成熟的申报递交工具方案之前，国内药企 CRO 出海还是要严重依赖 SAS。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/sJNfywlxVV4asu1pyBDruw">Nature | 空间解析技术绘制与人类复杂性状相关细胞图谱</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120232841.png" class="img-fluid"></p>
+<p>这篇文章提出了一种创新的生物信息学方法—gsMap，通过结合空间转录组学和GWAS数据，在空间层面上揭示了疾病相关细胞的分布及其基因表达特征 。这一方法不仅为理解复杂疾病的病理机制提供了新的工具和视角，还为精准医疗和个体化治疗strategy的开发奠定了基础 。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-025-08757-x</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/yD2deGmHK5eJebM8p9rBGQ">Nature | 超13万人大规模循环代谢标志物与全基因组关联研究</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233047.png" class="img-fluid"></p>
+<p>来自芬兰奥卢大学的Minna K. Karjalainen课题组在Nature上发表了研究论文Genome-wide characterization of circulating metabolic biomarkers，该课题组极大的拓展了之前的研究队列，在该研究中通过对超过13万人的循环代谢特征与全基因组关联研究，发现了400多个独立的基因位点并确定了其中可能的因果基因，样本和参与者特征会影响遗传关联。该文章的发现对于全面表型分子数据的转化具有重要意义，同时也揭示了多种代谢途径的大量遗传多效性，为孟德尔随机化分析提供了理论指导价值。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-024-07148-y</li>
+</ul>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/9eEWxasrV_SQWRrINCOvbw">NEJM | 药食同源，食物营养中的“暗物质”</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233233.png" class="img-fluid"></p>
+<p>越来越多的证据进一步强调了饮食质量在疾病预防中的重要性，尤其是在全球早发性癌症激增的情况下，这是美国国立癌症研究所（National Cancer institute）确定的一个新兴重点研究。事实上，自20世纪90年代以来，尽管遗传性癌症发病率没有变化，但全球50岁以下成年人的癌症发病率有所上升，这一发现强调了环境和生活方式因素的影响。在过去几十年中，生命早期的饮食暴露发生了显著变化，这反映了超重、肥胖和西式饮食的趋势，甚至在儿童和青少年中也是如此。</p>
+<p>2025年5月7日，NEJM 发表题为“Chemical Complexity of Food and Implications for Therapeutics”的文章。人类日常饮食中蕴藏着一个庞大的“营养分子库”（曾称“营养暗物质”，NDM），包含超过13.9万种生物活性分子。这些分子不仅是食物的化学组成部分，更可能是维系健康的关键“密码”，让“食药同源”从经验认知升华为科学探索的新方向。</p>
+<ul>
+<li>论文 DOI：10.1056/NEJMra2413243</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="4" type="1">
+<li><a href="https://www.civo.com/blog/why-gpus-accelerate-ai-learning?utm_id=FAUN_Kala501_Link_title" title="为什么GPU能够加速AI学习">为什么GPU能够加速AI学习</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233419.png" class="img-fluid"></p>
+<p>推文简要介绍了对于模型训练与推理来说，gpu 相比 cpu 的优势。</p>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/f5pRQi1n5TJxNoK4A28ddw">中山大学校内部署 Overleaf</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233557.png" class="img-fluid"></p>
+<p>中山大学校内基于 Overleaf 社区版本二次开发的在线协同 latex 编辑器，便利校内师生使用。平台支持无限数量合作者、无编译时间限制、历史记录、中文支持等功能。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="6" type="1">
+<li><a href="https://cli.github.com/manual/" title="GitHub CLI 手册">GitHub CLI 手册</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233712.png" class="img-fluid"></p>
+<p>GitHub CLI 可以让开发者通过命令行与 GitHub 进行无缝的协同工作，无需离开终端就能操作 GitHub。</p>
+<ol start="7" type="1">
+<li><a href="https://vatlab.github.io/sos-docs/notebook.html" title="SoS Notebook 文档">SoS Notebook 文档</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120233827.png" class="img-fluid"></p>
+<p>SoS Notebook 是一个基于 Jupyter 的多语言工作环境，允许你在同一个笔记本中无缝使用多种编程语言。网页具体介绍了入门指南、用户手册、教程、FAQ 等内容。</p>
+<ol start="8" type="1">
+<li><a href="https://infi.cn/app/dashboard/" title="英飞思想家：无限白板的绘图工具">英飞思想家：无限白板的绘图工具</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234133.png" class="img-fluid"></p>
+<p>基于无线画布的在线协作空间，能够在多人协同环境中实时记录与分享灵感与想法。在无线画布中，用户可以通过多种形式进行记录与表达，包括文字、便签、图形等，还能绘制流程图、科研设计图等专业图示。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="9" type="1">
+<li><a href="https://google.github.io/styleguide/pyguide.html" title="Google Python Style Guide">Google Python Style Guide</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234246.png" class="img-fluid"></p>
+<p>编程风格是指代码在命名、缩进与排版、注释与文档、错误处理、模块组织、测试与提交信息等方面的统一约定。好的风格让团队读起来“像同一人写的”，从而降低沟通成本、减少 Bug、提升维护性与可测试性。这里详细给出了 Google Python Style，值得学习。</p>
+<ol start="10" type="1">
+<li><a href="https://github.com/thomas-haslwanter/statsintro_python" title="Python 统计入门">Python 统计入门</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234345.png" class="img-fluid"></p>
+<p>这是 Thomas Haslwanter 教授撰写的《An Introduction to Statistics with Python》一书的配套代码库。该项目是学习如何使用 Python 进行统计学分析和数据科学的不错入门资源。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
+<p>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2025/11/21/biostat_weekly_issue9/</guid>
+  <pubDate>Fri, 21 Nov 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251120234936.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 8 期）：刷多了社交媒体，AI 也会“脑腐”</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -1738,7 +1862,7 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="3163f825" class="cell" data-execution_count="1">
+<div id="cf598d5a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1807,7 +1931,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="490e39f1" class="cell" data-execution_count="2">
+<div id="face877e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1946,7 +2070,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="6cf7c86c" class="cell" data-execution_count="3">
+<div id="29fa9893" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2022,7 +2146,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="c798f92e" class="cell" data-execution_count="4">
+<div id="6b8417d4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2106,7 +2230,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="7c2fb0b1" class="cell" data-execution_count="5">
+<div id="f7a779fe" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2218,7 +2342,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="a784f992" class="cell" data-execution_count="6">
+<div id="62e9cc2f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -2387,7 +2511,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="9cf9fcc9" class="cell" data-execution_count="1">
+<div id="10737eec" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2605,7 +2729,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="7671be00" class="cell" data-execution_count="2">
+<div id="c1b627a0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2738,7 +2862,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="e8611e57" class="cell" data-execution_count="3">
+<div id="33e151e1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2828,7 +2952,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="5c6ffe07" class="cell" data-execution_count="4">
+<div id="486a370c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2923,7 +3047,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="d259d509" class="cell" data-execution_count="5">
+<div id="41b1ba23" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2958,7 +3082,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="9dfaf7b6" class="cell" data-execution_count="6">
+<div id="620e65da" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3044,7 +3168,7 @@ font-style: inherit;">return</span> model</span></code></pre></div></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="4591f5e6" class="cell" data-execution_count="7">
+<div id="043a40af" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3115,7 +3239,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="f0034d32" class="cell" data-execution_count="8">
+<div id="4a461768" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3274,7 +3398,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="ae9d59fc" class="cell" data-execution_count="9">
+<div id="bcf55379" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3969,7 +4093,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="c9df66b2" class="cell" data-execution_count="1">
+<div id="bca6e25e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -4069,7 +4193,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="34869cc9" class="cell" data-execution_count="2">
+<div id="4fff3783" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -4180,7 +4304,7 @@ font-style: inherit;">'</span>)</span></code></pre></div></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="df292c52" class="cell" data-execution_count="3">
+<div id="41701ddd" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4351,7 +4475,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div></d
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="071f0ca9" class="cell" data-execution_count="1">
+<div id="988861ec" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -4447,7 +4571,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="1458f6d5" class="cell" data-execution_count="2">
+<div id="6acaa759" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4591,7 +4715,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="403be601" class="cell" data-execution_count="3">
+<div id="8248c84c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4871,7 +4995,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="ddc03a5b" class="cell" data-execution_count="1">
+<div id="aeb66736" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4938,7 +5062,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="cb2613b5" class="cell" data-execution_count="2">
+<div id="77ec6cdc" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -5030,7 +5154,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="024c6ee0" class="cell" data-execution_count="3">
+<div id="8b848b62" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5154,7 +5278,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="e7b4c798" class="cell" data-execution_count="1">
+<div id="350a4aeb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -5220,7 +5344,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="7c73afcd" class="cell" data-execution_count="2">
+<div id="4a24f646" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -5370,7 +5494,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="d6e8c383" class="cell" data-execution_count="1">
+<div id="b3e1c726" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5403,7 +5527,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="6196801b" class="cell" data-execution_count="2">
+<div id="448c1984" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -5444,7 +5568,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="3f599e9a" class="cell" data-execution_count="3">
+<div id="50298249" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -5499,7 +5623,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="01555853" class="cell" data-execution_count="4">
+<div id="bde1a102" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -6306,83 +6430,6 @@ plink --vcf input.vcf --dosage DS --write-snplist --out output</code></pre>
   <guid>https://leslie-lu.github.io/blog/2025/01/20/red_packet/</guid>
   <pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Leslie-Lu/WeChatOfficialAccount/main/2025_happy_newyear.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>R 中项目环境管理</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/01/19/renv_in_r/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>在 R 语言的项目开发和数据分析过程中，管理包的依赖关系一直是一个挑战。每个项目可能依赖不同版本的R包，而不同项目间的包依赖往往互相冲突。为了避免这些问题，renv 包应运而生，其相当于 python 中的 virtualenv，帮助 R 用户高效地管理和隔离项目的依赖环境。</p>
-<p>这里，我们将介绍 renv 包的基本功能及使用方法，帮助大家更好地管理 R 项目的包依赖。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">renv</figcaption>
-</figure>
-</div>
-<section id="什么是-renv-包" class="level3">
-<h3 class="anchored" data-anchor-id="什么是-renv-包">什么是 renv 包</h3>
-<p>renv（R Environment）是一个用于管理 R 项目环境的工具。它允许为每个 R 项目创建一个独立的虚拟环境，从而确保每个项目拥有独立且隔离的 R 包依赖。通过使用 renv，我们可以避免包版本冲突，并且可以轻松地复制和共享项目环境，确保项目在不同的机器或不同的时间点上能够重现。</p>
-</section>
-<section id="renv-的核心优势" class="level3">
-<h3 class="anchored" data-anchor-id="renv-的核心优势">renv 的核心优势</h3>
-<ul>
-<li>隔离环境：每个项目有独立的库，包的版本不会相互干扰。即使我们在一个项目中更新了某个包的版本，其他项目依然可以使用旧版本。</li>
-<li>项目可重现性：通过保存和共享项目的依赖信息（如包的版本），其他开发者可以使用相同的环境重新创建项目，确保研究的可重现性。</li>
-<li>便捷的依赖管理：renv 会自动创建和维护 renv.lock 文件，记录项目依赖的包及其版本。这个文件是重现项目环境的关键，确保在不同机器或时间点运行时，依赖的版本完全一致。</li>
-</ul>
-</section>
-<section id="如何在-r-中使用-renv-包" class="level3">
-<h3 class="anchored" data-anchor-id="如何在-r-中使用-renv-包">如何在 R 中使用 renv 包</h3>
-<section id="初始化项目" class="level4">
-<h4 class="anchored" data-anchor-id="初始化项目">1. 初始化项目</h4>
-<p>首先，我们需要安装并加载 renv 包。在一个新的 R 项目中，我们可以使用 <code>renv::init()</code> 来初始化 renv 环境。这将会创建一个新的 renv 文件夹并生成 renv.lock 文件。初始化后，项目中会有一个专门的库（renv/library）存放该项目所需的所有 R 包，同时生成 renv.lock 文件，这个文件记录了所有依赖包的具体版本。</p>
-</section>
-<section id="安装依赖包" class="level4">
-<h4 class="anchored" data-anchor-id="安装依赖包">2. 安装依赖包</h4>
-<p>当我们开始开发项目时，可以通过 <code>install.packages()</code> 安装所需的 R 包，renv 会将这些包安装到项目的独立环境中。</p>
-<p>例如，安装 ggplot2` 包后，renv 会自动更新 renv.lock 文件，记录包的安装信息及其版本。</p>
-</section>
-<section id="恢复项目环境" class="level4">
-<h4 class="anchored" data-anchor-id="恢复项目环境">3. 恢复项目环境</h4>
-<p>如果我们或者其他人需要在另一个环境中重新运行该项目，renv 允许我们通过 <code>renv::restore()</code> 命令恢复项目的所有依赖包。这个命令会根据 renv.lock 文件自动安装所有所需的包及其指定版本，从而确保每次运行时的包版本一致，避免了环境问题。</p>
-</section>
-<section id="查看并更新项目依赖" class="level4">
-<h4 class="anchored" data-anchor-id="查看并更新项目依赖">4. 查看并更新项目依赖</h4>
-<p>如果我们需要查看项目当前依赖的所有包，可以使用 <code>renv::status()</code> 命令，它会列出所有包及其状态。而当我们需要更新项目中的某个包时，可以使用 <code>renv::update()</code> 命令，它会根据当前最新的包版本进行更新，并更新 renv.lock 文件。</p>
-</section>
-<section id="分享项目" class="level4">
-<h4 class="anchored" data-anchor-id="分享项目">5. 分享项目</h4>
-<p>当我们完成项目后，可以将 renv.lock 文件和源代码一起通过 github 分享给其他人，其他人只需要使用 <code>renv::restore()</code> 来恢复项目环境，无需担心包依赖的问题。</p>
-</section>
-</section>
-<section id="renv-与-packrat-的对比" class="level3">
-<h3 class="anchored" data-anchor-id="renv-与-packrat-的对比">renv 与 packrat 的对比</h3>
-<p>在 renv 之前，R 中有一个较为类似的包叫做 packrat，它也提供环境管理的功能。然而，renv 相比于 packrat 有几个优势：</p>
-<ul>
-<li>更简洁：renv 比 packrat 更轻量，易于使用和理解。</li>
-<li>更强的兼容性：renv 与 R 版本的兼容性更好，适应性更强，能够更好地处理依赖关系。</li>
-<li>性能更高：renv 在项目初始化、恢复和更新时速度更快。</li>
-</ul>
-<p>因此，renv 在目前 R 项目环境管理中得到了更广泛的使用。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>r</category>
-  <category>tools</category>
-  <category>version control</category>
-  <guid>https://leslie-lu.github.io/blog/2025/01/19/renv_in_r/</guid>
-  <pubDate>Sun, 19 Jan 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://rstudio.github.io/renv/articles/renv.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
