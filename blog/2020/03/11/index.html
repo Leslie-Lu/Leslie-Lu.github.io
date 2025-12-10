@@ -288,7 +288,7 @@ div.column-margin+hr.dinkus {
 
 
 <p>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</p>
-<div id="c0633819" class="cell" data-execution_count="1">
+<div id="89d794d2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 行向量</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
@@ -298,7 +298,7 @@ div.column-margin+hr.dinkus {
 </div>
 </div>
 <p>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</p>
-<div id="29c17290" class="cell" data-execution_count="2">
+<div id="66bed686" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.transpose()) <span class="co">#从程序的运行结果来看，确实是无效的</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -306,7 +306,7 @@ div.column-margin+hr.dinkus {
 </div>
 </div>
 <p>应该如何表示一个列向量呢？</p>
-<div id="9a5e7e1f" class="cell" data-execution_count="3">
+<div id="b3f7cbb9" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_t<span class="op">=</span> A[:, np.newaxis] <span class="co">#增加一个维度</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_t)</span>
@@ -320,7 +320,7 @@ div.column-margin+hr.dinkus {
 </div>
 </div>
 <p>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1<em>m的特殊矩阵，可以把列向量看作是一个n</em>1的特殊矩阵。</p>
-<div id="5dcff408" class="cell" data-execution_count="4">
+<div id="3591a762" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span>
@@ -336,7 +336,7 @@ div.column-margin+hr.dinkus {
 <section id="向量的加法" class="level3">
 <h3 class="anchored" data-anchor-id="向量的加法">向量的加法</h3>
 <p>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</p>
-<div id="56ccad43" class="cell" data-execution_count="5">
+<div id="8bd0256f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>u</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]]).T</span>
@@ -351,7 +351,7 @@ div.column-margin+hr.dinkus {
 <section id="向量的数乘" class="level3">
 <h3 class="anchored" data-anchor-id="向量的数乘">向量的数乘</h3>
 <p>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</p>
-<div id="52a6d782" class="cell" data-execution_count="6">
+<div id="efcd68dc" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span><span class="op">*</span>u)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -366,7 +366,7 @@ div.column-margin+hr.dinkus {
 <p>向量间的乘法分为内积和外积两种形式。</p>
 <p>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</p>
 <p>内积的几何表示<code>u*v= |u||v|cosθ</code>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</p>
-<div id="d101c8a7" class="cell" data-execution_count="7">
+<div id="d40e79ec" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>])</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>])</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 若使用numpy库中的内积运算函数dot进行运算，传入的参数必须是用一维数组表示的行向量</span></span>
@@ -387,7 +387,7 @@ div.column-margin+hr.dinkus {
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</p>
-<div id="bb9bf8b2" class="cell" data-execution_count="8">
+<div id="6c33d9a2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]]).T</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#二维乘二维，结果还是二维</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -397,7 +397,7 @@ div.column-margin+hr.dinkus {
 </div>
 <p>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</p>
 <p>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</p>
-<div id="7e274028" class="cell" data-execution_count="9">
+<div id="e8cc80e8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>])</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(u,v)) <span class="co">#一维乘一维，结果还是一维</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -405,12 +405,12 @@ div.column-margin+hr.dinkus {
 <pre><code>7</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_6667/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+<pre><code>/tmp/ipykernel_7475/2827165229.py:3: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
   print(np.cross(u,v)) #一维乘一维，结果还是一维</code></pre>
 </div>
 </div>
 <p>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</p>
-<div id="29533cfb" class="cell" data-execution_count="10">
+<div id="1dc5d7d4" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">9</span>])</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">12</span>])</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(x,y))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -422,7 +422,7 @@ div.column-margin+hr.dinkus {
 <section id="向量先数乘后叠加向量的线性组合" class="level3">
 <h3 class="anchored" data-anchor-id="向量先数乘后叠加向量的线性组合">向量先数乘后叠加：向量的线性组合</h3>
 <p>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</p>
-<div id="3018673c" class="cell" data-execution_count="11">
+<div id="a75d42bd" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]]).T</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>w<span class="op">=</span> np.array([[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]]).T</span>
@@ -963,160 +963,159 @@ div.column-margin+hr.dinkus {
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 行向量</span></span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
-<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.transpose()) <span class="co">#从程序的运行结果来看，确实是无效的</span></span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>应该如何表示一个列向量呢？</span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>A_t<span class="op">=</span> A[:, np.newaxis] <span class="co">#增加一个维度</span></span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_t)</span>
-<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_t.shape) <span class="co">#列向量本身就是二维表示的</span></span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1*m的特殊矩阵，可以把列向量看作是一个n*1的特殊矩阵。</span>
-<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]])</span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.T) <span class="co">#此时可以直接通过行向量转置的方法生成对应的列向量</span></span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量的加法</span></span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</span>
-<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
-<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>u</span>
-<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]]).T</span>
-<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u<span class="op">+</span>v)</span>
-<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量的数乘</span></span>
-<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</span>
-<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
-<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span><span class="op">*</span>u)</span>
-<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量间的乘法：内积和外积</span></span>
-<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a>向量间的乘法分为内积和外积两种形式。</span>
-<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</span>
-<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>内积的几何表示<span class="in">`u*v= |u||v|cosθ`</span>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</span>
-<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>])</span>
-<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>])</span>
-<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a><span class="co"># 若使用numpy库中的内积运算函数dot进行运算，传入的参数必须是用一维数组表示的行向量</span></span>
-<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#一维乘一维，结果还是一维</span></span>
-<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a>uC<span class="op">=</span> u[:,np.newaxis]</span>
-<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a>vC<span class="op">=</span> v[:,np.newaxis]</span>
-<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(uC)</span>
-<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(vC)</span>
-<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(uC,vC)) <span class="co">#行数为1的二维数组，即二维数组形式的行向量，报错</span></span>
-<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]])</span>
-<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]])</span>
-<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#列数为1的二维数组，即二维数组形式的行向量，报错</span></span>
-<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]]).T</span>
-<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]]).T</span>
-<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span>
-<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</span>
-<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]])</span>
-<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]]).T</span>
-<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#二维乘二维，结果还是二维</span></span>
-<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</span>
-<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</span>
-<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>])</span>
-<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>])</span>
-<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(u,v)) <span class="co">#一维乘一维，结果还是一维</span></span>
-<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</span>
-<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">9</span>])</span>
-<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">12</span>])</span>
-<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(x,y))</span>
-<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量先数乘后叠加：向量的线性组合</span></span>
-<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</span>
-<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
-<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]]).T</span>
-<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>w<span class="op">=</span> np.array([[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]]).T</span>
-<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span><span class="op">*</span>u <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>v <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>w)</span>
-<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u)</span>
-<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a>u.shape</span>
-<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).shape</span>
-<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u.T,v.T)) <span class="co">#报错，带有第二个维度无法进行向量内积</span></span>
-<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a>进一步思考：我们知道，两个向量相加，在几何上就是将两个向量首尾依次连接，所得到的结果向量就是连接最初的起点和最终的终点的有向连线。我们假定有3个非零的三维列向量u、v和w，讨论以下几种不同的线性组合情况：</span>
-<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第一种情况：cu的所有线性组合构成的图像</span>
-<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a>  由于标量c可以取0，因而cu的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
-<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第二种情况：cu+dv的所有线性组合构成的图像</span>
-<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>当向量u和向量v不在一条直线上时，即u和v不共线</span>
-<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a>     <span class="in">`cu+dv`</span>的所有线性组合构成的图像可以表示为三维空间中的一个通过原点(0,0,0)的二维平面。</span>
-<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>当向量u和向量v处在一条直线上时</span>
-<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a>     则<span class="in">`cu+dv`</span>的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
-<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第三种情况：cu+dv+ew的所有线性组合构成的图像</span>
-<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>当向量u、v、w不在一个平面上时，cu+dv+ew的所有线性组合构成的图像是整个三维空间。</span>
-<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>当向量u、v、w处在一个平面上时，cu+dv+ew的所有线性组合构成的图像是三维空间中的一个通过原点(0,0,0)的二维平面。</span>
-<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>当向量u、v、w处在一条直线上时，cu+dv+ew的所有线性组合构成的图像是三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
-<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a>我们发现，在讨论上述线性组合的多种不同情况时，均反复提到了共线、共面的概念。这些特殊的性质会对一组向量线性组合所得到的结果向量在空间中的位置产生重要影响，它们构成了线性代数中非常重要的概念。后面我们也将使用更加专业的词汇对其进行描述和介绍，即线性相关和线性无关。</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>Python中一般使用numpy库生成一个向量，但其默认生成的是行向量。</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 行向量</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>但我们一般使用列向量的形式，因此需要对其做一些处理。有人想，转置处理就可以了，也就是把向量的行索引和列索隐交换位置。但是numpy重的转置方法对于一维数组是无效的：</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.transpose()) <span class="co">#从程序的运行结果来看，确实是无效的</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>应该如何表示一个列向量呢？</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>A_t<span class="op">=</span> A[:, np.newaxis] <span class="co">#增加一个维度</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_t)</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_t.shape) <span class="co">#列向量本身就是二维表示的</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>这种做法比较复杂，更直观更简单的实现方法是：显然，我们一直把向量看作是一个维数为1的数组，其实也可以看作是行数为1或列数为1的一个二维数组。而二维数组对应的就是矩阵，因此向量还可以看作是一个特殊的矩阵，即可以把行向量看作是一个1*m的特殊矩阵，可以把列向量看作是一个n*1的特殊矩阵。</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 在对行向量进行初始化时，使用了numpy中的二维数组的初始化方法，因此在语句中多嵌套了一层中括号</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]])</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.T) <span class="co">#此时可以直接通过行向量转置的方法生成对应的列向量</span></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量的加法</span></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>两个维数相同的向量才能进行加法运算，只要将相同位置上的元素对应相加即可，结果向量的维数保持不变。</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>u</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]]).T</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u<span class="op">+</span>v)</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量的数乘</span></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>向量的数乘就是将参与乘法运算的标量同向量的每个元素分别相乘，以此得到最终的结果向量，结果向量的维数依然保持不变。从几何意义上来看，向量的数乘就是将向量沿着所在直线的方向拉伸相应的倍数，拉伸方向和参与运算的标量符号一致。</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span><span class="op">*</span>u)</span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量间的乘法：内积和外积</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>向量间的乘法分为内积和外积两种形式。</span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a>向量的内积运算：参与内积运算的两个向量必须维数相等，运算规则是先将对应位置上的元素相乘，然后合并相加，最终运算结果是一个标量。可能这样说不太好理解，要是从几何表示上看，内积的意义就非常清晰了。</span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a>内积的几何表示<span class="in">`u*v= |u||v|cosθ`</span>，它表示向量u在向量v方向上的投影长度乘以向量v的模长。需要注意的是，在实际运算向量内积时，无论是行向量间的内积还是列向量间的内积，最终的运算结果都是一样的。</span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>])</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>])</span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a><span class="co"># 若使用numpy库中的内积运算函数dot进行运算，传入的参数必须是用一维数组表示的行向量</span></span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#一维乘一维，结果还是一维</span></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a>uC<span class="op">=</span> u[:,np.newaxis]</span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a>vC<span class="op">=</span> v[:,np.newaxis]</span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(uC)</span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(vC)</span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(uC,vC)) <span class="co">#行数为1的二维数组，即二维数组形式的行向量，报错</span></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]])</span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]])</span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#列数为1的二维数组，即二维数组形式的行向量，报错</span></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]]).T</span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]]).T</span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#列数为1的二维数组，即二维数组形式的列向量，报错</span></span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>二维数组形式的向量怎么进行内积运算呢？我们知道二维数组表示下得向量的本质上是矩阵，只不过是行数或列数为1的特殊矩阵。若将这种表示方法下的向量作为传入内积运算函数dot的参数，就需要依据矩阵的乘法法则来计算。</span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>]])</span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>]]).T</span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u,v)) <span class="co">#二维乘二维，结果还是二维</span></span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>向量的外积运算：这里只讨论在二维平面和三维空间中的运算情况。</span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a>在二维平面中，与内积类似，外积也有一种表达式：u*v= |u||v|sinθ。在二维平面中，向量的外积表示两个向量张成的平行四边形的“面积”。当然，这个面积要打上引号，因为若两个向量的夹角大于180度，那么向量外积运算所得到的结果为负。</span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">5</span>])</span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>])</span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(u,v)) <span class="co">#一维乘一维，结果还是一维</span></span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>而在三维空间中，外积要复杂一点，其计算所得到的结果是一个向量而不是一个数值。其最终得到的结果向量也是有明确的物理含义的，即表示u和v两个向量张成平面的法向量。</span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">9</span>])</span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">12</span>])</span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.cross(x,y))</span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量先数乘后叠加：向量的线性组合</span></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a>基于向量加法和数量乘法这两类基本运算，将其进行组合应用。针对向量u和v，先求出标量c和向量u的数量积，再求出标量d和向量v的数量积，最后再将二者进行叠加，就得到向量u和v的线性组合cu+dv，这里的标量c和d可以取任意值，包括0。</span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>u<span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).T</span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span> np.array([[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]]).T</span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>w<span class="op">=</span> np.array([[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]]).T</span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span><span class="op">*</span>u <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>v <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>w)</span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u)</span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>u.shape</span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a>np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]]).shape</span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(u.T,v.T)) <span class="co">#报错，带有第二个维度无法进行向量内积</span></span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>进一步思考：我们知道，两个向量相加，在几何上就是将两个向量首尾依次连接，所得到的结果向量就是连接最初的起点和最终的终点的有向连线。我们假定有3个非零的三维列向量u、v和w，讨论以下几种不同的线性组合情况：</span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第一种情况：cu的所有线性组合构成的图像</span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>  由于标量c可以取0，因而cu的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第二种情况：cu+dv的所有线性组合构成的图像</span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>当向量u和向量v不在一条直线上时，即u和v不共线</span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a>     <span class="in">`cu+dv`</span>的所有线性组合构成的图像可以表示为三维空间中的一个通过原点(0,0,0)的二维平面。</span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>当向量u和向量v处在一条直线上时</span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a>     则<span class="in">`cu+dv`</span>的所有线性组合构成的图像可以表示为三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第三种情况：cu+dv+ew的所有线性组合构成的图像</span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>当向量u、v、w不在一个平面上时，cu+dv+ew的所有线性组合构成的图像是整个三维空间。</span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>当向量u、v、w处在一个平面上时，cu+dv+ew的所有线性组合构成的图像是三维空间中的一个通过原点(0,0,0)的二维平面。</span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>当向量u、v、w处在一条直线上时，cu+dv+ew的所有线性组合构成的图像是三维空间中一条穿过原点(0,0,0)的直线，包括原点本身。</span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a>我们发现，在讨论上述线性组合的多种不同情况时，均反复提到了共线、共面的概念。这些特殊的性质会对一组向量线性组合所得到的结果向量在空间中的位置产生重要影响，它们构成了线性代数中非常重要的概念。后面我们也将使用更加专业的词汇对其进行描述和介绍，即线性相关和线性无关。</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
