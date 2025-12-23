@@ -290,7 +290,7 @@ div.column-margin+hr.dinkus {
 <section id="矩阵的加法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的加法运算">矩阵的加法运算</h3>
 <p>矩阵之间的加法运算必须运用在两个相等规模的矩阵之间，即行数和列数都相等的两个矩阵才能做加法运算，原因非常容易理解：因为需要将参与加法运算的两个矩阵对应位置上的元素分别进行相加，才能得到最终的结果矩阵。</p>
-<div id="2ee3dad2" class="cell" data-execution_count="1">
+<div id="da544ccc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
@@ -309,7 +309,7 @@ div.column-margin+hr.dinkus {
 <section id="矩阵的数量乘法运算" class="level3">
 <h3 class="anchored" data-anchor-id="矩阵的数量乘法运算">矩阵的数量乘法运算</h3>
 <p>将参与运算的标量数字分别与矩阵的每一个元素相乘，得到结果矩阵对应的新元素，显然，得到的结果矩阵的大小规模是不变的。</p>
-<div id="6c1c5cf1" class="cell" data-execution_count="2">
+<div id="ac607ab2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">4</span>],</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="dv">5</span>],</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">6</span>]])</span>
@@ -329,7 +329,7 @@ div.column-margin+hr.dinkus {
 <li><p>左边矩阵的行数决定最终结果矩阵的行数</p></li>
 <li><p>右边矩阵的列数决定最终结果矩阵的列数</p></li>
 </ol>
-<div id="4253cfd0" class="cell" data-execution_count="3">
+<div id="1a59981a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>],</span>
@@ -356,7 +356,7 @@ div.column-margin+hr.dinkus {
 <li><p>矩阵的行数就是结果向量的维数</p></li>
 <li><p>乘法运算的实施过程就是矩阵的每行和列向量的对应元素分别相乘之后再进行相加</p></li>
 </ol>
-<div id="780bd28f" class="cell" data-execution_count="4">
+<div id="4c4930dc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">3</span>, <span class="dv">4</span>],</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
