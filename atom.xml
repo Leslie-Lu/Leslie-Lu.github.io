@@ -11,7 +11,46 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Fri, 09 Jan 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 13 Jan 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>《生统爱好者周刊》同名中文播客正式上线 Apple Podcast &amp; 小宇宙</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/01/13/podcast/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>好消息，为了让大家能更好地利用碎片化时间获取行业前沿资讯，《生统爱好者周刊》同名中文播客现已正式在<code>苹果播客（Apple Podcasts）</code>和<code>小宇宙</code>平台上线。</p>
+<p>我们希望通过声音，将那些深奥的统计模型、前沿的医学研究以及有趣的行业观察，更生动地传递给每一位在科研路上奋斗的你。你可以在通勤途中、锻炼时，甚至是休息时，轻松收听我们的播客，获取最新的生物统计资讯和实用技巧。</p>
+<section id="如何收听" class="level3">
+<h3 class="anchored" data-anchor-id="如何收听">如何收听</h3>
+<p>现在就打开你常用的播客客户端，搜索 “生统爱好者周刊” 即可订阅收听：</p>
+<ol type="1">
+<li><strong>苹果播客（Apple Podcasts）</strong>：在 Apple 设备上打开“播客”应用，搜索 “生统爱好者周刊”，点击订阅即可。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/7f0a76289c652efcbc66a66718ec8090.jpg" class="img-fluid"></p>
+<ol start="2" type="1">
+<li><strong>小宇宙</strong>：打开小宇宙应用，搜索 “生统爱好者周刊”，点击订阅即可。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/0adf9bfd8a348a117522b7f8543800b7.jpg" class="img-fluid"></p>
+<p>目前我们仅支持这两个平台，欢迎大家多多支持和分享。如果你希望在其他平台收听，欢迎在评论区留言，我们会根据大家的需求逐步扩展平台支持。</p>
+<p>科研之路，披荆斩棘。让我们在声音的世界里，一起见证生物统计学的魅力！</p>
+<p>如果你更倾向于阅读文字版，欢迎关注微信公众号<strong>「陆震生物统计」</strong>获取每周五的同步更新。</p>
+<p>注：本播客内容基于《生统爱好者周刊》公开内容制作，相关学术论文链接及原始资讯请查阅周刊文字版。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2026/01/13/podcast/</guid>
+  <pubDate>Tue, 13 Jan 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/Gemini_Generated_Image_luoxs6luoxs6luox.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 16 期）：AI 看病，误诊了谁负责？</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -2737,7 +2776,7 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="eccbc09d" class="cell" data-execution_count="1">
+<div id="0614dae3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2806,7 +2845,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="a685a948" class="cell" data-execution_count="2">
+<div id="dc717c91" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -2945,7 +2984,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="dc11db3c" class="cell" data-execution_count="3">
+<div id="656e9542" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3021,7 +3060,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="e2a1d8dd" class="cell" data-execution_count="4">
+<div id="0e42c94d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3105,7 +3144,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="421ba4d0" class="cell" data-execution_count="5">
+<div id="e31f7dd0" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3217,7 +3256,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="52558111" class="cell" data-execution_count="6">
+<div id="d7e79957" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3386,7 +3425,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="3e0b78c1" class="cell" data-execution_count="1">
+<div id="82ab5a0b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3604,7 +3643,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="4c1237f8" class="cell" data-execution_count="2">
+<div id="952f354e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3737,7 +3776,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="9254f53e" class="cell" data-execution_count="3">
+<div id="d41dcde3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3827,7 +3866,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="ef813840" class="cell" data-execution_count="4">
+<div id="a1f4140d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3922,7 +3961,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="ead97f1d" class="cell" data-execution_count="5">
+<div id="2fa39a10" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3957,7 +3996,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="4e2b9a47" class="cell" data-execution_count="6">
+<div id="32ae932c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4043,7 +4082,7 @@ font-style: inherit;">return</span> model</span></code></pre></div></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="97dede87" class="cell" data-execution_count="7">
+<div id="35b1fe21" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4114,7 +4153,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="c4cabbce" class="cell" data-execution_count="8">
+<div id="4812e8ea" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4273,7 +4312,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="852039f0" class="cell" data-execution_count="9">
+<div id="7480366a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4968,7 +5007,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="1204e234" class="cell" data-execution_count="1">
+<div id="2904577e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -5068,7 +5107,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="50fba165" class="cell" data-execution_count="2">
+<div id="1614ac88" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -5179,7 +5218,7 @@ font-style: inherit;">'</span>)</span></code></pre></div></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="5d1998c1" class="cell" data-execution_count="3">
+<div id="cfe29bb7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5350,7 +5389,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div></d
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="939e1455" class="cell" data-execution_count="1">
+<div id="6459789a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -5446,7 +5485,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="927487ae" class="cell" data-execution_count="2">
+<div id="094d6bb8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5590,7 +5629,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="51eb6363" class="cell" data-execution_count="3">
+<div id="adf7636d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -5870,7 +5909,7 @@ Each new term in the Fibonacci sequence is generated by adding the previous two 
 <section id="方法一直接遍历法新手友好" class="level4">
 <h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
 <p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="1da8ff10" class="cell" data-execution_count="1">
+<div id="6ef38f63" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5937,7 +5976,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
 <section id="方法二生成器-numpy效率升级" class="level4">
 <h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
 <p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="dc87de11" class="cell" data-execution_count="2">
+<div id="c642ceea" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -6029,7 +6068,7 @@ font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre>
 <section id="方法三数学优化法" class="level4">
 <h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
 <p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="92ee4338" class="cell" data-execution_count="3">
+<div id="33d46182" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -6153,7 +6192,7 @@ font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
 <section id="暴力遍历法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="暴力遍历法适合小数据">暴力遍历法（适合小数据）</h4>
 <p>思路：遍历1到999的所有数，逐个检查是否为3或5的倍数，累加符合条件的数。</p>
-<div id="c9855d46" class="cell" data-execution_count="1">
+<div id="2fa90289" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Solution to Project Euler Problem 1</span></span>
@@ -6219,7 +6258,7 @@ font-style: inherit;">1000</span>)</span>
 <section id="方法二数学公式法" class="level4">
 <h4 class="anchored" data-anchor-id="方法二数学公式法">方法二：数学公式法</h4>
 <p>思路：利用等差数列求和公式，避免重复计算。分别计算3、5的倍数总和，减去15的倍数总和（因为15的倍数被重复计算了两次）。</p>
-<div id="06a1a2d7" class="cell" data-execution_count="2">
+<div id="74e91260" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># solution using a more efficient method</span></span>
@@ -6369,7 +6408,7 @@ font-style: inherit;">1000</span>)</span></code></pre></div></div>
 </ul>
 <p>例如：数组 A 形状 (2, 3)，数组 B 形状 (3,)：B 被视为 (1, 3)，然后广播为 (2, 3)，操作可进行。数组 C 形状 (2, 3)，数组 D 形状 (2, 2)：比较最后维度 3 和 2，不兼容，抛出错误。这些规则确保操作的正确性，但需要大家理解形状匹配的逻辑。</p>
 <p>以下是几个具体例子，展示广播机制的应用：</p>
-<div id="3dba4b6c" class="cell" data-execution_count="1">
+<div id="bbf6c410" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -6402,7 +6441,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 </div>
 </div>
 <p>这里，标量 2 被广播为 [2, 2, 2]，与 [1, 2, 3] 逐元素相加。效率高，因为不实际创建新数组。</p>
-<div id="4cd42607" class="cell" data-execution_count="2">
+<div id="56b701eb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">arr1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[<span class="dv" style="color: #AD0000;
@@ -6443,7 +6482,7 @@ font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 </div>
 <p>arr1 形状 (2, 3)，arr2 形状 (3,)。arr2 被视为 (1, 3)，然后广播为 (2, 3)，即 [[10, 20, 30], [10, 20, 30]]。结果为逐元素相加，符合预期。</p>
 <p>在图像处理中，假设有形状 (2, 2, 3) 的图像数组（高度、宽度、通道），与形状 (3,) 的缩放向量：</p>
-<div id="8fdc9c4b" class="cell" data-execution_count="3">
+<div id="91159d71" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">image <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([[[<span class="fl" style="color: #AD0000;
@@ -6498,7 +6537,7 @@ font-style: inherit;">*</span> scale</span></code></pre></div></div>
 <li><p>形状不匹配：如果数组形状无法广播，NumPy 会抛出 ValueError。建议先打印形状（如 print(arr.shape)）确认。</p></li>
 <li><p>意外广播：一维数组与二维数组相加，可能按行或按列广播，需明确意图。例如，np.array([1,2]) + np.array([[3,4],[5,6]]) 需要注意广播方向。</p></li>
 </ul>
-<div id="b7bf617d" class="cell" data-execution_count="4">
+<div id="d8d37316" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">a<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
@@ -6756,136 +6795,6 @@ Omidiran, Oluwaferanmi, Aashna Patel, Sarah Usman, Ishani Mhatre, Habiba Abdelha
   <guid>https://leslie-lu.github.io/blog/2025/03/08/randomizationandBlindness/</guid>
   <pubDate>Sat, 08 Mar 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250307224129.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>配对样本t检验的统计学效率</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/03/07/pairedttest/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="引言" class="level3">
-<h3 class="anchored" data-anchor-id="引言">引言</h3>
-<p>复习独立样本 t 检验和配对样本 t 检验的统计量，并证明配对样本 t 检验的统计学效率高于独立样本 t 检验。</p>
-<p>统计学效率通常指在相同的显著性水平和样本量下，检验检测真实差异（效应量）的能力（即检验功效 power）更高，或者在达到相同power时所需样本量更小。</p>
-</section>
-<section id="两种t检验的定义与适用场景" class="level3">
-<h3 class="anchored" data-anchor-id="两种t检验的定义与适用场景">两种t检验的定义与适用场景</h3>
-<ul>
-<li><p><strong>配对样本t检验</strong>：适用于同一组个体在两个不同条件下的测量结果，或配对设计的实验。其核心思想是计算每对观测值的差异 <img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">，然后检验这些差异的均值是否为零。</p></li>
-<li><p><strong>独立样本t检验</strong>：适用于两个独立组的均值比较，例如实验组和对照组的测量结果完全独立。</p></li>
-</ul>
-</section>
-<section id="两种检验的基本公式" class="level3">
-<h3 class="anchored" data-anchor-id="两种检验的基本公式">两种检验的基本公式</h3>
-<section id="配对样本t检验" class="level4">
-<h4 class="anchored" data-anchor-id="配对样本t检验">配对样本t检验</h4>
-<p>假设有<img src="https://latex.codecogs.com/png.latex?n">对配对观测值<img src="https://latex.codecogs.com/png.latex?(X_1,%20Y_1),%20(X_2,%20Y_2),%20%5Cldots,%20(X_n,%20Y_n)">，定义差异<img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">。目标是检验原假设<img src="https://latex.codecogs.com/png.latex?H_0:%20%5Cmu_D%20=%200">对备择假设<img src="https://latex.codecogs.com/png.latex?H_1:%20%5Cmu_D%20%5Cneq%200">。统计量为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B%5Cbar%7BD%7D%7D%7Bs_D%20/%20%5Csqrt%7Bn%7D%7D%0A"></p>
-<p>其中：</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi=1%7D%5En%20D_i"> 是差异的样本均值，</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?s_D%20=%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn-1%7D%20%5Csum_%7Bi=1%7D%5En%20(D_i%20-%20%5Cbar%7BD%7D)%5E2%7D"> 是差异的样本标准差，</p></li>
-<li><p>自由度为<img src="https://latex.codecogs.com/png.latex?n%20-%201">。</p></li>
-</ul>
-</section>
-<section id="独立样本t检验" class="level4">
-<h4 class="anchored" data-anchor-id="独立样本t检验">独立样本t检验</h4>
-<p>假设有两个独立样本，样本1为<img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cldots,%20X_%7Bn_1%7D">，样本2为<img src="https://latex.codecogs.com/png.latex?Y_1,%20Y_2,%20%5Cldots,%20Y_%7Bn_2%7D">，均值分别为<img src="https://latex.codecogs.com/png.latex?%5Cmu_X">和<img src="https://latex.codecogs.com/png.latex?%5Cmu_Y">。目标是检验<img src="https://latex.codecogs.com/png.latex?H_0:%20%5Cmu_X%20=%20%5Cmu_Y">对<img src="https://latex.codecogs.com/png.latex?H_1:%20%5Cmu_X%20%5Cneq%20%5Cmu_Y">。统计量为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D%7D%7Bs_p%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn_1%7D%20+%20%5Cfrac%7B1%7D%7Bn_2%7D%7D%7D%0A"></p>
-<p>其中：</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D"> 和 <img src="https://latex.codecogs.com/png.latex?%5Cbar%7BY%7D"> 分别是两个样本的均值，</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?s_p%5E2%20=%20%5Cfrac%7B(n_1%20-%201)s_X%5E2%20+%20(n_2%20-%201)s_Y%5E2%7D%7Bn_1%20+%20n_2%20-%202%7D"> 是合并方差（假设两组方差相等），</p></li>
-<li><p>自由度为<img src="https://latex.codecogs.com/png.latex?n_1%20+%20n_2%20-%202">。</p></li>
-</ul>
-</section>
-</section>
-<section id="统计学效率的比较框架" class="level3">
-<h3 class="anchored" data-anchor-id="统计学效率的比较框架">统计学效率的比较框架</h3>
-<p>为公平比较两种检验的效率，我们假设：</p>
-<ul>
-<li><p>总观测次数相同。例如，配对样本t检验有<img src="https://latex.codecogs.com/png.latex?n">对（共<img src="https://latex.codecogs.com/png.latex?2n">个观测值），独立样本t检验有两个各有<img src="https://latex.codecogs.com/png.latex?n">个观测值的独立样本（共<img src="https://latex.codecogs.com/png.latex?2n">个观测值）。</p></li>
-<li><p>配对样本中的<img src="https://latex.codecogs.com/png.latex?X_i">和<img src="https://latex.codecogs.com/png.latex?Y_i">之间存在相关性，相关系数为<img src="https://latex.codecogs.com/png.latex?%5Crho">（通常<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">，即非负相关性，因为配对设计常用于控制个体差异）。</p></li>
-<li><p>两组的总体方差均为<img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">，效应量（均值差异）为<img src="https://latex.codecogs.com/png.latex?%5Cdelta">。</p></li>
-</ul>
-<p>统计学效率的关键在于估计量的方差和检验效能的比较。我们通过计算估计量的方差和非中心参数来证明配对样本t检验的优势。</p>
-</section>
-<section id="估计量的方差比较" class="level3">
-<h3 class="anchored" data-anchor-id="估计量的方差比较">估计量的方差比较</h3>
-<section id="配对样本t检验-1" class="level4">
-<h4 class="anchored" data-anchor-id="配对样本t检验-1">配对样本t检验</h4>
-<p>配对差异<img src="https://latex.codecogs.com/png.latex?D_i%20=%20X_i%20-%20Y_i">的方差为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(D_i)%20=%20%5Ctext%7BVar%7D(X_i)%20+%20%5Ctext%7BVar%7D(Y_i)%20-%202%20%5Ctext%7BCov%7D(X_i,%20Y_i)%0A"></p>
-<p>假设<img src="https://latex.codecogs.com/png.latex?%5Ctext%7BVar%7D(X_i)%20=%20%5Ctext%7BVar%7D(Y_i)%20=%20%5Csigma%5E2">，且<img src="https://latex.codecogs.com/png.latex?%5Ctext%7BCov%7D(X_i,%20Y_i)%20=%20%5Crho%20%5Csigma%5E2">，则：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(D_i)%20=%202%20%5Csigma%5E2%20(1%20-%20%5Crho)%0A"></p>
-<p>差异均值<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D">的方差为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7BD%7D)%20=%20%5Cfrac%7B%5Ctext%7BVar%7D(D_i)%7D%7Bn%7D%20=%20%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%0A"></p>
-<p>标准误为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSE%7D(%5Cbar%7BD%7D)%20=%20%5Csqrt%7B%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%7D%0A"></p>
-</section>
-<section id="独立样本t检验-1" class="level4">
-<h4 class="anchored" data-anchor-id="独立样本t检验-1">独立样本t检验</h4>
-<p>对于两个各有<img src="https://latex.codecogs.com/png.latex?n">个观测值的独立样本，<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D">的方差为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%20=%20%5Ctext%7BVar%7D(%5Cbar%7BX%7D)%20+%20%5Ctext%7BVar%7D(%5Cbar(Y))%20=%20%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%0A"></p>
-<p>标准误为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSE%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%20=%20%5Csqrt%7B%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%7D%0A"></p>
-</section>
-<section id="方差比较" class="level4">
-<h4 class="anchored" data-anchor-id="方差比较">方差比较</h4>
-<ul>
-<li><p>配对样本t检验的方差：<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D"></p></li>
-<li><p>独立样本t检验的方差：<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D"></p></li>
-</ul>
-<p>当<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">时，<img src="https://latex.codecogs.com/png.latex?1%20-%20%5Crho%20%3C%201">，因此：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B2%20%5Csigma%5E2%20(1%20-%20%5Crho)%7D%7Bn%7D%20%3C%20%5Cfrac%7B2%20%5Csigma%5E2%7D%7Bn%7D%0A"></p>
-<p>这表明配对样本t检验的估计量<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BD%7D">比独立样本t检验的估计量<img src="https://latex.codecogs.com/png.latex?%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D">具有更小的方差。两者的检验统计量分子相同（即效应量），但配对样本t检验的分母（标准误）更小，估计越精确，检验越有可能检测到真实的差异，相应地更容易拒绝原假设，因此具有更高的power，统计学效率更高。</p>
-</section>
-</section>
-<section id="power与非中心参数" class="level3">
-<h3 class="anchored" data-anchor-id="power与非中心参数">power与非中心参数</h3>
-<p>power 是检验在备择假设为真时拒绝原假设的概率，power 与统计量的非中心参数相关。非中心参数越大，power 越高。</p>
-<section id="配对样本t检验-2" class="level4">
-<h4 class="anchored" data-anchor-id="配对样本t检验-2">配对样本t检验</h4>
-<p>在备择假设<img src="https://latex.codecogs.com/png.latex?%5Cmu_D%20=%20%5Cdelta">下，非中心参数为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda_p%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Ctext%7BSE%7D(%5Cbar%7BD%7D)%7D%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%20(1%20-%20%5Crho)%7D%7D%0A"></p>
-</section>
-<section id="独立样本t检验-2" class="level4">
-<h4 class="anchored" data-anchor-id="独立样本t检验-2">独立样本t检验</h4>
-<p>在备择假设<img src="https://latex.codecogs.com/png.latex?%5Cmu_X%20-%20%5Cmu_Y%20=%20%5Cdelta">下，非中心参数为：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda_i%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Ctext%7BSE%7D(%5Cbar%7BX%7D%20-%20%5Cbar%7BY%7D)%7D%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%7D%7D%0A"></p>
-</section>
-<section id="非中心参数比较" class="level4">
-<h4 class="anchored" data-anchor-id="非中心参数比较">非中心参数比较</h4>
-<p>比较<img src="https://latex.codecogs.com/png.latex?%5Clambda_p">和<img src="https://latex.codecogs.com/png.latex?%5Clambda_i">：</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Clambda_p%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%20(1%20-%20%5Crho)%7D%7D"></p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Clambda_i%20=%20%5Cfrac%7B%5Cdelta%7D%7B%5Csigma%7D%20%5Csqrt%7B%5Cfrac%7Bn%7D%7B2%7D%7D"></p></li>
-</ul>
-<p>当<img src="https://latex.codecogs.com/png.latex?%5Crho%20%3E%200">时，<img src="https://latex.codecogs.com/png.latex?%5Clambda_p%20%3E%20%5Clambda_i">，表明配对样本t检验在相同条件下具有更高的 power。</p>
-</section>
-</section>
-<section id="结论" class="level2">
-<h2 class="anchored" data-anchor-id="结论">结论</h2>
-<p>通过估计量方差和非中心参数的比较，证明了当配对观测值正相关时，配对样本t检验的统计学效率高于独立样本t检验。这也是为什么在实验设计中，当可以控制个体差异时，优先选择配对设计的原因。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>RCT</category>
-  <category>Statistics</category>
-  <category>Hypothesis Testing</category>
-  <category>t-test</category>
-  <category>power analysis</category>
-  <guid>https://leslie-lu.github.io/blog/2025/03/07/pairedttest/</guid>
-  <pubDate>Fri, 07 Mar 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/statistical-power-chart.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
