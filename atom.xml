@@ -11,7 +11,133 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Thu, 12 Feb 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 13 Feb 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>生统爱好者周刊（第 21 期）：博士生敢不敢冒险，很大程度“写在导师身上”</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/02/13/biostat_weekly_issue21/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212221439.png" class="img-fluid"></p>
+</section>
+<section id="本周话题博士生敢不敢冒险很大程度写在导师身上" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题博士生敢不敢冒险很大程度写在导师身上">本周话题：<a href="https://mp.weixin.qq.com/s/Rs07ifdz0RpfwBLcFWktsg">博士生敢不敢冒险，很大程度“写在导师身上”</a></h3>
+<p>最新发表在 Nature 的研究发现：导师在科研上偏保守还是爱“押高风险项目”，会深刻塑造博士生的冒险偏好，这种影响在学生离组、甚至转方向 10 年后仍持续存在。想培养敢闯的科研新人，制度与导师都得先敢冒险。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/g3t3j1OOCTiZbDneI8M4LA">Nature | 人类终于读懂 98% 的基因暗物质</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212221648.png" class="img-fluid"></p>
+<p>去年5月，谷歌DeepMind重磅发布了新一代「阿尔法」模型——AlphaGenome。它可一次性「读入」100万个DNA碱基对，并预测任何基因突变如何改变分子的功能。AlphaGenome不仅限于单个基因预测，而是贯穿了整个调控基因组。为了验证真本事，研发团队拿真实的癌症突变给AlphaGenome来了场「实战演习」。在T细胞白血病中，某些特定的突变会像合上电闸一样，意外激活一个极其危险的基因——TAL1。AlphaGenome不仅准确预测出了这种激活的具体路径，而且其预测结果与科学家在实验室里忙活多年才得出的结论完全吻合。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-025-10014-0</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/rhqn7nzo5_uVD9hFos6Pbw">Nature | 智源多模态大模型登Nature，生成式人工智能路线统一到自回归</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212222222.png" class="img-fluid"></p>
+<p>2026年1月28日，智源多模态大模型成果”Multimodal learning with next-token prediction for large multimodal models（通过预测下一个词元进行多模态学习的多模态大模型）“上线国际顶级学术期刊Nature，这是我国科研机构主导的大模型成果首次在Nature正刊发表。</p>
+<p>2018年以来，GPT采用 “预测下一个词元（Next-token prediction，NTP）”的自回归路线，实现了语言大模型重大突破，开启了生成式人工智能浪潮。而多模态模型主要依赖对比学习、扩散模型等专门路线，自回归路线是否可以作为通用路线统一多模态？一直是未解之谜。智源这项成果表明，只采用自回归路线，就可以统一多模态学习，训练出优秀的原生多模态大模型，对于确立自回归成为生成式人工智能统一路线具有重大意义。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-025-10041-x</li>
+</ul>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/wIk1cM3HXANxhAXoXoadCQ">Lancet Microbe | 我国2023年那次儿童肺炎支原体感染小暴发有啥特点？</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212222939.png" class="img-fluid"></p>
+<p>2023年初，我国对新冠疫情防控政策做出重大调整，新冠病毒感染将由“乙类甲管”调整为“乙类乙管”… …当大家对新型冠状病毒感染的恐慌尚未完全褪去时，2023年，我国出现了一次儿童感染肺炎支原体的短暂高峰。该团队对685株M肺炎分离株进行了测序，其中包括2023年小高峰期间采集到的248株（北京62株，其他省份186株）和北京2013-22年间采集的437株。通过分析这些菌株基因组序列和436个公开的全球序列，研究人员使用时间校准系统发育树和种群规模推断重建了肺炎支原体的进化历史。该团队还通过全基因组关联研究分析了导致我国2023年肺炎支原体再发小高峰的潜在遗传变异机制，并对我国各地的2023个分离株进行了系统地理学分析。研究发现：2023年出现的肺炎支原体短暂流行高峰只是之前流行菌株的再次出现，并没有发生新的突变，但大环内酯类抗生素耐药性的高流行率和肺炎支原体在国内的迅速传播使得这类传染病的防控形势更加严峻。</p>
+<ul>
+<li>论文 DOI：10.1016/j.lanmic.2025.101200</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/HToma_8oycXyymiTYSQiCg">新刊发布 | 柳叶刀最新金色开放获取期刊《柳叶刀-医学影像与诊疗》</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223231.png" class="img-fluid"></p>
+<p>《柳叶刀-医学影像与诊疗》（The Lancet Medical Imaging &amp; Theranostics）是柳叶刀最新发布的金色开放获取期刊，致力于发表高质量的临床研究和思想引领性文章，涵盖成熟或新兴的诊断影像与介入放射学技术，以及影像技术在各医学专科中疾病筛查、诊断、预后评估和治疗方面的创新应用。目前，期刊已开放征稿。</p>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/pDyS-ZiH-SwAHvJPXHkQ_w">一文读懂扰动与虚拟细胞！人工智能模型真的能够替代湿实验吗？</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223512.png" class="img-fluid"></p>
+<p>从扰动分析到虚拟细胞与Virtual Cell Challenge，本文通俗拆解“1对1虚拟细胞”背后的真实进展与噱头，对比AlphaGenome等前沿工作，聊清AI能替代湿实验到什么程度、现在能做什么。</p>
+<ol start="6" type="1">
+<li><a href="https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss" title="高斯">卡尔·弗里德里希·高斯</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223741.png" class="img-fluid"></p>
+<p>Carl Friedrich Gauss（卡尔·弗里德里希·高斯，1777–1855） 是德国数学家、物理学家与天文学家，常被誉为“数学王子（Princeps mathematicorum）”。他几乎在所有重要数学分支都留下了基础性、决定性的成果，并深刻影响了统计学、物理学与工程科学。你在回归、GWAS、误差建模中反复使用的假设，其思想源头几乎都可追溯到高斯。他让数学从抽象推演，真正成为理解自然与数据的通用语言。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/pMCDZOyv3htD1nNvcnW-GA">使用 R 目标试验模拟：TrialEmulation 包从 IPCW 到 MSM 实战</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223836.png" class="img-fluid"></p>
+<p>基于 TrialEmulation 包，本文用实战思路串起 TTE 全流程：从设定 ITT/PP 估计量、构建嵌套试验队列、估计 IPCW，到拟合边际结构模型并可视化不同治疗策略下的生存曲线，可直接改变量名复用到你自己的 R 项目中。</p>
+<ol start="8" type="1">
+<li><a href="https://mp.weixin.qq.com/s/_2CDFb5nOA20IT6xxkHmnw">Gemini科研绘图20个高质量Prompt</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224009.png" class="img-fluid"></p>
+<p>整理 Gemini Nano Banana 系列 20 个科研绘图 Prompt，从Piezo1机械转导、STING免疫到临床AI伦理治理，覆盖机理、器械、诊断与治疗全链路，用于头脑风暴与方案设计，助你高效产出专业级科研示意图。</p>
+<ol start="9" type="1">
+<li><a href="https://abyss.abgox.com/zh-CN/" title="abyss bucket">abyss bucket</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224141.png" class="img-fluid"></p>
+<p>abyss 是一个非常特殊的 Scoop bucket，它旨在成为类似 Winget 的 Scoop 方案 + 数据持久化。区别于标准的 Scoop bucket，它还包含了一些额外的特性。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="10" type="1">
+<li><a href="https://mp.weixin.qq.com/s/2DR5xMmtJoW8OpI_hRfiyQ">科研绘图工具分享：这10个网站，够你从脑图到海报都搞定</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224254.png" class="img-fluid"></p>
+<p>除了常见的思维导图和流程图工具，还整理了画结构图、画“地铁图”、做在线白板协作，以及专门用来激发信息可视化灵感的网站。适合论文配图、PPT 展示、课程作业和头脑风暴，从小白到进阶都能找到顺手的工具。</p>
+<ol start="11" type="1">
+<li><a href="https://www.sqlstyle.guide/zh/" title="SQL">SQL样式指南</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224424.png" class="img-fluid"></p>
+<p>SQL Style Guide 是一份开源、免费的SQL编码规范手册。它旨在帮助开发团队写出整洁、一致且易于维护的SQL代码，核心原则是“选定一套规则并严格遵守”。除了命名和查询，它还覆盖了表结构创建、数据类型选择、约束与键的定义，并附赠一份实用的跨数据库保留字列表。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2026/02/13/biostat_weekly_issue21/</guid>
+  <pubDate>Fri, 13 Feb 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212221439.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>领马年新春限定微信红包封面！</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -3308,7 +3434,7 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="ffb11ebc" class="cell" data-execution_count="1">
+<div id="a411f44f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3377,7 +3503,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="493545da" class="cell" data-execution_count="2">
+<div id="365dc868" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3516,7 +3642,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="61cc9228" class="cell" data-execution_count="3">
+<div id="6baec256" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3592,7 +3718,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="75c54f07" class="cell" data-execution_count="4">
+<div id="db07701d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3676,7 +3802,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="1a8c7445" class="cell" data-execution_count="5">
+<div id="b275e9e2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3788,7 +3914,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="45188c84" class="cell" data-execution_count="6">
+<div id="ea9cc179" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -3957,7 +4083,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="9a80ad64" class="cell" data-execution_count="1">
+<div id="df2a375e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4175,7 +4301,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="ea8c0648" class="cell" data-execution_count="2">
+<div id="5c83bcd8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4308,7 +4434,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="648a8a37" class="cell" data-execution_count="3">
+<div id="c4c0237a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4398,7 +4524,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="100a1d70" class="cell" data-execution_count="4">
+<div id="73124f6b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4493,7 +4619,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="8e80f697" class="cell" data-execution_count="5">
+<div id="1039daef" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4528,7 +4654,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="ddaec1ed" class="cell" data-execution_count="6">
+<div id="f0044a2d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4614,7 +4740,7 @@ font-style: inherit;">return</span> model</span></code></pre></div></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="dea2e262" class="cell" data-execution_count="7">
+<div id="31947713" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4685,7 +4811,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="25f20bc7" class="cell" data-execution_count="8">
+<div id="fb24cfdf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4844,7 +4970,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="90066595" class="cell" data-execution_count="9">
+<div id="e17c099c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5539,7 +5665,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="2aa68af8" class="cell" data-execution_count="1">
+<div id="8af0ae4a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -5639,7 +5765,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="db01e82a" class="cell" data-execution_count="2">
+<div id="971c7157" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -5750,7 +5876,7 @@ font-style: inherit;">'</span>)</span></code></pre></div></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="f84c1987" class="cell" data-execution_count="3">
+<div id="083aff14" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5921,7 +6047,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div></d
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="72e938a9" class="cell" data-execution_count="1">
+<div id="07355acd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -6017,7 +6143,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="97041c8d" class="cell" data-execution_count="2">
+<div id="120f2f54" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -6161,7 +6287,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="a435e509" class="cell" data-execution_count="3">
+<div id="57a19fbc" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -6413,293 +6539,6 @@ font-style: inherit;">600_851_475_143</span></span>
   <guid>https://leslie-lu.github.io/blog/2025/04/02/dragen_wgs/</guid>
   <pubDate>Wed, 02 Apr 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250402182406.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>PE0002: Even Fibonacci Numbers</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/04/01/pe0002/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="题目" class="level3">
-<h3 class="anchored" data-anchor-id="题目">题目</h3>
-Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:
-<div style="text-align:center;">
-<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
-</div>
-<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.</p>
-</section>
-<section id="问题描述" class="level3">
-<h3 class="anchored" data-anchor-id="问题描述">问题描述</h3>
-<p>题目要求：找出斐波那契数列中不超过四百万的所有偶数项，并计算它们的和。 斐波那契数列以1和2开始，后续项由前两项相加生成，例如：1, 2, 3, 5, 8, 13, 21, 34… 目标：求所有偶数项（如2、8、34等）的总和。</p>
-</section>
-<section id="解答" class="level3">
-<h3 class="anchored" data-anchor-id="解答">解答</h3>
-<section id="方法一直接遍历法新手友好" class="level4">
-<h4 class="anchored" data-anchor-id="方法一直接遍历法新手友好">方法一：直接遍历法（新手友好）</h4>
-<p>思路：逐个生成斐波那契数，检查是否为偶数，累加符合条件的项。</p>
-<div id="f8cb5569" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> sum_of_even_fibonacci(limit) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>:</span>
-<span id="cb1-2">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">"""Returns the sum of even Fibonacci numbers not exceeding the limit."""</span></span>
-<span id="cb1-3">    a, b <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span></span>
-<span id="cb1-4">    total <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb1-5">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">while</span> a <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;=</span> limit:</span>
-<span id="cb1-6">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> a <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>:</span>
-<span id="cb1-7">            total <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> a</span>
-<span id="cb1-8">        a, b<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> b, a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span>b</span>
-<span id="cb1-9">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> total</span>
-<span id="cb1-10"></span>
-<span id="cb1-11">sum_of_even_fibonacci(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>4613732</code></pre>
-</div>
-</div>
-<p>优点：逻辑简单，适合理解基础循环和条件判断。 缺点：需检查每个数是否为偶数，效率较低（时间复杂度 <code>O(n)</code>）。</p>
-</section>
-<section id="方法二生成器-numpy效率升级" class="level4">
-<h4 class="anchored" data-anchor-id="方法二生成器-numpy效率升级">方法二：生成器 + NumPy（效率升级）</h4>
-<p>思路：用生成器无限生成斐波那契数，结合NumPy数组快速筛选偶数。</p>
-<div id="c984d624" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># solution using a more efficient method</span></span>
-<span id="cb3-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> fibonacci():</span>
-<span id="cb3-3">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">"""Generator for Fibonacci numbers"""</span></span>
-<span id="cb3-4">    a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> b<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb3-5">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">while</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>:</span>
-<span id="cb3-6">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">yield</span> b</span>
-<span id="cb3-7">        a, b<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> b, a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span>b</span>
-<span id="cb3-8"></span>
-<span id="cb3-9">series<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb3-10"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> num <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> fibonacci():</span>
-<span id="cb3-11">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> num <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4_000_000</span>:</span>
-<span id="cb3-12">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">break</span></span>
-<span id="cb3-13">    series.append(num)</span>
-<span id="cb3-14"></span>
-<span id="cb3-15"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># series</span></span>
-<span id="cb3-16"></span>
-<span id="cb3-17"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb3-18">arr<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.array(series)</span>
-<span id="cb3-19">arr[arr<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>].<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>()  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># sum of even Fibonacci numbers</span></span></code></pre></div></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>np.int64(4613732)</code></pre>
-</div>
-</div>
-<p>优点：生成器减少内存占用，NumPy向量化操作加速计算。 缺点：仍需生成全部数列，大范围数据仍不够高效。</p>
-</section>
-<section id="方法三数学优化法" class="level4">
-<h4 class="anchored" data-anchor-id="方法三数学优化法">方法三：数学优化法</h4>
-<p>核心发现：斐波那契数列中，每第三项为偶数（如2, 8, 34, 144…）。 利用此规律，只需计算这些特定项的和，跳过无关项，效率飙升。</p>
-<div id="10ca797d" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> SumThirdValue(limit) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>:</span>
-<span id="cb5-2">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">"""</span></span>
-<span id="cb5-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    Every third Fibonacci number is even.</span></span>
-<span id="cb5-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    """</span></span>
-<span id="cb5-5">    x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb5-6">    <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb5-7">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">while</span> x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;=</span> limit:</span>
-<span id="cb5-8">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> (x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span>y)</span>
-<span id="cb5-9">        x, y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>y, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>y</span>
-<span id="cb5-10">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span></span>
-<span id="cb5-11"></span>
-<span id="cb5-12">SumThirdValue(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4_000_000</span>)</span></code></pre></div></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>4613732</code></pre>
-</div>
-</div>
-<p>优点：时间复杂度降至 <code>O(log n)</code>，四千万甚至十亿级数据也能瞬间完成。</p>
-</section>
-</section>
-<section id="答案" class="level3">
-<h3 class="anchored" data-anchor-id="答案">答案</h3>
-<p>答案为4613732。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>project euler</category>
-  <category>algorithm</category>
-  <category>math</category>
-  <category>programming</category>
-  <category>fibonacci</category>
-  <guid>https://leslie-lu.github.io/blog/2025/04/01/pe0002/</guid>
-  <pubDate>Tue, 01 Apr 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250401160955.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
