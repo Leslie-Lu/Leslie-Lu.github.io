@@ -3434,7 +3434,7 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
 <section id="方法一暴力遍历法新手入门" class="level4">
 <h4 class="anchored" data-anchor-id="方法一暴力遍历法新手入门">方法一：暴力遍历法（新手入门）</h4>
 <p>思路：生成所有3位数的乘积，逐个检查是否为回文数，记录最大值。</p>
-<div id="a411f44f" class="cell" data-execution_count="1">
+<div id="eee1c54a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3503,7 +3503,7 @@ font-style: inherit;">return</span> ans</span>
 </section>
 <section id="方法二" class="level4">
 <h4 class="anchored" data-anchor-id="方法二">方法二</h4>
-<div id="365dc868" class="cell" data-execution_count="2">
+<div id="3c81e9b8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -3642,7 +3642,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法三减少重复计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法三减少重复计算">方法三：减少重复计算</h4>
 <p>优化点：内层循环从a开始，避免重复检查i*j和j*i。</p>
-<div id="6baec256" class="cell" data-execution_count="3">
+<div id="1e5e9591" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3718,7 +3718,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法四倒序搜索-提前终止" class="level4">
 <h4 class="anchored" data-anchor-id="方法四倒序搜索-提前终止">方法四：倒序搜索 + 提前终止</h4>
 <p>优化点：从999开始倒序搜索，若乘积小于当前最大值则提前终止。</p>
-<div id="db07701d" class="cell" data-execution_count="4">
+<div id="d3a68368" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3802,7 +3802,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法五数学优化" class="level4">
 <h4 class="anchored" data-anchor-id="方法五数学优化">方法五：数学优化</h4>
 <p>数学原理：若乘积为回文数，至少一个数为11的倍数（仅限6位回文数）</p>
-<div id="b275e9e2" class="cell" data-execution_count="5">
+<div id="86a615c6" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">largestPalindrome <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3914,7 +3914,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <section id="方法六向量化计算" class="level4">
 <h4 class="anchored" data-anchor-id="方法六向量化计算">方法六：向量化计算</h4>
 <p>代码逻辑：利用NumPy矩阵运算加速。</p>
-<div id="ea9cc179" class="cell" data-execution_count="6">
+<div id="11505a10" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -4083,7 +4083,7 @@ font-style: inherit;">return</span> largestPalindrome  </span></code></pre></div
 <p>注意力公式为：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
 <p>代码实现：</p>
-<div id="df2a375e" class="cell" data-execution_count="1">
+<div id="d6185b15" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4301,7 +4301,7 @@ font-style: inherit;">1</span>](x)</span></code></pre></div></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i)%7D%20=%20%5Csin%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPE%7D_%7B(pos,%202i+1)%7D%20=%20%5Ccos%5Cleft(%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7Bmodel%7D%7D%7D%5Cright)%0A"></p>
 <p>代码实现：</p>
-<div id="5c83bcd8" class="cell" data-execution_count="2">
+<div id="c4c74fac" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4434,7 +4434,7 @@ font-style: inherit;">self</span>.dropout(x)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="c4c0237a" class="cell" data-execution_count="3">
+<div id="7946926a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4524,7 +4524,7 @@ font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </figure>
 </div>
 <p>代码实现：</p>
-<div id="73124f6b" class="cell" data-execution_count="4">
+<div id="912dff9a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4619,7 +4619,7 @@ background-color: null;
 font-style: inherit;">self</span>.feed_forward)</span></code></pre></div></div>
 </div>
 <p>其中，掩码生成函数如下：</p>
-<div id="1039daef" class="cell" data-execution_count="5">
+<div id="9d92e090" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4654,7 +4654,7 @@ font-style: inherit;">~</span>subsequent_mask</span></code></pre></div></div>
 </section>
 <section id="模型初始化与参数设置" class="level4">
 <h4 class="anchored" data-anchor-id="模型初始化与参数设置">5. 模型初始化与参数设置</h4>
-<div id="f0044a2d" class="cell" data-execution_count="6">
+<div id="5a3a3b1b" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4740,7 +4740,7 @@ font-style: inherit;">return</span> model</span></code></pre></div></div>
 <p>公式：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Blr%7D%20=%20%5Ctext%7Bd_model%7D%5E%7B-0.5%7D%20%5Ccdot%20%5Ctext%7Bmin%7D(%5Ctext%7Bstep%7D%5E%7B-0.5%7D,%20%5Ctext%7Bstep%7D%20%5Ccdot%20%5Ctext%7Bwarmup%7D%5E%7B-1.5%7D)%0A"></p>
 <p>代码实现：</p>
-<div id="31947713" class="cell" data-execution_count="7">
+<div id="7e4a9cd4" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4811,7 +4811,7 @@ font-style: inherit;">1.5</span>)</span></code></pre></div></div>
 <h4 class="anchored" data-anchor-id="标签平滑label-smoothing">2. 标签平滑（Label Smoothing）</h4>
 <p>标签平滑是一种正则化技术，用于缓解模型过拟合和提高泛化能力。它通过将目标标签的概率分布进行平滑处理，使得模型在训练时不会过于自信地预测某个特定的标签。</p>
 <p>代码实现：</p>
-<div id="fb24cfdf" class="cell" data-execution_count="8">
+<div id="5b63c3ab" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -4970,7 +4970,7 @@ font-style: inherit;">self</span>.criterion(x, true_dist.clone().detach())</span
 <section id="分布式训练加速" class="level4">
 <h4 class="anchored" data-anchor-id="分布式训练加速">3. 分布式训练加速</h4>
 <p>多 GPU 训练：</p>
-<div id="e17c099c" class="cell" data-execution_count="9">
+<div id="52fdfba8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5665,7 +5665,7 @@ Review by @zhenlu</code></pre>
 <section id="api-接入" class="level4">
 <h4 class="anchored" data-anchor-id="api-接入">API 接入</h4>
 <p>首先是接入硅基流动上可选的模型，我们没有使用 deepseek 官网的 api：</p>
-<div id="8af0ae4a" class="cell" data-execution_count="1">
+<div id="5e4f4d64" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># load the env file</span></span>
@@ -5765,7 +5765,7 @@ font-style: inherit;">'Using DeepSeek to translate the post...'</span>)</span></
 <section id="读取-qmd-文件" class="level4">
 <h4 class="anchored" data-anchor-id="读取-qmd-文件">读取 qmd 文件</h4>
 <p>对于 qmd 文件，我们需要识别应用于我们网页的 metadata，对于这部分信息，我们翻译了 title 并回写，以保证翻译后生成的 _en.qmd 文件可直接用于静态网站生成，无需手动调整。代码如下：</p>
-<div id="971c7157" class="cell" data-execution_count="2">
+<div id="bfae3a33" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load the QMD file</span></span>
@@ -5876,7 +5876,7 @@ font-style: inherit;">'</span>)</span></code></pre></div></div>
 <section id="翻译函数" class="level4">
 <h4 class="anchored" data-anchor-id="翻译函数">翻译函数</h4>
 <p>再次感谢 <code>Rico00121/hugo-translator</code> 项目，由于原项目在翻译时，对于 code 的支持并不好，我们在原有的基础上，修改了大模型的 prompt，增加了对代码的翻译支持：要求翻译时，保留代码的原有格式和内容，不要破坏 Markdown 格式。</p>
-<div id="083aff14" class="cell" data-execution_count="3">
+<div id="b393cd1a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -6047,7 +6047,7 @@ font-style: inherit;">return</span> translated_text</span></code></pre></div></d
 <section id="方法一基础试除法适合小数据" class="level4">
 <h4 class="anchored" data-anchor-id="方法一基础试除法适合小数据">方法一：基础试除法（适合小数据）</h4>
 <p>思路：从2开始逐个试除，记录能整除的最大质数。若剩余数&gt;1，则其本身为质数，直接作为最大质因数。</p>
-<div id="07355acd" class="cell" data-execution_count="1">
+<div id="53f2ab29" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> math</span>
@@ -6143,7 +6143,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="优化试除法效率翻倍" class="level4">
 <h4 class="anchored" data-anchor-id="优化试除法效率翻倍">优化试除法（效率翻倍）</h4>
 <p>核心优化：单独处理2，2是唯一的偶质数，先除尽2，后续只需检查奇数。</p>
-<div id="120f2f54" class="cell" data-execution_count="2">
+<div id="6f1bd253" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -6287,7 +6287,7 @@ font-style: inherit;"># 输出：6857</span></span></code></pre></div></div>
 <section id="方法三numpy" class="level4">
 <h4 class="anchored" data-anchor-id="方法三numpy">方法三：numpy</h4>
 <p>思路：利用 numpy的向量化运算，快速筛选质因数。</p>
-<div id="57a19fbc" class="cell" data-execution_count="3">
+<div id="6b18794e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
