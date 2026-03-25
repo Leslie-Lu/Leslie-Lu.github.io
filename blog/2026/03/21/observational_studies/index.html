@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zhen Lu">
+<meta name="description" content="Unrevealing the intricate concepts in observational studies and causal inference, including time zero, exposure timing, collider bias, and more.">
+
+<title>厘清一些观察性研究与因果推断背景下的概念 | Zhen Lu – Zhen Lu</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-ff73747157bea4a22cb1ab1a769f836e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-ffc1e1c74b8c374cdd6fd9c97fd297a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #170C3A;
+      }
+</style>
+<style type="text/css">
+hr.dinkus {
+    width: 50px;
+    margin: 2em auto 2em;
+    border-top: 5px dotted #454545;
+}
+
+div.column-margin+hr.dinkus {
+    margin: 1em auto 2em;
+}
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Zhen Lu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../talks/index.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../publications/index.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../news/index.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../uses/index.html"> 
+<span class="menu-text">Uses</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../atom.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Zhen Lu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../biostat_weekly_rss.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Biostat Weekly @ OpenBioStat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:luzh29@mail2.sysu.edu.cn"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:envelope" style="font-size: 1.1em;" aria-label="Icon envelope from bi Iconify.design set." title="E-mail"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/ZhenLu_Biost" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:twitter-x" style="font-size: 1.1em;" aria-label="Icon twitter-x from bi Iconify.design set." title="X"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@leslielu8542" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:youtube" style="font-size: 1.1em;" aria-label="Icon youtube from bi Iconify.design set." title="YouTube"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://space.bilibili.com/32159908" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="fa6-brands:bilibili" style="font-size: 1em;" aria-label="Icon bilibili from fa6-brands Iconify.design set." title="bilibili"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202405101850871.jpg" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:wechat" style="font-size: 1em;" aria-label="Icon wechat from bi Iconify.design set." title="Wechat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.zhihu.com/people/edison-70-18" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="simple-icons:zhihu" style="font-size: 1em;" aria-label="Icon zhihu from simple-icons Iconify.design set." title="Zhihu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=LKLQ1g8AAAAJ" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 1em;" aria-label="Icon google-scholar-square from academicons Iconify.design set." title="Google scholar"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Leslie-Lu" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" aria-label="Icon github from bi Iconify.design set." title="GitHub"></iconify-icon></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">厘清一些观察性研究与因果推断背景下的概念</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+                  <div>
+        <div class="description">
+          Unrevealing the intricate concepts in observational studies and causal inference, including time zero, exposure timing, collider bias, and more.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">causal inference</div>
+                <div class="quarto-category">observational studies</div>
+                <div class="quarto-category">bias</div>
+                <div class="quarto-category">epidemiology</div>
+                <div class="quarto-category">target trial emulation</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://leslie-lu.github.io/">Zhen Lu</a> <a href="https://orcid.org/0000-0002-3481-6310" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Saturday, March 21, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#写在前面" id="toc-写在前面" class="nav-link active" data-scroll-target="#写在前面">写在前面</a></li>
+  <li><a href="#一先从最基础的问题讲起the-timing-of-exposure-和-time-zero-是一回事吗" id="toc-一先从最基础的问题讲起the-timing-of-exposure-和-time-zero-是一回事吗" class="nav-link" data-scroll-target="#一先从最基础的问题讲起the-timing-of-exposure-和-time-zero-是一回事吗">一、先从最基础的问题讲起：<code>the timing of exposure</code> 和 <code>time zero</code> 是一回事吗</a></li>
+  <li><a href="#二time-zeroindex-datebaselineexposure-timing-之间的区别与联系" id="toc-二time-zeroindex-datebaselineexposure-timing-之间的区别与联系" class="nav-link" data-scroll-target="#二time-zeroindex-datebaselineexposure-timing-之间的区别与联系">二、<code>time zero</code>、<code>index date</code>、<code>baseline</code>、<code>exposure timing</code> 之间的区别与联系</a></li>
+  <li><a href="#三为什么-target-trial-emulation-如此强调时间对齐" id="toc-三为什么-target-trial-emulation-如此强调时间对齐" class="nav-link" data-scroll-target="#三为什么-target-trial-emulation-如此强调时间对齐">三、为什么 target trial emulation 如此强调时间对齐</a></li>
+  <li><a href="#四为什么-time-zero-设错会导致偏倚" id="toc-四为什么-time-zero-设错会导致偏倚" class="nav-link" data-scroll-target="#四为什么-time-zero-设错会导致偏倚">四、为什么 <code>time zero</code> 设错会导致偏倚</a></li>
+  <li><a href="#五用-covid-19aceiarb-的例子理解-collider-bias" id="toc-五用-covid-19aceiarb-的例子理解-collider-bias" class="nav-link" data-scroll-target="#五用-covid-19aceiarb-的例子理解-collider-bias">五、用 COVID-19、ACEI/ARB 的例子理解 collider bias</a></li>
+  <li><a href="#六什么是-grace-period" id="toc-六什么是-grace-period" class="nav-link" data-scroll-target="#六什么是-grace-period">六、什么是 <code>grace period</code></a></li>
+  <li><a href="#七time-varying-confounding-为什么麻烦" id="toc-七time-varying-confounding-为什么麻烦" class="nav-link" data-scroll-target="#七time-varying-confounding-为什么麻烦">七、<code>time-varying confounding</code> 为什么麻烦</a></li>
+  <li><a href="#八grace-period-与-time-varying-confounding-的关系" id="toc-八grace-period-与-time-varying-confounding-的关系" class="nav-link" data-scroll-target="#八grace-period-与-time-varying-confounding-的关系">八、<code>grace period</code> 与 <code>time-varying confounding</code> 的关系</a></li>
+  <li><a href="#九一个统一时间线正确设计immortal-time-bias-与-collider-bias" id="toc-九一个统一时间线正确设计immortal-time-bias-与-collider-bias" class="nav-link" data-scroll-target="#九一个统一时间线正确设计immortal-time-bias-与-collider-bias">九、一个统一时间线：正确设计、immortal time bias 与 collider bias</a></li>
+  <li><a href="#十从-time-varying-confounding-到-ipw为什么不能只靠普通回归" id="toc-十从-time-varying-confounding-到-ipw为什么不能只靠普通回归" class="nav-link" data-scroll-target="#十从-time-varying-confounding-到-ipw为什么不能只靠普通回归">十、从 time-varying confounding 到 IPW：为什么不能只靠普通回归</a></li>
+  <li><a href="#十一iptw-与-ipcw-分别在做什么" id="toc-十一iptw-与-ipcw-分别在做什么" class="nav-link" data-scroll-target="#十一iptw-与-ipcw-分别在做什么">十一、<code>IPTW</code> 与 <code>IPCW</code> 分别在做什么</a></li>
+  <li><a href="#十二严谨理解-ipcw它究竟是什么" id="toc-十二严谨理解-ipcw它究竟是什么" class="nav-link" data-scroll-target="#十二严谨理解-ipcw它究竟是什么">十二、严谨理解 IPCW：它究竟是什么</a></li>
+  <li><a href="#十三ipcw-与-time-varying-confounder-到底是什么关系" id="toc-十三ipcw-与-time-varying-confounder-到底是什么关系" class="nav-link" data-scroll-target="#十三ipcw-与-time-varying-confounder-到底是什么关系">十三、IPCW 与 time-varying confounder 到底是什么关系</a></li>
+  <li><a href="#十四为什么不能把-time-varying-confounder-直接放进结局模型里" id="toc-十四为什么不能把-time-varying-confounder-直接放进结局模型里" class="nav-link" data-scroll-target="#十四为什么不能把-time-varying-confounder-直接放进结局模型里">十四、为什么不能把 time-varying confounder 直接放进结局模型里</a></li>
+  <li><a href="#十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子" id="toc-十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子" class="nav-link" data-scroll-target="#十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子">十五、一个把 grace period、time-varying confounding、IPTW、IPCW 串起来的例子</a></li>
+  <li><a href="#十六一个最实用的概念对照表" id="toc-十六一个最实用的概念对照表" class="nav-link" data-scroll-target="#十六一个最实用的概念对照表">十六、一个最实用的概念对照表</a></li>
+  <li><a href="#十七写给实际做研究的几点建议" id="toc-十七写给实际做研究的几点建议" class="nav-link" data-scroll-target="#十七写给实际做研究的几点建议">十七、写给实际做研究的几点建议</a></li>
+  <li><a href="#十八takeaways" id="toc-十八takeaways" class="nav-link" data-scroll-target="#十八takeaways">十八、Takeaways</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="写在前面" class="level3">
+<h3 class="anchored" data-anchor-id="写在前面">写在前面</h3>
+<p>在观察性研究和因果推断的语境里，很多概念单独看并不难，但一旦放在同一篇文章或同一个研究设计里，就很容易混淆。最常见的一组混淆包括：</p>
+<ul>
+<li><code>the timing of exposure</code> 到底是什么</li>
+<li><code>target trial emulation</code> 中的 <code>time zero</code> 是什么</li>
+<li><code>index date</code>、<code>baseline</code>、<code>time zero</code> 是不是一回事</li>
+<li><code>collider bias</code>、<code>immortal time bias</code> 为什么都和“时间定义不清”有关</li>
+<li><code>grace period</code> 是什么，为什么它既必要又危险</li>
+<li><code>time-varying confounding</code> 为什么不能靠“在模型里调一下变量”简单解决</li>
+<li><code>IPTW</code> 和 <code>IPCW</code> 到底分别在解决什么问题</li>
+</ul>
+<p>我们这篇文章试图把这些概念放到同一套时间框架中，给大家做一次系统整理。</p>
+<p>整个的主线其实只有一句话：</p>
+<blockquote class="blockquote">
+<p>在 target trial emulation 中，入组时点、治疗策略定义时点、随访起点、暴露发生时间、后续协变量更新时间，必须在同一条时间轴上被严格定义；一旦定义错位，就很容易产生偏倚。</p>
+</blockquote>
+</section>
+<section id="一先从最基础的问题讲起the-timing-of-exposure-和-time-zero-是一回事吗" class="level3">
+<h3 class="anchored" data-anchor-id="一先从最基础的问题讲起the-timing-of-exposure-和-time-zero-是一回事吗">一、先从最基础的问题讲起：<code>the timing of exposure</code> 和 <code>time zero</code> 是一回事吗</h3>
+<p>结论先说：</p>
+<p><strong>不是同一回事，但关系极其密切。</strong></p>
+<section id="the-timing-of-exposure-是什么" class="level4">
+<h4 class="anchored" data-anchor-id="the-timing-of-exposure-是什么">1. <code>the timing of exposure</code> 是什么</h4>
+<p><code>the timing of exposure</code> 指的是：</p>
+<p><strong>暴露或治疗发生在什么时候。</strong></p>
+<p>例如：</p>
+<ul>
+<li>患者在确诊当天开始用药</li>
+<li>患者在住院后第 3 天才接受干预</li>
+<li>患者在感染前已经连续服药多年</li>
+</ul>
+<p>这些都属于 exposure 的时间定位问题。</p>
+</section>
+<section id="time-zero-是什么" class="level4">
+<h4 class="anchored" data-anchor-id="time-zero-是什么">2. <code>time zero</code> 是什么</h4>
+<p><code>time zero</code> 指的是：</p>
+<p><strong>研究正式开始计时的时点。</strong></p>
+<p>也就是：</p>
+<ul>
+<li>从这一刻开始判断谁进入风险集</li>
+<li>从这一刻开始计算随访时间</li>
+<li>从这一刻开始观察结局</li>
+<li>从这一刻开始比较不同治疗策略</li>
+</ul>
+<p>在 target trial emulation 中，<code>time zero</code> 对应于理想随机试验中的“随机分组并开始随访”的时点。</p>
+</section>
+<section id="两者的关系" class="level4">
+<h4 class="anchored" data-anchor-id="两者的关系">3. 两者的关系</h4>
+<p>两者的关系可以概括为：</p>
+<ul>
+<li><code>time zero</code> 是整项研究的时间原点</li>
+<li><code>the timing of exposure</code> 是暴露相对于这个原点的位置</li>
+</ul>
+<p>所以，暴露可以发生在：</p>
+<ul>
+<li><code>time zero</code> 之前</li>
+<li><code>time zero</code> 当下</li>
+<li><code>time zero</code> 之后</li>
+</ul>
+<p>它们概念不同，但必须对齐。因为只要暴露定义和 <code>time zero</code> 不匹配，偏倚就很容易出现。</p>
+</section>
+</section>
+<section id="二time-zeroindex-datebaselineexposure-timing-之间的区别与联系" class="level3">
+<h3 class="anchored" data-anchor-id="二time-zeroindex-datebaselineexposure-timing-之间的区别与联系">二、<code>time zero</code>、<code>index date</code>、<code>baseline</code>、<code>exposure timing</code> 之间的区别与联系</h3>
+<p>这四个概念经常一起出现，因此最容易混。</p>
+<section id="time-zero" class="level4">
+<h4 class="anchored" data-anchor-id="time-zero">1. <code>time zero</code></h4>
+<p>如前所述，<code>time zero</code> 是研究开始比较结局的起点。</p>
+</section>
+<section id="index-date" class="level4">
+<h4 class="anchored" data-anchor-id="index-date">2. <code>index date</code></h4>
+<p><code>index date</code> 是数据库研究中常用的术语，通常指：</p>
+<p><strong>给每个研究对象定义的锚点日期。</strong></p>
+<p>它常用于：</p>
+<ul>
+<li>划定基线窗口</li>
+<li>划定暴露窗口</li>
+<li>划定随访窗口</li>
+</ul>
+<p>在很多研究中，<code>index date</code> 实际上就承担了 <code>time zero</code> 的角色，但严格说：</p>
+<ul>
+<li><code>index date</code> 更偏向数据管理和操作定义</li>
+<li><code>time zero</code> 更偏向因果推断和试验设计中的起点定义</li>
+</ul>
+</section>
+<section id="baseline" class="level4">
+<h4 class="anchored" data-anchor-id="baseline">3. <code>baseline</code></h4>
+<p><code>baseline</code> 不是单纯一个日期，而是：</p>
+<p><strong>围绕起点时刻所定义的起始状态。</strong></p>
+<p>它可以指：</p>
+<ul>
+<li><code>time zero</code> 当下的变量值</li>
+<li><code>time zero</code> 前一段窗口中收集到的起始协变量信息</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>年龄</li>
+<li>性别</li>
+<li>既往病史</li>
+<li>基线实验室指标</li>
+<li>基线用药史</li>
+</ul>
+<p>都属于 baseline information。</p>
+</section>
+<section id="exposure-timing" class="level4">
+<h4 class="anchored" data-anchor-id="exposure-timing">4. <code>exposure timing</code></h4>
+<p><code>exposure timing</code> 讲的是暴露相对于 <code>time zero</code> 的发生位置。</p>
+<p>例如：</p>
+<ul>
+<li>在 <code>time zero</code> 当天开始治疗</li>
+<li>在 <code>time zero</code> 之前已经长期暴露</li>
+<li>在 <code>time zero</code> 之后几天内启动治疗</li>
+</ul>
+</section>
+<section id="一个最实用的理解框架" class="level4">
+<h4 class="anchored" data-anchor-id="一个最实用的理解框架">5. 一个最实用的理解框架</h4>
+<p>看到一篇观察性研究时，我们可以依次问四个问题：</p>
+<ol type="1">
+<li><code>time zero</code> 是哪一天？</li>
+<li><code>index date</code> 是哪一天？它是否等于 <code>time zero</code>？</li>
+<li><code>baseline</code> 是如何定义和测量的？</li>
+<li>暴露是在 <code>time zero</code> 前、当时还是之后发生的？</li>
+</ol>
+<p>只要这四个问题不清楚，后面的因果解释几乎一定会有风险。</p>
+</section>
+</section>
+<section id="三为什么-target-trial-emulation-如此强调时间对齐" class="level3">
+<h3 class="anchored" data-anchor-id="三为什么-target-trial-emulation-如此强调时间对齐">三、为什么 target trial emulation 如此强调时间对齐</h3>
+<p>target trial emulation 的核心价值，不只是“模仿随机对照试验”这么抽象的一句话，而是迫使研究者在开始分析前回答以下问题：</p>
+<ol type="1">
+<li>谁在什么时点符合入组条件？</li>
+<li>从哪一刻开始随访？</li>
+<li>治疗策略在什么时点被分配或定义？</li>
+<li>结局从哪一刻开始计数？</li>
+<li>哪些变量是 baseline 变量，哪些已经是 post-baseline 变量？</li>
+</ol>
+<p>在理想情况下，下面三个时点应尽量对齐：</p>
+<ul>
+<li>eligibility assessment</li>
+<li>treatment assignment or strategy assignment</li>
+<li>start of follow-up</li>
+</ul>
+<p>如果这三者不对齐，就容易出现：</p>
+<ul>
+<li><code>immortal time bias</code></li>
+<li><code>selection bias</code></li>
+<li><code>collider bias</code></li>
+<li>对 post-baseline variables 的错误调整</li>
+<li>对 dynamic treatment strategies 的错误建模</li>
+</ul>
+</section>
+<section id="四为什么-time-zero-设错会导致偏倚" class="level3">
+<h3 class="anchored" data-anchor-id="四为什么-time-zero-设错会导致偏倚">四、为什么 <code>time zero</code> 设错会导致偏倚</h3>
+<p>下面分两类讲。</p>
+<section id="immortal-time-bias随访开始太早暴露定义太晚" class="level4">
+<h4 class="anchored" data-anchor-id="immortal-time-bias随访开始太早暴露定义太晚">1. <code>immortal time bias</code>：随访开始太早，暴露定义太晚</h4>
+<p><code>immortal time bias</code> 的核心是：</p>
+<p><strong>某人必须先“活到未来某个时点”，才有资格被归入暴露组；如果分析时却把这段时间提前算入暴露组，就会让暴露组看起来获益。</strong></p>
+<section id="例子" class="level5">
+<h5 class="anchored" data-anchor-id="例子">例子</h5>
+<p>研究问题：</p>
+<blockquote class="blockquote">
+<p>住院后使用某药是否降低 30 天死亡率？</p>
+</blockquote>
+<p>错误设计：</p>
+<ul>
+<li>把住院当天设为 <code>time zero</code></li>
+<li>只要患者在住院后 7 天内任意一天开始用药，就归入 treated 组</li>
+<li>但从住院当天起就把这些患者算作 treated</li>
+</ul>
+<p>如果某患者第 5 天才开始用药，那么：</p>
+<ul>
+<li>第 0 天到第 5 天，他实际上还没有接受治疗</li>
+<li>但若想最终进入 treated 组，他必须先活到第 5 天</li>
+</ul>
+<p>于是 treated 组“白赚”了一段必须生存的时间，治疗效果会被高估。</p>
+</section>
+<section id="本质" class="level5">
+<h5 class="anchored" data-anchor-id="本质">本质</h5>
+<p>这里的问题不是“治疗启动得晚”，而是：</p>
+<p><strong><code>time zero</code> 与 exposure timing 没有被正确处理。</strong></p>
+</section>
+</section>
+<section id="collider-bias-selection-bias先按暴露后的事件筛人再比较暴露" class="level4">
+<h4 class="anchored" data-anchor-id="collider-bias-selection-bias先按暴露后的事件筛人再比较暴露">2. <code>collider bias</code> / <code>selection bias</code>：先按暴露后的事件筛人，再比较暴露</h4>
+<p>另一类常见错误是：</p>
+<p><strong>把研究起点放在一个发生于暴露之后、且可能受暴露影响的事件之后。</strong></p>
+<p>这时，入组样本已经被“选择机制”筛过一遍，比较结果可能失真。</p>
+</section>
+</section>
+<section id="五用-covid-19aceiarb-的例子理解-collider-bias" class="level3">
+<h3 class="anchored" data-anchor-id="五用-covid-19aceiarb-的例子理解-collider-bias">五、用 COVID-19、ACEI/ARB 的例子理解 collider bias</h3>
+<p>一个经典例子来自疫情期间关于 ACE inhibitors 和 angiotensin receptor blockers 的研究讨论。</p>
+<p>研究问题大致是：</p>
+<blockquote class="blockquote">
+<p>既往使用 ACE inhibitors 或 ARB，是否会影响 COVID-19 患者的死亡等结局？</p>
+</blockquote>
+<p>这类研究常见的做法是：</p>
+<ul>
+<li>先筛出所有已经确诊 COVID-19 的患者</li>
+<li>再在这些人中比较：
+<ul>
+<li>正在使用 ACEI/ARB 的人</li>
+<li>未使用 ACEI/ARB 的人</li>
+</ul></li>
+<li>然后比较死亡率或其他不良结局</li>
+</ul>
+<p>表面看，这似乎很自然，因为研究对象就是“COVID-19 患者”。但这里潜在的问题在于：</p>
+<p><strong>“是否感染 COVID-19”这个事件发生在暴露之后，而且可能同时受到暴露与其他危险因素的影响。</strong></p>
+<section id="问题是如何出现的" class="level4">
+<h4 class="anchored" data-anchor-id="问题是如何出现的">1. 问题是如何出现的</h4>
+<p>假设在当时的理论框架下，有人提出：</p>
+<blockquote class="blockquote">
+<p>ACEI/ARB 可能会增加感染 COVID-19 的概率。</p>
+</blockquote>
+<p>如果这个假设成立，那么：</p>
+<ul>
+<li>服药者，即使其他感染危险因素较少，也可能因为药物暴露而进入“COVID 患者”样本</li>
+<li>未服药者，若也进入“COVID 患者”样本，则可能需要具备更多其他危险因素，例如更重的心肺基础病、更高龄或更多暴露机会</li>
+</ul>
+<p>这样一来，在“已经感染 COVID-19 的人”这个被筛选过的人群里，可能出现一种人为关系：</p>
+<ul>
+<li>服药者反而平均更“健康”一些</li>
+<li>未服药者反而携带更多其他高危因素</li>
+</ul>
+<p>这些其他高危因素又会增加死亡风险。</p>
+<p>于是，当研究者在“感染者”中比较服药与未服药的死亡率时，看到的差异不再只是药物效应，而混入了样本选择机制造成的差异，这就是潜在的 collider bias。</p>
+</section>
+<section id="这个例子的核心逻辑" class="level4">
+<h4 class="anchored" data-anchor-id="这个例子的核心逻辑">2. 这个例子的核心逻辑</h4>
+<p>可以把“感染 COVID-19”想象成一道门。</p>
+<p>进入这道门，可能有两条路：</p>
+<ul>
+<li>路 A：因为服用了某药，更容易感染</li>
+<li>路 B：因为存在其他多个风险因素，更容易感染</li>
+</ul>
+<p>如果研究只纳入已经进门的人，那么在门内人群中就可能出现这种反向关系：</p>
+<ul>
+<li>有路 A 的人，不必具备太多路 B 的因素也能进门</li>
+<li>没有路 A 的人，往往需要更多路 B 的因素才能进门</li>
+</ul>
+<p>于是门内样本不再可比。</p>
+</section>
+<section id="这个例子最终说明了什么" class="level4">
+<h4 class="anchored" data-anchor-id="这个例子最终说明了什么">3. 这个例子最终说明了什么</h4>
+<p>后来作者进一步检查数据，发现：</p>
+<blockquote class="blockquote">
+<p>ACEI/ARB 与是否被诊断为 COVID-19 并无明显关联。</p>
+</blockquote>
+<p>这意味着前述 collider bias 在这项研究中更接近“理论上的潜在问题”，而不是实际中已经造成严重偏倚的问题。</p>
+<p>但这个例子非常重要，因为它说明了一个通用原则：</p>
+<blockquote class="blockquote">
+<p>如果入组条件依赖于暴露后的事件，而该事件又同时受暴露和其他危险因素影响，就必须警惕 collider bias。</p>
+</blockquote>
+</section>
+</section>
+<section id="六什么是-grace-period" class="level3">
+<h3 class="anchored" data-anchor-id="六什么是-grace-period">六、什么是 <code>grace period</code></h3>
+<p>现实世界的临床策略往往不是“在 <code>time zero</code> 的那一刻立刻开始治疗”，而是：</p>
+<ul>
+<li>确诊后 2 天内开始</li>
+<li>入院后 24 小时内开始</li>
+<li>手术后 3 天内开始</li>
+</ul>
+<p>这时就会出现 <code>grace period</code>。</p>
+<section id="定义" class="level4">
+<h4 class="anchored" data-anchor-id="定义">1. 定义</h4>
+<p><code>grace period</code> 指的是：</p>
+<p><strong>在研究起点之后，允许治疗在一段合理窗口内启动的时间段。</strong></p>
+<p>例如：</p>
+<ul>
+<li>策略 A：确诊后 2 天内开始抗病毒治疗</li>
+<li>策略 B：确诊后 2 天内不开始抗病毒治疗</li>
+</ul>
+<p>这里“2 天内”就是 grace period。</p>
+</section>
+<section id="为什么需要-grace-period" class="level4">
+<h4 class="anchored" data-anchor-id="为什么需要-grace-period">2. 为什么需要 grace period</h4>
+<p>因为在真实临床实践中：</p>
+<ul>
+<li>医生通常需要一定时间评估病情</li>
+<li>检查结果不一定在入组瞬间全部可得</li>
+<li>药物启动存在流程上的自然延迟</li>
+</ul>
+<p>如果研究强行把策略定义成“必须在 0 秒钟立刻开始”，往往不符合现实，也不符合临床决策过程。</p>
+<p>因此，grace period 不是随意放宽，而是：</p>
+<p><strong>对真实治疗策略的合理刻画。</strong></p>
+</section>
+<section id="为什么-grace-period-也会带来偏倚风险" class="level4">
+<h4 class="anchored" data-anchor-id="为什么-grace-period-也会带来偏倚风险">3. 为什么 grace period 也会带来偏倚风险</h4>
+<p>因为在 grace period 内：</p>
+<ul>
+<li>有人可能先发生结局</li>
+<li>有人会因为病情恶化而启动治疗</li>
+<li>有人会因为病情较轻而不启动治疗</li>
+</ul>
+<p>如果研究者把“几天后才开始治疗的人”从 <code>time zero</code> 起就算作 treated，仍然会产生 <code>immortal time bias</code>。</p>
+<p>所以，grace period 的存在不等于偏倚自动被解决；它只是让治疗策略的定义更真实，但分析方法必须同步调整。</p>
+</section>
+</section>
+<section id="七time-varying-confounding-为什么麻烦" class="level3">
+<h3 class="anchored" data-anchor-id="七time-varying-confounding-为什么麻烦">七、<code>time-varying confounding</code> 为什么麻烦</h3>
+<p><code>time-varying confounding</code> 指的是：</p>
+<p><strong>混杂因素不是固定不变的，而是随时间变化，并且其变化会同时影响后续治疗和结局。</strong></p>
+<p>常见例子包括：</p>
+<ul>
+<li>每日病情严重程度</li>
+<li>动态氧饱和度</li>
+<li>炎症指标变化</li>
+<li>血压、肾功能、SOFA score 的更新</li>
+</ul>
+<section id="为什么它比普通混杂更复杂" class="level4">
+<h4 class="anchored" data-anchor-id="为什么它比普通混杂更复杂">1. 为什么它比普通混杂更复杂</h4>
+<p>普通 baseline confounder 的处理思路通常是：</p>
+<ul>
+<li>在模型中进行调整</li>
+<li>或在倾向评分中纳入</li>
+</ul>
+<p>但 time-varying confounder 的关键困难在于：</p>
+<ol type="1">
+<li>它影响后续治疗是否发生</li>
+<li>它影响最终结局</li>
+<li>它往往又受到先前治疗的影响</li>
+</ol>
+<p>第 3 点是整个问题的核心。</p>
+</section>
+<section id="一个典型结构" class="level4">
+<h4 class="anchored" data-anchor-id="一个典型结构">2. 一个典型结构</h4>
+<p>设：</p>
+<ul>
+<li><code>L_t</code> 表示时点 <code>t</code> 的病情严重程度</li>
+<li><code>A_t</code> 表示时点 <code>t</code> 的治疗</li>
+</ul>
+<p>那么现实中常见的是：</p>
+<ul>
+<li><code>L_t</code> 影响 <code>A_t</code></li>
+<li><code>A_t</code> 影响未来的 <code>L_{t+1}</code></li>
+<li><code>L_t</code> 影响结局 <code>Y</code></li>
+</ul>
+<p>于是，<code>L_t</code> 既是后续治疗的混杂因素，又是先前治疗的后果。</p>
+</section>
+<section id="为什么直接调整可能出错" class="level4">
+<h4 class="anchored" data-anchor-id="为什么直接调整可能出错">3. 为什么“直接调整”可能出错</h4>
+<p>如果把 post-baseline 的 <code>L_t</code> 直接放进一个普通回归模型中调整，可能发生两种问题：</p>
+<ul>
+<li>把治疗通过改善病情而产生的真实效应“调掉”</li>
+<li>因为调整了受先前治疗影响的变量而引入新的偏倚</li>
+</ul>
+<p>这就是经典的 treatment-confounder feedback 问题。</p>
+<p>因此，对 time-varying confounding 的处理，不能简单等同于“多调整几个变量”。</p>
+</section>
+</section>
+<section id="八grace-period-与-time-varying-confounding-的关系" class="level3">
+<h3 class="anchored" data-anchor-id="八grace-period-与-time-varying-confounding-的关系">八、<code>grace period</code> 与 <code>time-varying confounding</code> 的关系</h3>
+<p>二者不是同一个概念，但经常同时出现。</p>
+<section id="grace-period-讲的是什么" class="level4">
+<h4 class="anchored" data-anchor-id="grace-period-讲的是什么">1. <code>grace period</code> 讲的是什么</h4>
+<p>它讲的是：</p>
+<p><strong>治疗被允许在 <code>time zero</code> 后的一小段时间内启动。</strong></p>
+</section>
+<section id="time-varying-confounding-讲的是什么" class="level4">
+<h4 class="anchored" data-anchor-id="time-varying-confounding-讲的是什么">2. <code>time-varying confounding</code> 讲的是什么</h4>
+<p>它讲的是：</p>
+<p><strong>在随访过程中会变化的临床状态，既影响后续治疗决策，也影响结局。</strong></p>
+</section>
+<section id="两者为什么常常绑在一起" class="level4">
+<h4 class="anchored" data-anchor-id="两者为什么常常绑在一起">3. 两者为什么常常绑在一起</h4>
+<p>因为一旦存在 grace period，就意味着在这个窗口内：</p>
+<ul>
+<li>患者病情可能发生变化</li>
+<li>医生会依据这些变化决定是否启动治疗</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>策略 A：确诊后 5 天内开始治疗</li>
+<li>病人第 2 天突然恶化，于是更可能在第 2 天启动治疗</li>
+</ul>
+<p>那么“第 2 天病情是否恶化”就是一个典型的 time-varying confounder。</p>
+<p>因此，grace period 越长，time-varying confounding 的问题往往越突出。</p>
+</section>
+</section>
+<section id="九一个统一时间线正确设计immortal-time-bias-与-collider-bias" class="level3">
+<h3 class="anchored" data-anchor-id="九一个统一时间线正确设计immortal-time-bias-与-collider-bias">九、一个统一时间线：正确设计、immortal time bias 与 collider bias</h3>
+<p>为了把前面的概念串起来，下面我们用三条文字时间线说明。</p>
+<section id="正确对齐的设计" class="level4">
+<h4 class="anchored" data-anchor-id="正确对齐的设计">1. 正确对齐的设计</h4>
+<p>研究问题：</p>
+<blockquote class="blockquote">
+<p>新诊断高血压患者，是否在确诊当天开始 ACEI，会影响 1 年内心血管事件风险？</p>
+</blockquote>
+<p>时间线：</p>
+<ul>
+<li>第 0 天：符合入组条件</li>
+<li>第 0 天：定义治疗策略</li>
+<li>第 0 天：开始随访</li>
+<li>第 1 天以后：观察结局</li>
+</ul>
+<p>这里：</p>
+<ul>
+<li>eligibility assessment、treatment assignment、start of follow-up 对齐</li>
+<li>偏倚风险最小</li>
+</ul>
+</section>
+<section id="immortal-time-bias" class="level4">
+<h4 class="anchored" data-anchor-id="immortal-time-bias">2. <code>immortal time bias</code></h4>
+<p>研究问题：</p>
+<blockquote class="blockquote">
+<p>住院后使用某药是否降低死亡？</p>
+</blockquote>
+<p>错误时间线：</p>
+<ul>
+<li>第 0 天：住院并开始随访</li>
+<li>第 5 天：患者才开始用药</li>
+<li>但分析中从第 0 天起就将其归为 treated</li>
+</ul>
+<p>偏倚机制：</p>
+<ul>
+<li>若患者第 0 到第 5 天死亡，则不可能进入 treated 组</li>
+<li>treated 组获得一段“必须存活”的时间</li>
+</ul>
+</section>
+<section id="collider-bias" class="level4">
+<h4 class="anchored" data-anchor-id="collider-bias">3. <code>collider bias</code></h4>
+<p>研究问题：</p>
+<blockquote class="blockquote">
+<p>既往长期使用 ACEI/ARB 是否影响 COVID-19 相关死亡？</p>
+</blockquote>
+<p>可能有问题的时间线：</p>
+<ul>
+<li>暴露：感染之前已经存在</li>
+<li>中间事件：是否感染 COVID-19</li>
+<li>研究入组：只纳入已感染 COVID-19 的人</li>
+<li>结局：感染后的死亡</li>
+</ul>
+<p>偏倚机制：</p>
+<ul>
+<li>若“感染 COVID-19”同时受暴露和其他危险因素影响</li>
+<li>那么只研究已感染者，相当于在一个 post-exposure collider 上条件化</li>
+</ul>
+</section>
+</section>
+<section id="十从-time-varying-confounding-到-ipw为什么不能只靠普通回归" class="level3">
+<h3 class="anchored" data-anchor-id="十从-time-varying-confounding-到-ipw为什么不能只靠普通回归">十、从 time-varying confounding 到 IPW：为什么不能只靠普通回归</h3>
+<p>如果时间变化中的临床状态既影响后续治疗，又受先前治疗影响，那么：</p>
+<ul>
+<li>在结局模型里直接调这些变量，可能导致偏差</li>
+<li>不调整，又会留下混杂</li>
+</ul>
+<p>这时，经典解决思路之一是：</p>
+<p><strong>marginal structural model（MSM） + inverse probability weighting（IPW）</strong></p>
+<p>这里的 IPW 通常包括两部分：</p>
+<ul>
+<li><code>IPTW</code>：inverse probability of treatment weighting</li>
+<li><code>IPCW</code>：inverse probability of censoring weighting</li>
+</ul>
+<p>二者常常一起使用，但解决的问题不同。</p>
+</section>
+<section id="十一iptw-与-ipcw-分别在做什么" class="level3">
+<h3 class="anchored" data-anchor-id="十一iptw-与-ipcw-分别在做什么">十一、<code>IPTW</code> 与 <code>IPCW</code> 分别在做什么</h3>
+<section id="iptw处理治疗分配的非随机性" class="level4">
+<h4 class="anchored" data-anchor-id="iptw处理治疗分配的非随机性">1. <code>IPTW</code>：处理治疗分配的非随机性</h4>
+<p>如果患者在每个时点接受何种治疗，取决于其既往病情、既往治疗史、其他协变量，那么治疗并非随机分配。</p>
+<p><code>IPTW</code> 的思想是：</p>
+<blockquote class="blockquote">
+<p>对那些“在其历史条件下不太可能接受当前治疗、但实际上接受了该治疗”的个体赋予更大权重，从而构造一个治疗分配更接近随机化的伪总体。</p>
+</blockquote>
+</section>
+<section id="ipcw处理删失的非随机性" class="level4">
+<h4 class="anchored" data-anchor-id="ipcw处理删失的非随机性">2. <code>IPCW</code>：处理删失的非随机性</h4>
+<p>删失包括：</p>
+<ul>
+<li>真实失访</li>
+<li>因偏离策略而进行的人工删失</li>
+<li>提前退出观察</li>
+</ul>
+<p>如果删失与病情演变、治疗史或其他危险因素有关，那么只分析“未被删失的人”会产生偏差。</p>
+<p><code>IPCW</code> 的思想是：</p>
+<blockquote class="blockquote">
+<p>对那些“本来更容易被删失、但实际上仍留在样本中”的个体赋予更大权重，以补偿与其相似但已被删失的个体。</p>
+</blockquote>
+</section>
+</section>
+<section id="十二严谨理解-ipcw它究竟是什么" class="level3">
+<h3 class="anchored" data-anchor-id="十二严谨理解-ipcw它究竟是什么">十二、严谨理解 IPCW：它究竟是什么</h3>
+<section id="从删失开始" class="level4">
+<h4 class="anchored" data-anchor-id="从删失开始">1. 从“删失”开始</h4>
+<p>在因果推断中，<code>censoring</code> 不仅指传统生存分析里的失访，也包括分析策略造成的人为删失。</p>
+<p>例如，在 <code>clone-censor-weight</code> 设计中：</p>
+<ul>
+<li>每个受试者可能被复制到多个策略臂</li>
+<li>一旦某个克隆体偏离其被分配的策略，就在那一刻被人工删失</li>
+</ul>
+<p>这时删失通常不是随机的，而往往与病情变化、临床判断和治疗决策有关。</p>
+</section>
+<section id="ipcw-的核心直觉" class="level4">
+<h4 class="anchored" data-anchor-id="ipcw-的核心直觉">2. IPCW 的核心直觉</h4>
+<p>如果某一类患者通常很容易中途被删失，那么最终仍留在样本中的少数这类患者，就需要“代表”那些本来类似、但已经被删失的人。</p>
+<p>因此：</p>
+<ul>
+<li>越容易被删失的人</li>
+<li>如果实际上没有被删失</li>
+<li>其分析权重就应越大</li>
+</ul>
+</section>
+<section id="形式化表达" class="level4">
+<h4 class="anchored" data-anchor-id="形式化表达">3. 形式化表达</h4>
+<p>设在时点 <code>t</code>：</p>
+<ul>
+<li><code>C_t = 1</code> 表示在 <code>t</code> 被删失</li>
+<li><code>C_t = 0</code> 表示在 <code>t</code> 尚未被删失</li>
+</ul>
+<p>那么一个人到时点 <code>t</code> 仍未被删失的条件概率，可以写成依赖历史信息的形式：</p>
+<pre class="text"><code>P(C_1 = 0, C_2 = 0, ..., C_t = 0 | 历史信息)</code></pre>
+<p>IPCW 的基本思想就是取其倒数作为权重。更常见的写法是按时点连乘：</p>
+<pre class="text"><code>w_t = ∏ 1 / P(C_k = 0 | 到 k 时点的既往协变量史、治疗史、删失史)</code></pre>
+<p>其含义是：</p>
+<p>在每个时点，根据个体到该时点为止的完整历史，估计其“仍然没有被删失”的概率；这个概率越小，说明这类个体越不容易留在样本中，因此其权重越大。</p>
+</section>
+<section id="stabilized-weights" class="level4">
+<h4 class="anchored" data-anchor-id="stabilized-weights">4. stabilized weights</h4>
+<p>为了避免极端大权重带来方差膨胀，实践中常常使用 stabilized weights。其思想是：</p>
+<ul>
+<li>分母使用更完整的历史信息来拟合删失机制</li>
+<li>分子使用较简化的信息结构</li>
+</ul>
+<p>这样得到的权重通常更稳定。</p>
+</section>
+</section>
+<section id="十三ipcw-与-time-varying-confounder-到底是什么关系" class="level3">
+<h3 class="anchored" data-anchor-id="十三ipcw-与-time-varying-confounder-到底是什么关系">十三、IPCW 与 time-varying confounder 到底是什么关系</h3>
+<p>这是最容易被混淆的一点。</p>
+<section id="一个准确的结论" class="level4">
+<h4 class="anchored" data-anchor-id="一个准确的结论">1. 一个准确的结论</h4>
+<p><strong>IPCW 本身不是“直接处理 time-varying confounding 的工具”；它主要处理的是 informative censoring。</strong></p>
+<p>但在很多实际研究中，导致删失非随机发生的因素，恰恰就是那些随时间变化的混杂因素，因此：</p>
+<ul>
+<li>构建 IPCW 时，常常需要把 time-varying confounders 纳入删失模型</li>
+</ul>
+</section>
+<section id="更完整的表述" class="level4">
+<h4 class="anchored" data-anchor-id="更完整的表述">2. 更完整的表述</h4>
+<p>在 longitudinal causal inference 中，时间变化的协变量通常会同时影响：</p>
+<ul>
+<li>后续治疗</li>
+<li>后续删失</li>
+<li>最终结局</li>
+</ul>
+<p>因此常见做法是：</p>
+<ul>
+<li>用 time-varying confounders 构建治疗模型，得到 <code>IPTW</code></li>
+<li>用同样的历史信息构建删失模型，得到 <code>IPCW</code></li>
+<li>最终将二者结合起来进行加权分析</li>
+</ul>
+<p>所以，真正处理“time-varying confounding affected by prior treatment”的经典框架，并不是单独 IPCW，而是：</p>
+<p><strong>MSM + IPTW，必要时再叠加 IPCW。</strong></p>
+</section>
+</section>
+<section id="十四为什么不能把-time-varying-confounder-直接放进结局模型里" class="level3">
+<h3 class="anchored" data-anchor-id="十四为什么不能把-time-varying-confounder-直接放进结局模型里">十四、为什么不能把 time-varying confounder 直接放进结局模型里</h3>
+<p>这是因果推断中最容易“看起来合理、实际上错误”的一步。</p>
+<p>考虑如下过程：</p>
+<ul>
+<li>第 0 天：开始随访</li>
+<li>第 1 天：病情严重程度更新为 <code>L_1</code></li>
+<li>第 2 天：根据 <code>L_1</code> 决定是否给药 <code>A_2</code></li>
+<li>第 3 天：病情再次更新为 <code>L_3</code></li>
+<li>第 10 天：观察死亡</li>
+</ul>
+<p>这里：</p>
+<ul>
+<li><code>L_1</code> 和 <code>L_3</code> 都会影响后续治疗</li>
+<li><code>L_1</code> 和 <code>L_3</code> 也会影响死亡</li>
+<li>但 <code>L_3</code> 很可能已经受 earlier treatment 的影响</li>
+</ul>
+<p>如果此时直接在回归模型中调整 <code>L_3</code>，就相当于调整了一个部分由治疗产生的变量，后果可能是：</p>
+<ul>
+<li>截断了治疗通过改善病情而产生的真实效应</li>
+<li>或因条件化于治疗后变量而引入偏差</li>
+</ul>
+<p>因此，对这类问题更稳健的做法通常不是“在 outcome model 里直接把所有时间变化变量都调进去”，而是通过权重方法、g-formula 或其他 g-methods 进行处理。</p>
+</section>
+<section id="十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子" class="level3">
+<h3 class="anchored" data-anchor-id="十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子">十五、一个把 grace period、time-varying confounding、IPTW、IPCW 串起来的例子</h3>
+<p>研究问题：</p>
+<blockquote class="blockquote">
+<p>COVID-19 确诊后 5 天内开始某抗病毒药，是否能降低 30 天死亡率？</p>
+</blockquote>
+<section id="研究策略定义" class="level4">
+<h4 class="anchored" data-anchor-id="研究策略定义">1. 研究策略定义</h4>
+<ul>
+<li><code>time zero</code>：确诊当天</li>
+<li>策略 A：确诊后 5 天内启动药物</li>
+<li>策略 B：确诊后 5 天内不启动药物</li>
+</ul>
+<p>这里的“5 天内”就是 grace period。</p>
+</section>
+<section id="现实中的时间变化" class="level4">
+<h4 class="anchored" data-anchor-id="现实中的时间变化">2. 现实中的时间变化</h4>
+<p>在第 1 至第 5 天内，患者的：</p>
+<ul>
+<li>症状严重程度</li>
+<li>氧饱和度</li>
+<li>炎症指标</li>
+<li>影像学表现</li>
+</ul>
+<p>都可能动态变化。</p>
+<p>这些变量会：</p>
+<ul>
+<li>影响医生是否在第 2 天、第 3 天或第 4 天启动治疗</li>
+<li>同时影响 30 天死亡风险</li>
+</ul>
+<p>因此，它们是典型的 time-varying confounders。</p>
+</section>
+<section id="如果做-clone-censor-weight会发生什么" class="level4">
+<h4 class="anchored" data-anchor-id="如果做-clone-censor-weight会发生什么">3. 如果做 clone-censor-weight，会发生什么</h4>
+<p>每位患者可能被复制到两个策略臂：</p>
+<ul>
+<li>A 克隆体：代表“5 天内启动治疗”</li>
+<li>B 克隆体：代表“5 天内不启动治疗”</li>
+</ul>
+<p>随后：</p>
+<ul>
+<li>若 A 克隆体到第 5 天仍未启动治疗，则该克隆体被人工删失</li>
+<li>若 B 克隆体在第 5 天内启动了治疗，则该克隆体被人工删失</li>
+</ul>
+</section>
+<section id="为什么需要-ipcw" class="level4">
+<h4 class="anchored" data-anchor-id="为什么需要-ipcw">4. 为什么需要 IPCW</h4>
+<p>这些人工删失不是随机的。</p>
+<p>例如：</p>
+<ul>
+<li>病情更差的人可能更容易在第 2 天启动药物</li>
+<li>因此，“不启动治疗”策略下的克隆体更容易因为偏离策略而被删失</li>
+</ul>
+<p>而病情严重程度又与死亡强相关。</p>
+<p>如果不对这种删失进行加权纠正，最终留下来的 B 组克隆体会偏向病情较轻者，估计结果将发生偏差。</p>
+<p>这就是 IPCW 发挥作用的地方。</p>
+</section>
+<section id="为什么还需要-iptw" class="level4">
+<h4 class="anchored" data-anchor-id="为什么还需要-iptw">5. 为什么还需要 IPTW</h4>
+<p>即使不考虑删失，患者何时启动治疗本身也不是随机的，而是受到病情演变影响。</p>
+<p>因此，还需要使用治疗权重来处理“谁更可能接受治疗”这一非随机机制。</p>
+<p>最终的分析通常需要：</p>
+<ul>
+<li>IPTW 处理治疗分配</li>
+<li>IPCW 处理删失机制</li>
+<li>在加权伪总体中估计结局模型</li>
+</ul>
+</section>
+</section>
+<section id="十六一个最实用的概念对照表" class="level3">
+<h3 class="anchored" data-anchor-id="十六一个最实用的概念对照表">十六、一个最实用的概念对照表</h3>
+<section id="如果你问的是研究从哪一刻开始算" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是研究从哪一刻开始算">1. 如果你问的是“研究从哪一刻开始算”</h4>
+<p>看 <code>time zero</code>。</p>
+</section>
+<section id="如果你问的是数据库里每个人锚定在哪一天" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是数据库里每个人锚定在哪一天">2. 如果你问的是“数据库里每个人锚定在哪一天”</h4>
+<p>看 <code>index date</code>。</p>
+</section>
+<section id="如果你问的是起点时这个人的状态如何" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是起点时这个人的状态如何">3. 如果你问的是“起点时这个人的状态如何”</h4>
+<p>看 <code>baseline</code>。</p>
+</section>
+<section id="如果你问的是暴露发生在什么时候" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是暴露发生在什么时候">4. 如果你问的是“暴露发生在什么时候”</h4>
+<p>看 <code>timing of exposure</code>。</p>
+</section>
+<section id="如果你问的是允许治疗在起点后几天内启动吗" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是允许治疗在起点后几天内启动吗">5. 如果你问的是“允许治疗在起点后几天内启动吗”</h4>
+<p>看 <code>grace period</code>。</p>
+</section>
+<section id="如果你问的是病情等变量会不会在随访中变化并影响后续治疗和结局" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是病情等变量会不会在随访中变化并影响后续治疗和结局">6. 如果你问的是“病情等变量会不会在随访中变化，并影响后续治疗和结局”</h4>
+<p>看 <code>time-varying confounding</code>。</p>
+</section>
+<section id="如果你问的是有人必须先活到将来某个时点才能被归入治疗组吗" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是有人必须先活到将来某个时点才能被归入治疗组吗">7. 如果你问的是“有人必须先活到将来某个时点才能被归入治疗组吗”</h4>
+<p>警惕 <code>immortal time bias</code>。</p>
+</section>
+<section id="如果你问的是研究是否按暴露后发生的事件筛选样本" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是研究是否按暴露后发生的事件筛选样本">8. 如果你问的是“研究是否按暴露后发生的事件筛选样本”</h4>
+<p>警惕 <code>collider bias</code> 或更广义的 <code>selection bias</code>。</p>
+</section>
+<section id="如果你问的是删失是否和患者的临床过程有关" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是删失是否和患者的临床过程有关">9. 如果你问的是“删失是否和患者的临床过程有关”</h4>
+<p>考虑 <code>IPCW</code>。</p>
+</section>
+<section id="如果你问的是后续治疗分配是否由既往病情和治疗史决定" class="level4">
+<h4 class="anchored" data-anchor-id="如果你问的是后续治疗分配是否由既往病情和治疗史决定">10. 如果你问的是“后续治疗分配是否由既往病情和治疗史决定”</h4>
+<p>考虑 <code>IPTW</code>。</p>
+</section>
+</section>
+<section id="十七写给实际做研究的几点建议" class="level3">
+<h3 class="anchored" data-anchor-id="十七写给实际做研究的几点建议">十七、写给实际做研究的几点建议</h3>
+<section id="先画时间线再写模型" class="level4">
+<h4 class="anchored" data-anchor-id="先画时间线再写模型">1. 先画时间线，再写模型</h4>
+<p>在开始分析前，至少应明确画出：</p>
+<ul>
+<li>入组时点</li>
+<li>暴露定义窗口</li>
+<li>grace period</li>
+<li>随访起点</li>
+<li>结局观察窗口</li>
+<li>协变量测量窗口</li>
+</ul>
+<p>很多设计错误在画时间线时就能暴露出来。</p>
+</section>
+<section id="不要把所有-post-baseline-variable-都当成该调整的变量" class="level4">
+<h4 class="anchored" data-anchor-id="不要把所有-post-baseline-variable-都当成该调整的变量">2. 不要把所有 post-baseline variable 都当成“该调整的变量”</h4>
+<p>看到 post-baseline 变量时，先问：</p>
+<ul>
+<li>它是否受先前治疗影响？</li>
+<li>它是否同时影响后续治疗和结局？</li>
+</ul>
+<p>如果是，那么它可能是 time-varying confounder，不能简单用普通回归处理。</p>
+</section>
+<section id="不要把-grace-period-误当成天然无偏" class="level4">
+<h4 class="anchored" data-anchor-id="不要把-grace-period-误当成天然无偏">3. 不要把 grace period 误当成“天然无偏”</h4>
+<p>grace period 只是策略定义的一部分，不是偏倚的解药。分析方法必须与之对应。</p>
+</section>
+<section id="对删失保持高度敏感" class="level4">
+<h4 class="anchored" data-anchor-id="对删失保持高度敏感">4. 对删失保持高度敏感</h4>
+<p>特别是在以下情境中：</p>
+<ul>
+<li>偏离策略后人工删失</li>
+<li>失访与病情相关</li>
+<li>转院、停药、出院与疾病进展相关</li>
+</ul>
+<p>这些情形下，删失往往不是无信息的。</p>
+</section>
+<section id="权重方法不是自动正确" class="level4">
+<h4 class="anchored" data-anchor-id="权重方法不是自动正确">5. 权重方法不是“自动正确”</h4>
+<p>使用 IPTW/IPCW 时，仍需认真检查：</p>
+<ul>
+<li>是否存在未测量混杂或未测量删失决定因素</li>
+<li>positivity 是否成立</li>
+<li>权重是否出现极端值</li>
+<li>模型设定是否合理</li>
+</ul>
+</section>
+</section>
+<section id="十八takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="十八takeaways">十八、Takeaways</h3>
+<p>我们可以用一句话概括这篇文章：</p>
+<blockquote class="blockquote">
+<p>在 target trial emulation 中，几乎所有关键偏倚问题，最终都可以追溯到“时间定义是否与因果问题相匹配”。</p>
+</blockquote>
+<p>更具体地说：</p>
+<ul>
+<li><code>the timing of exposure</code> 不是 <code>time zero</code>，但必须相对于 <code>time zero</code> 被清晰界定</li>
+<li><code>index date</code> 常常与 <code>time zero</code> 重合，但在概念上不完全等同</li>
+<li><code>baseline</code> 指的是起点时的状态及其测量窗口</li>
+<li>若把未来才发生的治疗从起点就算作暴露，容易产生 <code>immortal time bias</code></li>
+<li>若按暴露后发生且可能受暴露影响的事件筛选样本，容易产生 <code>collider bias</code></li>
+<li><code>grace period</code> 让治疗策略更贴近真实临床，但也会引入新的分析复杂度</li>
+<li><code>time-varying confounding</code> 之所以麻烦，在于它常常既影响后续治疗，又受先前治疗影响</li>
+<li><code>IPTW</code> 主要处理治疗分配的非随机性</li>
+<li><code>IPCW</code> 主要处理删失的非随机性</li>
+<li>在纵向因果推断中，二者经常结合使用，以在加权后的伪总体中逼近理想 target trial 的比较</li>
+</ul>
+<p>如果我们这篇文章对你有帮助，欢迎转发给正在做真实世界研究、临床流行病学和因果推断的同学。</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/leslie-lu\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "Leslie-Lu/Leslie-Lu.github.io";
+    script.dataset.repoId = "R_kgDOL6FPww";
+    script.dataset.category = "Blog comments";
+    script.dataset.categoryId = "DIC_kwDOL6FPw84CfSVZ";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "厘清一些观察性研究与因果推断背景下的概念"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-03-21</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Unrevealing the intricate concepts in observational studies and causal inference, including time zero, exposure timing, collider bias, and more."</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - causal inference</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - observational studies</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - bias</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - epidemiology</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - target trial emulation</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 写在前面</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>在观察性研究和因果推断的语境里，很多概念单独看并不难，但一旦放在同一篇文章或同一个研究设计里，就很容易混淆。最常见的一组混淆包括：</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`the timing of exposure`</span> 到底是什么</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`target trial emulation`</span> 中的 <span class="in">`time zero`</span> 是什么</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`index date`</span>、<span class="in">`baseline`</span>、<span class="in">`time zero`</span> 是不是一回事</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`collider bias`</span>、<span class="in">`immortal time bias`</span> 为什么都和“时间定义不清”有关</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`grace period`</span> 是什么，为什么它既必要又危险</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time-varying confounding`</span> 为什么不能靠“在模型里调一下变量”简单解决</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IPTW`</span> 和 <span class="in">`IPCW`</span> 到底分别在解决什么问题</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>我们这篇文章试图把这些概念放到同一套时间框架中，给大家做一次系统整理。</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>整个的主线其实只有一句话：</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 在 target trial emulation 中，入组时点、治疗策略定义时点、随访起点、暴露发生时间、后续协变量更新时间，必须在同一条时间轴上被严格定义；一旦定义错位，就很容易产生偏倚。</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 一、先从最基础的问题讲起：`the timing of exposure` 和 `time zero` 是一回事吗</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>结论先说：</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>**不是同一回事，但关系极其密切。**</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `the timing of exposure` 是什么</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="in">`the timing of exposure`</span> 指的是：</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>**暴露或治疗发生在什么时候。**</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>患者在确诊当天开始用药</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>患者在住院后第 3 天才接受干预</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>患者在感染前已经连续服药多年</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>这些都属于 exposure 的时间定位问题。</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `time zero` 是什么</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="in">`time zero`</span> 指的是：</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>**研究正式开始计时的时点。**</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>也就是：</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>从这一刻开始判断谁进入风险集</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>从这一刻开始计算随访时间</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>从这一刻开始观察结局</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>从这一刻开始比较不同治疗策略</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>在 target trial emulation 中，<span class="in">`time zero`</span> 对应于理想随机试验中的“随机分组并开始随访”的时点。</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 两者的关系</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>两者的关系可以概括为：</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 是整项研究的时间原点</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`the timing of exposure`</span> 是暴露相对于这个原点的位置</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>所以，暴露可以发生在：</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 之前</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 当下</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 之后</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>它们概念不同，但必须对齐。因为只要暴露定义和 <span class="in">`time zero`</span> 不匹配，偏倚就很容易出现。</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## 二、`time zero`、`index date`、`baseline`、`exposure timing` 之间的区别与联系</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>这四个概念经常一起出现，因此最容易混。</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `time zero`</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>如前所述，<span class="in">`time zero`</span> 是研究开始比较结局的起点。</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `index date`</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">`index date`</span> 是数据库研究中常用的术语，通常指：</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>**给每个研究对象定义的锚点日期。**</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>它常用于：</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>划定基线窗口</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>划定暴露窗口</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>划定随访窗口</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>在很多研究中，<span class="in">`index date`</span> 实际上就承担了 <span class="in">`time zero`</span> 的角色，但严格说：</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`index date`</span> 更偏向数据管理和操作定义</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 更偏向因果推断和试验设计中的起点定义</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. `baseline`</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">`baseline`</span> 不是单纯一个日期，而是：</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>**围绕起点时刻所定义的起始状态。**</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>它可以指：</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 当下的变量值</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span> 前一段窗口中收集到的起始协变量信息</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>年龄</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>性别</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>既往病史</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基线实验室指标</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基线用药史</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>都属于 baseline information。</span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. `exposure timing`</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="in">`exposure timing`</span> 讲的是暴露相对于 <span class="in">`time zero`</span> 的发生位置。</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在 <span class="in">`time zero`</span> 当天开始治疗</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在 <span class="in">`time zero`</span> 之前已经长期暴露</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在 <span class="in">`time zero`</span> 之后几天内启动治疗</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 一个最实用的理解框架</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>看到一篇观察性研究时，我们可以依次问四个问题：</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`time zero`</span> 是哪一天？</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`index date`</span> 是哪一天？它是否等于 <span class="in">`time zero`</span>？</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`baseline`</span> 是如何定义和测量的？</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>暴露是在 <span class="in">`time zero`</span> 前、当时还是之后发生的？</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a>只要这四个问题不清楚，后面的因果解释几乎一定会有风险。</span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## 三、为什么 target trial emulation 如此强调时间对齐</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>target trial emulation 的核心价值，不只是“模仿随机对照试验”这么抽象的一句话，而是迫使研究者在开始分析前回答以下问题：</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>谁在什么时点符合入组条件？</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>从哪一刻开始随访？</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>治疗策略在什么时点被分配或定义？</span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>结局从哪一刻开始计数？</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>哪些变量是 baseline 变量，哪些已经是 post-baseline 变量？</span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>在理想情况下，下面三个时点应尽量对齐：</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>eligibility assessment</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>treatment assignment or strategy assignment</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>start of follow-up</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>如果这三者不对齐，就容易出现：</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`immortal time bias`</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`selection bias`</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`collider bias`</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>对 post-baseline variables 的错误调整</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>对 dynamic treatment strategies 的错误建模</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## 四、为什么 `time zero` 设错会导致偏倚</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a>下面分两类讲。</span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `immortal time bias`：随访开始太早，暴露定义太晚</span></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="in">`immortal time bias`</span> 的核心是：</span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>**某人必须先“活到未来某个时点”，才有资格被归入暴露组；如果分析时却把这段时间提前算入暴露组，就会让暴露组看起来获益。**</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 例子</span></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>研究问题：</span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 住院后使用某药是否降低 30 天死亡率？</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>错误设计：</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>把住院当天设为 <span class="in">`time zero`</span></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>只要患者在住院后 7 天内任意一天开始用药，就归入 treated 组</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>但从住院当天起就把这些患者算作 treated</span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>如果某患者第 5 天才开始用药，那么：</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天到第 5 天，他实际上还没有接受治疗</span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>但若想最终进入 treated 组，他必须先活到第 5 天</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a>于是 treated 组“白赚”了一段必须生存的时间，治疗效果会被高估。</span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 本质</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>这里的问题不是“治疗启动得晚”，而是：</span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a>**`time zero` 与 exposure timing 没有被正确处理。**</span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `collider bias` / `selection bias`：先按暴露后的事件筛人，再比较暴露</span></span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a>另一类常见错误是：</span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a>**把研究起点放在一个发生于暴露之后、且可能受暴露影响的事件之后。**</span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a>这时，入组样本已经被“选择机制”筛过一遍，比较结果可能失真。</span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a><span class="fu">## 五、用 COVID-19、ACEI/ARB 的例子理解 collider bias</span></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>一个经典例子来自疫情期间关于 ACE inhibitors 和 angiotensin receptor blockers 的研究讨论。</span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a>研究问题大致是：</span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 既往使用 ACE inhibitors 或 ARB，是否会影响 COVID-19 患者的死亡等结局？</span></span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>这类研究常见的做法是：</span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>先筛出所有已经确诊 COVID-19 的患者</span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>再在这些人中比较：</span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>正在使用 ACEI/ARB 的人</span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>未使用 ACEI/ARB 的人</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>然后比较死亡率或其他不良结局</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>表面看，这似乎很自然，因为研究对象就是“COVID-19 患者”。但这里潜在的问题在于：</span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>**“是否感染 COVID-19”这个事件发生在暴露之后，而且可能同时受到暴露与其他危险因素的影响。**</span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 问题是如何出现的</span></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a>假设在当时的理论框架下，有人提出：</span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ACEI/ARB 可能会增加感染 COVID-19 的概率。</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>如果这个假设成立，那么：</span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>服药者，即使其他感染危险因素较少，也可能因为药物暴露而进入“COVID 患者”样本</span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>未服药者，若也进入“COVID 患者”样本，则可能需要具备更多其他危险因素，例如更重的心肺基础病、更高龄或更多暴露机会</span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>这样一来，在“已经感染 COVID-19 的人”这个被筛选过的人群里，可能出现一种人为关系：</span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>服药者反而平均更“健康”一些</span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>未服药者反而携带更多其他高危因素</span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>这些其他高危因素又会增加死亡风险。</span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>于是，当研究者在“感染者”中比较服药与未服药的死亡率时，看到的差异不再只是药物效应，而混入了样本选择机制造成的差异，这就是潜在的 collider bias。</span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 这个例子的核心逻辑</span></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a>可以把“感染 COVID-19”想象成一道门。</span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>进入这道门，可能有两条路：</span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>路 A：因为服用了某药，更容易感染</span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>路 B：因为存在其他多个风险因素，更容易感染</span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>如果研究只纳入已经进门的人，那么在门内人群中就可能出现这种反向关系：</span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>有路 A 的人，不必具备太多路 B 的因素也能进门</span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>没有路 A 的人，往往需要更多路 B 的因素才能进门</span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>于是门内样本不再可比。</span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 这个例子最终说明了什么</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a>后来作者进一步检查数据，发现：</span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ACEI/ARB 与是否被诊断为 COVID-19 并无明显关联。</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>这意味着前述 collider bias 在这项研究中更接近“理论上的潜在问题”，而不是实际中已经造成严重偏倚的问题。</span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a>但这个例子非常重要，因为它说明了一个通用原则：</span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 如果入组条件依赖于暴露后的事件，而该事件又同时受暴露和其他危险因素影响，就必须警惕 collider bias。</span></span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## 六、什么是 `grace period`</span></span>
+<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a>现实世界的临床策略往往不是“在 <span class="in">`time zero`</span> 的那一刻立刻开始治疗”，而是：</span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>确诊后 2 天内开始</span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>入院后 24 小时内开始</span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>手术后 3 天内开始</span>
+<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a>这时就会出现 <span class="in">`grace period`</span>。</span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 定义</span></span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a><span class="in">`grace period`</span> 指的是：</span>
+<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a>**在研究起点之后，允许治疗在一段合理窗口内启动的时间段。**</span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>策略 A：确诊后 2 天内开始抗病毒治疗</span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>策略 B：确诊后 2 天内不开始抗病毒治疗</span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>这里“2 天内”就是 grace period。</span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 为什么需要 grace period</span></span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>因为在真实临床实践中：</span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>医生通常需要一定时间评估病情</span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>检查结果不一定在入组瞬间全部可得</span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>药物启动存在流程上的自然延迟</span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>如果研究强行把策略定义成“必须在 0 秒钟立刻开始”，往往不符合现实，也不符合临床决策过程。</span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>因此，grace period 不是随意放宽，而是：</span>
+<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>**对真实治疗策略的合理刻画。**</span>
+<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 为什么 grace period 也会带来偏倚风险</span></span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>因为在 grace period 内：</span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>有人可能先发生结局</span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>有人会因为病情恶化而启动治疗</span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>有人会因为病情较轻而不启动治疗</span>
+<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a>如果研究者把“几天后才开始治疗的人”从 <span class="in">`time zero`</span> 起就算作 treated，仍然会产生 <span class="in">`immortal time bias`</span>。</span>
+<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a>所以，grace period 的存在不等于偏倚自动被解决；它只是让治疗策略的定义更真实，但分析方法必须同步调整。</span>
+<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a><span class="fu">## 七、`time-varying confounding` 为什么麻烦</span></span>
+<span id="cb3-350"><a href="#cb3-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-351"><a href="#cb3-351" aria-hidden="true" tabindex="-1"></a><span class="in">`time-varying confounding`</span> 指的是：</span>
+<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a>**混杂因素不是固定不变的，而是随时间变化，并且其变化会同时影响后续治疗和结局。**</span>
+<span id="cb3-354"><a href="#cb3-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-355"><a href="#cb3-355" aria-hidden="true" tabindex="-1"></a>常见例子包括：</span>
+<span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>每日病情严重程度</span>
+<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>动态氧饱和度</span>
+<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>炎症指标变化</span>
+<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>血压、肾功能、SOFA score 的更新</span>
+<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-362"><a href="#cb3-362" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 为什么它比普通混杂更复杂</span></span>
+<span id="cb3-363"><a href="#cb3-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a>普通 baseline confounder 的处理思路通常是：</span>
+<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在模型中进行调整</span>
+<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>或在倾向评分中纳入</span>
+<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a>但 time-varying confounder 的关键困难在于：</span>
+<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>它影响后续治疗是否发生</span>
+<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>它影响最终结局</span>
+<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>它往往又受到先前治疗的影响</span>
+<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a>第 3 点是整个问题的核心。</span>
+<span id="cb3-376"><a href="#cb3-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-377"><a href="#cb3-377" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 一个典型结构</span></span>
+<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a>设：</span>
+<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`L_t`</span> 表示时点 <span class="in">`t`</span> 的病情严重程度</span>
+<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`A_t`</span> 表示时点 <span class="in">`t`</span> 的治疗</span>
+<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>那么现实中常见的是：</span>
+<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-386"><a href="#cb3-386" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`L_t`</span> 影响 <span class="in">`A_t`</span></span>
+<span id="cb3-387"><a href="#cb3-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`A_t`</span> 影响未来的 <span class="in">`L_{t+1}`</span></span>
+<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`L_t`</span> 影响结局 <span class="in">`Y`</span></span>
+<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a>于是，<span class="in">`L_t`</span> 既是后续治疗的混杂因素，又是先前治疗的后果。</span>
+<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 为什么“直接调整”可能出错</span></span>
+<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a>如果把 post-baseline 的 <span class="in">`L_t`</span> 直接放进一个普通回归模型中调整，可能发生两种问题：</span>
+<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>把治疗通过改善病情而产生的真实效应“调掉”</span>
+<span id="cb3-397"><a href="#cb3-397" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>因为调整了受先前治疗影响的变量而引入新的偏倚</span>
+<span id="cb3-398"><a href="#cb3-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-399"><a href="#cb3-399" aria-hidden="true" tabindex="-1"></a>这就是经典的 treatment-confounder feedback 问题。</span>
+<span id="cb3-400"><a href="#cb3-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-401"><a href="#cb3-401" aria-hidden="true" tabindex="-1"></a>因此，对 time-varying confounding 的处理，不能简单等同于“多调整几个变量”。</span>
+<span id="cb3-402"><a href="#cb3-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-403"><a href="#cb3-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## 八、`grace period` 与 `time-varying confounding` 的关系</span></span>
+<span id="cb3-404"><a href="#cb3-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-405"><a href="#cb3-405" aria-hidden="true" tabindex="-1"></a>二者不是同一个概念，但经常同时出现。</span>
+<span id="cb3-406"><a href="#cb3-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-407"><a href="#cb3-407" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `grace period` 讲的是什么</span></span>
+<span id="cb3-408"><a href="#cb3-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-409"><a href="#cb3-409" aria-hidden="true" tabindex="-1"></a>它讲的是：</span>
+<span id="cb3-410"><a href="#cb3-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-411"><a href="#cb3-411" aria-hidden="true" tabindex="-1"></a>**治疗被允许在 `time zero` 后的一小段时间内启动。**</span>
+<span id="cb3-412"><a href="#cb3-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-413"><a href="#cb3-413" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `time-varying confounding` 讲的是什么</span></span>
+<span id="cb3-414"><a href="#cb3-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-415"><a href="#cb3-415" aria-hidden="true" tabindex="-1"></a>它讲的是：</span>
+<span id="cb3-416"><a href="#cb3-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-417"><a href="#cb3-417" aria-hidden="true" tabindex="-1"></a>**在随访过程中会变化的临床状态，既影响后续治疗决策，也影响结局。**</span>
+<span id="cb3-418"><a href="#cb3-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-419"><a href="#cb3-419" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 两者为什么常常绑在一起</span></span>
+<span id="cb3-420"><a href="#cb3-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-421"><a href="#cb3-421" aria-hidden="true" tabindex="-1"></a>因为一旦存在 grace period，就意味着在这个窗口内：</span>
+<span id="cb3-422"><a href="#cb3-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-423"><a href="#cb3-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>患者病情可能发生变化</span>
+<span id="cb3-424"><a href="#cb3-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>医生会依据这些变化决定是否启动治疗</span>
+<span id="cb3-425"><a href="#cb3-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-426"><a href="#cb3-426" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-427"><a href="#cb3-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-428"><a href="#cb3-428" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>策略 A：确诊后 5 天内开始治疗</span>
+<span id="cb3-429"><a href="#cb3-429" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>病人第 2 天突然恶化，于是更可能在第 2 天启动治疗</span>
+<span id="cb3-430"><a href="#cb3-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-431"><a href="#cb3-431" aria-hidden="true" tabindex="-1"></a>那么“第 2 天病情是否恶化”就是一个典型的 time-varying confounder。</span>
+<span id="cb3-432"><a href="#cb3-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-433"><a href="#cb3-433" aria-hidden="true" tabindex="-1"></a>因此，grace period 越长，time-varying confounding 的问题往往越突出。</span>
+<span id="cb3-434"><a href="#cb3-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-435"><a href="#cb3-435" aria-hidden="true" tabindex="-1"></a><span class="fu">## 九、一个统一时间线：正确设计、immortal time bias 与 collider bias</span></span>
+<span id="cb3-436"><a href="#cb3-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-437"><a href="#cb3-437" aria-hidden="true" tabindex="-1"></a>为了把前面的概念串起来，下面我们用三条文字时间线说明。</span>
+<span id="cb3-438"><a href="#cb3-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-439"><a href="#cb3-439" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 正确对齐的设计</span></span>
+<span id="cb3-440"><a href="#cb3-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-441"><a href="#cb3-441" aria-hidden="true" tabindex="-1"></a>研究问题：</span>
+<span id="cb3-442"><a href="#cb3-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-443"><a href="#cb3-443" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 新诊断高血压患者，是否在确诊当天开始 ACEI，会影响 1 年内心血管事件风险？</span></span>
+<span id="cb3-444"><a href="#cb3-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-445"><a href="#cb3-445" aria-hidden="true" tabindex="-1"></a>时间线：</span>
+<span id="cb3-446"><a href="#cb3-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-447"><a href="#cb3-447" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天：符合入组条件</span>
+<span id="cb3-448"><a href="#cb3-448" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天：定义治疗策略</span>
+<span id="cb3-449"><a href="#cb3-449" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天：开始随访</span>
+<span id="cb3-450"><a href="#cb3-450" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 1 天以后：观察结局</span>
+<span id="cb3-451"><a href="#cb3-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-452"><a href="#cb3-452" aria-hidden="true" tabindex="-1"></a>这里：</span>
+<span id="cb3-453"><a href="#cb3-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-454"><a href="#cb3-454" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>eligibility assessment、treatment assignment、start of follow-up 对齐</span>
+<span id="cb3-455"><a href="#cb3-455" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>偏倚风险最小</span>
+<span id="cb3-456"><a href="#cb3-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-457"><a href="#cb3-457" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `immortal time bias`</span></span>
+<span id="cb3-458"><a href="#cb3-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-459"><a href="#cb3-459" aria-hidden="true" tabindex="-1"></a>研究问题：</span>
+<span id="cb3-460"><a href="#cb3-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-461"><a href="#cb3-461" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 住院后使用某药是否降低死亡？</span></span>
+<span id="cb3-462"><a href="#cb3-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-463"><a href="#cb3-463" aria-hidden="true" tabindex="-1"></a>错误时间线：</span>
+<span id="cb3-464"><a href="#cb3-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-465"><a href="#cb3-465" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天：住院并开始随访</span>
+<span id="cb3-466"><a href="#cb3-466" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 5 天：患者才开始用药</span>
+<span id="cb3-467"><a href="#cb3-467" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>但分析中从第 0 天起就将其归为 treated</span>
+<span id="cb3-468"><a href="#cb3-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-469"><a href="#cb3-469" aria-hidden="true" tabindex="-1"></a>偏倚机制：</span>
+<span id="cb3-470"><a href="#cb3-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-471"><a href="#cb3-471" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若患者第 0 到第 5 天死亡，则不可能进入 treated 组</span>
+<span id="cb3-472"><a href="#cb3-472" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>treated 组获得一段“必须存活”的时间</span>
+<span id="cb3-473"><a href="#cb3-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-474"><a href="#cb3-474" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. `collider bias`</span></span>
+<span id="cb3-475"><a href="#cb3-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-476"><a href="#cb3-476" aria-hidden="true" tabindex="-1"></a>研究问题：</span>
+<span id="cb3-477"><a href="#cb3-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-478"><a href="#cb3-478" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 既往长期使用 ACEI/ARB 是否影响 COVID-19 相关死亡？</span></span>
+<span id="cb3-479"><a href="#cb3-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-480"><a href="#cb3-480" aria-hidden="true" tabindex="-1"></a>可能有问题的时间线：</span>
+<span id="cb3-481"><a href="#cb3-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-482"><a href="#cb3-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露：感染之前已经存在</span>
+<span id="cb3-483"><a href="#cb3-483" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>中间事件：是否感染 COVID-19</span>
+<span id="cb3-484"><a href="#cb3-484" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>研究入组：只纳入已感染 COVID-19 的人</span>
+<span id="cb3-485"><a href="#cb3-485" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>结局：感染后的死亡</span>
+<span id="cb3-486"><a href="#cb3-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-487"><a href="#cb3-487" aria-hidden="true" tabindex="-1"></a>偏倚机制：</span>
+<span id="cb3-488"><a href="#cb3-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-489"><a href="#cb3-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若“感染 COVID-19”同时受暴露和其他危险因素影响</span>
+<span id="cb3-490"><a href="#cb3-490" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>那么只研究已感染者，相当于在一个 post-exposure collider 上条件化</span>
+<span id="cb3-491"><a href="#cb3-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-492"><a href="#cb3-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十、从 time-varying confounding 到 IPW：为什么不能只靠普通回归</span></span>
+<span id="cb3-493"><a href="#cb3-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-494"><a href="#cb3-494" aria-hidden="true" tabindex="-1"></a>如果时间变化中的临床状态既影响后续治疗，又受先前治疗影响，那么：</span>
+<span id="cb3-495"><a href="#cb3-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-496"><a href="#cb3-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在结局模型里直接调这些变量，可能导致偏差</span>
+<span id="cb3-497"><a href="#cb3-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>不调整，又会留下混杂</span>
+<span id="cb3-498"><a href="#cb3-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-499"><a href="#cb3-499" aria-hidden="true" tabindex="-1"></a>这时，经典解决思路之一是：</span>
+<span id="cb3-500"><a href="#cb3-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-501"><a href="#cb3-501" aria-hidden="true" tabindex="-1"></a>**marginal structural model（MSM） + inverse probability weighting（IPW）**</span>
+<span id="cb3-502"><a href="#cb3-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-503"><a href="#cb3-503" aria-hidden="true" tabindex="-1"></a>这里的 IPW 通常包括两部分：</span>
+<span id="cb3-504"><a href="#cb3-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-505"><a href="#cb3-505" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IPTW`</span>：inverse probability of treatment weighting</span>
+<span id="cb3-506"><a href="#cb3-506" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IPCW`</span>：inverse probability of censoring weighting</span>
+<span id="cb3-507"><a href="#cb3-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-508"><a href="#cb3-508" aria-hidden="true" tabindex="-1"></a>二者常常一起使用，但解决的问题不同。</span>
+<span id="cb3-509"><a href="#cb3-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-510"><a href="#cb3-510" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十一、`IPTW` 与 `IPCW` 分别在做什么</span></span>
+<span id="cb3-511"><a href="#cb3-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-512"><a href="#cb3-512" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `IPTW`：处理治疗分配的非随机性</span></span>
+<span id="cb3-513"><a href="#cb3-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-514"><a href="#cb3-514" aria-hidden="true" tabindex="-1"></a>如果患者在每个时点接受何种治疗，取决于其既往病情、既往治疗史、其他协变量，那么治疗并非随机分配。</span>
+<span id="cb3-515"><a href="#cb3-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-516"><a href="#cb3-516" aria-hidden="true" tabindex="-1"></a><span class="in">`IPTW`</span> 的思想是：</span>
+<span id="cb3-517"><a href="#cb3-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-518"><a href="#cb3-518" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 对那些“在其历史条件下不太可能接受当前治疗、但实际上接受了该治疗”的个体赋予更大权重，从而构造一个治疗分配更接近随机化的伪总体。</span></span>
+<span id="cb3-519"><a href="#cb3-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-520"><a href="#cb3-520" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. `IPCW`：处理删失的非随机性</span></span>
+<span id="cb3-521"><a href="#cb3-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-522"><a href="#cb3-522" aria-hidden="true" tabindex="-1"></a>删失包括：</span>
+<span id="cb3-523"><a href="#cb3-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-524"><a href="#cb3-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>真实失访</span>
+<span id="cb3-525"><a href="#cb3-525" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>因偏离策略而进行的人工删失</span>
+<span id="cb3-526"><a href="#cb3-526" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>提前退出观察</span>
+<span id="cb3-527"><a href="#cb3-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-528"><a href="#cb3-528" aria-hidden="true" tabindex="-1"></a>如果删失与病情演变、治疗史或其他危险因素有关，那么只分析“未被删失的人”会产生偏差。</span>
+<span id="cb3-529"><a href="#cb3-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-530"><a href="#cb3-530" aria-hidden="true" tabindex="-1"></a><span class="in">`IPCW`</span> 的思想是：</span>
+<span id="cb3-531"><a href="#cb3-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-532"><a href="#cb3-532" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 对那些“本来更容易被删失、但实际上仍留在样本中”的个体赋予更大权重，以补偿与其相似但已被删失的个体。</span></span>
+<span id="cb3-533"><a href="#cb3-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-534"><a href="#cb3-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十二、严谨理解 IPCW：它究竟是什么</span></span>
+<span id="cb3-535"><a href="#cb3-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-536"><a href="#cb3-536" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 从“删失”开始</span></span>
+<span id="cb3-537"><a href="#cb3-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-538"><a href="#cb3-538" aria-hidden="true" tabindex="-1"></a>在因果推断中，<span class="in">`censoring`</span> 不仅指传统生存分析里的失访，也包括分析策略造成的人为删失。</span>
+<span id="cb3-539"><a href="#cb3-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-540"><a href="#cb3-540" aria-hidden="true" tabindex="-1"></a>例如，在 <span class="in">`clone-censor-weight`</span> 设计中：</span>
+<span id="cb3-541"><a href="#cb3-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-542"><a href="#cb3-542" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>每个受试者可能被复制到多个策略臂</span>
+<span id="cb3-543"><a href="#cb3-543" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>一旦某个克隆体偏离其被分配的策略，就在那一刻被人工删失</span>
+<span id="cb3-544"><a href="#cb3-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-545"><a href="#cb3-545" aria-hidden="true" tabindex="-1"></a>这时删失通常不是随机的，而往往与病情变化、临床判断和治疗决策有关。</span>
+<span id="cb3-546"><a href="#cb3-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-547"><a href="#cb3-547" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. IPCW 的核心直觉</span></span>
+<span id="cb3-548"><a href="#cb3-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-549"><a href="#cb3-549" aria-hidden="true" tabindex="-1"></a>如果某一类患者通常很容易中途被删失，那么最终仍留在样本中的少数这类患者，就需要“代表”那些本来类似、但已经被删失的人。</span>
+<span id="cb3-550"><a href="#cb3-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-551"><a href="#cb3-551" aria-hidden="true" tabindex="-1"></a>因此：</span>
+<span id="cb3-552"><a href="#cb3-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-553"><a href="#cb3-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>越容易被删失的人</span>
+<span id="cb3-554"><a href="#cb3-554" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>如果实际上没有被删失</span>
+<span id="cb3-555"><a href="#cb3-555" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>其分析权重就应越大</span>
+<span id="cb3-556"><a href="#cb3-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-557"><a href="#cb3-557" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 形式化表达</span></span>
+<span id="cb3-558"><a href="#cb3-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-559"><a href="#cb3-559" aria-hidden="true" tabindex="-1"></a>设在时点 <span class="in">`t`</span>：</span>
+<span id="cb3-560"><a href="#cb3-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-561"><a href="#cb3-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`C_t = 1`</span> 表示在 <span class="in">`t`</span> 被删失</span>
+<span id="cb3-562"><a href="#cb3-562" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`C_t = 0`</span> 表示在 <span class="in">`t`</span> 尚未被删失</span>
+<span id="cb3-563"><a href="#cb3-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-564"><a href="#cb3-564" aria-hidden="true" tabindex="-1"></a>那么一个人到时点 <span class="in">`t`</span> 仍未被删失的条件概率，可以写成依赖历史信息的形式：</span>
+<span id="cb3-565"><a href="#cb3-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-566"><a href="#cb3-566" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb3-567"><a href="#cb3-567" aria-hidden="true" tabindex="-1"></a><span class="in">P(C_1 = 0, C_2 = 0, ..., C_t = 0 | 历史信息)</span></span>
+<span id="cb3-568"><a href="#cb3-568" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-569"><a href="#cb3-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-570"><a href="#cb3-570" aria-hidden="true" tabindex="-1"></a>IPCW 的基本思想就是取其倒数作为权重。更常见的写法是按时点连乘：</span>
+<span id="cb3-571"><a href="#cb3-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-572"><a href="#cb3-572" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb3-573"><a href="#cb3-573" aria-hidden="true" tabindex="-1"></a><span class="in">w_t = ∏ 1 / P(C_k = 0 | 到 k 时点的既往协变量史、治疗史、删失史)</span></span>
+<span id="cb3-574"><a href="#cb3-574" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-575"><a href="#cb3-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-576"><a href="#cb3-576" aria-hidden="true" tabindex="-1"></a>其含义是：</span>
+<span id="cb3-577"><a href="#cb3-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-578"><a href="#cb3-578" aria-hidden="true" tabindex="-1"></a>在每个时点，根据个体到该时点为止的完整历史，估计其“仍然没有被删失”的概率；这个概率越小，说明这类个体越不容易留在样本中，因此其权重越大。</span>
+<span id="cb3-579"><a href="#cb3-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-580"><a href="#cb3-580" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. stabilized weights</span></span>
+<span id="cb3-581"><a href="#cb3-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-582"><a href="#cb3-582" aria-hidden="true" tabindex="-1"></a>为了避免极端大权重带来方差膨胀，实践中常常使用 stabilized weights。其思想是：</span>
+<span id="cb3-583"><a href="#cb3-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-584"><a href="#cb3-584" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分母使用更完整的历史信息来拟合删失机制</span>
+<span id="cb3-585"><a href="#cb3-585" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分子使用较简化的信息结构</span>
+<span id="cb3-586"><a href="#cb3-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-587"><a href="#cb3-587" aria-hidden="true" tabindex="-1"></a>这样得到的权重通常更稳定。</span>
+<span id="cb3-588"><a href="#cb3-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-589"><a href="#cb3-589" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十三、IPCW 与 time-varying confounder 到底是什么关系</span></span>
+<span id="cb3-590"><a href="#cb3-590" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-591"><a href="#cb3-591" aria-hidden="true" tabindex="-1"></a>这是最容易被混淆的一点。</span>
+<span id="cb3-592"><a href="#cb3-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-593"><a href="#cb3-593" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 一个准确的结论</span></span>
+<span id="cb3-594"><a href="#cb3-594" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-595"><a href="#cb3-595" aria-hidden="true" tabindex="-1"></a>**IPCW 本身不是“直接处理 time-varying confounding 的工具”；它主要处理的是 informative censoring。**</span>
+<span id="cb3-596"><a href="#cb3-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-597"><a href="#cb3-597" aria-hidden="true" tabindex="-1"></a>但在很多实际研究中，导致删失非随机发生的因素，恰恰就是那些随时间变化的混杂因素，因此：</span>
+<span id="cb3-598"><a href="#cb3-598" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-599"><a href="#cb3-599" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>构建 IPCW 时，常常需要把 time-varying confounders 纳入删失模型</span>
+<span id="cb3-600"><a href="#cb3-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-601"><a href="#cb3-601" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 更完整的表述</span></span>
+<span id="cb3-602"><a href="#cb3-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-603"><a href="#cb3-603" aria-hidden="true" tabindex="-1"></a>在 longitudinal causal inference 中，时间变化的协变量通常会同时影响：</span>
+<span id="cb3-604"><a href="#cb3-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-605"><a href="#cb3-605" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>后续治疗</span>
+<span id="cb3-606"><a href="#cb3-606" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>后续删失</span>
+<span id="cb3-607"><a href="#cb3-607" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>最终结局</span>
+<span id="cb3-608"><a href="#cb3-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-609"><a href="#cb3-609" aria-hidden="true" tabindex="-1"></a>因此常见做法是：</span>
+<span id="cb3-610"><a href="#cb3-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-611"><a href="#cb3-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用 time-varying confounders 构建治疗模型，得到 <span class="in">`IPTW`</span></span>
+<span id="cb3-612"><a href="#cb3-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用同样的历史信息构建删失模型，得到 <span class="in">`IPCW`</span></span>
+<span id="cb3-613"><a href="#cb3-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>最终将二者结合起来进行加权分析</span>
+<span id="cb3-614"><a href="#cb3-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-615"><a href="#cb3-615" aria-hidden="true" tabindex="-1"></a>所以，真正处理“time-varying confounding affected by prior treatment”的经典框架，并不是单独 IPCW，而是：</span>
+<span id="cb3-616"><a href="#cb3-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-617"><a href="#cb3-617" aria-hidden="true" tabindex="-1"></a>**MSM + IPTW，必要时再叠加 IPCW。**</span>
+<span id="cb3-618"><a href="#cb3-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-619"><a href="#cb3-619" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十四、为什么不能把 time-varying confounder 直接放进结局模型里</span></span>
+<span id="cb3-620"><a href="#cb3-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-621"><a href="#cb3-621" aria-hidden="true" tabindex="-1"></a>这是因果推断中最容易“看起来合理、实际上错误”的一步。</span>
+<span id="cb3-622"><a href="#cb3-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-623"><a href="#cb3-623" aria-hidden="true" tabindex="-1"></a>考虑如下过程：</span>
+<span id="cb3-624"><a href="#cb3-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-625"><a href="#cb3-625" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 0 天：开始随访</span>
+<span id="cb3-626"><a href="#cb3-626" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 1 天：病情严重程度更新为 <span class="in">`L_1`</span></span>
+<span id="cb3-627"><a href="#cb3-627" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 2 天：根据 <span class="in">`L_1`</span> 决定是否给药 <span class="in">`A_2`</span></span>
+<span id="cb3-628"><a href="#cb3-628" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 3 天：病情再次更新为 <span class="in">`L_3`</span></span>
+<span id="cb3-629"><a href="#cb3-629" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>第 10 天：观察死亡</span>
+<span id="cb3-630"><a href="#cb3-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-631"><a href="#cb3-631" aria-hidden="true" tabindex="-1"></a>这里：</span>
+<span id="cb3-632"><a href="#cb3-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-633"><a href="#cb3-633" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`L_1`</span> 和 <span class="in">`L_3`</span> 都会影响后续治疗</span>
+<span id="cb3-634"><a href="#cb3-634" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`L_1`</span> 和 <span class="in">`L_3`</span> 也会影响死亡</span>
+<span id="cb3-635"><a href="#cb3-635" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>但 <span class="in">`L_3`</span> 很可能已经受 earlier treatment 的影响</span>
+<span id="cb3-636"><a href="#cb3-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-637"><a href="#cb3-637" aria-hidden="true" tabindex="-1"></a>如果此时直接在回归模型中调整 <span class="in">`L_3`</span>，就相当于调整了一个部分由治疗产生的变量，后果可能是：</span>
+<span id="cb3-638"><a href="#cb3-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-639"><a href="#cb3-639" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>截断了治疗通过改善病情而产生的真实效应</span>
+<span id="cb3-640"><a href="#cb3-640" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>或因条件化于治疗后变量而引入偏差</span>
+<span id="cb3-641"><a href="#cb3-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-642"><a href="#cb3-642" aria-hidden="true" tabindex="-1"></a>因此，对这类问题更稳健的做法通常不是“在 outcome model 里直接把所有时间变化变量都调进去”，而是通过权重方法、g-formula 或其他 g-methods 进行处理。</span>
+<span id="cb3-643"><a href="#cb3-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-644"><a href="#cb3-644" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十五、一个把 grace period、time-varying confounding、IPTW、IPCW 串起来的例子</span></span>
+<span id="cb3-645"><a href="#cb3-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-646"><a href="#cb3-646" aria-hidden="true" tabindex="-1"></a>研究问题：</span>
+<span id="cb3-647"><a href="#cb3-647" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-648"><a href="#cb3-648" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; COVID-19 确诊后 5 天内开始某抗病毒药，是否能降低 30 天死亡率？</span></span>
+<span id="cb3-649"><a href="#cb3-649" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-650"><a href="#cb3-650" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 研究策略定义</span></span>
+<span id="cb3-651"><a href="#cb3-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-652"><a href="#cb3-652" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time zero`</span>：确诊当天</span>
+<span id="cb3-653"><a href="#cb3-653" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>策略 A：确诊后 5 天内启动药物</span>
+<span id="cb3-654"><a href="#cb3-654" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>策略 B：确诊后 5 天内不启动药物</span>
+<span id="cb3-655"><a href="#cb3-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-656"><a href="#cb3-656" aria-hidden="true" tabindex="-1"></a>这里的“5 天内”就是 grace period。</span>
+<span id="cb3-657"><a href="#cb3-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-658"><a href="#cb3-658" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 现实中的时间变化</span></span>
+<span id="cb3-659"><a href="#cb3-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-660"><a href="#cb3-660" aria-hidden="true" tabindex="-1"></a>在第 1 至第 5 天内，患者的：</span>
+<span id="cb3-661"><a href="#cb3-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-662"><a href="#cb3-662" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>症状严重程度</span>
+<span id="cb3-663"><a href="#cb3-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>氧饱和度</span>
+<span id="cb3-664"><a href="#cb3-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>炎症指标</span>
+<span id="cb3-665"><a href="#cb3-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>影像学表现</span>
+<span id="cb3-666"><a href="#cb3-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-667"><a href="#cb3-667" aria-hidden="true" tabindex="-1"></a>都可能动态变化。</span>
+<span id="cb3-668"><a href="#cb3-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-669"><a href="#cb3-669" aria-hidden="true" tabindex="-1"></a>这些变量会：</span>
+<span id="cb3-670"><a href="#cb3-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-671"><a href="#cb3-671" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>影响医生是否在第 2 天、第 3 天或第 4 天启动治疗</span>
+<span id="cb3-672"><a href="#cb3-672" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>同时影响 30 天死亡风险</span>
+<span id="cb3-673"><a href="#cb3-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-674"><a href="#cb3-674" aria-hidden="true" tabindex="-1"></a>因此，它们是典型的 time-varying confounders。</span>
+<span id="cb3-675"><a href="#cb3-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-676"><a href="#cb3-676" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 如果做 clone-censor-weight，会发生什么</span></span>
+<span id="cb3-677"><a href="#cb3-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-678"><a href="#cb3-678" aria-hidden="true" tabindex="-1"></a>每位患者可能被复制到两个策略臂：</span>
+<span id="cb3-679"><a href="#cb3-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-680"><a href="#cb3-680" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A 克隆体：代表“5 天内启动治疗”</span>
+<span id="cb3-681"><a href="#cb3-681" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B 克隆体：代表“5 天内不启动治疗”</span>
+<span id="cb3-682"><a href="#cb3-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-683"><a href="#cb3-683" aria-hidden="true" tabindex="-1"></a>随后：</span>
+<span id="cb3-684"><a href="#cb3-684" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-685"><a href="#cb3-685" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若 A 克隆体到第 5 天仍未启动治疗，则该克隆体被人工删失</span>
+<span id="cb3-686"><a href="#cb3-686" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若 B 克隆体在第 5 天内启动了治疗，则该克隆体被人工删失</span>
+<span id="cb3-687"><a href="#cb3-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-688"><a href="#cb3-688" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 为什么需要 IPCW</span></span>
+<span id="cb3-689"><a href="#cb3-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-690"><a href="#cb3-690" aria-hidden="true" tabindex="-1"></a>这些人工删失不是随机的。</span>
+<span id="cb3-691"><a href="#cb3-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-692"><a href="#cb3-692" aria-hidden="true" tabindex="-1"></a>例如：</span>
+<span id="cb3-693"><a href="#cb3-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-694"><a href="#cb3-694" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>病情更差的人可能更容易在第 2 天启动药物</span>
+<span id="cb3-695"><a href="#cb3-695" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>因此，“不启动治疗”策略下的克隆体更容易因为偏离策略而被删失</span>
+<span id="cb3-696"><a href="#cb3-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-697"><a href="#cb3-697" aria-hidden="true" tabindex="-1"></a>而病情严重程度又与死亡强相关。</span>
+<span id="cb3-698"><a href="#cb3-698" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-699"><a href="#cb3-699" aria-hidden="true" tabindex="-1"></a>如果不对这种删失进行加权纠正，最终留下来的 B 组克隆体会偏向病情较轻者，估计结果将发生偏差。</span>
+<span id="cb3-700"><a href="#cb3-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-701"><a href="#cb3-701" aria-hidden="true" tabindex="-1"></a>这就是 IPCW 发挥作用的地方。</span>
+<span id="cb3-702"><a href="#cb3-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-703"><a href="#cb3-703" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 为什么还需要 IPTW</span></span>
+<span id="cb3-704"><a href="#cb3-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-705"><a href="#cb3-705" aria-hidden="true" tabindex="-1"></a>即使不考虑删失，患者何时启动治疗本身也不是随机的，而是受到病情演变影响。</span>
+<span id="cb3-706"><a href="#cb3-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-707"><a href="#cb3-707" aria-hidden="true" tabindex="-1"></a>因此，还需要使用治疗权重来处理“谁更可能接受治疗”这一非随机机制。</span>
+<span id="cb3-708"><a href="#cb3-708" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-709"><a href="#cb3-709" aria-hidden="true" tabindex="-1"></a>最终的分析通常需要：</span>
+<span id="cb3-710"><a href="#cb3-710" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-711"><a href="#cb3-711" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>IPTW 处理治疗分配</span>
+<span id="cb3-712"><a href="#cb3-712" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>IPCW 处理删失机制</span>
+<span id="cb3-713"><a href="#cb3-713" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在加权伪总体中估计结局模型</span>
+<span id="cb3-714"><a href="#cb3-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-715"><a href="#cb3-715" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十六、一个最实用的概念对照表</span></span>
+<span id="cb3-716"><a href="#cb3-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-717"><a href="#cb3-717" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 如果你问的是“研究从哪一刻开始算”</span></span>
+<span id="cb3-718"><a href="#cb3-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-719"><a href="#cb3-719" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`time zero`</span>。</span>
+<span id="cb3-720"><a href="#cb3-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-721"><a href="#cb3-721" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 如果你问的是“数据库里每个人锚定在哪一天”</span></span>
+<span id="cb3-722"><a href="#cb3-722" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-723"><a href="#cb3-723" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`index date`</span>。</span>
+<span id="cb3-724"><a href="#cb3-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-725"><a href="#cb3-725" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 如果你问的是“起点时这个人的状态如何”</span></span>
+<span id="cb3-726"><a href="#cb3-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-727"><a href="#cb3-727" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`baseline`</span>。</span>
+<span id="cb3-728"><a href="#cb3-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-729"><a href="#cb3-729" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 如果你问的是“暴露发生在什么时候”</span></span>
+<span id="cb3-730"><a href="#cb3-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-731"><a href="#cb3-731" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`timing of exposure`</span>。</span>
+<span id="cb3-732"><a href="#cb3-732" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-733"><a href="#cb3-733" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 如果你问的是“允许治疗在起点后几天内启动吗”</span></span>
+<span id="cb3-734"><a href="#cb3-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-735"><a href="#cb3-735" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`grace period`</span>。</span>
+<span id="cb3-736"><a href="#cb3-736" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-737"><a href="#cb3-737" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. 如果你问的是“病情等变量会不会在随访中变化，并影响后续治疗和结局”</span></span>
+<span id="cb3-738"><a href="#cb3-738" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-739"><a href="#cb3-739" aria-hidden="true" tabindex="-1"></a>看 <span class="in">`time-varying confounding`</span>。</span>
+<span id="cb3-740"><a href="#cb3-740" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-741"><a href="#cb3-741" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. 如果你问的是“有人必须先活到将来某个时点才能被归入治疗组吗”</span></span>
+<span id="cb3-742"><a href="#cb3-742" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-743"><a href="#cb3-743" aria-hidden="true" tabindex="-1"></a>警惕 <span class="in">`immortal time bias`</span>。</span>
+<span id="cb3-744"><a href="#cb3-744" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-745"><a href="#cb3-745" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8. 如果你问的是“研究是否按暴露后发生的事件筛选样本”</span></span>
+<span id="cb3-746"><a href="#cb3-746" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-747"><a href="#cb3-747" aria-hidden="true" tabindex="-1"></a>警惕 <span class="in">`collider bias`</span> 或更广义的 <span class="in">`selection bias`</span>。</span>
+<span id="cb3-748"><a href="#cb3-748" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-749"><a href="#cb3-749" aria-hidden="true" tabindex="-1"></a><span class="fu">### 9. 如果你问的是“删失是否和患者的临床过程有关”</span></span>
+<span id="cb3-750"><a href="#cb3-750" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-751"><a href="#cb3-751" aria-hidden="true" tabindex="-1"></a>考虑 <span class="in">`IPCW`</span>。</span>
+<span id="cb3-752"><a href="#cb3-752" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-753"><a href="#cb3-753" aria-hidden="true" tabindex="-1"></a><span class="fu">### 10. 如果你问的是“后续治疗分配是否由既往病情和治疗史决定”</span></span>
+<span id="cb3-754"><a href="#cb3-754" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-755"><a href="#cb3-755" aria-hidden="true" tabindex="-1"></a>考虑 <span class="in">`IPTW`</span>。</span>
+<span id="cb3-756"><a href="#cb3-756" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-757"><a href="#cb3-757" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十七、写给实际做研究的几点建议</span></span>
+<span id="cb3-758"><a href="#cb3-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-759"><a href="#cb3-759" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 先画时间线，再写模型</span></span>
+<span id="cb3-760"><a href="#cb3-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-761"><a href="#cb3-761" aria-hidden="true" tabindex="-1"></a>在开始分析前，至少应明确画出：</span>
+<span id="cb3-762"><a href="#cb3-762" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-763"><a href="#cb3-763" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>入组时点</span>
+<span id="cb3-764"><a href="#cb3-764" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露定义窗口</span>
+<span id="cb3-765"><a href="#cb3-765" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>grace period</span>
+<span id="cb3-766"><a href="#cb3-766" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>随访起点</span>
+<span id="cb3-767"><a href="#cb3-767" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>结局观察窗口</span>
+<span id="cb3-768"><a href="#cb3-768" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>协变量测量窗口</span>
+<span id="cb3-769"><a href="#cb3-769" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-770"><a href="#cb3-770" aria-hidden="true" tabindex="-1"></a>很多设计错误在画时间线时就能暴露出来。</span>
+<span id="cb3-771"><a href="#cb3-771" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-772"><a href="#cb3-772" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 不要把所有 post-baseline variable 都当成“该调整的变量”</span></span>
+<span id="cb3-773"><a href="#cb3-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-774"><a href="#cb3-774" aria-hidden="true" tabindex="-1"></a>看到 post-baseline 变量时，先问：</span>
+<span id="cb3-775"><a href="#cb3-775" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-776"><a href="#cb3-776" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>它是否受先前治疗影响？</span>
+<span id="cb3-777"><a href="#cb3-777" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>它是否同时影响后续治疗和结局？</span>
+<span id="cb3-778"><a href="#cb3-778" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-779"><a href="#cb3-779" aria-hidden="true" tabindex="-1"></a>如果是，那么它可能是 time-varying confounder，不能简单用普通回归处理。</span>
+<span id="cb3-780"><a href="#cb3-780" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-781"><a href="#cb3-781" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 不要把 grace period 误当成“天然无偏”</span></span>
+<span id="cb3-782"><a href="#cb3-782" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-783"><a href="#cb3-783" aria-hidden="true" tabindex="-1"></a>grace period 只是策略定义的一部分，不是偏倚的解药。分析方法必须与之对应。</span>
+<span id="cb3-784"><a href="#cb3-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-785"><a href="#cb3-785" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 对删失保持高度敏感</span></span>
+<span id="cb3-786"><a href="#cb3-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-787"><a href="#cb3-787" aria-hidden="true" tabindex="-1"></a>特别是在以下情境中：</span>
+<span id="cb3-788"><a href="#cb3-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-789"><a href="#cb3-789" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>偏离策略后人工删失</span>
+<span id="cb3-790"><a href="#cb3-790" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>失访与病情相关</span>
+<span id="cb3-791"><a href="#cb3-791" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>转院、停药、出院与疾病进展相关</span>
+<span id="cb3-792"><a href="#cb3-792" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-793"><a href="#cb3-793" aria-hidden="true" tabindex="-1"></a>这些情形下，删失往往不是无信息的。</span>
+<span id="cb3-794"><a href="#cb3-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-795"><a href="#cb3-795" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 权重方法不是“自动正确”</span></span>
+<span id="cb3-796"><a href="#cb3-796" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-797"><a href="#cb3-797" aria-hidden="true" tabindex="-1"></a>使用 IPTW/IPCW 时，仍需认真检查：</span>
+<span id="cb3-798"><a href="#cb3-798" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-799"><a href="#cb3-799" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>是否存在未测量混杂或未测量删失决定因素</span>
+<span id="cb3-800"><a href="#cb3-800" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>positivity 是否成立</span>
+<span id="cb3-801"><a href="#cb3-801" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>权重是否出现极端值</span>
+<span id="cb3-802"><a href="#cb3-802" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>模型设定是否合理</span>
+<span id="cb3-803"><a href="#cb3-803" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-804"><a href="#cb3-804" aria-hidden="true" tabindex="-1"></a><span class="fu">## 十八、Takeaways</span></span>
+<span id="cb3-805"><a href="#cb3-805" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-806"><a href="#cb3-806" aria-hidden="true" tabindex="-1"></a>我们可以用一句话概括这篇文章：</span>
+<span id="cb3-807"><a href="#cb3-807" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-808"><a href="#cb3-808" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 在 target trial emulation 中，几乎所有关键偏倚问题，最终都可以追溯到“时间定义是否与因果问题相匹配”。</span></span>
+<span id="cb3-809"><a href="#cb3-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-810"><a href="#cb3-810" aria-hidden="true" tabindex="-1"></a>更具体地说：</span>
+<span id="cb3-811"><a href="#cb3-811" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-812"><a href="#cb3-812" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`the timing of exposure`</span> 不是 <span class="in">`time zero`</span>，但必须相对于 <span class="in">`time zero`</span> 被清晰界定</span>
+<span id="cb3-813"><a href="#cb3-813" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`index date`</span> 常常与 <span class="in">`time zero`</span> 重合，但在概念上不完全等同</span>
+<span id="cb3-814"><a href="#cb3-814" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`baseline`</span> 指的是起点时的状态及其测量窗口</span>
+<span id="cb3-815"><a href="#cb3-815" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若把未来才发生的治疗从起点就算作暴露，容易产生 <span class="in">`immortal time bias`</span></span>
+<span id="cb3-816"><a href="#cb3-816" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若按暴露后发生且可能受暴露影响的事件筛选样本，容易产生 <span class="in">`collider bias`</span></span>
+<span id="cb3-817"><a href="#cb3-817" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`grace period`</span> 让治疗策略更贴近真实临床，但也会引入新的分析复杂度</span>
+<span id="cb3-818"><a href="#cb3-818" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`time-varying confounding`</span> 之所以麻烦，在于它常常既影响后续治疗，又受先前治疗影响</span>
+<span id="cb3-819"><a href="#cb3-819" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IPTW`</span> 主要处理治疗分配的非随机性</span>
+<span id="cb3-820"><a href="#cb3-820" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IPCW`</span> 主要处理删失的非随机性</span>
+<span id="cb3-821"><a href="#cb3-821" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在纵向因果推断中，二者经常结合使用，以在加权后的伪总体中逼近理想 target trial 的比较</span>
+<span id="cb3-822"><a href="#cb3-822" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-823"><a href="#cb3-823" aria-hidden="true" tabindex="-1"></a>如果我们这篇文章对你有帮助，欢迎转发给正在做真实世界研究、临床流行病学和因果推断的同学。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2016–2026 Zhen Lu</span> <span class="faux-block">All content licensed under<br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></span></p>
+</div>   
+    <div class="nav-footer-center">
+<p><span class="faux-block"><i class="fa-brands fa-orcid" aria-label="orcid"></i> <strong>ORCID</strong> <a href="https://orcid.org/0000-0002-3481-6310">0000-0002-3481-6310</a></span></p>
+</div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span> <span class="faux-block"><a href="https://github.com/Leslie-Lu/Leslie-Lu.github.io">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
