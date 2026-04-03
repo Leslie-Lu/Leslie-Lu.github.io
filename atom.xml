@@ -13,6 +13,550 @@
 <generator>quarto-1.9.36</generator>
 <lastBuildDate>Fri, 03 Apr 2026 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>因果 estimand</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/03/31/pragmatic_trial/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>临床研究里，大家最熟悉的是随机对照试验（RCT）。但很多医生、患者和决策者真正关心的问题，并不是：</p>
+<p>“在高度理想、严格控制、执行完美的条件下，这个干预能不能起作用？”</p>
+<p>而是：</p>
+<p>“在日常临床实践中，面对真实的病人、真实的医生、真实的依从性和真实的医疗系统，这个干预到底有没有用？”</p>
+<p>这正是 <strong>pragmatic trial</strong> 试图回答的问题。它对应的另一端，是 <strong>explanatory trial</strong>，即更强调机制验证和因果识别的 <strong>解释性试验</strong>。</p>
+<p>一句话概括：</p>
+<blockquote class="blockquote">
+<p><strong>解释性试验更像在问“它在理想条件下是否有效”，实用性试验更像在问“它在真实世界里是否值得用”。</strong></p>
+</blockquote>
+<section id="一pragmatic-trial-是怎么提出的" class="level3">
+<h3 class="anchored" data-anchor-id="一pragmatic-trial-是怎么提出的">一、Pragmatic trial 是怎么提出的？</h3>
+<p>它是一种以 <strong>回答决策者最关心的真实世界问题</strong> 为目标的试验设计哲学。这里的决策者包括：</p>
+<ul>
+<li>患者</li>
+<li>临床医生</li>
+<li>政策制定者</li>
+<li>支付方</li>
+</ul>
+<p>也就是说，pragmatic trial 的出发点不是“把一切都控制得尽可能干净”，而是“让研究结果尽可能对现实决策有用”。</p>
+<p>这会直接影响试验设计的各个方面：</p>
+<ul>
+<li>纳入什么样的人</li>
+<li>在什么样的医疗场景开展</li>
+<li>干预怎么执行</li>
+<li>结局怎么定义</li>
+<li>数据怎么收集</li>
+<li>分析时关注什么问题</li>
+</ul>
+</section>
+<section id="二pragmatic-trial-和-explanatory-trial-的核心区别" class="level3">
+<h3 class="anchored" data-anchor-id="二pragmatic-trial-和-explanatory-trial-的核心区别">二、Pragmatic trial 和 explanatory trial 的核心区别</h3>
+<p>很多人第一次接触 pragmatic trial，会误以为它只是“做得没那么严格的 RCT”。这其实不对。</p>
+<p>更准确地说，它们回答的是 <strong>不同层面的问题</strong>。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>Explanatory trial</th>
+<th>Pragmatic trial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>目标</td>
+<td>证明干预在理想条件下的效果</td>
+<td>评价干预在真实实践中的效果</td>
+</tr>
+<tr class="even">
+<td>核心关注</td>
+<td>内部效度（internal validity）</td>
+<td>外部效度/可推广性（external validity/generalizability）</td>
+</tr>
+<tr class="odd">
+<td>研究对象</td>
+<td>更“干净”、更标准化的人群</td>
+<td>更接近日常临床的多样化人群</td>
+</tr>
+<tr class="even">
+<td>干预执行</td>
+<td>尽量统一、标准化、严格监督</td>
+<td>尽量保留临床实践中的自由度</td>
+</tr>
+<tr class="odd">
+<td>结局</td>
+<td>倾向客观、机制性终点</td>
+<td>倾向患者关心的、整体性的结局</td>
+</tr>
+<tr class="even">
+<td>数据收集</td>
+<td>更全面、更密集</td>
+<td>更依赖常规医疗数据，额外负担更少</td>
+</tr>
+</tbody>
+</table>
+<p>最重要的一点是：</p>
+<blockquote class="blockquote">
+<p><strong>pragmatic 和 explanatory 不是两个互斥类别，而是一个连续谱的两端。</strong></p>
+</blockquote>
+<p>现实中的很多研究，往往某些设计要素偏 pragmatic，另一些又偏 explanatory。真正成熟的研究设计，从来不是简单贴标签，而是在不同目标之间做取舍。</p>
+</section>
+<section id="三pragmatic-trial-有哪些典型特征" class="level3">
+<h3 class="anchored" data-anchor-id="三pragmatic-trial-有哪些典型特征">三、pragmatic trial 有哪些典型特征？</h3>
+<p>pragmatic trial 常见有以下几个特征。</p>
+<section id="比较的是临床上真正-relevant-的备选方案" class="level4">
+<h4 class="anchored" data-anchor-id="比较的是临床上真正-relevant-的备选方案">1. 比较的是临床上真正 relevant 的备选方案</h4>
+<p>不是比较一个高度理想化的“纯处理”与安慰剂，而是比较临床实践中真实会发生竞争的方案。</p>
+<p>例如：</p>
+<ul>
+<li>比较两类药物，而不是只比较某个固定药物分子</li>
+<li>同一类药里具体选哪种药，可以由医生决定</li>
+<li>剂量可由临床判断调整</li>
+<li>允许合并其他治疗（co-interventions）</li>
+</ul>
+<p>这些做法会牺牲一些控制性，但更像现实中的临床决策。</p>
+</section>
+<section id="纳入更广泛更多样的人群" class="level4">
+<h4 class="anchored" data-anchor-id="纳入更广泛更多样的人群">2. 纳入更广泛、更多样的人群</h4>
+<p>pragmatic trial 往往只有很少的排除标准，甚至几乎没有。</p>
+<p>因为现实中接受治疗的人，本来就不是一个高度筛选后的“完美样本”。如果研究只纳入年轻、依从性好、合并症少、诊断非常明确的患者，那么结果虽然干净，但临床可用性往往有限。</p>
+<p>有时入组甚至可以基于 <strong>推定诊断</strong>，而不是必须等到最终确诊。因为在真实医疗中，很多治疗本来就是在诊断尚未完全确定时启动的。</p>
+</section>
+<section id="在差异很大的实践场景中开展" class="level4">
+<h4 class="anchored" data-anchor-id="在差异很大的实践场景中开展">3. 在差异很大的实践场景中开展</h4>
+<p>如果一项研究只在顶级中心、由最资深专家实施，那么它回答的是“在最理想的医疗环境中这个干预表现如何”。</p>
+<p>但真实世界不是这样。</p>
+<p>所以 pragmatic trial 会尽量纳入：</p>
+<ul>
+<li>不同层级医院</li>
+<li>不同地区</li>
+<li>不同资源条件</li>
+<li>不同经验水平的临床医生</li>
+</ul>
+<p>一个很形象的例子：比较两种胃食管反流手术时，解释性试验可能只让食管外科专家参与；而 pragmatic trial 则可能把一年只做少量此类手术的普通外科医生也纳入。</p>
+</section>
+<section id="结局更倾向患者中心" class="level4">
+<h4 class="anchored" data-anchor-id="结局更倾向患者中心">4. 结局更倾向患者中心</h4>
+<p>解释性试验通常偏爱实验室指标、影像学结果、生物标志物等客观终点。</p>
+<p>pragmatic trial 则更关注：</p>
+<ul>
+<li>患者报告结局（PRO）</li>
+<li>症状改善</li>
+<li>功能状态</li>
+<li>生活质量</li>
+<li>全因死亡</li>
+<li>是否住院</li>
+<li>是否需要进一步治疗</li>
+</ul>
+<p>因为这些结果，才更接近患者、医生和支付方真正关心的问题。</p>
+</section>
+</section>
+<section id="四为什么-pragmatic-trial-更贴近真实世界" class="level3">
+<h3 class="anchored" data-anchor-id="四为什么-pragmatic-trial-更贴近真实世界">四、为什么 pragmatic trial 更贴近真实世界？</h3>
+<p>因为它刻意减少对临床实践的“打扰”。</p>
+<p>在 explanatory trial 中，研究者常常会为了控制偏倚而做很多额外安排：</p>
+<ul>
+<li>更短的随访</li>
+<li>更频繁的访视</li>
+<li>更严格的依从性监测</li>
+<li>更详细的过程评估</li>
+<li>更高强度的方案执行监督</li>
+</ul>
+<p>这些做法有助于提高内部效度，但也会让研究环境越来越不像普通临床。</p>
+<p>相反，pragmatic trial 的逻辑是：</p>
+<blockquote class="blockquote">
+<p><strong>如果我想知道一个干预在日常实践中能不能真正发挥作用，那研究本身就不应该把日常实践改造得面目全非。</strong></p>
+</blockquote>
+<p>例如，在比较两种 shared decision making 方法时，解释性研究可能会录音门诊过程、精细评估交流质量；但 pragmatic trial 通常不会加入这么多“侵入式”的研究动作，因为真实门诊里并没有这些额外安排。</p>
+</section>
+<section id="五pragmatic-trial-的优势到底是什么" class="level3">
+<h3 class="anchored" data-anchor-id="五pragmatic-trial-的优势到底是什么">五、Pragmatic trial 的优势到底是什么？</h3>
+<section id="更强的临床可解释性" class="level4">
+<h4 class="anchored" data-anchor-id="更强的临床可解释性">1. 更强的临床可解释性</h4>
+<p>临床医生最常面对的不是“完美执行治疗”的病人，而是：</p>
+<ul>
+<li>依从性一般</li>
+<li>合并症很多</li>
+<li>诊断有时不完全清楚</li>
+<li>医疗资源并不理想</li>
+<li>医生风格存在差异</li>
+</ul>
+<p>pragmatic trial 的价值就在于：它让研究结果更接近这些真实情境。</p>
+</section>
+<section id="更强的推广性" class="level4">
+<h4 class="anchored" data-anchor-id="更强的推广性">2. 更强的推广性</h4>
+<p>当研究人群、医生、场景都更接近日常医疗时，结果自然更容易迁移到本院、本科室、自己的患者身上。</p>
+</section>
+<section id="对卫生决策更有用" class="level4">
+<h4 class="anchored" data-anchor-id="对卫生决策更有用">3. 对卫生决策更有用</h4>
+<p>药监审批、医保支付、临床路径制定、指南更新，往往不仅关心“有没有 efficacy”，还关心：</p>
+<ul>
+<li>能不能实施</li>
+<li>在普通环境中还有没有效果</li>
+<li>值不值得投入成本</li>
+<li>对患者实际获益有多大</li>
+</ul>
+<p>这些问题，恰恰是 pragmatic trial 更擅长回答的。</p>
+</section>
+</section>
+<section id="六但-pragmatic-trial-不是没有代价" class="level3">
+<h3 class="anchored" data-anchor-id="六但-pragmatic-trial-不是没有代价">六、但 pragmatic trial 不是“没有代价”</h3>
+<p>实用性试验的优势，恰恰来自它“少打扰真实临床”的设计；而它的局限，也正是这种选择的直接后果。</p>
+<section id="缺失数据更多" class="level4">
+<h4 class="anchored" data-anchor-id="缺失数据更多">1. 缺失数据更多</h4>
+<p>pragmatic trial 常依赖电子病历、医保理赔数据、死亡登记数据库等现成数据源。这样做的好处是：</p>
+<ul>
+<li>便宜</li>
+<li>高效</li>
+<li>可规模化</li>
+<li>更少额外负担</li>
+</ul>
+<p>但问题是，临床数据不是为了研究而系统收集的。</p>
+<p>除身高、体重、血压等常规指标外，很多研究真正想要的变量可能存在：</p>
+<ul>
+<li>没记录</li>
+<li>记录不完整</li>
+<li>记录时间不统一</li>
+<li>测量标准不一致</li>
+</ul>
+<p>因此，缺失数据会更多，而缺失数据几乎总会增加结果解释的难度。</p>
+</section>
+<section id="数据变异更大" class="level4">
+<h4 class="anchored" data-anchor-id="数据变异更大">2. 数据变异更大</h4>
+<p>如果研究纳入了各种不同背景的医生和机构，那么从病人到病人的数据记录方式会更不一致，辅助治疗也会更丰富、更杂。</p>
+<p>这当然更真实，但也意味着：</p>
+<ul>
+<li>噪音更大</li>
+<li>变异更大</li>
+<li>估计更不精确</li>
+</ul>
+</section>
+<section id="方案执行更难统一" class="level4">
+<h4 class="anchored" data-anchor-id="方案执行更难统一">3. 方案执行更难统一</h4>
+<p>解释性试验更容易做到 protocol adherence。pragmatic trial 则往往允许医生和机构保留日常实践中的弹性。</p>
+<p>结果就是：</p>
+<ul>
+<li>同一干预的“剂量”可能不同</li>
+<li>同一流程的落实程度可能不同</li>
+<li>同一方案在不同中心的执行深度可能不同</li>
+</ul>
+<p>这会使效应估计更接近真实世界，但也更难“干净地”解释。</p>
+</section>
+<section id="随访更长随机化后的干扰更多" class="level4">
+<h4 class="anchored" data-anchor-id="随访更长随机化后的干扰更多">4. 随访更长，随机化后的干扰更多</h4>
+<p>较长随访可以提供长期价值信息，但也会增加随机化后事件发生的机会，例如：</p>
+<ul>
+<li>中途换药</li>
+<li>合并其他治疗</li>
+<li>失访</li>
+<li>医疗环境变化</li>
+<li>患者行为变化</li>
+</ul>
+<p>这些因素会让结果更难解释。换句话说，研究越接近现实，现实本身的复杂性就越会进入研究。</p>
+</section>
+</section>
+<section id="七成本上pragmatic-trial-是更便宜还是更贵" class="level3">
+<h3 class="anchored" data-anchor-id="七成本上pragmatic-trial-是更便宜还是更贵">七、成本上，pragmatic trial 是更便宜还是更贵？</h3>
+<p>没有统一答案。</p>
+<section id="explanatory-trial-常见的控成本方式" class="level4">
+<h4 class="anchored" data-anchor-id="explanatory-trial-常见的控成本方式">explanatory trial 常见的控成本方式</h4>
+<ul>
+<li>尽量缩短随访时间</li>
+<li>招募更容易在短期内发生终点事件的患者</li>
+<li>更快积累事件数，从而更早结束研究</li>
+</ul>
+</section>
+<section id="pragmatic-trial-常见的控成本方式" class="level4">
+<h4 class="anchored" data-anchor-id="pragmatic-trial-常见的控成本方式">pragmatic trial 常见的控成本方式</h4>
+<ul>
+<li>利用电子病历、医保数据、死亡登记等现成数据源</li>
+<li>从患者登记库中简化招募</li>
+<li>减少额外随访接触次数</li>
+<li>尽量不增加临床团队的研究负担</li>
+</ul>
+<p>但这里有一个特别值得统计学家和临床研究者警惕的问题：</p>
+<blockquote class="blockquote">
+<p><strong>如果为了省钱而不去测量干预的实际执行强度，就可能把“没有落实”误判为“没有效果”。</strong></p>
+</blockquote>
+<p>很多干预，无论是临床治疗还是管理措施，都是 dose-dependent 的。病人没吃药、医生没执行、门诊没落实，最后观察到“无效”，不一定说明干预没用，也可能只是它根本没有被真正实施。</p>
+</section>
+</section>
+<section id="八pragmatic-trial-和-observational-study-的边界在哪里" class="level3">
+<h3 class="anchored" data-anchor-id="八pragmatic-trial-和-observational-study-的边界在哪里">八、pragmatic trial 和 observational study 的边界在哪里？</h3>
+<p>这是一个非常现实的问题。</p>
+<p>一个例子：患者面对手术和药物治疗时，先可以选择“接受常规治疗”还是“进入随机试验”。结果三分之二患者拒绝试验，剩下三分之一才被随机。</p>
+<p>从“纯粹主义”的 RCT 视角看，这个设计确实不够干净，因为：</p>
+<ul>
+<li>患者在一开始并没有全部随机</li>
+<li>愿意进入随机的人，和不愿意进入随机的人，本来就可能不同</li>
+<li>这种自我选择会带来选择偏倚</li>
+</ul>
+<p>所以有人会质疑：这到底还是不是 clinical trial？</p>
+<p>但从另一面看，这恰恰就是临床实践本来的样子：</p>
+<ul>
+<li>患者会表达偏好</li>
+<li>患者会拒绝随机</li>
+<li>医生会与患者共同决策</li>
+<li>治疗方案不会像实验室那样完全由研究者掌控</li>
+</ul>
+<p>这说明一个很重要的事实：</p>
+<blockquote class="blockquote">
+<p><strong>越想让研究贴近真实临床，就越有可能偏离“纯随机试验”的理想形态。</strong></p>
+</blockquote>
+<p>这不是谁对谁错，而是研究目标不同带来的张力。</p>
+</section>
+<section id="九对生物统计工作者来说最重要的认识是什么" class="level3">
+<h3 class="anchored" data-anchor-id="九对生物统计工作者来说最重要的认识是什么">九、对生物统计工作者来说，最重要的认识是什么？</h3>
+<p>我认为有三点。</p>
+<section id="不要把-pragmatic-和-explanatory-当成非黑即白的标签" class="level4">
+<h4 class="anchored" data-anchor-id="不要把-pragmatic-和-explanatory-当成非黑即白的标签">1. 不要把 pragmatic 和 explanatory 当成非黑即白的标签</h4>
+<p>现实中的研究更像位于一条连续谱上。一个研究可能：</p>
+<ul>
+<li>入组很 pragmatic</li>
+<li>干预执行很 explanatory</li>
+<li>结局定义又比较 pragmatic</li>
+<li>分析策略偏 explanatory</li>
+</ul>
+<p>所以判断一项研究，不能只看作者怎么命名，而要看具体设计特征。</p>
+</section>
+<section id="内部效度和外部效度通常需要权衡" class="level4">
+<h4 class="anchored" data-anchor-id="内部效度和外部效度通常需要权衡">2. 内部效度和外部效度，通常需要权衡</h4>
+<p>提高内部效度，往往意味着：</p>
+<ul>
+<li>更严格纳排</li>
+<li>更高一致性</li>
+<li>更强过程控制</li>
+<li>更少噪音</li>
+</ul>
+<p>但这常常会降低外部效度和可推广性。</p>
+<p>反过来，越追求真实世界，就越会引入复杂性、异质性和解释上的不确定性。</p>
+</section>
+<section id="异质性解释可能需要pragmatic-程度这个视角" class="level4">
+<h4 class="anchored" data-anchor-id="异质性解释可能需要pragmatic-程度这个视角">3. 异质性解释可能需要“pragmatic 程度”这个视角</h4>
+<p>临床决策从来不依赖单个研究，而依赖证据体和系统综述。</p>
+<p>当系统综述中研究结果高度异质时，我们通常会看：</p>
+<ul>
+<li>人群是否不同</li>
+<li>干预是否不同</li>
+<li>结局是否不同</li>
+<li>偏倚风险是否不同</li>
+</ul>
+<p>我们认为还应该加上一点：</p>
+<ul>
+<li><strong>研究位于 explanatory-pragmatic 光谱的什么位置</strong></li>
+</ul>
+<p>因为同一个干预，在高度控制条件下有效，不代表在日常临床里同样有效；反之，在真实世界里效应被稀释，也不等于机制上无效。</p>
+</section>
+</section>
+<section id="十如何一句话判断一项研究更偏-pragmatic-还是-explanatory" class="level3">
+<h3 class="anchored" data-anchor-id="十如何一句话判断一项研究更偏-pragmatic-还是-explanatory">十、如何一句话判断一项研究更偏 pragmatic 还是 explanatory？</h3>
+<p>我自己的一个简单判断方法是问 5 个问题：</p>
+<ol type="1">
+<li>这项研究纳入的人，像不像日常门诊里会遇到的病人？</li>
+<li>参与研究的医生和机构，像不像普通临床环境？</li>
+<li>干预执行方式，像不像真实世界会发生的样子？</li>
+<li>结局指标，是不是患者和临床真正关心的结果？</li>
+<li>数据收集过程，有没有明显改变原本的医疗行为？</li>
+</ol>
+<p>如果这 5 个问题大多回答“像”，它通常就更偏 pragmatic。</p>
+</section>
+<section id="十一takeways" class="level3">
+<h3 class="anchored" data-anchor-id="十一takeways">十一、Takeways</h3>
+<p>pragmatic trial 的兴起，不是因为传统 RCT 不重要了，而是因为现代医疗决策越来越需要回答这样的问题：</p>
+<ul>
+<li>某个干预在普通医疗环境中是否还能有效？</li>
+<li>在依从性不完美的病人中是否仍值得推荐？</li>
+<li>在资源有限、执行不完全一致的现实系统中是否仍有价值？</li>
+<li>对患者真正关心的结局是否有改善？</li>
+</ul>
+<p>所以，pragmatic trial 不是“降低标准”的研究，而是 <strong>把研究问题从“理想条件下是否有效”推进到“真实世界中是否有用”</strong>。</p>
+<p>对于生物统计工作者而言，真正重要的不是站队，而是清楚地知道：</p>
+<blockquote class="blockquote">
+<p><strong>你想回答什么问题，就应该接受与之匹配的设计代价。</strong></p>
+</blockquote>
+<p>这也是 pragmatic trial 最值得理解的地方 <span class="citation" data-cites="RN1599">(Sox and Lewis 2016)</span>。</p>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-RN1599" class="csl-entry">
+Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical Answers to <span>‘Real World’</span> Questions.”</span> Journal Article. <em>JAMA</em> 316 (11): 1205–6. <a href="https://doi.org/10.1001/jama.2016.11409">https://doi.org/10.1001/jama.2016.11409</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>causal inference</category>
+  <category>epidemiology</category>
+  <category>estimands</category>
+  <category>propensity score</category>
+  <category>SMR weights</category>
+  <category>ATT</category>
+  <category>ATE</category>
+  <guid>https://leslie-lu.github.io/blog/2026/03/31/pragmatic_trial/</guid>
+  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>因果 estimand</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/03/ATT/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么" class="level3">
+<h3 class="anchored" data-anchor-id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么">一、为什么很多人学了 propensity score，仍然分不清自己在估计什么？</h3>
+<p>因为在因果推断里，<strong>方法</strong>和 <strong>estimand</strong> 不是一回事。</p>
+<p>同样是做倾向评分加权，你可能估计的是：</p>
+<ul>
+<li>ATE</li>
+<li>ATT</li>
+<li>ATC</li>
+</ul>
+<p>这三者不是同一个量的不同算法，而是三个本来就不同的因果问题。</p>
+</section>
+<section id="二ateattatc-分别是什么意思" class="level3">
+<h3 class="anchored" data-anchor-id="二ateattatc-分别是什么意思">二、ATE、ATT、ATC 分别是什么意思？</h3>
+<p>设：</p>
+<ul>
+<li><code>T=1</code>：接受治疗，比如起始 GLP-1 receptor agonists</li>
+<li><code>T=0</code>：接受对照，比如起始 SGLT-2 inhibitors</li>
+<li><code>Y(1)</code>：若接受治疗时的潜在结局</li>
+<li><code>Y(0)</code>：若接受对照时的潜在结局</li>
+</ul>
+<section id="ateaverage-treatment-effect" class="level4">
+<h4 class="anchored" data-anchor-id="ateaverage-treatment-effect">1. ATE：average treatment effect</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATE%20=%20E%5BY(1)-Y(0)%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在整个目标人群中，如果所有人都接受治疗，与如果所有人都接受对照相比，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>整个研究总体</strong>。</p>
+</section>
+<section id="attaverage-treatment-effect-among-the-treated" class="level4">
+<h4 class="anchored" data-anchor-id="attaverage-treatment-effect-among-the-treated">2. ATT：average treatment effect among the treated</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATT%20=%20E%5BY(1)-Y(0)%5Cmid%20T=1%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在那些实际上接受了治疗的人中，治疗相对于如果这些同样的人改为接受对照，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>treated 人群</strong>。</p>
+</section>
+<section id="atcaverage-treatment-effect-among-the-controls" class="level4">
+<h4 class="anchored" data-anchor-id="atcaverage-treatment-effect-among-the-controls">3. ATC：average treatment effect among the controls</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATC%20=%20E%5BY(1)-Y(0)%5Cmid%20T=0%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在那些实际上接受了对照的人中，如果他们改为接受治疗，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>control 人群</strong>。</p>
+</section>
+</section>
+<section id="三为什么同一项研究里-ateattatc-可能不一样" class="level3">
+<h3 class="anchored" data-anchor-id="三为什么同一项研究里-ateattatc-可能不一样">三、为什么同一项研究里 ATE、ATT、ATC 可能不一样？</h3>
+<p>因为 treatment effect 往往不是对所有人都相同。</p>
+<p>举例来说，如果 GLP-1 对高 BMI 患者效果更强，而现实中高 BMI 患者又更容易被开 GLP-1，那么：</p>
+<ul>
+<li><code>ATT</code> 可能比 <code>ATE</code> 更大</li>
+<li><code>ATC</code> 可能又和前两者不同</li>
+</ul>
+</section>
+<section id="四smr-weights-是什么为什么它常对应-att" class="level3">
+<h3 class="anchored" data-anchor-id="四smr-weights-是什么为什么它常对应-att">四、SMR weights 是什么？为什么它常对应 ATT？</h3>
+<p><code>SMR</code> 指的是 <code>standardized mortality ratio</code> 权重。尽管名字里有 mortality，但在方法学上它并不限于死亡结局，也常用于其他终点的标准化分析。</p>
+<p>当目标 estimand 是 <code>ATT</code> 时，一个常见的 SMR weighting 形式是：</p>
+<ul>
+<li>对 treatment 组：<code>w=1</code></li>
+<li>对 control 组：<code>w=e(X)/(1-e(X))</code></li>
+</ul>
+<p>其中 <code>e(X)</code> 是 propensity score。</p>
+<p>这组权重的含义是：</p>
+<blockquote class="blockquote">
+<p>不改变 treatment 组本身，而把 control 组重加权成“看起来像 treatment 组”的协变量分布。</p>
+</blockquote>
+<p>因此，最终估计的就是 treated population 下的反事实对照结果，也就是 <code>ATT</code>。</p>
+</section>
+<section id="五att-为什么在药物流行病学里很常见" class="level3">
+<h3 class="anchored" data-anchor-id="五att-为什么在药物流行病学里很常见">五、ATT 为什么在药物流行病学里很常见？</h3>
+<p>因为很多药物流行病学研究的问题本来就是：</p>
+<blockquote class="blockquote">
+<p>对于那些现实中已经被医生选去用某种药的患者，这种药相对于可替代方案的效果如何？</p>
+</blockquote>
+<p>这恰好对应 <code>ATT</code> 的临床含义。</p>
+<p>以 GLP-1 与 SGLT-2 为例：</p>
+<ul>
+<li><code>ATE</code>：适用于所有符合条件的患者</li>
+<li><code>ATT</code>：适用于现实中被开 GLP-1 的患者</li>
+<li><code>ATC</code>：适用于现实中被开 SGLT-2 的患者</li>
+</ul>
+<p>如果医生的处方行为本身就体现了患者异质性，那么 <code>ATT</code> 往往更贴近真实临床决策场景。</p>
+</section>
+<section id="六读论文时如何快速判断自己看到的是哪一种-estimand" class="level3">
+<h3 class="anchored" data-anchor-id="六读论文时如何快速判断自己看到的是哪一种-estimand">六、读论文时，如何快速判断自己看到的是哪一种 estimand？</h3>
+<p>可以抓住以下关键词。</p>
+<section id="ate" class="level4">
+<h4 class="anchored" data-anchor-id="ate">ATE</h4>
+<ul>
+<li>average treatment effect</li>
+<li>effect in the overall eligible population</li>
+</ul>
+</section>
+<section id="att" class="level4">
+<h4 class="anchored" data-anchor-id="att">ATT</h4>
+<ul>
+<li>average treatment effect among the treated</li>
+<li>among initiators of drug A</li>
+<li>control group weighted to resemble the treated</li>
+</ul>
+</section>
+<section id="atc" class="level4">
+<h4 class="anchored" data-anchor-id="atc">ATC</h4>
+<ul>
+<li>average treatment effect among controls</li>
+<li>treatment group weighted to resemble controls</li>
+</ul>
+<p>如果论文同时出现 <code>SMR weights</code> 和 “among those treated”，几乎可以直接想到：作者的目标大概率是 <code>ATT</code>。</p>
+</section>
+</section>
+<section id="七takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="七takeaways">七、Takeaways</h3>
+<p>因果推断里最容易被忽视的一点是：<strong>先明确你在平均谁，再谈如何计算。</strong></p>
+<ul>
+<li><code>ATE</code>：平均到全体</li>
+<li><code>ATT</code>：平均到 treated</li>
+<li><code>ATC</code>：平均到 controls</li>
+</ul>
+<p>而 <code>SMR weights</code> 的典型角色，是把比较组标准化到 treatment 组的协变量分布，从而支持 <code>ATT</code> 的估计。</p>
+<p>理解了这一层，读药物流行病学论文时就不容易被一堆术语绕进去。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>causal inference</category>
+  <category>epidemiology</category>
+  <category>estimands</category>
+  <category>propensity score</category>
+  <category>SMR weights</category>
+  <category>ATT</category>
+  <category>ATE</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/03/ATT/</guid>
+  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
   <title>生统爱好者周刊（第 27 期）：AI正在改变科学发现方式？</title>
   <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2026/04/03/biostat_weekly_issue27/</link>
@@ -5399,70 +5943,6 @@ samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
   <guid>https://leslie-lu.github.io/blog/2025/06/24/vep/</guid>
   <pubDate>Tue, 24 Jun 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250624022739.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>2024年度期刊影响因子 JCR2024 公布</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/06/18/2024JCR/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>刚刚，2024 年度期刊影响因子 JCR2024 已在 Web of Science 平台正式公布。目前我们已经快速抓取成 Excel，供大家免费下载使用。公众号后台直接回复 <code>JCR2024</code> 即可获取，注意不是在评论区评论。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/a915b9ca0f6473800c870dac00bd76fc.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">JCR2024</figcaption>
-</figure>
-</div>
-<section id="关注的一些期刊" class="level4">
-<h4 class="anchored" data-anchor-id="关注的一些期刊">关注的一些期刊</h4>
-<p>神刊 CA 降至 232.4；医学四大刊全部下降，最高 Lancet 为 88.5；Nature 下降至 48.5，Cell 为 42.5。</p>
-<p>值得注意的是，期刊 JOURNAL OF HEPATOLOGY 由 26.8 突破至 33 分。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>impact-factor</category>
-  <category>JCR</category>
-  <category>journal</category>
-  <guid>https://leslie-lu.github.io/blog/2025/06/18/2024JCR/</guid>
-  <pubDate>Wed, 18 Jun 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/a915b9ca0f6473800c870dac00bd76fc.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>色素痣就诊</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/06/17/mole/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>2025 年 6 月 15 日，去医院美容皮肤科就诊。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/f7a6187f4ffa149befd6bd0e974967af.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">皮肤镜检查报告单</figcaption>
-</figure>
-</div>
-<p>目前无治疗，等待以后复查观察。</p>
-
-
-<!-- -->
-
-
- ]]></description>
-  <category>healthcare</category>
-  <category>dermatology</category>
-  <guid>https://leslie-lu.github.io/blog/2025/06/17/mole/</guid>
-  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
