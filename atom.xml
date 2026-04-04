@@ -11,7 +11,180 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.9.36</generator>
-<lastBuildDate>Fri, 03 Apr 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 04 Apr 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Competing Risk、Cause-Specific Cox 与 Fine-Gray：到底该回答哪一个问题？</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/04/competing_risk/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="一什么是-competing-risk" class="level3">
+<h3 class="anchored" data-anchor-id="一什么是-competing-risk">一、什么是 competing risk？</h3>
+<p><code>Competing risk</code>，中文通常叫<strong>竞争风险</strong>，指的是：</p>
+<blockquote class="blockquote">
+<p>某个事件一旦先发生，就会阻止你感兴趣的目标事件之后再发生。</p>
+</blockquote>
+<p>最典型的例子是研究“癌症死亡”时的“其他原因死亡”：</p>
+<ul>
+<li>目标事件：癌症死亡</li>
+<li>竞争事件：死于心血管病、意外死亡等其他原因</li>
+</ul>
+<p>因为一个人一旦先死于其他原因，就不可能以后再死于癌症，因此“其他原因死亡”就是癌症死亡的 competing risk。</p>
+</section>
+<section id="二为什么-competing-risk-不能简单当作普通删失" class="level3">
+<h3 class="anchored" data-anchor-id="二为什么-competing-risk-不能简单当作普通删失">二、为什么 competing risk 不能简单当作普通删失？</h3>
+<p>这是理解后续模型选择的关键。</p>
+<ul>
+<li><code>censoring</code> 的含义是：我们只是没再观察到这个人，但理论上他未来仍可能发生目标事件</li>
+<li><code>competing risk</code> 的含义是：目标事件从此以后已经不可能再发生</li>
+</ul>
+<p>比如研究 3 年内是否发生 SUD <span class="citation" data-cites="RN1586">(Cai et al. 2026)</span>。如果某人在 1 年时死亡，那么对 “SUD” 这个结局来说，他不是简单的失访，而是已经不可能在之后再发生 SUD。</p>
+<p>因此，如果把大量 competing events 当作普通独立删失，用 <code>1-KM</code> 来估计结局累积发生概率，通常会高估真实风险。</p>
+</section>
+<section id="三两类最常见的问题病因学问题-vs-预测问题" class="level3">
+<h3 class="anchored" data-anchor-id="三两类最常见的问题病因学问题-vs-预测问题">三、两类最常见的问题：病因学问题 vs 预测问题</h3>
+<p>处理 competing risk 时，首先要问的不是“该用哪个软件命令”，而是：</p>
+<blockquote class="blockquote">
+<p>你到底想回答什么问题？</p>
+</blockquote>
+<p>通常有两类不同的问题。</p>
+<section id="病因学或机制问题" class="level4">
+<h4 class="anchored" data-anchor-id="病因学或机制问题">1. 病因学或机制问题</h4>
+<p>例如：</p>
+<blockquote class="blockquote">
+<p>某种治疗是否会改变目标事件在仍然存活且尚未发生事件的人中的瞬时发生率？</p>
+</blockquote>
+<p>这类问题更接近 hazard 的解释，常用 <code>cause-specific hazard model</code>。</p>
+</section>
+<section id="绝对风险或预测问题" class="level4">
+<h4 class="anchored" data-anchor-id="绝对风险或预测问题">2. 绝对风险或预测问题</h4>
+<p>例如：</p>
+<blockquote class="blockquote">
+<p>在真实存在 competing events 的情况下，3 年内目标事件最终会发生多少？</p>
+</blockquote>
+<p>这类问题更接近 cumulative incidence，常用 <code>Fine-Gray</code> 或直接建模 CIF。</p>
+</section>
+</section>
+<section id="四什么是-cause-specific-hazard-model" class="level3">
+<h3 class="anchored" data-anchor-id="四什么是-cause-specific-hazard-model">四、什么是 cause-specific hazard model？</h3>
+<p>研究某个特定结局时，<code>cause-specific hazard model</code> 的做法是：</p>
+<ul>
+<li>把目标事件定义为 event</li>
+<li>把 competing events 在发生时从风险集中移除</li>
+<li>在技术实现上常把 competing events 当作删失处理</li>
+</ul>
+<p>例如研究 SUD 发生风险时：</p>
+<ul>
+<li>目标事件：SUD</li>
+<li>competing event：死亡</li>
+</ul>
+<p>一旦有人先死亡，他就不再属于“未来可能发生 SUD”的风险集，因此在 cause-specific Cox 框架中会在死亡时点被移出风险集。</p>
+<p>这里“treated as censoring”不是说死亡真的等同于失访，而是说：<strong>在 cause-specific hazard 的统计框架里，死亡通过删失机制把个体移出目标事件风险集。</strong></p>
+</section>
+<section id="五这类模型到底估计什么" class="level3">
+<h3 class="anchored" data-anchor-id="五这类模型到底估计什么">五、这类模型到底估计什么？</h3>
+<p>它估计的是：</p>
+<blockquote class="blockquote">
+<p>在时点 <code>t</code> 时，条件于个体仍然活着且尚未发生任何结局，目标事件的瞬时发生率。</p>
+</blockquote>
+<p>因此如果论文说：</p>
+<blockquote class="blockquote">
+<p>initiating GLP-1 versus SGLT-2 changes the hazard of SUD conditional on being alive</p>
+</blockquote>
+<p>它的意思就是：</p>
+<blockquote class="blockquote">
+<p>作者关心的是在“还活着的人”里，起始 GLP-1 是否改变之后发生 SUD 的 hazard。</p>
+</blockquote>
+<p>这更像一个病因学问题，而不是一个现实累计风险预测问题。</p>
+</section>
+<section id="六什么是-fine-gray-model" class="level3">
+<h3 class="anchored" data-anchor-id="六什么是-fine-gray-model">六、什么是 Fine-Gray model？</h3>
+<p><code>Fine-Gray</code> 直接建模的是某个具体结局的 <code>subdistribution hazard</code>，目标是得到该结局的累积发生函数 <code>CIF</code>（cumulative incidence function）。</p>
+<p>它回答的问题更接近：</p>
+<blockquote class="blockquote">
+<p>在 competing risk 真实存在的情况下，到某个时间点为止，目标事件实际累计发生的概率是多少？</p>
+</blockquote>
+<p>因此，<code>Fine-Gray</code> 更适合：</p>
+<ul>
+<li>prognosis</li>
+<li>risk prediction</li>
+<li>绝对风险汇报</li>
+</ul>
+<p>如果研究者真正关心的是“3 年内有多少人会发生目标事件”，<code>CIF</code> 往往比 <code>1-KM</code> 更合适。</p>
+</section>
+<section id="七cause-specific-cox-与-fine-gray-到底怎么选" class="level3">
+<h3 class="anchored" data-anchor-id="七cause-specific-cox-与-fine-gray-到底怎么选">七、cause-specific Cox 与 Fine-Gray 到底怎么选？</h3>
+<p>一个很实用的判断标准是：</p>
+<section id="如果你关心的是机制或病因学问题" class="level4">
+<h4 class="anchored" data-anchor-id="如果你关心的是机制或病因学问题">如果你关心的是机制或病因学问题</h4>
+<p>例如：</p>
+<blockquote class="blockquote">
+<p>某药物是否改变了目标疾病本身的发生过程？</p>
+</blockquote>
+<p>那 <code>cause-specific Cox</code> 往往更自然，因为它聚焦于在仍然 event-free 且 alive 的人群中的 hazard。</p>
+</section>
+<section id="如果你关心的是临床绝对风险" class="level4">
+<h4 class="anchored" data-anchor-id="如果你关心的是临床绝对风险">如果你关心的是临床绝对风险</h4>
+<p>例如：</p>
+<blockquote class="blockquote">
+<p>在真实世界里，3 年内最终有多少人会发生这个结局？</p>
+</blockquote>
+<p>那 <code>Fine-Gray</code> 或 CIF 更合适，因为 competing event 不是被“技术性删失”掉，而是被纳入了实际风险计算。</p>
+</section>
+</section>
+<section id="八为什么对死亡结局本身又可以直接用标准-cox" class="level3">
+<h3 class="anchored" data-anchor-id="八为什么对死亡结局本身又可以直接用标准-cox">八、为什么对“死亡结局本身”又可以直接用标准 Cox？</h3>
+<p>因为当研究结局本身就是死亡时，死亡不再是 competing event，而是目标事件本身。</p>
+<p>例如研究 <code>SUD-associated mortality</code>：</p>
+<ul>
+<li>event of interest：死亡</li>
+<li>这时不需要把死亡当作 competing risk</li>
+<li>直接用 standard Cox proportional hazards model 就可以</li>
+</ul>
+<p>所以同一篇论文里可能出现这样的搭配：</p>
+<ul>
+<li>对非死亡结局：cause-specific Cox</li>
+<li>对死亡结局：standard Cox</li>
+</ul>
+<p>这不是前后不一致，而是因为研究问题变了。</p>
+</section>
+<section id="九takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="九takeaways">九、Takeaways</h3>
+<p><code>Competing risk</code> 分析最重要的，不是背模型名称，而是先分清楚两个层面的问题：</p>
+<ul>
+<li>你想知道治疗是否改变目标事件在“仍然活着且事件未发生者”中的 hazard 吗？</li>
+<li>还是想知道在现实存在 competing event 的情况下，目标事件到某个时间点实际会发生多少？</li>
+</ul>
+<p>前者更接近 <code>cause-specific Cox</code>，后者更接近 <code>Fine-Gray / CIF</code>。</p>
+<p>因此，阅读方法部分时，要先问：</p>
+<blockquote class="blockquote">
+<p>这篇文章想回答的是病因学问题，还是绝对风险问题？</p>
+</blockquote>
+<p>只有问题定义清楚，模型选择才谈得上是否合理。</p>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-RN1586" class="csl-entry">
+Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Like Peptide-1 Receptor Agonists and Risk of Substance Use Disorders Among US Veterans with Type 2 Diabetes: Cohort Study.”</span> Journal Article. <em>BMJ</em> 392: e086886. <a href="https://doi.org/10.1136/bmj-2025-086886">https://doi.org/10.1136/bmj-2025-086886</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>competing risk</category>
+  <category>cause-specific cox</category>
+  <category>fine-gray</category>
+  <category>survival analysis</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/04/competing_risk/</guid>
+  <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>因果 estimand</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -5757,189 +5930,6 @@ comm -23 aa_sorted.txt bb_sorted.txt | wc -l</code></pre>
   <guid>https://leslie-lu.github.io/blog/2025/06/30/comm/</guid>
   <pubDate>Mon, 30 Jun 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250630140522.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>离线跑 VEP 必备：Reference FASTA 文件下载与预处理</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/06/24/vep/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>这里，我们将详细介绍如何为 Ensembl Variant Effect Predictor (VEP) 离线模式准备本地参考基因组 FASTA，以及为什么要 <code>先解压、再 bgzip 压缩</code>。看完就能举一反三，为任何物种配置 VEP 参考序列。</p>
-<section id="为什么一定要用-ensembl-官方-fasta" class="level3">
-<h3 class="anchored" data-anchor-id="为什么一定要用-ensembl-官方-fasta">1. 为什么一定要用 Ensembl 官方 FASTA？</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 11%">
-<col style="width: 88%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>坐标一致</td>
-<td>VEP 只能 100% 保证与同版本 Ensembl 发布的注释（GTF/GFF、缓存）完全匹配。用其他来源 → 坐标或 HGVS 解析可能错位</td>
-</tr>
-<tr class="even">
-<td>目录统一</td>
-<td>Ensembl FTP 采用统一的 …/release-114/fasta/<species>/dna/ 结构，自动化脚本好写</species></td>
-</tr>
-<tr class="odd">
-<td>长期维护</td>
-<td>每个 release 都保留完整历史，且提供 MD5 校验，便于版本溯源</td>
-</tr>
-</tbody>
-</table>
-<p>简言之：想省心，就用 <a href="https://www.ensembl.org/index.html" title="Ensembl">Ensembl FASTA</a> ，且版本号要与当前 VEP 保持一致。</p>
-</section>
-<section id="选哪个文件最合适" class="level3">
-<h3 class="anchored" data-anchor-id="选哪个文件最合适">2. 选哪个文件最合适？</h3>
-<p>进入 …/dna/ 目录后，你会看到一堆后缀类似的压缩包：</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 28%">
-<col style="width: 52%">
-<col style="width: 18%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>文件名片段</th>
-<th>含义</th>
-<th>是否推荐做 VEP 参考？</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>dna.primary_assembly.fa.gz</td>
-<td>仅含正式染色体 (24 条常染 + XY + M) 及少量 decoy</td>
-<td>✅ 推荐</td>
-</tr>
-<tr class="even">
-<td>dna.toplevel.fa.gz</td>
-<td>primary_assembly + alt contigs + patch</td>
-<td>体积大，注释慢</td>
-</tr>
-<tr class="odd">
-<td>_sm. / _rm.</td>
-<td>soft-mask / repeat-mask</td>
-<td>⛔ 不要（大小写或 N 会影响插件）</td>
-</tr>
-</tbody>
-</table>
-<p>拿 <code>unmasked + primary_assembly</code> 即可。以人类 GRCh38 为例：Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz。</p>
-</section>
-<section id="下载-解压-bgzip-三步走" class="level3">
-<h3 class="anchored" data-anchor-id="下载-解压-bgzip-三步走">3. 下载 ➜ 解压 ➜ bgzip 三步走</h3>
-<pre class="{bash}"><code>#| eval: false
-# 下载记得确认 release 号
-curl -O https://ftp.ensembl.org/pub/release-114/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-# 先完全解压；bgzip 不能直接二次压缩 .gz
-gzip -d Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-# 用 bgzip 重新块压缩，生成可随机索引的 .fa.gz
-bgzip -@ 8 Homo_sapiens.GRCh38.dna.primary_assembly.fa   # -@ 8 = 8 线程
-# （可选）提前生成索引，VEP 第一次跑时也会自动创建
-samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</code></pre>
-<section id="为什么要这么折腾" class="level4">
-<h4 class="anchored" data-anchor-id="为什么要这么折腾">为什么要这么折腾？</h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 59%">
-<col style="width: 21%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>特点</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>纯文本 .fa</td>
-<td>读取最快；占用磁盘大</td>
-<td>本地磁盘富余</td>
-</tr>
-<tr class="even">
-<td>普通 gzip .fa.gz</td>
-<td>空间省，但无法随机访问 ➜ VEP 巨慢</td>
-<td>❌ 不要</td>
-</tr>
-<tr class="odd">
-<td>bgzip .fa.gz</td>
-<td>空间省，又可随机定位 (Bio::DB::HTS::Faidx)</td>
-<td>✅ 推荐</td>
-</tr>
-</tbody>
-</table>
-<p>bgzip 和 samtools 均来自 htslib，conda 安装：<code>conda install -c bioconda htslib samtools</code>。</p>
-<p>其他物种同理，路径里换成对应英文学名即可。</p>
-</section>
-</section>
-<section id="常见报错与解决方案" class="level3">
-<h3 class="anchored" data-anchor-id="常见报错与解决方案">4. 常见报错与解决方案</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 22%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>报错</th>
-<th>原因</th>
-<th>解决</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>Can't locate Bio/DB/HTS/Faidx.pm</code></td>
-<td>perl-htslib 缺失</td>
-<td><code>conda install -c bioconda perl-htslib</code></td>
-</tr>
-<tr class="even">
-<td><code>Could not find index file</code></td>
-<td><code>.fai</code> / <code>.gzi</code> 损坏或丢失</td>
-<td>手动 <code>samtools faidx *.fa.gz</code> 重新索引</td>
-</tr>
-<tr class="odd">
-<td>运行速度奇慢 + 单核</td>
-<td>用了普通 gzip 文件</td>
-<td>按上文改用 bgzip</td>
-</tr>
-<tr class="even">
-<td>内存占用飙升</td>
-<td>开太多 <code>--fork</code> 线程</td>
-<td>减少 <code>--fork</code> 或增加 <code>--buffer_size</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="take-home-message" class="level3">
-<h3 class="anchored" data-anchor-id="take-home-message">Take Home Message</h3>
-<p>下载 unmasked primary_assembly → 解压 → bgzip，然后把 .fa.gz 路径传给 –fasta，VEP 离线跑得又快又稳，磁盘占用还能少一半以上。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>vep</category>
-  <category>reference genome</category>
-  <category>bioinformatics</category>
-  <category>variant annotation</category>
-  <category>genomics</category>
-  <guid>https://leslie-lu.github.io/blog/2025/06/24/vep/</guid>
-  <pubDate>Tue, 24 Jun 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250624022739.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
