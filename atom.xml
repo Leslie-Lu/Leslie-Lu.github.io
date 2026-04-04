@@ -15,6 +15,263 @@
 <item>
   <title>因果 estimand</title>
   <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/03/ATT/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么" class="level3">
+<h3 class="anchored" data-anchor-id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么">一、为什么很多人学了 propensity score，仍然分不清自己在估计什么？</h3>
+<p>因为在因果推断里，<strong>方法</strong>和 <strong>estimand</strong> 不是一回事。</p>
+<p>同样是做倾向评分加权，你可能估计的是：</p>
+<ul>
+<li>ATE</li>
+<li>ATT</li>
+<li>ATC</li>
+</ul>
+<p>这三者不是同一个量的不同算法，而是三个本来就不同的因果问题。</p>
+</section>
+<section id="二ateattatc-分别是什么意思" class="level3">
+<h3 class="anchored" data-anchor-id="二ateattatc-分别是什么意思">二、ATE、ATT、ATC 分别是什么意思？</h3>
+<p>设：</p>
+<ul>
+<li><code>T=1</code>：接受治疗，比如起始 GLP-1 receptor agonists</li>
+<li><code>T=0</code>：接受对照，比如起始 SGLT-2 inhibitors</li>
+<li><code>Y(1)</code>：若接受治疗时的潜在结局</li>
+<li><code>Y(0)</code>：若接受对照时的潜在结局</li>
+</ul>
+<section id="ateaverage-treatment-effect" class="level4">
+<h4 class="anchored" data-anchor-id="ateaverage-treatment-effect">1. ATE：average treatment effect</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATE%20=%20E%5BY(1)-Y(0)%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在整个目标人群中，如果所有人都接受治疗，与如果所有人都接受对照相比，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>整个研究总体</strong>。</p>
+</section>
+<section id="attaverage-treatment-effect-among-the-treated" class="level4">
+<h4 class="anchored" data-anchor-id="attaverage-treatment-effect-among-the-treated">2. ATT：average treatment effect among the treated</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATT%20=%20E%5BY(1)-Y(0)%5Cmid%20T=1%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在那些实际上接受了治疗的人中，治疗相对于如果这些同样的人改为接受对照，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>treated 人群</strong>。</p>
+</section>
+<section id="atcaverage-treatment-effect-among-the-controls" class="level4">
+<h4 class="anchored" data-anchor-id="atcaverage-treatment-effect-among-the-controls">3. ATC：average treatment effect among the controls</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0AATC%20=%20E%5BY(1)-Y(0)%5Cmid%20T=0%5D%0A"></p>
+<p>它回答的是：</p>
+<blockquote class="blockquote">
+<p>在那些实际上接受了对照的人中，如果他们改为接受治疗，平均会差多少？</p>
+</blockquote>
+<p>平均对象是<strong>control 人群</strong>。</p>
+</section>
+</section>
+<section id="三为什么同一项研究里-ateattatc-可能不一样" class="level3">
+<h3 class="anchored" data-anchor-id="三为什么同一项研究里-ateattatc-可能不一样">三、为什么同一项研究里 ATE、ATT、ATC 可能不一样？</h3>
+<p>因为 treatment effect 往往不是对所有人都相同。</p>
+<p>举例来说，如果 GLP-1 对高 BMI 患者效果更强，而现实中高 BMI 患者又更容易被开 GLP-1，那么：</p>
+<ul>
+<li><code>ATT</code> 可能比 <code>ATE</code> 更大</li>
+<li><code>ATC</code> 可能又和前两者不同</li>
+</ul>
+</section>
+<section id="四smr-weights-是什么为什么它常对应-att" class="level3">
+<h3 class="anchored" data-anchor-id="四smr-weights-是什么为什么它常对应-att">四、SMR weights 是什么？为什么它常对应 ATT？</h3>
+<p><code>SMR</code> 指的是 <code>standardized mortality ratio</code> 权重。尽管名字里有 mortality，但在方法学上它并不限于死亡结局，也常用于其他终点的标准化分析。</p>
+<p>当目标 estimand 是 <code>ATT</code> 时，一个常见的 SMR weighting 形式是：</p>
+<ul>
+<li>对 treatment 组：<code>w=1</code></li>
+<li>对 control 组：<code>w=e(X)/(1-e(X))</code></li>
+</ul>
+<p>其中 <code>e(X)</code> 是 propensity score。</p>
+<p>这组权重的含义是：</p>
+<blockquote class="blockquote">
+<p>不改变 treatment 组本身，而把 control 组重加权成“看起来像 treatment 组”的协变量分布。</p>
+</blockquote>
+<p>因此，最终估计的就是 treated population 下的反事实对照结果，也就是 <code>ATT</code>。</p>
+</section>
+<section id="五att-为什么在药物流行病学里很常见" class="level3">
+<h3 class="anchored" data-anchor-id="五att-为什么在药物流行病学里很常见">五、ATT 为什么在药物流行病学里很常见？</h3>
+<p>因为很多药物流行病学研究的问题本来就是：</p>
+<blockquote class="blockquote">
+<p>对于那些现实中已经被医生选去用某种药的患者，这种药相对于可替代方案的效果如何？</p>
+</blockquote>
+<p>这恰好对应 <code>ATT</code> 的临床含义。</p>
+<p>以 GLP-1 与 SGLT-2 为例：</p>
+<ul>
+<li><code>ATE</code>：适用于所有符合条件的患者</li>
+<li><code>ATT</code>：适用于现实中被开 GLP-1 的患者</li>
+<li><code>ATC</code>：适用于现实中被开 SGLT-2 的患者</li>
+</ul>
+<p>如果医生的处方行为本身就体现了患者异质性，那么 <code>ATT</code> 往往更贴近真实临床决策场景。</p>
+</section>
+<section id="六读论文时如何快速判断自己看到的是哪一种-estimand" class="level3">
+<h3 class="anchored" data-anchor-id="六读论文时如何快速判断自己看到的是哪一种-estimand">六、读论文时，如何快速判断自己看到的是哪一种 estimand？</h3>
+<p>可以抓住以下关键词。</p>
+<section id="ate" class="level4">
+<h4 class="anchored" data-anchor-id="ate">ATE</h4>
+<ul>
+<li>average treatment effect</li>
+<li>effect in the overall eligible population</li>
+</ul>
+</section>
+<section id="att" class="level4">
+<h4 class="anchored" data-anchor-id="att">ATT</h4>
+<ul>
+<li>average treatment effect among the treated</li>
+<li>among initiators of drug A</li>
+<li>control group weighted to resemble the treated</li>
+</ul>
+</section>
+<section id="atc" class="level4">
+<h4 class="anchored" data-anchor-id="atc">ATC</h4>
+<ul>
+<li>average treatment effect among controls</li>
+<li>treatment group weighted to resemble controls</li>
+</ul>
+<p>如果论文同时出现 <code>SMR weights</code> 和 “among those treated”，几乎可以直接想到：作者的目标大概率是 <code>ATT</code>。</p>
+</section>
+</section>
+<section id="七takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="七takeaways">七、Takeaways</h3>
+<p>因果推断里最容易被忽视的一点是：<strong>先明确你在平均谁，再谈如何计算。</strong></p>
+<ul>
+<li><code>ATE</code>：平均到全体</li>
+<li><code>ATT</code>：平均到 treated</li>
+<li><code>ATC</code>：平均到 controls</li>
+</ul>
+<p>而 <code>SMR weights</code> 的典型角色，是把比较组标准化到 treatment 组的协变量分布，从而支持 <code>ATT</code> 的估计。</p>
+<p>理解了这一层，读药物流行病学论文时就不容易被一堆术语绕进去。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>causal inference</category>
+  <category>epidemiology</category>
+  <category>estimands</category>
+  <category>propensity score</category>
+  <category>SMR weights</category>
+  <category>ATT</category>
+  <category>ATE</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/03/ATT/</guid>
+  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>生统爱好者周刊（第 27 期）：AI正在改变科学发现方式？</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/03/biostat_weekly_issue27/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260402235758.png" class="img-fluid"></p>
+</section>
+<section id="本周话题ai正在改变科学发现方式" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题ai正在改变科学发现方式">本周话题：<a href="https://mp.weixin.qq.com/s/FG9RebJlaKf9LbhewjrPkQ">AI正在改变科学发现方式？</a></h3>
+<p>如果让科学家回顾过去十年的科研变化，人工智能（AI）一定是最重要的变量之一。从蛋白质结构预测到新药发现，从材料设计到核聚变控制，AI正在逐渐进入科学研究的核心环节。AI正在从传统的科研辅助工具，逐渐演变为推动科学发现的重要基础设施。在数据处理、假说生成、实验设计以及科学模拟等多个环节，AI都开始展现出前所未有的能力。但与此同时，AI在科学领域的大规模应用，也面临着数据、算法和科研生态等多方面挑战。或许在不久的将来，一些重大科学发现的背后，都将出现人工智能的身影。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/24fahH7gKuaRqFN-IHYFXA">Lancet Respiratory Medicine | 急性呼吸衰竭床旁亚表型识别</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403000706.png" class="img-fluid"></p>
+<p>PHIND研究是一项多中心前瞻性队列研究，首次实现了急性呼吸窘迫综合征（ARDS）炎症亚表型的床旁实时识别。研究纳入512例急性呼吸衰竭患者，利用IL-6、TNFR1及碳酸氢盐水平构建简化模型，在约1小时内完成高炎症型与低炎症型分型。结果显示，高炎症亚表型占18%，其60天死亡率显著高于低炎症型（51% vs 28%，OR=2.7），且机械通气时间、ICU住院时间均显著延长。值得注意的是，两亚型在传统氧合指标上无显著差异，提示生物学分型优于单纯临床指标。本研究证实炎症亚表型具有重要预后价值，并为ARDS精准医学和分层治疗策略提供了关键技术基础。</p>
+<ul>
+<li>论文 DOI：10.1016/S2213-2600(26)00040-8</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/pb1DBpFQHiCkZrUQCFrgHg">Nature | 西湖大学团队泛基因组“拼装”方法新突破，发现人类13%未知序列</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001132.png" class="img-fluid"></p>
+<p>北京时间4月1日晚23时，西湖大学振星教授杨剑团队与合作者在Nature上发表最新研究成果。他们创新性地开发了基于泛基因组的联合组装（PIGA）方法，成功构建了千人泛基因组，极大突破了既往泛基因组样本量的上限。</p>
+<p>“这项研究极大地深化了我们对复杂遗传变异及其功能的认知，彰显了基于大规模基因组组装的分析方法在填补传统测序研究空白方面的巨大潜力，为人类健康研究和其他物种泛基因组研究提供了新范式。”杨剑说。或许，在不久的将来，这套组装基因组的新方法，也将成为科学家们破解人类疾病密码、实现精准医疗的关键利器。</p>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/EzkUd3hLha8SiqtneZBbxA">FDA发布历史性草案：动物实验不再是唯一选择，类器官等新技术将加速新药上市</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001611.png" class="img-fluid"></p>
+<p>2026年3月18日，美国FDA发布了一份具有里程碑意义的草案指南，正式为替代动物实验的新方法（NAM）打开监管大门。这意味着，类器官、器官芯片、计算机模拟等前沿技术，将有望取代传统动物实验，成为药物研发的主流路径。</p>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/K4wVZJhwS592GDZmod57Qw">英伟达GPU全系列硬核科普手册：一文读懂NVIDIA芯片的定位、规格与应用场景</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001735.png" class="img-fluid"></p>
+<p>这篇文章是一份英伟达 GPU 全系列的硬核科普手册：从游戏显卡到 AI 超级芯片，覆盖消费级 GeForce（RTX 5090 ～ RTX 3090）、工作站 RTX Pro（RTX 6000 Ada / RTX A6000）、推理卡 L/T 系列（L40S / L4 / T4）、训练卡 B/H/A 系列（B200 / H200 / H100 / A100）以及中国特供版（H20 / L20 / RTX 4090D）五大产品线。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://github.com/openilink/openilink-hub" title="OpeniLink Hub GitHub">OpeniLink Hub：让微信接入 Claude/ChatGPT</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002006.png" class="img-fluid"></p>
+<p>微信 3 月开放了 iLink 协议（ClawBot 插件），第一次官方允许用程序收发个人号消息。OpeniLink Hub 基于这个协议做了一个开源消息管理平台：接入 AI 大模型： 填个 API Key，微信自动调 Claude、ChatGPT、Ollama 等大模型回复，微信号变 AI 助手。一行命令安装，内置 SQLite 零配置，7 种语言 SDK，MIT 开源。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/-TCpDbDvFjcuU6zvYHjeuQ">别再在 for 循环里 c() 了，c2()到底快在哪？</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002337.png" class="img-fluid"></p>
+<p>做 R 的性能优化，有一个场景几乎人人踩过坑：在循环里不断 c(v, new) 追加数据。小数据时看不出来，一旦规模上来，速度像被抽走一样。这篇文章想把话说清楚：yulab.utils 里的 chunked_array 不是“更快的向量”，它其实换了一套数据组织方式。它在“写入/拼接”上赢得很干脆，但在“随机访问”上要付成本。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/XhSpIwD3Oey_xbV4i5DtAw">Claude Code + Obsidian 教程</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002616.png" class="img-fluid"></p>
+<p>介绍了如何将AI深度融入个人笔记工作流。其核心为指导用户通过名为“Claudian”的插件，将Claude Code的能力整合到Obsidian笔记软件中。该方案旨在解决用户频繁在笔记工具与AI聊天窗口之间切换的痛点，使AI从一个单纯的对话伙伴，转变为拥有“读写”权限的智能协作者。安装过程的关键在于先通过“BRAT”插件加载测试版本，再进行配置。成功集成后，AI可直接读取当前笔记内容、编辑文件甚至运行代码，在知识管理、内容创作和代码调试等场景中实现一站式闭环操作，极大提升了效率与流畅度。</p>
+<ol start="8" type="1">
+<li><a href="https://mp.weixin.qq.com/s/L0D7zKfu_oboxIsMeEEQ4Q">不平衡数据处理5种利器</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002917.png" class="img-fluid"></p>
+<p>在数据科学项目中，类别不平衡是常见挑战，会导致模型预测严重偏向多数类。本文系统总结了五种核心应对策略。最基础的是随机欠采样和过采样，通过增减样本来平衡数据分布。更优的方法是SMOTE，它为少数类合成新样本。另一种高级策略是集成学习（如XGBoost），其算法机制天然有助于关注少数类。而最被推荐、最简便高效的方法是调整类别权重，它无需修改数据，只需在模型训练时（如设置class_weight=‘balanced’）为少数类分配更高的损失权重，即可引导模型平等学习所有类别，是实践中优先考虑的首选方案。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/03/biostat_weekly_issue27/</guid>
+  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260402235758.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>从“理想条件下有效”到“真实世界中有用”的距离有多远</title>
+  <dc:creator>Zhen Lu</dc:creator>
   <link>https://leslie-lu.github.io/blog/2026/03/31/pragmatic_trial/</link>
   <description><![CDATA[ 
 
@@ -393,273 +650,13 @@
 Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical Answers to <span>‘Real World’</span> Questions.”</span> Journal Article. <em>JAMA</em> 316 (11): 1205–6. <a href="https://doi.org/10.1001/jama.2016.11409">https://doi.org/10.1001/jama.2016.11409</a>.
 </div>
 </div></section></div> ]]></description>
-  <category>causal inference</category>
-  <category>epidemiology</category>
-  <category>estimands</category>
-  <category>propensity score</category>
-  <category>SMR weights</category>
-  <category>ATT</category>
-  <category>ATE</category>
+  <category>pragmatic trial</category>
+  <category>explanatory trial</category>
+  <category>randomized controlled trial</category>
+  <category>real-world evidence</category>
   <guid>https://leslie-lu.github.io/blog/2026/03/31/pragmatic_trial/</guid>
-  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+  <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>因果 estimand</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2026/04/03/ATT/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么" class="level3">
-<h3 class="anchored" data-anchor-id="一为什么很多人学了-propensity-score仍然分不清自己在估计什么">一、为什么很多人学了 propensity score，仍然分不清自己在估计什么？</h3>
-<p>因为在因果推断里，<strong>方法</strong>和 <strong>estimand</strong> 不是一回事。</p>
-<p>同样是做倾向评分加权，你可能估计的是：</p>
-<ul>
-<li>ATE</li>
-<li>ATT</li>
-<li>ATC</li>
-</ul>
-<p>这三者不是同一个量的不同算法，而是三个本来就不同的因果问题。</p>
-</section>
-<section id="二ateattatc-分别是什么意思" class="level3">
-<h3 class="anchored" data-anchor-id="二ateattatc-分别是什么意思">二、ATE、ATT、ATC 分别是什么意思？</h3>
-<p>设：</p>
-<ul>
-<li><code>T=1</code>：接受治疗，比如起始 GLP-1 receptor agonists</li>
-<li><code>T=0</code>：接受对照，比如起始 SGLT-2 inhibitors</li>
-<li><code>Y(1)</code>：若接受治疗时的潜在结局</li>
-<li><code>Y(0)</code>：若接受对照时的潜在结局</li>
-</ul>
-<section id="ateaverage-treatment-effect" class="level4">
-<h4 class="anchored" data-anchor-id="ateaverage-treatment-effect">1. ATE：average treatment effect</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATE%20=%20E%5BY(1)-Y(0)%5D%0A"></p>
-<p>它回答的是：</p>
-<blockquote class="blockquote">
-<p>在整个目标人群中，如果所有人都接受治疗，与如果所有人都接受对照相比，平均会差多少？</p>
-</blockquote>
-<p>平均对象是<strong>整个研究总体</strong>。</p>
-</section>
-<section id="attaverage-treatment-effect-among-the-treated" class="level4">
-<h4 class="anchored" data-anchor-id="attaverage-treatment-effect-among-the-treated">2. ATT：average treatment effect among the treated</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATT%20=%20E%5BY(1)-Y(0)%5Cmid%20T=1%5D%0A"></p>
-<p>它回答的是：</p>
-<blockquote class="blockquote">
-<p>在那些实际上接受了治疗的人中，治疗相对于如果这些同样的人改为接受对照，平均会差多少？</p>
-</blockquote>
-<p>平均对象是<strong>treated 人群</strong>。</p>
-</section>
-<section id="atcaverage-treatment-effect-among-the-controls" class="level4">
-<h4 class="anchored" data-anchor-id="atcaverage-treatment-effect-among-the-controls">3. ATC：average treatment effect among the controls</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATC%20=%20E%5BY(1)-Y(0)%5Cmid%20T=0%5D%0A"></p>
-<p>它回答的是：</p>
-<blockquote class="blockquote">
-<p>在那些实际上接受了对照的人中，如果他们改为接受治疗，平均会差多少？</p>
-</blockquote>
-<p>平均对象是<strong>control 人群</strong>。</p>
-</section>
-</section>
-<section id="三为什么同一项研究里-ateattatc-可能不一样" class="level3">
-<h3 class="anchored" data-anchor-id="三为什么同一项研究里-ateattatc-可能不一样">三、为什么同一项研究里 ATE、ATT、ATC 可能不一样？</h3>
-<p>因为 treatment effect 往往不是对所有人都相同。</p>
-<p>举例来说，如果 GLP-1 对高 BMI 患者效果更强，而现实中高 BMI 患者又更容易被开 GLP-1，那么：</p>
-<ul>
-<li><code>ATT</code> 可能比 <code>ATE</code> 更大</li>
-<li><code>ATC</code> 可能又和前两者不同</li>
-</ul>
-</section>
-<section id="四smr-weights-是什么为什么它常对应-att" class="level3">
-<h3 class="anchored" data-anchor-id="四smr-weights-是什么为什么它常对应-att">四、SMR weights 是什么？为什么它常对应 ATT？</h3>
-<p><code>SMR</code> 指的是 <code>standardized mortality ratio</code> 权重。尽管名字里有 mortality，但在方法学上它并不限于死亡结局，也常用于其他终点的标准化分析。</p>
-<p>当目标 estimand 是 <code>ATT</code> 时，一个常见的 SMR weighting 形式是：</p>
-<ul>
-<li>对 treatment 组：<code>w=1</code></li>
-<li>对 control 组：<code>w=e(X)/(1-e(X))</code></li>
-</ul>
-<p>其中 <code>e(X)</code> 是 propensity score。</p>
-<p>这组权重的含义是：</p>
-<blockquote class="blockquote">
-<p>不改变 treatment 组本身，而把 control 组重加权成“看起来像 treatment 组”的协变量分布。</p>
-</blockquote>
-<p>因此，最终估计的就是 treated population 下的反事实对照结果，也就是 <code>ATT</code>。</p>
-</section>
-<section id="五att-为什么在药物流行病学里很常见" class="level3">
-<h3 class="anchored" data-anchor-id="五att-为什么在药物流行病学里很常见">五、ATT 为什么在药物流行病学里很常见？</h3>
-<p>因为很多药物流行病学研究的问题本来就是：</p>
-<blockquote class="blockquote">
-<p>对于那些现实中已经被医生选去用某种药的患者，这种药相对于可替代方案的效果如何？</p>
-</blockquote>
-<p>这恰好对应 <code>ATT</code> 的临床含义。</p>
-<p>以 GLP-1 与 SGLT-2 为例：</p>
-<ul>
-<li><code>ATE</code>：适用于所有符合条件的患者</li>
-<li><code>ATT</code>：适用于现实中被开 GLP-1 的患者</li>
-<li><code>ATC</code>：适用于现实中被开 SGLT-2 的患者</li>
-</ul>
-<p>如果医生的处方行为本身就体现了患者异质性，那么 <code>ATT</code> 往往更贴近真实临床决策场景。</p>
-</section>
-<section id="六读论文时如何快速判断自己看到的是哪一种-estimand" class="level3">
-<h3 class="anchored" data-anchor-id="六读论文时如何快速判断自己看到的是哪一种-estimand">六、读论文时，如何快速判断自己看到的是哪一种 estimand？</h3>
-<p>可以抓住以下关键词。</p>
-<section id="ate" class="level4">
-<h4 class="anchored" data-anchor-id="ate">ATE</h4>
-<ul>
-<li>average treatment effect</li>
-<li>effect in the overall eligible population</li>
-</ul>
-</section>
-<section id="att" class="level4">
-<h4 class="anchored" data-anchor-id="att">ATT</h4>
-<ul>
-<li>average treatment effect among the treated</li>
-<li>among initiators of drug A</li>
-<li>control group weighted to resemble the treated</li>
-</ul>
-</section>
-<section id="atc" class="level4">
-<h4 class="anchored" data-anchor-id="atc">ATC</h4>
-<ul>
-<li>average treatment effect among controls</li>
-<li>treatment group weighted to resemble controls</li>
-</ul>
-<p>如果论文同时出现 <code>SMR weights</code> 和 “among those treated”，几乎可以直接想到：作者的目标大概率是 <code>ATT</code>。</p>
-</section>
-</section>
-<section id="七takeaways" class="level3">
-<h3 class="anchored" data-anchor-id="七takeaways">七、Takeaways</h3>
-<p>因果推断里最容易被忽视的一点是：<strong>先明确你在平均谁，再谈如何计算。</strong></p>
-<ul>
-<li><code>ATE</code>：平均到全体</li>
-<li><code>ATT</code>：平均到 treated</li>
-<li><code>ATC</code>：平均到 controls</li>
-</ul>
-<p>而 <code>SMR weights</code> 的典型角色，是把比较组标准化到 treatment 组的协变量分布，从而支持 <code>ATT</code> 的估计。</p>
-<p>理解了这一层，读药物流行病学论文时就不容易被一堆术语绕进去。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>causal inference</category>
-  <category>epidemiology</category>
-  <category>estimands</category>
-  <category>propensity score</category>
-  <category>SMR weights</category>
-  <category>ATT</category>
-  <category>ATE</category>
-  <guid>https://leslie-lu.github.io/blog/2026/04/03/ATT/</guid>
-  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>生统爱好者周刊（第 27 期）：AI正在改变科学发现方式？</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2026/04/03/biostat_weekly_issue27/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
-<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
-<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
-<section id="封面图" class="level3">
-<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260402235758.png" class="img-fluid"></p>
-</section>
-<section id="本周话题ai正在改变科学发现方式" class="level3">
-<h3 class="anchored" data-anchor-id="本周话题ai正在改变科学发现方式">本周话题：<a href="https://mp.weixin.qq.com/s/FG9RebJlaKf9LbhewjrPkQ">AI正在改变科学发现方式？</a></h3>
-<p>如果让科学家回顾过去十年的科研变化，人工智能（AI）一定是最重要的变量之一。从蛋白质结构预测到新药发现，从材料设计到核聚变控制，AI正在逐渐进入科学研究的核心环节。AI正在从传统的科研辅助工具，逐渐演变为推动科学发现的重要基础设施。在数据处理、假说生成、实验设计以及科学模拟等多个环节，AI都开始展现出前所未有的能力。但与此同时，AI在科学领域的大规模应用，也面临着数据、算法和科研生态等多方面挑战。或许在不久的将来，一些重大科学发现的背后，都将出现人工智能的身影。</p>
-</section>
-<section id="生统研究" class="level3">
-<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
-<ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/24fahH7gKuaRqFN-IHYFXA">Lancet Respiratory Medicine | 急性呼吸衰竭床旁亚表型识别</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403000706.png" class="img-fluid"></p>
-<p>PHIND研究是一项多中心前瞻性队列研究，首次实现了急性呼吸窘迫综合征（ARDS）炎症亚表型的床旁实时识别。研究纳入512例急性呼吸衰竭患者，利用IL-6、TNFR1及碳酸氢盐水平构建简化模型，在约1小时内完成高炎症型与低炎症型分型。结果显示，高炎症亚表型占18%，其60天死亡率显著高于低炎症型（51% vs 28%，OR=2.7），且机械通气时间、ICU住院时间均显著延长。值得注意的是，两亚型在传统氧合指标上无显著差异，提示生物学分型优于单纯临床指标。本研究证实炎症亚表型具有重要预后价值，并为ARDS精准医学和分层治疗策略提供了关键技术基础。</p>
-<ul>
-<li>论文 DOI：10.1016/S2213-2600(26)00040-8</li>
-</ul>
-<ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/pb1DBpFQHiCkZrUQCFrgHg">Nature | 西湖大学团队泛基因组“拼装”方法新突破，发现人类13%未知序列</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001132.png" class="img-fluid"></p>
-<p>北京时间4月1日晚23时，西湖大学振星教授杨剑团队与合作者在Nature上发表最新研究成果。他们创新性地开发了基于泛基因组的联合组装（PIGA）方法，成功构建了千人泛基因组，极大突破了既往泛基因组样本量的上限。</p>
-<p>“这项研究极大地深化了我们对复杂遗传变异及其功能的认知，彰显了基于大规模基因组组装的分析方法在填补传统测序研究空白方面的巨大潜力，为人类健康研究和其他物种泛基因组研究提供了新范式。”杨剑说。或许，在不久的将来，这套组装基因组的新方法，也将成为科学家们破解人类疾病密码、实现精准医疗的关键利器。</p>
-</section>
-<section id="博文资讯" class="level3">
-<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
-<ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/EzkUd3hLha8SiqtneZBbxA">FDA发布历史性草案：动物实验不再是唯一选择，类器官等新技术将加速新药上市</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001611.png" class="img-fluid"></p>
-<p>2026年3月18日，美国FDA发布了一份具有里程碑意义的草案指南，正式为替代动物实验的新方法（NAM）打开监管大门。这意味着，类器官、器官芯片、计算机模拟等前沿技术，将有望取代传统动物实验，成为药物研发的主流路径。</p>
-<ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/K4wVZJhwS592GDZmod57Qw">英伟达GPU全系列硬核科普手册：一文读懂NVIDIA芯片的定位、规格与应用场景</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001735.png" class="img-fluid"></p>
-<p>这篇文章是一份英伟达 GPU 全系列的硬核科普手册：从游戏显卡到 AI 超级芯片，覆盖消费级 GeForce（RTX 5090 ～ RTX 3090）、工作站 RTX Pro（RTX 6000 Ada / RTX A6000）、推理卡 L/T 系列（L40S / L4 / T4）、训练卡 B/H/A 系列（B200 / H200 / H100 / A100）以及中国特供版（H20 / L20 / RTX 4090D）五大产品线。</p>
-</section>
-<section id="工具" class="level3">
-<h3 class="anchored" data-anchor-id="工具">工具</h3>
-<ol start="5" type="1">
-<li><a href="https://github.com/openilink/openilink-hub" title="OpeniLink Hub GitHub">OpeniLink Hub：让微信接入 Claude/ChatGPT</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002006.png" class="img-fluid"></p>
-<p>微信 3 月开放了 iLink 协议（ClawBot 插件），第一次官方允许用程序收发个人号消息。OpeniLink Hub 基于这个协议做了一个开源消息管理平台：接入 AI 大模型： 填个 API Key，微信自动调 Claude、ChatGPT、Ollama 等大模型回复，微信号变 AI 助手。一行命令安装，内置 SQLite 零配置，7 种语言 SDK，MIT 开源。</p>
-<ol start="6" type="1">
-<li><a href="https://mp.weixin.qq.com/s/-TCpDbDvFjcuU6zvYHjeuQ">别再在 for 循环里 c() 了，c2()到底快在哪？</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002337.png" class="img-fluid"></p>
-<p>做 R 的性能优化，有一个场景几乎人人踩过坑：在循环里不断 c(v, new) 追加数据。小数据时看不出来，一旦规模上来，速度像被抽走一样。这篇文章想把话说清楚：yulab.utils 里的 chunked_array 不是“更快的向量”，它其实换了一套数据组织方式。它在“写入/拼接”上赢得很干脆，但在“随机访问”上要付成本。</p>
-</section>
-<section id="资源" class="level3">
-<h3 class="anchored" data-anchor-id="资源">资源</h3>
-<ol start="7" type="1">
-<li><a href="https://mp.weixin.qq.com/s/XhSpIwD3Oey_xbV4i5DtAw">Claude Code + Obsidian 教程</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002616.png" class="img-fluid"></p>
-<p>介绍了如何将AI深度融入个人笔记工作流。其核心为指导用户通过名为“Claudian”的插件，将Claude Code的能力整合到Obsidian笔记软件中。该方案旨在解决用户频繁在笔记工具与AI聊天窗口之间切换的痛点，使AI从一个单纯的对话伙伴，转变为拥有“读写”权限的智能协作者。安装过程的关键在于先通过“BRAT”插件加载测试版本，再进行配置。成功集成后，AI可直接读取当前笔记内容、编辑文件甚至运行代码，在知识管理、内容创作和代码调试等场景中实现一站式闭环操作，极大提升了效率与流畅度。</p>
-<ol start="8" type="1">
-<li><a href="https://mp.weixin.qq.com/s/L0D7zKfu_oboxIsMeEEQ4Q">不平衡数据处理5种利器</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002917.png" class="img-fluid"></p>
-<p>在数据科学项目中，类别不平衡是常见挑战，会导致模型预测严重偏向多数类。本文系统总结了五种核心应对策略。最基础的是随机欠采样和过采样，通过增减样本来平衡数据分布。更优的方法是SMOTE，它为少数类合成新样本。另一种高级策略是集成学习（如XGBoost），其算法机制天然有助于关注少数类。而最被推荐、最简便高效的方法是调整类别权重，它无需修改数据，只需在模型训练时（如设置class_weight=‘balanced’）为少数类分配更高的损失权重，即可引导模型平等学习所有类别，是实践中优先考虑的首选方案。</p>
-</section>
-<section id="贡献者github-id" class="level3">
-<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
-<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
-<ul>
-<li>[<code>@Leslie-Lu</code>]（陆震）</li>
-<li>[<code>@YihanChen325</code>]（陈奕含）</li>
-<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
-<li>[<code>@GCRPM</code>]（徐林玉）</li>
-</ul>
-</section>
-<section id="订阅" class="level3">
-<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
-<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
-<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
-<p>（完）</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostat-weekly</category>
-  <guid>https://leslie-lu.github.io/blog/2026/04/03/biostat_weekly_issue27/</guid>
-  <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260402235758.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>生统爱好者周刊（第 26 期）：光环之下的压力：名校博士后的隐秘困境</title>
