@@ -10,8 +10,311 @@
 <atom:link href="https://leslie-lu.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
-<generator>quarto-1.9.36</generator>
-<lastBuildDate>Sat, 04 Apr 2026 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.9.37</generator>
+<lastBuildDate>Fri, 10 Apr 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>生统爱好者周刊（第 28 期）：Nature | 我和我的博士生导师的关系变得很糟糕——我该怎么办？</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/10/biostat_weekly_issue28/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409192358.png" class="img-fluid"></p>
+</section>
+<section id="本周话题nature-我和我的博士生导师的关系变得很糟糕我该怎么办" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题nature-我和我的博士生导师的关系变得很糟糕我该怎么办">本周话题：<a href="https://mp.weixin.qq.com/s/Zx7w-u2mYIUHs-bNLjkm6w">Nature | 我和我的博士生导师的关系变得很糟糕——我该怎么办？</a></h3>
+<p><code>@kirihsia</code> 面对导师“怪物式”的压迫，Nature 的回复揭示了一个扎心的现实：博士生的幸福感往往并不取决于实验结果，而取决于导师的底线。面对导师的毒性压迫，首要任务是实现心理切割，坚信人格尊严远重于一纸文凭。建议在通过详细计划书进行“防御性沟通”的同时，务必留存所有交流证据，并积极寻求校方调解或更换导师的退路。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/XQybKRkkOcIBsF5jjt9zeA">Nature Biomedical Engineering | 用于乳腺超声图像分析的基础生成模型</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409192643.png" class="img-fluid"></p>
+<p>北京大学与医科院肿瘤医院团队开发出首个乳腺超声基础生成模型 BUSGen，通过 350 万张大规模影像预训练，有效解决了医疗AI研发中高质量标注数据稀缺的难题。该模型生成的合成数据不仅能显著提升癌症筛查、早期诊断及预后预测的准确性，在导管原位癌等疑难诊断上的表现甚至超越了资深放射科医生。研究证实，这种合成数据具备极强的可扩展性与泛化能力，能有效规避数据采集偏差并保护患者隐私，为医疗影像AI的研究与临床转化开辟了高效率、安全的新路径。</p>
+<ul>
+<li>论文 DOI：10.1038/s41551-026-01639-1</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/j5y0F6WyTFtuJqBsHTTjWA">Nature Machine Intelligence | 基于对170万个体数据训练，实现跨场景、跨设备的心脏健康评估的多模态基础模型</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409192855.png" class="img-fluid"></p>
+<p>牛津大学等机构的研究团队开发了首个心脏感知基础模型 CSFM，通过对 170 万人规模的异构心电图（ECG）、脉搏波（PPG）及临床文本进行生成式预训练，成功打破了心脏健康监测中不同设备、信号和场景之间的数据问题。该模型展现了极强的“通用性”与“设备无关性”，不仅在心血管疾病诊断和生命体征测量等五大类任务中超越了传统专用模型，还能在仅有单导联输入的情况下推断缺失的空间信息，甚至实现从脉搏波到心电图的跨模态波形重建。CSFM 的诞生标志着心脏监测领域进入了“通用智能时代”，其强大的特征提取能力和即插即用的灵活性，将极大地降低医疗AI的开发门槛，为全球范围内普及公平、精准的心血管健康管理提供了可能。</p>
+<ul>
+<li>论文 DOI：10.1038/s42256-026-01180-5</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/Jgw_H8iNGOw84JmOS6Bk0w">英伟达发布《2026年医疗健康与生命科学领域AI应用现状报告》</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409193234.png" class="img-fluid"></p>
+<p>NVIDIA发布《State of AI in Healthcare and Life Sciences: 2026 Trends》（2026年医疗健康与生命科学领域AI应用现状报告），报告通过对全球600余位行业专业人士的调研，全面呈现了医疗健康与生命科学行业的AI应用全景，解读了行业核心技术趋势、商业落地成果与未来发展方向。</p>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/pmHzMrPR51kQ7embgZAJeA">因果推断：背景与潜在结果框架</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409193526.png" class="img-fluid"></p>
+<p>因果推断中的潜在结果框架（Potential Outcomes Framework），又称 Neyman–Rubin 因果模型，是现代因果推断的重要理论基础。该框架以反事实思维为核心，通过为每个研究单位定义在不同处理条件下可能出现的潜在结果，将因果效应形式化为这些潜在结果之间的差异。在这一框架下，不同目标人群对应不同的因果估计量，如总体平均处理效应（ATE）、处理组平均处理效应（ATT）等，同时需要依赖若干关键假设来识别因果效应，包括稳定单位处理值假设（SUTVA）、无混杂性（可忽略性）以及重叠性条件等。潜在结果框架为理解随机对照试验和观察性研究中的因果效应估计提供了统一的理论基础，也是倾向得分、匹配、工具变量等多种因果推断方法的理论出发点。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/6CzFVWr9ariTCM_p9pWi_g">从AutoFigure到AutoFigure-Edit：AI论文绘图可以编辑</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194339.png" class="img-fluid"></p>
+<p>西湖大学团队开源的 AutoFigure-Edit 是一款首创的 AI 论文矢量绘图工具，它打破了传统 AI 生图“不可编辑”的局限，能够将长篇学术文本直接转化为可直接拖拽、改字、换色的 SVG 矢量图。该系统利用 SAM3 技术智能分割图像组件，并支持通过上传参考图实现一键风格迁移（如适配 Nature 风格），其核心代码与环境已在 GitHub（<a href="https://github.com/ResearAI/AutoFigure-Edit" title="ResearAI/AutoFigure-Edit">ResearAI/AutoFigure-Edit</a>）完全开源，并提供在线体验网站（<a href="https://deepscientist.cc/" title="deepscientist.cc">deepscientist.cc</a>）。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/4UWurhgVGWvNrji-nT5vpw">Zread CLI | 快速理解代码架构</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194433.png" class="img-fluid"></p>
+<p>Zread CLI 是由智谱 AI 推出的一款强大的本地代码仓库深度解读工具，专为解决开发者面对庞大陌生源码（如数十万行代码的 Claude Code）时“看不懂、理不顺”的痛点。只需在项目目录下执行简单的 zread 命令，该工具便能自动分析代码结构、逻辑依赖与系统架构，并生成一份图文并茂、可交互的结构化 Wiki 说明书。相比网页版工具，它支持完全本地化运行，能够无缝处理公司私有项目或个人非开源代码，能为 Cursor 等 AI 编程工具提供精准的项目上下文，极大提升了研发效率与代码理解深度。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/jvUALEdZuS3UBZ2dUY6PYQ">全球遴选150名本科生，2026西湖大学生科“大师课”报名开启</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194554.png" class="img-fluid"></p>
+<p>近日，2026西湖大学生命科学国际暑期学校已开放申请，将从全球申请者中遴选150名优秀本科生，与国际顶尖学者共同探索生命科学的前沿奥秘。一年一期的“大师课”，也是研究型大学里的研究型夏校，今年已到第四期。</p>
+<ol start="8" type="1">
+<li><a href="https://mp.weixin.qq.com/s/jhjR4d4W2b08ajNPJcf6Bw">UKBAnalytica1.0 | 告别重复造轮子</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194733.png" class="img-fluid"></p>
+<p>UKBAnalytica 1.0 是一款专为UK Biobank设计的 R 语言全流程分析工具包，它针对 RAP 平台数据处理中的字段晦涩、疾病定义复杂及生存时间计算繁琐等痛点，提供了一套从数据下载、标准化预处理、自动提取 20 余种预定义疾病表型，到批量 Cox/Logistic 回归及机器学习（支持 SHAP 解释）的一站式解决方案。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/10/biostat_weekly_issue28/</guid>
+  <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409192358.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>IPW、IPTW 与 IPCW：从逆概率加权到治疗加权、删失加权</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/07/ipw/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="一为什么会有-inverse-probability-weighting" class="level3">
+<h3 class="anchored" data-anchor-id="一为什么会有-inverse-probability-weighting">一、为什么会有 inverse probability weighting？</h3>
+<p>在观察性研究里，研究者经常面对一个根本问题：不同人进入某种“数据路径”的概率并不一样。</p>
+<p>例如：</p>
+<ul>
+<li>有些人更容易接受某种治疗</li>
+<li>有些人更容易失访</li>
+<li>有些人更容易在随访中停药或偏离方案</li>
+<li>有些人更容易被完整观察到</li>
+</ul>
+<p>如果直接拿观察到的数据做比较，得到的往往不是目标总体中的真实平均效应，而是一个已经被选择机制扭曲过的结果。</p>
+<p><strong>inverse probability weighting（IPW，逆概率加权）</strong>的核心思想非常直接：</p>
+<blockquote class="blockquote">
+<p>谁更不容易被观察到、被分配到当前状态，谁就应该在分析中有更大的权重。</p>
+</blockquote>
+<p>数学上，它通常长成下面这样：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i%20=%20%5Cfrac%7B1%7D%7BP(%5Ctext%7B%E8%BF%9B%E5%85%A5%E5%BD%93%E5%89%8D%E8%A7%82%E5%AF%9F%E7%8A%B6%E6%80%81%7D%20%5Cmid%20%5Ctext%7B%E5%B7%B2%E7%9F%A5%E5%8D%8F%E5%8F%98%E9%87%8F%E5%92%8C%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
+<p>概率越小，权重越大。直观上，一个“很难出现在你数据里但实际出现了”的个体，需要代表更多与他相似但没有被观察到的人。</p>
+</section>
+<section id="二ipw-是总类iptw-和-ipcw-是具体应用" class="level3">
+<h3 class="anchored" data-anchor-id="二ipw-是总类iptw-和-ipcw-是具体应用">二、IPW 是总类，IPTW 和 IPCW 是具体应用</h3>
+<p>很多人第一次接触时会把 <code>IPW</code>、<code>IPTW</code>、<code>IPCW</code> 当成三个完全不同的方法。其实更准确的理解是：</p>
+<ul>
+<li><code>IPW</code> 是总类</li>
+<li><code>IPTW</code> 是把 IPW 用在 treatment assignment 上</li>
+<li><code>IPCW</code> 是把 IPW 用在 censoring / observation process 上</li>
+</ul>
+<p>也就是说，它们的统计思想完全一致，区别只在于“逆的到底是哪一个概率”。</p>
+<section id="iptwinverse-probability-of-treatment-weighting" class="level4">
+<h4 class="anchored" data-anchor-id="iptwinverse-probability-of-treatment-weighting">1. IPTW：inverse probability of treatment weighting</h4>
+<p><code>IPTW</code> 用来纠正治疗分配不是随机的这个问题。</p>
+<p>设：</p>
+<ul>
+<li><code>T=1</code> 表示接受治疗</li>
+<li><code>T=0</code> 表示未接受治疗或接受对照治疗</li>
+<li><code>X</code> 表示协变量</li>
+<li><code>e(X)=P(T=1\mid X)</code> 表示 propensity score</li>
+</ul>
+<p>最常见的 ATE 权重是：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i=%5Cfrac%7BT_i%7D%7Be(X_i)%7D+%5Cfrac%7B1-T_i%7D%7B1-e(X_i)%7D%0A"></p>
+<p>直观上：</p>
+<ul>
+<li>一个本来不太可能接受治疗但实际接受治疗的人，在治疗组里更“稀有”，权重更大</li>
+<li>一个本来不太可能留在对照组但实际留在对照组的人，在对照组里更“稀有”，权重也更大</li>
+</ul>
+<p>经过这种加权后，我们希望在加权伪总体中，治疗组与对照组的协变量分布更接近，从而减少混杂。</p>
+</section>
+<section id="ipcwinverse-probability-of-censoring-weighting" class="level4">
+<h4 class="anchored" data-anchor-id="ipcwinverse-probability-of-censoring-weighting">2. IPCW：inverse probability of censoring weighting</h4>
+<p><code>IPCW</code> 用来纠正删失不是随机的这个问题。</p>
+<p>设：</p>
+<ul>
+<li><code>R=1</code> 表示某时点仍然被观察到、未删失</li>
+<li><code>R=0</code> 表示已经删失</li>
+</ul>
+<p>则一个常见想法是对未删失者赋予权重：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i=%5Cfrac%7B1%7D%7BP(R_i=1%5Cmid%20X_i,%5Ctext%7Bhistory%7D)%7D%0A"></p>
+<p>它的直觉是：</p>
+<blockquote class="blockquote">
+<p>那些本来很容易失访、停药、偏离方案，但实际上还留在样本里的人，需要代表那些和他们相似、却已经被删失的人。</p>
+</blockquote>
+<p>因此：</p>
+<ul>
+<li><code>IPTW</code> 解决的是 treatment selection bias</li>
+<li><code>IPCW</code> 解决的是 informative censoring / selection during follow-up</li>
+</ul>
+</section>
+</section>
+<section id="三为什么-iptw-和-ipcw-本质上都是-ipw" class="level3">
+<h3 class="anchored" data-anchor-id="三为什么-iptw-和-ipcw-本质上都是-ipw">三、为什么 IPTW 和 IPCW 本质上都是 IPW？</h3>
+<p>从更抽象的层面看，<code>IPW</code> 在做的是同一件事：</p>
+<blockquote class="blockquote">
+<p>用样本进入当前观察路径的概率倒数，对样本重新加权，从而重建一个更接近目标试验或目标总体的伪总体。</p>
+</blockquote>
+<p>因此你完全可以把它们理解为：</p>
+<ul>
+<li><code>IPTW</code>：对“接受当前治疗状态”的概率做逆概率加权</li>
+<li><code>IPCW</code>：对“持续未删失/未偏离方案”的概率做逆概率加权</li>
+</ul>
+<p>在纵向因果推断里，两者还经常一起出现。比如在 marginal structural model（MSM）里，研究者可能同时需要：</p>
+<ul>
+<li>用 <code>IPTW</code> 调整 time-varying treatment assignment</li>
+<li>用 <code>IPCW</code> 调整 informative censoring</li>
+</ul>
+<p>最终的权重就是两部分相乘：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i%20=%20w_i%5E%7Btreatment%7D%5Ctimes%20w_i%5E%7Bcensoring%7D%0A"></p>
+</section>
+<section id="四一个最容易混淆的问题为什么-ipcw-不是对被删失概率加权" class="level3">
+<h3 class="anchored" data-anchor-id="四一个最容易混淆的问题为什么-ipcw-不是对被删失概率加权">四、一个最容易混淆的问题：为什么 IPCW 不是对“被删失概率”加权？</h3>
+<p>初学者经常会问：既然叫 inverse probability of censoring weighting，为什么很多公式里放的是“未被删失”的概率？</p>
+<p>原因在于分析时真正还留在风险集里的，是那些<strong>尚未删失的人</strong>。我们要做的是让这些人代表那些本来相似、但已经被删失的人。因此权重通常赋给“还在样本里的人”。</p>
+<p>所以在实践中常见的是：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i(t)=%5Cfrac%7B1%7D%7BP(C_i(t)=0%5Cmid%20%5Ctext%7B%E8%BF%87%E5%8E%BB%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
+<p>这里 <code>C_i(t)=0</code> 表示截至时点 <code>t</code> 尚未删失。</p>
+<p>换句话说：</p>
+<ul>
+<li>不是给“已经删失的人”补权重</li>
+<li>而是给“尚未删失的人”加更大的权重，让他们代替已删失者说话</li>
+</ul>
+</section>
+<section id="五ipw-的关键假设是什么" class="level3">
+<h3 class="anchored" data-anchor-id="五ipw-的关键假设是什么">五、IPW 的关键假设是什么？</h3>
+<p>无论是 IPTW 还是 IPCW，都不是魔法。它们要成立，至少依赖三类核心假设。</p>
+<section id="没有重要的未测量混杂或未测量选择因素" class="level4">
+<h4 class="anchored" data-anchor-id="没有重要的未测量混杂或未测量选择因素">1. 没有重要的未测量混杂或未测量选择因素</h4>
+<p>如果决定治疗、决定删失的关键因素没有被测量或没有进入模型，那么加权模型即使形式上写得很漂亮，也仍然会有偏。</p>
+</section>
+<section id="正值性positivity" class="level4">
+<h4 class="anchored" data-anchor-id="正值性positivity">2. 正值性（positivity）</h4>
+<p>也就是：</p>
+<ul>
+<li>每种协变量模式下，都有机会接受任一治疗</li>
+<li>每种协变量模式下，都有机会继续被观察到</li>
+</ul>
+<p>如果某些人几乎一定会接受某药，或几乎一定会失访，那么相应的分母概率会非常接近 0，权重就会爆炸。</p>
+</section>
+<section id="模型不能错得太离谱" class="level4">
+<h4 class="anchored" data-anchor-id="模型不能错得太离谱">3. 模型不能错得太离谱</h4>
+<p>无论你用的是 logistic regression、machine learning 还是 pooled models，本质上都在估计某个条件概率。如果这个模型严重错设，权重就会不稳定，甚至系统性偏误。</p>
+</section>
+</section>
+<section id="六为什么大家总担心极端权重" class="level3">
+<h3 class="anchored" data-anchor-id="六为什么大家总担心极端权重">六、为什么大家总担心极端权重？</h3>
+<p>因为 IPW 最大的实践风险就是高方差。</p>
+<p>例如，如果某个人在当前历史下“继续未删失”的概率只有 <code>0.01</code>，但他确实还留在样本里，那么他的 IPCW 就会接近 <code>100</code>。这种情况下，少数样本就可能决定整体结果。</p>
+<p>因此实务中常会做几件事：</p>
+<ul>
+<li>检查 propensity score 或 censoring probability 的分布</li>
+<li>看权重是否过大、是否长尾</li>
+<li>使用 stabilized weights</li>
+<li>必要时做 truncation / trimming</li>
+<li>做平衡性诊断，而不是只盯着模型 AUC</li>
+</ul>
+</section>
+<section id="七如何用一句话区分-ipwiptwipcw" class="level3">
+<h3 class="anchored" data-anchor-id="七如何用一句话区分-ipwiptwipcw">七、如何用一句话区分 IPW、IPTW、IPCW？</h3>
+<p>可以记成下面三句话：</p>
+<ul>
+<li><code>IPW</code>：总的思想，谁更难被观察到或被分配到当前状态，谁权重更大</li>
+<li><code>IPTW</code>：纠正治疗分配不随机</li>
+<li><code>IPCW</code>：纠正删失或偏离方案不随机</li>
+</ul>
+<p>再浓缩一点：</p>
+<blockquote class="blockquote">
+<p>IPTW 和 IPCW 不是两套彼此无关的方法，而是 IPW 在不同选择机制上的两个典型实现。</p>
+</blockquote>
+</section>
+<section id="八实际写作和解读论文时应该重点看什么" class="level3">
+<h3 class="anchored" data-anchor-id="八实际写作和解读论文时应该重点看什么">八、实际写作和解读论文时，应该重点看什么？</h3>
+<p>如果一篇文章声称“使用了 inverse probability weighting”，真正值得你追问的不是“用了没有”，而是：</p>
+<ul>
+<li>它逆的是治疗概率，还是删失概率，还是两者都有？</li>
+<li>目标 estimand 是 ATE、ATT、还是 per-protocol effect？</li>
+<li>权重模型里纳入了哪些变量？</li>
+<li>时间变化协变量是如何处理的？</li>
+<li>权重是否稳定，是否有截尾？</li>
+<li>加权后协变量平衡是否真的改善？</li>
+</ul>
+<p>只有这些问题都说得清楚，<code>IPW</code> 才不是一句方法学口号，而是真正服务于因果问题的设计与分析工具。</p>
+</section>
+<section id="九takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="九takeaways">九、Takeaways</h3>
+<p><code>IPW</code> 的本质不是“复杂建模”，而是“重建样本代表性”。</p>
+<p>在这个统一框架下：</p>
+<ul>
+<li><code>IPTW</code> 解决的是“谁更可能接受治疗”</li>
+<li><code>IPCW</code> 解决的是“谁更可能持续留在观察中”</li>
+</ul>
+<p>二者共享同一个核心思想：<strong>用逆概率加权构造一个更接近目标试验的伪总体。</strong></p>
+<p>理解了这一点，再去看 MSM、target trial emulation、per-protocol analysis，就会顺畅很多。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>causal inference</category>
+  <category>inverse probability weighting</category>
+  <category>treatment effects</category>
+  <category>inverse probability of censoring weighting</category>
+  <category>inverse probability of treatment weighting</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/07/ipw/</guid>
+  <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/43faf651802366b70bfef5bbc1f7eeee.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Competing Risk、Cause-Specific Cox 与 Fine-Gray：到底该回答哪一个问题？</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -5799,137 +6102,6 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
   <category>subject one exam</category>
   <guid>https://leslie-lu.github.io/blog/2025/07/28/driver_license_test/</guid>
   <pubDate>Mon, 28 Jul 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>测序深度如何影响GWAS及多组学研究</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/07/21/sequencing_depth/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>随着基因组学技术的进步，越来越多的研究采用测序技术进行遗传变异的检测与分析。测序深度（Sequencing Depth）是影响基因组学数据质量的重要指标之一，它直接关系到遗传变异的准确识别以及后续 GWAS 和多组学研究的结果可靠性。</p>
-<section id="什么是测序深度" class="level3">
-<h3 class="anchored" data-anchor-id="什么是测序深度">什么是测序深度？</h3>
-<p>测序深度通常用「X」表示，它指的是基因组中每个碱基位置被测序读取（Reads）的平均次数。比如，10X测序深度意味着每个位点平均被测序10次。</p>
-<p>更高的测序深度通常意味着更可靠的数据，因为位点覆盖次数越多，测序错误的概率越小，变异检测的准确性越高。</p>
-</section>
-<section id="测序深度对-gwas-分析的影响" class="level3">
-<h3 class="anchored" data-anchor-id="测序深度对-gwas-分析的影响">测序深度对 GWAS 分析的影响</h3>
-<section id="基因型准确性" class="level4">
-<h4 class="anchored" data-anchor-id="基因型准确性">1. 基因型准确性</h4>
-<p>GWAS 需要准确识别个体基因型（Genotype），而基因型准确性直接受测序深度的影响。当测序深度较低（如 0.1x）时，个体基因型可能无法直接可靠地确定，但可以通过群体信息推测（Imputation）。推测准确性通常用 R² 表示，R² 越接近 1，表示推测基因型越可靠。</p>
-<p>例如，Liu, S. et al. <span class="citation" data-cites="RN1360">(Liu et al. 2024)</span> 研究直接从群体水平估计等位基因频率与多态性，发现即使测序深度低至 0.1x 超低测序深度（如 NIPT 数据）下，基因型推测的 R² 仍可超过 0.84。这意味着即使测序深度不高，通过推测也可以实现有效样本量的大幅增加，例如 10 万个低深度样本，实际有效样本量仍能达到 8.4 万个。</p>
-</section>
-<section id="避免冗余信号ld聚类" class="level4">
-<h4 class="anchored" data-anchor-id="避免冗余信号ld聚类">2. 避免冗余信号（LD聚类）</h4>
-<p>在 GWAS 分析中，通常会对高度相关的 SNP（连锁不平衡，LD）进行聚类（LD clumping），避免冗余的关联信号。当测序深度不充分时，LD 结构的识别可能不准确，导致聚类失效或误导性结果。因此，适当提高测序深度有助于更准确地揭示 LD 结构，减少假阳性信号。</p>
-</section>
-</section>
-<section id="测序深度在多组学研究中的重要性" class="level3">
-<h3 class="anchored" data-anchor-id="测序深度在多组学研究中的重要性">测序深度在多组学研究中的重要性</h3>
-<section id="单倍型haplotype构建的准确性" class="level4">
-<h4 class="anchored" data-anchor-id="单倍型haplotype构建的准确性">1. 单倍型（Haplotype）构建的准确性</h4>
-<p>高质量的单倍型（High-quality haplotype）构建依赖于较高的测序深度或高质量的数据来源（如长读长测序技术）。单倍型能够帮助更精确地理解遗传变异的连锁关系，在 GWAS、eQTL、孟德尔随机化（MR）分析研究中起关键作用。</p>
-</section>
-<section id="mr-分析" class="level4">
-<h4 class="anchored" data-anchor-id="mr-分析">2. MR 分析</h4>
-<p>孟德尔随机化利用 SNP 作为工具变量，研究暴露因素与疾病结局的因果关系。SNP 的准确识别与基因型调用至关重要，测序深度的提高能大幅提升工具变量的有效性。</p>
-</section>
-</section>
-<section id="如何确定合适的测序深度" class="level3">
-<h3 class="anchored" data-anchor-id="如何确定合适的测序深度">如何确定合适的测序深度？</h3>
-<ul>
-<li><p>研究目的：不同研究需求的测序深度不同，例如全基因组研究推荐≥30X，超低深度测序可能适合大规模群体推测分析。</p></li>
-<li><p>经费限制：高深度测序成本较高，需在精度与成本之间权衡。</p></li>
-<li><p>分析需求：是否需要精细 LD 结构、单倍型精确构建、个体级基因型，决定了所需的测序深度水平。</p></li>
-</ul>
-
-
-<!-- -->
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-RN1360" class="csl-entry">
-Liu, Siyang, Yanhong Liu, Yuqin Gu, Xingchen Lin, Huanhuan Zhu, Hankui Liu, Zhe Xu, et al. 2024. <span>“Utilizing Non-Invasive Prenatal Test Sequencing Data for Human Genetic Investigation.”</span> Journal Article. <em>Cell Genomics</em> 4 (10): 100669. https://doi.org/<a href="https://doi.org/10.1016/j.xgen.2024.100669">https://doi.org/10.1016/j.xgen.2024.100669</a>.
-</div>
-</div></section></div> ]]></description>
-  <category>sequencing depth</category>
-  <category>gwas</category>
-  <category>multi-omics</category>
-  <category>mendelian randomization</category>
-  <guid>https://leslie-lu.github.io/blog/2025/07/21/sequencing_depth/</guid>
-  <pubDate>Mon, 21 Jul 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250721174048.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>换行符不一致导致 comm 结果异常</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/06/30/comm/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="问题背景换行符" class="level3">
-<h3 class="anchored" data-anchor-id="问题背景换行符">问题背景：换行符</h3>
-<p>在处理文本文件时，换行符可能导致由于文件格式不同而出现意想不到的问题。尤其是在跨平台开发中，Windows 和 Unix/Linux 系统使用的换行符不同，这可能会导致一些命令行工具（如 comm、diff 等）无法正确处理文件内容。</p>
-<p>比如，comm 命令明明应该返回正确的比较结果，却因为换行符不一致而失灵。这种情况在开发中并不少见，尤其是当你从不同来源获取文件时。</p>
-<p>通过检查文件格式，我们发现：</p>
-<pre class="{bash}"><code>#| eval: false
-file aa_sorted.txt
-file bb_sorted.txt</code></pre>
-<p>aa_sorted.txt：ASCII 文本，带有 CRLF 换行符（Windows 格式，每行以 结尾）。</p>
-<p>bb_sorted.txt：ASCII 文本，带有 LF 换行符（Unix/Linux 格式，每行以 结尾）。</p>
-<p>由于 comm 命令要求比较的行完全一致，换行符的差异会导致它无法正确识别相同的行。</p>
-</section>
-<section id="解决方法统一换行符格式" class="level3">
-<h3 class="anchored" data-anchor-id="解决方法统一换行符格式">解决方法：统一换行符格式</h3>
-<p>这个问题并不复杂，只需将文件格式统一即可。以下是具体步骤：</p>
-<section id="将-windows-格式转换为-unix-格式" class="level4">
-<h4 class="anchored" data-anchor-id="将-windows-格式转换为-unix-格式">1. 将 Windows 格式转换为 Unix 格式</h4>
-<p>使用 dos2unix 工具可以将带有 CRLF 换行符的文件转换为 LF 格式。运行以下命令：</p>
-<pre class="{bash}"><code>#| eval: false
-dos2unix aa_sorted.txt</code></pre>
-<p>这条命令会将 aa_sorted.txt 的换行符从 CRLF 转换为 LF，与 bb_sorted.txt 的格式保持一致。</p>
-</section>
-<section id="重新运行-comm-命令" class="level4">
-<h4 class="anchored" data-anchor-id="重新运行-comm-命令">2. 重新运行 comm 命令</h4>
-<p>在确保两个文件的换行符一致后，重新运行你的 comm 命令：</p>
-<pre class="{bash}"><code>#| eval: false
-comm -23 aa_sorted.txt bb_sorted.txt | wc -l</code></pre>
-<p>现在，comm 能正确比较文件内容，输出预期的结果。</p>
-</section>
-</section>
-<section id="takeaway" class="level3">
-<h3 class="anchored" data-anchor-id="takeaway">Takeaway</h3>
-<p>换行符不一致是许多文本处理工具（如 comm、diff 等）结果异常的常见原因。通过使用 dos2unix 工具统一文件格式，这个问题可以轻松解决。以下是几点实用建议：</p>
-<ul>
-<li><p>检查文件格式：在比较文件前，使用 file 命令检查换行符类型。</p></li>
-<li><p>保持一致性：在团队协作或跨平台开发时，建议统一使用 LF 换行符（Linux 标准）。</p></li>
-<li><p>善用工具：dos2unix 和 unix2dos 是处理换行符问题的得力助手。</p></li>
-</ul>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>linux</category>
-  <category>command line</category>
-  <category>troubleshooting</category>
-  <category>text processing</category>
-  <category>file formats</category>
-  <category>cross-platform development</category>
-  <guid>https://leslie-lu.github.io/blog/2025/06/30/comm/</guid>
-  <pubDate>Mon, 30 Jun 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20250630140522.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
