@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-46e9abaf3e869d264012e503b62e699b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/bootstrap/bootstrap-71554634537212a048b442a07a669a16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
@@ -329,7 +329,7 @@ C_{ik} = \sum_{j} A_{ij} B_{jk}
 C_{ik} = A_{ij} B_{jk}
 \]</span></p>
 <p>我们用torch实现这个例子：</p>
-<div id="9e4f3b0e" class="cell" data-execution_count="1">
+<div id="b44f2127" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.arange(<span class="dv">15</span>).reshape(<span class="dv">3</span>, <span class="dv">5</span>)</span>
@@ -341,7 +341,7 @@ C_{ik} = A_{ij} B_{jk}
 </div>
 <section id="column-sum" class="level4">
 <h4 class="anchored" data-anchor-id="column-sum">column sum</h4>
-<div id="c7b49158" class="cell" data-execution_count="2">
+<div id="9842de03" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;j'</span>, [a])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -351,7 +351,7 @@ C_{ik} = A_{ij} B_{jk}
 </section>
 <section id="row-sum" class="level4">
 <h4 class="anchored" data-anchor-id="row-sum">row sum</h4>
-<div id="98c54d3c" class="cell" data-execution_count="3">
+<div id="e64af497" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;i'</span>, [a])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>tensor([ 3, 12])</code></pre>
@@ -360,7 +360,7 @@ C_{ik} = A_{ij} B_{jk}
 </section>
 <section id="sum" class="level4">
 <h4 class="anchored" data-anchor-id="sum">sum</h4>
-<div id="dc574d0d" class="cell" data-execution_count="4">
+<div id="27152550" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;'</span>, [a])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>tensor(15)</code></pre>
@@ -369,7 +369,7 @@ C_{ik} = A_{ij} B_{jk}
 </section>
 <section id="transpose" class="level4">
 <h4 class="anchored" data-anchor-id="transpose">transpose</h4>
-<div id="a5f68657" class="cell" data-execution_count="5">
+<div id="cdc48077" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ij-&gt;ji'</span>, [a])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>tensor([[0, 3],
@@ -380,19 +380,19 @@ C_{ik} = A_{ij} B_{jk}
 </section>
 <section id="batch-matrix-multiplication" class="level4">
 <h4 class="anchored" data-anchor-id="batch-matrix-multiplication">batch matrix multiplication</h4>
-<div id="6d7533bb" class="cell" data-execution_count="6">
+<div id="ad79a440" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> torch.randn(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>torch.einsum(<span class="st">'ijk,ikl-&gt;ijl'</span>, [a, b])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([[[ 0.0517,  2.8287,  0.5439],
-         [-3.8662, -1.9008,  0.1175]],
+<pre><code>tensor([[[ 1.5312,  0.0803,  2.3620],
+         [ 0.0118,  0.8413,  1.1564]],
 
-        [[-0.1648,  2.8008,  0.8589],
-         [ 0.2316,  0.1639,  0.1806]],
+        [[-0.8335, -0.3243,  0.0638],
+         [ 1.9223,  0.8372,  0.5196]],
 
-        [[ 0.8154, -0.5368,  1.9137],
-         [ 1.7757, -2.7122,  0.7345]]])</code></pre>
+        [[ 0.5317,  2.2558,  1.5851],
+         [ 3.6563,  3.1707,  3.3289]]])</code></pre>
 </div>
 </div>
 </section>
