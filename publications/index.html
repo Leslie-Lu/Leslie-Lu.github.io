@@ -81,6 +81,34 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-articles .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-execute','listing-bibliography','listing-csl','listing-pagetitle','listing-author-meta','listing-main-photo','listing-website','listing-format','listing-engines','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-include-back-link','listing-title','listing-date','listing-author','listing-categories','listing-pub-info','listing-doi','listing-path','listing-outputHref','listing-date-modified','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-execute","listing-bibliography","listing-csl","listing-pagetitle","listing-author-meta","listing-main-photo","listing-website","listing-format","listing-engines","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-include-back-link","listing-title","listing-date","listing-author","listing-categories","listing-pub-info","listing-doi","listing-path","listing-outputHref","listing-date-modified","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-articles'] = new List('listing-articles', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-translations-and-notes .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -278,7 +306,7 @@ window.Quarto = {
   <li><a href="#book-chapters" id="toc-book-chapters" class="nav-link" data-scroll-target="#book-chapters">Book chapters</a></li>
   </ul>
 </nav>
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="YWxnb3JpdGht">algorithm <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZQ==">artificial intelligence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FuY2Vy">cancer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FuY2VyJTIwcHJldmVudGlvbg==">cancer prevention <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FyY2lub21h">carcinoma <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FyZGlvdmFzY3VsYXIlMjBkaXNlYXNl">cardiovascular disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2F1c2FsJTIwaW5mZXJlbmNl">causal inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2VydmljYWwlMjBjYW5jZXI=">cervical cancer <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Y2VydmljYWwlMjB0dW1vcg==">cervical tumor <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2hpbmE=">china <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Y2hyb25pYyUyMHZpcmFsJTIwaW5mZWN0aW9u">chronic viral infection <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xpbmljYWwlMjBkaWFnbm9zdGljJTIwbW9kZWw=">clinical diagnostic model <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y292aWQtMTk=">covid-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGVlcCUyMGxlYXJuaW5n">deep learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGlhZ25vc2lz">diagnosis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZWhy">ehr <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZWxlY3Ryb25pYyUyMGhlYWx0aCUyMHJlY29yZA==">electronic health record <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZnVsbCUyMGdlbm90eXBpbmc=">full genotyping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aGVzaXRhbmN5">hesitancy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aG9zcGl0YWxpemF0aW9u">hospitalization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aHVtYW4lMjBwYXBpbGxvbWF2aXJ1cw==">human papillomavirus <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bG9naXN0aWMlMjByZWdyZXNzaW9u">logistic regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bG9uZy10ZXJtJTIwZWZmZWN0">long-term effect <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWFsaWduYW50">malignant <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWw=">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV1cm9sb2d5">neurology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV1cm9zeXBoaWxpcw==">neurosyphilis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGhlbm9tYXBwaW5nJTIwc3RyYXRlZ3k=">phenomapping strategy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cG9wdWxhdGlvbi1iYXNlZA==">population-based <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGlvbiUyMG1vZGVs">prediction model <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJldmVudGl2ZSUyMG1lZGljaW5l">preventive medicine <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ciUyMGZvciUyMGRhdGElMjBzY2llbmNl">r for data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmFwaWQlMjBhbnRpZ2VuJTIwdGVzdGluZw==">rapid antigen testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmlzay1kaWZmZXJlbnRpYXRlZA==">risk-differentiated <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2Fycy1jb3YtMg==">sars-cov-2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2NyZWVuaW5n">screening <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c3VydmVpbGxhbmNl">surveillance <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3lwaGlsaXM=">syphilis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHVtb3I=">tumor <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dWslMjBiaW9iYW5r">uk biobank <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dXNhYmlsaXR5">usability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dmFjY2luZQ==">vaccine <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dmFsaWRhdGlvbiUyMHN0dWR5">validation study <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dmFsaWRpdHk=">validity <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -288,8 +316,609 @@ window.Quarto = {
 <p>My research training focuses on clinical epidemiology, biostatistics, and machine learning, with substantial experience in infectious disease research. <i class="ai  ai-blank-just-to-add-ai-dependency-to-this-page" title="" style="color:"></i></p>
 <section id="journal-articles" class="level2">
 <h2 class="anchored" data-anchor-id="journal-articles">Journal articles</h2>
-<div id="articles">
+<div id="listing-articles" class="quarto-listing quarto-listing-container-custom">
+<div class="publications project-list">
+<ul class="list">
+    
+        <li class="project" data-index="0" data-categories="bmV1cm9sb2d5JTJDYXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyQ3ByZXZlbnRpdmUlMjBtZWRpY2luZQ==" data-listing-date-sort="1771459200000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="257">
+            <div class="project-content listing-pub-info">
+                <p><strong>Lu Z</strong>, Zou J, Zhang H, et al. A machine learning model for predicting adverse prognostic events in patients with neurosyphilis: results from the DEFEAT-NS study. iScience 2026: 115104.</p>
+            </div>
 
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=neurology">
+                            neurology
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=artificial intelligence">
+                            artificial intelligence
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=preventive medicine">
+                            preventive medicine
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/lu-2026/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1016/j.isci.2026.115104">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/Leslie-Lu/DEFEAT-NS">
+                        
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.1016/j.isci.2026.115104">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="1" data-categories="Y2VydmljYWwlMjBjYW5jZXIlMkNodW1hbiUyMHBhcGlsbG9tYXZpcnVzJTJDc2NyZWVuaW5nJTJDbWFjaGluZSUyMGxlYXJuaW5nJTJDY2VydmljYWwlMjB0dW1vciUyQ2NhbmNlciUyQ2NhcmNpbm9tYSUyQ3R1bW9yJTJDbWFsaWduYW50JTJDbWwlMkNwaGVub21hcHBpbmclMjBzdHJhdGVneSUyQ2xvZ2lzdGljJTIwcmVncmVzc2lvbiUyQ3JlZ3Jlc3Npb24lMkNwb3B1bGF0aW9uLWJhc2VkJTJDdmFsaWRhdGlvbiUyMHN0dWR5JTJDY2FuY2VyJTIwcHJldmVudGlvbiUyQ3ZhbGlkaXR5JTJDdXNhYmlsaXR5JTJDYWxnb3JpdGhtJTJDc3VydmVpbGxhbmNlJTJDZWxlY3Ryb25pYyUyMGhlYWx0aCUyMHJlY29yZCUyQ2Vocg==" data-listing-date-sort="1742342400000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
+            <div class="project-content listing-pub-info">
+                <p><strong>Lu Z</strong>, Dong B, Cai H, et al. Identifying Data-Driven Clinical Subgroups for Cervical Cancer Prevention With Machine Learning: Population-Based, External, and Diagnostic Validation Study. JMIR Public Health Surveill 2025; 11: e67840.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=cervical cancer">
+                            cervical cancer
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=human papillomavirus">
+                            human papillomavirus
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=screening">
+                            screening
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=machine learning">
+                            machine learning
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=cervical tumor">
+                            cervical tumor
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=cancer">
+                            cancer
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=carcinoma">
+                            carcinoma
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=tumor">
+                            tumor
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=malignant">
+                            malignant
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=ml">
+                            ml
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=phenomapping strategy">
+                            phenomapping strategy
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=logistic regression">
+                            logistic regression
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=regression">
+                            regression
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=population-based">
+                            population-based
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=validation study">
+                            validation study
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=cancer prevention">
+                            cancer prevention
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=validity">
+                            validity
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=usability">
+                            usability
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=algorithm">
+                            algorithm
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=surveillance">
+                            surveillance
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=electronic health record">
+                            electronic health record
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=ehr">
+                            ehr
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/lu-2025-JMIR/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://preprints.jmir.org/preprint/67840?__hstc=102212634.ada1e83929cfa3846d2f40595ec67f12.1762780108798.1773661670535.1776428726369.7&amp;__hssc=102212634.2.1776428726369&amp;__hsfp=88406e7c347e33715d994b64a78be802&amp;_gl=1*1ab3v2j*_gcl_au*MTEwMzc3NjQ3OS4xNzcxNTk5MjQ2LjE1MzYxMDg2OTcuMTc3NjQyODcyMi4xNzc2NDMwMTAy*_ga*NDk2MzI4OTY4LjE3NjI3ODAwMjQ.*_ga_YP0XNYBWWC*czE3NzY0Mjg3MjAkbzgkZzEkdDE3NzY0MzAxMDgkajUzJGwwJGgw">
+                        
+                            <i class="fa-solid fa-file-lines"></i> Preprint version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.2196/67840">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/Leslie-Lu/SCREENing">
+                        
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.2196/67840">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="2" data-categories="Y2VydmljYWwlMjBjYW5jZXIlMkNjaGluYSUyQ2h1bWFuJTIwcGFwaWxsb21hdmlydXMlMkNzY3JlZW5pbmclMkN2YWNjaW5l" data-listing-date-sort="1739836800000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="424">
+            <div class="project-content listing-pub-info">
+                <p><strong>Lu Z</strong>, Dong B, Yao P, et al. Characteristics of Human Papillomavirus Prevalence and Infection Patterns Among Women Aged 35-65 in Fujian Province, China: A Nine-Year Retrospective Observational Study. J Med Virol 2025; 97(2): e70238.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=cervical cancer">
+                            cervical cancer
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=china">
+                            china
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=human papillomavirus">
+                            human papillomavirus
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=screening">
+                            screening
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=vaccine">
+                            vaccine
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/lu-2025/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1002/jmv.70238">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1002/jmv.70277">
+                        
+                            <i class="fa-solid fa-file-lines"></i> Corrected version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.1002/jmv.70238">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="3" data-categories="cHJlZGljdGlvbiUyMG1vZGVsJTJDY2VydmljYWwlMjBjYW5jZXIlMkNodW1hbiUyMHBhcGlsbG9tYXZpcnVzJTJDZnVsbCUyMGdlbm90eXBpbmclMkNtYWNoaW5lJTIwbGVhcm5pbmclMkNjaGluYQ==" data-listing-date-sort="1737763200000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="508">
+            <div class="project-content listing-pub-info">
+                <p>Dong B, <strong>Lu Z</strong>, Yang T, et al. Development, validation, and clinical application of a machine learning model for risk stratification and management of cervical cancer screening based on full-genotyping hrHPV test (SMART-HPV): a modelling study. Lancet Reg Health West Pac 2025; 55: 101480.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=prediction model">
+                            prediction model
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=cervical cancer">
+                            cervical cancer
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=human papillomavirus">
+                            human papillomavirus
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=full genotyping">
+                            full genotyping
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=machine learning">
+                            machine learning
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=china">
+                            china
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/dong-lu-2025/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1016/j.lanwpc.2025.101480">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/Leslie-Lu/CerviScreen">
+                        
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://cerviscreen.fjsfy.com/predict-tool/">
+                        
+                            <i class="fa-solid fa-chart-simple"></i> Deployment of the model
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.1016/j.lanwpc.2025.101480">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="4" data-categories="Y2FyZGlvdmFzY3VsYXIlMjBkaXNlYXNlJTJDY2hyb25pYyUyMHZpcmFsJTIwaW5mZWN0aW9uJTJDaG9zcGl0YWxpemF0aW9uJTJDbG9uZy10ZXJtJTIwZWZmZWN0JTJDdWslMjBiaW9iYW5r" data-listing-date-sort="1704412800000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="375">
+            <div class="project-content listing-pub-info">
+                <p>Yang L, <strong>Lu Z</strong>, Bian J, Li F, Zou H. Association between chronic viral infection-related hospitalization and risk of cardiovascular disease: A population-based cohort study. J Med Virol 2024; 96(1): e29350.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=cardiovascular disease">
+                            cardiovascular disease
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=chronic viral infection">
+                            chronic viral infection
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=hospitalization">
+                            hospitalization
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=long-term effect">
+                            long-term effect
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=uk biobank">
+                            uk biobank
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/yang-lu-2024/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1002/jmv.29350">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.1002/jmv.29350">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="5" data-categories="bmV1cm9zeXBoaWxpcyUyQ3N5cGhpbGlzJTJDY2xpbmljYWwlMjBkaWFnbm9zdGljJTIwbW9kZWwlMkNyaXNrLWRpZmZlcmVudGlhdGVkJTJDZGlhZ25vc2lz" data-listing-date-sort="1689724800000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="596">
+            <div class="project-content listing-pub-info">
+                <p>Zou H, <strong>Lu Z</strong>, Weng W, et al. Diagnosis of neurosyphilis in HIV-negative patients with syphilis: development, validation, and clinical utility of a suite of machine learning models. EClinicalMedicine 2023; 62: 102080.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=neurosyphilis">
+                            neurosyphilis
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=syphilis">
+                            syphilis
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=clinical diagnostic model">
+                            clinical diagnostic model
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=risk-differentiated">
+                            risk-differentiated
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=diagnosis">
+                            diagnosis
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/zou-lu-2023/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.1016/j.eclinm.2023.102080">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/Leslie-Lu/Machine-learning-based-diagnosis-for-neurosyphilis">
+                        
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://zhen-lu.shinyapps.io/Machine-learning-based-diagnosis-for-neurosyphilis/">
+                        
+                            <i class="fa-solid fa-chart-simple"></i> Deployment of the model
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.1016/j.eclinm.2023.102080">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="6" data-categories="Y292aWQtMTklMkNzYXJzLWNvdi0yJTJDdmFjY2luZSUyQ2hlc2l0YW5jeSUyQ3JhcGlkJTIwYW50aWdlbiUyMHRlc3RpbmclMkNjaGluYQ==" data-listing-date-sort="1682899200000" data-listing-file-modified-sort="1776432893907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="518">
+            <div class="project-content listing-pub-info">
+                <p><strong>Lu Z</strong>, Fu L, Yang L, et al. Hesitancy to Undergo SARS-CoV-2 Rapid Antigen Testing in China: Nationwide Cross-sectional Study. JMIR Public Health Surveill 2023; 9: e43555.</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=covid-19">
+                            covid-19
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=sars-cov-2">
+                            sars-cov-2
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=vaccine">
+                            vaccine
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=hesitancy">
+                            hesitancy
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=rapid antigen testing">
+                            rapid antigen testing
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=china">
+                            china
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/articles/lu-2023/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://preprints.jmir.org/preprint/43555?__hstc=102212634.ada1e83929cfa3846d2f40595ec67f12.1762780108798.1773661670535.1776428726369.7&amp;__hssc=102212634.1.1776428726369&amp;__hsfp=c60ff2469fb788b076a6dd1317abc4ec&amp;_gl=1*vk1njv*_ga*NDk2MzI4OTY4LjE3NjI3ODAwMjQ.*_ga_YP0XNYBWWC*czE3NzY0Mjg3MjAkbzgkZzAkdDE3NzY0Mjg3MjEkajYwJGwwJGgw*_gcl_au*MTEwMzc3NjQ3OS4xNzcxNTk5MjQ2LjE1MzYxMDg2OTcuMTc3NjQyODcyMi4xNzc2NDI4NzIy">
+                        
+                            <i class="fa-solid fa-file-lines"></i> Preprint version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://doi.org/10.2196/43555">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Final version
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/Leslie-Lu/Hesitancy-about-SARS-CoV-2-rapid-antigen-testing-in-China">
+                        
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://www.zotero.org/save?type=doi&amp;q=10.2196/43555">
+                        
+                            <i class="ai ai-zotero"></i> Add to Zotero
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+</ul>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
 </div>
 </section>
 <section id="reviews" class="level2">
@@ -310,7 +939,7 @@ window.Quarto = {
 <div class="publications project-list">
 <ul class="list">
     
-        <li class="project" data-index="0" data-categories="ZGVlcCUyMGxlYXJuaW5n" data-listing-date-sort="1764806400000" data-listing-file-modified-sort="1776416244437" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
+        <li class="project" data-index="0" data-categories="ZGVlcCUyMGxlYXJuaW5n" data-listing-date-sort="1764806400000" data-listing-file-modified-sort="1776432893908" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
             <div class="project-content listing-pub-info">
                 <p>Lu, Z. (2025). <a href="https://lulab-sysu.github.io/dl_notes/">深度学习笔记 (1 ed.)</a>. https://lulab-sysu.github.io/dl_notes/</p>
             </div>
@@ -358,7 +987,7 @@ window.Quarto = {
             </div>
         </li>
         
-        <li class="project" data-index="1" data-categories="ciUyMGZvciUyMGRhdGElMjBzY2llbmNl" data-listing-date-sort="1764720000000" data-listing-file-modified-sort="1776416244437" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="37">
+        <li class="project" data-index="1" data-categories="ciUyMGZvciUyMGRhdGElMjBzY2llbmNl" data-listing-date-sort="1764720000000" data-listing-file-modified-sort="1776432893908" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="37">
             <div class="project-content listing-pub-info">
                 <p>Lu, Z. (2025). <a href="https://openbiostat.github.io/R-for-Data-Science-2e-Chinese/">R for Data Science (2e) 中文版 (1 ed.)</a>. https://openbiostat.github.io/R-for-Data-Science-2e-Chinese/</p>
             </div>
@@ -396,6 +1025,54 @@ window.Quarto = {
                     <li class="project-link">
                         
                         <a href="https://github.com/openbiostat/R-for-Data-Science-2e-Chinese">
+                        
+                            <i class="fa-brands fa-github"></i> Repository
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+        <li class="project" data-index="2" data-categories="Y2F1c2FsJTIwaW5mZXJlbmNl" data-listing-date-sort="1725321600000" data-listing-file-modified-sort="1776432893908" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
+            <div class="project-content listing-pub-info">
+                <p>Lu, Z. (2024). <a href="https://lulab-sysu.github.io/Causal-Inference-in-R-Chinese/">Causal Inference in R 中文版 (1 ed.)</a>. https://lulab-sysu.github.io/Causal-Inference-in-R-Chinese/</p>
+            </div>
+
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=causal inference">
+                            causal inference
+                        </a></div>
+                    
+            </div>
+            
+
+            
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../publications/translations-and-notes/Causal-Inference-in-R-Chinese/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://lulab-sysu.github.io/Causal-Inference-in-R-Chinese/">
+                        
+                            <i class="fa-solid fa-book"></i> Book
+                        </a>
+                    </li>
+                        
+                    <li class="project-link">
+                        
+                        <a href="https://github.com/LuLab-SYSU/Causal-Inference-in-R-Chinese">
                         
                             <i class="fa-brands fa-github"></i> Repository
                         </a>
