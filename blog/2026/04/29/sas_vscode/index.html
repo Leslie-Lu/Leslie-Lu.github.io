@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zhen Lu">
+<meta name="description" content="从医学和公卫科研中的真实分析场景出发，记录 SAS Extension for Visual Studio Code 的本地与远程 IOM 配置思路。">
+
+<title>把 SAS 接到 VS Code | Zhen Lu – Zhen Lu</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-71554634537212a048b442a07a669a16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #170C3A;
+      }
+</style>
+<style type="text/css">
+hr.dinkus {
+    width: 50px;
+    margin: 2em auto 2em;
+    border-top: 5px dotted #454545;
+}
+
+div.column-margin+hr.dinkus {
+    margin: 1em auto 2em;
+}
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Zhen Lu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../talks/index.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../publications/index.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../news/index.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../uses/index.html"> 
+<span class="menu-text">Uses</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../atom.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Zhen Lu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../biostat_weekly_rss.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Biostat Weekly @ OpenBioStat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:luzh29@mail2.sysu.edu.cn"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:envelope" style="font-size: 1.1em;" aria-label="Icon envelope from bi Iconify.design set." title="E-mail"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/ZhenLu_Biost" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:twitter-x" style="font-size: 1.1em;" aria-label="Icon twitter-x from bi Iconify.design set." title="X"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@leslielu8542" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:youtube" style="font-size: 1.1em;" aria-label="Icon youtube from bi Iconify.design set." title="YouTube"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://space.bilibili.com/32159908" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="fa6-brands:bilibili" style="font-size: 1em;" aria-label="Icon bilibili from fa6-brands Iconify.design set." title="bilibili"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/qrcode_for_gh_395f59db8b4c_430.jpg" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:wechat" style="font-size: 1em;" aria-label="Icon wechat from bi Iconify.design set." title="Wechat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.zhihu.com/people/edison-70-18" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="simple-icons:zhihu" style="font-size: 1em;" aria-label="Icon zhihu from simple-icons Iconify.design set." title="Zhihu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=LKLQ1g8AAAAJ" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 1em;" aria-label="Icon google-scholar-square from academicons Iconify.design set." title="Google scholar"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Leslie-Lu" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" aria-label="Icon github from bi Iconify.design set." title="GitHub"></iconify-icon></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">把 SAS 接到 VS Code</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+                  <div>
+        <div class="description">
+          从医学和公卫科研中的真实分析场景出发，记录 SAS Extension for Visual Studio Code 的本地与远程 IOM 配置思路。
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">sas</div>
+                <div class="quarto-category">vs code</div>
+                <div class="quarto-category">research workflow</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://leslie-lu.github.io/">Zhen Lu</a> <a href="https://orcid.org/0000-0002-3481-6310" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Wednesday, April 29, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#先想清楚你到底要连接哪一种-sas" id="toc-先想清楚你到底要连接哪一种-sas" class="nav-link active" data-scroll-target="#先想清楚你到底要连接哪一种-sas">1. 先想清楚：你到底要连接哪一种 SAS</a></li>
+  <li><a href="#安装-vs-code-插件之前先检查-sas-端" id="toc-安装-vs-code-插件之前先检查-sas-端" class="nav-link" data-scroll-target="#安装-vs-code-插件之前先检查-sas-端">2. 安装 VS Code 插件之前，先检查 SAS 端</a></li>
+  <li><a href="#在-vs-code-里新增一个-profile" id="toc-在-vs-code-里新增一个-profile" class="nav-link" data-scroll-target="#在-vs-code-里新增一个-profile">3. 在 VS Code 里新增一个 profile</a></li>
+  <li><a href="#配置本机-sas-9.4local-profile" id="toc-配置本机-sas-9.4local-profile" class="nav-link" data-scroll-target="#配置本机-sas-9.4local-profile">4. 配置本机 SAS 9.4：local profile</a></li>
+  <li><a href="#配置远程-sasiom-profile" id="toc-配置远程-sasiom-profile" class="nav-link" data-scroll-target="#配置远程-sasiom-profile">5. 配置远程 SAS：IOM profile</a></li>
+  <li><a href="#一个科研场景里的最小工作流" id="toc-一个科研场景里的最小工作流" class="nav-link" data-scroll-target="#一个科研场景里的最小工作流">6. 一个科研场景里的最小工作流</a></li>
+  <li><a href="#常见问题多半不是插件坏了" id="toc-常见问题多半不是插件坏了" class="nav-link" data-scroll-target="#常见问题多半不是插件坏了">7. 常见问题：多半不是插件坏了</a></li>
+  <li><a href="#我不建议怎么用" id="toc-我不建议怎么用" class="nav-link" data-scroll-target="#我不建议怎么用">8. 我不建议怎么用</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">9. Takeaways</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>最近在整理 SAS 的使用环境时，我又重新试了一轮 VS Code 里的 SAS Extension。这个过程让我意识到一件小事：很多科研工具的配置文章容易写成换一个编辑器就能提高效率，但真正卡住人的，往往不是编辑器本身，而是本地 SAS、远程服务器、许可证、路径、账号这些很具体的东西。</p>
+<p>SAS 还是 SAS，真正执行代码的仍然是你已经安装或有权限访问的 SAS 环境。VS Code 在这里更像一个比较轻的工作台：写 <code>.sas</code> 文件、运行代码、看 log、管理项目文件。</p>
+<section id="先想清楚你到底要连接哪一种-sas" class="level3">
+<h3 class="anchored" data-anchor-id="先想清楚你到底要连接哪一种-sas">1. 先想清楚：你到底要连接哪一种 SAS</h3>
+<p>开始配置前，我建议先不要急着点安装。先问自己一个问题：</p>
+<blockquote class="blockquote">
+<p>我的 SAS 程序最终在哪里运行？</p>
+</blockquote>
+<p>常见情况大概有三类。</p>
+<p>第一类是本机已经装了 SAS 9.4，比如 Windows 电脑上有 SAS Foundation 或 SAS Enterprise Guide。这种情况下，可以考虑 <code>SAS 9.4 (local)</code> profile。VS Code 负责提交代码，本机 SAS 负责运行。</p>
+<p>第二类是单位或课题组有远程 SAS 服务器，平时可能通过 SAS Enterprise Guide 连上去。这种情况下，通常要问管理员服务器 host、port、username 等信息，然后配置 <code>SAS 9.4 (remote - IOM)</code> profile。</p>
+<p>第三类是有一台 Linux/Unix 服务器，里面可以通过命令行直接运行 <code>sas</code>，并且你有 SSH 权限。SAS Extension 也支持 remote SSH，不过这篇主要写官方文档里我最常用到的 local 和 IOM 两种配置。</p>
+<p>这一步很重要。因为 VS Code 插件不是凭空提供一个 SAS 环境。你没有 SAS 软件、没有远程服务器权限、没有可用许可证，只安装插件通常是跑不起来的。</p>
+</section>
+<section id="安装-vs-code-插件之前先检查-sas-端" class="level3">
+<h3 class="anchored" data-anchor-id="安装-vs-code-插件之前先检查-sas-端">2. 安装 VS Code 插件之前，先检查 SAS 端</h3>
+<p>在 VS Code 里需要安装的是 SAS 官方的 <strong>SAS Extension for Visual Studio Code</strong>。安装方式和普通 VS Code 插件一样，在 Extensions 面板里搜索 SAS 安装即可。</p>
+<p>但更容易出问题的是 SAS 端的依赖。根据 SAS 官方文档，如果使用 <code>SAS 9.4 (local)</code> 或 <code>SAS 9.4 (remote - IOM)</code>，Windows 客户端需要安装：</p>
+<ul>
+<li><code>SAS Integration Technologies Client for Windows (ITCLIENT)</code></li>
+<li><code>SAS Providers for OLE DB</code></li>
+</ul>
+<p>官方文档也提到，从 SAS Extension for VS Code v1.15 开始，使用这类连接时需要安装 SAS Providers for OLE DB。它们有时会随 SAS Enterprise Guide 或 SAS Add-in for Microsoft Office 一起安装；如果没有，就需要通过 SAS 9.4 安装程序或 SAS 官方下载页面补装。</p>
+<p>一个比较直接的检查方法，是看机器上是否存在类似下面的目录：</p>
+<pre class="text"><code>C:\Program Files\SASHome\x86\Integration Technologies
+C:\Program Files\SASHome\x86\SASProvidersforOLEDB</code></pre>
+<p>如果你的 SAS 安装在自定义路径，就要到对应的 <code>SASHome</code> 下面去找。路径不一定完全相同，关键是确认 ITCLIENT 和 SAS Providers for OLE DB 是否存在。</p>
+<p>这里不用把问题想复杂。对大多数本机 Windows + SAS 9.4 的使用者来说，如果 SAS Enterprise Guide 能正常打开，相关组件很可能已经在机器上。但很可能不等于一定，真正配置失败时还是要回到这些路径和组件上检查。</p>
+</section>
+<section id="在-vs-code-里新增一个-profile" class="level3">
+<h3 class="anchored" data-anchor-id="在-vs-code-里新增一个-profile">3. 在 VS Code 里新增一个 profile</h3>
+<p>插件装好后，打开 VS Code 的 Command Palette：</p>
+<pre class="text"><code>F1</code></pre>
+<p>或者：</p>
+<pre class="text"><code>Ctrl + Shift + P</code></pre>
+<p>然后输入并执行：</p>
+<pre class="text"><code>SAS: Add New Connection Profile</code></pre>
+<p>官方文档里对应的命令名是 <code>SAS.addProfile</code>。你需要选择一种 connection type，然后按照提示填写信息。创建好的 profile 会存到 VS Code 的 <code>settings.json</code> 里。以后如果有多个 SAS 环境，也可以用：</p>
+<pre class="text"><code>SAS: Switch Current Connection profile</code></pre>
+<p>来切换当前 profile。</p>
+<p>我自己的理解是，profile 就像一张连接卡片。它告诉 VS Code：这段 SAS 代码要交给哪里运行，是本机的 SAS 9.4，还是远程 IOM server。</p>
+</section>
+<section id="配置本机-sas-9.4local-profile" class="level3">
+<h3 class="anchored" data-anchor-id="配置本机-sas-9.4local-profile">4. 配置本机 SAS 9.4：local profile</h3>
+<p>如果 SAS 就装在你自己的 Windows 电脑上，可以选择：</p>
+<pre class="text"><code>SAS 9.4 (local)</code></pre>
+<p>官方文档里 local profile 的 <code>connectionType</code> 是：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"connectionType"</span><span class="fu">:</span> <span class="st">"com"</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"host"</span><span class="fu">:</span> <span class="st">"localhost"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>实际操作时，通常不需要手动写这段 JSON，按照 VS Code 的提示填写即可。<code>host</code> 默认可以理解为 <code>localhost</code>，也就是本机。</p>
+<p>local profile 的重点不在 host，而在本机组件是否完整。尤其是前面提到的 ITCLIENT 和 SAS Providers for OLE DB。如果 profile 建好了，但运行代码时连接失败，第一步不要怀疑自己的 SAS 语法，先检查客户端组件和 SAS 安装路径。</p>
+<p>我建议配置好以后，先不要直接跑复杂项目。新建一个最小的 <code>.sas</code> 文件，例如：</p>
+<pre class="sas"><code>proc product_status;
+run;
+
+data test;
+  input id age;
+  datalines;
+1 23
+2 31
+3 45
+;
+run;
+
+proc print data=test;
+run;</code></pre>
+<p>如果这段能运行，并且 log 和 output 都能正常看到，再去跑自己的课题代码。最小例子的好处是，它可以把环境问题和项目代码问题分开。</p>
+</section>
+<section id="配置远程-sasiom-profile" class="level3">
+<h3 class="anchored" data-anchor-id="配置远程-sasiom-profile">5. 配置远程 SAS：IOM profile</h3>
+<p>如果你平时使用的是学校、医院或公司提供的远程 SAS 环境，尤其是通过 SAS Enterprise Guide 连接的那种，更可能用到：</p>
+<pre class="text"><code>SAS 9.4 (remote - IOM)</code></pre>
+<p>官方文档里 IOM profile 的 <code>connectionType</code> 是：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"connectionType"</span><span class="fu">:</span> <span class="st">"iom"</span><span class="fu">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"host"</span><span class="fu">:</span> <span class="st">"your-server.example.edu"</span><span class="fu">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"username"</span><span class="fu">:</span> <span class="st">"your_username"</span><span class="fu">,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"port"</span><span class="fu">:</span> <span class="dv">8591</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>这里有几个信息需要提前问清楚：</p>
+<ul>
+<li><code>host</code>：IOM server 的地址</li>
+<li><code>username</code>：连接服务器使用的用户名</li>
+<li><code>port</code>：IOM server 端口，官方文档给出的默认值是 <code>8591</code></li>
+<li>是否需要 VPN、校园网或内网环境</li>
+<li>账号是否有运行 SAS Workspace Server 的权限</li>
+</ul>
+<p>IOM 这个词容易让刚接触的人有点紧张。简单说，它是 SAS 9 体系里一种比较正式的远程连接方式，常见于已经部署好 SAS Workspace Server 的机构环境。你不需要自己理解所有服务器架构，但至少要知道：IOM 不是随便填一个服务器 IP 就行，它背后要有相应的 SAS 服务在运行。</p>
+<p>如果你平时能用 SAS Enterprise Guide 连接同一个服务器，那么 VS Code 这边通常也有配置的基础。但具体 host、port、认证方式，还是以单位管理员提供的信息为准。</p>
+</section>
+<section id="一个科研场景里的最小工作流" class="level3">
+<h3 class="anchored" data-anchor-id="一个科研场景里的最小工作流">6. 一个科研场景里的最小工作流</h3>
+<p>配置完成后，我比较建议把 SAS 项目按文件夹整理，而不是把代码都放在桌面或下载目录里。比如一个比较简单的结构可以是：</p>
+<pre class="text"><code>project_name/
+  code/
+    00_setup.sas
+    01_clean_data.sas
+    02_analysis.sas
+    03_tables.sas
+  data_raw/
+  data_processed/
+  output/
+  log/</code></pre>
+<p>VS Code 的优势主要在这里体现：它适合管理一组纯文本文件。<code>.sas</code> 文件本质上也是文本文件，放在一个项目目录里之后，搜索变量名、比较版本、整理注释都会更方便。</p>
+<p>如果后续和 Git 配合，也可以把 SAS 代码纳入版本管理。对科研训练来说，这比最后一版、最终版2、投稿修改版、final更稳妥一些。当然，数据文件尤其是含隐私信息的数据，不应该随便放进公开仓库。</p>
+<p>在 VS Code 里写 SAS，我会先确认三件事：</p>
+<ol type="1">
+<li>当前 profile 是否选对了。</li>
+<li>代码里的路径是否适合当前运行环境。</li>
+<li>log 里是否有红色 error 或关键 warning。</li>
+</ol>
+<p>第三点尤其重要。SAS 有时即使前面某一步出错，后面的程序仍然会继续跑。不要只看有没有 output，要养成看 log 的习惯。</p>
+</section>
+<section id="常见问题多半不是插件坏了" class="level3">
+<h3 class="anchored" data-anchor-id="常见问题多半不是插件坏了">7. 常见问题：多半不是插件坏了</h3>
+<p>这类工具配置里，最常见的挫败感是：我明明按步骤做了，为什么还是连不上？</p>
+<p>我会按下面顺序排查。</p>
+<section id="先确认-sas-本身能不能用" class="level4">
+<h4 class="anchored" data-anchor-id="先确认-sas-本身能不能用">先确认 SAS 本身能不能用</h4>
+<p>如果是 local profile，先单独打开 SAS 或 SAS Enterprise Guide，看本机 SAS 是否能运行一段最小代码。</p>
+<p>如果是 IOM profile，先确认自己是否能用原来的方式连接远程 SAS，比如 SAS Enterprise Guide。假如 EG 都连不上，VS Code 这边也很难凭空解决。</p>
+</section>
+<section id="再确认客户端组件" class="level4">
+<h4 class="anchored" data-anchor-id="再确认客户端组件">再确认客户端组件</h4>
+<p>local 和 IOM 都可能依赖 ITCLIENT 和 SAS Providers for OLE DB。特别是换电脑、重装系统、只装了部分 SAS 组件时，这里很容易漏。</p>
+<p>如果机器上已经有 SAS 9.4M6 之类的版本，官方文档建议 SAS Providers for OLE DB 和 ITCLIENT 的版本要与本机 SAS 软件匹配；如果机器上没有已有 SAS 软件，则下载并安装当前最新版本。这里最好按单位授权和官方说明来处理，不要随便从不明来源下载。</p>
+</section>
+<section id="最后看-profile-信息" class="level4">
+<h4 class="anchored" data-anchor-id="最后看-profile-信息">最后看 profile 信息</h4>
+<p>profile 名字可以随便取，但连接信息不能随便填。IOM profile 里的 host、username、port 任意一个错了，都可能连接失败。</p>
+<p>如果你有多个 profile，比如一个 local、一个 remote，运行前看一下 VS Code 状态栏当前选中的 profile。很多时候不是配置没成功，而是当前 profile 选错了。</p>
+</section>
+</section>
+<section id="我不建议怎么用" class="level3">
+<h3 class="anchored" data-anchor-id="我不建议怎么用">8. 我不建议怎么用</h3>
+<p>还有一点需要单独说：如果项目涉及真实患者数据、医院数据或任何敏感信息，先遵守本单位的数据管理规定。VS Code、Git、云盘、远程服务器这些工具用起来都方便，但方便不等于可以随意同步或上传。</p>
+</section>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">9. Takeaways</h3>
+<p><strong>第一，先确定 SAS 程序在哪里运行，再配置 VS Code。</strong><br>
+local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection type 当成随便选择的选项。</p>
+<p><strong>第二，SAS Extension 不是 SAS 本身。</strong><br>
+它让 VS Code 能和已有 SAS 环境协作，但不会替你提供许可证、服务器权限或完整的 SAS 安装。</p>
+<p><strong>第三，配置成功后先跑最小例子，再迁移真实项目。</strong><br>
+最小代码可以快速判断问题出在环境、连接还是项目代码。等这一层稳定以后，再把真实课题里的清洗、建模和制表流程搬过去，会少很多不必要的焦虑。</p>
+<p>对我来说，SAS 搭配 VS Code 的价值不在于看起来更现代，而在于让 SAS 程序回到普通文本项目的管理方式里。对于需要长期维护分析代码的人，这一点已经足够实际。</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/leslie-lu\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "Leslie-Lu/Leslie-Lu.github.io";
+    script.dataset.repoId = "R_kgDOL6FPww";
+    script.dataset.category = "Blog comments";
+    script.dataset.categoryId = "DIC_kwDOL6FPw84CfSVZ";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "把 SAS 接到 VS Code"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-04-29</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "从医学和公卫科研中的真实分析场景出发，记录 SAS Extension for Visual Studio Code 的本地与远程 IOM 配置思路。"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260429164600.png</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - sas</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - vs code</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - research workflow</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>最近在整理 SAS 的使用环境时，我又重新试了一轮 VS Code 里的 SAS Extension。这个过程让我意识到一件小事：很多科研工具的配置文章容易写成换一个编辑器就能提高效率，但真正卡住人的，往往不是编辑器本身，而是本地 SAS、远程服务器、许可证、路径、账号这些很具体的东西。</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>SAS 还是 SAS，真正执行代码的仍然是你已经安装或有权限访问的 SAS 环境。VS Code 在这里更像一个比较轻的工作台：写 <span class="in">`.sas`</span> 文件、运行代码、看 log、管理项目文件。</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 先想清楚：你到底要连接哪一种 SAS</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>开始配置前，我建议先不要急着点安装。先问自己一个问题：</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 我的 SAS 程序最终在哪里运行？</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>常见情况大概有三类。</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>第一类是本机已经装了 SAS 9.4，比如 Windows 电脑上有 SAS Foundation 或 SAS Enterprise Guide。这种情况下，可以考虑 <span class="in">`SAS 9.4 (local)`</span> profile。VS Code 负责提交代码，本机 SAS 负责运行。</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>第二类是单位或课题组有远程 SAS 服务器，平时可能通过 SAS Enterprise Guide 连上去。这种情况下，通常要问管理员服务器 host、port、username 等信息，然后配置 <span class="in">`SAS 9.4 (remote - IOM)`</span> profile。</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>第三类是有一台 Linux/Unix 服务器，里面可以通过命令行直接运行 <span class="in">`sas`</span>，并且你有 SSH 权限。SAS Extension 也支持 remote SSH，不过这篇主要写官方文档里我最常用到的 local 和 IOM 两种配置。</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>这一步很重要。因为 VS Code 插件不是凭空提供一个 SAS 环境。你没有 SAS 软件、没有远程服务器权限、没有可用许可证，只安装插件通常是跑不起来的。</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 安装 VS Code 插件之前，先检查 SAS 端</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>在 VS Code 里需要安装的是 SAS 官方的 **SAS Extension for Visual Studio Code**。安装方式和普通 VS Code 插件一样，在 Extensions 面板里搜索 SAS 安装即可。</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>但更容易出问题的是 SAS 端的依赖。根据 SAS 官方文档，如果使用 <span class="in">`SAS 9.4 (local)`</span> 或 <span class="in">`SAS 9.4 (remote - IOM)`</span>，Windows 客户端需要安装：</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`SAS Integration Technologies Client for Windows (ITCLIENT)`</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`SAS Providers for OLE DB`</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>官方文档也提到，从 SAS Extension for VS Code v1.15 开始，使用这类连接时需要安装 SAS Providers for OLE DB。它们有时会随 SAS Enterprise Guide 或 SAS Add-in for Microsoft Office 一起安装；如果没有，就需要通过 SAS 9.4 安装程序或 SAS 官方下载页面补装。</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>一个比较直接的检查方法，是看机器上是否存在类似下面的目录：</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="in">C:\Program Files\SASHome\x86\Integration Technologies</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="in">C:\Program Files\SASHome\x86\SASProvidersforOLEDB</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>如果你的 SAS 安装在自定义路径，就要到对应的 <span class="in">`SASHome`</span> 下面去找。路径不一定完全相同，关键是确认 ITCLIENT 和 SAS Providers for OLE DB 是否存在。</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>这里不用把问题想复杂。对大多数本机 Windows + SAS 9.4 的使用者来说，如果 SAS Enterprise Guide 能正常打开，相关组件很可能已经在机器上。但很可能不等于一定，真正配置失败时还是要回到这些路径和组件上检查。</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 在 VS Code 里新增一个 profile</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>插件装好后，打开 VS Code 的 Command Palette：</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="in">F1</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>或者：</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="in">Ctrl + Shift + P</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>然后输入并执行：</span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="in">SAS: Add New Connection Profile</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>官方文档里对应的命令名是 <span class="in">`SAS.addProfile`</span>。你需要选择一种 connection type，然后按照提示填写信息。创建好的 profile 会存到 VS Code 的 <span class="in">`settings.json`</span> 里。以后如果有多个 SAS 环境，也可以用：</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="in">SAS: Switch Current Connection profile</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>来切换当前 profile。</span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>我自己的理解是，profile 就像一张连接卡片。它告诉 VS Code：这段 SAS 代码要交给哪里运行，是本机的 SAS 9.4，还是远程 IOM server。</span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. 配置本机 SAS 9.4：local profile</span></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>如果 SAS 就装在你自己的 Windows 电脑上，可以选择：</span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="in">SAS 9.4 (local)</span></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>官方文档里 local profile 的 <span class="in">`connectionType`</span> 是：</span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="in">```json</span></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>  <span class="st">"connectionType"</span><span class="op">:</span> <span class="st">"com"</span><span class="op">,</span></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>  <span class="st">"host"</span><span class="op">:</span> <span class="st">"localhost"</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>实际操作时，通常不需要手动写这段 JSON，按照 VS Code 的提示填写即可。<span class="in">`host`</span> 默认可以理解为 <span class="in">`localhost`</span>，也就是本机。</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>local profile 的重点不在 host，而在本机组件是否完整。尤其是前面提到的 ITCLIENT 和 SAS Providers for OLE DB。如果 profile 建好了，但运行代码时连接失败，第一步不要怀疑自己的 SAS 语法，先检查客户端组件和 SAS 安装路径。</span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>我建议配置好以后，先不要直接跑复杂项目。新建一个最小的 <span class="in">`.sas`</span> 文件，例如：</span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">```sas</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="in">proc product_status;</span></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="in">data test;</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="in">  input id age;</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="in">  datalines;</span></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a><span class="in">1 23</span></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="in">2 31</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="in">3 45</span></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a><span class="in">;</span></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="in">proc print data=test;</span></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>如果这段能运行，并且 log 和 output 都能正常看到，再去跑自己的课题代码。最小例子的好处是，它可以把环境问题和项目代码问题分开。</span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 配置远程 SAS：IOM profile</span></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>如果你平时使用的是学校、医院或公司提供的远程 SAS 环境，尤其是通过 SAS Enterprise Guide 连接的那种，更可能用到：</span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a><span class="in">SAS 9.4 (remote - IOM)</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>官方文档里 IOM profile 的 <span class="in">`connectionType`</span> 是：</span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="in">```json</span></span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>  <span class="st">"connectionType"</span><span class="op">:</span> <span class="st">"iom"</span><span class="op">,</span></span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a>  <span class="st">"host"</span><span class="op">:</span> <span class="st">"your-server.example.edu"</span><span class="op">,</span></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a>  <span class="st">"username"</span><span class="op">:</span> <span class="st">"your_username"</span><span class="op">,</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a>  <span class="st">"port"</span><span class="op">:</span> <span class="dv">8591</span></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>这里有几个信息需要提前问清楚：</span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`host`</span>：IOM server 的地址</span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`username`</span>：连接服务器使用的用户名</span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`port`</span>：IOM server 端口，官方文档给出的默认值是 <span class="in">`8591`</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>是否需要 VPN、校园网或内网环境</span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>账号是否有运行 SAS Workspace Server 的权限</span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>IOM 这个词容易让刚接触的人有点紧张。简单说，它是 SAS 9 体系里一种比较正式的远程连接方式，常见于已经部署好 SAS Workspace Server 的机构环境。你不需要自己理解所有服务器架构，但至少要知道：IOM 不是随便填一个服务器 IP 就行，它背后要有相应的 SAS 服务在运行。</span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a>如果你平时能用 SAS Enterprise Guide 连接同一个服务器，那么 VS Code 这边通常也有配置的基础。但具体 host、port、认证方式，还是以单位管理员提供的信息为准。</span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 一个科研场景里的最小工作流</span></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a>配置完成后，我比较建议把 SAS 项目按文件夹整理，而不是把代码都放在桌面或下载目录里。比如一个比较简单的结构可以是：</span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">project_name/</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="in">  code/</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">    00_setup.sas</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="in">    01_clean_data.sas</span></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">    02_analysis.sas</span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a><span class="in">    03_tables.sas</span></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">  data_raw/</span></span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="in">  data_processed/</span></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="in">  output/</span></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="in">  log/</span></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a>VS Code 的优势主要在这里体现：它适合管理一组纯文本文件。<span class="in">`.sas`</span> 文件本质上也是文本文件，放在一个项目目录里之后，搜索变量名、比较版本、整理注释都会更方便。</span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>如果后续和 Git 配合，也可以把 SAS 代码纳入版本管理。对科研训练来说，这比最后一版、最终版2、投稿修改版、final更稳妥一些。当然，数据文件尤其是含隐私信息的数据，不应该随便放进公开仓库。</span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a>在 VS Code 里写 SAS，我会先确认三件事：</span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>当前 profile 是否选对了。</span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>代码里的路径是否适合当前运行环境。</span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>log 里是否有红色 error 或关键 warning。</span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a>第三点尤其重要。SAS 有时即使前面某一步出错，后面的程序仍然会继续跑。不要只看有没有 output，要养成看 log 的习惯。</span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. 常见问题：多半不是插件坏了</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>这类工具配置里，最常见的挫败感是：我明明按步骤做了，为什么还是连不上？</span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>我会按下面顺序排查。</span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先确认 SAS 本身能不能用</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>如果是 local profile，先单独打开 SAS 或 SAS Enterprise Guide，看本机 SAS 是否能运行一段最小代码。</span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>如果是 IOM profile，先确认自己是否能用原来的方式连接远程 SAS，比如 SAS Enterprise Guide。假如 EG 都连不上，VS Code 这边也很难凭空解决。</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### 再确认客户端组件</span></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a>local 和 IOM 都可能依赖 ITCLIENT 和 SAS Providers for OLE DB。特别是换电脑、重装系统、只装了部分 SAS 组件时，这里很容易漏。</span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a>如果机器上已经有 SAS 9.4M6 之类的版本，官方文档建议 SAS Providers for OLE DB 和 ITCLIENT 的版本要与本机 SAS 软件匹配；如果机器上没有已有 SAS 软件，则下载并安装当前最新版本。这里最好按单位授权和官方说明来处理，不要随便从不明来源下载。</span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### 最后看 profile 信息</span></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a>profile 名字可以随便取，但连接信息不能随便填。IOM profile 里的 host、username、port 任意一个错了，都可能连接失败。</span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a>如果你有多个 profile，比如一个 local、一个 remote，运行前看一下 VS Code 状态栏当前选中的 profile。很多时候不是配置没成功，而是当前 profile 选错了。</span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8. 我不建议怎么用</span></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a>还有一点需要单独说：如果项目涉及真实患者数据、医院数据或任何敏感信息，先遵守本单位的数据管理规定。VS Code、Git、云盘、远程服务器这些工具用起来都方便，但方便不等于可以随意同步或上传。</span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a><span class="fu">## 9. Takeaways</span></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a>**第一，先确定 SAS 程序在哪里运行，再配置 VS Code。**  </span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a>local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection type 当成随便选择的选项。</span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a>**第二，SAS Extension 不是 SAS 本身。**  </span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a>它让 VS Code 能和已有 SAS 环境协作，但不会替你提供许可证、服务器权限或完整的 SAS 安装。</span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a>**第三，配置成功后先跑最小例子，再迁移真实项目。**  </span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a>最小代码可以快速判断问题出在环境、连接还是项目代码。等这一层稳定以后，再把真实课题里的清洗、建模和制表流程搬过去，会少很多不必要的焦虑。</span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a>对我来说，SAS 搭配 VS Code 的价值不在于看起来更现代，而在于让 SAS 程序回到普通文本项目的管理方式里。对于需要长期维护分析代码的人，这一点已经足够实际。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2016–2026 Zhen Lu</span> <span class="faux-block">All content licensed under<br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></span></p>
+</div>   
+    <div class="nav-footer-center">
+<p><span class="faux-block"><i class="fa-brands fa-orcid" aria-label="orcid"></i> <strong>ORCID</strong> <a href="https://orcid.org/0000-0002-3481-6310">0000-0002-3481-6310</a></span></p>
+</div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span> <span class="faux-block"><a href="https://github.com/Leslie-Lu/Leslie-Lu.github.io">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

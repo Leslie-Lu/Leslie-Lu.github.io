@@ -11,7 +11,231 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 29 Apr 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>把 SAS 接到 VS Code</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/04/29/sas_vscode/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>最近在整理 SAS 的使用环境时，我又重新试了一轮 VS Code 里的 SAS Extension。这个过程让我意识到一件小事：很多科研工具的配置文章容易写成换一个编辑器就能提高效率，但真正卡住人的，往往不是编辑器本身，而是本地 SAS、远程服务器、许可证、路径、账号这些很具体的东西。</p>
+<p>SAS 还是 SAS，真正执行代码的仍然是你已经安装或有权限访问的 SAS 环境。VS Code 在这里更像一个比较轻的工作台：写 <code>.sas</code> 文件、运行代码、看 log、管理项目文件。</p>
+<section id="先想清楚你到底要连接哪一种-sas" class="level3">
+<h3 class="anchored" data-anchor-id="先想清楚你到底要连接哪一种-sas">1. 先想清楚：你到底要连接哪一种 SAS</h3>
+<p>开始配置前，我建议先不要急着点安装。先问自己一个问题：</p>
+<blockquote class="blockquote">
+<p>我的 SAS 程序最终在哪里运行？</p>
+</blockquote>
+<p>常见情况大概有三类。</p>
+<p>第一类是本机已经装了 SAS 9.4，比如 Windows 电脑上有 SAS Foundation 或 SAS Enterprise Guide。这种情况下，可以考虑 <code>SAS 9.4 (local)</code> profile。VS Code 负责提交代码，本机 SAS 负责运行。</p>
+<p>第二类是单位或课题组有远程 SAS 服务器，平时可能通过 SAS Enterprise Guide 连上去。这种情况下，通常要问管理员服务器 host、port、username 等信息，然后配置 <code>SAS 9.4 (remote - IOM)</code> profile。</p>
+<p>第三类是有一台 Linux/Unix 服务器，里面可以通过命令行直接运行 <code>sas</code>，并且你有 SSH 权限。SAS Extension 也支持 remote SSH，不过这篇主要写官方文档里我最常用到的 local 和 IOM 两种配置。</p>
+<p>这一步很重要。因为 VS Code 插件不是凭空提供一个 SAS 环境。你没有 SAS 软件、没有远程服务器权限、没有可用许可证，只安装插件通常是跑不起来的。</p>
+</section>
+<section id="安装-vs-code-插件之前先检查-sas-端" class="level3">
+<h3 class="anchored" data-anchor-id="安装-vs-code-插件之前先检查-sas-端">2. 安装 VS Code 插件之前，先检查 SAS 端</h3>
+<p>在 VS Code 里需要安装的是 SAS 官方的 <strong>SAS Extension for Visual Studio Code</strong>。安装方式和普通 VS Code 插件一样，在 Extensions 面板里搜索 SAS 安装即可。</p>
+<p>但更容易出问题的是 SAS 端的依赖。根据 SAS 官方文档，如果使用 <code>SAS 9.4 (local)</code> 或 <code>SAS 9.4 (remote - IOM)</code>，Windows 客户端需要安装：</p>
+<ul>
+<li><code>SAS Integration Technologies Client for Windows (ITCLIENT)</code></li>
+<li><code>SAS Providers for OLE DB</code></li>
+</ul>
+<p>官方文档也提到，从 SAS Extension for VS Code v1.15 开始，使用这类连接时需要安装 SAS Providers for OLE DB。它们有时会随 SAS Enterprise Guide 或 SAS Add-in for Microsoft Office 一起安装；如果没有，就需要通过 SAS 9.4 安装程序或 SAS 官方下载页面补装。</p>
+<p>一个比较直接的检查方法，是看机器上是否存在类似下面的目录：</p>
+<pre class="text"><code>C:\Program Files\SASHome\x86\Integration Technologies
+C:\Program Files\SASHome\x86\SASProvidersforOLEDB</code></pre>
+<p>如果你的 SAS 安装在自定义路径，就要到对应的 <code>SASHome</code> 下面去找。路径不一定完全相同，关键是确认 ITCLIENT 和 SAS Providers for OLE DB 是否存在。</p>
+<p>这里不用把问题想复杂。对大多数本机 Windows + SAS 9.4 的使用者来说，如果 SAS Enterprise Guide 能正常打开，相关组件很可能已经在机器上。但很可能不等于一定，真正配置失败时还是要回到这些路径和组件上检查。</p>
+</section>
+<section id="在-vs-code-里新增一个-profile" class="level3">
+<h3 class="anchored" data-anchor-id="在-vs-code-里新增一个-profile">3. 在 VS Code 里新增一个 profile</h3>
+<p>插件装好后，打开 VS Code 的 Command Palette：</p>
+<pre class="text"><code>F1</code></pre>
+<p>或者：</p>
+<pre class="text"><code>Ctrl + Shift + P</code></pre>
+<p>然后输入并执行：</p>
+<pre class="text"><code>SAS: Add New Connection Profile</code></pre>
+<p>官方文档里对应的命令名是 <code>SAS.addProfile</code>。你需要选择一种 connection type，然后按照提示填写信息。创建好的 profile 会存到 VS Code 的 <code>settings.json</code> 里。以后如果有多个 SAS 环境，也可以用：</p>
+<pre class="text"><code>SAS: Switch Current Connection profile</code></pre>
+<p>来切换当前 profile。</p>
+<p>我自己的理解是，profile 就像一张连接卡片。它告诉 VS Code：这段 SAS 代码要交给哪里运行，是本机的 SAS 9.4，还是远程 IOM server。</p>
+</section>
+<section id="配置本机-sas-9.4local-profile" class="level3">
+<h3 class="anchored" data-anchor-id="配置本机-sas-9.4local-profile">4. 配置本机 SAS 9.4：local profile</h3>
+<p>如果 SAS 就装在你自己的 Windows 电脑上，可以选择：</p>
+<pre class="text"><code>SAS 9.4 (local)</code></pre>
+<p>官方文档里 local profile 的 <code>connectionType</code> 是：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb7-2">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"connectionType"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"com"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb7-3">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"host"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"localhost"</span></span>
+<span id="cb7-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+<p>实际操作时，通常不需要手动写这段 JSON，按照 VS Code 的提示填写即可。<code>host</code> 默认可以理解为 <code>localhost</code>，也就是本机。</p>
+<p>local profile 的重点不在 host，而在本机组件是否完整。尤其是前面提到的 ITCLIENT 和 SAS Providers for OLE DB。如果 profile 建好了，但运行代码时连接失败，第一步不要怀疑自己的 SAS 语法，先检查客户端组件和 SAS 安装路径。</p>
+<p>我建议配置好以后，先不要直接跑复杂项目。新建一个最小的 <code>.sas</code> 文件，例如：</p>
+<pre class="sas"><code>proc product_status;
+run;
+
+data test;
+  input id age;
+  datalines;
+1 23
+2 31
+3 45
+;
+run;
+
+proc print data=test;
+run;</code></pre>
+<p>如果这段能运行，并且 log 和 output 都能正常看到，再去跑自己的课题代码。最小例子的好处是，它可以把环境问题和项目代码问题分开。</p>
+</section>
+<section id="配置远程-sasiom-profile" class="level3">
+<h3 class="anchored" data-anchor-id="配置远程-sasiom-profile">5. 配置远程 SAS：IOM profile</h3>
+<p>如果你平时使用的是学校、医院或公司提供的远程 SAS 环境，尤其是通过 SAS Enterprise Guide 连接的那种，更可能用到：</p>
+<pre class="text"><code>SAS 9.4 (remote - IOM)</code></pre>
+<p>官方文档里 IOM profile 的 <code>connectionType</code> 是：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb10-2">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"connectionType"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"iom"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-3">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"host"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"your-server.example.edu"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-4">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"username"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"your_username"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-5">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"port"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8591</span></span>
+<span id="cb10-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+<p>这里有几个信息需要提前问清楚：</p>
+<ul>
+<li><code>host</code>：IOM server 的地址</li>
+<li><code>username</code>：连接服务器使用的用户名</li>
+<li><code>port</code>：IOM server 端口，官方文档给出的默认值是 <code>8591</code></li>
+<li>是否需要 VPN、校园网或内网环境</li>
+<li>账号是否有运行 SAS Workspace Server 的权限</li>
+</ul>
+<p>IOM 这个词容易让刚接触的人有点紧张。简单说，它是 SAS 9 体系里一种比较正式的远程连接方式，常见于已经部署好 SAS Workspace Server 的机构环境。你不需要自己理解所有服务器架构，但至少要知道：IOM 不是随便填一个服务器 IP 就行，它背后要有相应的 SAS 服务在运行。</p>
+<p>如果你平时能用 SAS Enterprise Guide 连接同一个服务器，那么 VS Code 这边通常也有配置的基础。但具体 host、port、认证方式，还是以单位管理员提供的信息为准。</p>
+</section>
+<section id="一个科研场景里的最小工作流" class="level3">
+<h3 class="anchored" data-anchor-id="一个科研场景里的最小工作流">6. 一个科研场景里的最小工作流</h3>
+<p>配置完成后，我比较建议把 SAS 项目按文件夹整理，而不是把代码都放在桌面或下载目录里。比如一个比较简单的结构可以是：</p>
+<pre class="text"><code>project_name/
+  code/
+    00_setup.sas
+    01_clean_data.sas
+    02_analysis.sas
+    03_tables.sas
+  data_raw/
+  data_processed/
+  output/
+  log/</code></pre>
+<p>VS Code 的优势主要在这里体现：它适合管理一组纯文本文件。<code>.sas</code> 文件本质上也是文本文件，放在一个项目目录里之后，搜索变量名、比较版本、整理注释都会更方便。</p>
+<p>如果后续和 Git 配合，也可以把 SAS 代码纳入版本管理。对科研训练来说，这比最后一版、最终版2、投稿修改版、final更稳妥一些。当然，数据文件尤其是含隐私信息的数据，不应该随便放进公开仓库。</p>
+<p>在 VS Code 里写 SAS，我会先确认三件事：</p>
+<ol type="1">
+<li>当前 profile 是否选对了。</li>
+<li>代码里的路径是否适合当前运行环境。</li>
+<li>log 里是否有红色 error 或关键 warning。</li>
+</ol>
+<p>第三点尤其重要。SAS 有时即使前面某一步出错，后面的程序仍然会继续跑。不要只看有没有 output，要养成看 log 的习惯。</p>
+</section>
+<section id="常见问题多半不是插件坏了" class="level3">
+<h3 class="anchored" data-anchor-id="常见问题多半不是插件坏了">7. 常见问题：多半不是插件坏了</h3>
+<p>这类工具配置里，最常见的挫败感是：我明明按步骤做了，为什么还是连不上？</p>
+<p>我会按下面顺序排查。</p>
+<section id="先确认-sas-本身能不能用" class="level4">
+<h4 class="anchored" data-anchor-id="先确认-sas-本身能不能用">先确认 SAS 本身能不能用</h4>
+<p>如果是 local profile，先单独打开 SAS 或 SAS Enterprise Guide，看本机 SAS 是否能运行一段最小代码。</p>
+<p>如果是 IOM profile，先确认自己是否能用原来的方式连接远程 SAS，比如 SAS Enterprise Guide。假如 EG 都连不上，VS Code 这边也很难凭空解决。</p>
+</section>
+<section id="再确认客户端组件" class="level4">
+<h4 class="anchored" data-anchor-id="再确认客户端组件">再确认客户端组件</h4>
+<p>local 和 IOM 都可能依赖 ITCLIENT 和 SAS Providers for OLE DB。特别是换电脑、重装系统、只装了部分 SAS 组件时，这里很容易漏。</p>
+<p>如果机器上已经有 SAS 9.4M6 之类的版本，官方文档建议 SAS Providers for OLE DB 和 ITCLIENT 的版本要与本机 SAS 软件匹配；如果机器上没有已有 SAS 软件，则下载并安装当前最新版本。这里最好按单位授权和官方说明来处理，不要随便从不明来源下载。</p>
+</section>
+<section id="最后看-profile-信息" class="level4">
+<h4 class="anchored" data-anchor-id="最后看-profile-信息">最后看 profile 信息</h4>
+<p>profile 名字可以随便取，但连接信息不能随便填。IOM profile 里的 host、username、port 任意一个错了，都可能连接失败。</p>
+<p>如果你有多个 profile，比如一个 local、一个 remote，运行前看一下 VS Code 状态栏当前选中的 profile。很多时候不是配置没成功，而是当前 profile 选错了。</p>
+</section>
+</section>
+<section id="我不建议怎么用" class="level3">
+<h3 class="anchored" data-anchor-id="我不建议怎么用">8. 我不建议怎么用</h3>
+<p>还有一点需要单独说：如果项目涉及真实患者数据、医院数据或任何敏感信息，先遵守本单位的数据管理规定。VS Code、Git、云盘、远程服务器这些工具用起来都方便，但方便不等于可以随意同步或上传。</p>
+</section>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">9. Takeaways</h3>
+<p><strong>第一，先确定 SAS 程序在哪里运行，再配置 VS Code。</strong><br>
+local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection type 当成随便选择的选项。</p>
+<p><strong>第二，SAS Extension 不是 SAS 本身。</strong><br>
+它让 VS Code 能和已有 SAS 环境协作，但不会替你提供许可证、服务器权限或完整的 SAS 安装。</p>
+<p><strong>第三，配置成功后先跑最小例子，再迁移真实项目。</strong><br>
+最小代码可以快速判断问题出在环境、连接还是项目代码。等这一层稳定以后，再把真实课题里的清洗、建模和制表流程搬过去，会少很多不必要的焦虑。</p>
+<p>对我来说，SAS 搭配 VS Code 的价值不在于看起来更现代，而在于让 SAS 程序回到普通文本项目的管理方式里。对于需要长期维护分析代码的人，这一点已经足够实际。</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>sas</category>
+  <category>vs code</category>
+  <category>research workflow</category>
+  <guid>https://leslie-lu.github.io/blog/2026/04/29/sas_vscode/</guid>
+  <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260429164600.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 30 期）：“课堂已死”：一位大学老师的心声</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -5932,134 +6156,6 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
   <guid>https://leslie-lu.github.io/blog/2025/10/10/biostat_weekly_issue3/</guid>
   <pubDate>Fri, 10 Oct 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251009185540.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>生统爱好者周刊（第 2 期）：非升即走，是人才培养更重要还是科研绩效更重要</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/10/03/biostat_weekly_issue2/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
-<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
-<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
-<section id="封面图" class="level3">
-<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002161737.png" class="img-fluid"></p>
-</section>
-<section id="本周话题非升即走是人才培养更重要还是科研绩效更重要" class="level3">
-<h3 class="anchored" data-anchor-id="本周话题非升即走是人才培养更重要还是科研绩效更重要">本周话题：<a href="https://mp.weixin.qq.com/s/fwizpM-ZDeZ9Qy81fa2Lmg">非升即走，是人才培养更重要还是科研绩效更重要</a></h3>
-<blockquote class="blockquote">
-<p>“培养”与“不培养”的区别，就是将预聘的青年教师看作“自己人”还是“过客”。如果是前者，就会竭其所能，在科研和教学方面提供方便。如果是后者，则“公事公办”，以硬性的量化指标予以考核和约束。现在看来，后一种情况占绝大多数。对比 Tenure Track，两者形似而神不似。</p>
-</blockquote>
-<p>有关此事，相关的评论和论文也发表了不少。但国内的情形就是这样，思考者与管理者经常是二分的，纵使思考者一再呼吁、理性分析，管理者仍常凭感觉行事。</p>
-</section>
-<section id="生统研究" class="level3">
-<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
-<ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/wzU7BnqkWe9o1wN6vXSp9g">Nature Medicine | 跨多种器官和影像模态生成高质量合成医学影像</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002162047.png" class="img-fluid"></p>
-<p>MINIM（Medical Image-Text Generative Intelligent Model），这是首个能够跨多种器官和影像模态生成高质量合成医学影像的统一基础模型。该研究团队在北京大学王金卓教授和温州医科大学张康教授的联合领导下，首次验证了基于文本条件的多模态医学影像生成技术在临床应用中的实际价值，不仅在图像质量上达到了临床可用标准，更重要的是在肺癌EGFR突变检测和乳腺癌HER2状态预测等关键临床任务中展现出显著的预后改善效果。</p>
-<ul>
-<li>论文 DOI：10.1038/s41591-024-03359-y</li>
-</ul>
-<ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/N9HF7a9mu2hbuBLrXNtjAw">Nature Machine Intelligence | 基于贝叶斯网络的 GWAS 因果推断框架</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002162317.png" class="img-fluid"></p>
-<p>本文提出了一种新的分析框架 Bayesian Network GWAS (BN-GWAS)，结合了贝叶斯网络建模和因果效应估计方法（如 MR、IDA/jointIDA），旨在系统性构建基因–基因–疾病因果网络，进而量化基因的直接效应、间接效应以及联合效应。</p>
-<ul>
-<li>论文 DOI：10.1038/s42256-024-00906-7</li>
-</ul>
-<ol start="3" type="1">
-<li>JAMA Psychiatry | 心理健康研究中的跨诊断临床分期模型</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/!%5B%5D(httpscdn.jsdelivr.netghLeslie-LuWeChatOfficialAccountimg_202520250925155951.png).png" class="img-fluid"></p>
-<p>当前心理健康研究中，跨诊断（transdiagnostic）临床分期模型受到越来越多关注。即不局限于某一类障碍（如抑郁、焦虑、精神病），而是试图把早期症状和风险因素建立一个分期 / 进展模型。该研究为跨诊断临床分期模型提供了强有力的纵向实证支持：从儿童到青年期，早期家族风险 -&gt; 轻微症状 -&gt; 中度 / 功能受损症状之间存在一种阶段性、渐进式的转变路径。中介分析表明，性格特质（如神经质倾向）等可能是干预目标：如果能够调节或缓冲神经质倾向（例如通过心理干预、情绪调节训练等），或许可以减缓或阻止从轻症到中重症的转化。该研究也强调：在心理健康的早期干预设计中，除了考虑固定的风险因素（如家族史、早期逆境等），还应将阶段身份（即当前症状状态）本身纳入风险评估和干预决策。</p>
-<ul>
-<li>论文 DOI：10.1001/jamapsychiatry.2025.2648</li>
-</ul>
-</section>
-<section id="博文资讯" class="level3">
-<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
-<ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/EkMK_xuLoAHuI--65trynw">解析面向对象在软件工程中的应用</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002163346.png" class="img-fluid"></p>
-<p>本文系统解析了面向对象思想在软件工程中的核心价值与应用体系。作者从发展史切入，厘清面向对象与UML、软件工程、DDD等概念的关系，重点阐述用例建模方法、面向对象分析（OOA）的建模过程（含静态/动态建模及深层模型）、面向对象设计（OOD）的职责驱动模式（GRASP），最终构建出从理论到实践的完整知识框架。</p>
-<ol start="5" type="1">
-<li><a href="https://www.lesswrong.com/posts/XGHf7EY3CK4KorBpw/understanding-llms-insights-from-mechanistic?utm_id=FAUN_VarBear495_Link_title" title="LLM 是如何工作的">LLM 是如何工作的</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002163741.png" class="img-fluid"></p>
-<p>该文概述了 Transformer LLM 工作的基本原理，适合初学者阅读。</p>
-</section>
-<section id="工具" class="level3">
-<h3 class="anchored" data-anchor-id="工具">工具</h3>
-<ol start="6" type="1">
-<li><a href="https://mp.weixin.qq.com/s/u4lt3ucIeMZT-c1zAj7YAg">Git 实用技巧</a></li>
-</ol>
-<p><img src="https://img.devrant.com/devrant/rant/r_292990_JmRu7.gif" class="img-fluid"></p>
-<p>推文文章列举 Git 实际应用的技巧，可以更直观的了解 Git 命令的使用方法。</p>
-<ol start="7" type="1">
-<li><a href="https://github.com/monkesearch/monkeSearch" title="monkeSearch GitHub">monkeSearch，Mac 上的语义文件搜索</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164205.png" class="img-fluid"></p>
-<p>在 Mac 上进行完全本地化、时间感知的自然语言文件搜索，在不到 1 秒的时间内使用自然语言查找相关文件。</p>
-<ol start="8" type="1">
-<li><a href="https://www.metametrix.cn/" title="开放科学计量学学习平台">开放科学计量学学习平台</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164322.png" class="img-fluid"></p>
-<p>该平台提供了科学计量学的相关阅读材料与教程指南，帮助研究者掌握科研趋势分析、合作网络可视化与知识图谱构建的方法，支持跨学科交流与科研影响力评估。</p>
-</section>
-<section id="资源" class="level3">
-<h3 class="anchored" data-anchor-id="资源">资源</h3>
-<ol start="9" type="1">
-<li><a href="https://cloufield.github.io/GWASTutorial/" title="GWAS 教程">GWAS 教程</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164457.png" class="img-fluid"></p>
-<p>该教程由东京大学镰谷研究室提供，主要面向生物信息学/统计遗传学的初学者。</p>
-<ol start="10" type="1">
-<li><a href="https://github.com/scoopcn/scoopcn" title="Scoop 国内软件仓库">Scoop 国内软件仓库</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164557.png" class="img-fluid"></p>
-<p>支持安装管理常用的国内应用程序。</p>
-<ol start="11" type="1">
-<li><a href="https://docs.python.org/3/reference/index.html" title="The Python Language Reference">The Python Language Reference</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164759.png" class="img-fluid"></p>
-<p>《The Python Language Reference》是Python官方提供的一份核心文档，它系统地阐述了Python语言本身的语法和核心语义。当你对某个语言机制的底层原理感到困惑时（例如，描述符如何工作、生成器的执行流程、元类的实例化过程），这份文档是最终的答案来源。它也是Python解释器实现者必须遵循的准则。</p>
-</section>
-<section id="贡献者github-id" class="level3">
-<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
-<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
-<ul>
-<li>[<code>@Leslie-Lu</code>]（陆震）</li>
-<li>[<code>@YihanChen325</code>]（陈奕含）</li>
-<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
-<li>[<code>@GCRPM</code>]（徐林玉）</li>
-</ul>
-</section>
-<section id="订阅" class="level3">
-<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
-<p>本周刊每周五发布，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
-<p>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/qrcode_for_gh_395f59db8b4c_258.jpg" class="img-fluid"></p>
-<p>（完）</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostat-weekly</category>
-  <guid>https://leslie-lu.github.io/blog/2025/10/03/biostat_weekly_issue2/</guid>
-  <pubDate>Fri, 03 Oct 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002161737.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
