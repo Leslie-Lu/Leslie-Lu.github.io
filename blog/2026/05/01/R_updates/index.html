@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zhen Lu">
+<meta name="description" content="Update R to 4.6.0: What changes matter for research analysis?">
+
+<title>R 4.6.0 更新里，哪些变化和科研分析更相关 | Zhen Lu – Zhen Lu</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-71554634537212a048b442a07a669a16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../../site_libs/quarto-contrib/iconify-2.0.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #170C3A;
+      }
+</style>
+<style type="text/css">
+hr.dinkus {
+    width: 50px;
+    margin: 2em auto 2em;
+    border-top: 5px dotted #454545;
+}
+
+div.column-margin+hr.dinkus {
+    margin: 1em auto 2em;
+}
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Zhen Lu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../talks/index.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../publications/index.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../news/index.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../uses/index.html"> 
+<span class="menu-text">Uses</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../atom.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Zhen Lu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../biostat_weekly_rss.xml"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:rss" style="font-size: 1.1em;" aria-label="Icon rss from bi Iconify.design set." title="RSS for Biostat Weekly @ OpenBioStat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:luzh29@mail2.sysu.edu.cn"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:envelope" style="font-size: 1.1em;" aria-label="Icon envelope from bi Iconify.design set." title="E-mail"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/ZhenLu_Biost" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:twitter-x" style="font-size: 1.1em;" aria-label="Icon twitter-x from bi Iconify.design set." title="X"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@leslielu8542" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:youtube" style="font-size: 1.1em;" aria-label="Icon youtube from bi Iconify.design set." title="YouTube"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://space.bilibili.com/32159908" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="fa6-brands:bilibili" style="font-size: 1em;" aria-label="Icon bilibili from fa6-brands Iconify.design set." title="bilibili"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/qrcode_for_gh_395f59db8b4c_430.jpg" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:wechat" style="font-size: 1em;" aria-label="Icon wechat from bi Iconify.design set." title="Wechat"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.zhihu.com/people/edison-70-18" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="simple-icons:zhihu" style="font-size: 1em;" aria-label="Icon zhihu from simple-icons Iconify.design set." title="Zhihu"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=LKLQ1g8AAAAJ" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 1em;" aria-label="Icon google-scholar-square from academicons Iconify.design set." title="Google scholar"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Leslie-Lu" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" aria-label="Icon github from bi Iconify.design set." title="GitHub"></iconify-icon></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">R 4.6.0 更新里，哪些变化和科研分析更相关</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+                  <div>
+        <div class="description">
+          Update R to 4.6.0: What changes matter for research analysis?
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">update</div>
+                <div class="quarto-category">reproducibility</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://leslie-lu.github.io/">Zhen Lu</a> <a href="https://orcid.org/0000-0002-3481-6310" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Friday, May 1, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#先说结论这不是一次-界面变了-的更新" id="toc-先说结论这不是一次-界面变了-的更新" class="nav-link active" data-scroll-target="#先说结论这不是一次-界面变了-的更新">1. 先说结论：这不是一次 <code>界面变了</code> 的更新</a></li>
+  <li><a href="#非参数检验wilcox.test-对-ties-的处理更强了" id="toc-非参数检验wilcox.test-对-ties-的处理更强了" class="nav-link" data-scroll-target="#非参数检验wilcox.test-对-ties-的处理更强了">2. 非参数检验：<code>wilcox.test()</code> 对 ties 的处理更强了</a></li>
+  <li><a href="#新的-free1way不是替代-anova而是补充一个更稳健的选择" id="toc-新的-free1way不是替代-anova而是补充一个更稳健的选择" class="nav-link" data-scroll-target="#新的-free1way不是替代-anova而是补充一个更稳健的选择">3. 新的 <code>free1way()</code>：不是替代 ANOVA，而是补充一个更稳健的选择</a></li>
+  <li><a href="#glm-诊断影响值和残差的细节更严谨" id="toc-glm-诊断影响值和残差的细节更严谨" class="nav-link" data-scroll-target="#glm-诊断影响值和残差的细节更严谨">4. GLM 诊断：影响值和残差的细节更严谨</a></li>
+  <li><a href="#数据初筛summarynotin-和-list.files-都更贴近日常代码" id="toc-数据初筛summarynotin-和-list.files-都更贴近日常代码" class="nav-link" data-scroll-target="#数据初筛summarynotin-和-list.files-都更贴近日常代码">5. 数据初筛：<code>summary()</code>、<code>%notin%</code> 和 <code>list.files()</code> 都更贴近日常代码</a></li>
+  <li><a href="#日期匹配和一些边角修复小地方也会影响可复现" id="toc-日期匹配和一些边角修复小地方也会影响可复现" class="nav-link" data-scroll-target="#日期匹配和一些边角修复小地方也会影响可复现">6. 日期匹配和一些边角修复：小地方也会影响可复现</a></li>
+  <li><a href="#论文引用和包安装和可复现有关的几件事" id="toc-论文引用和包安装和可复现有关的几件事" class="nav-link" data-scroll-target="#论文引用和包安装和可复现有关的几件事">7. 论文引用和包安装：和可复现有关的几件事</a></li>
+  <li><a href="#我会怎么升级" id="toc-我会怎么升级" class="nav-link" data-scroll-target="#我会怎么升级">8. 我会怎么升级</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>R 4.6.0 已经在 2026 年 4 月 24 日发布，代号是 <em>Because it was There</em>。</p>
+<p>我平时看 R 的版本更新，不太会把它当成 <code>必须马上升级</code> 的通知。对大多数医学、生物、公卫方向的科研人员来说，R 的小版本更新通常不是为了追新，而是为了判断三件事：自己的分析脚本会不会受影响，哪些新功能能减少一点重复劳动，以及在教学、论文和项目复现里有没有需要提前注意的地方。</p>
+<p>这篇文章不是完整翻译官方 NEWS。R 4.6.0 的更新很多，涉及 C/C++、包开发、图形设备、帮助文档、平台构建等内容。下面我只挑出几个和统计分析、数据整理、科研复现更相关的点，尤其是普通科研使用者可能真的会遇到的变化。</p>
+<section id="先说结论这不是一次-界面变了-的更新" class="level3">
+<h3 class="anchored" data-anchor-id="先说结论这不是一次-界面变了-的更新">1. 先说结论：这不是一次 <code>界面变了</code> 的更新</h3>
+<p>R 4.6.0 对日常使用者最直接的变化，不是菜单、界面或某个 IDE 的体验变化，而是一些基础函数、统计函数和包安装机制的细节改进。</p>
+<p>我会把这次更新粗略分成五类：</p>
+<ol type="1">
+<li>统计检验和模型诊断相关的变化；</li>
+<li>数据初步查看、文件筛选和日期匹配的改进；</li>
+<li>科研写作与引用 R 本身的变化；</li>
+<li>包安装、包完整性和编译环境相关的变化；</li>
+<li>一些会影响升级判断的兼容性细节。</li>
+</ol>
+<p>如果你只是用 RStudio 跑 <code>tidyverse</code>、<code>survival</code>、<code>lme4</code>、<code>glm</code>、<code>tableone</code> 这类常见分析包，这次更新大概率不会让你的工作流 <code>变样</code>。但如果你做方法学、开发内部分析包、维护课程代码，或者经常需要复现旧项目，就值得认真看一下。</p>
+</section>
+<section id="非参数检验wilcox.test-对-ties-的处理更强了" class="level3">
+<h3 class="anchored" data-anchor-id="非参数检验wilcox.test-对-ties-的处理更强了">2. 非参数检验：<code>wilcox.test()</code> 对 ties 的处理更强了</h3>
+<p>医学和公卫数据里，<code>wilcox.test()</code> 很常见。比如样本量不大、结局变量明显偏态，或者用秩和检验比较两组分布时，很多人都会用它。</p>
+<p>R 4.6.0 的官方 NEWS 提到，<code>wilcox.test()</code> 现在可以在存在 ties 的情况下进行 exact conditional inference，并且可以选择用 Edgeworth series 的修正项来改进渐近 p 值。</p>
+<p>这个变化听起来比较技术，但实际含义不难理解。</p>
+<p>在真实医学数据里，ties 很常见。比如评分量表、检测下限导致的相同数值、整数化的住院天数、分级变量转成数值后参与比较，都会让很多观测值相同。过去一遇到 ties，很多 exact 检验就会受到限制，软件可能退回渐近近似，或者给出提醒。</p>
+<p>这次更新不意味着 <code>以后 Wilcoxon 检验就不用判断前提了</code>。它更像是在常见的 ties 场景里，让基础 R 的实现更完整一些。对教学和小样本分析来说，这是一个值得知道的改进。</p>
+<p>我的建议是：如果论文里报告的是 Wilcoxon 检验，仍然要写清楚你使用的 R 版本和函数设置。尤其是小样本、ties 很多、p 值接近阈值时，不同软件、不同版本、不同 exact/asymptotic 选择可能给出略有差别的结果。</p>
+</section>
+<section id="新的-free1way不是替代-anova而是补充一个更稳健的选择" class="level3">
+<h3 class="anchored" data-anchor-id="新的-free1way不是替代-anova而是补充一个更稳健的选择">3. 新的 <code>free1way()</code>：不是替代 ANOVA，而是补充一个更稳健的选择</h3>
+<p>R 4.6.0 在 <code>stats</code> 包里新增了 <code>free1way()</code>。官方说明把它描述为用于 distribution-free stratified K-sample one-way layouts 的 semiparametrically efficient inference procedure，同时配套了 <code>power.free1way.test()</code>、<code>rfree1way()</code>、诊断图和 probability-probability plots。</p>
+<p>如果只看这句话，很容易觉得离普通科研很远。换成实际问题，可以这样理解：有些比较问题并不适合简单套一元方差分析，尤其是分布形态、分层结构、非参数推断和样本量设计都需要同时考虑时，R 现在在基础 <code>stats</code> 包里提供了一个新的入口。</p>
+<p>不过，我不建议把它写成 <code>ANOVA 的新替代品</code>。对大多数医学论文来说，是否使用它仍然取决于研究问题、数据结构和读者能否理解你的方法。新函数的出现，首先是给统计方法使用者多一个工具，而不是要求所有人马上替换旧分析。</p>
+<p>比较适合关注它的人包括：</p>
+<ul>
+<li>做非参数方法、秩检验或分布无关推断的人；</li>
+<li>经常处理分层多组比较的人；</li>
+<li>需要写模拟、功效或样本量评估代码的人；</li>
+<li>维护统计课程或方法学示例代码的人。</li>
+</ul>
+<p>普通应用研究者可以先知道有这个函数，后续真正用到时再查帮助文档和原始方法背景。不要只因为它是 <code>新函数</code> 就放进论文方法部分。</p>
+</section>
+<section id="glm-诊断影响值和残差的细节更严谨" class="level3">
+<h3 class="anchored" data-anchor-id="glm-诊断影响值和残差的细节更严谨">4. GLM 诊断：影响值和残差的细节更严谨</h3>
+<p>R 4.6.0 对 <code>glm</code> 对象的影响度量也做了调整。官方 NEWS 提到，<code>weighted.residuals()</code> 现在对 <code>"glm"</code> 对象返回 weighted working residuals；<code>influence.glm()</code> 也同时包含 <code>"wt.res"</code> 和 <code>"dev.res"</code>。另外，若干 GLM 的 influence measures 改用 Pearson residuals，而不是 deviance residuals。</p>
+<p>这类变化对初学者可能不显眼，因为很多人只是调用：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> dat)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>但在真实分析里，GLM 诊断很重要。比如 logistic regression 里是否有异常点、是否有高杠杆观测、某些样本是否明显影响系数估计，这些问题不只影响模型 <code>好不好看</code>，也会影响结果解释的稳定性。</p>
+<p>这里需要注意的是，R 4.6.0 的变化可能让某些诊断输出和旧版本略有不同。如果一个项目严格复现了旧论文或旧报告中的影响值诊断结果，最好记录 R 版本，并在升级后重新跑一遍关键诊断图和诊断表。</p>
+<p>另一个小变化也和模型有关：<code>confint.default()</code> 现在只要有合适的 <code>coef()</code> 和 <code>vcov()</code> 方法，也可以用于 S4 对象；<code>hatvalues()</code> 新增了对 <code>nls</code> 结果的方法。这些对普通线性模型用户不是大新闻，但对使用 S4 类模型对象、非线性模型或扩展建模包的人，可能会让基础诊断和区间估计更顺手。</p>
+</section>
+<section id="数据初筛summarynotin-和-list.files-都更贴近日常代码" class="level3">
+<h3 class="anchored" data-anchor-id="数据初筛summarynotin-和-list.files-都更贴近日常代码">5. 数据初筛：<code>summary()</code>、<code>%notin%</code> 和 <code>list.files()</code> 都更贴近日常代码</h3>
+<p>R 4.6.0 里有几处看起来很小，但我觉得对初学者和日常分析很友好。</p>
+<p>第一是 <code>summary()</code> 对 character vectors 更有信息量。以前对字符列做 <code>summary()</code>，常常只能看到 <code>Length</code>、<code>Class</code>、<code>Mode</code>，对实际数据检查帮助有限。现在默认 <code>summary()</code> 可以提供更多字符向量信息，也可以通过 <code>character.method = "factor"</code> 按类似 factor 的方式查看分布。</p>
+<p>在医学数据清洗里，这个细节很实用。很多变量从 Excel 或 CSV 读进来以后，一开始都是 character。比如性别、科室、药物名称、检测批次、随访状态。更有信息量的 <code>summary()</code> 可以帮助我们更早发现空字符串、类别数量异常、拼写不一致等问题。</p>
+<p>第二是 base R 新增了 <code>%notin%</code>。它等价于：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>但更易读：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>group <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"case"</span>), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>我不觉得这会改变统计分析本身，但它能减少一点代码理解成本。对学生来说，<code>! x %in% y</code> 的运算顺序经常让人犹豫，写成 <code>%notin%</code> 更接近自然语言。</p>
+<p>第三是 <code>list.files()</code> 新增 <code>fixed</code> 参数，用于把 <code>pattern</code> 当作固定字符串，而不是正则表达式。比如你只是想找文件名里包含 <code>.csv</code> 的文件，就可以写：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".csv"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>这对科研项目里的批量读入文件很有帮助。很多错误不是统计方法错了，而是文件匹配错了：本来想匹配后缀 <code>.csv</code>，结果因为正则表达式里的 <code>.</code> 代表任意字符，读入了不该读的文件。<code>fixed = TRUE</code> 至少可以让简单任务少绕一点弯。</p>
+</section>
+<section id="日期匹配和一些边角修复小地方也会影响可复现" class="level3">
+<h3 class="anchored" data-anchor-id="日期匹配和一些边角修复小地方也会影响可复现">6. 日期匹配和一些边角修复：小地方也会影响可复现</h3>
+<p>官方 NEWS 里还提到，<code>&lt;Date&gt; %in% set</code> 的速度恢复到 R 4.3.0 以前的水平，并且文档更明确地说明了 <code>&lt;character&gt; %in% &lt;Date&gt;</code> 以及反向匹配的行为。</p>
+<p>这类变化不是最吸引眼球的更新，但在公卫和临床数据里，日期变量非常常见。入组日期、住院日期、随访日期、检测日期、事件发生日期，都会参与筛选和合并。</p>
+<p>如果数据量很小，你可能感觉不到差异。但在大队列或长期随访数据里，日期匹配性能和行为一致性会影响数据处理脚本的稳定性。我的习惯仍然是：在合并或匹配前，尽量显式转换日期类型，不要让 character 和 Date 隐式比较承担太多责任。</p>
+<p>类似地，<code>diff()</code> 对 matrix 的返回、<code>as.Date()</code>/<code>as.POSIXlt()</code> 的边界行为、<code>cdplot()</code> 在极低密度区间的修复，这些都不一定每天遇到。但如果你刚好踩到这些边角 bug，版本更新就不是 <code>可有可无</code> 的事情。</p>
+</section>
+<section id="论文引用和包安装和可复现有关的几件事" class="level3">
+<h3 class="anchored" data-anchor-id="论文引用和包安装和可复现有关的几件事">7. 论文引用和包安装：和可复现有关的几件事</h3>
+<p>R 4.6.0 的 <code>citation()</code> 现在给 R 本身提供了 DOI：<code>10.32614/R.manuals</code>。如果你在论文、课题报告或软件说明中引用 R，后续可以更新参考文献格式。</p>
+<p>这件事不复杂，但值得提醒学生。很多论文会写一句 <code>All analyses were performed using R version ...</code>，但并不正式引用 R。更规范的做法是同时记录 R 版本、主要包版本，并在需要时使用 <code>citation()</code> 或包的 <code>citation("pkg")</code> 生成引用信息。</p>
+<p>包安装方面，R 4.6.0 引入了新的 package integrity verification 和 package signing 机制。简单说，包可以通过 <code>SHA256</code> 文件和 GnuPG 签名来做更可靠的完整性验证。当前这主要影响包维护者、机构内镜像、服务器环境和二进制包分发，不是每个普通用户都会直接操作。</p>
+<p>但它提醒我们一件事：科研可复现不只是脚本能跑，还包括包来源、包版本、系统环境是否可追踪。对医院、实验室或课程服务器来说，长期看这类机制会越来越重要。</p>
+<p>另外，默认 C++ 标准在可用时改为 C++20；一些旧的 C++11/C++14 指定方式已经不再支持。普通 R 用户通常不会直接处理这些，但如果你安装含 C++ 代码的包，或者在 Windows/macOS 上从源码安装包，升级 R 后遇到编译报错时，需要把这个背景纳入排查。</p>
+</section>
+<section id="我会怎么升级" class="level3">
+<h3 class="anchored" data-anchor-id="我会怎么升级">8. 我会怎么升级</h3>
+<p>如果是我自己的项目，我不会在一个快要投稿或正在返修的分析项目中，马上把 R 主版本切到 4.6.0 后直接覆盖旧环境。比较稳妥的做法是：</p>
+<ol type="1">
+<li>先保留旧项目环境，尤其是 <code>renv.lock</code>、<code>sessionInfo()</code>、主要输出表格和图；</li>
+<li>在新 R 版本里单独恢复或重建环境；</li>
+<li>重新跑关键模型、主要表格和敏感性分析；</li>
+<li>对 p 值接近阈值、模型诊断依赖较强、非参数检验较多的部分多看一眼；</li>
+<li>确认无明显差异后，再把新版本用于后续项目。</li>
+</ol>
+<p>如果只是学习 R、上课、做新的练习项目，升级到 R 4.6.0 问题不大。新版本的帮助文档、基础函数细节和包安装机制会更接近未来的 R 使用方式。</p>
+<p>但如果你维护的是已有论文项目，我更建议把 R 当成科研环境的一部分，而不是一个可以随意替换的编辑器。软件版本不是越新越好，关键是可解释、可复现、可回退。</p>
+</section>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">Takeaways</h3>
+<ol type="1">
+<li><p>R 版本更新不只是 <code>有没有新函数</code>，也包括统计函数的边界行为和诊断细节。像 <code>wilcox.test()</code>、<code>glm</code> influence measures、<code>summary()</code> 这样的变化，可能会出现在真实论文分析里。</p></li>
+<li><p>升级前先问项目处在哪个阶段。新项目可以跟进新版本；正在投稿、返修或复现旧结果的项目，最好保留旧环境，再并行测试新环境。</p></li>
+<li><p>科研分析的可复现不仅是保存代码。R 版本、包版本、包来源、引用信息、日期和文件匹配规则，都是分析链条的一部分。R 4.6.0 的很多更新，其实都在提醒我们把这些细节做得更扎实一点。</p></li>
+</ol>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/leslie-lu\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "Leslie-Lu/Leslie-Lu.github.io";
+    script.dataset.repoId = "R_kgDOL6FPww";
+    script.dataset.category = "Blog comments";
+    script.dataset.categoryId = "DIC_kwDOL6FPw84CfSVZ";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "R 4.6.0 更新里，哪些变化和科研分析更相关"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-05-01</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Update R to 4.6.0: What changes matter for research analysis?"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260501211530.png</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - update</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - reproducibility</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>R 4.6.0 已经在 2026 年 4 月 24 日发布，代号是 *Because it was There*。</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>我平时看 R 的版本更新，不太会把它当成 <span class="in">`必须马上升级`</span> 的通知。对大多数医学、生物、公卫方向的科研人员来说，R 的小版本更新通常不是为了追新，而是为了判断三件事：自己的分析脚本会不会受影响，哪些新功能能减少一点重复劳动，以及在教学、论文和项目复现里有没有需要提前注意的地方。</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>这篇文章不是完整翻译官方 NEWS。R 4.6.0 的更新很多，涉及 C/C++、包开发、图形设备、帮助文档、平台构建等内容。下面我只挑出几个和统计分析、数据整理、科研复现更相关的点，尤其是普通科研使用者可能真的会遇到的变化。</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 先说结论：这不是一次 `界面变了` 的更新</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对日常使用者最直接的变化，不是菜单、界面或某个 IDE 的体验变化，而是一些基础函数、统计函数和包安装机制的细节改进。</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>我会把这次更新粗略分成五类：</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>统计检验和模型诊断相关的变化；</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>数据初步查看、文件筛选和日期匹配的改进；</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研写作与引用 R 本身的变化；</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>包安装、包完整性和编译环境相关的变化；</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>一些会影响升级判断的兼容性细节。</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>如果你只是用 RStudio 跑 <span class="in">`tidyverse`</span>、<span class="in">`survival`</span>、<span class="in">`lme4`</span>、<span class="in">`glm`</span>、<span class="in">`tableone`</span> 这类常见分析包，这次更新大概率不会让你的工作流 <span class="in">`变样`</span>。但如果你做方法学、开发内部分析包、维护课程代码，或者经常需要复现旧项目，就值得认真看一下。</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 非参数检验：`wilcox.test()` 对 ties 的处理更强了</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>医学和公卫数据里，<span class="in">`wilcox.test()`</span> 很常见。比如样本量不大、结局变量明显偏态，或者用秩和检验比较两组分布时，很多人都会用它。</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的官方 NEWS 提到，<span class="in">`wilcox.test()`</span> 现在可以在存在 ties 的情况下进行 exact conditional inference，并且可以选择用 Edgeworth series 的修正项来改进渐近 p 值。</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>这个变化听起来比较技术，但实际含义不难理解。</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>在真实医学数据里，ties 很常见。比如评分量表、检测下限导致的相同数值、整数化的住院天数、分级变量转成数值后参与比较，都会让很多观测值相同。过去一遇到 ties，很多 exact 检验就会受到限制，软件可能退回渐近近似，或者给出提醒。</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>这次更新不意味着 <span class="in">`以后 Wilcoxon 检验就不用判断前提了`</span>。它更像是在常见的 ties 场景里，让基础 R 的实现更完整一些。对教学和小样本分析来说，这是一个值得知道的改进。</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>我的建议是：如果论文里报告的是 Wilcoxon 检验，仍然要写清楚你使用的 R 版本和函数设置。尤其是小样本、ties 很多、p 值接近阈值时，不同软件、不同版本、不同 exact/asymptotic 选择可能给出略有差别的结果。</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 新的 `free1way()`：不是替代 ANOVA，而是补充一个更稳健的选择</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>R 4.6.0 在 <span class="in">`stats`</span> 包里新增了 <span class="in">`free1way()`</span>。官方说明把它描述为用于 distribution-free stratified K-sample one-way layouts 的 semiparametrically efficient inference procedure，同时配套了 <span class="in">`power.free1way.test()`</span>、<span class="in">`rfree1way()`</span>、诊断图和 probability-probability plots。</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>如果只看这句话，很容易觉得离普通科研很远。换成实际问题，可以这样理解：有些比较问题并不适合简单套一元方差分析，尤其是分布形态、分层结构、非参数推断和样本量设计都需要同时考虑时，R 现在在基础 <span class="in">`stats`</span> 包里提供了一个新的入口。</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>不过，我不建议把它写成 <span class="in">`ANOVA 的新替代品`</span>。对大多数医学论文来说，是否使用它仍然取决于研究问题、数据结构和读者能否理解你的方法。新函数的出现，首先是给统计方法使用者多一个工具，而不是要求所有人马上替换旧分析。</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>比较适合关注它的人包括：</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>做非参数方法、秩检验或分布无关推断的人；</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经常处理分层多组比较的人；</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>需要写模拟、功效或样本量评估代码的人；</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>维护统计课程或方法学示例代码的人。</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>普通应用研究者可以先知道有这个函数，后续真正用到时再查帮助文档和原始方法背景。不要只因为它是 <span class="in">`新函数`</span> 就放进论文方法部分。</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. GLM 诊断：影响值和残差的细节更严谨</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对 <span class="in">`glm`</span> 对象的影响度量也做了调整。官方 NEWS 提到，<span class="in">`weighted.residuals()`</span> 现在对 <span class="in">`"glm"`</span> 对象返回 weighted working residuals；<span class="in">`influence.glm()`</span> 也同时包含 <span class="in">`"wt.res"`</span> 和 <span class="in">`"dev.res"`</span>。另外，若干 GLM 的 influence measures 改用 Pearson residuals，而不是 deviance residuals。</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>这类变化对初学者可能不显眼，因为很多人只是调用：</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> dat)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>但在真实分析里，GLM 诊断很重要。比如 logistic regression 里是否有异常点、是否有高杠杆观测、某些样本是否明显影响系数估计，这些问题不只影响模型 <span class="in">`好不好看`</span>，也会影响结果解释的稳定性。</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>这里需要注意的是，R 4.6.0 的变化可能让某些诊断输出和旧版本略有不同。如果一个项目严格复现了旧论文或旧报告中的影响值诊断结果，最好记录 R 版本，并在升级后重新跑一遍关键诊断图和诊断表。</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>另一个小变化也和模型有关：<span class="in">`confint.default()`</span> 现在只要有合适的 <span class="in">`coef()`</span> 和 <span class="in">`vcov()`</span> 方法，也可以用于 S4 对象；<span class="in">`hatvalues()`</span> 新增了对 <span class="in">`nls`</span> 结果的方法。这些对普通线性模型用户不是大新闻，但对使用 S4 类模型对象、非线性模型或扩展建模包的人，可能会让基础诊断和区间估计更顺手。</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 数据初筛：`summary()`、`%notin%` 和 `list.files()` 都更贴近日常代码</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>R 4.6.0 里有几处看起来很小，但我觉得对初学者和日常分析很友好。</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>第一是 <span class="in">`summary()`</span> 对 character vectors 更有信息量。以前对字符列做 <span class="in">`summary()`</span>，常常只能看到 <span class="in">`Length`</span>、<span class="in">`Class`</span>、<span class="in">`Mode`</span>，对实际数据检查帮助有限。现在默认 <span class="in">`summary()`</span> 可以提供更多字符向量信息，也可以通过 <span class="in">`character.method = "factor"`</span> 按类似 factor 的方式查看分布。</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>在医学数据清洗里，这个细节很实用。很多变量从 Excel 或 CSV 读进来以后，一开始都是 character。比如性别、科室、药物名称、检测批次、随访状态。更有信息量的 <span class="in">`summary()`</span> 可以帮助我们更早发现空字符串、类别数量异常、拼写不一致等问题。</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>第二是 base R 新增了 <span class="in">`%notin%`</span>。它等价于：</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> table)</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>但更易读：</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>group <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"case"</span>), ]</span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>我不觉得这会改变统计分析本身，但它能减少一点代码理解成本。对学生来说，<span class="in">`! x %in% y`</span> 的运算顺序经常让人犹豫，写成 <span class="in">`%notin%`</span> 更接近自然语言。</span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>第三是 <span class="in">`list.files()`</span> 新增 <span class="in">`fixed`</span> 参数，用于把 <span class="in">`pattern`</span> 当作固定字符串，而不是正则表达式。比如你只是想找文件名里包含 <span class="in">`.csv`</span> 的文件，就可以写：</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".csv"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>这对科研项目里的批量读入文件很有帮助。很多错误不是统计方法错了，而是文件匹配错了：本来想匹配后缀 <span class="in">`.csv`</span>，结果因为正则表达式里的 <span class="in">`.`</span> 代表任意字符，读入了不该读的文件。<span class="in">`fixed = TRUE`</span> 至少可以让简单任务少绕一点弯。</span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 日期匹配和一些边角修复：小地方也会影响可复现</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>官方 NEWS 里还提到，<span class="in">`&lt;Date&gt; %in% set`</span> 的速度恢复到 R 4.3.0 以前的水平，并且文档更明确地说明了 <span class="in">`&lt;character&gt; %in% &lt;Date&gt;`</span> 以及反向匹配的行为。</span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>这类变化不是最吸引眼球的更新，但在公卫和临床数据里，日期变量非常常见。入组日期、住院日期、随访日期、检测日期、事件发生日期，都会参与筛选和合并。</span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>如果数据量很小，你可能感觉不到差异。但在大队列或长期随访数据里，日期匹配性能和行为一致性会影响数据处理脚本的稳定性。我的习惯仍然是：在合并或匹配前，尽量显式转换日期类型，不要让 character 和 Date 隐式比较承担太多责任。</span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>类似地，<span class="in">`diff()`</span> 对 matrix 的返回、<span class="in">`as.Date()`</span>/<span class="in">`as.POSIXlt()`</span> 的边界行为、<span class="in">`cdplot()`</span> 在极低密度区间的修复，这些都不一定每天遇到。但如果你刚好踩到这些边角 bug，版本更新就不是 <span class="in">`可有可无`</span> 的事情。</span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. 论文引用和包安装：和可复现有关的几件事</span></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的 <span class="in">`citation()`</span> 现在给 R 本身提供了 DOI：<span class="in">`10.32614/R.manuals`</span>。如果你在论文、课题报告或软件说明中引用 R，后续可以更新参考文献格式。</span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>这件事不复杂，但值得提醒学生。很多论文会写一句 <span class="in">`All analyses were performed using R version ...`</span>，但并不正式引用 R。更规范的做法是同时记录 R 版本、主要包版本，并在需要时使用 <span class="in">`citation()`</span> 或包的 <span class="in">`citation("pkg")`</span> 生成引用信息。</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>包安装方面，R 4.6.0 引入了新的 package integrity verification 和 package signing 机制。简单说，包可以通过 <span class="in">`SHA256`</span> 文件和 GnuPG 签名来做更可靠的完整性验证。当前这主要影响包维护者、机构内镜像、服务器环境和二进制包分发，不是每个普通用户都会直接操作。</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>但它提醒我们一件事：科研可复现不只是脚本能跑，还包括包来源、包版本、系统环境是否可追踪。对医院、实验室或课程服务器来说，长期看这类机制会越来越重要。</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>另外，默认 C++ 标准在可用时改为 C++20；一些旧的 C++11/C++14 指定方式已经不再支持。普通 R 用户通常不会直接处理这些，但如果你安装含 C++ 代码的包，或者在 Windows/macOS 上从源码安装包，升级 R 后遇到编译报错时，需要把这个背景纳入排查。</span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8. 我会怎么升级</span></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>如果是我自己的项目，我不会在一个快要投稿或正在返修的分析项目中，马上把 R 主版本切到 4.6.0 后直接覆盖旧环境。比较稳妥的做法是：</span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>先保留旧项目环境，尤其是 <span class="in">`renv.lock`</span>、<span class="in">`sessionInfo()`</span>、主要输出表格和图；</span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>在新 R 版本里单独恢复或重建环境；</span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>重新跑关键模型、主要表格和敏感性分析；</span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>对 p 值接近阈值、模型诊断依赖较强、非参数检验较多的部分多看一眼；</span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>确认无明显差异后，再把新版本用于后续项目。</span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>如果只是学习 R、上课、做新的练习项目，升级到 R 4.6.0 问题不大。新版本的帮助文档、基础函数细节和包安装机制会更接近未来的 R 使用方式。</span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>但如果你维护的是已有论文项目，我更建议把 R 当成科研环境的一部分，而不是一个可以随意替换的编辑器。软件版本不是越新越好，关键是可解释、可复现、可回退。</span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaways</span></span>
+<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>R 版本更新不只是 <span class="in">`有没有新函数`</span>，也包括统计函数的边界行为和诊断细节。像 <span class="in">`wilcox.test()`</span>、<span class="in">`glm`</span> influence measures、<span class="in">`summary()`</span> 这样的变化，可能会出现在真实论文分析里。</span>
+<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>升级前先问项目处在哪个阶段。新项目可以跟进新版本；正在投稿、返修或复现旧结果的项目，最好保留旧环境，再并行测试新环境。</span>
+<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研分析的可复现不仅是保存代码。R 版本、包版本、包来源、引用信息、日期和文件匹配规则，都是分析链条的一部分。R 4.6.0 的很多更新，其实都在提醒我们把这些细节做得更扎实一点。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2016–2026 Zhen Lu</span> <span class="faux-block">All content licensed under<br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></span></p>
+</div>   
+    <div class="nav-footer-center">
+<p><span class="faux-block"><i class="fa-brands fa-orcid" aria-label="orcid"></i> <strong>ORCID</strong> <a href="https://orcid.org/0000-0002-3481-6310">0000-0002-3481-6310</a></span></p>
+</div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span> <span class="faux-block"><a href="https://github.com/Leslie-Lu/Leslie-Lu.github.io">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
