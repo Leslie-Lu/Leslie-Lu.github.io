@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="基因型数据存储的基础">
+<meta name="description" content="biostat weekly issue 34">
 
-<title>理解 PLINK格式 | Zhen Lu – Zhen Lu</title>
+<title>生统爱好者周刊（第 34 期）：什么是科研直觉 | Zhen Lu – Zhen Lu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -131,7 +131,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed slimcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -229,16 +229,14 @@ div.column-margin+hr.dinkus {
 <header id="title-block-header" class="quarto-title-block default blog-post page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">理解 PLINK格式</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 34 期）：什么是科研直觉</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                   <div>
         <div class="description">
-          基因型数据存储的基础
+          biostat weekly issue 34
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">plink</div>
-                <div class="quarto-category">gwas</div>
-                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">biostat-weekly</div>
               </div>
                   </div>
   </div>
@@ -256,7 +254,7 @@ div.column-margin+hr.dinkus {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 21, 2024</p>
+        <p class="date">Friday, May 22, 2026</p>
       </div>
     </div>
     
@@ -271,9 +269,14 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#plink-数据的基本组成" id="toc-plink-数据的基本组成" class="nav-link active" data-scroll-target="#plink-数据的基本组成">PLINK 数据的基本组成</a></li>
-  <li><a href="#数据格式及其特点" id="toc-数据格式及其特点" class="nav-link" data-scroll-target="#数据格式及其特点">数据格式及其特点</a></li>
-  <li><a href="#格式的适用场景" id="toc-格式的适用场景" class="nav-link" data-scroll-target="#格式的适用场景">格式的适用场景</a></li>
+  <li><a href="#封面图" id="toc-封面图" class="nav-link active" data-scroll-target="#封面图">封面图</a></li>
+  <li><a href="#本周话题什么是科研直觉" id="toc-本周话题什么是科研直觉" class="nav-link" data-scroll-target="#本周话题什么是科研直觉">本周话题：什么是科研直觉</a></li>
+  <li><a href="#生统研究" id="toc-生统研究" class="nav-link" data-scroll-target="#生统研究">生统研究</a></li>
+  <li><a href="#博文资讯" id="toc-博文资讯" class="nav-link" data-scroll-target="#博文资讯">博文资讯</a></li>
+  <li><a href="#工具" id="toc-工具" class="nav-link" data-scroll-target="#工具">工具</a></li>
+  <li><a href="#资源" id="toc-资源" class="nav-link" data-scroll-target="#资源">资源</a></li>
+  <li><a href="#贡献者github-id" id="toc-贡献者github-id" class="nav-link" data-scroll-target="#贡献者github-id">贡献者（GitHub ID）</a></li>
+  <li><a href="#订阅" id="toc-订阅" class="nav-link" data-scroll-target="#订阅">订阅</a></li>
   </ul>
 </nav>
 </nav>
@@ -282,121 +285,97 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">PLINK</figcaption>
-</figure>
-</div>
-<section id="plink-数据的基本组成" class="level3">
-<h3 class="anchored" data-anchor-id="plink-数据的基本组成">PLINK 数据的基本组成</h3>
-<p>在 PLINK 中，基因型数据的存储由三部分信息组成：</p>
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521234949.png" class="img-fluid"></p>
+</section>
+<section id="本周话题什么是科研直觉" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题什么是科研直觉">本周话题：<a href="https://mp.weixin.qq.com/s/UOFRfEOr1f6pWSqOMxjyrw">什么是科研直觉</a></h3>
+<p>姚期智：直觉产生的前提，是你要先发现问题、想要解决问题，直觉才会随之出现。想要成为优秀的科学家，核心是学会发现问题：可以学习别人提出的好问题，也可以从别人未关注的现象中提出自己的问题。这没有固定的规范。</p>
+<p>做研究就像在黑屋子里摸索，每个人都在黑暗中凭借感知前进，感受环境的细微差异，所有人都是在摸索中前行。最终，每一位研究者都要形成属于自己的治学路径。最优秀的研究者，拥有极强的方向感。成为优秀研究者的关键，就是在探索与验证中不断建立自己的判断规律，让自己每年都比过去更有洞察力、更聪明。</p>
+<p>至于具体如何培养直觉，没有统一的方法，但最重要的是锁定方向，找到自己真正认同并愿意投入的领域。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/mvcKN85jxllBkQzNNiTXoQ">Lancet | 突破后循环溶栓壁垒，将时间窗拓展至24小时</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235421.png" class="img-fluid"></p>
+<p>本研究系全球首次将后循环梗死的静脉溶栓治疗时间窗拓展至24小时。当前临床静脉溶栓的标准治疗时间窗为4.5小时，在此时间窗内实施溶栓可获得确切疗效。然而在中国，有50%的患者无法在发病4.5小时内抵达医院，因而错失再灌注治疗机会。尽管全球各国诊疗现状存在差异，但4.5小时的时间窗限制仍是制约溶栓治疗广泛应用的关键因素，拓展治疗时间窗已成为临床亟待满足的核心需求。</p>
+<p>TRACE-5研究基于既往TRACE-3研究结果开展。TRACE-3研究已成功将前循环梗死的溶栓治疗时间窗拓展至24小时。本次TRACE-5研究则实现后循环梗死溶栓时间窗同步拓展至24小时，至此前后循环梗死均拥有晚时间窗溶栓治疗的循证医学证据，使静脉溶栓这一关键再灌注治疗手段得以覆盖更广泛的患者群体，临床应用范围得到显著拓宽。</p>
 <ul>
-<li>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</li>
-<li>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</li>
-<li>基因型矩阵：每个样本在每个位点上的基因型数据。</li>
+<li>论文 DOI：10.1016/S0140-6736(25)02633-9</li>
 </ul>
-<p>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</p>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/yhm78xMzc65msGQTRL0cag">让肥胖治疗更公平，可负担的GLP-1生物仿制药可能带来变革</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235558.png" class="img-fluid"></p>
+<p>过去十年间，GLP-1受体激动剂彻底改变了肥胖管理方式。《柳叶刀》（The Lancet）社论指出，由于成本、生产能力以及供应链的限制，GLP-1受体激动剂的全球可及性持续存在不公平现象。可负担的生物仿制药可能带来颠覆性变革。不过仅靠药物无法解决肥胖问题，但GLP-1受体激动剂可以并且应该成为整合预防、照护和治疗的系统性方案的一部分。</p>
 </section>
-<section id="数据格式及其特点" class="level3">
-<h3 class="anchored" data-anchor-id="数据格式及其特点">数据格式及其特点</h3>
-<section id="pedmap-格式" class="level4">
-<h4 class="anchored" data-anchor-id="pedmap-格式">ped/map 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/1.9/formats" title="plink 1.9">PLINK</a> 的原始标准文本格式，用于存储完整的基因型数据表。</p>
-<section id="ped-文件" class="level5">
-<h5 class="anchored" data-anchor-id="ped-文件">.ped 文件</h5>
-<p>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</p>
-<div id="1a16dba3" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <code>G G</code> 表示基因型为 GG）。</p>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/wgTKx_PWEj_nZf5z_Vc8Wg">人工智能赋能基层医疗卫生服务：进展与挑战</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235845.png" class="img-fluid"></p>
+<p>基层医疗卫生机构是我国卫生体系的重要基石。然而，受诊疗能力相对薄弱等因素制约，其服务效能仍有较大提升空间。人工智能技术的引入，为赋能基层医疗服务提供了新的可能。本文深入梳理人工智能在基层医疗卫生系统的应用进展，发现其可以辅助诊疗，助力数智化健康管理和健康教育、公共医疗服务数智化管理，同时有助于优化医疗卫生资源配置。但人工智能的应用仍面临数据质量、数据安全、伦理规范等多重挑战。展望未来，建议在国家层面集聚专家资源推进技术研发与成果转化，加快人工智能在基层医疗卫生服务中的落地应用，补齐人工智能领域立法和监管”短板”，进而助力健康中国建设。</p>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/8CUU1VpYTdzjsq3iiNk_vQ">真实世界研究如何重塑药物全生命周期</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000003.png" class="img-fluid"></p>
+<p>在2024年美国FDA批准的53个新药中，有17个将真实世界证据（RWE）作为关键支持材料，这一数字较五年前增长了近4倍。当随机对照试验（RCT）的”金标准”遭遇外部效度困境，当精准医疗呼唤更广阔的患者画像，真实世界研究（Real-World Study, RWS）正从辅助角色跃升为医药研发的”必选项”。这场静默的证据革命，正在改写药物从实验室到病床的每一步规则。</p>
 </section>
-<section id="map-文件" class="level5">
-<h5 class="anchored" data-anchor-id="map-文件">.map 文件</h5>
-<p>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</p>
-<div id="12838e89" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体:位置:参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</p>
-<p>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</p>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://github.com/showteeth/ggpie" title="ggpie包">ggpie包</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000131.png" class="img-fluid"></p>
+<p>ggpie 是一个基于 ggplot2 语法体系的 R 包，主要用于绘制饼图和环形图。该包在保持 ggplot2 分层语法与美学映射一致性的基础上，简化了饼图绘制流程，支持对分类变量比例的直观可视化，并可灵活调整标签位置、颜色和主题样式。ggpie 常用于描述性统计分析中，对分类数据构成和比例分布进行展示，适合用于基线特征、构成比或亚组分布的可视化表达。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/FjB1Mqq_3J2Hzz-Uha01Mw">huggingface库基础知识：datasets</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000437.png" class="img-fluid"></p>
+<p>在大模型训练中，数据处理的复杂程度往往不亚于模型本身。HuggingFace datasets 库提供了一个强大、灵活且高效的数据处理工具链，使得我们能够轻松加载、切分、过滤、预处理并保存各种数据集。</p>
 </section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/ICl8ljp5s2BBB8kes44Ipg">完备的 AI Agent 学习路线</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000545.png" class="img-fluid"></p>
+<p>本文目标是把社区里优秀分享、官方博客、论文、开源项目和真实工程经验，整理成一份可以照着执行的 AI Agent 学习 todo list。</p>
+<ol start="8" type="1">
+<li><a href="https://mp.weixin.qq.com/s/nyVW0haNIc2d6iKm_rg4cw">Claude Code + Opus 4.7最佳实践</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000646.png" class="img-fluid"></p>
+<p>这篇blog信息量不小，整理一下Claude Code + Opus 4.7最佳实践，给同样在用Claude Code的朋友参考。</p>
 </section>
-<section id="fambimbed-格式" class="level4">
-<h4 class="anchored" data-anchor-id="fambimbed-格式">fam/bim/bed 格式</h4>
-<p>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</p>
-<section id="fam-文件" class="level5">
-<h5 class="anchored" data-anchor-id="fam-文件">.fam 文件</h5>
-<p>样本基本信息，内容与 .ped 文件的前六列一致。</p>
-<div id="d4569759" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+</ul>
 </section>
-<section id="bim-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bim-文件">.bim 文件</h5>
-<p>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</p>
-<div id="3ccb0548" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="bed-文件" class="level5">
-<h5 class="anchored" data-anchor-id="bed-文件">.bed 文件</h5>
-<p>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</p>
-<div id="4e95b565" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</p>
-</section>
-</section>
-<section id="psampvarpgen-格式" class="level4">
-<h4 class="anchored" data-anchor-id="psampvarpgen-格式">psam/pvar/pgen 格式</h4>
-<p>这是 <a href="https://www.cog-genomics.org/plink/2.0/" title="plink 2">PLINK2</a> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</p>
-<p>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</p>
-</section>
-</section>
-<section id="格式的适用场景" class="level3">
-<h3 class="anchored" data-anchor-id="格式的适用场景">格式的适用场景</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 40%">
-<col style="width: 39%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>格式集合</th>
-<th>特点</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ped/map</td>
-<td>文本格式，直观易读，但占用空间大</td>
-<td>数据检查、数据格式初学者</td>
-</tr>
-<tr class="even">
-<td>fam/bim/bed</td>
-<td>二进制格式，存储高效，需借助软件解析</td>
-<td>大规模数据分析，如GWAS</td>
-</tr>
-<tr class="odd">
-<td>psam/pvar/pgen</td>
-<td>PLINK2格式，兼容性强，处理速度快</td>
-<td>需要复杂分析和高性能计算时</td>
-</tr>
-</tbody>
-</table>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
 
 
 <!-- -->
@@ -884,119 +863,127 @@ div.column-margin+hr.dinkus {
   }
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u7406\u89E3 PLINK\u683C\u5F0F"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-12-21</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "\u57FA\u56E0\u578B\u6570\u636E\u5B58\u50A8\u7684\u57FA\u7840"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">- plink</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">- gwas</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">- bioinformatics</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">        \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>在基因组学研究中，PLINK 是一个广泛使用的工具，用于关联分析、基因型数据处理以及数据格式转换。PLINK 以多种文件格式存储基因型数据，每种格式适用于不同的应用场景。这里，本文将介绍 PLINK 的几种主要数据格式及其特点，帮助大家更好地理解和使用这些文件。</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="al">![PLINK](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202412232106583.png)</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## PLINK 数据的基本组成</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>在 PLINK 中，基因型数据的存储由三部分信息组成：</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>个体信息：每个研究对象的基本信息，如样本 ID、性别等。</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>变异信息：每个 SNP 的基本信息，如染色体位置和碱基变化。</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>基因型矩阵：每个样本在每个位点上的基因型数据。</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>为了存储和处理这些数据，PLINK 提供了多种格式集合，包括 ped/map、fam/bim/bed 和 psam/pvar/pgen。</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据格式及其特点</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### ped/map 格式</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK</span><span class="co">](https://www.cog-genomics.org/plink/1.9/formats "plink 1.9")</span> 的原始标准文本格式，用于存储完整的基因型数据表。</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .ped 文件</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>.ped 文件包含每个样本的详细基因型数据，无标题行，每行代表一个样本。每行的前六列是样本的基本信息，后续每两个字段表示一个 SNP 的等位基因。</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A C C</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span> G G T T A A G A T C</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>字段说明：第 1-6 列：样本信息（家庭 ID、样本 ID、父母 ID、性别、表型等）。第 7 列及之后：每个 SNP 的两个等位基因（如 <span class="in">`G G`</span> 表示基因型为 GG）。</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .map 文件</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>.map 文件存储每个变异位点的信息，无标题行，每行代表一个 SNP。</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>字段说明：第 1 列：染色体编号。第 2 列：变异 ID（格式为染色体<span class="sc">:位置:</span>参考等位基因:替代等位基因）。第 3 列：遗传距离（默认为 0）。第 4 列：物理位置（以碱基为单位）。</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>优点：直观易读，便于检查数据。缺点：文件体积大，尤其是对于大规模数据。</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### fam/bim/bed 格式</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>这是 PLINK 的二进制格式，包含与 ped/map 相同的信息，但文件更小，适合大数据处理。</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .fam 文件</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>样本基本信息，内容与 .ped 文件的前六列一致。</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00403 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> HG00404 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="op">-</span><span class="dv">9</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bim 文件</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>SNP 基本信息，与 .map 文件内容相似，但增加了等位基因列。</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">13273</span>:G:C     <span class="dv">0</span>       <span class="dv">13273</span>   C       G</span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="dv">1</span>:<span class="dv">14599</span>:T:A     <span class="dv">0</span>       <span class="dv">14599</span>   A       T</span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="fu">#### .bed 文件</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>二进制格式的基因型矩阵，每个位点的数据存储为二进制编码。</span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="dv">00</span> <span class="dv">6</span><span class="er">c</span> <span class="dv">1</span><span class="er">b</span> <span class="dv">0</span><span class="er">1</span> ff ff bf bf ff ff ff ef fb ff ff ff fe</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>优点：存储效率高，适合大规模基因型数据的分析。缺点：文件内容不可直接阅读，需要通过软件解析。</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### psam/pvar/pgen 格式</span></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>这是 <span class="co">[</span><span class="ot">PLINK2</span><span class="co">](https://www.cog-genomics.org/plink/2.0/ "plink 2")</span> 引入的新格式，提供更灵活的数据管理和高效的处理能力。</span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>.psam 文件：存储个体信息。.pvar 文件：存储变异信息，与 .bim 文件相似。.pgen 文件：存储基因型矩阵的二进制文件。</span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 格式的适用场景</span></span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 格式集合         <span class="pp">|</span> 特点                             <span class="pp">|</span> 适用场景                               <span class="pp">|</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------------|-------------------------------------|------------------------------------|</span></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ped/map          <span class="pp">|</span> 文本格式，直观易读，但占用空间大 <span class="pp">|</span> 数据检查、数据格式初学者               <span class="pp">|</span></span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fam/bim/bed      <span class="pp">|</span> 二进制格式，存储高效，需借助软件解析 <span class="pp">|</span> 大规模数据分析，如GWAS                <span class="pp">|</span></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> psam/pvar/pgen   <span class="pp">|</span> PLINK2格式，兼容性强，处理速度快 <span class="pp">|</span> 需要复杂分析和高性能计算时             <span class="pp">|</span></span>
-</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 34 期）：什么是科研直觉"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-05-22</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 34"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521234949.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostat-weekly</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>这里记录每周值得分享的生统相关内容，周五发布。</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>本杂志开源（GitHub: <span class="co">[</span><span class="ot">openbiostat/biostat-weekly</span><span class="co">](https://github.com/openbiostat/biostat-weekly "openbiostat/biostat-weekly")</span>），欢迎提交 issue 投稿或推荐生统相关内容。</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">「生统爱好者周刊讨论区」</span><span class="co">](https://github.com/openbiostat/biostat-weekly/discussions "生统爱好者周刊讨论区")</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 封面图</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521234949.png)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[什么是科研直觉](https://mp.weixin.qq.com/s/UOFRfEOr1f6pWSqOMxjyrw)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>姚期智：直觉产生的前提，是你要先发现问题、想要解决问题，直觉才会随之出现。想要成为优秀的科学家，核心是学会发现问题：可以学习别人提出的好问题，也可以从别人未关注的现象中提出自己的问题。这没有固定的规范。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>做研究就像在黑屋子里摸索，每个人都在黑暗中凭借感知前进，感受环境的细微差异，所有人都是在摸索中前行。最终，每一位研究者都要形成属于自己的治学路径。最优秀的研究者，拥有极强的方向感。成为优秀研究者的关键，就是在探索与验证中不断建立自己的判断规律，让自己每年都比过去更有洞察力、更聪明。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>至于具体如何培养直觉，没有统一的方法，但最重要的是锁定方向，找到自己真正认同并愿意投入的领域。</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Lancet | 突破后循环溶栓壁垒，将时间窗拓展至24小时</span><span class="co">](https://mp.weixin.qq.com/s/mvcKN85jxllBkQzNNiTXoQ)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235421.png)</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>本研究系全球首次将后循环梗死的静脉溶栓治疗时间窗拓展至24小时。当前临床静脉溶栓的标准治疗时间窗为4.5小时，在此时间窗内实施溶栓可获得确切疗效。然而在中国，有50%的患者无法在发病4.5小时内抵达医院，因而错失再灌注治疗机会。尽管全球各国诊疗现状存在差异，但4.5小时的时间窗限制仍是制约溶栓治疗广泛应用的关键因素，拓展治疗时间窗已成为临床亟待满足的核心需求。</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>TRACE-5研究基于既往TRACE-3研究结果开展。TRACE-3研究已成功将前循环梗死的溶栓治疗时间窗拓展至24小时。本次TRACE-5研究则实现后循环梗死溶栓时间窗同步拓展至24小时，至此前后循环梗死均拥有晚时间窗溶栓治疗的循证医学证据，使静脉溶栓这一关键再灌注治疗手段得以覆盖更广泛的患者群体，临床应用范围得到显著拓宽。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1016/S0140-6736(25)02633-9</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">让肥胖治疗更公平，可负担的GLP-1生物仿制药可能带来变革</span><span class="co">](https://mp.weixin.qq.com/s/yhm78xMzc65msGQTRL0cag)</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235558.png)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>过去十年间，GLP-1受体激动剂彻底改变了肥胖管理方式。《柳叶刀》（The Lancet）社论指出，由于成本、生产能力以及供应链的限制，GLP-1受体激动剂的全球可及性持续存在不公平现象。可负担的生物仿制药可能带来颠覆性变革。不过仅靠药物无法解决肥胖问题，但GLP-1受体激动剂可以并且应该成为整合预防、照护和治疗的系统性方案的一部分。</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">人工智能赋能基层医疗卫生服务：进展与挑战</span><span class="co">](https://mp.weixin.qq.com/s/wgTKx_PWEj_nZf5z_Vc8Wg)</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260521235845.png)</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>基层医疗卫生机构是我国卫生体系的重要基石。然而，受诊疗能力相对薄弱等因素制约，其服务效能仍有较大提升空间。人工智能技术的引入，为赋能基层医疗服务提供了新的可能。本文深入梳理人工智能在基层医疗卫生系统的应用进展，发现其可以辅助诊疗，助力数智化健康管理和健康教育、公共医疗服务数智化管理，同时有助于优化医疗卫生资源配置。但人工智能的应用仍面临数据质量、数据安全、伦理规范等多重挑战。展望未来，建议在国家层面集聚专家资源推进技术研发与成果转化，加快人工智能在基层医疗卫生服务中的落地应用，补齐人工智能领域立法和监管"短板"，进而助力健康中国建设。</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">真实世界研究如何重塑药物全生命周期</span><span class="co">](https://mp.weixin.qq.com/s/8CUU1VpYTdzjsq3iiNk_vQ)</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000003.png)</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>在2024年美国FDA批准的53个新药中，有17个将真实世界证据（RWE）作为关键支持材料，这一数字较五年前增长了近4倍。当随机对照试验（RCT）的"金标准"遭遇外部效度困境，当精准医疗呼唤更广阔的患者画像，真实世界研究（Real-World Study, RWS）正从辅助角色跃升为医药研发的"必选项"。这场静默的证据革命，正在改写药物从实验室到病床的每一步规则。</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">ggpie包</span><span class="co">](https://github.com/showteeth/ggpie "ggpie包")</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000131.png)</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>ggpie 是一个基于 ggplot2 语法体系的 R 包，主要用于绘制饼图和环形图。该包在保持 ggplot2 分层语法与美学映射一致性的基础上，简化了饼图绘制流程，支持对分类变量比例的直观可视化，并可灵活调整标签位置、颜色和主题样式。ggpie 常用于描述性统计分析中，对分类数据构成和比例分布进行展示，适合用于基线特征、构成比或亚组分布的可视化表达。</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span><span class="co">[</span><span class="ot">huggingface库基础知识：datasets</span><span class="co">](https://mp.weixin.qq.com/s/FjB1Mqq_3J2Hzz-Uha01Mw)</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000437.png)</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>在大模型训练中，数据处理的复杂程度往往不亚于模型本身。HuggingFace datasets 库提供了一个强大、灵活且高效的数据处理工具链，使得我们能够轻松加载、切分、过滤、预处理并保存各种数据集。</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span><span class="co">[</span><span class="ot">完备的 AI Agent 学习路线</span><span class="co">](https://mp.weixin.qq.com/s/ICl8ljp5s2BBB8kes44Ipg)</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000545.png)</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>本文目标是把社区里优秀分享、官方博客、论文、开源项目和真实工程经验，整理成一份可以照着执行的 AI Agent 学习 todo list。</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span><span class="co">[</span><span class="ot">Claude Code + Opus 4.7最佳实践</span><span class="co">](https://mp.weixin.qq.com/s/nyVW0haNIc2d6iKm_rg4cw)</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260522000646.png)</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>这篇blog信息量不小，整理一下Claude Code + Opus 4.7最佳实践，给同样在用Claude Code的朋友参考。</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<span class="in">`陆震生物统计`</span>或者扫描二维码，即可订阅。</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png)</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>同时，本周刊同步支持 <span class="co">[</span><span class="ot">RSS 订阅</span><span class="co">](https://leslie-lu.github.io/biostat_weekly_rss.xml "生统爱好者周刊 RSS 订阅")</span>；本周刊同名中文播客现已正式在<span class="co">[</span><span class="ot">苹果播客（Apple Podcasts）</span><span class="co">](https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB "Apple Podcasts 订阅")</span>和<span class="co">[</span><span class="ot">小宇宙</span><span class="co">](https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e "小宇宙订阅")</span>平台上线，搜索<span class="in">`生统爱好者周刊`</span>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
