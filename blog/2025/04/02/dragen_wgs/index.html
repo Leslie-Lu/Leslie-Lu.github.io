@@ -797,7 +797,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - graph-typer</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - dragen</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -807,7 +807,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -816,21 +816,38 @@ div.column-margin+hr.dinkus {
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 引言</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>随着高通量测序技术的飞速发展，全基因组测序（WGS）已成为精准医学和基因组学研究的重要支柱。然而，WGS 数据分析是一项复杂任务，尤其是变异检测环节，需要兼顾准确性、速度和易用性。GATK、GraphTyper 和 DRAGEN 正是这一领域的代表性工具，它们通过不同的技术手段，满足了不同的分析需求。</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>这里我们将深入探讨这三种工具的区别与联系，帮助更好地理解它们在 WGS 数据分析中的应用。</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## GATK：业界标准</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>GATK（Genome Analysis Toolkit）是由 Broad Institute 开发的一套开源工具集，专为高通量测序数据分析设计。它在变异检测方面表现尤为突出，能够精准识别单核苷酸变异（SNV）和插入缺失（Indel）。作为 WGS 数据分析的业界标准，GATK 被广泛应用于人类基因组研究。GATK 提供从原始数据（BAM）到变异结果（VCF）的全流程解决方案，以严谨的<span class="in">`最佳实践`</span>著称，适合需要高度定制化分析的研究项目，尤其是在追求准确性和灵活性时。其通过多步骤流程（包括 reads 比对、变异调用和过滤）确保结果可靠。</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>随着高通量测序技术的飞速发展，全基因组测序（WGS）已成为精准医学和基因组学研究的重要支柱。然而，WGS</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>数据分析是一项复杂任务，尤其是变异检测环节，需要兼顾准确性、速度和易用性。GATK、GraphTyper</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>和 DRAGEN</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>正是这一领域的代表性工具，它们通过不同的技术手段，满足了不同的分析需求。</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>这里我们将深入探讨这三种工具的区别与联系，帮助更好地理解它们在 WGS</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>数据分析中的应用。</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## GraphTyper：基于图的变异检测</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## GATK：业界标准</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>GraphTyper 是一种创新的变异检测工具，采用变异感知的基因组图（variation-aware genome graph）技术。与传统基于线性参考基因组的方法不同，它通过构建包含变异信息的图结构来比对测序 reads，从而减少参考等位基因偏倚。GraphTyper 特别适用于基因组复杂区域的变异检测，或需要提升检测灵敏度的研究，尤其在 SNV 和 Indel 检测中表现出色，因而适合处理大规模 WGS 数据，广泛用于群体遗传学研究。</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## DRAGEN：硬件加速的快速分析平台</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>DRAGEN（Dynamic Read Analysis for GENomics）是 Illumina 推出的硬件加速平台，利用 FPGA（现场可编程门阵列）技术实现超快速数据处理。它能够从原始 reads 到变异检测的全流程分析，效率远超传统软件工具。对于 30X 覆盖度的 WGS 数据，DRAGEN可在约30分钟内完成分析，极大地缩短了数据处理时间。除了 SNV 和 Indel，还能检测短串联重复（STR）、结构变异（SV）和拷贝数变异（CNV）。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>GATK（Genome Analysis Toolkit）是由 Broad Institute</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>开发的一套开源工具集，专为高通量测序数据分析设计。它在变异检测方面表现尤为突出，能够精准识别单核苷酸变异（SNV）和插入缺失（Indel）。作为</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>WGS 数据分析的业界标准，GATK 被广泛应用于人类基因组研究。GATK</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>提供从原始数据（BAM）到变异结果（VCF）的全流程解决方案，以严谨的<span class="in">`最佳实践`</span>著称，适合需要高度定制化分析的研究项目，尤其是在追求准确性和灵活性时。其通过多步骤流程（包括</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>reads 比对、变异调用和过滤）确保结果可靠。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## GraphTyper：基于图的变异检测</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>GraphTyper 是一种创新的变异检测工具，采用变异感知的基因组图（variation-aware</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>genome</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>graph）技术。与传统基于线性参考基因组的方法不同，它通过构建包含变异信息的图结构来比对测序</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>reads，从而减少参考等位基因偏倚。GraphTyper</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>特别适用于基因组复杂区域的变异检测，或需要提升检测灵敏度的研究，尤其在 SNV 和</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>Indel 检测中表现出色，因而适合处理大规模 WGS 数据，广泛用于群体遗传学研究。</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## DRAGEN：硬件加速的快速分析平台</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>DRAGEN（Dynamic Read Analysis for GENomics）是 Illumina 推出的硬件加速平台，利用</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>FPGA（现场可编程门阵列）技术实现超快速数据处理。它能够从原始 reads</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>到变异检测的全流程分析，效率远超传统软件工具。对于 30X 覆盖度的 WGS</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>数据，DRAGEN可在约30分钟内完成分析，极大地缩短了数据处理时间。除了 SNV 和</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>Indel，还能检测短串联重复（STR）、结构变异（SV）和拷贝数变异（CNV）。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

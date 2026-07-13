@@ -878,7 +878,7 @@ div.column-margin+hr.dinkus {
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - update</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - reproducibility</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -888,7 +888,7 @@ div.column-margin+hr.dinkus {
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -897,145 +897,210 @@ div.column-margin+hr.dinkus {
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>R 4.6.0 已经在 2026 年 4 月 24 日发布，代号是 *Because it was There*。</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>我平时看 R 的版本更新，不太会把它当成 <span class="in">`必须马上升级`</span> 的通知。对大多数医学、生物、公卫方向的科研人员来说，R 的小版本更新通常不是为了追新，而是为了判断三件事：自己的分析脚本会不会受影响，哪些新功能能减少一点重复劳动，以及在教学、论文和项目复现里有没有需要提前注意的地方。</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>这篇文章不是完整翻译官方 NEWS。R 4.6.0 的更新很多，涉及 C/C++、包开发、图形设备、帮助文档、平台构建等内容。下面我只挑出几个和统计分析、数据整理、科研复现更相关的点，尤其是普通科研使用者可能真的会遇到的变化。</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>我平时看 R 的版本更新，不太会把它当成 <span class="in">`必须马上升级`</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>的通知。对大多数医学、生物、公卫方向的科研人员来说，R</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>的小版本更新通常不是为了追新，而是为了判断三件事：自己的分析脚本会不会受影响，哪些新功能能减少一点重复劳动，以及在教学、论文和项目复现里有没有需要提前注意的地方。</span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 先说结论：这不是一次 `界面变了` 的更新</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对日常使用者最直接的变化，不是菜单、界面或某个 IDE 的体验变化，而是一些基础函数、统计函数和包安装机制的细节改进。</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>我会把这次更新粗略分成五类：</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>统计检验和模型诊断相关的变化；</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>数据初步查看、文件筛选和日期匹配的改进；</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研写作与引用 R 本身的变化；</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>包安装、包完整性和编译环境相关的变化；</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>一些会影响升级判断的兼容性细节。</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>如果你只是用 RStudio 跑 <span class="in">`tidyverse`</span>、<span class="in">`survival`</span>、<span class="in">`lme4`</span>、<span class="in">`glm`</span>、<span class="in">`tableone`</span> 这类常见分析包，这次更新大概率不会让你的工作流 <span class="in">`变样`</span>。但如果你做方法学、开发内部分析包、维护课程代码，或者经常需要复现旧项目，就值得认真看一下。</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 非参数检验：`wilcox.test()` 对 ties 的处理更强了</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>这篇文章不是完整翻译官方 NEWS。R 4.6.0 的更新很多，涉及</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>C/C++、包开发、图形设备、帮助文档、平台构建等内容。下面我只挑出几个和统计分析、数据整理、科研复现更相关的点，尤其是普通科研使用者可能真的会遇到的变化。</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 先说结论：这不是一次 `界面变了` 的更新</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对日常使用者最直接的变化，不是菜单、界面或某个 IDE</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>的体验变化，而是一些基础函数、统计函数和包安装机制的细节改进。</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>我会把这次更新粗略分成五类：</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>统计检验和模型诊断相关的变化；</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>数据初步查看、文件筛选和日期匹配的改进；</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研写作与引用 R 本身的变化；</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>包安装、包完整性和编译环境相关的变化；</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>一些会影响升级判断的兼容性细节。</span>
 <span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>医学和公卫数据里，<span class="in">`wilcox.test()`</span> 很常见。比如样本量不大、结局变量明显偏态，或者用秩和检验比较两组分布时，很多人都会用它。</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的官方 NEWS 提到，<span class="in">`wilcox.test()`</span> 现在可以在存在 ties 的情况下进行 exact conditional inference，并且可以选择用 Edgeworth series 的修正项来改进渐近 p 值。</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>如果你只是用 RStudio 跑 <span class="in">`tidyverse`</span>、<span class="in">`survival`</span>、<span class="in">`lme4`</span>、<span class="in">`glm`</span>、<span class="in">`tableone`</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>这类常见分析包，这次更新大概率不会让你的工作流</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="in">`变样`</span>。但如果你做方法学、开发内部分析包、维护课程代码，或者经常需要复现旧项目，就值得认真看一下。</span>
 <span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>这个变化听起来比较技术，但实际含义不难理解。</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 非参数检验：`wilcox.test()` 对 ties 的处理更强了</span></span>
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>在真实医学数据里，ties 很常见。比如评分量表、检测下限导致的相同数值、整数化的住院天数、分级变量转成数值后参与比较，都会让很多观测值相同。过去一遇到 ties，很多 exact 检验就会受到限制，软件可能退回渐近近似，或者给出提醒。</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>这次更新不意味着 <span class="in">`以后 Wilcoxon 检验就不用判断前提了`</span>。它更像是在常见的 ties 场景里，让基础 R 的实现更完整一些。对教学和小样本分析来说，这是一个值得知道的改进。</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>我的建议是：如果论文里报告的是 Wilcoxon 检验，仍然要写清楚你使用的 R 版本和函数设置。尤其是小样本、ties 很多、p 值接近阈值时，不同软件、不同版本、不同 exact/asymptotic 选择可能给出略有差别的结果。</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>医学和公卫数据里，<span class="in">`wilcox.test()`</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>很常见。比如样本量不大、结局变量明显偏态，或者用秩和检验比较两组分布时，很多人都会用它。</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的官方 NEWS 提到，<span class="in">`wilcox.test()`</span> 现在可以在存在 ties 的情况下进行 exact</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>conditional inference，并且可以选择用 Edgeworth series 的修正项来改进渐近 p 值。</span>
 <span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 新的 `free1way()`：不是替代 ANOVA，而是补充一个更稳健的选择</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>这个变化听起来比较技术，但实际含义不难理解。</span>
 <span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>R 4.6.0 在 <span class="in">`stats`</span> 包里新增了 <span class="in">`free1way()`</span>。官方说明把它描述为用于 distribution-free stratified K-sample one-way layouts 的 semiparametrically efficient inference procedure，同时配套了 <span class="in">`power.free1way.test()`</span>、<span class="in">`rfree1way()`</span>、诊断图和 probability-probability plots。</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>如果只看这句话，很容易觉得离普通科研很远。换成实际问题，可以这样理解：有些比较问题并不适合简单套一元方差分析，尤其是分布形态、分层结构、非参数推断和样本量设计都需要同时考虑时，R 现在在基础 <span class="in">`stats`</span> 包里提供了一个新的入口。</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>在真实医学数据里，ties</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>很常见。比如评分量表、检测下限导致的相同数值、整数化的住院天数、分级变量转成数值后参与比较，都会让很多观测值相同。过去一遇到</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>ties，很多 exact 检验就会受到限制，软件可能退回渐近近似，或者给出提醒。</span>
 <span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>不过，我不建议把它写成 <span class="in">`ANOVA 的新替代品`</span>。对大多数医学论文来说，是否使用它仍然取决于研究问题、数据结构和读者能否理解你的方法。新函数的出现，首先是给统计方法使用者多一个工具，而不是要求所有人马上替换旧分析。</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>比较适合关注它的人包括：</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>这次更新不意味着 <span class="in">`以后 Wilcoxon 检验就不用判断前提了`</span>。它更像是在常见的 ties</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>场景里，让基础 R</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>的实现更完整一些。对教学和小样本分析来说，这是一个值得知道的改进。</span>
 <span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>做非参数方法、秩检验或分布无关推断的人；</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经常处理分层多组比较的人；</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>需要写模拟、功效或样本量评估代码的人；</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>维护统计课程或方法学示例代码的人。</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>我的建议是：如果论文里报告的是 Wilcoxon 检验，仍然要写清楚你使用的 R</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>版本和函数设置。尤其是小样本、ties 很多、p</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>值接近阈值时，不同软件、不同版本、不同 exact/asymptotic</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>选择可能给出略有差别的结果。</span>
 <span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>普通应用研究者可以先知道有这个函数，后续真正用到时再查帮助文档和原始方法背景。不要只因为它是 <span class="in">`新函数`</span> 就放进论文方法部分。</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 新的 `free1way()`：不是替代 ANOVA，而是补充一个更稳健的选择</span></span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. GLM 诊断：影响值和残差的细节更严谨</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对 <span class="in">`glm`</span> 对象的影响度量也做了调整。官方 NEWS 提到，<span class="in">`weighted.residuals()`</span> 现在对 <span class="in">`"glm"`</span> 对象返回 weighted working residuals；<span class="in">`influence.glm()`</span> 也同时包含 <span class="in">`"wt.res"`</span> 和 <span class="in">`"dev.res"`</span>。另外，若干 GLM 的 influence measures 改用 Pearson residuals，而不是 deviance residuals。</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>这类变化对初学者可能不显眼，因为很多人只是调用：</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> dat)</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>R 4.6.0 在 <span class="in">`stats`</span> 包里新增了 <span class="in">`free1way()`</span>。官方说明把它描述为用于</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>distribution-free stratified K-sample one-way layouts 的 semiparametrically</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>efficient inference procedure，同时配套了</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="in">`power.free1way.test()`</span>、<span class="in">`rfree1way()`</span>、诊断图和 probability-probability plots。</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>如果只看这句话，很容易觉得离普通科研很远。换成实际问题，可以这样理解：有些比较问题并不适合简单套一元方差分析，尤其是分布形态、分层结构、非参数推断和样本量设计都需要同时考虑时，R</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>现在在基础 <span class="in">`stats`</span> 包里提供了一个新的入口。</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>不过，我不建议把它写成</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="in">`ANOVA 的新替代品`</span>。对大多数医学论文来说，是否使用它仍然取决于研究问题、数据结构和读者能否理解你的方法。新函数的出现，首先是给统计方法使用者多一个工具，而不是要求所有人马上替换旧分析。</span>
 <span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>但在真实分析里，GLM 诊断很重要。比如 logistic regression 里是否有异常点、是否有高杠杆观测、某些样本是否明显影响系数估计，这些问题不只影响模型 <span class="in">`好不好看`</span>，也会影响结果解释的稳定性。</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>比较适合关注它的人包括：</span>
 <span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>这里需要注意的是，R 4.6.0 的变化可能让某些诊断输出和旧版本略有不同。如果一个项目严格复现了旧论文或旧报告中的影响值诊断结果，最好记录 R 版本，并在升级后重新跑一遍关键诊断图和诊断表。</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>另一个小变化也和模型有关：<span class="in">`confint.default()`</span> 现在只要有合适的 <span class="in">`coef()`</span> 和 <span class="in">`vcov()`</span> 方法，也可以用于 S4 对象；<span class="in">`hatvalues()`</span> 新增了对 <span class="in">`nls`</span> 结果的方法。这些对普通线性模型用户不是大新闻，但对使用 S4 类模型对象、非线性模型或扩展建模包的人，可能会让基础诊断和区间估计更顺手。</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 数据初筛：`summary()`、`%notin%` 和 `list.files()` 都更贴近日常代码</span></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>R 4.6.0 里有几处看起来很小，但我觉得对初学者和日常分析很友好。</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>做非参数方法、秩检验或分布无关推断的人；</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经常处理分层多组比较的人；</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>需要写模拟、功效或样本量评估代码的人；</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>维护统计课程或方法学示例代码的人。</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>普通应用研究者可以先知道有这个函数，后续真正用到时再查帮助文档和原始方法背景。不要只因为它是</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="in">`新函数`</span> 就放进论文方法部分。</span>
 <span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>第一是 <span class="in">`summary()`</span> 对 character vectors 更有信息量。以前对字符列做 <span class="in">`summary()`</span>，常常只能看到 <span class="in">`Length`</span>、<span class="in">`Class`</span>、<span class="in">`Mode`</span>，对实际数据检查帮助有限。现在默认 <span class="in">`summary()`</span> 可以提供更多字符向量信息，也可以通过 <span class="in">`character.method = "factor"`</span> 按类似 factor 的方式查看分布。</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. GLM 诊断：影响值和残差的细节更严谨</span></span>
 <span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>在医学数据清洗里，这个细节很实用。很多变量从 Excel 或 CSV 读进来以后，一开始都是 character。比如性别、科室、药物名称、检测批次、随访状态。更有信息量的 <span class="in">`summary()`</span> 可以帮助我们更早发现空字符串、类别数量异常、拼写不一致等问题。</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>第二是 base R 新增了 <span class="in">`%notin%`</span>。它等价于：</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> table)</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>但更易读：</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>group <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"case"</span>), ]</span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>我不觉得这会改变统计分析本身，但它能减少一点代码理解成本。对学生来说，<span class="in">`! x %in% y`</span> 的运算顺序经常让人犹豫，写成 <span class="in">`%notin%`</span> 更接近自然语言。</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>R 4.6.0 对 <span class="in">`glm`</span> 对象的影响度量也做了调整。官方 NEWS</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>提到，<span class="in">`weighted.residuals()`</span> 现在对 <span class="in">`"glm"`</span> 对象返回 weighted working</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>residuals；<span class="in">`influence.glm()`</span> 也同时包含 <span class="in">`"wt.res"`</span> 和 <span class="in">`"dev.res"`</span>。另外，若干</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>GLM 的 influence measures 改用 Pearson residuals，而不是 deviance residuals。</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>这类变化对初学者可能不显眼，因为很多人只是调用：</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> dat)</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>但在真实分析里，GLM 诊断很重要。比如 logistic regression</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>里是否有异常点、是否有高杠杆观测、某些样本是否明显影响系数估计，这些问题不只影响模型</span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="in">`好不好看`</span>，也会影响结果解释的稳定性。</span>
 <span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>第三是 <span class="in">`list.files()`</span> 新增 <span class="in">`fixed`</span> 参数，用于把 <span class="in">`pattern`</span> 当作固定字符串，而不是正则表达式。比如你只是想找文件名里包含 <span class="in">`.csv`</span> 的文件，就可以写：</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".csv"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>这对科研项目里的批量读入文件很有帮助。很多错误不是统计方法错了，而是文件匹配错了：本来想匹配后缀 <span class="in">`.csv`</span>，结果因为正则表达式里的 <span class="in">`.`</span> 代表任意字符，读入了不该读的文件。<span class="in">`fixed = TRUE`</span> 至少可以让简单任务少绕一点弯。</span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 日期匹配和一些边角修复：小地方也会影响可复现</span></span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>官方 NEWS 里还提到，<span class="in">`&lt;Date&gt; %in% set`</span> 的速度恢复到 R 4.3.0 以前的水平，并且文档更明确地说明了 <span class="in">`&lt;character&gt; %in% &lt;Date&gt;`</span> 以及反向匹配的行为。</span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>这类变化不是最吸引眼球的更新，但在公卫和临床数据里，日期变量非常常见。入组日期、住院日期、随访日期、检测日期、事件发生日期，都会参与筛选和合并。</span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>如果数据量很小，你可能感觉不到差异。但在大队列或长期随访数据里，日期匹配性能和行为一致性会影响数据处理脚本的稳定性。我的习惯仍然是：在合并或匹配前，尽量显式转换日期类型，不要让 character 和 Date 隐式比较承担太多责任。</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>类似地，<span class="in">`diff()`</span> 对 matrix 的返回、<span class="in">`as.Date()`</span>/<span class="in">`as.POSIXlt()`</span> 的边界行为、<span class="in">`cdplot()`</span> 在极低密度区间的修复，这些都不一定每天遇到。但如果你刚好踩到这些边角 bug，版本更新就不是 <span class="in">`可有可无`</span> 的事情。</span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. 论文引用和包安装：和可复现有关的几件事</span></span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的 <span class="in">`citation()`</span> 现在给 R 本身提供了 DOI：<span class="in">`10.32614/R.manuals`</span>。如果你在论文、课题报告或软件说明中引用 R，后续可以更新参考文献格式。</span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>这件事不复杂，但值得提醒学生。很多论文会写一句 <span class="in">`All analyses were performed using R version ...`</span>，但并不正式引用 R。更规范的做法是同时记录 R 版本、主要包版本，并在需要时使用 <span class="in">`citation()`</span> 或包的 <span class="in">`citation("pkg")`</span> 生成引用信息。</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>包安装方面，R 4.6.0 引入了新的 package integrity verification 和 package signing 机制。简单说，包可以通过 <span class="in">`SHA256`</span> 文件和 GnuPG 签名来做更可靠的完整性验证。当前这主要影响包维护者、机构内镜像、服务器环境和二进制包分发，不是每个普通用户都会直接操作。</span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>但它提醒我们一件事：科研可复现不只是脚本能跑，还包括包来源、包版本、系统环境是否可追踪。对医院、实验室或课程服务器来说，长期看这类机制会越来越重要。</span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>另外，默认 C++ 标准在可用时改为 C++20；一些旧的 C++11/C++14 指定方式已经不再支持。普通 R 用户通常不会直接处理这些，但如果你安装含 C++ 代码的包，或者在 Windows/macOS 上从源码安装包，升级 R 后遇到编译报错时，需要把这个背景纳入排查。</span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8. 我会怎么升级</span></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>如果是我自己的项目，我不会在一个快要投稿或正在返修的分析项目中，马上把 R 主版本切到 4.6.0 后直接覆盖旧环境。比较稳妥的做法是：</span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>先保留旧项目环境，尤其是 <span class="in">`renv.lock`</span>、<span class="in">`sessionInfo()`</span>、主要输出表格和图；</span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>在新 R 版本里单独恢复或重建环境；</span>
-<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>重新跑关键模型、主要表格和敏感性分析；</span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>对 p 值接近阈值、模型诊断依赖较强、非参数检验较多的部分多看一眼；</span>
-<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>确认无明显差异后，再把新版本用于后续项目。</span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>如果只是学习 R、上课、做新的练习项目，升级到 R 4.6.0 问题不大。新版本的帮助文档、基础函数细节和包安装机制会更接近未来的 R 使用方式。</span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>这里需要注意的是，R 4.6.0</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>的变化可能让某些诊断输出和旧版本略有不同。如果一个项目严格复现了旧论文或旧报告中的影响值诊断结果，最好记录</span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>R 版本，并在升级后重新跑一遍关键诊断图和诊断表。</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>另一个小变化也和模型有关：<span class="in">`confint.default()`</span> 现在只要有合适的 <span class="in">`coef()`</span> 和</span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="in">`vcov()`</span> 方法，也可以用于 S4 对象；<span class="in">`hatvalues()`</span> 新增了对 <span class="in">`nls`</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>结果的方法。这些对普通线性模型用户不是大新闻，但对使用 S4</span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>类模型对象、非线性模型或扩展建模包的人，可能会让基础诊断和区间估计更顺手。</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 数据初筛：`summary()`、`%notin%` 和 `list.files()` 都更贴近日常代码</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>R 4.6.0 里有几处看起来很小，但我觉得对初学者和日常分析很友好。</span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>第一是 <span class="in">`summary()`</span> 对 character vectors 更有信息量。以前对字符列做</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="in">`summary()`</span>，常常只能看到</span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="in">`Length`</span>、<span class="in">`Class`</span>、<span class="in">`Mode`</span>，对实际数据检查帮助有限。现在默认 <span class="in">`summary()`</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>可以提供更多字符向量信息，也可以通过 <span class="in">`character.method = "factor"`</span> 按类似 factor</span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>的方式查看分布。</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>在医学数据清洗里，这个细节很实用。很多变量从 Excel 或 CSV 读进来以后，一开始都是</span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>character。比如性别、科室、药物名称、检测批次、随访状态。更有信息量的</span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a><span class="in">`summary()`</span> 可以帮助我们更早发现空字符串、类别数量异常、拼写不一致等问题。</span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>第二是 base R 新增了 <span class="in">`%notin%`</span>。它等价于：</span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> table)</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>但更易读：</span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>group <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"case"</span>), ]</span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>我不觉得这会改变统计分析本身，但它能减少一点代码理解成本。对学生来说，<span class="in">`! x %in% y`</span></span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a>的运算顺序经常让人犹豫，写成 <span class="in">`%notin%`</span> 更接近自然语言。</span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a>第三是 <span class="in">`list.files()`</span> 新增 <span class="in">`fixed`</span> 参数，用于把 <span class="in">`pattern`</span></span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>当作固定字符串，而不是正则表达式。比如你只是想找文件名里包含 <span class="in">`.csv`</span></span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>的文件，就可以写：</span>
 <span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>但如果你维护的是已有论文项目，我更建议把 R 当成科研环境的一部分，而不是一个可以随意替换的编辑器。软件版本不是越新越好，关键是可解释、可复现、可回退。</span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaways</span></span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".csv"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>R 版本更新不只是 <span class="in">`有没有新函数`</span>，也包括统计函数的边界行为和诊断细节。像 <span class="in">`wilcox.test()`</span>、<span class="in">`glm`</span> influence measures、<span class="in">`summary()`</span> 这样的变化，可能会出现在真实论文分析里。</span>
-<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>升级前先问项目处在哪个阶段。新项目可以跟进新版本；正在投稿、返修或复现旧结果的项目，最好保留旧环境，再并行测试新环境。</span>
+<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a>这对科研项目里的批量读入文件很有帮助。很多错误不是统计方法错了，而是文件匹配错了：本来想匹配后缀</span>
+<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a><span class="in">`.csv`</span>，结果因为正则表达式里的 <span class="in">`.`</span></span>
+<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>代表任意字符，读入了不该读的文件。<span class="in">`fixed = TRUE`</span> 至少可以让简单任务少绕一点弯。</span>
 <span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研分析的可复现不仅是保存代码。R 版本、包版本、包来源、引用信息、日期和文件匹配规则，都是分析链条的一部分。R 4.6.0 的很多更新，其实都在提醒我们把这些细节做得更扎实一点。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 日期匹配和一些边角修复：小地方也会影响可复现</span></span>
+<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a>官方 NEWS 里还提到，<span class="in">`&lt;Date&gt; %in% set`</span> 的速度恢复到 R 4.3.0</span>
+<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a>以前的水平，并且文档更明确地说明了 <span class="in">`&lt;character&gt; %in% &lt;Date&gt;`</span></span>
+<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>以及反向匹配的行为。</span>
+<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>这类变化不是最吸引眼球的更新，但在公卫和临床数据里，日期变量非常常见。入组日期、住院日期、随访日期、检测日期、事件发生日期，都会参与筛选和合并。</span>
+<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a>如果数据量很小，你可能感觉不到差异。但在大队列或长期随访数据里，日期匹配性能和行为一致性会影响数据处理脚本的稳定性。我的习惯仍然是：在合并或匹配前，尽量显式转换日期类型，不要让</span>
+<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>character 和 Date 隐式比较承担太多责任。</span>
+<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a>类似地，<span class="in">`diff()`</span> 对 matrix 的返回、<span class="in">`as.Date()`</span>/<span class="in">`as.POSIXlt()`</span></span>
+<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a>的边界行为、<span class="in">`cdplot()`</span></span>
+<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a>在极低密度区间的修复，这些都不一定每天遇到。但如果你刚好踩到这些边角</span>
+<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>bug，版本更新就不是 <span class="in">`可有可无`</span> 的事情。</span>
+<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. 论文引用和包安装：和可复现有关的几件事</span></span>
+<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a>R 4.6.0 的 <span class="in">`citation()`</span> 现在给 R 本身提供了</span>
+<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a>DOI：<span class="in">`10.32614/R.manuals`</span>。如果你在论文、课题报告或软件说明中引用</span>
+<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>R，后续可以更新参考文献格式。</span>
+<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a>这件事不复杂，但值得提醒学生。很多论文会写一句</span>
+<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a><span class="in">`All analyses were performed using R version ...`</span>，但并不正式引用</span>
+<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>R。更规范的做法是同时记录 R 版本、主要包版本，并在需要时使用 <span class="in">`citation()`</span> 或包的</span>
+<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a><span class="in">`citation("pkg")`</span> 生成引用信息。</span>
+<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a>包安装方面，R 4.6.0 引入了新的 package integrity verification 和 package signing</span>
+<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a>机制。简单说，包可以通过 <span class="in">`SHA256`</span> 文件和 GnuPG</span>
+<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a>签名来做更可靠的完整性验证。当前这主要影响包维护者、机构内镜像、服务器环境和二进制包分发，不是每个普通用户都会直接操作。</span>
+<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a>但它提醒我们一件事：科研可复现不只是脚本能跑，还包括包来源、包版本、系统环境是否可追踪。对医院、实验室或课程服务器来说，长期看这类机制会越来越重要。</span>
+<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>另外，默认 C++ 标准在可用时改为 C++20；一些旧的 C++11/C++14</span>
+<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>指定方式已经不再支持。普通 R 用户通常不会直接处理这些，但如果你安装含 C++</span>
+<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a>代码的包，或者在 Windows/macOS 上从源码安装包，升级 R</span>
+<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a>后遇到编译报错时，需要把这个背景纳入排查。</span>
+<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8. 我会怎么升级</span></span>
+<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a>如果是我自己的项目，我不会在一个快要投稿或正在返修的分析项目中，马上把 R</span>
+<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a>主版本切到 4.6.0 后直接覆盖旧环境。比较稳妥的做法是：</span>
+<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>先保留旧项目环境，尤其是 <span class="in">`renv.lock`</span>、<span class="in">`sessionInfo()`</span>、主要输出表格和图；</span>
+<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>在新 R 版本里单独恢复或重建环境；</span>
+<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>重新跑关键模型、主要表格和敏感性分析；</span>
+<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>对 p 值接近阈值、模型诊断依赖较强、非参数检验较多的部分多看一眼；</span>
+<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>确认无明显差异后，再把新版本用于后续项目。</span>
+<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>如果只是学习 R、上课、做新的练习项目，升级到 R 4.6.0</span>
+<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>问题不大。新版本的帮助文档、基础函数细节和包安装机制会更接近未来的 R 使用方式。</span>
+<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a>但如果你维护的是已有论文项目，我更建议把 R</span>
+<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a>当成科研环境的一部分，而不是一个可以随意替换的编辑器。软件版本不是越新越好，关键是可解释、可复现、可回退。</span>
+<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaways</span></span>
+<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>R 版本更新不只是 <span class="in">`有没有新函数`</span>，也包括统计函数的边界行为和诊断细节。像</span>
+<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a>   <span class="in">`wilcox.test()`</span>、<span class="in">`glm`</span> influence measures、<span class="in">`summary()`</span></span>
+<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a>   这样的变化，可能会出现在真实论文分析里。</span>
+<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>升级前先问项目处在哪个阶段。新项目可以跟进新版本；正在投稿、返修或复现旧结果的项目，最好保留旧环境，再并行测试新环境。</span>
+<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>科研分析的可复现不仅是保存代码。R</span>
+<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a>   版本、包版本、包来源、引用信息、日期和文件匹配规则，都是分析链条的一部分。R</span>
+<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>   4.6.0 的很多更新，其实都在提醒我们把这些细节做得更扎实一点。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -286,7 +286,7 @@ div.column-margin+hr.dinkus {
 </figure>
 </div>
 <p>将此向量存储为(1, 2, 1, 1)，并在内部将其关联为1=Type1和2=Type2（具体赋值根据字母顺序决定）。针对向量diabetes进行的任何分析都会将其视为名义型变量并自动选择合适的统计方法。</p>
-<p>在R中，因子可以简单地看作一个附加更多信息的向量（尽管它们内部机理是不同的）。这额外的信息包括向量中不同值的记录，我们称之为“水平”。</p>
+<p>在R中，因子可以简单地看作一个附加更多信息的向量（尽管它们内部机理是不同的）。这额外的信息包括向量中不同值的记录，我们称之为”水平”。</p>
 <p>要表示有序型变量，需要为函数factor()指定参数ordered=TRUE，如：</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -797,7 +797,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - programming</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -807,7 +807,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -824,17 +824,18 @@ div.column-margin+hr.dinkus {
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="al">![factor](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231514840.webp)</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>将此向量存储为(1, 2, 1, 1)，并在内部将其关联为1=Type1和2=Type2（具体赋值根据字母顺序决定）。针对向量diabetes进行的任何分析都会将其视为名义型变量并自动选择合适的统计方法。</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>在R中，因子可以简单地看作一个附加更多信息的向量（尽管它们内部机理是不同的）。这额外的信息包括向量中不同值的记录，我们称之为“水平”。</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>要表示有序型变量，需要为函数factor()指定参数ordered=TRUE，如：</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="al">![ordered-factor](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515774.webp)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>此时顺序为'Excellent''Improved''Poor'（对于字符型向量，因子的水平默认依字母顺序创建），这里恰好与逻辑顺序一致。若不一致，可以通过指定levels选项覆盖默认排序：</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="al">![ordered-factor-levels](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515992.jpeg)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>将此向量存储为(1, 2, 1,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>1)，并在内部将其关联为1=Type1和2=Type2（具体赋值根据字母顺序决定）。针对向量diabetes进行的任何分析都会将其视为名义型变量并自动选择合适的统计方法。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>在R中，因子可以简单地看作一个附加更多信息的向量（尽管它们内部机理是不同的）。这额外的信息包括向量中不同值的记录，我们称之为"水平"。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>要表示有序型变量，需要为函数factor()指定参数ordered=TRUE，如：</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="al">![ordered-factor](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515774.webp)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>此时顺序为'Excellent''Improved''Poor'（对于字符型向量，因子的水平默认依字母顺序创建），这里恰好与逻辑顺序一致。若不一致，可以通过指定levels选项覆盖默认排序：</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="al">![ordered-factor-levels](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231515992.jpeg)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

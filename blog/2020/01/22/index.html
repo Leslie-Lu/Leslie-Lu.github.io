@@ -312,12 +312,12 @@ window.Quarto = {
 <section id="前言" class="level3">
 <h3 class="anchored" data-anchor-id="前言">前言</h3>
 <p>类似其他计算机高级语言，R用户只需要熟悉其命令、语句及简单的语法规则，就可以做数据管理和分析处理工作。R把大部分常用的复杂数据计算的算法作为标准函数调用，用户仅需要指出函数名及其必要的参数即可，这一特点使得R编程十分简单。</p>
-<p>R是面向对象的、区分大小写的解释型数组编程语言，输入后可直接给出结果。R中功能靠函数实现。R的函数分为“高级”和“低级”函数，高级函数可调用低级函数，这里的高级函数习惯上称为泛型函数。plot()就是泛型函数，可以根据数据的类型调用底层的函数，应用相应的方法绘制相应的图形。这就是面向对象编程的思想。</p>
+<p>R是面向对象的、区分大小写的解释型数组编程语言，输入后可直接给出结果。R中功能靠函数实现。R的函数分为”高级”和”低级”函数，高级函数可调用低级函数，这里的高级函数习惯上称为泛型函数。plot()就是泛型函数，可以根据数据的类型调用底层的函数，应用相应的方法绘制相应的图形。这就是面向对象编程的思想。</p>
 </section>
 <section id="数据集" class="level3">
 <h3 class="anchored" data-anchor-id="数据集">数据集</h3>
 <p>创建含有研究信息的数据集，这是任何数据分析的第一步。数据集通常是由数据构成的一个矩形数组，行表示观测，列表是变量。</p>
-<p>R可以处理的数据类型包括数值型（如100）、字符型（如“流光相约”）、逻辑型（TRUE/FALSE）、复数型（如2+3i）和因子型（表示不同类别）。R中有许多用于存储数据的结构，包括标量、向量、矩阵、数组、数据框和列表。多样化数据结构赋予了R极其灵活的数据处理能力。</p>
+<p>R可以处理的数据类型包括数值型（如100）、字符型（如”流光相约”）、逻辑型（TRUE/FALSE）、复数型（如2+3i）和因子型（表示不同类别）。R中有许多用于存储数据的结构，包括标量、向量、矩阵、数组、数据框和列表。多样化数据结构赋予了R极其灵活的数据处理能力。</p>
 </section>
 <section id="标量与向量" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="标量与向量">标量与向量</h3>
@@ -881,7 +881,7 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - programming</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -891,7 +891,7 @@ window.Quarto = {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -902,13 +902,13 @@ window.Quarto = {
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>类似其他计算机高级语言，R用户只需要熟悉其命令、语句及简单的语法规则，就可以做数据管理和分析处理工作。R把大部分常用的复杂数据计算的算法作为标准函数调用，用户仅需要指出函数名及其必要的参数即可，这一特点使得R编程十分简单。</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>R是面向对象的、区分大小写的解释型数组编程语言，输入后可直接给出结果。R中功能靠函数实现。R的函数分为“高级”和“低级”函数，高级函数可调用低级函数，这里的高级函数习惯上称为泛型函数。plot()就是泛型函数，可以根据数据的类型调用底层的函数，应用相应的方法绘制相应的图形。这就是面向对象编程的思想。</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>R是面向对象的、区分大小写的解释型数组编程语言，输入后可直接给出结果。R中功能靠函数实现。R的函数分为"高级"和"低级"函数，高级函数可调用低级函数，这里的高级函数习惯上称为泛型函数。plot()就是泛型函数，可以根据数据的类型调用底层的函数，应用相应的方法绘制相应的图形。这就是面向对象编程的思想。</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据集</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>创建含有研究信息的数据集，这是任何数据分析的第一步。数据集通常是由数据构成的一个矩形数组，行表示观测，列表是变量。</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>R可以处理的数据类型包括数值型（如100）、字符型（如“流光相约”）、逻辑型（TRUE/FALSE）、复数型（如2+3i）和因子型（表示不同类别）。R中有许多用于存储数据的结构，包括标量、向量、矩阵、数组、数据框和列表。多样化数据结构赋予了R极其灵活的数据处理能力。</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>R可以处理的数据类型包括数值型（如100）、字符型（如"流光相约"）、逻辑型（TRUE/FALSE）、复数型（如2+3i）和因子型（表示不同类别）。R中有许多用于存储数据的结构，包括标量、向量、矩阵、数组、数据框和列表。多样化数据结构赋予了R极其灵活的数据处理能力。</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 标量与向量</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
@@ -964,15 +964,16 @@ window.Quarto = {
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="al">![with function](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408231501015.webp)</span></span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>花括号{}之间的语句都针对该数据框执行，无需担心名称冲突；若仅有一条语句，花括号可以省略。函数with()的局限性在于赋值仅在此函数的括号内有效。若需要创建在with()结构外依然存在的对象，使用特殊赋值符号 -&gt;&gt; ，即可保存对象到全局环境中。</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## 列表</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>列表是一些对象（成分）的有序集合，允许整合若干对象到单个对象名下，其中的对象可以是任何数据结构，如某个列表可以是若干向量、矩阵、数据框甚至其他列表的组合，使用函数list()创建列表：</span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="in">`mylist=list(object1,object2,...)`</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>可以通过在双重方括号中指明代表某个成分的数字或名称来访问列表中的元素，如mylist[<span class="co">[</span><span class="ot">4</span><span class="co">]</span>]。由于列表允许以一种简单的方式组织和重新调用可能不相干的信息，且许多R函数的运行结果都是以列表的形式返回的，由分析人员决定需要取出其中哪些成分，列表是R中的重要数据结构。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>花括号{}之间的语句都针对该数据框执行，无需担心名称冲突；若仅有一条语句，花括号可以省略。函数with()的局限性在于赋值仅在此函数的括号内有效。若需要创建在with()结构外依然存在的对象，使用特殊赋值符号</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>-&gt;&gt; ，即可保存对象到全局环境中。</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## 列表</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>列表是一些对象（成分）的有序集合，允许整合若干对象到单个对象名下，其中的对象可以是任何数据结构，如某个列表可以是若干向量、矩阵、数据框甚至其他列表的组合，使用函数list()创建列表：</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="in">`mylist=list(object1,object2,...)`</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>可以通过在双重方括号中指明代表某个成分的数字或名称来访问列表中的元素，如mylist[<span class="co">[</span><span class="ot">4</span><span class="co">]</span>]。由于列表允许以一种简单的方式组织和重新调用可能不相干的信息，且许多R函数的运行结果都是以列表的形式返回的，由分析人员决定需要取出其中哪些成分，列表是R中的重要数据结构。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

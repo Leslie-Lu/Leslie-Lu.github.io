@@ -838,7 +838,7 @@ Liu, Siyang, Yanhong Liu, Yuqin Gu, Xingchen Lin, Huanhuan Zhu, Hankui Liu, Zhe 
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - multi-omics</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - mendelian randomization</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -848,50 +848,66 @@ Liu, Siyang, Yanhong Liu, Yuqin Gu, Xingchen Lin, Huanhuan Zhu, Hankui Liu, Zhe 
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>随着基因组学技术的进步，越来越多的研究采用测序技术进行遗传变异的检测与分析。测序深度（Sequencing Depth）是影响基因组学数据质量的重要指标之一，它直接关系到遗传变异的准确识别以及后续 GWAS 和多组学研究的结果可靠性。</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是测序深度？</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>随着基因组学技术的进步，越来越多的研究采用测序技术进行遗传变异的检测与分析。测序深度（Sequencing</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Depth）是影响基因组学数据质量的重要指标之一，它直接关系到遗传变异的准确识别以及后续</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>GWAS 和多组学研究的结果可靠性。</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>测序深度通常用「X」表示，它指的是基因组中每个碱基位置被测序读取（Reads）的平均次数。比如，10X测序深度意味着每个位点平均被测序10次。</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是测序深度？</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>更高的测序深度通常意味着更可靠的数据，因为位点覆盖次数越多，测序错误的概率越小，变异检测的准确性越高。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>测序深度通常用「X」表示，它指的是基因组中每个碱基位置被测序读取（Reads）的平均次数。比如，10X测序深度意味着每个位点平均被测序10次。</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度对 GWAS 分析的影响</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>更高的测序深度通常意味着更可靠的数据，因为位点覆盖次数越多，测序错误的概率越小，变异检测的准确性越高。</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 基因型准确性</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度对 GWAS 分析的影响</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>GWAS 需要准确识别个体基因型（Genotype），而基因型准确性直接受测序深度的影响。当测序深度较低（如 0.1x）时，个体基因型可能无法直接可靠地确定，但可以通过群体信息推测（Imputation）。推测准确性通常用 R² 表示，R² 越接近 1，表示推测基因型越可靠。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 基因型准确性</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>例如，Liu, S. et al. <span class="co">[</span><span class="ot">@RN1360</span><span class="co">]</span> 研究直接从群体水平估计等位基因频率与多态性，发现即使测序深度低至 0.1x 超低测序深度（如 NIPT 数据）下，基因型推测的 R² 仍可超过 0.84。这意味着即使测序深度不高，通过推测也可以实现有效样本量的大幅增加，例如 10 万个低深度样本，实际有效样本量仍能达到 8.4 万个。</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 避免冗余信号（LD聚类）</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，通常会对高度相关的 SNP（连锁不平衡，LD）进行聚类（LD clumping），避免冗余的关联信号。当测序深度不充分时，LD 结构的识别可能不准确，导致聚类失效或误导性结果。因此，适当提高测序深度有助于更准确地揭示 LD 结构，减少假阳性信号。</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度在多组学研究中的重要性</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 单倍型（Haplotype）构建的准确性</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>高质量的单倍型（High-quality haplotype）构建依赖于较高的测序深度或高质量的数据来源（如长读长测序技术）。单倍型能够帮助更精确地理解遗传变异的连锁关系，在 GWAS、eQTL、孟德尔随机化（MR）分析研究中起关键作用。</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. MR 分析</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>孟德尔随机化利用 SNP 作为工具变量，研究暴露因素与疾病结局的因果关系。SNP 的准确识别与基因型调用至关重要，测序深度的提高能大幅提升工具变量的有效性。</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何确定合适的测序深度？</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>GWAS</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>需要准确识别个体基因型（Genotype），而基因型准确性直接受测序深度的影响。当测序深度较低（如</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>0.1x）时，个体基因型可能无法直接可靠地确定，但可以通过群体信息推测（Imputation）。推测准确性通常用</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>R² 表示，R² 越接近 1，表示推测基因型越可靠。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>例如，Liu, S. et al. <span class="co">[</span><span class="ot">@RN1360</span><span class="co">]</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>研究直接从群体水平估计等位基因频率与多态性，发现即使测序深度低至 0.1x</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>超低测序深度（如 NIPT 数据）下，基因型推测的 R² 仍可超过</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>0.84。这意味着即使测序深度不高，通过推测也可以实现有效样本量的大幅增加，例如 10</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>万个低深度样本，实际有效样本量仍能达到 8.4 万个。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 避免冗余信号（LD聚类）</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>在 GWAS 分析中，通常会对高度相关的 SNP（连锁不平衡，LD）进行聚类（LD</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>clumping），避免冗余的关联信号。当测序深度不充分时，LD</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>结构的识别可能不准确，导致聚类失效或误导性结果。因此，适当提高测序深度有助于更准确地揭示</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>LD 结构，减少假阳性信号。</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>研究目的：不同研究需求的测序深度不同，例如全基因组研究推荐≥30X，超低深度测序可能适合大规模群体推测分析。</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## 测序深度在多组学研究中的重要性</span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经费限制：高深度测序成本较高，需在精度与成本之间权衡。</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 单倍型（Haplotype）构建的准确性</span></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分析需求：是否需要精细 LD 结构、单倍型精确构建、个体级基因型，决定了所需的测序深度水平。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>高质量的单倍型（High-quality</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>haplotype）构建依赖于较高的测序深度或高质量的数据来源（如长读长测序技术）。单倍型能够帮助更精确地理解遗传变异的连锁关系，在</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>GWAS、eQTL、孟德尔随机化（MR）分析研究中起关键作用。</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. MR 分析</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>孟德尔随机化利用 SNP 作为工具变量，研究暴露因素与疾病结局的因果关系。SNP</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>的准确识别与基因型调用至关重要，测序深度的提高能大幅提升工具变量的有效性。</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何确定合适的测序深度？</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>研究目的：不同研究需求的测序深度不同，例如全基因组研究推荐≥30X，超低深度测序可能适合大规模群体推测分析。</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>经费限制：高深度测序成本较高，需在精度与成本之间权衡。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>分析需求：是否需要精细 LD</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  结构、单倍型精确构建、个体级基因型，决定了所需的测序深度水平。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -787,7 +787,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linux</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -797,7 +797,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -806,29 +806,32 @@ div.column-margin+hr.dinkus {
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>我们前面提到，在早期想要让计算机执行程序就得要参考一堆硬件功能函数，并且学习机器语言才能够编写程序，同时由于硬件与软件功能不一定一致，每次编写程序时都必须要重新改写，非常的麻烦。</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>如果能够将所有的硬件都驱动，并且提供一个软件的参考接口来给工程师开发软件，开发软件无疑会变得简单得多，而这就是操作系统（Operating System，OS）。</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 操作系统内核（Kernel）</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>操作系统其实也是一组程序，这组程序的重点在于管理计算机的所有活动以及驱动系统中的所有硬件。硬件的所有操作都必须要通过操作系统来实现，而这一功能的实现就是靠操作系统的内核完成。你的计算机能不能完成一些任务，都与内核有关。只有内核提供的功能，你的计算机系统才能帮你完成。举例来说，如果你的内核并不支持TCP/IP的网络协议，那么无论你配置什么样的网卡，这个内核都无法提供网络功能。</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>内核主要在管理硬件与提供相关的功能（读写硬盘、网络功能、CPU资源分配等），这些管理的操作都非常重要。如果用户能够直接使用到内核的话，一旦不小心将内核程序停止或破坏，将会导致整个系统的崩溃。因此内核程序放置到内存当中的区块是受保护的，并且启动后就一直常驻在内存之中。</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 系统调用</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>既然硬件都是由内核管理的，那么如果开发人员想要开发软件的话，自然就得要参考这个内核的相关功能。这样一来，还是从原本的参考硬件函数变成参考内核功能，还是一样的麻烦。</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>为了解决这个问题，操作系统通常会提供一套应用程序编程接口（Application Programming Interface，API）即系统调用层给程序员来开发软件，开发人员只要遵守该API公认的系统调用参数就可以比较容易地开发软件了。举例来说，我们学习C语言只要参考C语言的函数即可，不需要再去考虑其他内核的相关功能，因为内核的系统调用接口会主动地将C语言的相关语法转成内核可以了解的任务函数，内核自然就能够顺利地运行该程序。</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>内核只会进行计算机系统的资源分配，所以系统还需要有应用程序的提供，才能够供用户使用。应用程序与内核有比较大的关系，与硬件关系则不大；硬件也与内核有比较大的关系，至于与用户直接有关的则是应用程序。</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>有几点需要注意：</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>操作系统的内核层直接参考硬件规格写成，所以同一个操作系统程序不能够在不一样的硬件架构上运行；</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>操作系统只是管理整个硬件资源，包括CPU、内存、输入输出设备及文件系统等，如果没有其他的应用程序辅助，操作系统只能让计算机处于准备妥当的状态之中，无法完成用户所想要的功能；</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>应用程序的开发都是参考操作系统的API，所以该程序只能在该操作系统当中运行，不能在其他操作系统上运行。所以有些游戏不能够在Linux上安装运行。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>如果能够将所有的硬件都驱动，并且提供一个软件的参考接口来给工程师开发软件，开发软件无疑会变得简单得多，而这就是操作系统（Operating</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>System，OS）。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 操作系统内核（Kernel）</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>操作系统其实也是一组程序，这组程序的重点在于管理计算机的所有活动以及驱动系统中的所有硬件。硬件的所有操作都必须要通过操作系统来实现，而这一功能的实现就是靠操作系统的内核完成。你的计算机能不能完成一些任务，都与内核有关。只有内核提供的功能，你的计算机系统才能帮你完成。举例来说，如果你的内核并不支持TCP/IP的网络协议，那么无论你配置什么样的网卡，这个内核都无法提供网络功能。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>内核主要在管理硬件与提供相关的功能（读写硬盘、网络功能、CPU资源分配等），这些管理的操作都非常重要。如果用户能够直接使用到内核的话，一旦不小心将内核程序停止或破坏，将会导致整个系统的崩溃。因此内核程序放置到内存当中的区块是受保护的，并且启动后就一直常驻在内存之中。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 系统调用</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>既然硬件都是由内核管理的，那么如果开发人员想要开发软件的话，自然就得要参考这个内核的相关功能。这样一来，还是从原本的参考硬件函数变成参考内核功能，还是一样的麻烦。</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>为了解决这个问题，操作系统通常会提供一套应用程序编程接口（Application</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>Programming</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Interface，API）即系统调用层给程序员来开发软件，开发人员只要遵守该API公认的系统调用参数就可以比较容易地开发软件了。举例来说，我们学习C语言只要参考C语言的函数即可，不需要再去考虑其他内核的相关功能，因为内核的系统调用接口会主动地将C语言的相关语法转成内核可以了解的任务函数，内核自然就能够顺利地运行该程序。</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>内核只会进行计算机系统的资源分配，所以系统还需要有应用程序的提供，才能够供用户使用。应用程序与内核有比较大的关系，与硬件关系则不大；硬件也与内核有比较大的关系，至于与用户直接有关的则是应用程序。</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>有几点需要注意：</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>操作系统的内核层直接参考硬件规格写成，所以同一个操作系统程序不能够在不一样的硬件架构上运行；</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>操作系统只是管理整个硬件资源，包括CPU、内存、输入输出设备及文件系统等，如果没有其他的应用程序辅助，操作系统只能让计算机处于准备妥当的状态之中，无法完成用户所想要的功能；</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>应用程序的开发都是参考操作系统的API，所以该程序只能在该操作系统当中运行，不能在其他操作系统上运行。所以有些游戏不能够在Linux上安装运行。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

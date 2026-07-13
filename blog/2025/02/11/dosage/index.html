@@ -316,7 +316,7 @@ window.Quarto = {
 <p>Dosage 文件记录的是每个样本在某个位点的<strong>剂量</strong>（Dosage），即基因型为杂合（如 0/1）或风险等位基因（如 1/1）的期望值（Expected Value）。其取值范围通常为 0.0~2.0，表示从<em>无风险等位基因</em>到<em>两个风险等位基因</em>的概率分布。</p>
 <p>数学定义：</p>
 <p><span class="math display">\[
-Dosage = P(0/0) \times 0 + P(0/1) \times 1 + P(1/1) \times 2
+  Dosage = P(0/0) \times 0 + P(0/1) \times 1 + P(1/1) \times 2
 \]</span></p>
 <p>其中 <span class="math inline">\(P\)</span> 表示基因型的概率。基于这些概率，可以计算出 dosage 值，也就是参考等位基因的期望拷贝数。</p>
 </section>
@@ -865,7 +865,7 @@ plink --vcf input.vcf --dosage DS --write-snplist --out output</code></pre>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - dosage</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - saige</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -875,62 +875,81 @@ plink --vcf input.vcf --dosage DS --write-snplist --out output</code></pre>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>在基因组关联分析（GWAS）中，基因型数据的准确性和高效处理是核心挑战，准确的基因型数据是发现遗传变异与性状关联的关键。传统方法使用硬判型（Hard Call）数据（如 0/1/2 编码），但随着测序技术的发展，Dosage 文件因其对基因型不确定性的量化能力，逐渐成为 GWAS 分析的新标准。而 <span class="co">[</span><span class="ot">SAIGE</span><span class="co">](https://mp.weixin.qq.com/s/pCfu0tJxvvRIHqtbK9eSug)</span> 作为混合模型 GWAS 的明星工具，对 Dosage 文件的支持更是备受关注。</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dosage文件：基因型数据的概率化革命</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1 什么是 Dosage 文件？</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>在基因组关联分析（GWAS）中，基因型数据的准确性和高效处理是核心挑战，准确的基因型数据是发现遗传变异与性状关联的关键。传统方法使用硬判型（Hard</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>Call）数据（如 0/1/2 编码），但随着测序技术的发展，Dosage</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>文件因其对基因型不确定性的量化能力，逐渐成为 GWAS 分析的新标准。而</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">SAIGE</span><span class="co">](https://mp.weixin.qq.com/s/pCfu0tJxvvRIHqtbK9eSug)</span> 作为混合模型 GWAS</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>的明星工具，对 Dosage 文件的支持更是备受关注。</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>Dosage 文件记录的是每个样本在某个位点的**剂量**（Dosage），即基因型为杂合（如 0/1）或风险等位基因（如 1/1）的期望值（Expected Value）。其取值范围通常为 0.0~2.0，表示从*无风险等位基因*到*两个风险等位基因*的概率分布。</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dosage文件：基因型数据的概率化革命</span></span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>数学定义：</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1 什么是 Dosage 文件？</span></span>
 <span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>Dosage = P(0/0) \times 0 + P(0/1) \times 1 + P(1/1) \times 2</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>Dosage 文件记录的是每个样本在某个位点的**剂量**（Dosage），即基因型为杂合（如</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>0/1）或风险等位基因（如 1/1）的期望值（Expected Value）。其取值范围通常为</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>0.0\~2.0，表示从*无风险等位基因*到*两个风险等位基因*的概率分布。</span>
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>其中 $P$ 表示基因型的概率。基于这些概率，可以计算出 dosage 值，也就是参考等位基因的期望拷贝数。</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>数学定义：</span>
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.2 Dosage vs Hard Call：为什么更科学？</span></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>对比维度 | Hard Call | Dosage</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>--- | --- | ---</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>数据本质 | 离散（0/1/2） | 连续（0.0~2.0）</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>低深度测序处理 | 易丢失信息（强制二分类） | 保留不确定性（概率加权）</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>统计功效 | 可能低估关联信号 | 提高检测灵敏度</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>举个例子，若某位点的测序深度低，Hard Call 可能强制判为 0/0，而 Dosage 可记录为 0.2（更接近真实生物学状态）。</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAIGE为何偏爱 Dosage 文件？</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>SAIGE采用基于混合线性模型（Mixed Linear Model, MLM）的算法，通过引入<span class="co">[</span><span class="ot">遗传关系矩阵（GRM）</span><span class="co">](https://mp.weixin.qq.com/s/QF-0DEPZkD3MeHn3vkqWMg)</span>控制群体结构。而 Dosage 文件的优势在于，其连续型变量可直接作为协变量输入，避免离散化导致的信息损失，提高模型对微弱信号的捕捉能力。相比于简单的 hard call，dosage 数据充分利用了 imputation 的概率信息，使得关联分析更敏感、更准确。不过需要注意的是，dosage 文件在使用前必须经过严格的质量控制，确保 imputation 的准确性，以避免低质量数据对分析结果的干扰。</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dosage 文件的生成与使用</span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>生成 Dosage 文件的常用工具有 PLINK、BEAGLE、IMPUTE2 等。以 PLINK 为例，通过以下命令将 VCF 文件转换为 Dosage 文件：</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  Dosage = P(0/0) \times 0 + P(0/1) \times 1 + P(1/1) \times 2</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>其中 $P$ 表示基因型的概率。基于这些概率，可以计算出 dosage</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>值，也就是参考等位基因的期望拷贝数。</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.2 Dosage vs Hard Call：为什么更科学？</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span> 对比维度       <span class="pp">|</span> Hard Call                <span class="pp">|</span> Dosage                   <span class="pp">|</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="pp">| --------------</span> <span class="pp">| ------------------------</span> <span class="pp">| ------------------------</span> <span class="pp">|</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span> 数据本质       <span class="pp">|</span> 离散（0/1/2）            <span class="pp">|</span> 连续（0.0~2.0）          <span class="pp">|</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span> 低深度测序处理 <span class="pp">|</span> 易丢失信息（强制二分类） <span class="pp">|</span> 保留不确定性（概率加权） <span class="pp">|</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span> 统计功效       <span class="pp">|</span> 可能低估关联信号         <span class="pp">|</span> 提高检测灵敏度           <span class="pp">|</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>举个例子，若某位点的测序深度低，Hard Call 可能强制判为 0/0，而 Dosage 可记录为</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>0.2（更接近真实生物学状态）。</span>
 <span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 从VCF转换为Dosage格式</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--vcf</span> input.vcf <span class="at">--dosage</span> DS <span class="at">--write-snplist</span> <span class="at">--out</span> output</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>生成的 output.dosage 文件格式如下：</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ex">CHR</span> SNP POS A1 A2 DOSAGE_1 DOSAGE_2 ... DOSAGE_N</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> rs123 1000 A T 0.98 1.76 ... 0.02</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAIGE为何偏爱 Dosage 文件？</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>SAIGE采用基于混合线性模型（Mixed Linear Model,</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>MLM）的算法，通过引入<span class="co">[</span><span class="ot">遗传关系矩阵（GRM）</span><span class="co">](https://mp.weixin.qq.com/s/QF-0DEPZkD3MeHn3vkqWMg)</span>控制群体结构。而</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>Dosage</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>文件的优势在于，其连续型变量可直接作为协变量输入，避免离散化导致的信息损失，提高模型对微弱信号的捕捉能力。相比于简单的</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>hard call，dosage 数据充分利用了 imputation</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>的概率信息，使得关联分析更敏感、更准确。不过需要注意的是，dosage</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>文件在使用前必须经过严格的质量控制，确保 imputation</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>的准确性，以避免低质量数据对分析结果的干扰。</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dosage 文件的生成与使用</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>生成 Dosage 文件的常用工具有 PLINK、BEAGLE、IMPUTE2 等。以 PLINK</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>为例，通过以下命令将 VCF 文件转换为 Dosage 文件：</span>
 <span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take-Home Message</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>dosage 文件作为基因型 imputation 的产物，在 GWAS 分析中发挥着至关重要的作用。通过充分利用 dosage 数据中的概率信息，SAIGE 等工具能够更准确地捕捉到基因型与性状之间的微妙关联，为我们揭示遗传机制提供了有力支持。在数据质量和格式得到充分保障的前提下，正确使用 dosage 文件将大大提升 GWAS 分析的精度和效率。</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co"># 从VCF转换为Dosage格式</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--vcf</span> input.vcf <span class="at">--dosage</span> DS <span class="at">--write-snplist</span> <span class="at">--out</span> output</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>生成的 output.dosage 文件格式如下：</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="ex">CHR</span> SNP POS A1 A2 DOSAGE_1 DOSAGE_2 ... DOSAGE_N</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> rs123 1000 A T 0.98 1.76 ... 0.02</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Take-Home Message</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>dosage 文件作为基因型 imputation 的产物，在 GWAS</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>分析中发挥着至关重要的作用。通过充分利用 dosage 数据中的概率信息，SAIGE</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>等工具能够更准确地捕捉到基因型与性状之间的微妙关联，为我们揭示遗传机制提供了有力支持。在数据质量和格式得到充分保障的前提下，正确使用</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>dosage 文件将大大提升 GWAS 分析的精度和效率。</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

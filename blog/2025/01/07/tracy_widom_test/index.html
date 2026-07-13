@@ -794,7 +794,7 @@ system("$command");</code></pre>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostatistics</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - pca</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -804,43 +804,59 @@ system("$command");</code></pre>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>在现代基因组学和统计学中，Tracy-Widom 统计量（Tracy-Widom statistics）是一个广泛应用于分析主成分分析（PCA）结果的重要工具。尤其在遗传学、群体学和数据科学等领域，Tracy-Widom 统计量可以帮助研究者评估主成分的统计显著性，为后续的研究分析提供强有力的支持。</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>这里，我们将带大家深入了解 Tracy-Widom 统计量的概念、应用以及如何通过 twstats 程序进行计算。</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>在现代基因组学和统计学中，Tracy-Widom 统计量（Tracy-Widom</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>statistics）是一个广泛应用于分析主成分分析（PCA）结果的重要工具。尤其在遗传学、群体学和数据科学等领域，Tracy-Widom</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>统计量可以帮助研究者评估主成分的统计显著性，为后续的研究分析提供强有力的支持。</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 Tracy-Widom 统计量</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Tracy-Widom 统计量来源于随机矩阵理论，它用于描述随机矩阵的特征值分布，尤其是最大特征值的行为。在大规模数据分析中，Tracy-Widom 分布成为评估主成分显著性的标准工具。</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>具体来说，Tracy-Widom统计量用于检验 PCA 中主成分的显著性。我们前面讲过<span class="co">[</span><span class="ot">使用 Eigensoft 中的 smartPCA 进行 PCA 分析</span><span class="co">](https://mp.weixin.qq.com/s/C_41H2pcDHlYMODcb3S9ew)</span>。PCA 通常会计算各主成分的方差，并根据这些方差来筛选重要的主成分。然而，如何判断哪些主成分是由于数据的真实结构而非随机噪声引起的呢？这正是Tracy-Widom统计量能够发挥作用的地方，Tracy-Widom 统计量可以帮助我们判断哪些主成分是统计显著的。</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Tracy-Widom分布的核心思想是：如果我们从一个高维随机矩阵中提取主成分，那么最大主成分的值将服从特定的统计分布。通过计算 Tracy-Widom统计量，研究者可以对 PCA 中的每个主成分进行显著性检验，评估其是否真的反映了数据的结构，而非偶然性噪声。</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## twstats 程序与 Tracy-Widom 统计量</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序可以用来计算 Tracy-Widom 统计量。twstats 程序通过计算给定数据集的特征值分布，具体来说，twstats 程序会根据 Tracy-Widom 分布为每个主成分计算一个 p 值，从而帮助研究者判断哪些主成分是值得关注的。</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>twstats 适用于随机标记数据，但不适用于含有祖先信息标记（ancestry-informative markers）的数据。它假设数据集是由随机标记构成，这意味着在分析过程中不应该包含任何可能揭示祖先信息的标记（如遗传标记）。因为在包含祖先信息的标记数据中，可能会出现基因组混合 LD（连锁不平衡），这会违背Tracy-Widom统计量的基本假设。如果数据集含有祖先信息标记，Tracy-Widom 统计量的结果可能会不准确。</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序示例如下：</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{perl}</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="kw">#!/usr/bin/perl</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>这里，我们将带大家深入了解 Tracy-Widom 统计量的概念、应用以及如何通过 twstats</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>程序进行计算。</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 Tracy-Widom 统计量</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>Tracy-Widom</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>统计量来源于随机矩阵理论，它用于描述随机矩阵的特征值分布，尤其是最大特征值的行为。在大规模数据分析中，Tracy-Widom</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>分布成为评估主成分显著性的标准工具。</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>具体来说，Tracy-Widom统计量用于检验 PCA 中主成分的显著性。我们前面讲过[使用</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 smartPCA 进行 PCA</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>分析](https://mp.weixin.qq.com/s/C_41H2pcDHlYMODcb3S9ew)。PCA</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>通常会计算各主成分的方差，并根据这些方差来筛选重要的主成分。然而，如何判断哪些主成分是由于数据的真实结构而非随机噪声引起的呢？这正是Tracy-Widom统计量能够发挥作用的地方，Tracy-Widom</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>统计量可以帮助我们判断哪些主成分是统计显著的。</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>Tracy-Widom分布的核心思想是：如果我们从一个高维随机矩阵中提取主成分，那么最大主成分的值将服从特定的统计分布。通过计算</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>Tracy-Widom统计量，研究者可以对 PCA</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>中的每个主成分进行显著性检验，评估其是否真的反映了数据的结构，而非偶然性噪声。</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## twstats 程序与 Tracy-Widom 统计量</span></span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> = <span class="ot">"</span><span class="st">../bin/twstats</span><span class="ot">"</span>;</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -t twtable </span><span class="ot">"</span>;</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -i twexample.eval </span><span class="ot">"</span>;</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -o twexample.out</span><span class="ot">"</span>;</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ch">\n</span><span class="ot">"</span>);</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ot">"</span>);</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序可以用来计算 Tracy-Widom 统计量。twstats</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>程序通过计算给定数据集的特征值分布，具体来说，twstats 程序会根据 Tracy-Widom</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>分布为每个主成分计算一个 p 值，从而帮助研究者判断哪些主成分是值得关注的。</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>twstats 适用于随机标记数据，但不适用于含有祖先信息标记（ancestry-informative</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>markers）的数据。它假设数据集是由随机标记构成，这意味着在分析过程中不应该包含任何可能揭示祖先信息的标记（如遗传标记）。因为在包含祖先信息的标记数据中，可能会出现基因组混合</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>LD（连锁不平衡），这会违背Tracy-Widom统计量的基本假设。如果数据集含有祖先信息标记，Tracy-Widom</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>统计量的结果可能会不准确。</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Eigensoft 中的 twstats 程序示例如下：</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{perl}</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="kw">#!/usr/bin/perl</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> = <span class="ot">"</span><span class="st">../bin/twstats</span><span class="ot">"</span>;</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -t twtable </span><span class="ot">"</span>;</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -i twexample.eval </span><span class="ot">"</span>;</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="dt">$command</span> .= <span class="ot">"</span><span class="st"> -o twexample.out</span><span class="ot">"</span>;</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ch">\n</span><span class="ot">"</span>);</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="ot">"</span><span class="dt">$command</span><span class="ot">"</span>);</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

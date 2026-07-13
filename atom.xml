@@ -11,7 +11,255 @@
 <description>Zhen Lu&#39;s blog</description>
 <language>en</language>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Fri, 10 Jul 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 15 Jul 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>图解一个因果主张</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/07/15/causal_inference/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="图解一个因果主张" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="图解一个因果主张">图解一个因果主张</h3>
+<p>每项分析任务，无论是描述性、预测性还是推断性，都应当从一个清楚、精确的问题开始。让我们把它们图解出来，以便更好地理解因果问题的结构（我们会把注意力重新转回因果问题）。句子图解是一种语法方法，用来以视觉方式表示句子的结构，有时会在语法课中教授。在这种技术中，句子被拆解为其组成部分，例如主语、动词、宾语和修饰语，然后用一系列线条和符号显示出来。这些元素在图中的排列反映了它们的句法角色，以及它们如何在句子的整体结构中相互作用。通过把句子拆解成这些视觉表示，图解可以帮助学习者把握句子构造的细微差别，识别语法错误，并理解词语之间复杂的联系。我们可以把类似想法应用到因果主张上。下面是一个可能如何图解因果主张的例子。我们提取出了<em>原因</em>、<em>结果</em>、<em>主体</em>（对谁？）和<em>时间</em>（何时？）。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713225132.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">图解因果主张的示例</figcaption>
+</figure>
+</div>
+<p>让我们从一个基本因果问题开始：吸烟会导致肺癌吗？</p>
+<p>这里的因果主张可以是：吸烟导致肺癌。下图展示了这一因果主张的一种可能图解。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713225212.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">“吸烟导致肺癌”这一因果主张的图解</figcaption>
+</figure>
+</div>
+<p>让我们更具体一些。2005 年，<em>JAMA</em>（《美国医学会杂志》）发表了一项研究，题为”Effect of Smoking Reduction on Lung Cancer Risk”。该研究得出结论：“在每天吸 15 支或更多香烟的人群中，将吸烟量减少 50% 会显著降低肺癌风险”。<span class="citation" data-cites="godtfredsen2005effect">(Godtfredsen, Prescott, and Osler 2005)</span> 该研究将所研究的时间范围描述为 5-10 年。让我们图解这个因果主张。这里，我们假设估计因果效应的入选标准和目标人群相同（每天吸 15 支或更多香烟的人）；但情况并不总是如此。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713225446.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">基于 <span class="citation" data-cites="godtfredsen2005effect">Godtfredsen, Prescott, and Osler (2005)</span> 结果的更具体因果主张图解示例</figcaption>
+</figure>
+</div>
+<p>把这一想法转化为提出好的因果问题，我们可以把贯穿本书会看到的以下术语映射到这些图解中：<em>暴露</em>（原因）、<em>结局</em>（结果）、<em>入选标准</em>（对谁？）、<em>时间零点</em>（参与者何时开始随访？）、<em>目标人群</em>（我们能为谁估计结局效应？）以及<em>随访期</em>（何时？）。</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713225713.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">映射到因果分析术语的图解示例</figcaption>
+</figure>
+</div>
+<p>提出好的因果问题，意味着我们要把问题映射到可观察证据上。让我们回到吸烟的例子。我们最初的问题是：<em>吸烟会导致肺癌吗？</em>；研究中的证据表明，对于每天吸 15 支以上香烟的人，在 5-10 年内将吸烟量减少 50% 会降低肺癌风险。答案与问题匹配吗？并不完全匹配。让我们更新问题，使其与研究实际显示的内容一致：<em>对于每天吸 15 支以上香烟的人，在 5-10 年内将吸烟量减少 50% 是否会降低肺癌风险？</em> 打磨这种技能——提出可回答的因果问题——至关重要，我们将在本书中持续讨论。</p>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-godtfredsen2005effect" class="csl-entry">
+Godtfredsen, Nina S, Eva Prescott, and Merete Osler. 2005. <span>“Effect of Smoking Reduction on Lung Cancer Risk.”</span> <em>Jama</em> 294 (12): 1505–10.
+</div>
+</div></section></div> ]]></description>
+  <category>causal inference</category>
+  <category>r</category>
+  <category>biostatistics</category>
+  <guid>https://leslie-lu.github.io/blog/2026/07/15/causal_inference/</guid>
+  <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713225132.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>描述、预测和解释</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/07/14/causal_inference/</link>
+  <description><![CDATA[ 
+
+
+
+
+<blockquote class="blockquote">
+<p>书接上回：<a href="https://mp.weixin.qq.com/s/wnqfIhvzZGNzV7xlUeWFdg">从随意推断（casual inference）到因果推断（causal inference）</a></p>
+</blockquote>
+<section id="描述预测和解释" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="描述预测和解释">描述、预测和解释</h3>
+<p>解决这一问题的一个很好的第一步，是认识到关于描述、预测和解释的问题在根本上是不同的。与学术科学相比，工业界数据科学受”薛定谔的因果推断”的负担没有那么重，但<em>随意</em>推断还会以许多其他方式出现。例如，当利益相关者询问某个事件的”驱动因素”时，他们到底在问什么？是在要求一个预测该事件的模型吗？还是想更深入地理解是什么导致了该事件？这是一个含糊的请求，但在我们看来它明显带有因果兴趣；然而，许多数据科学家会倾向于用预测模型来回答这个问题。当我们明确自己的目标时，就能更有效地使用这三种方法（而且正如我们将看到的，当目标是进行因果推断时，描述性分析和预测模型仍然有用）。此外，这三种方法都是有用的决策工具。</p>
+<section id="描述" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="描述">描述</h4>
+<p>描述性分析旨在描述变量的分布，通常会按关键感兴趣变量进行分层。一个密切相关的概念是探索性数据分析（EDA），不过描述性研究通常比 EDA 有更明确的目标。</p>
+<p>描述性分析通常基于统计摘要，例如集中趋势（均值、中位数）和离散程度（最小值、最大值、四分位数）的度量，但有时也会使用回归建模等技术。在描述性分析中，使用回归这类更高级技术的目标不同于预测研究或因果研究。在描述性分析中对某个变量进行”调整”，意味着我们移除了它的关联效应（因此改变了我们的问题），<em>并不</em>意味着我们控制了混杂。</p>
+<p>在流行病学中，一个对描述性分析很有价值的概念是”人、地点和时间”——谁在何处、何时患有什么疾病。这个概念也是其他领域进行描述性分析的一个良好模板。通常，我们希望清楚说明自己试图描述的是什么人群，因此需要尽可能具体。对人类健康而言，描述涉及的人、地点和时期都至关重要。换句话说，要关注形成对数据理解的第一性原则，并据此描述你的数据。</p>
+<section id="例子" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="例子">例子</h5>
+<p>计数是我们能用数据做的最好的事情之一。EDA 对预测分析和因果分析都有益，但描述性分析本身也独立于其他分析任务而具有价值。你可以问问任何一位原以为自己会开发复杂机器学习模型、结果发现大部分时间都花在仪表盘上的数据科学家。理解数据的分布，尤其是围绕关键分析目标（例如工业界的 KPI 或流行病学中的疾病发生率）的分布，对于许多类型的决策都至关重要。</p>
+<p>近期描述性分析的最佳例子之一来自 COVID-19 大流行 <span class="citation" data-cites="Fox2022">(Fox et al. 2022)</span>。2020 年，尤其是在大流行早期，描述性分析对于理解风险和分配资源至关重要。由于冠状病毒与其他呼吸道疾病相似，我们已有许多可降低风险的公共卫生工具（例如保持距离，以及后来使用口罩）。按地区统计的病例描述性统计，对于决定地方政策及其力度至关重要。</p>
+<p>大流行期间一个更复杂的描述性分析优秀例子，是《金融时报》持续发布的关于各个国家和地区<a href="https://www.ft.com/content/a2901ce8-5eb7-4633-b89c-cbdf5b386938">预期死亡人数与观察死亡人数</a>的报告<sup>1</sup>。虽然预期死亡人数的计算比多数描述性统计稍微复杂一些，但它在无需理清因果效应的情况下（例如，这些死亡是否直接由 COVID-19 导致？是否由于医疗服务不可及？是否为 COVID 后心血管事件？）提供了大量关于当前死亡情况的信息。在这里对其 2020 年 7 月图形的（简化）复现中，你可以看到大流行早期数月所造成的惊人影响。</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;John Burn-Murdoch 负责了其中许多展示，并就该主题做过一次<a href="https://cloud.rstudio.com/resources/rstudioglobal-2021/reporting-on-and-visualising-the-pandemic/">精彩演讲</a>。</p></div></div><div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713221130.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">2020 年超额死亡人数与历史上所有原因预期死亡人数的比较。数据来自《金融时报》。</figcaption>
+</figure>
+</div>
+<p>下面还有一些优秀的描述性分析例子。</p>
+<ul>
+<li><strong>全球森林砍伐</strong>。 Our World in Data <span class="citation" data-cites="owidforestsanddeforestation">(Ritchie and Roser 2021)</span> 是一个数据新闻组织，会针对各种主题制作有思考深度、通常属于描述性的报告。在这份报告中，他们展示了森林覆盖的绝对变化（森林转变）和相对变化（砍伐或再造林）的数据可视化，并结合基础统计和林业理论，呈现了关于森林随时间变化状况的有用信息。</li>
+<li><strong>衣原体和淋球菌感染的患病率</strong> <span class="citation" data-cites="Miller2004">(Miller 2004)</span>。 测量疾病患病率（当前有多少人患有某种疾病，通常以每多少人的比例表示）有助于基础公共卫生工作（资源、预防、教育）和科学理解。在这项研究中，作者开展了一项复杂调查，旨在代表美国所有高中（目标人群）；他们使用调查权重来处理与其问题相关的多种因素，然后计算患病率比和其他统计量。正如我们将看到的，权重在因果推断中也因为同样的原因而有用：瞄准特定人群。尽管如此，并非所有加权技术本质上都是因果性的，这里也不是。</li>
+<li><strong>估计特定种族和族裔的子宫切除术不平等</strong> <span class="citation" data-cites="Gartner2020">(Gartner et al. 2020)</span>。 描述性技术也帮助我们理解经济学和流行病学等领域中的不平等。在这项研究中，作者问道：子宫切除术的风险是否因种族或族裔背景而异？尽管该分析按关键变量进行了分层，但它仍然是描述性的。这篇论文另一个有意思的方面，是作者努力确保研究回答的是关于正确目标人群的问题。他们的分析结合了多个数据来源，以便更好地估计真实人群患病率（而不是像常见做法那样只估计医院人群中的患病率）。他们还对既往子宫切除术的患病情况进行了调整；例如，他们只在实际可能接受子宫切除术的人群中计算发生率（新发病例率）（例如，这些人尚未做过子宫切除术）。</li>
+</ul>
+</section>
+<section id="有效性" class="level5">
+<h5 class="anchored" data-anchor-id="有效性">有效性</h5>
+<p>描述性分析中有两个关键的有效性问题：测量误差和抽样误差。</p>
+<p>测量误差指的是我们在某种程度上错误测量了一个或多个变量。对描述性分析而言，测量错误意味着我们可能无法得到问题的答案。然而，这种情况的严重程度取决于测量误差本身的严重性和所提问题。</p>
+<p>抽样误差在描述性分析中是一个更细致的问题。它与我们正在分析的人群（分析应当描述谁）以及不确定性（我们有多确定有数据者的描述能够代表我们试图描述的人群）有关。</p>
+<p>我们的数据来源人群和我们试图描述的人群必须相同，我们才能给出有效的描述。设想一个由在线调查生成的数据集。回答这些问题的人是谁？他们与我们想要描述的人有什么关系？在许多分析中，愿意花时间回答调查的人不同于我们想要描述的人；例如，填写调查的一组人，其变量分布可能不同于不填写调查的人。这类数据得到的结果在技术上并不是有偏的，因为除了与样本量相关的不确定性和测量误差之外，这些描述是准确的——它们只是并不针对正确的人群！换句话说，<em>我们得到了错误问题的答案</em>。</p>
+<p>值得注意的是，有时我们的数据代表了整个总体（或足够接近整个总体），因此抽样误差无关紧要。设想一家公司拥有所有使用其服务的客户的某些数据。对许多分析而言，这代表了我们希望获得信息的整个总体（当前客户）。类似地，在拥有覆盖全人口健康登记系统的国家，为特定实践目的可获得的数据已经足够接近整个总体，因此不需要抽样（尽管研究者可能会为了简化计算而使用抽样）。在这些情况下，实际上并不存在通常意义上的不确定性。假设所有内容都被良好测量，我们生成的摘要统计量<em>本质上是无偏且精确的</em>，因为我们拥有总体中每个人的信息。当然，在实践中，即使在最理想的情况下，我们通常也会遇到某种混合的测量误差、缺失数据等问题。</p>
+<p>描述性分析的一个关键细节是，混杂偏倚这个本书的主要关注点之一，在这里并没有定义。这是因为混杂是一个因果问题。描述性分析不可能被混杂，因为它们只是对关系<em>现状</em>的统计描述，而不是对这些关系背后机制的说明。</p>
+</section>
+<section id="与因果推断的关系" class="level5">
+<h5 class="anchored" data-anchor-id="与因果推断的关系">与因果推断的关系</h5>
+<p>人类非常擅长发现模式。寻找模式是我们大脑的有用特征，但当我们使用的数据或方法并不能使这类推断有效时，它也可能让我们滑向不当推断。当你的目标是描述时，最需要警惕的是从描述跳到因果（无论是隐含地还是明确地）。</p>
+<p>当然，当我们<em>确实</em>在估计因果效应时，描述性分析也很有帮助。它帮助我们理解正在处理的人群、结局的分布、暴露（我们认为可能具有因果作用的变量）以及混杂因素（为了获得暴露的无偏因果效应而需要考虑的变量）。它还帮助我们确认正在使用的数据结构与我们试图回答的问题相匹配。在开展因果研究时，你应当始终对数据进行描述性分析。</p>
+<p>最后，在某些情形下，我们可以用基础统计量进行因果推断。这里同样要谨慎区分因果问题和描述性成分：仅仅因为我们使用了相同的计算（例如均值差），并不意味着你能生成的所有描述都是因果性的。描述性分析是否与因果分析重叠，取决于数据和问题。</p>
+</section>
+</section>
+<section id="预测" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="预测">预测</h4>
+<p>预测的目标是使用数据对变量作出准确预测，通常是在新数据上进行预测。这具体意味着什么，取决于问题、领域等。预测模型被用于几乎所有可以想象的场景，从经同行评议的临床模型，到嵌入消费设备的定制机器学习模型。甚至像 ChatGPT 所基于的大语言模型也是预测模型：它们预测对某个提示的回应会是什么样。</p>
+<p>预测建模通常使用与本书将介绍的因果建模工作流不同的工作流。由于预测的目标通常与在新数据上进行预测有关，这类建模的工作流侧重于在保持对新数据泛化能力的同时最大化预测准确性，有时称为偏差-方差权衡。在实践中，这意味着将数据分为训练集（用于建立模型的数据部分）和测试集（用于评估模型的数据部分，它是模型在新数据上表现的代理）。通常，数据科学家会使用交叉验证或其他抽样技术，进一步降低模型对训练集过拟合的风险。</p>
+<p>关于预测建模已有许多优秀文本，因此我们建议你参考这些资料，以更深入地了解这些技术的目标和方法 <span class="citation" data-cites="kuhn2013a harrell2001 Kuhn_Silge_2022 James_Witten_Hastie_Tibshirani_2022">(Kuhn and Johnson 2013; Harrell 2001; Kuhn and Silge 2022; James et al. 2022)</span>。</p>
+<section id="例子-1" class="level5">
+<h5 class="anchored" data-anchor-id="例子-1">例子</h5>
+<p>预测是数据科学中最受欢迎的话题，这在很大程度上得益于工业界的机器学习应用。当然，预测在统计学中有悠久历史，许多今天流行的模型已经在学术界内外使用了几十年。</p>
+<p>让我们看一个关于 COVID-19 的预测例子。2021 年，研究者发表了 ISARIC 4C Deterioration model，这是一个用于预测急性 COVID-19 严重不良结局的临床预后模型 <span class="citation" data-cites="Gupta2021">(Gupta et al. 2021)</span>。作者纳入了一项描述性分析，以理解该模型开发所依托的人群，尤其是结局和候选预测因子的分布。这个模型的一个有用之处在于，它使用的是 COVID 相关住院第一天通常会测量的项目。作者通过按英国地区进行交叉验证来建立该模型，然后在一个留出地区的数据上测试该模型。最终模型包含 11 个项目，并描述了这些项目的模型属性、与结局的关系等。值得注意的是，作者使用临床领域知识来选择候选变量，但并没有落入把模型系数解释为因果效应的诱惑。毫无疑问，其中一些预测变量与结局存在因果关系，但并非全部如此，模型也没有试图估计这些因果关系。</p>
+<ul>
+<li><p>Netflix 定期在其<a href="https://research.netflix.com/">研究博客</a>中分享建模成功经验和新策略。他们最近还发表了一篇论文，回顾了深度学习模型在推荐系统中的应用（在这个例子中，是向用户推荐节目和电影）<span class="citation" data-cites="steck2021">(Steck et al. 2021)</span>。这篇论文阐述了他们目标的细节、所用模型的细节，以及他们遇到的许多挑战，从而形成了一份关于使用这类模型的实践指南。</p></li>
+<li><p>2020 年初，具有健康研究中预测和预后建模经验的研究者发表了一篇关于 COVID-19 诊断和预后模型的综述 <span class="citation" data-cites="Wynants2020">(Wynants et al. 2020)</span>。这篇综述不仅因其覆盖范围广而有意思，也因为被评为质量较差的模型数量惊人：“[232] 个模型被评为偏倚风险高或不明确，主要原因包括对照患者选择不具代表性、排除了在研究结束时尚未经历感兴趣事件的患者、模型过拟合风险高以及报告不清楚。”这项研究也是一项<a href="https://www.covprecise.org/">动态综述</a>。</p></li>
+</ul>
+</section>
+<section id="有效性-1" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="有效性-1">有效性</h5>
+<p>预测建模中有效性的关键衡量指标是预测准确性，可以通过多种方式测量，例如均方根误差（RMSE）、平均绝对误差（MAE）、曲线下面积（AUC）等。预测建模的一个方便之处在于，我们通常可以评估自己是否正确；而对于只有部分数据的描述性统计，或真实因果结构未知的因果推断，这一点并不成立。我们并不总是能够与真值比较，但在拟合初始预测模型时，这几乎总是必需的 <sup>2</sup>。</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;我们这里说的是单数”模型”，但数据科学家通常会为了实验拟合许多模型，而且最好的预测模型往往是多个模型预测的某种组合，称为堆叠模型。</p></div></div><p>测量误差也是预测建模中的一个问题，因为我们通常需要准确的数据才能进行准确预测。有趣的是，在预测场景中，测量误差和缺失本身可能包含信息。在因果场景中，这可能会引入偏倚，但预测模型可以毫无问题地利用这些信息。例如，在著名的 Netflix Prize 中，获胜模型利用了客户是否曾经为某部电影评分这一信息来改进推荐系统。</p>
+<p>与描述性分析类似，混杂在预测建模中没有定义。预测模型中的系数不可能被混杂；我们关心的只是该变量是否提供预测信息，而不是这些信息是否来自因果关系或其他原因。</p>
+</section>
+<section id="与因果推断的关系-1" class="level5">
+<h5 class="anchored" data-anchor-id="与因果推断的关系-1">与因果推断的关系</h5>
+<p>预测中最大的单一风险，是假定模型中的某个系数具有因果解释。这种假定很可能不成立。一个模型可能预测得很好，但从因果角度看，它的系数也可能完全有偏。</p>
+<p>人们常常错误地把用于预测模型的特征（变量）选择方法，用来选择因果模型中的混杂因素。除了这些方法存在过拟合风险之外，它们适用于预测模型，却不适用于因果模型。预测指标无法确定你的问题的因果结构，而某个变量对结局具有预测价值，也并不使它成为混杂因素。一般来说，应当由背景知识（而不是预测或关联统计）来帮助你为因果模型选择变量 <span class="citation" data-cites="robinsImpossible">(Robins and Wasserman 1999)</span>。</p>
+<p>尽管如此，预测对因果推断依然至关重要。从哲学角度看，我们是在比较不同<em>如果……会怎样</em>情景下的预测：如果一件事发生，结局会是什么；如果另一件事发生，结局又会是什么？我们会花大量时间讨论这个主题。我们还会从实践角度大量讨论预测：就像在预测以及某些描述任务中一样，我们会使用建模技术来回答因果问题。倾向评分方法和 g-计算等技术使用模型预测来回答因果问题，但建立和解释这些模型本身的工作流非常不同。</p>
+</section>
+</section>
+<section id="因果推断" class="level4">
+<h4 class="anchored" data-anchor-id="因果推断">因果推断</h4>
+<p>因果推断的目标，是理解某个变量（有时称为暴露）对另一个变量（有时称为结局）的影响。“暴露”和”结局”是本书用来描述我们感兴趣的因果关系的术语。重要的是，我们的目标是清楚而精确地回答这个问题。在实践中，这意味着使用研究设计（例如随机试验）或统计方法（例如倾向评分）来计算暴露对结局的无偏效应。</p>
+<p>与预测和描述一样，最好从一个清楚、精确的问题开始，这样才能得到清楚、精确的答案。在统计学和数据科学中，尤其是当我们在现代世界的数据海洋中穿行时，我们常常最终得到一个没有问题的答案（例如 <a href="https://en.wikipedia.org/wiki/42_(number)#The_Hitchhiker's_Guide_to_the_Galaxy"><code>42</code></a>）。当然，这会使答案的解释变得困难。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>因果推断与解释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>有些作者把”因果推断”和”解释”这两个短语互换使用。我们对此稍微谨慎一些。因果推断总是与解释有关，但我们可以在并不了解其发生机制的情况下，准确估计一件事对另一件事的效应。</p>
+<p>以 John Snow 为例，他被称为流行病学之父。1854 年，Snow 对伦敦一次霍乱暴发进行了著名调查，并确认特定水源是导致该病的原因。他是对的：受污染的水是霍乱传播的机制。然而，他并没有足够信息来解释具体机制：导致霍乱的细菌 <em>Vibrio cholerae</em> 直到近 30 年后才被确认。</p>
+</div>
+</div>
+</section>
+<section id="例子-2" class="level4">
+<h4 class="anchored" data-anchor-id="例子-2">例子</h4>
+<p>本书会看到许多因果推断的例子，但我们先继续看一个与 COVID-19 相关的例子。随着大流行持续，疫苗和抗病毒治疗等工具陆续可用，普遍佩戴口罩等政策也开始变化。2022 年 2 月，美国马萨诸塞州撤销了一项要求公立学校普遍佩戴口罩的全州政策 <span class="citation" data-cites="Cowger2022">(Cowger et al. 2022)</span>。在大波士顿地区，一些学区继续执行该政策，而另一些学区停止执行；停止执行的学区也在政策变化后的数周内于不同时间停止。这种政策差异使研究者能够利用这一时期学区政策之间的差异，研究普遍佩戴口罩对 COVID-19 病例的影响。研究者纳入了对学区的描述性分析，以理解与 COVID-19 及其他健康决定因素相关因素的分布。为估计普遍佩戴口罩对病例的影响，作者使用了一种在政策相关因果推断中常见的技术，称为双重差分，来估计这一效应。作者发现，继续要求佩戴口罩的学区，其病例数远低于未继续要求的学区；他们的分析得出结论，政策变化导致了近 12,000 例额外病例，约占研究 15 周期间这些学区病例的近 30%。</p>
+<p>下面还有几个有意思的例子：</p>
+<ul>
+<li><p>Netflix 经常在工作中使用因果推断。2022 年，他们发表了一篇<a href="https://netflixtechblog.com/a-survey-of-causal-inference-applications-at-netflix-b62d25175e6f">博客文章，总结了他们参与的一些因果任务</a>。一个有意思的例子是本地化。Netflix 面向全球用户，通过字幕和配音来本地化内容。随机实验并不是一个好主意，因为这意味着要向用户暂不提供内容，因此 Netflix 的研究者使用了几种方法来理解本地化的价值，同时处理潜在混杂。一个例子是研究疫情相关配音延迟的影响。研究者使用合成控制来模拟存在和不存在这些延迟时对观看量的影响。可以推测，疫情相关延迟发生的时间与通常会影响配音流程的许多因素无关，因此减少了一部分潜在混杂。</p></li>
+<li><p>Tuskegee Study 是现代史上最臭名昭著的医疗滥用例子之一。人们通常把它视为美国黑人对医疗界不信任的来源之一。健康经济学研究者使用双重差分技术的一个变体，评估 Tuskegee Study 对老年黑人男性的不信任和预期寿命的影响 <span class="citation" data-cites="Alsan2018">(Alsan and Wanamaker 2017)</span>。结果重要而令人不安：“我们发现，1972 年该研究被披露与老年黑人男性医疗不信任和死亡率上升、门诊和住院医师互动减少相关。我们的估计表明，在披露事件影响下，45 岁黑人男性的预期寿命最多下降 1.5 年，这约占 1980 年黑人男性与白人男性预期寿命差距的 35%，以及黑人男性与女性差距的 25%。”</p></li>
+</ul>
+<section id="有效性-2" class="level5">
+<h5 class="anchored" data-anchor-id="有效性-2">有效性</h5>
+<p>作出有效的因果推断需要若干假设。不同于预测，我们通常无法确认自己的因果模型是否正确。换句话说，我们需要作出的大多数假设都是不可验证的。我们将在本书中反复回到这一主题——从这些假设的基础，到实践决策，再到检查模型中的问题。</p>
+</section>
+</section>
+<section id="为什么正确的因果模型不简单等同于最好的预测模型" class="level4">
+<h4 class="anchored" data-anchor-id="为什么正确的因果模型不简单等同于最好的预测模型">为什么正确的因果模型不简单等同于最好的预测模型？</h4>
+<p>到这里，你可能会想，为什么正确的因果模型不简单等同于最好的预测模型。两者相关是有道理的：自然地，会导致其他事物的因素也会是预测因子。因果关系层层相连，因此任何预测信息在某种程度上都与我们所预测事物的因果结构有关。难道不应该认为，一个预测得好的模型也具有因果性吗？确实，<em>有些</em>预测模型可以是很好的因果模型，反之亦然。不幸的是，情况并不总是如此；因果效应不一定有很好的预测能力，而好的预测因子也不一定在因果上无偏 <span class="citation" data-cites="shmueli2010a">(Shmueli 2010)</span>。仅凭数据无法知道这一点。</p>
+<p>我们先从因果视角看，因为它稍微简单一些。设想一个针对某个暴露的因果无偏模型，它只包含同时与结局<em>和</em>暴露相关的变量。换句话说，这个模型为我们感兴趣的暴露提供了正确答案，但并不包含结局的其他预测因子（有时这可能是个好主意）。如果一个结局有许多原因，那么一个准确描述其与单一暴露关系的模型，很可能无法很好地预测该结局。同样，如果暴露对结局的真实因果效应很小，它带来的预测价值也很有限。换句话说，一个模型的预测能力无论高低，都无法帮助我们区分该模型是否给出了正确答案。当然，低预测能力也可能表明某个因果效应从应用角度看并没有太大用处，尽管这还取决于若干统计因素。</p>
+<p>预测模型并不总是无偏因果模型，还有两个更复杂的原因。第一个原因，我们考虑一个从因果角度看准确的模型：它估计对某个结局的效应，而且所有这些效应都是无偏的。即使在这种理想情形下，你也可能用另一个模型得到更好的预测。原因与预测建模中的偏差-方差权衡有关。当效应很小、数据噪声很大、预测因子高度相关，或数据量不多时，使用带有偏倚的模型（如惩罚回归）可能是有道理的。这些模型有意引入偏倚，以换取样本外预测中方差的改善。由于预测和因果推断的目标不同（通常是对样本外观察进行准确预测，而不是估计无偏效应），最适合推断的模型不一定是最好的预测模型。</p>
+<p>第二，从因果角度看有偏的变量，往往也会带来预测能力。先看一个简单例子。一个著名的混杂关系例子，是夏季冰淇淋销量与犯罪之间的关系。<a href="https://slate.com/news-and-politics/2013/07/warm-weather-homicide-rates-when-ice-cream-sales-rise-homicides-rise-coincidence.html">从描述上看，冰淇淋销量与犯罪有关</a>，但这种关系受到天气混杂；例如，天气较暖时，冰淇淋销量和犯罪都会增加。（当然，这是简化说法，因为天气本身并不导致犯罪，但它位于因果路径上。）</p>
+<p>考虑一个思想实验：你身处一个黑暗房间。你的目标是预测犯罪，但你不知道天气或一年中的时间。不过，你有冰淇淋销量的信息。一个用冰淇淋销量预测犯罪的模型，从因果角度看会是有偏的——冰淇淋销量并不导致犯罪，即使模型会显示出一个效应——但它会为你的犯罪模型提供一些预测价值。这两个条件背后的原因相同：天气和冰淇淋销量相关，天气和犯罪也相关。冰淇淋销量可以成功地（尽管并不完美地）作为天气的代理。这会导致对冰淇淋销量对犯罪的因果影响的效应估计有偏，但也会部分有效地预测犯罪。其他从因果角度看无效的变量，无论是自身有偏，还是会把偏倚引入因果效应估计，也常常带来良好的预测价值。因此，预测准确性并不是衡量因果性的好指标。</p>
+<p>一个密切相关的概念是 <em>Table Two Fallacy</em>，之所以这样命名，是因为在健康研究论文中，描述性分析通常呈现在表 1，而回归模型通常呈现在表 2 <span class="citation" data-cites="Westreich2013">(Westreich and Greenland 2013)</span>。Table Two Fallacy 指的是研究者呈现混杂因素和其他非暴露变量，尤其是当他们把这些系数也解释为因果效应时。问题在于，在某些情况下，用于估计某个变量无偏效应的模型，可能并不是用于估计另一个变量无偏效应的同一个模型。换句话说，我们不能把混杂因素的效应解释为因果效应，因为它们<em>自身</em>也可能被另一个与原始暴露无关的变量所混杂。</p>
+<p>描述性、预测性和因果性分析总会相互包含一些成分。预测模型的一部分预测能力来自结局的因果结构，而因果模型也因为包含关于结局的信息而具有一定预测能力。然而，同一个模型在同一份数据中，如果目标不同，其有用性也会随着目标而不同。</p>
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Alsan2018" class="csl-entry">
+Alsan, Marcella, and Marianne Wanamaker. 2017. <span>“Tuskegee and the Health of Black Men*.”</span> <em>The Quarterly Journal of Economics</em> 133 (1): 407–55. <a href="https://doi.org/10.1093/qje/qjx029">https://doi.org/10.1093/qje/qjx029</a>.
+</div>
+<div id="ref-Cowger2022" class="csl-entry">
+Cowger, Tori L., Eleanor J. Murray, Jaylen Clarke, Mary T. Bassett, Bisola O. Ojikutu, Sarimer M. Sánchez, Natalia Linos, and Kathryn T. Hall. 2022. <span>“Lifting Universal Masking in Schools <span></span> Covid-19 Incidence Among Students and Staff.”</span> <em>New England Journal of Medicine</em> 387 (21): 1935–46. <a href="https://doi.org/10.1056/nejmoa2211029">https://doi.org/10.1056/nejmoa2211029</a>.
+</div>
+<div id="ref-Fox2022" class="csl-entry">
+Fox, Matthew P, Eleanor J Murray, Catherine R Lesko, and Shawnita Sealy-Jefferson. 2022. <span>“On the Need to Revitalize Descriptive Epidemiology.”</span> <em>American Journal of Epidemiology</em> 191 (7): 1174–79. <a href="https://doi.org/10.1093/aje/kwac056">https://doi.org/10.1093/aje/kwac056</a>.
+</div>
+<div id="ref-Gartner2020" class="csl-entry">
+Gartner, Danielle R., Paul L. Delamater, Robert A. Hummer, Jennifer L. Lund, Brian W. Pence, and Whitney R. Robinson. 2020. <span>“Integrating Surveillance Data to Estimate Race/Ethnicity-Specific Hysterectomy Inequalities Among Reproductive-Aged Women.”</span> <em>Epidemiology</em> 31 (3): 385–92. <a href="https://doi.org/10.1097/ede.0000000000001171">https://doi.org/10.1097/ede.0000000000001171</a>.
+</div>
+<div id="ref-Gupta2021" class="csl-entry">
+Gupta, Rishi K, Ewen M Harrison, Antonia Ho, Annemarie B Docherty, Stephen R Knight, Maarten van Smeden, Ibrahim Abubakar, et al. 2021. <span>“Development and Validation of the ISARIC 4C Deterioration Model for Adults Hospitalised with COVID-19: A Prospective Cohort Study.”</span> <em>The Lancet Respiratory Medicine</em> 9 (4): 349–59. <a href="https://doi.org/10.1016/s2213-2600(20)30559-2">https://doi.org/10.1016/s2213-2600(20)30559-2</a>.
+</div>
+<div id="ref-harrell2001" class="csl-entry">
+Harrell, Frank E. 2001. <em>Multivariable Modeling Strategies</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4757-3462-1_4">https://doi.org/10.1007/978-1-4757-3462-1_4</a>.
+</div>
+<div id="ref-James_Witten_Hastie_Tibshirani_2022" class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2022. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer.
+</div>
+<div id="ref-kuhn2013a" class="csl-entry">
+Kuhn, Max, and Kjell Johnson. 2013. <em>Applied Predictive Modeling</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4614-6849-3">https://doi.org/10.1007/978-1-4614-6849-3</a>.
+</div>
+<div id="ref-Kuhn_Silge_2022" class="csl-entry">
+Kuhn, Max, and Julia Silge. 2022. <em>Tidy Modeling with r: A Framework for Modeling in the Tidyverse</em>. O’Reilly.
+</div>
+<div id="ref-Miller2004" class="csl-entry">
+Miller, William C. 2004. <span>“Prevalence of Chlamydial and Gonococcal Infections Among Young Adults in the United States.”</span> <em>JAMA</em> 291 (18): 2229. <a href="https://doi.org/10.1001/jama.291.18.2229">https://doi.org/10.1001/jama.291.18.2229</a>.
+</div>
+<div id="ref-owidforestsanddeforestation" class="csl-entry">
+Ritchie, Hannah, and Max Roser. 2021. <span>“Forests and Deforestation.”</span> <em>Our World in Data</em>.
+</div>
+<div id="ref-robinsImpossible" class="csl-entry">
+Robins, J. M., and L. Wasserman. 1999. <em>On the Impossibility of Inferring Causation from Association Without Background Knowledge</em>. Edited by P. Glymour and G. Cooper. Menlo Park, CA, Cambridge, MA: AAAI Press, The MIT Press.
+</div>
+<div id="ref-shmueli2010a" class="csl-entry">
+Shmueli, Galit. 2010. <span>“To Explain or to Predict?”</span> <em>Statistical Science</em> 25 (3). <a href="https://doi.org/10.1214/10-sts330">https://doi.org/10.1214/10-sts330</a>.
+</div>
+<div id="ref-steck2021" class="csl-entry">
+Steck, Harald, Linas Baltrunas, Ehtsham Elahi, Dawen Liang, Yves Raimond, and Justin Basilico. 2021. <span>“Deep Learning for Recommender Systems: A Netflix Case Study.”</span> <em>AI Magazine</em> 42 (3): 7–18. <a href="https://doi.org/10.1609/aimag.v42i3.18140">https://doi.org/10.1609/aimag.v42i3.18140</a>.
+</div>
+<div id="ref-Westreich2013" class="csl-entry">
+Westreich, D., and S. Greenland. 2013. <span>“The Table 2 Fallacy: Presenting and Interpreting Confounder and Modifier Coefficients.”</span> <em>American Journal of Epidemiology</em> 177 (4): 292–98. <a href="https://doi.org/10.1093/aje/kws412">https://doi.org/10.1093/aje/kws412</a>.
+</div>
+<div id="ref-Wynants2020" class="csl-entry">
+Wynants, Laure, Ben Van Calster, Gary S Collins, Richard D Riley, Georg Heinze, Ewoud Schuit, Elena Albu, et al. 2020. <span>“Prediction Models for Diagnosis and Prognosis of Covid-19: Systematic Review and Critical Appraisal.”</span> <em>BMJ</em>, April, m1328. <a href="https://doi.org/10.1136/bmj.m1328">https://doi.org/10.1136/bmj.m1328</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>causal inference</category>
+  <category>r</category>
+  <category>biostatistics</category>
+  <guid>https://leslie-lu.github.io/blog/2026/07/14/causal_inference/</guid>
+  <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260713221130.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 41 期）：AI时代，你和导师的知识差距消失了！真的吗？然后呢？</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -55,7 +303,7 @@
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
 <ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/-M_2IBJN_Cl297bAeYsgZQ">OpenAI给语音AI补上“眼力见”</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-M_2IBJN_Cl297bAeYsgZQ">OpenAI给语音AI补上”眼力见”</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260709220112.png" class="img-fluid"></p>
 <p>GPT-Live 是 OpenAI 面向实时语音交互推出的新一代 AI 语音模型，旨在提升人机交流的自然性与连续性。GPT-Live 通过全双工能力实现边听边说，可根据对话状态判断继续倾听、回应或调用工具，同时将自然交流与复杂任务执行分离，使语音模型负责互动体验，而推理模型负责搜索、分析和多步骤任务。该技术代表 AI 助手从简单问答工具向实时感知、主动协作型智能体的发展方向。</p>
@@ -156,7 +404,8 @@
 <p>这里最容易被低估的是第四点，也就是 <code>intercurrent event</code>。</p>
 <p>临床试验里很少有完美情况。不是每个受试者都会从随机化开始，一直按方案治疗到最后一次随访，中间没有停药、换药、救援治疗、死亡、器官移植、失访或其他治疗改变。真实试验里，治疗开始后发生的这些事件，常常会改变后续结局的含义。</p>
 <p>举个简化例子。一个肿瘤试验计划在第 6 个治疗周期后评价最佳总体缓解。部分患者在疾病进展前提前停用研究药物，并接受下一线治疗。第 6 周期后的疗效评价仍然能记录，但它到底代表什么？</p>
-<p>如果我们关心的是 <code>开始 A 治疗策略后，包括必要后续治疗在内的总体效果</code>，那么后续治疗后的结局可能仍然相关。</p>
+<p>如果我们关心的是 <code>开始 A 治疗策略后，包括必要后续治疗在内的总体效果</code>，那么后续治疗后的结局可能仍然相关。<br>
+</p>
 <p>如果我们关心的是 <code>如果没有接受下一线治疗，A 药本身会带来什么效果</code>，那么后续治疗后的结局就不再直接回答这个问题。</p>
 <p>同一个观察值，在一个 <code>estimand</code> 下可能是相关数据，在另一个 <code>estimand</code> 下可能需要被视为不再反映目标问题。这就是为什么不能只说 <code>有缺失就插补</code>，也不能只说 <code>发生停药就按 ITT 分析</code>。这些说法太粗了。</p>
 </section>
@@ -193,11 +442,14 @@
 <h3 class="anchored" data-anchor-id="缺失数据处理也要回到-estimand">5. 缺失数据处理也要回到 estimand</h3>
 <p>很多人第一次接触 <code>estimand</code>，会觉得它是临床试验设计阶段的概念，和后面的 <code>missing data</code> 技术关系不大。实际做分析时，二者关系很紧。</p>
 <p>缺失数据处理之前，至少要先问三个问题。</p>
-<p>第一，缺失发生在什么事件之后？</p>
+<p>第一，缺失发生在什么事件之后？<br>
+</p>
 <p>如果缺失发生在救援治疗之后，而我们的 <code>estimand</code> 采用 <code>treatment policy strategy</code>，那么这些缺失值仍然对应目标问题，需要考虑如何在同类治疗路径中插补。简单从未使用救援治疗的人那里借信息，可能不合适。</p>
-<p>第二，事件之后的数据是否仍然 relevant？</p>
+<p>第二，事件之后的数据是否仍然 relevant？<br>
+</p>
 <p>如果 <code>estimand</code> 采用 <code>hypothetical strategy</code>，真实世界中事件之后收集到的数据未必直接回答目标问题。这个时候，插补不是普通意义上补一个没测到的值，而是在假想情景下预测一个反事实结局。相应的假设要写清楚，敏感性分析也更重要。</p>
-<p>第三，事件之后的数据是否还存在？</p>
+<p>第三，事件之后的数据是否还存在？<br>
+</p>
 <p>对于死亡这类 terminal event，如果原结局是某个死亡后不再存在的连续生理指标，就不能把它简单当成一个可插补的普通缺失值。这个时候可能需要重新定义结局，或者采用复合变量策略，而不是机械地套用 multiple imputation。</p>
 <p>这也是我觉得 <code>estimand</code> 对实际分析很有帮助的地方。它不只是让 SAP 看起来更规范，而是逼着我们在插补之前先回答：这个缺失值背后缺的到底是什么？是本来应该观察但没观察到的值，还是目标问题本身已经变了？</p>
 <p>如果这个问题没有想清楚，后面无论是 MAR、MNAR、delta adjustment、jump-to-reference，还是 tipping point analysis，都容易变成技术堆叠。方法越多，反而越不容易解释。</p>
@@ -242,7 +494,7 @@
 </section>
 <section id="本周话题中美押注人形机器人它们真能干啥活" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题中美押注人形机器人它们真能干啥活">本周话题：<a href="https://mp.weixin.qq.com/s/L5cvR-BB48onboysMqOaYA">中美押注人形机器人：它们真能干啥活？</a></h3>
-<p>中美企业正加速“押注”人形机器人，从汽车工厂到高危环境，测试它们能否替人类完成重复或危险工作。但续航、安全和数据隐私等问题尚未解决，人形机器人距离真正走进家庭和日常生活，还有不小的鸿沟。</p>
+<p>中美企业正加速”押注”人形机器人，从汽车工厂到高危环境，测试它们能否替人类完成重复或危险工作。但续航、安全和数据隐私等问题尚未解决，人形机器人距离真正走进家庭和日常生活，还有不小的鸿沟。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -270,12 +522,12 @@
 <li><a href="https://mp.weixin.qq.com/s/kYv6aClJwefUFKeZkOiONA">AI做质性分析，比人工快48倍？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260702204148.png" class="img-fluid"></p>
-<p>质性研究一直是护理科研的重要方法，通过访谈深入了解患者的真实体验。研究者以骨肿瘤术后患者运动恐惧症为案例，首次系统比较了ChatGPT、DeepSeek与人工编码在质性分析中的表现。结果显示AI效率碾压，主题高度重合，人工编码由于认知负荷，偶尔会遗漏一些细微的主题（比如“睡眠质量对康复动力的影响”），而AI能更全面地扫描文本，发现容易被忽略的潜在主题。当然，AI也会“过度解读”——比如生成了“应对策略”这个主题，实际上可以归入其他主题，需要人工把关。大语言模型不能取代护士的共情和专业判断，但它可以成为一个极其高效的科研助手。</p>
+<p>质性研究一直是护理科研的重要方法，通过访谈深入了解患者的真实体验。研究者以骨肿瘤术后患者运动恐惧症为案例，首次系统比较了ChatGPT、DeepSeek与人工编码在质性分析中的表现。结果显示AI效率碾压，主题高度重合，人工编码由于认知负荷，偶尔会遗漏一些细微的主题（比如”睡眠质量对康复动力的影响”），而AI能更全面地扫描文本，发现容易被忽略的潜在主题。当然，AI也会”过度解读”——比如生成了”应对策略”这个主题，实际上可以归入其他主题，需要人工把关。大语言模型不能取代护士的共情和专业判断，但它可以成为一个极其高效的科研助手。</p>
 <ol start="4" type="1">
 <li><a href="https://mp.weixin.qq.com/s/7KVikT7wHOvGRjQChzhkWw">当大脑结构成为模型结构，BrainStack 的神经科学驱动式 MoE 革命</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260702205624.png" class="img-fluid"></p>
-<p>一项名为BrainStack的突破性研究，它针对静默语音（即大脑内部无声的言语想象）的EEG信号解码难题，提出了一个革命性的解决方案。其核心是将神经科学与深度学习深度融合，首创了“神经科学驱动的MoE（专家混合）”架构。该模型模仿大脑功能分区，为不同脑区配备专门的“专家”网络，并通过一个“路由器”动态整合各脑区的信息。在目前最大的静默语音EEG数据集上，BrainStack以显著优势超越了现有所有模型，证明了让模型结构模仿大脑结构这一理念的巨大潜力。这不仅为失语症患者带来了新的沟通希望，也为整个脑机接口领域提供了一种全新的、更高效、更可解释的建模范式。</p>
+<p>一项名为BrainStack的突破性研究，它针对静默语音（即大脑内部无声的言语想象）的EEG信号解码难题，提出了一个革命性的解决方案。其核心是将神经科学与深度学习深度融合，首创了”神经科学驱动的MoE（专家混合）“架构。该模型模仿大脑功能分区，为不同脑区配备专门的”专家”网络，并通过一个”路由器”动态整合各脑区的信息。在目前最大的静默语音EEG数据集上，BrainStack以显著优势超越了现有所有模型，证明了让模型结构模仿大脑结构这一理念的巨大潜力。这不仅为失语症患者带来了新的沟通希望，也为整个脑机接口领域提供了一种全新的、更高效、更可解释的建模范式。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -380,10 +632,10 @@
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
 <ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/0Lx3C1CtQxOkC0y2ZRKU7Q">Nature | 跨物种“死亡时钟”揭示衰老的转录组机制</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0Lx3C1CtQxOkC0y2ZRKU7Q">Nature | 跨物种”死亡时钟”揭示衰老的转录组机制</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260625233622.png" class="img-fluid"></p>
-<p>衰老研究最扎心的冲突是：身份证年龄相同的人，身体离“死亡风险”可能并不一样。2026年5月27日，Nature 发表《Universal transcriptomic hallmarks of mammalian ageing and mortality》，把超过11,000份转录组、25种以上组织和小鼠、大鼠、食蟹猴、人放到同一张地图里。核心结论很硬：哺乳动物衰老和死亡风险共享一套保守的转录组指纹，并且可以被可解释的“年龄/死亡时钟”量化。真正抓人的地方在这里：它不是再报一个长寿基因，而是在追问哪些分子模块正在把身体推向更高死亡风险，哪些干预又能把这个读数往回拉。</p>
+<p>衰老研究最扎心的冲突是：身份证年龄相同的人，身体离”死亡风险”可能并不一样。2026年5月27日，Nature 发表《Universal transcriptomic hallmarks of mammalian ageing and mortality》，把超过11,000份转录组、25种以上组织和小鼠、大鼠、食蟹猴、人放到同一张地图里。核心结论很硬：哺乳动物衰老和死亡风险共享一套保守的转录组指纹，并且可以被可解释的”年龄/死亡时钟”量化。真正抓人的地方在这里：它不是再报一个长寿基因，而是在追问哪些分子模块正在把身体推向更高死亡风险，哪些干预又能把这个读数往回拉。</p>
 <ul>
 <li>论文 DOI：10.1038/s41586-026-10542-3</li>
 </ul>
@@ -399,7 +651,7 @@
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
 <ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/XbqMFDLzNW4Iue1-ciGj-g">大脑“顿悟”机制：先重现记忆，再更新理解</a></li>
+<li><a href="https://mp.weixin.qq.com/s/XbqMFDLzNW4Iue1-ciGj-g">大脑”顿悟”机制：先重现记忆，再更新理解</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260626000216.png" class="img-fluid"></p>
 <p>研究通过让被试观看乱序电视剧发现，“啊哈时刻”往往源于对因果相关过往事件的回忆。fMRI结果显示，顿悟发生前，大脑会先重现相关记忆，随后约2秒内皮层表征发生突变，完成情境理解更新。进一步表明，大脑倾向以因果关系而非时间顺序组织记忆，使人能够在复杂叙事中快速建立连贯理解。</p>
@@ -481,7 +733,7 @@
 </section>
 <section id="本周话题医疗数字孪生的六重误判与真相" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题医疗数字孪生的六重误判与真相">本周话题：<a href="https://mp.weixin.qq.com/s/QvLpQNSp0m7ZOia92lPAbw">医疗数字孪生的六重误判与真相</a></h3>
-<p>当前行业对医疗数字孪生存在多种常见误解，例如将其简单理解为3D可视化系统、一次性交付的技术项目、基于大模型的对话工具或仅是数据的简单堆叠等。文章强调，真正具有临床价值的医疗数字孪生并非技术展示，而是能够在临床决策支持、护理路径优化及智慧医院建设中提供可验证、可持续运行的计算模型，并提出了最小可用数字孪生（MVDT）、场景选择和 ModelOps 运营体系等实践建议，为评估和实施“AI+医疗数字孪生”项目提供了可操作的参考框架。</p>
+<p>当前行业对医疗数字孪生存在多种常见误解，例如将其简单理解为3D可视化系统、一次性交付的技术项目、基于大模型的对话工具或仅是数据的简单堆叠等。文章强调，真正具有临床价值的医疗数字孪生并非技术展示，而是能够在临床决策支持、护理路径优化及智慧医院建设中提供可验证、可持续运行的计算模型，并提出了最小可用数字孪生（MVDT）、场景选择和 ModelOps 运营体系等实践建议，为评估和实施”AI+医疗数字孪生”项目提供了可操作的参考框架。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -505,10 +757,10 @@
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
 <ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/6iB0DtZNhJPvdIyT9Im4hw">在预训练阶段“动手术”：让模型从源头学不会某些能力</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6iB0DtZNhJPvdIyT9Im4hw">在预训练阶段”动手术”：让模型从源头学不会某些能力</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260618223748.png" class="img-fluid"></p>
-<p>研究提出，将模型能力的“塑形”前移到预训练阶段，通过对训练数据进行Token级过滤，从源头限制模型习得某些不希望具备的能力（如医学知识），而非依赖后期对齐或安全补丁。相比传统的文档级过滤，Token级方法更精细，在实现类似“能力削弱”效果的同时，对其他正常能力的损伤更小，呈现出“帕累托改进”。这一思路为AI安全提供了新路径：不只是约束模型“说什么”，而是决定模型“能学到什么”。不过，这种方法也带来权衡问题，例如知识完整性下降及潜在的泛化能力影响。</p>
+<p>研究提出，将模型能力的”塑形”前移到预训练阶段，通过对训练数据进行Token级过滤，从源头限制模型习得某些不希望具备的能力（如医学知识），而非依赖后期对齐或安全补丁。相比传统的文档级过滤，Token级方法更精细，在实现类似”能力削弱”效果的同时，对其他正常能力的损伤更小，呈现出”帕累托改进”。这一思路为AI安全提供了新路径：不只是约束模型”说什么”，而是决定模型”能学到什么”。不过，这种方法也带来权衡问题，例如知识完整性下降及潜在的泛化能力影响。</p>
 <ol start="4" type="1">
 <li><a href="https://mp.weixin.qq.com/s/ztpjD2UCnaMgTpL9JpbUlQ">全球四大生物银行深度横评：爱沙尼亚、UK Biobank、FinnGen、All of Us，谁才是精准医学的未来？</a></li>
 </ol>
@@ -518,7 +770,7 @@
 <li><a href="https://mp.weixin.qq.com/s/bhE7nShAUHHD7tVldaWd7g">繁忙的临床医生，如何快速高效的阅读一项临床试验？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260618224318.png" class="img-fluid"></p>
-<p>近期，JCO Oncology Practice杂志围绕“如何深入剖析一项临床试验”，从一名临床医生的角度，进行了系统阐述。</p>
+<p>近期，JCO Oncology Practice杂志围绕”如何深入剖析一项临床试验”，从一名临床医生的角度，进行了系统阐述。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -592,7 +844,7 @@
 </section>
 <section id="本周话题当-ai-agent-成为新的软件范式" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题当-ai-agent-成为新的软件范式">本周话题：<a href="https://mp.weixin.qq.com/s/JZQHliFgnx_ZobU7XL4UWw">当 AI Agent 成为新的软件范式</a></h3>
-<p>Agent 的价值不仅是提高编码效率，而是将软件从“静态代码系统”转变为“动态推理系统”，使用户直接表达目标，由 Agent 自主规划、执行和交付结果。未来工程师的核心能力将从编写代码转向意图表达、Agent编排、质量治理和系统监督。</p>
+<p>Agent 的价值不仅是提高编码效率，而是将软件从”静态代码系统”转变为”动态推理系统”，使用户直接表达目标，由 Agent 自主规划、执行和交付结果。未来工程师的核心能力将从编写代码转向意图表达、Agent编排、质量治理和系统监督。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -637,13 +889,13 @@
 <li><a href="https://mp.weixin.qq.com/s/u02DHk2Lasi45JHAlOha5g">Claude Cowork 使用说明</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260611233831.png" class="img-fluid"></p>
-<p>Claude Cowork 是 Anthropic 于 2026 年推出的桌面端 AI 智能体工作模式，面向非程序员知识工作者。与传统聊天机器人不同，Cowork 不仅提供建议，还能直接访问授权文件夹，自主拆解任务、调用工具、处理文档，并生成 Excel、Word、PPT 等可交付成果。它支持本地文件管理、网络研究、定时任务、项目记忆及多工具连接，强调“描述目标，委派任务，验收结果”的工作方式。其核心价值在于将用户从重复性操作中解放出来，转向监督、决策与成果评估。</p>
+<p>Claude Cowork 是 Anthropic 于 2026 年推出的桌面端 AI 智能体工作模式，面向非程序员知识工作者。与传统聊天机器人不同，Cowork 不仅提供建议，还能直接访问授权文件夹，自主拆解任务、调用工具、处理文档，并生成 Excel、Word、PPT 等可交付成果。它支持本地文件管理、网络研究、定时任务、项目记忆及多工具连接，强调”描述目标，委派任务，验收结果”的工作方式。其核心价值在于将用户从重复性操作中解放出来，转向监督、决策与成果评估。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
 <p>7.<a href="https://community.sketch-your-mind.com/t/welcome-to-the-sketch-your-mind-community/353" title="Obsidian Sketch Your Mind社区">Obsidian Sketch Your Mind社区</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260611234037.png" class="img-fluid"></p>
-<p>Sketch Your Mind（SYM）是由 Obsidian Excalidraw 插件开发者 Zsolt Viczián 创建的视觉知识管理（Visual PKM）学习社区，致力于帮助用户通过可视化思维提升学习、研究、写作与决策能力。平台围绕 Obsidian 与 Excalidraw 构建完整生态，提供 Excalidraw Essentials 入门课程、Excalidraw Mastery 深度课程、Visual PKM 工作坊以及 Sketch Your Life 思维工具体系。社区还汇集了大量视频教程、课程讲义、案例展示和成员交流内容，涵盖视觉笔记、思维导图、PDF批注、知识管理与AI工作流等主题。对于希望将 Obsidian 从“笔记工具”升级为“可视化第二大脑”的学习者而言，SYM 是当前国际上最具影响力的 Visual PKM 资源平台之一。</p>
+<p>Sketch Your Mind（SYM）是由 Obsidian Excalidraw 插件开发者 Zsolt Viczián 创建的视觉知识管理（Visual PKM）学习社区，致力于帮助用户通过可视化思维提升学习、研究、写作与决策能力。平台围绕 Obsidian 与 Excalidraw 构建完整生态，提供 Excalidraw Essentials 入门课程、Excalidraw Mastery 深度课程、Visual PKM 工作坊以及 Sketch Your Life 思维工具体系。社区还汇集了大量视频教程、课程讲义、案例展示和成员交流内容，涵盖视觉笔记、思维导图、PDF批注、知识管理与AI工作流等主题。对于希望将 Obsidian 从”笔记工具”升级为”可视化第二大脑”的学习者而言，SYM 是当前国际上最具影响力的 Visual PKM 资源平台之一。</p>
 <ol start="8" type="1">
 <li><a href="https://github.com/PKM-er" title="PKMer知识管理开源社区">PKMer知识管理开源社区</a></li>
 </ol>
@@ -720,7 +972,7 @@
 <li><a href="https://mp.weixin.qq.com/s/E92uCsbivVlsVg3lCuEv4g">Nature | ERA：用树搜索和 LLM 自动生成经验型科研软件</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260604215834.png" class="img-fluid"></p>
-<p>本文提出 Empirical Research Assistance（ERA），把“写出能在可评分任务上获得高分的科研软件”定义为搜索问题，用 LLM 进行代码改写、用树搜索选择候选程序，并通过文献方法、研究想法和重组策略引导搜索；作者报告 ERA 在单细胞批次整合、COVID-19 住院预测、时间序列预测、遥感分割、斑马鱼神经活动预测和数值积分等任务中达到或超过专家级表现。</p>
+<p>本文提出 Empirical Research Assistance（ERA），把”写出能在可评分任务上获得高分的科研软件”定义为搜索问题，用 LLM 进行代码改写、用树搜索选择候选程序，并通过文献方法、研究想法和重组策略引导搜索；作者报告 ERA 在单细胞批次整合、COVID-19 住院预测、时间序列预测、遥感分割、斑马鱼神经活动预测和数值积分等任务中达到或超过专家级表现。</p>
 <ul>
 <li>论文 DOI：10.1038/s41586-026-10658-6</li>
 </ul>
@@ -733,12 +985,12 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260604215942.png" class="img-fluid"></p>
 <p>欧洲心脏病学会（ESC）冠脉病理生理与微循环工作组、血栓工作组及欧洲心血管介入协会（EAPCI）联合发布冠脉微血管阻塞（MVO）病理生理、预防与管理临床共识。</p>
 <p>共识指出，即便及时完成急诊冠脉介入治疗（PCI）开通大血管，仍有高达 60%的STEMI患者存在心肌组织灌注不足，核心诱因是冠脉微血管阻塞与缺血再灌注损伤引发的 “无复流” 现象。这一问题直接导致梗死心肌愈合不良、左心室不良重构，显著增加远期心衰与死亡风险。</p>
-<p>共识首次明确，冠脉无复流并非“全或无”，是动态连续的病理过程：从早期可逆的微血管功能异常，逐步进展为局限性微血管阻塞，最终发展为大范围微血管阻塞（累及范围＞1.55%）伴心肌内出血，后者提示损伤不可逆、预后极差。</p>
+<p>共识首次明确，冠脉无复流并非”全或无”，是动态连续的病理过程：从早期可逆的微血管功能异常，逐步进展为局限性微血管阻塞，最终发展为大范围微血管阻塞（累及范围＞1.55%）伴心肌内出血，后者提示损伤不可逆、预后极差。</p>
 <ol start="5" type="1">
 <li><a href="https://mp.weixin.qq.com/s/OLq88H9Ux1nkQGh-mI1vPA">AI放大人类道德偏差，而非替代或超越人类</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260604220242.png" class="img-fluid"></p>
-<p>本文基于《心理学年度综述》的一篇综述文章，探讨人工智能在道德心理学中的角色，指出AI并未改变人类的道德本质，而是放大了既有的认知偏差与道德悖论；人类在评价AI时存在明显“双重标准”，既高估自身能力又对AI提出不切实际的高要求；同时，AI在责任归属、歧视判断、人机互动与“委托作恶”等情境中，正在重塑信任、责任与道德边界，促使我们重新思考人与机器共存的伦理框架。</p>
+<p>本文基于《心理学年度综述》的一篇综述文章，探讨人工智能在道德心理学中的角色，指出AI并未改变人类的道德本质，而是放大了既有的认知偏差与道德悖论；人类在评价AI时存在明显”双重标准”，既高估自身能力又对AI提出不切实际的高要求；同时，AI在责任归属、歧视判断、人机互动与”委托作恶”等情境中，正在重塑信任、责任与道德边界，促使我们重新思考人与机器共存的伦理框架。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -756,10 +1008,10 @@
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
 <ol start="8" type="1">
-<li><a href="https://mp.weixin.qq.com/s/piiP-byiDnyBB13cRp1u6A">中大毕业照“出片”地图，别错过这些宝藏机位！</a></li>
+<li><a href="https://mp.weixin.qq.com/s/piiP-byiDnyBB13cRp1u6A">中大毕业照”出片”地图，别错过这些宝藏机位！</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260604220956.png" class="img-fluid"></p>
-<p>清风、红墙、绿瓦……都是青春里舍不得忘却的碎片快带上这份“出片”地图把青春的记忆装进相框里。</p>
+<p>清风、红墙、绿瓦……都是青春里舍不得忘却的碎片快带上这份”出片”地图把青春的记忆装进相框里。</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -815,8 +1067,8 @@
 <li><a href="https://mp.weixin.qq.com/s/gd1G0qqQORkyA0gL103KFA">Nature丨全球首个人类胚胎早期器官发生阶段时空动态转录全景图问世</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260528204511.png" class="img-fluid"></p>
-<p>长期以来，受精后第4周至第8周的人类胚胎发育阶段被视为“认知盲区”——既难以在体外培养获得该时期的胚胎，也无法通过影像学手段获取类似胎儿发育的精准数据。然而，这一阶段的分子调控与人类对自身发育的认知密切相关，同时该阶段的发育异常与先天性心脏病、神经发育障碍及多种疾病的易感性密切相关。尽管近年来测序技术不断进步，针对该阶段胚胎转录特征的系统性、连续性时空解析数据仍极为稀缺。</p>
-<p>2026年5月27日，复旦大学、浙江大学与华大生命科学研究院基因组多维解析技术全国重点实验室科研团队在Nature上发表了题为Spatiotemporal transcriptome atlas of human embryos after gastrulation的研究论文。研究团队通过整合高分辨空间转录组技术Stereo-seq与单核RNA测序 (snRNA-seq)，首次系统绘制了覆盖原肠运动后、器官形成关键期 (Carnegie stage 12–23，受精后约4至8周) 的人类全胚胎时空转录组图谱。这是全球首个人类胚胎早期器官发生阶段时空转录全景图，标志着人类对早期器官发生的认知，从零散的切片观察迈入整体、动态、分子化的全景解析新阶段。同期，Nature杂志配发评论文章高度评价这项工作，评价认为“With this resource, they provide a powerful framework for connecting genetic variation to human disease”.</p>
+<p>长期以来，受精后第4周至第8周的人类胚胎发育阶段被视为”认知盲区”——既难以在体外培养获得该时期的胚胎，也无法通过影像学手段获取类似胎儿发育的精准数据。然而，这一阶段的分子调控与人类对自身发育的认知密切相关，同时该阶段的发育异常与先天性心脏病、神经发育障碍及多种疾病的易感性密切相关。尽管近年来测序技术不断进步，针对该阶段胚胎转录特征的系统性、连续性时空解析数据仍极为稀缺。</p>
+<p>2026年5月27日，复旦大学、浙江大学与华大生命科学研究院基因组多维解析技术全国重点实验室科研团队在Nature上发表了题为Spatiotemporal transcriptome atlas of human embryos after gastrulation的研究论文。研究团队通过整合高分辨空间转录组技术Stereo-seq与单核RNA测序 (snRNA-seq)，首次系统绘制了覆盖原肠运动后、器官形成关键期 (Carnegie stage 12–23，受精后约4至8周) 的人类全胚胎时空转录组图谱。这是全球首个人类胚胎早期器官发生阶段时空转录全景图，标志着人类对早期器官发生的认知，从零散的切片观察迈入整体、动态、分子化的全景解析新阶段。同期，Nature杂志配发评论文章高度评价这项工作，评价认为”With this resource, they provide a powerful framework for connecting genetic variation to human disease”.</p>
 <ul>
 <li>论文 DOI：10.1038/s41586-026-10545-0</li>
 </ul>
@@ -824,7 +1076,7 @@
 <li><a href="https://mp.weixin.qq.com/s/P5g1PGfaccZaopZZNOos6w">Nature BME | 利用类关联流形学习弥合医学人工智能模型的可解释性差距</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260528205134.png" class="img-fluid"></p>
-<p>深圳理工大学及中国科学院深圳先进技术研究院团队提出了一种称为“类关联流形学习”的数学方法，成功将黑盒AI模型决策规律转化为低维空间可视化流形，可识别AI模型决策的关键因素，并且以生成式方法生成使得模型输出改变的一系列特征变化样本，从而让医生直观理解模型行为，弥合了医疗AI的“可解释鸿沟”，有助于发现AI背后隐藏的医学知识规律。</p>
+<p>深圳理工大学及中国科学院深圳先进技术研究院团队提出了一种称为”类关联流形学习”的数学方法，成功将黑盒AI模型决策规律转化为低维空间可视化流形，可识别AI模型决策的关键因素，并且以生成式方法生成使得模型输出改变的一系列特征变化样本，从而让医生直观理解模型行为，弥合了医疗AI的”可解释鸿沟”，有助于发现AI背后隐藏的医学知识规律。</p>
 <ul>
 <li>论文 DOI：10.1038/s41551-026-01676-w</li>
 </ul>
@@ -1019,7 +1271,7 @@
 </section>
 <section id="本周话题高校教授学生写周记很痛苦我为什么还执意要求" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题高校教授学生写周记很痛苦我为什么还执意要求">本周话题：<a href="https://mp.weixin.qq.com/s/9EkMxdY06R6cj090tXdN7Q">高校教授：学生写周记“很痛苦”，我为什么还执意要求？</a></h3>
-<p>北京建筑大学教授王崇臣对研究生有一个硬性要求——每周日提交周记。然而，很多学生并不能完全理解导师的用意，把写周记当作一个额外的“痛苦”工作。那么，王崇臣为什么执意坚持这一要求？</p>
+<p>北京建筑大学教授王崇臣对研究生有一个硬性要求——每周日提交周记。然而，很多学生并不能完全理解导师的用意，把写周记当作一个额外的”痛苦”工作。那么，王崇臣为什么执意坚持这一要求？</p>
 <p>王崇臣认为，写周记可以帮助学生锤炼科学思维、提升写作能力；对研究生而言，周记也是导师深入了解其具体工作的重要机会，有着不可替代的价值。</p>
 </section>
 <section id="生统研究" class="level3">
@@ -1029,7 +1281,7 @@
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260513231308.png" class="img-fluid"></p>
 <p>糖质太过复杂，一直缺乏有效的研究手段。糖质的生物合成并不像DNA、RNA、蛋白质一样依赖模板，因此缺乏从基因组到糖质序列的对应关系；而高度多样的单糖组成、复杂的糖苷键连接方式和显著的空间构象异质性，限制了对于复杂糖质复合物的高分辨率三维结构解析。这种结构信息的长期缺失，也在很大程度上阻碍了人类对糖质在多种生理和病理过程中作用机制的深入理解。</p>
-<p>当地时间2026年4月23日，颜宁、黄隽豪、闫创业等在国际期刊Science上发表最新研究成果，论文标题为“高分辨率冷冻电镜解析揭示管状纤绒毛中结构N-和O-糖质（Structural N- and O-glycans revealed by high-resolution cryo-EM analysis of tubular mastigonemes）”。研究团队以金藻 Ochromonas danica 的管状纤绒毛（T-mastigoneme）糖质-蛋白质复合物为研究对象，建立了整合高分辨率冷冻电镜、糖蛋白质组学与人工智能建模的综合研究策略，获得了整体糖质分辨率约2 Å（即0.2纳米），核心局部最高达 1.8 Å 的超高分辨率三维电镜密度图，进一步将天然糖质复合物的研究推进至近原子分辨率层面。</p>
+<p>当地时间2026年4月23日，颜宁、黄隽豪、闫创业等在国际期刊Science上发表最新研究成果，论文标题为”高分辨率冷冻电镜解析揭示管状纤绒毛中结构N-和O-糖质（Structural N- and O-glycans revealed by high-resolution cryo-EM analysis of tubular mastigonemes）“。研究团队以金藻 Ochromonas danica 的管状纤绒毛（T-mastigoneme）糖质-蛋白质复合物为研究对象，建立了整合高分辨率冷冻电镜、糖蛋白质组学与人工智能建模的综合研究策略，获得了整体糖质分辨率约2 Å（即0.2纳米），核心局部最高达 1.8 Å 的超高分辨率三维电镜密度图，进一步将天然糖质复合物的研究推进至近原子分辨率层面。</p>
 <ul>
 <li>论文 DOI：10.1126/science.aef4958</li>
 </ul>
@@ -1037,7 +1289,7 @@
 <li><a href="https://mp.weixin.qq.com/s/4SMiU7Vi7RB77jXzh9Z7LQ">Nature Communications | 理解人类早期脑功能发育的结构基础</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260513231516.png" class="img-fluid"></p>
-<p>该研究基于dHCP新生儿多模态影像数据，提出“双轴髓鞘协方差”框架，并构建新生儿特异性的髓鞘-功能耦合指标（MFC），用于解释婴儿早期功能网络的形成机制。研究发现，MFC主要分布于初级感觉和运动皮层，且随年龄增长而增强，呈现明显的距离依赖性：局部连接耦合更强，而远距离连接增长更快并与后续行为发育更相关。进一步分析表明，MFC与神经血管耦合、胶质发生等基因表达模式密切相关，并可预测18个月时的运动、语言和认知结局。该研究提示，新生儿功能连接的出现并非仅由白质髓鞘化驱动，灰质内微结构的同步成熟同样是早期脑功能整合的重要基础。</p>
+<p>该研究基于dHCP新生儿多模态影像数据，提出”双轴髓鞘协方差”框架，并构建新生儿特异性的髓鞘-功能耦合指标（MFC），用于解释婴儿早期功能网络的形成机制。研究发现，MFC主要分布于初级感觉和运动皮层，且随年龄增长而增强，呈现明显的距离依赖性：局部连接耦合更强，而远距离连接增长更快并与后续行为发育更相关。进一步分析表明，MFC与神经血管耦合、胶质发生等基因表达模式密切相关，并可预测18个月时的运动、语言和认知结局。该研究提示，新生儿功能连接的出现并非仅由白质髓鞘化驱动，灰质内微结构的同步成熟同样是早期脑功能整合的重要基础。</p>
 <ul>
 <li>论文 DOI：10.1038/s41467-026-70660-4</li>
 </ul>
@@ -1135,7 +1387,7 @@
 <li><a href="https://mp.weixin.qq.com/s/qb900IUog5Zx0PaSWDAj6g">Nature Human Behaviour | 特征选择可导致机器学习模型解释偏差</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507134310.png" class="img-fluid"></p>
-<p>脑影像机器学习里最常见的可解释性做法，是先用单变量特征筛选（univariate feature selection）找出与目标表型关联最强的一批连接，再把这些高排名特征解释成该表型的“神经网络”。Adkinson 等人用四个大样本发育期数据集、超过 12,000 名参与者、13 个结局变量，把全脑连接按与表型的关联强弱切成十个互不重叠的十分位组（decile），结果发现显著预测并不只属于最靠前的特征。许多在常规流程里被丢弃的低排名连接，既能在内部交叉验证和外部验证中维持显著预测，也会导向不同的网络和节点解释。</p>
+<p>脑影像机器学习里最常见的可解释性做法，是先用单变量特征筛选（univariate feature selection）找出与目标表型关联最强的一批连接，再把这些高排名特征解释成该表型的”神经网络”。Adkinson 等人用四个大样本发育期数据集、超过 12,000 名参与者、13 个结局变量，把全脑连接按与表型的关联强弱切成十个互不重叠的十分位组（decile），结果发现显著预测并不只属于最靠前的特征。许多在常规流程里被丢弃的低排名连接，既能在内部交叉验证和外部验证中维持显著预测，也会导向不同的网络和节点解释。</p>
 <ul>
 <li>论文 DOI：10.1038/s41562-026-02447-y</li>
 </ul>
@@ -1143,7 +1395,7 @@
 <li><a href="https://mp.weixin.qq.com/s/-WXVySLCOA61aYvT2iTNIQ">Nature Genetics | 空间多组学进行镶嵌式整合 SpaMosaic</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507134737.png" class="img-fluid"></p>
-<p>Nature Genetics 上的空间多组学整合工具 SpaMosaic。针对空间组学中样本模态不全、平台不一的“马赛克式”数据难题，提出了一种基于图神经网络和对比学习的整合思路：通过将不同切片、不同模态（如RNA、ATAC、蛋白、组蛋白修饰）对齐到统一低维空间，不仅能实现跨样本的空间聚类和区域注释，还能有效预测缺失的组学信息。通过模拟数据、小鼠脑及胚胎等复杂数据集验证了其在去批次和保持空间连续性上的优越性，为研究者提供了一种无需重复实验、仅靠数据整合即可补全“调控拼图”的高端科研范式。</p>
+<p>Nature Genetics 上的空间多组学整合工具 SpaMosaic。针对空间组学中样本模态不全、平台不一的”马赛克式”数据难题，提出了一种基于图神经网络和对比学习的整合思路：通过将不同切片、不同模态（如RNA、ATAC、蛋白、组蛋白修饰）对齐到统一低维空间，不仅能实现跨样本的空间聚类和区域注释，还能有效预测缺失的组学信息。通过模拟数据、小鼠脑及胚胎等复杂数据集验证了其在去批次和保持空间连续性上的优越性，为研究者提供了一种无需重复实验、仅靠数据整合即可补全”调控拼图”的高端科研范式。</p>
 <ul>
 <li>论文 DOI：10.1038/s41588-026-02573-3</li>
 </ul>
@@ -1159,12 +1411,12 @@
 <li><a href="https://mp.weixin.qq.com/s/vY6GaAdg39d8Op0Fz7GnFQ">主题模型: 从K-means到BERTopic</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507140211.png" class="img-fluid"></p>
-<p>传统主题模型 LDA 与现代语义主题模型 BERTopic 的优劣。无论是针对空间组学中碎片化模态的 SpaMosaic，还是取代传统 LDA 主题模型的 BERTopic，都在强调通过语义对齐和图神经网络等现代算法，将原本零散、模糊的原始信息转化为高连贯性、可解释的科学故事，为处理复杂数据提供了从“勤劳补实验”向“高效换模型”转型的进阶范式。</p>
+<p>传统主题模型 LDA 与现代语义主题模型 BERTopic 的优劣。无论是针对空间组学中碎片化模态的 SpaMosaic，还是取代传统 LDA 主题模型的 BERTopic，都在强调通过语义对齐和图神经网络等现代算法，将原本零散、模糊的原始信息转化为高连贯性、可解释的科学故事，为处理复杂数据提供了从”勤劳补实验”向”高效换模型”转型的进阶范式。</p>
 <ol start="5" type="1">
 <li><a href="https://mp.weixin.qq.com/s/NBRnhd1ySf2zklPLpuMdNg">生成式人工智能对医学信息学发展贡献与挑战</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507135921.png" class="img-fluid"></p>
-<p>随着医学信息学进入以大数据与AI驱动的智能化阶段，生成式AI正推动临床决策支持从“规则提示”向“协同推演”转型，通过整合多模态数据与多智能体协作提升复杂疾病诊疗能力；同时重构医学知识发现模式，实现从文献挖掘到真实世界研究的自动化与数据驱动；并进一步延伸至智能问诊、健康管理和医学教育，促进医疗服务向全生命周期健康管理转变。然而，当前仍存在数据质量与泛化能力不足、评估体系缺失、伦理与隐私风险以及临床工作流整合困难等关键瓶颈。总体而言，生成式AI正在重塑医学信息学范式，但其价值实现仍依赖技术进步与规范治理的协同推进。</p>
+<p>随着医学信息学进入以大数据与AI驱动的智能化阶段，生成式AI正推动临床决策支持从”规则提示”向”协同推演”转型，通过整合多模态数据与多智能体协作提升复杂疾病诊疗能力；同时重构医学知识发现模式，实现从文献挖掘到真实世界研究的自动化与数据驱动；并进一步延伸至智能问诊、健康管理和医学教育，促进医疗服务向全生命周期健康管理转变。然而，当前仍存在数据质量与泛化能力不足、评估体系缺失、伦理与隐私风险以及临床工作流整合困难等关键瓶颈。总体而言，生成式AI正在重塑医学信息学范式，但其价值实现仍依赖技术进步与规范治理的协同推进。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -1187,10 +1439,10 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507142457.png" class="img-fluid"></p>
 <p>三款基于 GitHub 且集成 Claude 的绘图 Skill，旨在通过自然语言交互彻底简化技术绘图流程，三者共同实现了从 RAG 流程到云架构图的高效、专业化自动生成。</p>
 <ol start="9" type="1">
-<li><a href="https://mp.weixin.qq.com/s/3FE6ulWVWL3cPG7CBvf3kA">NeuroClaw：属于神经科学/脑科学工作者的“小龙虾”</a></li>
+<li><a href="https://mp.weixin.qq.com/s/3FE6ulWVWL3cPG7CBvf3kA">NeuroClaw：属于神经科学/脑科学工作者的”小龙虾”</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260507142549.png" class="img-fluid"></p>
-<p>NeuroClaw 是由港中文与哈佛联手打造的神经科学专用 AI Agent，它像一只拥有“数字外骨骼”的小龙虾，凭借三层智能体架构，能自主从原始数据抓取元数据、自动配置复杂的 Docker/Python 环境，并精准调度 FreeSurfer、FSL 等主流工具链，旨在将科研人员从繁琐的工程报错与复现危机中解放出来，让大脑研究真正实现“科研的归科学家，工程的归智能体”。</p>
+<p>NeuroClaw 是由港中文与哈佛联手打造的神经科学专用 AI Agent，它像一只拥有”数字外骨骼”的小龙虾，凭借三层智能体架构，能自主从原始数据抓取元数据、自动配置复杂的 Docker/Python 环境，并精准调度 FreeSurfer、FSL 等主流工具链，旨在将科研人员从繁琐的工程报错与复现危机中解放出来，让大脑研究真正实现”科研的归科学家，工程的归智能体”。</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -1409,7 +1661,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260430235114.png" class="img-fluid"></p>
 <p>作者希望回答一个神经科学中非常基础、却长期缺少完整图谱的问题：人类大脑皮层的大尺度功能层级，究竟如何从婴儿期逐步建立，在成年期达到相对成熟，又在老年阶段发生怎样的变化。 这项研究进一步追问，这种层级结构是否与认知能力、脑结构耦合以及分子层面的生物学特征相互对应。</p>
-<p>文章的核心结论可以概括为一句话：人脑的功能组织不是固定不变的，而是在一生中沿着几条主要轴线不断重塑。 婴幼儿时期，这种组织主要由初级感觉系统奠基；儿童和青春期阶段，高级联想与控制相关系统逐渐拉开层级；进入老年之后，原本清晰的分化又会出现一定程度的减弱，也就是所谓的“去分化”。更重要的是，这种变化并不只是图谱上的现象，它与认知表现、结构—功能关系以及转录组特征都存在对应关系。</p>
+<p>文章的核心结论可以概括为一句话：人脑的功能组织不是固定不变的，而是在一生中沿着几条主要轴线不断重塑。 婴幼儿时期，这种组织主要由初级感觉系统奠基；儿童和青春期阶段，高级联想与控制相关系统逐渐拉开层级；进入老年之后，原本清晰的分化又会出现一定程度的减弱，也就是所谓的”去分化”。更重要的是，这种变化并不只是图谱上的现象，它与认知表现、结构—功能关系以及转录组特征都存在对应关系。</p>
 <ul>
 <li>论文 DOI：10.1038/s41586-026-10219-x</li>
 </ul>
@@ -1429,7 +1681,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 <li><a href="https://mp.weixin.qq.com/s/w7Xe_zA_VpxdyXfmtgsqyw">从Alpha波到Gamma波，揭秘大脑如何用节拍器协调860亿神经元</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260430235609.png" class="img-fluid"></p>
-<p>大脑神经元通过不同频段的节律性活动（如Delta、Theta、Alpha、Beta、Gamma波）实现协同工作，这些“节拍”不仅对应睡眠、记忆、注意与认知等功能，还通过同步与相位锁定机制提升脑区间的信息传递效率。其中，神经振荡并非附属现象，而是类似“操作系统”的协调机制，其失调与帕金森病、阿尔茨海默病及精神分裂症等密切相关。同时，基于振荡的神经调控、神经反馈和脑机接口技术正展现出重要应用潜力。</p>
+<p>大脑神经元通过不同频段的节律性活动（如Delta、Theta、Alpha、Beta、Gamma波）实现协同工作，这些”节拍”不仅对应睡眠、记忆、注意与认知等功能，还通过同步与相位锁定机制提升脑区间的信息传递效率。其中，神经振荡并非附属现象，而是类似”操作系统”的协调机制，其失调与帕金森病、阿尔茨海默病及精神分裂症等密切相关。同时，基于振荡的神经调控、神经反馈和脑机接口技术正展现出重要应用潜力。</p>
 <ol start="4" type="1">
 <li><a href="https://doi.org/10.1001/jama.2026.2894" title="CMS的BALANCE模型">CMS的BALANCE模型</a></li>
 </ol>
@@ -1442,7 +1694,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 <li><a href="https://mp.weixin.qq.com/s/Pah9B9rgFEiYSJuf-sOVPg">利用ggplot2+circlize绘制环图棒棒糖图+堆叠柱状图+箱线图+色块图</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260501000455.png" class="img-fluid"></p>
-<p>分享发表在Nature Aging题为“Nonlinear dynamics of multi-omics profiles during human aging”中环状圆形棒棒糖图+堆叠柱状图+色块图+箱线图。</p>
+<p>分享发表在Nature Aging题为”Nonlinear dynamics of multi-omics profiles during human aging”中环状圆形棒棒糖图+堆叠柱状图+色块图+箱线图。</p>
 <ol start="6" type="1">
 <li><a href="https://github.com/facebookresearch/tribev2" title="TRIBE v2 计算机神经科学的视觉、听觉和语言基础模型">TRIBE v2 计算机神经科学的视觉、听觉和语言基础模型</a></li>
 </ol>
@@ -1461,7 +1713,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 <li><a href="https://mp.weixin.qq.com/s/GIh33OWDTdNlRBJWAyAPRQ">临床医学领域最受欢迎的90+机器学习数据集</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260501001203.png" class="img-fluid"></p>
-<p>汇总了“临床医学领域最受欢迎的90+机器学习数据集”，系统整理了来自 Kaggle、GitHub 等平台的高质量公开资源。核心内容以数据集清单为主，为每个数据集提供名称、热度（⭐）、简要用途、主题标签、使用协议、提供者及访问链接，便于快速检索与使用。所涵盖领域广泛，包括疾病预测（如糖尿病、癌症、心血管疾病）、健康指标分析、临床记录与试验数据、医学影像与声音数据，以及心理健康、医疗资源管理等多个方向。此外，文章还补充了相关数据集合集与工具资源（如 MIMIC-III），构成一个结构化的数据资源导航。</p>
+<p>汇总了”临床医学领域最受欢迎的90+机器学习数据集”，系统整理了来自 Kaggle、GitHub 等平台的高质量公开资源。核心内容以数据集清单为主，为每个数据集提供名称、热度（⭐）、简要用途、主题标签、使用协议、提供者及访问链接，便于快速检索与使用。所涵盖领域广泛，包括疾病预测（如糖尿病、癌症、心血管疾病）、健康指标分析、临床记录与试验数据、医学影像与声音数据，以及心理健康、医疗资源管理等多个方向。此外，文章还补充了相关数据集合集与工具资源（如 MIMIC-III），构成一个结构化的数据资源导航。</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -1699,7 +1951,6 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 它让 VS Code 能和已有 SAS 环境协作，但不会替你提供许可证、服务器权限或完整的 SAS 安装。</p>
 <p><strong>第三，配置成功后先跑最小例子，再迁移真实项目。</strong><br>
 最小代码可以快速判断问题出在环境、连接还是项目代码。等这一层稳定以后，再把真实课题里的清洗、建模和制表流程搬过去，会少很多不必要的焦虑。</p>
-<p>对我来说，SAS 搭配 VS Code 的价值不在于看起来更现代，而在于让 SAS 程序回到普通文本项目的管理方式里。对于需要长期维护分析代码的人，这一点已经足够实际。</p>
 
 
 <!-- -->
@@ -1737,7 +1988,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
 <ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/I0UIyog3A0U4BjCkl0jfRg">Lancet Global Health | 在“数据科学与人工智能-全球健康”交叉领域建立共识框架</a></li>
+<li><a href="https://mp.weixin.qq.com/s/I0UIyog3A0U4BjCkl0jfRg">Lancet Global Health | 在”数据科学与人工智能-全球健康”交叉领域建立共识框架</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260424000131.png" class="img-fluid"></p>
 <p>数据科学和人工智能（AI）正深刻改变全球健康实践。从传染病监测、辅助临床诊断，到卫生资源配置与公共卫生干预设计，相关技术的应用场景持续拓展，尤其为资源紧张的中低收入国家带来了缩小卫生服务差距的新可能。然而，全球范围内的相关研究与实践仍较为分散，地区间能力差距明显。中低收入国家普遍面临数字基础设施薄弱、AI治理能力不足、技术人才紧缺等现实瓶颈，围绕算法偏见与数据主权的争议又进一步加大了AI公平、可持续部署的难度。一个根本性问题亟待回答：在数据科学、AI与全球健康的交叉领域，哪些研究方向最为紧迫？有限的科研资源应优先投向哪些议题？对此，国际社会尚缺乏一套系统且可操作的共识框架。</p>
@@ -1749,7 +2000,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/wkjN0EmhrSy4e6dmMvXjVw">Nature Communications | 傍晚运动强度和时间的选择对睡眠影响的剂量–反应关系</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260424000633.png" class="img-fluid"></p>
-<p>很多综述并不支持“傍晚运动一定伤睡眠”，甚至发现晚间高强度运动总体不必然损害睡眠。作者认为矛盾的关键在于：过去研究往往只看强度或只看时长，但缺少对强度与时长的组合负荷（也就是“运动应激量”）的系统刻画。这篇研究的价值在于：它把“结束时间”和“应激量”放进同一框架，直接检验是否存在剂量–反应关系。该研究基于超过400万人夜的大规模真实世界数据，系统分析了傍晚运动对睡眠的剂量–反应关系，发现影响睡眠的关键在于运动结束时间与运动应激量的共同作用：若运动在入睡前至少4小时结束，无论强度如何基本不影响睡眠；而越接近入睡时间且应激量越高，则越可能导致入睡延迟、睡眠时长缩短、质量下降以及夜间自主神经功能恶化；研究还指出这种关系在不同性别、年龄和体型中具有一致性，为优化晚间运动与睡眠之间的平衡提供了明确、可操作的时间阈值与强度建议。</p>
+<p>很多综述并不支持”傍晚运动一定伤睡眠”，甚至发现晚间高强度运动总体不必然损害睡眠。作者认为矛盾的关键在于：过去研究往往只看强度或只看时长，但缺少对强度与时长的组合负荷（也就是”运动应激量”）的系统刻画。这篇研究的价值在于：它把”结束时间”和”应激量”放进同一框架，直接检验是否存在剂量–反应关系。该研究基于超过400万人夜的大规模真实世界数据，系统分析了傍晚运动对睡眠的剂量–反应关系，发现影响睡眠的关键在于运动结束时间与运动应激量的共同作用：若运动在入睡前至少4小时结束，无论强度如何基本不影响睡眠；而越接近入睡时间且应激量越高，则越可能导致入睡延迟、睡眠时长缩短、质量下降以及夜间自主神经功能恶化；研究还指出这种关系在不同性别、年龄和体型中具有一致性，为优化晚间运动与睡眠之间的平衡提供了明确、可操作的时间阈值与强度建议。</p>
 <ul>
 <li>论文 DOI：10.1038/s41467-025-58271-x</li>
 </ul>
@@ -1757,7 +2008,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/fCLNvXYHYWVoThz1FS1ilw">Lancet Oncology | “妇癌之王”为何难早筛？卵巢癌防治关键点</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260424000816.png" class="img-fluid"></p>
-<p>一篇2019年刊登在《柳叶刀-肿瘤学》（The Lancet Oncology）上的综述，将卵巢癌的特点总结为“七成活不过5年，七成患者复发，七成发现时已是晚期”。虽然随着治疗手段的发展，如今卵巢癌的5年生存率已有一些改善，但早诊断的困难，仍在很大程度上影响着它的预后。目前，国际妇产科学联盟（FIGO）、欧洲妇科肿瘤学会（ESGO）、美国妇产科医师协会（ACOG）等主流妇产科学术机构，都已将机会性输卵管切除术视作一种低成本、低额外风险的卵巢癌一级预防策略。</p>
+<p>一篇2019年刊登在《柳叶刀-肿瘤学》（The Lancet Oncology）上的综述，将卵巢癌的特点总结为”七成活不过5年，七成患者复发，七成发现时已是晚期”。虽然随着治疗手段的发展，如今卵巢癌的5年生存率已有一些改善，但早诊断的困难，仍在很大程度上影响着它的预后。目前，国际妇产科学联盟（FIGO）、欧洲妇科肿瘤学会（ESGO）、美国妇产科医师协会（ACOG）等主流妇产科学术机构，都已将机会性输卵管切除术视作一种低成本、低额外风险的卵巢癌一级预防策略。</p>
 </section>
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
@@ -1778,7 +2029,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/SD5U6-06JgmHoGvtsQlxCg">从工具到方法：GitHub驱动的科研技能提炼框架</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260424001524.png" class="img-fluid"></p>
-<p>文章提出“skill-from-github”理念，将开源项目中的方法论抽象为可复用技能，通过标准化流程实现科研知识的结构化沉淀；该模式强调透明性与可复现性，减少工具依赖，为科研效率提升与方法共享提供新路径。</p>
+<p>文章提出”skill-from-github”理念，将开源项目中的方法论抽象为可复用技能，通过标准化流程实现科研知识的结构化沉淀；该模式强调透明性与可复现性，减少工具依赖，为科研效率提升与方法共享提供新路径。</p>
 <ol start="7" type="1">
 <li><a href="https://mp.weixin.qq.com/s/EsRxLlOvz0OjOFLcL225ig">一组人，不止一条路：GBTM解析纵向数据的多重轨迹</a></li>
 </ol>
@@ -1844,7 +2095,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </section>
 <section id="本周话题ai会取代医生吗" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题ai会取代医生吗">本周话题：<a href="https://mp.weixin.qq.com/s/Kq4mvVpP0rvt-68fqLIqSg">AI会取代医生吗？</a></h3>
-<p>清华大学医学院院长黄天荫指出，医疗AI的核心价值并非取代医生，而是作为“能力放大器”重塑医疗体系，尤其在基层医疗中提升效率与可及性。当前，AI更适用于常见病、慢病管理及初筛等标准化场景，而复杂决策仍依赖医生判断。然而，医疗AI仍面临数据标准不统一、基础设施不足及安全与责任界定不清等挑战，其效果也缺乏基于真实患者结局的充分验证。未来医疗将走向人机协同，关键不在于AI是否完美，而在于能否整体降低医疗风险。这也意味着医生角色将逐步转向“临床+AI”的复合型能力。</p>
+<p>清华大学医学院院长黄天荫指出，医疗AI的核心价值并非取代医生，而是作为”能力放大器”重塑医疗体系，尤其在基层医疗中提升效率与可及性。当前，AI更适用于常见病、慢病管理及初筛等标准化场景，而复杂决策仍依赖医生判断。然而，医疗AI仍面临数据标准不统一、基础设施不足及安全与责任界定不清等挑战，其效果也缺乏基于真实患者结局的充分验证。未来医疗将走向人机协同，关键不在于AI是否完美，而在于能否整体降低医疗风险。这也意味着医生角色将逐步转向”临床+AI”的复合型能力。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -1905,7 +2156,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/qSObBd3GQyeJy_Z1LDUcTg">还没做实验？先来这里查查你的基因被敲除后会发生什么！</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260416233842.png" class="img-fluid"></p>
-<p>给大家安利一个专门收录“基因扰动”（Gene Perturbation）数据的宝藏数据库——GPSAdb。而且，它刚刚在 NAR (Nucleic Acids Research) 上发了 2.0 版本，数据量直接翻倍，功能也更强了。简单说，GPSAdb 就是一个“基因敲除/敲低后果查询器”。全世界的科学家做过的 siRNA、shRNA、CRISPR/Cas9 敲除、CRISPRi 干扰实验，只要测了 RNA-seq 并上传了公共数据库，GPSAdb 的团队就把它们收集回来。</p>
+<p>给大家安利一个专门收录”基因扰动”（Gene Perturbation）数据的宝藏数据库——GPSAdb。而且，它刚刚在 NAR (Nucleic Acids Research) 上发了 2.0 版本，数据量直接翻倍，功能也更强了。简单说，GPSAdb 就是一个”基因敲除/敲低后果查询器”。全世界的科学家做过的 siRNA、shRNA、CRISPR/Cas9 敲除、CRISPRi 干扰实验，只要测了 RNA-seq 并上传了公共数据库，GPSAdb 的团队就把它们收集回来。</p>
 <ol start="9" type="1">
 <li><a href="https://mp.weixin.qq.com/s/iDEbmc7aW-Ls5VUJeDgUFQ">tipr包：用于未测量混杂因素敏感性分析</a></li>
 </ol>
@@ -1958,7 +2209,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </section>
 <section id="本周话题nature-我和我的博士生导师的关系变得很糟糕我该怎么办" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题nature-我和我的博士生导师的关系变得很糟糕我该怎么办">本周话题：<a href="https://mp.weixin.qq.com/s/Zx7w-u2mYIUHs-bNLjkm6w">Nature | 我和我的博士生导师的关系变得很糟糕——我该怎么办？</a></h3>
-<p><code>@kirihsia</code> 面对导师“怪物式”的压迫，Nature 的回复揭示了一个扎心的现实：博士生的幸福感往往并不取决于实验结果，而取决于导师的底线。面对导师的毒性压迫，首要任务是实现心理切割，坚信人格尊严远重于一纸文凭。建议在通过详细计划书进行“防御性沟通”的同时，务必留存所有交流证据，并积极寻求校方调解或更换导师的退路。</p>
+<p><code>@kirihsia</code> 面对导师”怪物式”的压迫，Nature 的回复揭示了一个扎心的现实：博士生的幸福感往往并不取决于实验结果，而取决于导师的底线。面对导师的毒性压迫，首要任务是实现心理切割，坚信人格尊严远重于一纸文凭。建议在通过详细计划书进行”防御性沟通”的同时，务必留存所有交流证据，并积极寻求校方调解或更换导师的退路。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -1974,7 +2225,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/j5y0F6WyTFtuJqBsHTTjWA">Nature Machine Intelligence | 基于对170万个体数据训练，实现跨场景、跨设备的心脏健康评估的多模态基础模型</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409192855.png" class="img-fluid"></p>
-<p>牛津大学等机构的研究团队开发了首个心脏感知基础模型 CSFM，通过对 170 万人规模的异构心电图（ECG）、脉搏波（PPG）及临床文本进行生成式预训练，成功打破了心脏健康监测中不同设备、信号和场景之间的数据问题。该模型展现了极强的“通用性”与“设备无关性”，不仅在心血管疾病诊断和生命体征测量等五大类任务中超越了传统专用模型，还能在仅有单导联输入的情况下推断缺失的空间信息，甚至实现从脉搏波到心电图的跨模态波形重建。CSFM 的诞生标志着心脏监测领域进入了“通用智能时代”，其强大的特征提取能力和即插即用的灵活性，将极大地降低医疗AI的开发门槛，为全球范围内普及公平、精准的心血管健康管理提供了可能。</p>
+<p>牛津大学等机构的研究团队开发了首个心脏感知基础模型 CSFM，通过对 170 万人规模的异构心电图（ECG）、脉搏波（PPG）及临床文本进行生成式预训练，成功打破了心脏健康监测中不同设备、信号和场景之间的数据问题。该模型展现了极强的”通用性”与”设备无关性”，不仅在心血管疾病诊断和生命体征测量等五大类任务中超越了传统专用模型，还能在仅有单导联输入的情况下推断缺失的空间信息，甚至实现从脉搏波到心电图的跨模态波形重建。CSFM 的诞生标志着心脏监测领域进入了”通用智能时代”，其强大的特征提取能力和即插即用的灵活性，将极大地降低医疗AI的开发门槛，为全球范围内普及公平、精准的心血管健康管理提供了可能。</p>
 <ul>
 <li>论文 DOI：10.1038/s42256-026-01180-5</li>
 </ul>
@@ -1998,20 +2249,20 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><a href="https://mp.weixin.qq.com/s/6CzFVWr9ariTCM_p9pWi_g">从AutoFigure到AutoFigure-Edit：AI论文绘图可以编辑</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194339.png" class="img-fluid"></p>
-<p>西湖大学团队开源的 AutoFigure-Edit 是一款首创的 AI 论文矢量绘图工具，它打破了传统 AI 生图“不可编辑”的局限，能够将长篇学术文本直接转化为可直接拖拽、改字、换色的 SVG 矢量图。该系统利用 SAM3 技术智能分割图像组件，并支持通过上传参考图实现一键风格迁移（如适配 Nature 风格），其核心代码与环境已在 GitHub（<a href="https://github.com/ResearAI/AutoFigure-Edit" title="ResearAI/AutoFigure-Edit">ResearAI/AutoFigure-Edit</a>）完全开源，并提供在线体验网站（<a href="https://deepscientist.cc/" title="deepscientist.cc">deepscientist.cc</a>）。</p>
+<p>西湖大学团队开源的 AutoFigure-Edit 是一款首创的 AI 论文矢量绘图工具，它打破了传统 AI 生图”不可编辑”的局限，能够将长篇学术文本直接转化为可直接拖拽、改字、换色的 SVG 矢量图。该系统利用 SAM3 技术智能分割图像组件，并支持通过上传参考图实现一键风格迁移（如适配 Nature 风格），其核心代码与环境已在 GitHub（<a href="https://github.com/ResearAI/AutoFigure-Edit" title="ResearAI/AutoFigure-Edit">ResearAI/AutoFigure-Edit</a>）完全开源，并提供在线体验网站（<a href="https://deepscientist.cc/" title="deepscientist.cc">deepscientist.cc</a>）。</p>
 <ol start="6" type="1">
 <li><a href="https://mp.weixin.qq.com/s/4UWurhgVGWvNrji-nT5vpw">Zread CLI | 快速理解代码架构</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194433.png" class="img-fluid"></p>
-<p>Zread CLI 是由智谱 AI 推出的一款强大的本地代码仓库深度解读工具，专为解决开发者面对庞大陌生源码（如数十万行代码的 Claude Code）时“看不懂、理不顺”的痛点。只需在项目目录下执行简单的 zread 命令，该工具便能自动分析代码结构、逻辑依赖与系统架构，并生成一份图文并茂、可交互的结构化 Wiki 说明书。相比网页版工具，它支持完全本地化运行，能够无缝处理公司私有项目或个人非开源代码，能为 Cursor 等 AI 编程工具提供精准的项目上下文，极大提升了研发效率与代码理解深度。</p>
+<p>Zread CLI 是由智谱 AI 推出的一款强大的本地代码仓库深度解读工具，专为解决开发者面对庞大陌生源码（如数十万行代码的 Claude Code）时”看不懂、理不顺”的痛点。只需在项目目录下执行简单的 zread 命令，该工具便能自动分析代码结构、逻辑依赖与系统架构，并生成一份图文并茂、可交互的结构化 Wiki 说明书。相比网页版工具，它支持完全本地化运行，能够无缝处理公司私有项目或个人非开源代码，能为 Cursor 等 AI 编程工具提供精准的项目上下文，极大提升了研发效率与代码理解深度。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
 <ol start="7" type="1">
-<li><a href="https://mp.weixin.qq.com/s/jvUALEdZuS3UBZ2dUY6PYQ">全球遴选150名本科生，2026西湖大学生科“大师课”报名开启</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jvUALEdZuS3UBZ2dUY6PYQ">全球遴选150名本科生，2026西湖大学生科”大师课”报名开启</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260409194554.png" class="img-fluid"></p>
-<p>近日，2026西湖大学生命科学国际暑期学校已开放申请，将从全球申请者中遴选150名优秀本科生，与国际顶尖学者共同探索生命科学的前沿奥秘。一年一期的“大师课”，也是研究型大学里的研究型夏校，今年已到第四期。</p>
+<p>近日，2026西湖大学生命科学国际暑期学校已开放申请，将从全球申请者中遴选150名优秀本科生，与国际顶尖学者共同探索生命科学的前沿奥秘。一年一期的”大师课”，也是研究型大学里的研究型夏校，今年已到第四期。</p>
 <ol start="8" type="1">
 <li><a href="https://mp.weixin.qq.com/s/jhjR4d4W2b08ajNPJcf6Bw">UKBAnalytica1.0 | 告别重复造轮子</a></li>
 </ol>
@@ -2057,7 +2308,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 
 <section id="一为什么会有-inverse-probability-weighting" class="level3">
 <h3 class="anchored" data-anchor-id="一为什么会有-inverse-probability-weighting">一、为什么会有 inverse probability weighting？</h3>
-<p>在观察性研究里，研究者经常面对一个根本问题：不同人进入某种“数据路径”的概率并不一样。</p>
+<p>在观察性研究里，研究者经常面对一个根本问题：不同人进入某种”数据路径”的概率并不一样。</p>
 <p>例如：</p>
 <ul>
 <li>有些人更容易接受某种治疗</li>
@@ -2071,8 +2322,8 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <p>谁更不容易被观察到、被分配到当前状态，谁就应该在分析中有更大的权重。</p>
 </blockquote>
 <p>数学上，它通常长成下面这样：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i%20=%20%5Cfrac%7B1%7D%7BP(%5Ctext%7B%E8%BF%9B%E5%85%A5%E5%BD%93%E5%89%8D%E8%A7%82%E5%AF%9F%E7%8A%B6%E6%80%81%7D%20%5Cmid%20%5Ctext%7B%E5%B7%B2%E7%9F%A5%E5%8D%8F%E5%8F%98%E9%87%8F%E5%92%8C%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
-<p>概率越小，权重越大。直观上，一个“很难出现在你数据里但实际出现了”的个体，需要代表更多与他相似但没有被观察到的人。</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20w_i%20=%20%5Cfrac%7B1%7D%7BP(%5Ctext%7B%E8%BF%9B%E5%85%A5%E5%BD%93%E5%89%8D%E8%A7%82%E5%AF%9F%E7%8A%B6%E6%80%81%7D%20%5Cmid%20%5Ctext%7B%E5%B7%B2%E7%9F%A5%E5%8D%8F%E5%8F%98%E9%87%8F%E5%92%8C%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
+<p>概率越小，权重越大。直观上，一个”很难出现在你数据里但实际出现了”的个体，需要代表更多与他相似但没有被观察到的人。</p>
 </section>
 <section id="二ipw-是总类iptw-和-ipcw-是具体应用" class="level3">
 <h3 class="anchored" data-anchor-id="二ipw-是总类iptw-和-ipcw-是具体应用">二、IPW 是总类，IPTW 和 IPCW 是具体应用</h3>
@@ -2082,7 +2333,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><code>IPTW</code> 是把 IPW 用在 treatment assignment 上</li>
 <li><code>IPCW</code> 是把 IPW 用在 censoring / observation process 上</li>
 </ul>
-<p>也就是说，它们的统计思想完全一致，区别只在于“逆的到底是哪一个概率”。</p>
+<p>也就是说，它们的统计思想完全一致，区别只在于”逆的到底是哪一个概率”。</p>
 <section id="iptwinverse-probability-of-treatment-weighting" class="level4">
 <h4 class="anchored" data-anchor-id="iptwinverse-probability-of-treatment-weighting">1. IPTW：inverse probability of treatment weighting</h4>
 <p><code>IPTW</code> 用来纠正治疗分配不是随机的这个问题。</p>
@@ -2094,11 +2345,11 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><code>e(X)=P(T=1\mid X)</code> 表示 propensity score</li>
 </ul>
 <p>最常见的 ATE 权重是：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i=%5Cfrac%7BT_i%7D%7Be(X_i)%7D+%5Cfrac%7B1-T_i%7D%7B1-e(X_i)%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20w_i=%5Cfrac%7BT_i%7D%7Be(X_i)%7D+%5Cfrac%7B1-T_i%7D%7B1-e(X_i)%7D%0A"></p>
 <p>直观上：</p>
 <ul>
-<li>一个本来不太可能接受治疗但实际接受治疗的人，在治疗组里更“稀有”，权重更大</li>
-<li>一个本来不太可能留在对照组但实际留在对照组的人，在对照组里更“稀有”，权重也更大</li>
+<li>一个本来不太可能接受治疗但实际接受治疗的人，在治疗组里更”稀有”，权重更大</li>
+<li>一个本来不太可能留在对照组但实际留在对照组的人，在对照组里更”稀有”，权重也更大</li>
 </ul>
 <p>经过这种加权后，我们希望在加权伪总体中，治疗组与对照组的协变量分布更接近，从而减少混杂。</p>
 </section>
@@ -2111,7 +2362,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li><code>R=0</code> 表示已经删失</li>
 </ul>
 <p>则一个常见想法是对未删失者赋予权重：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i=%5Cfrac%7B1%7D%7BP(R_i=1%5Cmid%20X_i,%5Ctext%7Bhistory%7D)%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20w_i=%5Cfrac%7B1%7D%7BP(R_i=1%5Cmid%20X_i,%5Ctext%7Bhistory%7D)%7D%0A"></p>
 <p>它的直觉是：</p>
 <blockquote class="blockquote">
 <p>那些本来很容易失访、停药、偏离方案，但实际上还留在样本里的人，需要代表那些和他们相似、却已经被删失的人。</p>
@@ -2131,8 +2382,8 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </blockquote>
 <p>因此你完全可以把它们理解为：</p>
 <ul>
-<li><code>IPTW</code>：对“接受当前治疗状态”的概率做逆概率加权</li>
-<li><code>IPCW</code>：对“持续未删失/未偏离方案”的概率做逆概率加权</li>
+<li><code>IPTW</code>：对”接受当前治疗状态”的概率做逆概率加权</li>
+<li><code>IPCW</code>：对”持续未删失/未偏离方案”的概率做逆概率加权</li>
 </ul>
 <p>在纵向因果推断里，两者还经常一起出现。比如在 marginal structural model（MSM）里，研究者可能同时需要：</p>
 <ul>
@@ -2140,19 +2391,19 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li>用 <code>IPCW</code> 调整 informative censoring</li>
 </ul>
 <p>最终的权重就是两部分相乘：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i%20=%20w_i%5E%7Btreatment%7D%5Ctimes%20w_i%5E%7Bcensoring%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20w_i%20=%20w_i%5E%7Btreatment%7D%5Ctimes%20w_i%5E%7Bcensoring%7D%0A"></p>
 </section>
 <section id="四一个最容易混淆的问题为什么-ipcw-不是对被删失概率加权" class="level3">
-<h3 class="anchored" data-anchor-id="四一个最容易混淆的问题为什么-ipcw-不是对被删失概率加权">四、一个最容易混淆的问题：为什么 IPCW 不是对“被删失概率”加权？</h3>
-<p>初学者经常会问：既然叫 inverse probability of censoring weighting，为什么很多公式里放的是“未被删失”的概率？</p>
-<p>原因在于分析时真正还留在风险集里的，是那些<strong>尚未删失的人</strong>。我们要做的是让这些人代表那些本来相似、但已经被删失的人。因此权重通常赋给“还在样本里的人”。</p>
+<h3 class="anchored" data-anchor-id="四一个最容易混淆的问题为什么-ipcw-不是对被删失概率加权">四、一个最容易混淆的问题：为什么 IPCW 不是对”被删失概率”加权？</h3>
+<p>初学者经常会问：既然叫 inverse probability of censoring weighting，为什么很多公式里放的是”未被删失”的概率？</p>
+<p>原因在于分析时真正还留在风险集里的，是那些<strong>尚未删失的人</strong>。我们要做的是让这些人代表那些本来相似、但已经被删失的人。因此权重通常赋给”还在样本里的人”。</p>
 <p>所以在实践中常见的是：</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i(t)=%5Cfrac%7B1%7D%7BP(C_i(t)=0%5Cmid%20%5Ctext%7B%E8%BF%87%E5%8E%BB%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20w_i(t)=%5Cfrac%7B1%7D%7BP(C_i(t)=0%5Cmid%20%5Ctext%7B%E8%BF%87%E5%8E%BB%E5%8E%86%E5%8F%B2%7D)%7D%0A"></p>
 <p>这里 <code>C_i(t)=0</code> 表示截至时点 <code>t</code> 尚未删失。</p>
 <p>换句话说：</p>
 <ul>
-<li>不是给“已经删失的人”补权重</li>
-<li>而是给“尚未删失的人”加更大的权重，让他们代替已删失者说话</li>
+<li>不是给”已经删失的人”补权重</li>
+<li>而是给”尚未删失的人”加更大的权重，让他们代替已删失者说话</li>
 </ul>
 </section>
 <section id="五ipw-的关键假设是什么" class="level3">
@@ -2179,7 +2430,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <section id="六为什么大家总担心极端权重" class="level3">
 <h3 class="anchored" data-anchor-id="六为什么大家总担心极端权重">六、为什么大家总担心极端权重？</h3>
 <p>因为 IPW 最大的实践风险就是高方差。</p>
-<p>例如，如果某个人在当前历史下“继续未删失”的概率只有 <code>0.01</code>，但他确实还留在样本里，那么他的 IPCW 就会接近 <code>100</code>。这种情况下，少数样本就可能决定整体结果。</p>
+<p>例如，如果某个人在当前历史下”继续未删失”的概率只有 <code>0.01</code>，但他确实还留在样本里，那么他的 IPCW 就会接近 <code>100</code>。这种情况下，少数样本就可能决定整体结果。</p>
 <p>因此实务中常会做几件事：</p>
 <ul>
 <li>检查 propensity score 或 censoring probability 的分布</li>
@@ -2204,7 +2455,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </section>
 <section id="八实际写作和解读论文时应该重点看什么" class="level3">
 <h3 class="anchored" data-anchor-id="八实际写作和解读论文时应该重点看什么">八、实际写作和解读论文时，应该重点看什么？</h3>
-<p>如果一篇文章声称“使用了 inverse probability weighting”，真正值得你追问的不是“用了没有”，而是：</p>
+<p>如果一篇文章声称”使用了 inverse probability weighting”，真正值得你追问的不是”用了没有”，而是：</p>
 <ul>
 <li>它逆的是治疗概率，还是删失概率，还是两者都有？</li>
 <li>目标 estimand 是 ATE、ATT、还是 per-protocol effect？</li>
@@ -2217,11 +2468,11 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </section>
 <section id="九takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="九takeaways">九、Takeaways</h3>
-<p><code>IPW</code> 的本质不是“复杂建模”，而是“重建样本代表性”。</p>
+<p><code>IPW</code> 的本质不是”复杂建模”，而是”重建样本代表性”。</p>
 <p>在这个统一框架下：</p>
 <ul>
-<li><code>IPTW</code> 解决的是“谁更可能接受治疗”</li>
-<li><code>IPCW</code> 解决的是“谁更可能持续留在观察中”</li>
+<li><code>IPTW</code> 解决的是”谁更可能接受治疗”</li>
+<li><code>IPCW</code> 解决的是”谁更可能持续留在观察中”</li>
 </ul>
 <p>二者共享同一个核心思想：<strong>用逆概率加权构造一个更接近目标试验的伪总体。</strong></p>
 <p>理解了这一点，再去看 MSM、target trial emulation、per-protocol analysis，就会顺畅很多。</p>
@@ -2256,12 +2507,12 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <blockquote class="blockquote">
 <p>某个事件一旦先发生，就会阻止你感兴趣的目标事件之后再发生。</p>
 </blockquote>
-<p>最典型的例子是研究“癌症死亡”时的“其他原因死亡”：</p>
+<p>最典型的例子是研究”癌症死亡”时的”其他原因死亡”：</p>
 <ul>
 <li>目标事件：癌症死亡</li>
 <li>竞争事件：死于心血管病、意外死亡等其他原因</li>
 </ul>
-<p>因为一个人一旦先死于其他原因，就不可能以后再死于癌症，因此“其他原因死亡”就是癌症死亡的 competing risk。</p>
+<p>因为一个人一旦先死于其他原因，就不可能以后再死于癌症，因此”其他原因死亡”就是癌症死亡的 competing risk。</p>
 </section>
 <section id="二为什么-competing-risk-不能简单当作普通删失" class="level3">
 <h3 class="anchored" data-anchor-id="二为什么-competing-risk-不能简单当作普通删失">二、为什么 competing risk 不能简单当作普通删失？</h3>
@@ -2275,7 +2526,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </section>
 <section id="三两类最常见的问题病因学问题-vs-预测问题" class="level3">
 <h3 class="anchored" data-anchor-id="三两类最常见的问题病因学问题-vs-预测问题">三、两类最常见的问题：病因学问题 vs 预测问题</h3>
-<p>处理 competing risk 时，首先要问的不是“该用哪个软件命令”，而是：</p>
+<p>处理 competing risk 时，首先要问的不是”该用哪个软件命令”，而是：</p>
 <blockquote class="blockquote">
 <p>你到底想回答什么问题？</p>
 </blockquote>
@@ -2310,8 +2561,8 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li>目标事件：SUD</li>
 <li>competing event：死亡</li>
 </ul>
-<p>一旦有人先死亡，他就不再属于“未来可能发生 SUD”的风险集，因此在 cause-specific Cox 框架中会在死亡时点被移出风险集。</p>
-<p>这里“treated as censoring”不是说死亡真的等同于失访，而是说：<strong>在 cause-specific hazard 的统计框架里，死亡通过删失机制把个体移出目标事件风险集。</strong></p>
+<p>一旦有人先死亡，他就不再属于”未来可能发生 SUD”的风险集，因此在 cause-specific Cox 框架中会在死亡时点被移出风险集。</p>
+<p>这里”treated as censoring”不是说死亡真的等同于失访，而是说：<strong>在 cause-specific hazard 的统计框架里，死亡通过删失机制把个体移出目标事件风险集。</strong></p>
 </section>
 <section id="五这类模型到底估计什么" class="level3">
 <h3 class="anchored" data-anchor-id="五这类模型到底估计什么">五、这类模型到底估计什么？</h3>
@@ -2325,7 +2576,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 </blockquote>
 <p>它的意思就是：</p>
 <blockquote class="blockquote">
-<p>作者关心的是在“还活着的人”里，起始 GLP-1 是否改变之后发生 SUD 的 hazard。</p>
+<p>作者关心的是在”还活着的人”里，起始 GLP-1 是否改变之后发生 SUD 的 hazard。</p>
 </blockquote>
 <p>这更像一个病因学问题，而不是一个现实累计风险预测问题。</p>
 </section>
@@ -2342,7 +2593,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <li>risk prediction</li>
 <li>绝对风险汇报</li>
 </ul>
-<p>如果研究者真正关心的是“3 年内有多少人会发生目标事件”，<code>CIF</code> 往往比 <code>1-KM</code> 更合适。</p>
+<p>如果研究者真正关心的是”3 年内有多少人会发生目标事件”，<code>CIF</code> 往往比 <code>1-KM</code> 更合适。</p>
 </section>
 <section id="七cause-specific-cox-与-fine-gray-到底怎么选" class="level3">
 <h3 class="anchored" data-anchor-id="七cause-specific-cox-与-fine-gray-到底怎么选">七、cause-specific Cox 与 Fine-Gray 到底怎么选？</h3>
@@ -2361,11 +2612,11 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <blockquote class="blockquote">
 <p>在真实世界里，3 年内最终有多少人会发生这个结局？</p>
 </blockquote>
-<p>那 <code>Fine-Gray</code> 或 CIF 更合适，因为 competing event 不是被“技术性删失”掉，而是被纳入了实际风险计算。</p>
+<p>那 <code>Fine-Gray</code> 或 CIF 更合适，因为 competing event 不是被”技术性删失”掉，而是被纳入了实际风险计算。</p>
 </section>
 </section>
 <section id="八为什么对死亡结局本身又可以直接用标准-cox" class="level3">
-<h3 class="anchored" data-anchor-id="八为什么对死亡结局本身又可以直接用标准-cox">八、为什么对“死亡结局本身”又可以直接用标准 Cox？</h3>
+<h3 class="anchored" data-anchor-id="八为什么对死亡结局本身又可以直接用标准-cox">八、为什么对”死亡结局本身”又可以直接用标准 Cox？</h3>
 <p>因为当研究结局本身就是死亡时，死亡不再是 competing event，而是目标事件本身。</p>
 <p>例如研究 <code>SUD-associated mortality</code>：</p>
 <ul>
@@ -2384,7 +2635,7 @@ local、IOM、SSH 解决的是不同运行环境的问题。不要把 connection
 <h3 class="anchored" data-anchor-id="九takeaways">九、Takeaways</h3>
 <p><code>Competing risk</code> 分析最重要的，不是背模型名称，而是先分清楚两个层面的问题：</p>
 <ul>
-<li>你想知道治疗是否改变目标事件在“仍然活着且事件未发生者”中的 hazard 吗？</li>
+<li>你想知道治疗是否改变目标事件在”仍然活着且事件未发生者”中的 hazard 吗？</li>
 <li>还是想知道在现实存在 competing event 的情况下，目标事件到某个时间点实际会发生多少？</li>
 </ul>
 <p>前者更接近 <code>cause-specific Cox</code>，后者更接近 <code>Fine-Gray / CIF</code>。</p>
@@ -2444,7 +2695,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </ul>
 <section id="ateaverage-treatment-effect" class="level4">
 <h4 class="anchored" data-anchor-id="ateaverage-treatment-effect">1. ATE：average treatment effect</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATE%20=%20E%5BY(1)-Y(0)%5D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20ATE%20=%20E%5BY(1)-Y(0)%5D%0A"></p>
 <p>它回答的是：</p>
 <blockquote class="blockquote">
 <p>在整个目标人群中，如果所有人都接受治疗，与如果所有人都接受对照相比，平均会差多少？</p>
@@ -2453,7 +2704,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 <section id="attaverage-treatment-effect-among-the-treated" class="level4">
 <h4 class="anchored" data-anchor-id="attaverage-treatment-effect-among-the-treated">2. ATT：average treatment effect among the treated</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATT%20=%20E%5BY(1)-Y(0)%5Cmid%20T=1%5D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20ATT%20=%20E%5BY(1)-Y(0)%5Cmid%20T=1%5D%0A"></p>
 <p>它回答的是：</p>
 <blockquote class="blockquote">
 <p>在那些实际上接受了治疗的人中，治疗相对于如果这些同样的人改为接受对照，平均会差多少？</p>
@@ -2462,7 +2713,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 <section id="atcaverage-treatment-effect-among-the-controls" class="level4">
 <h4 class="anchored" data-anchor-id="atcaverage-treatment-effect-among-the-controls">3. ATC：average treatment effect among the controls</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%0AATC%20=%20E%5BY(1)-Y(0)%5Cmid%20T=0%5D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20ATC%20=%20E%5BY(1)-Y(0)%5Cmid%20T=0%5D%0A"></p>
 <p>它回答的是：</p>
 <blockquote class="blockquote">
 <p>在那些实际上接受了对照的人中，如果他们改为接受治疗，平均会差多少？</p>
@@ -2490,7 +2741,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <p>其中 <code>e(X)</code> 是 propensity score。</p>
 <p>这组权重的含义是：</p>
 <blockquote class="blockquote">
-<p>不改变 treatment 组本身，而把 control 组重加权成“看起来像 treatment 组”的协变量分布。</p>
+<p>不改变 treatment 组本身，而把 control 组重加权成”看起来像 treatment 组”的协变量分布。</p>
 </blockquote>
 <p>因此，最终估计的就是 treated population 下的反事实对照结果，也就是 <code>ATT</code>。</p>
 </section>
@@ -2595,7 +2846,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li>论文 DOI：10.1016/S2213-2600(26)00040-8</li>
 </ul>
 <ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/pb1DBpFQHiCkZrUQCFrgHg">Nature | 西湖大学团队泛基因组“拼装”方法新突破，发现人类13%未知序列</a></li>
+<li><a href="https://mp.weixin.qq.com/s/pb1DBpFQHiCkZrUQCFrgHg">Nature | 西湖大学团队泛基因组”拼装”方法新突破，发现人类13%未知序列</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403001132.png" class="img-fluid"></p>
 <p>北京时间4月1日晚23时，西湖大学振星教授杨剑团队与合作者在Nature上发表最新研究成果。他们创新性地开发了基于泛基因组的联合组装（PIGA）方法，成功构建了千人泛基因组，极大突破了既往泛基因组样本量的上限。</p>
@@ -2625,7 +2876,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li><a href="https://mp.weixin.qq.com/s/-TCpDbDvFjcuU6zvYHjeuQ">别再在 for 循环里 c() 了，c2()到底快在哪？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002337.png" class="img-fluid"></p>
-<p>做 R 的性能优化，有一个场景几乎人人踩过坑：在循环里不断 c(v, new) 追加数据。小数据时看不出来，一旦规模上来，速度像被抽走一样。这篇文章想把话说清楚：yulab.utils 里的 chunked_array 不是“更快的向量”，它其实换了一套数据组织方式。它在“写入/拼接”上赢得很干脆，但在“随机访问”上要付成本。</p>
+<p>做 R 的性能优化，有一个场景几乎人人踩过坑：在循环里不断 c(v, new) 追加数据。小数据时看不出来，一旦规模上来，速度像被抽走一样。这篇文章想把话说清楚：yulab.utils 里的 chunked_array 不是”更快的向量”，它其实换了一套数据组织方式。它在”写入/拼接”上赢得很干脆，但在”随机访问”上要付成本。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
@@ -2633,7 +2884,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li><a href="https://mp.weixin.qq.com/s/XhSpIwD3Oey_xbV4i5DtAw">Claude Code + Obsidian 教程</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260403002616.png" class="img-fluid"></p>
-<p>介绍了如何将AI深度融入个人笔记工作流。其核心为指导用户通过名为“Claudian”的插件，将Claude Code的能力整合到Obsidian笔记软件中。该方案旨在解决用户频繁在笔记工具与AI聊天窗口之间切换的痛点，使AI从一个单纯的对话伙伴，转变为拥有“读写”权限的智能协作者。安装过程的关键在于先通过“BRAT”插件加载测试版本，再进行配置。成功集成后，AI可直接读取当前笔记内容、编辑文件甚至运行代码，在知识管理、内容创作和代码调试等场景中实现一站式闭环操作，极大提升了效率与流畅度。</p>
+<p>介绍了如何将AI深度融入个人笔记工作流。其核心为指导用户通过名为”Claudian”的插件，将Claude Code的能力整合到Obsidian笔记软件中。该方案旨在解决用户频繁在笔记工具与AI聊天窗口之间切换的痛点，使AI从一个单纯的对话伙伴，转变为拥有”读写”权限的智能协作者。安装过程的关键在于先通过”BRAT”插件加载测试版本，再进行配置。成功集成后，AI可直接读取当前笔记内容、编辑文件甚至运行代码，在知识管理、内容创作和代码调试等场景中实现一站式闭环操作，极大提升了效率与流畅度。</p>
 <ol start="8" type="1">
 <li><a href="https://mp.weixin.qq.com/s/L0D7zKfu_oboxIsMeEEQ4Q">不平衡数据处理5种利器</a></li>
 </ol>
@@ -2684,7 +2935,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <p>这正是 <strong>pragmatic trial</strong> 试图回答的问题。它对应的另一端，是 <strong>explanatory trial</strong>，即更强调机制验证和因果识别的 <strong>解释性试验</strong>。</p>
 <p>一句话概括：</p>
 <blockquote class="blockquote">
-<p><strong>解释性试验更像在问“它在理想条件下是否有效”，实用性试验更像在问“它在真实世界里是否值得用”。</strong></p>
+<p><strong>解释性试验更像在问”它在理想条件下是否有效”，实用性试验更像在问”它在真实世界里是否值得用”。</strong></p>
 </blockquote>
 <section id="一pragmatic-trial-是怎么提出的" class="level3">
 <h3 class="anchored" data-anchor-id="一pragmatic-trial-是怎么提出的">一、Pragmatic trial 是怎么提出的？</h3>
@@ -2695,7 +2946,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li>政策制定者</li>
 <li>支付方</li>
 </ul>
-<p>也就是说，pragmatic trial 的出发点不是“把一切都控制得尽可能干净”，而是“让研究结果尽可能对现实决策有用”。</p>
+<p>也就是说，pragmatic trial 的出发点不是”把一切都控制得尽可能干净”，而是”让研究结果尽可能对现实决策有用”。</p>
 <p>这会直接影响试验设计的各个方面：</p>
 <ul>
 <li>纳入什么样的人</li>
@@ -2708,13 +2959,13 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 <section id="二pragmatic-trial-和-explanatory-trial-的核心区别" class="level3">
 <h3 class="anchored" data-anchor-id="二pragmatic-trial-和-explanatory-trial-的核心区别">二、Pragmatic trial 和 explanatory trial 的核心区别</h3>
-<p>很多人第一次接触 pragmatic trial，会误以为它只是“做得没那么严格的 RCT”。这其实不对。</p>
+<p>很多人第一次接触 pragmatic trial，会误以为它只是”做得没那么严格的 RCT”。这其实不对。</p>
 <p>更准确地说，它们回答的是 <strong>不同层面的问题</strong>。</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 8%">
+<col style="width: 31%">
+<col style="width: 59%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2767,7 +3018,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <p>pragmatic trial 常见有以下几个特征。</p>
 <section id="比较的是临床上真正-relevant-的备选方案" class="level4">
 <h4 class="anchored" data-anchor-id="比较的是临床上真正-relevant-的备选方案">1. 比较的是临床上真正 relevant 的备选方案</h4>
-<p>不是比较一个高度理想化的“纯处理”与安慰剂，而是比较临床实践中真实会发生竞争的方案。</p>
+<p>不是比较一个高度理想化的”纯处理”与安慰剂，而是比较临床实践中真实会发生竞争的方案。</p>
 <p>例如：</p>
 <ul>
 <li>比较两类药物，而不是只比较某个固定药物分子</li>
@@ -2780,12 +3031,12 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <section id="纳入更广泛更多样的人群" class="level4">
 <h4 class="anchored" data-anchor-id="纳入更广泛更多样的人群">2. 纳入更广泛、更多样的人群</h4>
 <p>pragmatic trial 往往只有很少的排除标准，甚至几乎没有。</p>
-<p>因为现实中接受治疗的人，本来就不是一个高度筛选后的“完美样本”。如果研究只纳入年轻、依从性好、合并症少、诊断非常明确的患者，那么结果虽然干净，但临床可用性往往有限。</p>
+<p>因为现实中接受治疗的人，本来就不是一个高度筛选后的”完美样本”。如果研究只纳入年轻、依从性好、合并症少、诊断非常明确的患者，那么结果虽然干净，但临床可用性往往有限。</p>
 <p>有时入组甚至可以基于 <strong>推定诊断</strong>，而不是必须等到最终确诊。因为在真实医疗中，很多治疗本来就是在诊断尚未完全确定时启动的。</p>
 </section>
 <section id="在差异很大的实践场景中开展" class="level4">
 <h4 class="anchored" data-anchor-id="在差异很大的实践场景中开展">3. 在差异很大的实践场景中开展</h4>
-<p>如果一项研究只在顶级中心、由最资深专家实施，那么它回答的是“在最理想的医疗环境中这个干预表现如何”。</p>
+<p>如果一项研究只在顶级中心、由最资深专家实施，那么它回答的是”在最理想的医疗环境中这个干预表现如何”。</p>
 <p>但真实世界不是这样。</p>
 <p>所以 pragmatic trial 会尽量纳入：</p>
 <ul>
@@ -2814,7 +3065,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 <section id="四为什么-pragmatic-trial-更贴近真实世界" class="level3">
 <h3 class="anchored" data-anchor-id="四为什么-pragmatic-trial-更贴近真实世界">四、为什么 pragmatic trial 更贴近真实世界？</h3>
-<p>因为它刻意减少对临床实践的“打扰”。</p>
+<p>因为它刻意减少对临床实践的”打扰”。</p>
 <p>在 explanatory trial 中，研究者常常会为了控制偏倚而做很多额外安排：</p>
 <ul>
 <li>更短的随访</li>
@@ -2828,13 +3079,13 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <blockquote class="blockquote">
 <p><strong>如果我想知道一个干预在日常实践中能不能真正发挥作用，那研究本身就不应该把日常实践改造得面目全非。</strong></p>
 </blockquote>
-<p>例如，在比较两种 shared decision making 方法时，解释性研究可能会录音门诊过程、精细评估交流质量；但 pragmatic trial 通常不会加入这么多“侵入式”的研究动作，因为真实门诊里并没有这些额外安排。</p>
+<p>例如，在比较两种 shared decision making 方法时，解释性研究可能会录音门诊过程、精细评估交流质量；但 pragmatic trial 通常不会加入这么多”侵入式”的研究动作，因为真实门诊里并没有这些额外安排。</p>
 </section>
 <section id="五pragmatic-trial-的优势到底是什么" class="level3">
 <h3 class="anchored" data-anchor-id="五pragmatic-trial-的优势到底是什么">五、Pragmatic trial 的优势到底是什么？</h3>
 <section id="更强的临床可解释性" class="level4">
 <h4 class="anchored" data-anchor-id="更强的临床可解释性">1. 更强的临床可解释性</h4>
-<p>临床医生最常面对的不是“完美执行治疗”的病人，而是：</p>
+<p>临床医生最常面对的不是”完美执行治疗”的病人，而是：</p>
 <ul>
 <li>依从性一般</li>
 <li>合并症很多</li>
@@ -2850,7 +3101,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 <section id="对卫生决策更有用" class="level4">
 <h4 class="anchored" data-anchor-id="对卫生决策更有用">3. 对卫生决策更有用</h4>
-<p>药监审批、医保支付、临床路径制定、指南更新，往往不仅关心“有没有 efficacy”，还关心：</p>
+<p>药监审批、医保支付、临床路径制定、指南更新，往往不仅关心”有没有 efficacy”，还关心：</p>
 <ul>
 <li>能不能实施</li>
 <li>在普通环境中还有没有效果</li>
@@ -2861,8 +3112,8 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </section>
 </section>
 <section id="六但-pragmatic-trial-不是没有代价" class="level3">
-<h3 class="anchored" data-anchor-id="六但-pragmatic-trial-不是没有代价">六、但 pragmatic trial 不是“没有代价”</h3>
-<p>实用性试验的优势，恰恰来自它“少打扰真实临床”的设计；而它的局限，也正是这种选择的直接后果。</p>
+<h3 class="anchored" data-anchor-id="六但-pragmatic-trial-不是没有代价">六、但 pragmatic trial 不是”没有代价”</h3>
+<p>实用性试验的优势，恰恰来自它”少打扰真实临床”的设计；而它的局限，也正是这种选择的直接后果。</p>
 <section id="缺失数据更多" class="level4">
 <h4 class="anchored" data-anchor-id="缺失数据更多">1. 缺失数据更多</h4>
 <p>pragmatic trial 常依赖电子病历、医保理赔数据、死亡登记数据库等现成数据源。这样做的好处是：</p>
@@ -2897,11 +3148,11 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <p>解释性试验更容易做到 protocol adherence。pragmatic trial 则往往允许医生和机构保留日常实践中的弹性。</p>
 <p>结果就是：</p>
 <ul>
-<li>同一干预的“剂量”可能不同</li>
+<li>同一干预的”剂量”可能不同</li>
 <li>同一流程的落实程度可能不同</li>
 <li>同一方案在不同中心的执行深度可能不同</li>
 </ul>
-<p>这会使效应估计更接近真实世界，但也更难“干净地”解释。</p>
+<p>这会使效应估计更接近真实世界，但也更难”干净地”解释。</p>
 </section>
 <section id="随访更长随机化后的干扰更多" class="level4">
 <h4 class="anchored" data-anchor-id="随访更长随机化后的干扰更多">4. 随访更长，随机化后的干扰更多</h4>
@@ -2937,16 +3188,16 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </ul>
 <p>但这里有一个特别值得统计学家和临床研究者警惕的问题：</p>
 <blockquote class="blockquote">
-<p><strong>如果为了省钱而不去测量干预的实际执行强度，就可能把“没有落实”误判为“没有效果”。</strong></p>
+<p><strong>如果为了省钱而不去测量干预的实际执行强度，就可能把”没有落实”误判为”没有效果”。</strong></p>
 </blockquote>
-<p>很多干预，无论是临床治疗还是管理措施，都是 dose-dependent 的。病人没吃药、医生没执行、门诊没落实，最后观察到“无效”，不一定说明干预没用，也可能只是它根本没有被真正实施。</p>
+<p>很多干预，无论是临床治疗还是管理措施，都是 dose-dependent 的。病人没吃药、医生没执行、门诊没落实，最后观察到”无效”，不一定说明干预没用，也可能只是它根本没有被真正实施。</p>
 </section>
 </section>
 <section id="八pragmatic-trial-和-observational-study-的边界在哪里" class="level3">
 <h3 class="anchored" data-anchor-id="八pragmatic-trial-和-observational-study-的边界在哪里">八、pragmatic trial 和 observational study 的边界在哪里？</h3>
 <p>这是一个非常现实的问题。</p>
-<p>一个例子：患者面对手术和药物治疗时，先可以选择“接受常规治疗”还是“进入随机试验”。结果三分之二患者拒绝试验，剩下三分之一才被随机。</p>
-<p>从“纯粹主义”的 RCT 视角看，这个设计确实不够干净，因为：</p>
+<p>一个例子：患者面对手术和药物治疗时，先可以选择”接受常规治疗”还是”进入随机试验”。结果三分之二患者拒绝试验，剩下三分之一才被随机。</p>
+<p>从”纯粹主义”的 RCT 视角看，这个设计确实不够干净，因为：</p>
 <ul>
 <li>患者在一开始并没有全部随机</li>
 <li>愿意进入随机的人，和不愿意进入随机的人，本来就可能不同</li>
@@ -2962,7 +3213,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 </ul>
 <p>这说明一个很重要的事实：</p>
 <blockquote class="blockquote">
-<p><strong>越想让研究贴近真实临床，就越有可能偏离“纯随机试验”的理想形态。</strong></p>
+<p><strong>越想让研究贴近真实临床，就越有可能偏离”纯随机试验”的理想形态。</strong></p>
 </blockquote>
 <p>这不是谁对谁错，而是研究目标不同带来的张力。</p>
 </section>
@@ -2993,7 +3244,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <p>反过来，越追求真实世界，就越会引入复杂性、异质性和解释上的不确定性。</p>
 </section>
 <section id="异质性解释可能需要pragmatic-程度这个视角" class="level4">
-<h4 class="anchored" data-anchor-id="异质性解释可能需要pragmatic-程度这个视角">3. 异质性解释可能需要“pragmatic 程度”这个视角</h4>
+<h4 class="anchored" data-anchor-id="异质性解释可能需要pragmatic-程度这个视角">3. 异质性解释可能需要”pragmatic 程度”这个视角</h4>
 <p>临床决策从来不依赖单个研究，而依赖证据体和系统综述。</p>
 <p>当系统综述中研究结果高度异质时，我们通常会看：</p>
 <ul>
@@ -3019,7 +3270,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li>结局指标，是不是患者和临床真正关心的结果？</li>
 <li>数据收集过程，有没有明显改变原本的医疗行为？</li>
 </ol>
-<p>如果这 5 个问题大多回答“像”，它通常就更偏 pragmatic。</p>
+<p>如果这 5 个问题大多回答”像”，它通常就更偏 pragmatic。</p>
 </section>
 <section id="十一takeways" class="level3">
 <h3 class="anchored" data-anchor-id="十一takeways">十一、Takeways</h3>
@@ -3030,7 +3281,7 @@ Cai, Miao, Taeyoung Choi, Yan Xie, and Ziyad Al-Aly. 2026. <span>“Glucagon-Lik
 <li>在资源有限、执行不完全一致的现实系统中是否仍有价值？</li>
 <li>对患者真正关心的结局是否有改善？</li>
 </ul>
-<p>所以，pragmatic trial 不是“降低标准”的研究，而是 <strong>把研究问题从“理想条件下是否有效”推进到“真实世界中是否有用”</strong>。</p>
+<p>所以，pragmatic trial 不是”降低标准”的研究，而是 <strong>把研究问题从”理想条件下是否有效”推进到”真实世界中是否有用”</strong>。</p>
 <p>对于生物统计工作者而言，真正重要的不是站队，而是清楚地知道：</p>
 <blockquote class="blockquote">
 <p><strong>你想回答什么问题，就应该接受与之匹配的设计代价。</strong></p>
@@ -3098,15 +3349,15 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
 <ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/Pq5L9igmp5ydXwTTwf0j-Q">阳痿不只是性问题：可能提前预警心梗的“血管信号”</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Pq5L9igmp5ydXwTTwf0j-Q">阳痿不只是性问题：可能提前预警心梗的”血管信号”</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260326232957.png" class="img-fluid"></p>
-<p>研究表明，勃起功能障碍（ED）不仅影响性生活，还可能是心血管疾病的早期信号，往往比心肌梗死提前2～5年出现。其核心机制在于动脉粥样硬化导致血管内皮功能受损、血流减少，而阴茎动脉更细，因此更早“暴露问题”。流行病学数据显示，ED患者心血管事件和心梗风险显著升高。不过，ED并不等同于心脏病，其成因还包括心理、内分泌及神经因素。对于中年男性，若ED合并高血压、糖尿病等，应警惕潜在心血管风险并尽早评估。</p>
+<p>研究表明，勃起功能障碍（ED）不仅影响性生活，还可能是心血管疾病的早期信号，往往比心肌梗死提前2～5年出现。其核心机制在于动脉粥样硬化导致血管内皮功能受损、血流减少，而阴茎动脉更细，因此更早”暴露问题”。流行病学数据显示，ED患者心血管事件和心梗风险显著升高。不过，ED并不等同于心脏病，其成因还包括心理、内分泌及神经因素。对于中年男性，若ED合并高血压、糖尿病等，应警惕潜在心血管风险并尽早评估。</p>
 <ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/MqIQ5hoBp8rIjLmhCrfswA">生物信息学：驱动生命科学进入“大数据时代”的新引擎</a></li>
+<li><a href="https://mp.weixin.qq.com/s/MqIQ5hoBp8rIjLmhCrfswA">生物信息学：驱动生命科学进入”大数据时代”的新引擎</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260326232037.png" class="img-fluid"></p>
-<p>随着高通量测序等技术的发展，生命科学正从“小数据实验”迈向“海量数据驱动”，生物信息学因此成为连接数据与发现的关键工具。它通过算法与计算模型，对基因组、转录组等复杂数据进行整合分析，帮助科学家理解疾病机制、发现生物标志物并推动精准医学发展。从基础研究到临床应用，生物信息学已成为现代生物医学不可或缺的“导航系统”。与此同时，这一领域也对科研人员提出了跨学科能力要求——既要理解生物学问题，也要掌握数据分析方法。可以说，谁能更好地“读懂数据”，谁就更接近生命科学的下一个突破。</p>
+<p>随着高通量测序等技术的发展，生命科学正从”小数据实验”迈向”海量数据驱动”，生物信息学因此成为连接数据与发现的关键工具。它通过算法与计算模型，对基因组、转录组等复杂数据进行整合分析，帮助科学家理解疾病机制、发现生物标志物并推动精准医学发展。从基础研究到临床应用，生物信息学已成为现代生物医学不可或缺的”导航系统”。与此同时，这一领域也对科研人员提出了跨学科能力要求——既要理解生物学问题，也要掌握数据分析方法。可以说，谁能更好地”读懂数据”，谁就更接近生命科学的下一个突破。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -3114,7 +3365,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <li><a href="https://mp.weixin.qq.com/s/iPvKRvFhgJAendxKueT_8w">Harness Engineering</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260326233731.png" class="img-fluid"></p>
-<p>当Agent能力提升，瓶颈反而转向执行系统本身。Harness Engineering关注如何构建稳定、可控的运行环境，解决任务调度、工具调用与失败恢复问题。它让Agent从“能做”走向“做得可靠”，正在成为AI应用工程的新基础设施。</p>
+<p>当Agent能力提升，瓶颈反而转向执行系统本身。Harness Engineering关注如何构建稳定、可控的运行环境，解决任务调度、工具调用与失败恢复问题。它让Agent从”能做”走向”做得可靠”，正在成为AI应用工程的新基础设施。</p>
 <ol start="6" type="1">
 <li><a href="https://stat.ethz.ch/R-manual/R-patched/library/grDevices/html/plotmath.html" title="R 语言数学图形标注">R 语言用于数学图形标注（Mathematical Annotation）</a></li>
 </ol>
@@ -3171,7 +3422,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 
 
 
-<p>3月24日，由<a href="https://mp.weixin.qq.com/s/6vjU77jMjbsofoKDAzU4gA">新锐学术</a>研制的《新锐期刊分区表》（简称“新锐分区”，其为<strong>原中科院分区</strong>）正式推出。</p>
+<p>3月24日，由<a href="https://mp.weixin.qq.com/s/6vjU77jMjbsofoKDAzU4gA">新锐学术</a>研制的《新锐期刊分区表》（简称”新锐分区”，其为<strong>原中科院分区</strong>）正式推出。</p>
 <p>我们也是第一时间将最新的中科院分区表2026医学大类的期刊数据（共计<strong>5742本杂志</strong>）爬出来整理成 Excel 表格，供大家科研投稿参考使用。</p>
 <p>公众号后台回复<code>2026中科院分区</code>即可获取表格链接。</p>
 <blockquote class="blockquote">
@@ -3215,7 +3466,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <p>于是，临床和公共卫生决策不可能永远等着 RCT。我们不得不使用真实世界数据、医保数据库、电子病历、注册登记数据来回答因果问题。</p>
 <p>问题也随之而来：<strong>观察性研究不是随机分组的，怎么尽量减少偏差？</strong></p>
 <p>这就是 Target Trial Emulation（目标试验模拟，以下简称 TTE）进入视野的原因。</p>
-<p>一句话总结 TTE：<strong>TTE 不是神奇地把观察性研究变成 RCT，而是要求我们先明确“理想中的随机试验应该怎么设计”，再用观察性数据尽可能去逼近这个试验。</strong><span class="citation" data-cites="RN1590">(Hernán, Wang, and Leaf 2022)</span></p>
+<p>一句话总结 TTE：<strong>TTE 不是神奇地把观察性研究变成 RCT，而是要求我们先明确”理想中的随机试验应该怎么设计”，再用观察性数据尽可能去逼近这个试验。</strong><span class="citation" data-cites="RN1590">(Hernán, Wang, and Leaf 2022)</span></p>
 </section>
 <section id="二先回到因果推断最核心的问题我们到底在比较什么" class="level3">
 <h3 class="anchored" data-anchor-id="二先回到因果推断最核心的问题我们到底在比较什么">二、先回到因果推断最核心的问题：我们到底在比较什么</h3>
@@ -3224,7 +3475,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <blockquote class="blockquote">
 <p>如果这个人接受了治疗 A，而不是治疗 B，会发生什么？</p>
 </blockquote>
-<p>现实世界里，同一个人在同一时刻不可能既接受 A 又接受 B，所以我们永远看不到同一个人的两个结果。RCT 的价值，在于它通过随机分配，把两组人在平均意义上做到了可比，让“不同人之间的比较”尽量接近“同一个人两种可能结果的比较”。</p>
+<p>现实世界里，同一个人在同一时刻不可能既接受 A 又接受 B，所以我们永远看不到同一个人的两个结果。RCT 的价值，在于它通过随机分配，把两组人在平均意义上做到了可比，让”不同人之间的比较”尽量接近”同一个人两种可能结果的比较”。</p>
 <p>TTE 的出发点也是一样的。它不是先拿到数据就上一个多变量模型，而是先回答：</p>
 <ul>
 <li>理想试验的纳入标准是什么？</li>
@@ -3237,8 +3488,8 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <p>如果这些问题没有先定义清楚，那么后面的模型再复杂，也很可能是在回答一个模糊甚至错误的问题。</p>
 </section>
 <section id="三tte-最重要的贡献往往不是调混杂而是把问题问对" class="level3">
-<h3 class="anchored" data-anchor-id="三tte-最重要的贡献往往不是调混杂而是把问题问对">三、TTE 最重要的贡献，往往不是“调混杂”，而是把问题问对</h3>
-<p>很多人一提观察性研究，就想到“把混杂变量放进回归模型里控制一下”。这当然重要，但：<strong>大量观察性研究出错，并不只是因为没控制好混杂，而是因为连研究设计本身都错了。</strong><span class="citation" data-cites="RN1591">(Hernán et al. 2016)</span></p>
+<h3 class="anchored" data-anchor-id="三tte-最重要的贡献往往不是调混杂而是把问题问对">三、TTE 最重要的贡献，往往不是”调混杂”，而是把问题问对</h3>
+<p>很多人一提观察性研究，就想到”把混杂变量放进回归模型里控制一下”。这当然重要，但：<strong>大量观察性研究出错，并不只是因为没控制好混杂，而是因为连研究设计本身都错了。</strong><span class="citation" data-cites="RN1591">(Hernán et al. 2016)</span></p>
 <p>最常见的错误包括：</p>
 <ul>
 <li>没有对齐 eligibility、treatment assignment 和 follow-up 的起点</li>
@@ -3247,11 +3498,11 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <li>产生 immortal time bias</li>
 <li>因错误入组或错误起点带来 selection bias</li>
 </ul>
-<p>这些偏差，往往不是靠“多调几个协变量”就能补救的。</p>
+<p>这些偏差，往往不是靠”多调几个协变量”就能补救的。</p>
 <section id="什么叫-time-zero-必须对齐" class="level4">
 <h4 class="anchored" data-anchor-id="什么叫-time-zero-必须对齐">1. 什么叫 time zero 必须对齐</h4>
 <p>在随机试验中，time zero 很清楚：通常就是满足纳入标准并被分配治疗策略的那一刻。</p>
-<p>但在观察性研究中，如果研究者把“开始随访”的时间放在一个与目标试验不一致的位置，就会出问题。</p>
+<p>但在观察性研究中，如果研究者把”开始随访”的时间放在一个与目标试验不一致的位置，就会出问题。</p>
 <p>经典例子是绝经后女性激素治疗与冠心病风险。早期很多观察性研究没有发现激素治疗增加心脏病风险，后来一个重要原因被指出：<strong>研究的随访并不是从开始用药时启动，而是在女性已经用了药几个月甚至几年之后才开始。</strong>这样就漏掉了治疗早期可能更高的风险阶段。<span class="citation" data-cites="RN1591">(Hernán et al. 2016)</span></p>
 <p>所以，TTE 的第一原则不是建模，而是：</p>
 <blockquote class="blockquote">
@@ -3260,7 +3511,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 </section>
 <section id="prevalent-user-为什么危险" class="level4">
 <h4 class="anchored" data-anchor-id="prevalent-user-为什么危险">2. prevalent user 为什么危险</h4>
-<p>如果研究纳入的是“已经持续用药一段时间的人”，而不是“刚开始治疗的人”，就会天然选进一些“存活下来并且坚持到现在的人”。这类人已经经过了某种筛选，早期不良反应、早期停药、早期死亡的人反而被排除在外。</p>
+<p>如果研究纳入的是”已经持续用药一段时间的人”，而不是”刚开始治疗的人”，就会天然选进一些”存活下来并且坚持到现在的人”。这类人已经经过了某种筛选，早期不良反应、早期停药、早期死亡的人反而被排除在外。</p>
 <p>这会造成 selection bias，也会系统性低估治疗早期风险。</p>
 </section>
 </section>
@@ -3268,7 +3519,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <h3 class="anchored" data-anchor-id="四用一个最典型的例子理解-ttecovid-19-与-tocilizumab">四、用一个最典型的例子理解 TTE：COVID-19 与 tocilizumab</h3>
 <p>一个例子：<strong>重症 COVID-19 患者早期使用 tocilizumab 是否降低死亡风险。</strong><span class="citation" data-cites="RN1590">(Hernán, Wang, and Leaf 2022)</span></p>
 <p>Gupta 等人在 JAMA Internal Medicine 2020 发表的一项多中心队列研究中，比较了 ICU 入院后 2 天内使用 tocilizumab 与未早期使用者的死亡风险。研究纳入 3924 名重症患者，采用逆概率加权后的 Cox 模型，估计的死亡风险 HR 为 0.71，95% CI 0.56-0.92。<span class="citation" data-cites="RN1592">(Gupta et al. 2021)</span></p>
-<p>这个例子之所以重要，不是因为“模型高级”，而是因为它把 TTE 里几个最关键的设计问题都暴露出来了。</p>
+<p>这个例子之所以重要，不是因为”模型高级”，而是因为它把 TTE 里几个最关键的设计问题都暴露出来了。</p>
 <section id="什么是-grace-period" class="level4">
 <h4 class="anchored" data-anchor-id="什么是-grace-period">1. 什么是 grace period</h4>
 <p>如果目标试验里的治疗策略定义为：</p>
@@ -3276,12 +3527,12 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <li>策略 A：ICU 入院后 2 天内开始 tocilizumab</li>
 <li>策略 B：ICU 入院后 2 天内不开始 tocilizumab</li>
 </ul>
-<p>那么这里的“2 天内”就是一个 <strong>grace period</strong>。</p>
-<p>grace period 的含义不是“随便放宽标准”，而是：</p>
+<p>那么这里的”2 天内”就是一个 <strong>grace period</strong>。</p>
+<p>grace period 的含义不是”随便放宽标准”，而是：</p>
 <ul>
 <li>让治疗策略更贴近真实临床流程</li>
 <li>承认从入组到真正给药之间可能存在合理延迟</li>
-<li>把研究问题定义为现实可执行的策略，而不是“入组后 0 秒内必须完成给药”的不现实方案</li>
+<li>把研究问题定义为现实可执行的策略，而不是”入组后 0 秒内必须完成给药”的不现实方案</li>
 </ul>
 <p>但 grace period 也带来一个关键问题：</p>
 <blockquote class="blockquote">
@@ -3296,33 +3547,33 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <li>2 天内没用上的，算对照组</li>
 </ul>
 <p>那就会出问题。</p>
-<p>因为对某个最终被归入“治疗组”的病人来说，他必须先活到真正开始给药的那一刻。也就是说，从 ICU 入院到用药之间那段时间，对他而言是一个“必须存活”的时间窗口。如果这段时间被错误地记在治疗组的受益里，就形成了 immortal time bias。<span class="citation" data-cites="RN1591">(Hernán et al. 2016)</span></p>
-<p>更麻烦的是，如果一个病人本来可能在第 2 天用药，但他在第 1 天先去世了，那么按上面这种简单分法，他会被放进“未用药组”。这样一来，很多本应归属于“可能接受治疗策略的人”的早期死亡，被错误地压到了对照组里，治疗看上去就会被夸大。</p>
+<p>因为对某个最终被归入”治疗组”的病人来说，他必须先活到真正开始给药的那一刻。也就是说，从 ICU 入院到用药之间那段时间，对他而言是一个”必须存活”的时间窗口。如果这段时间被错误地记在治疗组的受益里，就形成了 immortal time bias。<span class="citation" data-cites="RN1591">(Hernán et al. 2016)</span></p>
+<p>更麻烦的是，如果一个病人本来可能在第 2 天用药，但他在第 1 天先去世了，那么按上面这种简单分法，他会被放进”未用药组”。这样一来，很多本应归属于”可能接受治疗策略的人”的早期死亡，被错误地压到了对照组里，治疗看上去就会被夸大。</p>
 </section>
 <section id="为什么要-clone" class="level4">
 <h4 class="anchored" data-anchor-id="为什么要-clone">3. 为什么要 clone</h4>
 <p>这就是 clone-censor-weight 方法出现的地方。</p>
 <p>对于在 time zero 时尚未开始 tocilizumab、但未来 2 天内可能开始的人，可以先在统计上做两个副本：</p>
 <ul>
-<li>一个 clone 分配到“2 天内用药”策略</li>
-<li>一个 clone 分配到“2 天内不用药”策略</li>
+<li>一个 clone 分配到”2 天内用药”策略</li>
+<li>一个 clone 分配到”2 天内不用药”策略</li>
 </ul>
 <p>然后从同一个 time zero 开始随访。</p>
 <p>之后：</p>
 <ul>
-<li>如果“用药策略”的 clone 在 2 天内没有真正开始用药，就因偏离方案而被删失</li>
-<li>如果“不用药策略”的 clone 在 2 天内开始了用药，也因偏离方案而被删失</li>
+<li>如果”用药策略”的 clone 在 2 天内没有真正开始用药，就因偏离方案而被删失</li>
+<li>如果”不用药策略”的 clone 在 2 天内开始了用药，也因偏离方案而被删失</li>
 </ul>
 <p>这样处理后，grace period 内发生的早期死亡不会被错误地只归到某一组，而是被正确纳入两条潜在策略路径的比较中。</p>
 <p>这里要特别强调两点。</p>
-<p>第一，<strong>clone 不是说现实里一个病人真的被招募了两次</strong>。它只是一个统计技巧，用来表示：在 time zero 时，这个人对两种策略都仍然“兼容”。</p>
+<p>第一，<strong>clone 不是说现实里一个病人真的被招募了两次</strong>。它只是一个统计技巧，用来表示：在 time zero 时，这个人对两种策略都仍然”兼容”。</p>
 <p>第二，<strong>time zero 并不会因为有 grace period 而后移</strong>。随访必须从满足纳入标准的当下开始，grace period 是随访初始阶段的一部分，而不是另起一个时间点。</p>
 </section>
 <section id="既然-clone-了两份是否-double-counting" class="level4">
 <h4 class="anchored" data-anchor-id="既然-clone-了两份是否-double-counting">4. 既然 clone 了两份，是否 double counting</h4>
 <p>这是初学者最自然的问题。</p>
-<p>答案是：<strong>点估计上看起来像“重复使用了信息”，但不是 naive 的重复计数。</strong></p>
-<p>更准确地说，clone 相当于把“随机把这类病人分到某个策略，再重复很多次”的过程做了解析化表达。它提高了信息使用效率，但同一个人的两个 clone 并不是独立观测，因此<strong>方差估计必须调整</strong>，否则标准误会偏小、置信区间会过窄。</p>
+<p>答案是：<strong>点估计上看起来像”重复使用了信息”，但不是 naive 的重复计数。</strong></p>
+<p>更准确地说，clone 相当于把”随机把这类病人分到某个策略，再重复很多次”的过程做了解析化表达。它提高了信息使用效率，但同一个人的两个 clone 并不是独立观测，因此<strong>方差估计必须调整</strong>，否则标准误会偏小、置信区间会过窄。</p>
 </section>
 </section>
 <section id="五为什么在-tte-里删失和加权经常同时出现" class="level3">
@@ -3333,14 +3584,14 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <p>在 clone 之后，每个 clone 都被分配到一条策略上。只要现实中的病程偏离了这条策略，这个 clone 就需要被人工删失。</p>
 <p>例如：</p>
 <ul>
-<li>被分到“2 天内用药”的 clone，结果 2 天内没用药，删失</li>
-<li>被分到“2 天内不用药”的 clone，结果 2 天内用了药，删失</li>
+<li>被分到”2 天内用药”的 clone，结果 2 天内没用药，删失</li>
+<li>被分到”2 天内不用药”的 clone，结果 2 天内用了药，删失</li>
 </ul>
 </section>
 <section id="为什么删失后还要加权" class="level4">
 <h4 class="anchored" data-anchor-id="为什么删失后还要加权">2. 为什么删失后还要加权</h4>
 <p>因为这种删失通常不是随机的。</p>
-<p>病情更重的患者，可能更容易提前用药，也更容易死亡；病情较轻的患者，可能更容易留在“不用药”的策略路径里。如果简单删失而不做调整，留下来的样本会越来越不代表原始研究对象。</p>
+<p>病情更重的患者，可能更容易提前用药，也更容易死亡；病情较轻的患者，可能更容易留在”不用药”的策略路径里。如果简单删失而不做调整，留下来的样本会越来越不代表原始研究对象。</p>
 <p>所以需要用 <strong>inverse probability of censoring weighting, IPCW</strong> 来纠正这种非随机删失带来的偏差。</p>
 <p>其直觉是：</p>
 <blockquote class="blockquote">
@@ -3349,16 +3600,16 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 </section>
 <section id="ipcw-和-iptw-的区别" class="level4">
 <h4 class="anchored" data-anchor-id="ipcw-和-iptw-的区别">3. IPCW 和 IPTW 的区别</h4>
-<p>两者都叫“逆概率加权”，但作用不同。</p>
+<p>两者都叫”逆概率加权”，但作用不同。</p>
 <ul>
-<li>IPTW：调整的是治疗分配上的不平衡，即“为什么这个人更可能接受治疗”</li>
-<li>IPCW：调整的是删失上的不平衡，即“为什么这个人更可能中途消失、失访、偏离方案”</li>
+<li>IPTW：调整的是治疗分配上的不平衡，即”为什么这个人更可能接受治疗”</li>
+<li>IPCW：调整的是删失上的不平衡，即”为什么这个人更可能中途消失、失访、偏离方案”</li>
 </ul>
-<p>在 clone-censor-weight 框架里，最核心的权重通常是 IPCW，因为偏差主要来自“因偏离策略而被人工删失”。但在更复杂分析中，两类权重也可以同时出现。</p>
+<p>在 clone-censor-weight 框架里，最核心的权重通常是 IPCW，因为偏差主要来自”因偏离策略而被人工删失”。但在更复杂分析中，两类权重也可以同时出现。</p>
 </section>
 <section id="ipcw-的模型怎么建" class="level4">
 <h4 class="anchored" data-anchor-id="ipcw-的模型怎么建">4. IPCW 的模型怎么建</h4>
-<p>IPCW 的权重，本质上是“到当前时点仍未被删失的逆概率”。实际估计时，常见做法包括：</p>
+<p>IPCW 的权重，本质上是”到当前时点仍未被删失的逆概率”。实际估计时，常见做法包括：</p>
 <ul>
 <li>离散时间：logistic regression 或 pooled logistic regression</li>
 <li>连续时间：Cox 模型</li>
@@ -3370,12 +3621,12 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 </section>
 </section>
 <section id="六为什么把变量放进回归模型并不总是正确答案" class="level3">
-<h3 class="anchored" data-anchor-id="六为什么把变量放进回归模型并不总是正确答案">六、为什么“把变量放进回归模型”并不总是正确答案</h3>
+<h3 class="anchored" data-anchor-id="六为什么把变量放进回归模型并不总是正确答案">六、为什么”把变量放进回归模型”并不总是正确答案</h3>
 <p>很多人对因果推断的第一反应是：“那我把所有相关变量都塞进模型里不就好了？”</p>
 <p>问题没这么简单。</p>
 <section id="为什么-confounder-放进模型通常有帮助" class="level4">
 <h4 class="anchored" data-anchor-id="为什么-confounder-放进模型通常有帮助">1. 为什么 confounder 放进模型通常有帮助</h4>
-<p>混杂因素是指同时影响治疗和结局的变量。把 confounder 放进回归模型，本质上是在做“条件比较”：</p>
+<p>混杂因素是指同时影响治疗和结局的变量。把 confounder 放进回归模型，本质上是在做”条件比较”：</p>
 <blockquote class="blockquote">
 <p>在这些混杂因素相同的人之间，治疗和结局还有什么关系？</p>
 </blockquote>
@@ -3387,7 +3638,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <ul>
 <li>治疗 → 炎症下降 → 死亡风险下降</li>
 </ul>
-<p>其中“炎症下降”就是 mediator。此时如果把 mediator 当成“协变量”控制掉，等于把治疗作用于结局的真实路径切断了。</p>
+<p>其中”炎症下降”就是 mediator。此时如果把 mediator 当成”协变量”控制掉，等于把治疗作用于结局的真实路径切断了。</p>
 <p>所以，<strong>如果目标是估计治疗的总效应，随意把 mediator 放进模型往往是错的。</strong></p>
 </section>
 <section id="为什么时间变化混杂更难" class="level4">
@@ -3399,14 +3650,14 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <li>它影响死亡</li>
 <li>它本身又会被之前的治疗改变</li>
 </ul>
-<p>此时如果用普通回归在结局模型里“控制当前病情”，常常会把治疗通过改善病情而产生的真实效应一起调掉。这也是为什么在 TTE 和更广义的因果推断中，MSM、IPTW、IPCW 等方法如此重要。</p>
+<p>此时如果用普通回归在结局模型里”控制当前病情”，常常会把治疗通过改善病情而产生的真实效应一起调掉。这也是为什么在 TTE 和更广义的因果推断中，MSM、IPTW、IPCW 等方法如此重要。</p>
 </section>
 </section>
 <section id="七tte-能解决什么不能解决什么" class="level3">
 <h3 class="anchored" data-anchor-id="七tte-能解决什么不能解决什么">七、TTE 能解决什么，不能解决什么</h3>
 <p>这可能是理解 TTE 最重要的一部分。</p>
 <section id="它最擅长解决的是坏设计" class="level4">
-<h4 class="anchored" data-anchor-id="它最擅长解决的是坏设计">1. 它最擅长解决的是“坏设计”</h4>
+<h4 class="anchored" data-anchor-id="它最擅长解决的是坏设计">1. 它最擅长解决的是”坏设计”</h4>
 <p>TTE 非常擅长纠正以下自我制造的偏差：</p>
 <ul>
 <li>time zero 错位</li>
@@ -3424,7 +3675,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <p>换句话说，同样的数据、同样的 treatment、不同的 outcome，对混杂控制的要求可能完全不同。</p>
 </section>
 <section id="它只能模拟数据里存在的现实世界可执行的策略" class="level4">
-<h4 class="anchored" data-anchor-id="它只能模拟数据里存在的现实世界可执行的策略">3. 它只能模拟“数据里存在的、现实世界可执行的策略”</h4>
+<h4 class="anchored" data-anchor-id="它只能模拟数据里存在的现实世界可执行的策略">3. 它只能模拟”数据里存在的、现实世界可执行的策略”</h4>
 <p>如果数据库里只有治疗 A 和 B，没有 C，就不能模拟 A、B、C 三臂试验。</p>
 <p>如果真实世界里没有 placebo，也无法用日常医疗数据逼真模拟 placebo-controlled trial。</p>
 <p>如果真实世界中没有双盲、没有每周严密监测，也不能要求观察性数据去模拟一个高度解释性、强干预、双盲安慰剂对照试验。</p>
@@ -3435,7 +3686,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 </section>
 </section>
 <section id="八为什么-tte-不应被理解为拿观察性研究去对抗-rct" class="level3">
-<h3 class="anchored" data-anchor-id="八为什么-tte-不应被理解为拿观察性研究去对抗-rct">八、为什么 TTE 不应被理解为“拿观察性研究去对抗 RCT”</h3>
+<h3 class="anchored" data-anchor-id="八为什么-tte-不应被理解为拿观察性研究去对抗-rct">八、为什么 TTE 不应被理解为”拿观察性研究去对抗 RCT”</h3>
 <p>这是 JAMA 2022 文章里我们认为最成熟的一点。<span class="citation" data-cites="RN1590">(Hernán, Wang, and Leaf 2022)</span></p>
 <p>Hernán 明确提出：<strong>随机试验和观察性研究不是竞争者，而是协作者。</strong></p>
 <section id="benchmark-and-extend" class="level4">
@@ -3465,7 +3716,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <p>“如果大家更好地遵守这个策略，会怎样？”</p>
 </blockquote>
 <p>在这种情况下，TTE 中使用的那套方法，包括处理动态依从性、人工删失、逆概率加权等，也可以反过来用于重新分析试验数据，估计更接近 per-protocol 的效果。</p>
-<p>所以，TTE 不是“trial 的替代品”，而是 trial 思维在观察性研究中的延伸，同时也能反哺 trial 分析。</p>
+<p>所以，TTE 不是”trial 的替代品”，而是 trial 思维在观察性研究中的延伸，同时也能反哺 trial 分析。</p>
 </section>
 </section>
 <section id="九给初学者的一个实用框架怎么判断一项-tte-研究靠不靠谱" class="level3">
@@ -3548,7 +3799,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 </ul>
 <p>如果关键 confounders 没有测到，TTE 也救不了。</p>
 <p>如果研究问题本身不具有现实中的可执行策略含义，TTE 也无从谈起。</p>
-<p>如果时间起点、治疗策略、依从定义都模糊不清，那么“模拟目标试验”往往只是方法学包装，而不是实质上的试验模拟。</p>
+<p>如果时间起点、治疗策略、依从定义都模糊不清，那么”模拟目标试验”往往只是方法学包装，而不是实质上的试验模拟。</p>
 </section>
 <section id="十一takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="十一takeaways">十一、Takeaways</h3>
@@ -3569,7 +3820,7 @@ Sox, Harold C., and Roger J. Lewis. 2016. <span>“Pragmatic Trials: Practical A
 <blockquote class="blockquote">
 <p>我们到底想让数据回答哪一个因果问题？</p>
 </blockquote>
-<p>我想，这个问题如果没有事先想清楚，任何模型都只是“算得很认真”，未必是“答得正确”。</p>
+<p>我想，这个问题如果没有事先想清楚，任何模型都只是”算得很认真”，未必是”答得正确”。</p>
 
 
 <!-- -->
@@ -3613,18 +3864,18 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <p>因为一旦出现失访、退出、未完成随访等情况，我们看到的治疗效果，就不一定还能代表全部入组人群的真实效果。更棘手的是，缺失数据带来的偏倚方向往往并不容易预判。</p>
 <p>这时，一个非常实用的问题就出现了：</p>
 <blockquote class="blockquote">
-<p>如果这些缺失者和我们已经观察到的受试者不一样，那么他们要“不一样”到什么程度，原始结论才会被推翻？</p>
+<p>如果这些缺失者和我们已经观察到的受试者不一样，那么他们要”不一样”到什么程度，原始结论才会被推翻？</p>
 </blockquote>
-<p>这正是 <strong>tipping point analysis</strong> 想回答的问题。 我们对这一方法的统计学定位是：它的核心任务不是“修正缺失”，而是<strong>评估原始结论对缺失数据假设有多敏感</strong>。</p>
+<p>这正是 <strong>tipping point analysis</strong> 想回答的问题。 我们对这一方法的统计学定位是：它的核心任务不是”修正缺失”，而是<strong>评估原始结论对缺失数据假设有多敏感</strong>。</p>
 </section>
 <section id="二tipping-point-analysis-到底在做什么" class="level3">
 <h3 class="anchored" data-anchor-id="二tipping-point-analysis-到底在做什么">二、tipping point analysis 到底在做什么？</h3>
 <p>最简洁的理解是：</p>
 <blockquote class="blockquote">
-<p>它是在做一个“压力测试”。</p>
+<p>它是在做一个”压力测试”。</p>
 </blockquote>
-<p>也就是说，研究者先从原始主分析出发，然后针对缺失数据，逐步施加越来越不利于原结论的假设，看看要到什么程度，研究结果才会从“显著”变成“不显著”，或从“治疗有效”变成“治疗无效”。</p>
-<p>这个“让结论翻盘的临界点”，就是 <strong>tipping point</strong>。</p>
+<p>也就是说，研究者先从原始主分析出发，然后针对缺失数据，逐步施加越来越不利于原结论的假设，看看要到什么程度，研究结果才会从”显著”变成”不显著”，或从”治疗有效”变成”治疗无效”。</p>
+<p>这个”让结论翻盘的临界点”，就是 <strong>tipping point</strong>。</p>
 <p>因此，tipping point analysis 不是在问：</p>
 <ul>
 <li>真相一定是什么？</li>
@@ -3638,17 +3889,17 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 </section>
 <section id="三为什么它和-missing-at-random-missing-not-at-random-有关" class="level3">
 <h3 class="anchored" data-anchor-id="三为什么它和-missing-at-random-missing-not-at-random-有关">三、为什么它和 missing at random / missing not at random 有关？</h3>
-<p>理解 tipping point analysis，一个关键前提是理解“缺失机制”。</p>
+<p>理解 tipping point analysis，一个关键前提是理解”缺失机制”。</p>
 <p>临床研究里常见的表述是：</p>
 <ul>
 <li><strong>MAR（missing at random）</strong>：在给定已观测信息后，缺失的发生不再依赖缺失值本身</li>
 <li><strong>MNAR（missing not at random）</strong>：缺失的发生仍然与那个没有被观察到的真实值有关</li>
 </ul>
 <p>举个直观例子。</p>
-<p>如果做满意度调查时，有人没填问卷只是因为忘记了，这更接近随机缺失；但如果越不满意的人越不愿意填写问卷，那么“缺失”本身就和真实满意度相关，这就是非随机缺失。</p>
+<p>如果做满意度调查时，有人没填问卷只是因为忘记了，这更接近随机缺失；但如果越不满意的人越不愿意填写问卷，那么”缺失”本身就和真实满意度相关，这就是非随机缺失。</p>
 <p>tipping point analysis 的思路是：如果要想让原始结论改变，往往需要假设缺失者和非缺失者存在某种<strong>系统性的差异</strong>。而一旦这种差异足够大、足够有方向性，就意味着：</p>
 <blockquote class="blockquote">
-<p>这些缺失并不是“随便少掉”的，而更像是 <strong>MNAR</strong>。</p>
+<p>这些缺失并不是”随便少掉”的，而更像是 <strong>MNAR</strong>。</p>
 </blockquote>
 <p>所以，tipping point analysis 实际上是在把一个抽象问题具体化：</p>
 <blockquote class="blockquote">
@@ -3672,10 +3923,10 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <li>把对照组缺失者的结局往<strong>更好</strong>的方向推</li>
 </ul>
 <p>这是因为只有这样，才会系统性削弱治疗组的优势。</p>
-<p>这里需要特别提醒一点：有时会说“往上移”或“往下移”，但“上”和“下”本身没有固定的好坏含义，必须看研究终点的定义。比如：</p>
+<p>这里需要特别提醒一点：有时会说”往上移”或”往下移”，但”上”和”下”本身没有固定的好坏含义，必须看研究终点的定义。比如：</p>
 <ul>
-<li>如果数值越大越差，那么“向上偏移”就是更差</li>
-<li>如果数值越大越好，那么“向上偏移”就是更好</li>
+<li>如果数值越大越差，那么”向上偏移”就是更差</li>
+<li>如果数值越大越好，那么”向上偏移”就是更好</li>
 </ul>
 <p>所以，真正应该抓住的是：</p>
 <blockquote class="blockquote">
@@ -3683,7 +3934,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 </blockquote>
 </section>
 <section id="五为什么一定是治疗组更差或对照组更好才可能翻盘" class="level3">
-<h3 class="anchored" data-anchor-id="五为什么一定是治疗组更差或对照组更好才可能翻盘">五、为什么一定是“治疗组更差”或“对照组更好”，才可能翻盘？</h3>
+<h3 class="anchored" data-anchor-id="五为什么一定是治疗组更差或对照组更好才可能翻盘">五、为什么一定是”治疗组更差”或”对照组更好”，才可能翻盘？</h3>
 <p>很多人第一次接触 tipping point analysis 时，最困惑的地方就在这里。</p>
 <p>假设一个试验原始结果显示：治疗组优于对照组。</p>
 <p>那要推翻它，只有两条路：</p>
@@ -3704,13 +3955,13 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <p>那只会让原始结论更稳，而不会把它推翻。</p>
 <p>因此，tipping point analysis 本质上是在寻找：</p>
 <blockquote class="blockquote">
-<p><strong>哪一种“最不利于原结论”的缺失数据情景，能够把结果推过那条临界线。</strong></p>
+<p><strong>哪一种”最不利于原结论”的缺失数据情景，能够把结果推过那条临界线。</strong></p>
 </blockquote>
 </section>
 <section id="六如何判断偏移得太多了" class="level3">
-<h3 class="anchored" data-anchor-id="六如何判断偏移得太多了">六、如何判断“偏移得太多了”？</h3>
+<h3 class="anchored" data-anchor-id="六如何判断偏移得太多了">六、如何判断”偏移得太多了”？</h3>
 <p>这正是 tipping point analysis 最有价值，也最容易被误解的地方。</p>
-<p>很多人以为这类分析最后会给出一个精确概率，告诉你某个缺失情景“有多可能发生”。其实不是。</p>
+<p>很多人以为这类分析最后会给出一个精确概率，告诉你某个缺失情景”有多可能发生”。其实不是。</p>
 <p>它能告诉你的，是：</p>
 <ul>
 <li>如果缺失者比非缺失者差 2 个单位，结论不变</li>
@@ -3740,7 +3991,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <li>研究对象特征</li>
 <li>常识</li>
 </ul>
-<p>也就是说，真正重要的不是“能不能翻盘”，而是：</p>
+<p>也就是说，真正重要的不是”能不能翻盘”，而是：</p>
 <blockquote class="blockquote">
 <p><strong>要翻盘所需要的那种偏移，是否临床上可信。</strong></p>
 </blockquote>
@@ -3764,7 +4015,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 </ul>
 <p>也就是说，原始结论很明确：<strong>三联药方案比标准治疗更有效。</strong></p>
 <p>那么，缺失数据会不会把这个结论推翻？</p>
-<p>研究者进一步做了 tipping point analysis。它的含义不是“重新证明三联药有效”，而是问：</p>
+<p>研究者进一步做了 tipping point analysis。它的含义不是”重新证明三联药有效”，而是问：</p>
 <blockquote class="blockquote">
 <p>如果那些缺失了结局数据的患者，其真实血压和已观察到的人不一样，那么要不一样到什么程度，才会让原始结论不成立？</p>
 </blockquote>
@@ -3773,13 +4024,13 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <li>三联药组中缺失数据的患者，真实血压必须<strong>高得离谱</strong></li>
 <li>或者标准治疗组中缺失数据的患者，真实血压必须<strong>低得离谱</strong></li>
 </ul>
-<p>换句话说，要想把“三联药更优”的结论推翻，必须假设：</p>
+<p>换句话说，要想把”三联药更优”的结论推翻，必须假设：</p>
 <ul>
 <li>干预组缺失者比同组已观察者糟糕很多</li>
 <li>或对照组缺失者比同组已观察者好很多</li>
 </ul>
 <p>而这种程度的差异，被作者认为是 <strong>implausible</strong>，即临床上不太可信。</p>
-<p>因此，这项分析最后支持的不是“缺失不重要”，而是：</p>
+<p>因此，这项分析最后支持的不是”缺失不重要”，而是：</p>
 <blockquote class="blockquote">
 <p><strong>即便考虑缺失数据，只要我们不接受一个极不现实的缺失情景，三联药优于标准治疗的结论仍然成立。</strong></p>
 </blockquote>
@@ -3793,7 +4044,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <li>原始结论对缺失数据假设是否敏感？</li>
 <li>缺失者需要与非缺失者差异多大，结果才会翻盘？</li>
 <li>哪个方向的偏移最能动摇主分析结论？</li>
-<li>研究结论是“脆弱的”，还是“稳健的”？</li>
+<li>研究结论是”脆弱的”，还是”稳健的”？</li>
 </ol>
 </section>
 <section id="它不能回答的问题" class="level4">
@@ -3823,8 +4074,8 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <p>如果方向设错了，敏感性分析的解释价值会明显下降。</p>
 </section>
 <section id="最关键的是看临界点有多远" class="level4">
-<h4 class="anchored" data-anchor-id="最关键的是看临界点有多远">3. 最关键的是看“临界点有多远”</h4>
-<p>不要只盯着“做没做”。真正该问的是：</p>
+<h4 class="anchored" data-anchor-id="最关键的是看临界点有多远">3. 最关键的是看”临界点有多远”</h4>
+<p>不要只盯着”做没做”。真正该问的是：</p>
 <ul>
 <li>只要很小偏移就翻盘？</li>
 <li>还是要极端偏移才翻盘？</li>
@@ -3841,7 +4092,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 <li>缺失者为何可能比非缺失者更差或更好</li>
 <li>这种假设是否符合疾病机制与实际随访经验</li>
 </ul>
-<p>没有这一步，tipping point analysis 很容易沦为“做了一个图，但不知道该如何解释”。</p>
+<p>没有这一步，tipping point analysis 很容易沦为”做了一个图，但不知道该如何解释”。</p>
 </section>
 </section>
 <section id="十几点启发" class="level3">
@@ -3856,7 +4107,7 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 </section>
 <section id="结果表达一定要临床化" class="level4">
 <h4 class="anchored" data-anchor-id="结果表达一定要临床化">3. 结果表达一定要临床化</h4>
-<p>不要只写“结果稳健”或“结果不稳健”。更好的表述是：</p>
+<p>不要只写”结果稳健”或”结果不稳健”。更好的表述是：</p>
 <ul>
 <li>需要多大幅度的偏移才会翻盘</li>
 <li>这一幅度在临床上是否 plausible</li>
@@ -3870,14 +4121,13 @@ Hernán, Miguel A., Wei Wang, and David E. Leaf. 2022. <span>“Target Trial Emu
 </section>
 <section id="十一takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="十一takeaways">十一、Takeaways</h3>
-<p>缺失数据问题最麻烦的地方，不在于“有缺失”，而在于“我们不知道缺失者到底是什么样的人”。</p>
+<p>缺失数据问题最麻烦的地方，不在于”有缺失”，而在于”我们不知道缺失者到底是什么样的人”。</p>
 <p>tipping point analysis 的高明之处就在于：它不假装自己知道真相，而是换一个更务实的问题来问。</p>
 <blockquote class="blockquote">
 <p>假如缺失者真的和已观察者不一样，那么他们得不一样到什么程度，才足以把我们的结论推翻？</p>
 </blockquote>
-<p>如果答案是“只要稍微偏一点就能翻盘”，那就说明结果脆弱；如果答案是“必须偏到临床上几乎不可能”，那主分析结论就更值得信赖。</p>
+<p>如果答案是”只要稍微偏一点就能翻盘”，那就说明结果脆弱；如果答案是”必须偏到临床上几乎不可能”，那主分析结论就更值得信赖。</p>
 <p>所以，tipping point analysis 的价值，不是替研究者作判断，而是把判断所需要的关键尺度摆到台面上。</p>
-<p>而这正是我们认为临床研究中优秀的敏感性分析应有的样子。</p>
 
 
 <!-- -->
@@ -3918,9 +4168,9 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><code>the timing of exposure</code> 到底是什么</li>
 <li><code>target trial emulation</code> 中的 <code>time zero</code> 是什么</li>
 <li><code>index date</code>、<code>baseline</code>、<code>time zero</code> 是不是一回事</li>
-<li><code>collider bias</code>、<code>immortal time bias</code> 为什么都和“时间定义不清”有关</li>
+<li><code>collider bias</code>、<code>immortal time bias</code> 为什么都和”时间定义不清”有关</li>
 <li><code>grace period</code> 是什么，为什么它既必要又危险</li>
-<li><code>time-varying confounding</code> 为什么不能靠“在模型里调一下变量”简单解决</li>
+<li><code>time-varying confounding</code> 为什么不能靠”在模型里调一下变量”简单解决</li>
 <li><code>IPTW</code> 和 <code>IPCW</code> 到底分别在解决什么问题</li>
 </ul>
 <p>我们这篇文章试图把这些概念放到同一套时间框架中，给大家做一次系统整理。</p>
@@ -3956,7 +4206,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>从这一刻开始观察结局</li>
 <li>从这一刻开始比较不同治疗策略</li>
 </ul>
-<p>在 target trial emulation 中，<code>time zero</code> 对应于理想随机试验中的“随机分组并开始随访”的时点。</p>
+<p>在 target trial emulation 中，<code>time zero</code> 对应于理想随机试验中的”随机分组并开始随访”的时点。</p>
 </section>
 <section id="两者的关系" class="level4">
 <h4 class="anchored" data-anchor-id="两者的关系">3. 两者的关系</h4>
@@ -4040,7 +4290,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="三为什么-target-trial-emulation-如此强调时间对齐" class="level3">
 <h3 class="anchored" data-anchor-id="三为什么-target-trial-emulation-如此强调时间对齐">三、为什么 target trial emulation 如此强调时间对齐</h3>
-<p>target trial emulation 的核心价值，不只是“模仿随机对照试验”这么抽象的一句话，而是迫使研究者在开始分析前回答以下问题：</p>
+<p>target trial emulation 的核心价值，不只是”模仿随机对照试验”这么抽象的一句话，而是迫使研究者在开始分析前回答以下问题：</p>
 <ol type="1">
 <li>谁在什么时点符合入组条件？</li>
 <li>从哪一刻开始随访？</li>
@@ -4069,7 +4319,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <section id="immortal-time-bias随访开始太早暴露定义太晚" class="level4">
 <h4 class="anchored" data-anchor-id="immortal-time-bias随访开始太早暴露定义太晚">1. <code>immortal time bias</code>：随访开始太早，暴露定义太晚</h4>
 <p><code>immortal time bias</code> 的核心是：</p>
-<p><strong>某人必须先“活到未来某个时点”，才有资格被归入暴露组；如果分析时却把这段时间提前算入暴露组，就会让暴露组看起来获益。</strong></p>
+<p><strong>某人必须先”活到未来某个时点”，才有资格被归入暴露组；如果分析时却把这段时间提前算入暴露组，就会让暴露组看起来获益。</strong></p>
 <section id="例子" class="level5">
 <h5 class="anchored" data-anchor-id="例子">例子</h5>
 <p>研究问题：</p>
@@ -4087,11 +4337,11 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>第 0 天到第 5 天，他实际上还没有接受治疗</li>
 <li>但若想最终进入 treated 组，他必须先活到第 5 天</li>
 </ul>
-<p>于是 treated 组“白赚”了一段必须生存的时间，治疗效果会被高估。</p>
+<p>于是 treated 组”白赚”了一段必须生存的时间，治疗效果会被高估。</p>
 </section>
 <section id="本质" class="level5">
 <h5 class="anchored" data-anchor-id="本质">本质</h5>
-<p>这里的问题不是“治疗启动得晚”，而是：</p>
+<p>这里的问题不是”治疗启动得晚”，而是：</p>
 <p><strong><code>time zero</code> 与 exposure timing 没有被正确处理。</strong></p>
 </section>
 </section>
@@ -4099,7 +4349,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <h4 class="anchored" data-anchor-id="collider-bias-selection-bias先按暴露后的事件筛人再比较暴露">2. <code>collider bias</code> / <code>selection bias</code>：先按暴露后的事件筛人，再比较暴露</h4>
 <p>另一类常见错误是：</p>
 <p><strong>把研究起点放在一个发生于暴露之后、且可能受暴露影响的事件之后。</strong></p>
-<p>这时，入组样本已经被“选择机制”筛过一遍，比较结果可能失真。</p>
+<p>这时，入组样本已经被”选择机制”筛过一遍，比较结果可能失真。</p>
 </section>
 </section>
 <section id="五用-covid-19aceiarb-的例子理解-collider-bias" class="level3">
@@ -4119,7 +4369,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </ul></li>
 <li>然后比较死亡率或其他不良结局</li>
 </ul>
-<p>表面看，这似乎很自然，因为研究对象就是“COVID-19 患者”。但这里潜在的问题在于：</p>
+<p>表面看，这似乎很自然，因为研究对象就是”COVID-19 患者”。但这里潜在的问题在于：</p>
 <p><strong>“是否感染 COVID-19”这个事件发生在暴露之后，而且可能同时受到暴露与其他危险因素的影响。</strong></p>
 <section id="问题是如何出现的" class="level4">
 <h4 class="anchored" data-anchor-id="问题是如何出现的">1. 问题是如何出现的</h4>
@@ -4129,20 +4379,20 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </blockquote>
 <p>如果这个假设成立，那么：</p>
 <ul>
-<li>服药者，即使其他感染危险因素较少，也可能因为药物暴露而进入“COVID 患者”样本</li>
-<li>未服药者，若也进入“COVID 患者”样本，则可能需要具备更多其他危险因素，例如更重的心肺基础病、更高龄或更多暴露机会</li>
+<li>服药者，即使其他感染危险因素较少，也可能因为药物暴露而进入”COVID 患者”样本</li>
+<li>未服药者，若也进入”COVID 患者”样本，则可能需要具备更多其他危险因素，例如更重的心肺基础病、更高龄或更多暴露机会</li>
 </ul>
-<p>这样一来，在“已经感染 COVID-19 的人”这个被筛选过的人群里，可能出现一种人为关系：</p>
+<p>这样一来，在”已经感染 COVID-19 的人”这个被筛选过的人群里，可能出现一种人为关系：</p>
 <ul>
-<li>服药者反而平均更“健康”一些</li>
+<li>服药者反而平均更”健康”一些</li>
 <li>未服药者反而携带更多其他高危因素</li>
 </ul>
 <p>这些其他高危因素又会增加死亡风险。</p>
-<p>于是，当研究者在“感染者”中比较服药与未服药的死亡率时，看到的差异不再只是药物效应，而混入了样本选择机制造成的差异，这就是潜在的 collider bias。</p>
+<p>于是，当研究者在”感染者”中比较服药与未服药的死亡率时，看到的差异不再只是药物效应，而混入了样本选择机制造成的差异，这就是潜在的 collider bias。</p>
 </section>
 <section id="这个例子的核心逻辑" class="level4">
 <h4 class="anchored" data-anchor-id="这个例子的核心逻辑">2. 这个例子的核心逻辑</h4>
-<p>可以把“感染 COVID-19”想象成一道门。</p>
+<p>可以把”感染 COVID-19”想象成一道门。</p>
 <p>进入这道门，可能有两条路：</p>
 <ul>
 <li>路 A：因为服用了某药，更容易感染</li>
@@ -4161,7 +4411,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <blockquote class="blockquote">
 <p>ACEI/ARB 与是否被诊断为 COVID-19 并无明显关联。</p>
 </blockquote>
-<p>这意味着前述 collider bias 在这项研究中更接近“理论上的潜在问题”，而不是实际中已经造成严重偏倚的问题。</p>
+<p>这意味着前述 collider bias 在这项研究中更接近”理论上的潜在问题”，而不是实际中已经造成严重偏倚的问题。</p>
 <p>但这个例子非常重要，因为它说明了一个通用原则：</p>
 <blockquote class="blockquote">
 <p>如果入组条件依赖于暴露后的事件，而该事件又同时受暴露和其他危险因素影响，就必须警惕 collider bias。</p>
@@ -4170,7 +4420,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="六什么是-grace-period" class="level3">
 <h3 class="anchored" data-anchor-id="六什么是-grace-period">六、什么是 <code>grace period</code></h3>
-<p>现实世界的临床策略往往不是“在 <code>time zero</code> 的那一刻立刻开始治疗”，而是：</p>
+<p>现实世界的临床策略往往不是”在 <code>time zero</code> 的那一刻立刻开始治疗”，而是：</p>
 <ul>
 <li>确诊后 2 天内开始</li>
 <li>入院后 24 小时内开始</li>
@@ -4186,7 +4436,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>策略 A：确诊后 2 天内开始抗病毒治疗</li>
 <li>策略 B：确诊后 2 天内不开始抗病毒治疗</li>
 </ul>
-<p>这里“2 天内”就是 grace period。</p>
+<p>这里”2 天内”就是 grace period。</p>
 </section>
 <section id="为什么需要-grace-period" class="level4">
 <h4 class="anchored" data-anchor-id="为什么需要-grace-period">2. 为什么需要 grace period</h4>
@@ -4196,7 +4446,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>检查结果不一定在入组瞬间全部可得</li>
 <li>药物启动存在流程上的自然延迟</li>
 </ul>
-<p>如果研究强行把策略定义成“必须在 0 秒钟立刻开始”，往往不符合现实，也不符合临床决策过程。</p>
+<p>如果研究强行把策略定义成”必须在 0 秒钟立刻开始”，往往不符合现实，也不符合临床决策过程。</p>
 <p>因此，grace period 不是随意放宽，而是：</p>
 <p><strong>对真实治疗策略的合理刻画。</strong></p>
 </section>
@@ -4208,7 +4458,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>有人会因为病情恶化而启动治疗</li>
 <li>有人会因为病情较轻而不启动治疗</li>
 </ul>
-<p>如果研究者把“几天后才开始治疗的人”从 <code>time zero</code> 起就算作 treated，仍然会产生 <code>immortal time bias</code>。</p>
+<p>如果研究者把”几天后才开始治疗的人”从 <code>time zero</code> 起就算作 treated，仍然会产生 <code>immortal time bias</code>。</p>
 <p>所以，grace period 的存在不等于偏倚自动被解决；它只是让治疗策略的定义更真实，但分析方法必须同步调整。</p>
 </section>
 </section>
@@ -4254,14 +4504,14 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>于是，<code>L_t</code> 既是后续治疗的混杂因素，又是先前治疗的后果。</p>
 </section>
 <section id="为什么直接调整可能出错" class="level4">
-<h4 class="anchored" data-anchor-id="为什么直接调整可能出错">3. 为什么“直接调整”可能出错</h4>
+<h4 class="anchored" data-anchor-id="为什么直接调整可能出错">3. 为什么”直接调整”可能出错</h4>
 <p>如果把 post-baseline 的 <code>L_t</code> 直接放进一个普通回归模型中调整，可能发生两种问题：</p>
 <ul>
-<li>把治疗通过改善病情而产生的真实效应“调掉”</li>
+<li>把治疗通过改善病情而产生的真实效应”调掉”</li>
 <li>因为调整了受先前治疗影响的变量而引入新的偏倚</li>
 </ul>
 <p>这就是经典的 treatment-confounder feedback 问题。</p>
-<p>因此，对 time-varying confounding 的处理，不能简单等同于“多调整几个变量”。</p>
+<p>因此，对 time-varying confounding 的处理，不能简单等同于”多调整几个变量”。</p>
 </section>
 </section>
 <section id="八grace-period-与-time-varying-confounding-的关系" class="level3">
@@ -4289,7 +4539,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>策略 A：确诊后 5 天内开始治疗</li>
 <li>病人第 2 天突然恶化，于是更可能在第 2 天启动治疗</li>
 </ul>
-<p>那么“第 2 天病情是否恶化”就是一个典型的 time-varying confounder。</p>
+<p>那么”第 2 天病情是否恶化”就是一个典型的 time-varying confounder。</p>
 <p>因此，grace period 越长，time-varying confounding 的问题往往越突出。</p>
 </section>
 </section>
@@ -4330,7 +4580,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>偏倚机制：</p>
 <ul>
 <li>若患者第 0 到第 5 天死亡，则不可能进入 treated 组</li>
-<li>treated 组获得一段“必须存活”的时间</li>
+<li>treated 组获得一段”必须存活”的时间</li>
 </ul>
 </section>
 <section id="collider-bias" class="level4">
@@ -4348,7 +4598,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </ul>
 <p>偏倚机制：</p>
 <ul>
-<li>若“感染 COVID-19”同时受暴露和其他危险因素影响</li>
+<li>若”感染 COVID-19”同时受暴露和其他危险因素影响</li>
 <li>那么只研究已感染者，相当于在一个 post-exposure collider 上条件化</li>
 </ul>
 </section>
@@ -4376,7 +4626,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>如果患者在每个时点接受何种治疗，取决于其既往病情、既往治疗史、其他协变量，那么治疗并非随机分配。</p>
 <p><code>IPTW</code> 的思想是：</p>
 <blockquote class="blockquote">
-<p>对那些“在其历史条件下不太可能接受当前治疗、但实际上接受了该治疗”的个体赋予更大权重，从而构造一个治疗分配更接近随机化的伪总体。</p>
+<p>对那些”在其历史条件下不太可能接受当前治疗、但实际上接受了该治疗”的个体赋予更大权重，从而构造一个治疗分配更接近随机化的伪总体。</p>
 </blockquote>
 </section>
 <section id="ipcw处理删失的非随机性" class="level4">
@@ -4387,17 +4637,17 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>因偏离策略而进行的人工删失</li>
 <li>提前退出观察</li>
 </ul>
-<p>如果删失与病情演变、治疗史或其他危险因素有关，那么只分析“未被删失的人”会产生偏差。</p>
+<p>如果删失与病情演变、治疗史或其他危险因素有关，那么只分析”未被删失的人”会产生偏差。</p>
 <p><code>IPCW</code> 的思想是：</p>
 <blockquote class="blockquote">
-<p>对那些“本来更容易被删失、但实际上仍留在样本中”的个体赋予更大权重，以补偿与其相似但已被删失的个体。</p>
+<p>对那些”本来更容易被删失、但实际上仍留在样本中”的个体赋予更大权重，以补偿与其相似但已被删失的个体。</p>
 </blockquote>
 </section>
 </section>
 <section id="十二严谨理解-ipcw它究竟是什么" class="level3">
 <h3 class="anchored" data-anchor-id="十二严谨理解-ipcw它究竟是什么">十二、严谨理解 IPCW：它究竟是什么</h3>
 <section id="从删失开始" class="level4">
-<h4 class="anchored" data-anchor-id="从删失开始">1. 从“删失”开始</h4>
+<h4 class="anchored" data-anchor-id="从删失开始">1. 从”删失”开始</h4>
 <p>在因果推断中，<code>censoring</code> 不仅指传统生存分析里的失访，也包括分析策略造成的人为删失。</p>
 <p>例如，在 <code>clone-censor-weight</code> 设计中：</p>
 <ul>
@@ -4408,7 +4658,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="ipcw-的核心直觉" class="level4">
 <h4 class="anchored" data-anchor-id="ipcw-的核心直觉">2. IPCW 的核心直觉</h4>
-<p>如果某一类患者通常很容易中途被删失，那么最终仍留在样本中的少数这类患者，就需要“代表”那些本来类似、但已经被删失的人。</p>
+<p>如果某一类患者通常很容易中途被删失，那么最终仍留在样本中的少数这类患者，就需要”代表”那些本来类似、但已经被删失的人。</p>
 <p>因此：</p>
 <ul>
 <li>越容易被删失的人</li>
@@ -4428,7 +4678,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>IPCW 的基本思想就是取其倒数作为权重。更常见的写法是按时点连乘：</p>
 <pre class="text"><code>w_t = ∏ 1 / P(C_k = 0 | 到 k 时点的既往协变量史、治疗史、删失史)</code></pre>
 <p>其含义是：</p>
-<p>在每个时点，根据个体到该时点为止的完整历史，估计其“仍然没有被删失”的概率；这个概率越小，说明这类个体越不容易留在样本中，因此其权重越大。</p>
+<p>在每个时点，根据个体到该时点为止的完整历史，估计其”仍然没有被删失”的概率；这个概率越小，说明这类个体越不容易留在样本中，因此其权重越大。</p>
 </section>
 <section id="stabilized-weights" class="level4">
 <h4 class="anchored" data-anchor-id="stabilized-weights">4. stabilized weights</h4>
@@ -4445,7 +4695,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>这是最容易被混淆的一点。</p>
 <section id="一个准确的结论" class="level4">
 <h4 class="anchored" data-anchor-id="一个准确的结论">1. 一个准确的结论</h4>
-<p><strong>IPCW 本身不是“直接处理 time-varying confounding 的工具”；它主要处理的是 informative censoring。</strong></p>
+<p><strong>IPCW 本身不是”直接处理 time-varying confounding 的工具”；它主要处理的是 informative censoring。</strong></p>
 <p>但在很多实际研究中，导致删失非随机发生的因素，恰恰就是那些随时间变化的混杂因素，因此：</p>
 <ul>
 <li>构建 IPCW 时，常常需要把 time-varying confounders 纳入删失模型</li>
@@ -4465,13 +4715,13 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>用同样的历史信息构建删失模型，得到 <code>IPCW</code></li>
 <li>最终将二者结合起来进行加权分析</li>
 </ul>
-<p>所以，真正处理“time-varying confounding affected by prior treatment”的经典框架，并不是单独 IPCW，而是：</p>
+<p>所以，真正处理”time-varying confounding affected by prior treatment”的经典框架，并不是单独 IPCW，而是：</p>
 <p><strong>MSM + IPTW，必要时再叠加 IPCW。</strong></p>
 </section>
 </section>
 <section id="十四为什么不能把-time-varying-confounder-直接放进结局模型里" class="level3">
 <h3 class="anchored" data-anchor-id="十四为什么不能把-time-varying-confounder-直接放进结局模型里">十四、为什么不能把 time-varying confounder 直接放进结局模型里</h3>
-<p>这是因果推断中最容易“看起来合理、实际上错误”的一步。</p>
+<p>这是因果推断中最容易”看起来合理、实际上错误”的一步。</p>
 <p>考虑如下过程：</p>
 <ul>
 <li>第 0 天：开始随访</li>
@@ -4491,7 +4741,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>截断了治疗通过改善病情而产生的真实效应</li>
 <li>或因条件化于治疗后变量而引入偏差</li>
 </ul>
-<p>因此，对这类问题更稳健的做法通常不是“在 outcome model 里直接把所有时间变化变量都调进去”，而是通过权重方法、g-formula 或其他 g-methods 进行处理。</p>
+<p>因此，对这类问题更稳健的做法通常不是”在 outcome model 里直接把所有时间变化变量都调进去”，而是通过权重方法、g-formula 或其他 g-methods 进行处理。</p>
 </section>
 <section id="十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子" class="level3">
 <h3 class="anchored" data-anchor-id="十五一个把-grace-periodtime-varying-confoundingiptwipcw-串起来的例子">十五、一个把 grace period、time-varying confounding、IPTW、IPCW 串起来的例子</h3>
@@ -4506,7 +4756,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li>策略 A：确诊后 5 天内启动药物</li>
 <li>策略 B：确诊后 5 天内不启动药物</li>
 </ul>
-<p>这里的“5 天内”就是 grace period。</p>
+<p>这里的”5 天内”就是 grace period。</p>
 </section>
 <section id="现实中的时间变化" class="level4">
 <h4 class="anchored" data-anchor-id="现实中的时间变化">2. 现实中的时间变化</h4>
@@ -4529,8 +4779,8 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <h4 class="anchored" data-anchor-id="如果做-clone-censor-weight会发生什么">3. 如果做 clone-censor-weight，会发生什么</h4>
 <p>每位患者可能被复制到两个策略臂：</p>
 <ul>
-<li>A 克隆体：代表“5 天内启动治疗”</li>
-<li>B 克隆体：代表“5 天内不启动治疗”</li>
+<li>A 克隆体：代表”5 天内启动治疗”</li>
+<li>B 克隆体：代表”5 天内不启动治疗”</li>
 </ul>
 <p>随后：</p>
 <ul>
@@ -4553,7 +4803,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <section id="为什么还需要-iptw" class="level4">
 <h4 class="anchored" data-anchor-id="为什么还需要-iptw">5. 为什么还需要 IPTW</h4>
 <p>即使不考虑删失，患者何时启动治疗本身也不是随机的，而是受到病情演变影响。</p>
-<p>因此，还需要使用治疗权重来处理“谁更可能接受治疗”这一非随机机制。</p>
+<p>因此，还需要使用治疗权重来处理”谁更可能接受治疗”这一非随机机制。</p>
 <p>最终的分析通常需要：</p>
 <ul>
 <li>IPTW 处理治疗分配</li>
@@ -4565,43 +4815,43 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <section id="十六一个最实用的概念对照表" class="level3">
 <h3 class="anchored" data-anchor-id="十六一个最实用的概念对照表">十六、一个最实用的概念对照表</h3>
 <section id="如果你问的是研究从哪一刻开始算" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是研究从哪一刻开始算">1. 如果你问的是“研究从哪一刻开始算”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是研究从哪一刻开始算">1. 如果你问的是”研究从哪一刻开始算”</h4>
 <p>看 <code>time zero</code>。</p>
 </section>
 <section id="如果你问的是数据库里每个人锚定在哪一天" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是数据库里每个人锚定在哪一天">2. 如果你问的是“数据库里每个人锚定在哪一天”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是数据库里每个人锚定在哪一天">2. 如果你问的是”数据库里每个人锚定在哪一天”</h4>
 <p>看 <code>index date</code>。</p>
 </section>
 <section id="如果你问的是起点时这个人的状态如何" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是起点时这个人的状态如何">3. 如果你问的是“起点时这个人的状态如何”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是起点时这个人的状态如何">3. 如果你问的是”起点时这个人的状态如何”</h4>
 <p>看 <code>baseline</code>。</p>
 </section>
 <section id="如果你问的是暴露发生在什么时候" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是暴露发生在什么时候">4. 如果你问的是“暴露发生在什么时候”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是暴露发生在什么时候">4. 如果你问的是”暴露发生在什么时候”</h4>
 <p>看 <code>timing of exposure</code>。</p>
 </section>
 <section id="如果你问的是允许治疗在起点后几天内启动吗" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是允许治疗在起点后几天内启动吗">5. 如果你问的是“允许治疗在起点后几天内启动吗”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是允许治疗在起点后几天内启动吗">5. 如果你问的是”允许治疗在起点后几天内启动吗”</h4>
 <p>看 <code>grace period</code>。</p>
 </section>
 <section id="如果你问的是病情等变量会不会在随访中变化并影响后续治疗和结局" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是病情等变量会不会在随访中变化并影响后续治疗和结局">6. 如果你问的是“病情等变量会不会在随访中变化，并影响后续治疗和结局”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是病情等变量会不会在随访中变化并影响后续治疗和结局">6. 如果你问的是”病情等变量会不会在随访中变化，并影响后续治疗和结局”</h4>
 <p>看 <code>time-varying confounding</code>。</p>
 </section>
 <section id="如果你问的是有人必须先活到将来某个时点才能被归入治疗组吗" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是有人必须先活到将来某个时点才能被归入治疗组吗">7. 如果你问的是“有人必须先活到将来某个时点才能被归入治疗组吗”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是有人必须先活到将来某个时点才能被归入治疗组吗">7. 如果你问的是”有人必须先活到将来某个时点才能被归入治疗组吗”</h4>
 <p>警惕 <code>immortal time bias</code>。</p>
 </section>
 <section id="如果你问的是研究是否按暴露后发生的事件筛选样本" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是研究是否按暴露后发生的事件筛选样本">8. 如果你问的是“研究是否按暴露后发生的事件筛选样本”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是研究是否按暴露后发生的事件筛选样本">8. 如果你问的是”研究是否按暴露后发生的事件筛选样本”</h4>
 <p>警惕 <code>collider bias</code> 或更广义的 <code>selection bias</code>。</p>
 </section>
 <section id="如果你问的是删失是否和患者的临床过程有关" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是删失是否和患者的临床过程有关">9. 如果你问的是“删失是否和患者的临床过程有关”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是删失是否和患者的临床过程有关">9. 如果你问的是”删失是否和患者的临床过程有关”</h4>
 <p>考虑 <code>IPCW</code>。</p>
 </section>
 <section id="如果你问的是后续治疗分配是否由既往病情和治疗史决定" class="level4">
-<h4 class="anchored" data-anchor-id="如果你问的是后续治疗分配是否由既往病情和治疗史决定">10. 如果你问的是“后续治疗分配是否由既往病情和治疗史决定”</h4>
+<h4 class="anchored" data-anchor-id="如果你问的是后续治疗分配是否由既往病情和治疗史决定">10. 如果你问的是”后续治疗分配是否由既往病情和治疗史决定”</h4>
 <p>考虑 <code>IPTW</code>。</p>
 </section>
 </section>
@@ -4621,7 +4871,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>很多设计错误在画时间线时就能暴露出来。</p>
 </section>
 <section id="不要把所有-post-baseline-variable-都当成该调整的变量" class="level4">
-<h4 class="anchored" data-anchor-id="不要把所有-post-baseline-variable-都当成该调整的变量">2. 不要把所有 post-baseline variable 都当成“该调整的变量”</h4>
+<h4 class="anchored" data-anchor-id="不要把所有-post-baseline-variable-都当成该调整的变量">2. 不要把所有 post-baseline variable 都当成”该调整的变量”</h4>
 <p>看到 post-baseline 变量时，先问：</p>
 <ul>
 <li>它是否受先前治疗影响？</li>
@@ -4630,7 +4880,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>如果是，那么它可能是 time-varying confounder，不能简单用普通回归处理。</p>
 </section>
 <section id="不要把-grace-period-误当成天然无偏" class="level4">
-<h4 class="anchored" data-anchor-id="不要把-grace-period-误当成天然无偏">3. 不要把 grace period 误当成“天然无偏”</h4>
+<h4 class="anchored" data-anchor-id="不要把-grace-period-误当成天然无偏">3. 不要把 grace period 误当成”天然无偏”</h4>
 <p>grace period 只是策略定义的一部分，不是偏倚的解药。分析方法必须与之对应。</p>
 </section>
 <section id="对删失保持高度敏感" class="level4">
@@ -4644,7 +4894,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <p>这些情形下，删失往往不是无信息的。</p>
 </section>
 <section id="权重方法不是自动正确" class="level4">
-<h4 class="anchored" data-anchor-id="权重方法不是自动正确">5. 权重方法不是“自动正确”</h4>
+<h4 class="anchored" data-anchor-id="权重方法不是自动正确">5. 权重方法不是”自动正确”</h4>
 <p>使用 IPTW/IPCW 时，仍需认真检查：</p>
 <ul>
 <li>是否存在未测量混杂或未测量删失决定因素</li>
@@ -4658,7 +4908,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <h3 class="anchored" data-anchor-id="十八takeaways">十八、Takeaways</h3>
 <p>我们可以用一句话概括这篇文章：</p>
 <blockquote class="blockquote">
-<p>在 target trial emulation 中，几乎所有关键偏倚问题，最终都可以追溯到“时间定义是否与因果问题相匹配”。</p>
+<p>在 target trial emulation 中，几乎所有关键偏倚问题，最终都可以追溯到”时间定义是否与因果问题相匹配”。</p>
 </blockquote>
 <p>更具体地说：</p>
 <ul>
@@ -4753,7 +5003,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://samtools.github.io/bcftools/bcftools.html" title="bcftools">bcftools</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260319220111.png" class="img-fluid"></p>
-<p>bcftools 是一个用于处理 VCF / BCF 变异数据的高性能命令行工具集，由 Wellcome Sanger Institute 开发与维护，是 HTSlib / samtools / bcftools 这一基因组学工具链中的核心成员。bcftools 是“变异数据层面”的瑞士军刀，是 WGS / WES / GWAS 流水线中不可或缺的底层工具。bcftools 专门处理已经完成比对和变异检测之后的数据，它不负责比对、不负责变异检测，而是负责：“如何高效、准确地管理和操控变异结果”。</p>
+<p>bcftools 是一个用于处理 VCF / BCF 变异数据的高性能命令行工具集，由 Wellcome Sanger Institute 开发与维护，是 HTSlib / samtools / bcftools 这一基因组学工具链中的核心成员。bcftools 是”变异数据层面”的瑞士军刀，是 WGS / WES / GWAS 流水线中不可或缺的底层工具。bcftools 专门处理已经完成比对和变异检测之后的数据，它不负责比对、不负责变异检测，而是负责：“如何高效、准确地管理和操控变异结果”。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
@@ -4814,7 +5064,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="本周话题openclaw会是科学家的超级助手吗" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题openclaw会是科学家的超级助手吗">本周话题：<a href="https://mp.weixin.qq.com/s/nBclwC2dPU_at5t7f5FEkQ">OpenClaw会是科学家的“超级助手”吗？</a></h3>
-<p>OpenClaw 的出现，标志着 AI 正从“对话时代”跨入“代理时代”。它像是一个刚刚学会走路的孩子，拥有无穷的好奇心和破坏力。它带给我们的不仅仅是生产力的跃迁，更是对人类与 AI 关系的一次重塑。OpenClaw 对科研人员来说，它能大幅提升自动化处理的效率，但目前仍需警惕其带来的底层安全风险。</p>
+<p>OpenClaw 的出现，标志着 AI 正从”对话时代”跨入”代理时代”。它像是一个刚刚学会走路的孩子，拥有无穷的好奇心和破坏力。它带给我们的不仅仅是生产力的跃迁，更是对人类与 AI 关系的一次重塑。OpenClaw 对科研人员来说，它能大幅提升自动化处理的效率，但目前仍需警惕其带来的底层安全风险。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -4841,12 +5091,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/CwnJ9jK4_g9Sd8jxaOddQA">深入解析OpenClaw上下文窗口压缩方案</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260313000605.png" class="img-fluid"></p>
-<p>最近很火的 OpenClaw 的出镜率是越来越高了，内外网的技术文章，新产品的问世，Mac Mini 的涨价，自媒体的宣传层出不穷。作者是国外一个叫 Peter Steinberger（现已经被奥特曼高薪挖到 OpenAI ），说是花了一个周末就烹饪完成的“小龙虾”。这篇文章具体展示它内部详细是如何进行上下文窗口管理的。</p>
+<p>最近很火的 OpenClaw 的出镜率是越来越高了，内外网的技术文章，新产品的问世，Mac Mini 的涨价，自媒体的宣传层出不穷。作者是国外一个叫 Peter Steinberger（现已经被奥特曼高薪挖到 OpenAI ），说是花了一个周末就烹饪完成的”小龙虾”。这篇文章具体展示它内部详细是如何进行上下文窗口管理的。</p>
 <ol start="4" type="1">
 <li><a href="https://en.wikipedia.org/wiki/Alan_Turing" title="艾伦·图灵">艾伦·图灵</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260313000800.png" class="img-fluid"></p>
-<p>Alan Turing（艾伦·图灵，1912–1954） 是英国数学家、逻辑学家、密码学家与计算机科学先驱，被广泛誉为计算机科学之父和人工智能思想的奠基者之一。他提出的理论模型深刻定义了“什么是计算”，并直接塑造了现代计算机与 AI 的思想边界。</p>
+<p>Alan Turing（艾伦·图灵，1912–1954） 是英国数学家、逻辑学家、密码学家与计算机科学先驱，被广泛誉为计算机科学之父和人工智能思想的奠基者之一。他提出的理论模型深刻定义了”什么是计算”，并直接塑造了现代计算机与 AI 的思想边界。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -4920,7 +5170,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="本周话题引入学术年龄作为科研人才评价新标准" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题引入学术年龄作为科研人才评价新标准">本周话题：<a href="https://mp.weixin.qq.com/s/7ZXziJbYY8PZtf6NqGIrFA">引入“学术年龄”作为科研人才评价新标准？</a></h3>
-<p>当前科研生态中存在的现实问题：不少科研项目和人才计划以35岁、40岁、45岁等生理年龄作为硬性门槛，迫使部分科研人员为“赶末班车”而追逐热点、追求速成。所谓学术年龄，是指从获得博士学位或正式进入科研体系起计算的科研年限，旨在衡量科研成长阶段，而非个人的生理年龄。它承认科研并非越早越好，也不必都沿着同一节奏前进，而更看重对在学术领域深耕的意愿和能力，无论从何时起步。</p>
+<p>当前科研生态中存在的现实问题：不少科研项目和人才计划以35岁、40岁、45岁等生理年龄作为硬性门槛，迫使部分科研人员为”赶末班车”而追逐热点、追求速成。所谓学术年龄，是指从获得博士学位或正式进入科研体系起计算的科研年限，旨在衡量科研成长阶段，而非个人的生理年龄。它承认科研并非越早越好，也不必都沿着同一节奏前进，而更看重对在学术领域深耕的意愿和能力，无论从何时起步。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -4947,12 +5197,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/GSmWn_RohZN7hcdH7h3R9w">亚虹医药宫颈癌前病变无创治疗产品希维她®获批</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260305235038.png" class="img-fluid"></p>
-<p>亚虹医药宣布其APL-1702（CEVIRA）拟用于治疗宫颈高级别鳞状上皮内病变（HSIL）患者的上市许可申请已获得中国国家药品监督管理局核准签发。该产品是全球首个针对宫颈上皮内瘤变2级（CIN2）患者的非手术无创治疗产品，有望实现由“一刀切”向“优选无创”的治疗路径转变。</p>
+<p>亚虹医药宣布其APL-1702（CEVIRA）拟用于治疗宫颈高级别鳞状上皮内病变（HSIL）患者的上市许可申请已获得中国国家药品监督管理局核准签发。该产品是全球首个针对宫颈上皮内瘤变2级（CIN2）患者的非手术无创治疗产品，有望实现由”一刀切”向”优选无创”的治疗路径转变。</p>
 <ol start="4" type="1">
 <li><a href="https://en.wikipedia.org/wiki/Claude_Shannon">克劳德·E·香农</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260305235942.png" class="img-fluid"></p>
-<p>Claude Shannon（克劳德·E·香农，1916–2001） 是美国数学家与工程师，被公认为信息论的创始人，也常被称为“信息时代之父”。他用严格的数学语言回答了一个划时代的问题：什么是信息？信息最多能被多高效、可靠地传输？他的思想奠定了现代通信、计算机科学、数据压缩、加密、AI 与数字世界的理论基础。</p>
+<p>Claude Shannon（克劳德·E·香农，1916–2001） 是美国数学家与工程师，被公认为信息论的创始人，也常被称为”信息时代之父”。他用严格的数学语言回答了一个划时代的问题：什么是信息？信息最多能被多高效、可靠地传输？他的思想奠定了现代通信、计算机科学、数据压缩、加密、AI 与数字世界的理论基础。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -4960,7 +5210,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/HJH-_FRe0Dt-tl1TGsffww">OpenAI推出一键质性文本分析的AI工具</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260305234753.png" class="img-fluid"></p>
-<p>OpenAI 经济研究团队近期发布了 GABRIEL（Generative AI for Behavioral Research in Economic Literature），这是一个开源的 Python 工具包，旨在利用大型语言模型（如 GPT）对大规模定性数据进行自动化分析和量化处理。该工具可以将访谈文本、社交媒体内容、课程大纲、研究论文甚至图像等非结构化数据转化为可用于统计分析的量化指标。研究者只需用自然语言描述需要测量的概念，例如评价某份招聘信息的“家庭友好程度”，GABRIEL 便可以将同样的分析标准批量应用于大量文档并生成一致的评分结果，从而显著降低人工标注的工作量。除自动化文本编码与指标提取外，GABRIEL 还提供数据集匹配、智能去重、文本段落编码、隐私去标识化以及研究假设生成等功能。作为一个开源工具，GABRIEL 的目标是帮助社会科学和数据科学研究者更高效地利用大规模定性数据开展研究，并推动定性信息在量化研究中的应用。</p>
+<p>OpenAI 经济研究团队近期发布了 GABRIEL（Generative AI for Behavioral Research in Economic Literature），这是一个开源的 Python 工具包，旨在利用大型语言模型（如 GPT）对大规模定性数据进行自动化分析和量化处理。该工具可以将访谈文本、社交媒体内容、课程大纲、研究论文甚至图像等非结构化数据转化为可用于统计分析的量化指标。研究者只需用自然语言描述需要测量的概念，例如评价某份招聘信息的”家庭友好程度”，GABRIEL 便可以将同样的分析标准批量应用于大量文档并生成一致的评分结果，从而显著降低人工标注的工作量。除自动化文本编码与指标提取外，GABRIEL 还提供数据集匹配、智能去重、文本段落编码、隐私去标识化以及研究假设生成等功能。作为一个开源工具，GABRIEL 的目标是帮助社会科学和数据科学研究者更高效地利用大规模定性数据开展研究，并推动定性信息在量化研究中的应用。</p>
 <ol start="6" type="1">
 <li><a href="https://cran.r-project.org/web/packages/traj/index.html" title="traj 包">traj 包</a></li>
 </ol>
@@ -5026,7 +5276,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="本周话题nejm-fda重大变革新药上市只需一项确证性试验" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题nejm-fda重大变革新药上市只需一项确证性试验">本周话题：<a href="https://mp.weixin.qq.com/s/2h0DdOYcbez1MUG_3ogGcw">NEJM | FDA重大变革，新药上市只需一项确证性试验</a></h3>
-<p>上周，美国FDA局长Marty Makary与其生物制品评价与研究中心（CBER）主任Vinay Prasad在《新英格兰医学杂志》（NEJM）撰文，宣布FDA数十年新药审批传统——药企提交关于新药的”两项关键临床试验”数据——将让位于”单项关键试验+确认性证据”新标准。作者宣称，这一转变不仅意味着新药上市路径可能大幅加速、研发成本显著降低，更标志着药物审批理念从”数量优先”迈向“质量与整体可信度优先”。此举可能改变美国乃至全球新药审批格局，影响未来药物研发、审批及药物可及性。</p>
+<p>上周，美国FDA局长Marty Makary与其生物制品评价与研究中心（CBER）主任Vinay Prasad在《新英格兰医学杂志》（NEJM）撰文，宣布FDA数十年新药审批传统——药企提交关于新药的”两项关键临床试验”数据——将让位于”单项关键试验+确认性证据”新标准。作者宣称，这一转变不仅意味着新药上市路径可能大幅加速、研发成本显著降低，更标志着药物审批理念从”数量优先”迈向”质量与整体可信度优先”。此举可能改变美国乃至全球新药审批格局，影响未来药物研发、审批及药物可及性。</p>
 <ul>
 <li>论文 DOI：10.1056/NEJMsb2517623</li>
 </ul>
@@ -5045,7 +5295,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/9DzgCOdfWvRROtALKQO5fg">BMJ | 鼻咽癌精准免疫治疗新突破</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260225165020.png" class="img-fluid"></p>
-<p>鼻咽癌在我国华南地区高发，免疫治疗虽已改变整体治疗格局，但临床面临关键挑战：并非所有局部晚期患者均需强化免疫干预，过度治疗可能增加负担，而治疗不足则错失获益机会。基于此，中山大学附属第五医院副院长、鼻咽癌防治中心首席专家陈明远教授团队提出了“动态风险分层”策略，即不再仅依赖治疗前的TNM分期，而是综合评估诱导化疗后的两项关键指标：影像学肿瘤退缩程度与血浆EB病毒DNA清除状态。未能达到缓解标准的患者被定义为“高风险人群”，成为免疫强化治疗的精准靶向群体。</p>
+<p>鼻咽癌在我国华南地区高发，免疫治疗虽已改变整体治疗格局，但临床面临关键挑战：并非所有局部晚期患者均需强化免疫干预，过度治疗可能增加负担，而治疗不足则错失获益机会。基于此，中山大学附属第五医院副院长、鼻咽癌防治中心首席专家陈明远教授团队提出了”动态风险分层”策略，即不再仅依赖治疗前的TNM分期，而是综合评估诱导化疗后的两项关键指标：影像学肿瘤退缩程度与血浆EB病毒DNA清除状态。未能达到缓解标准的患者被定义为”高风险人群”，成为免疫强化治疗的精准靶向群体。</p>
 <ul>
 <li>论文 DOI：10.1136/bmj-2025-085863</li>
 </ul>
@@ -5072,7 +5322,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://en.wikipedia.org/wiki/Ronald_Fisher" title="罗纳德·A·费舍尔">罗纳德·A·费舍尔</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260225192459.png" class="img-fluid"></p>
-<p>Ronald Fisher（罗纳德·A·费舍尔，1890–1962） 是英国统计学家、遗传学家与进化生物学家，被广泛认为是现代统计学与实验设计的奠基人。他把统计方法从“事后分析”推进为科学研究的核心工具，深刻影响了生物学、医学、农业与社会科学。他用概率模型、严谨设计和系统推断，把不确定性纳入科学方法本身，将 达尔文进化论 × 孟德尔遗传学 × 统计学 融合为一体。</p>
+<p>Ronald Fisher（罗纳德·A·费舍尔，1890–1962） 是英国统计学家、遗传学家与进化生物学家，被广泛认为是现代统计学与实验设计的奠基人。他把统计方法从”事后分析”推进为科学研究的核心工具，深刻影响了生物学、医学、农业与社会科学。他用概率模型、严谨设计和系统推断，把不确定性纳入科学方法本身，将 达尔文进化论 × 孟德尔遗传学 × 统计学 融合为一体。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -5080,7 +5330,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://libguides.library.cityu.edu.hk/rim_recognition/top_papers" title="识别和认定 Top Papers">识别和认定 Top Papers</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260225192934.png" class="img-fluid"></p>
-<p>这个页面 “Top Papers” 来自 City University of Hong Kong Library 的 Research Impact Measurement（RIM，研究影响力评估） 指南，是一个非常规范、偏“科研管理与学术评估”视角的权威说明页面，主要目的是：教你如何用国际通行标准，识别和认定“高影响力 / 顶级论文”。该页面明确指出，“Top Papers”通常包括以下两类（均基于 Web of Science / ESI 体系）：Highly Cited Papers（高被引论文）与Hot Papers（热点论文）。</p>
+<p>这个页面 “Top Papers” 来自 City University of Hong Kong Library 的 Research Impact Measurement（RIM，研究影响力评估） 指南，是一个非常规范、偏”科研管理与学术评估”视角的权威说明页面，主要目的是：教你如何用国际通行标准，识别和认定”高影响力 / 顶级论文”。该页面明确指出，“Top Papers”通常包括以下两类（均基于 Web of Science / ESI 体系）：Highly Cited Papers（高被引论文）与Hot Papers（热点论文）。</p>
 <ol start="7" type="1">
 <li><a href="https://github.com/cafferychen777/flashdeconv" title="FlashDeconv">FlashDeconv</a></li>
 </ol>
@@ -5146,7 +5396,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="本周话题博士生敢不敢冒险很大程度写在导师身上" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题博士生敢不敢冒险很大程度写在导师身上">本周话题：<a href="https://mp.weixin.qq.com/s/Rs07ifdz0RpfwBLcFWktsg">博士生敢不敢冒险，很大程度“写在导师身上”</a></h3>
-<p>最新发表在 Nature 的研究发现：导师在科研上偏保守还是爱“押高风险项目”，会深刻塑造博士生的冒险偏好，这种影响在学生离组、甚至转方向 10 年后仍持续存在。想培养敢闯的科研新人，制度与导师都得先敢冒险。</p>
+<p>最新发表在 Nature 的研究发现：导师在科研上偏保守还是爱”押高风险项目”，会深刻塑造博士生的冒险偏好，这种影响在学生离组、甚至转方向 10 年后仍持续存在。想培养敢闯的科研新人，制度与导师都得先敢冒险。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -5171,7 +5421,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/wIk1cM3HXANxhAXoXoadCQ">Lancet Microbe | 我国2023年那次儿童肺炎支原体感染小暴发有啥特点？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212222939.png" class="img-fluid"></p>
-<p>2023年初，我国对新冠疫情防控政策做出重大调整，新冠病毒感染将由“乙类甲管”调整为“乙类乙管”… …当大家对新型冠状病毒感染的恐慌尚未完全褪去时，2023年，我国出现了一次儿童感染肺炎支原体的短暂高峰。该团队对685株M肺炎分离株进行了测序，其中包括2023年小高峰期间采集到的248株（北京62株，其他省份186株）和北京2013-22年间采集的437株。通过分析这些菌株基因组序列和436个公开的全球序列，研究人员使用时间校准系统发育树和种群规模推断重建了肺炎支原体的进化历史。该团队还通过全基因组关联研究分析了导致我国2023年肺炎支原体再发小高峰的潜在遗传变异机制，并对我国各地的2023个分离株进行了系统地理学分析。研究发现：2023年出现的肺炎支原体短暂流行高峰只是之前流行菌株的再次出现，并没有发生新的突变，但大环内酯类抗生素耐药性的高流行率和肺炎支原体在国内的迅速传播使得这类传染病的防控形势更加严峻。</p>
+<p>2023年初，我国对新冠疫情防控政策做出重大调整，新冠病毒感染将由”乙类甲管”调整为”乙类乙管”… …当大家对新型冠状病毒感染的恐慌尚未完全褪去时，2023年，我国出现了一次儿童感染肺炎支原体的短暂高峰。该团队对685株M肺炎分离株进行了测序，其中包括2023年小高峰期间采集到的248株（北京62株，其他省份186株）和北京2013-22年间采集的437株。通过分析这些菌株基因组序列和436个公开的全球序列，研究人员使用时间校准系统发育树和种群规模推断重建了肺炎支原体的进化历史。该团队还通过全基因组关联研究分析了导致我国2023年肺炎支原体再发小高峰的潜在遗传变异机制，并对我国各地的2023个分离株进行了系统地理学分析。研究发现：2023年出现的肺炎支原体短暂流行高峰只是之前流行菌株的再次出现，并没有发生新的突变，但大环内酯类抗生素耐药性的高流行率和肺炎支原体在国内的迅速传播使得这类传染病的防控形势更加严峻。</p>
 <ul>
 <li>论文 DOI：10.1016/j.lanmic.2025.101200</li>
 </ul>
@@ -5187,12 +5437,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/pDyS-ZiH-SwAHvJPXHkQ_w">一文读懂扰动与虚拟细胞！人工智能模型真的能够替代湿实验吗？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223512.png" class="img-fluid"></p>
-<p>从扰动分析到虚拟细胞与Virtual Cell Challenge，本文通俗拆解“1对1虚拟细胞”背后的真实进展与噱头，对比AlphaGenome等前沿工作，聊清AI能替代湿实验到什么程度、现在能做什么。</p>
+<p>从扰动分析到虚拟细胞与Virtual Cell Challenge，本文通俗拆解”1对1虚拟细胞”背后的真实进展与噱头，对比AlphaGenome等前沿工作，聊清AI能替代湿实验到什么程度、现在能做什么。</p>
 <ol start="6" type="1">
 <li><a href="https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss" title="高斯">卡尔·弗里德里希·高斯</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212223741.png" class="img-fluid"></p>
-<p>Carl Friedrich Gauss（卡尔·弗里德里希·高斯，1777–1855） 是德国数学家、物理学家与天文学家，常被誉为“数学王子（Princeps mathematicorum）”。他几乎在所有重要数学分支都留下了基础性、决定性的成果，并深刻影响了统计学、物理学与工程科学。你在回归、GWAS、误差建模中反复使用的假设，其思想源头几乎都可追溯到高斯。他让数学从抽象推演，真正成为理解自然与数据的通用语言。</p>
+<p>Carl Friedrich Gauss（卡尔·弗里德里希·高斯，1777–1855） 是德国数学家、物理学家与天文学家，常被誉为”数学王子（Princeps mathematicorum）“。他几乎在所有重要数学分支都留下了基础性、决定性的成果，并深刻影响了统计学、物理学与工程科学。你在回归、GWAS、误差建模中反复使用的假设，其思想源头几乎都可追溯到高斯。他让数学从抽象推演，真正成为理解自然与数据的通用语言。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
@@ -5218,12 +5468,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/2DR5xMmtJoW8OpI_hRfiyQ">科研绘图工具分享：这10个网站，够你从脑图到海报都搞定</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224254.png" class="img-fluid"></p>
-<p>除了常见的思维导图和流程图工具，还整理了画结构图、画“地铁图”、做在线白板协作，以及专门用来激发信息可视化灵感的网站。适合论文配图、PPT 展示、课程作业和头脑风暴，从小白到进阶都能找到顺手的工具。</p>
+<p>除了常见的思维导图和流程图工具，还整理了画结构图、画”地铁图”、做在线白板协作，以及专门用来激发信息可视化灵感的网站。适合论文配图、PPT 展示、课程作业和头脑风暴，从小白到进阶都能找到顺手的工具。</p>
 <ol start="11" type="1">
 <li><a href="https://www.sqlstyle.guide/zh/" title="SQL">SQL样式指南</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260212224424.png" class="img-fluid"></p>
-<p>SQL Style Guide 是一份开源、免费的SQL编码规范手册。它旨在帮助开发团队写出整洁、一致且易于维护的SQL代码，核心原则是“选定一套规则并严格遵守”。除了命名和查询，它还覆盖了表结构创建、数据类型选择、约束与键的定义，并附赠一份实用的跨数据库保留字列表。</p>
+<p>SQL Style Guide 是一份开源、免费的SQL编码规范手册。它旨在帮助开发团队写出整洁、一致且易于维护的SQL代码，核心原则是”选定一套规则并严格遵守”。除了命名和查询，它还覆盖了表结构创建、数据类型选择、约束与键的定义，并附赠一份实用的跨数据库保留字列表。</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -5357,12 +5607,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://genome.sph.umich.edu/wiki/LocusZoom_Standalone" title="LocusZoom Standalone">LocusZoom Standalone</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260205221509.png" class="img-fluid"></p>
-<p>LocusZoom Standalone 是一个用于 GWAS 区域关联结果可视化的命令行工具，由 University of Michigan School of Public Health 的研究团队开发和维护。它的核心目标是：把某一个基因组区域内的 GWAS 统计结果、连锁不平衡（LD）和基因注释，整合成一张“一眼就能读懂”的区域关联图。网页介绍了安装流程。</p>
+<p>LocusZoom Standalone 是一个用于 GWAS 区域关联结果可视化的命令行工具，由 University of Michigan School of Public Health 的研究团队开发和维护。它的核心目标是：把某一个基因组区域内的 GWAS 统计结果、连锁不平衡（LD）和基因注释，整合成一张”一眼就能读懂”的区域关联图。网页介绍了安装流程。</p>
 <ol start="8" type="1">
 <li><a href="https://github.com/Homebrew/brew" title="Homebrew GitHub 仓库">Homebrew</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260205221611.png" class="img-fluid"></p>
-<p>Homebrew 是 macOS 和 Linux 上最受欢迎的包管理器之一，它通过命令行让软件安装、升级、卸载和管理变得极为简单。Homebrew 的理念是“把开发者需要的工具和应用打包管理，免去手动下载和配置的麻烦”。Homebrew 的核心目标是让开发者在 macOS 或 Linux 上 像在 Linux 包管理器（apt/yum/pacman）中一样管理软件，保持系统整洁，同时极大提高开发效率。</p>
+<p>Homebrew 是 macOS 和 Linux 上最受欢迎的包管理器之一，它通过命令行让软件安装、升级、卸载和管理变得极为简单。Homebrew 的理念是”把开发者需要的工具和应用打包管理，免去手动下载和配置的麻烦”。Homebrew 的核心目标是让开发者在 macOS 或 Linux 上 像在 Linux 包管理器（apt/yum/pacman）中一样管理软件，保持系统整洁，同时极大提高开发效率。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
@@ -5431,8 +5681,8 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/l3Qa4EMaB-rQT2Xvmuqn_Q">Nature Genetics | 你选什么专业，基因说了算？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260129153111.png" class="img-fluid"></p>
-<p>在人生的诸多十字路口中，专业选择无疑是最关键的一个。它像一个无形的筛选器，不仅塑造了我们的知识结构和职业生涯，更深刻地影响着我们的思维方式、社交圈层，乃至未来的家庭与生活。每当填报志愿或回首往事时，我们总会用家庭背景、个人兴趣、社会趋势或经济回报来解释自己的选择。但你是否曾想过，在这场关乎未来的重大抉择背后，是否还存在着一种更古老、更深邃的力量，来自我们基因的“轻语”？</p>
-<p>为探讨基因与专业选择间的关联，研究团队利用芬兰和挪威的教育注册数据及其对应基因型信息，涵盖10类专业领域（如社会科学、人文艺术、商科、信息与通信技术、自然科学等），总样本规模超过46万，每类从约4万至31万不等。作者首先在控制教育水平（如最高学历）后，考察基因是否仍与专业类别显著相关。其次，采用兄弟姐妹或家庭内分析设计（within-family design），以排除家庭背景和群体分层等混杂因素。结果显示，这些基因关联在家庭内也部分存在，表明至少部分效应源于“直接遗传作用”，而非完全受社会或地理结构影响。</p>
+<p>在人生的诸多十字路口中，专业选择无疑是最关键的一个。它像一个无形的筛选器，不仅塑造了我们的知识结构和职业生涯，更深刻地影响着我们的思维方式、社交圈层，乃至未来的家庭与生活。每当填报志愿或回首往事时，我们总会用家庭背景、个人兴趣、社会趋势或经济回报来解释自己的选择。但你是否曾想过，在这场关乎未来的重大抉择背后，是否还存在着一种更古老、更深邃的力量，来自我们基因的”轻语”？</p>
+<p>为探讨基因与专业选择间的关联，研究团队利用芬兰和挪威的教育注册数据及其对应基因型信息，涵盖10类专业领域（如社会科学、人文艺术、商科、信息与通信技术、自然科学等），总样本规模超过46万，每类从约4万至31万不等。作者首先在控制教育水平（如最高学历）后，考察基因是否仍与专业类别显著相关。其次，采用兄弟姐妹或家庭内分析设计（within-family design），以排除家庭背景和群体分层等混杂因素。结果显示，这些基因关联在家庭内也部分存在，表明至少部分效应源于”直接遗传作用”，而非完全受社会或地理结构影响。</p>
 <ul>
 <li>论文 DOI：10.1038/s41588-025-02391-z</li>
 </ul>
@@ -5448,7 +5698,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/frfBBk5BAs97nkSWMVKkhw">Fundamental Research | 健康生活方式可缩小由社会经济差异导致的老年健康不平等，显著提升晚年生活质量</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260129154313.png" class="img-fluid"></p>
-<p>该研究基于长达20年的全国前瞻性队列研究，系统剖析了社会经济地位与健康生活方式对老年人死亡和健康老龄化的影响。研究发现，低社会经济地位群体在预期寿命和健康老龄化上均存在显著劣势，但无论个体处于何种社会经济地位，维持健康生活方式都是延长总预期寿命、提升健康预期寿命的重要途径，能够有效缓解社会经济差异带来的健康不平等。该研究为破解“健康鸿沟”提供了可落地的个体干预突破口，为我国应对人口老龄化和促进健康老龄化实践提供了重要的科学证据。</p>
+<p>该研究基于长达20年的全国前瞻性队列研究，系统剖析了社会经济地位与健康生活方式对老年人死亡和健康老龄化的影响。研究发现，低社会经济地位群体在预期寿命和健康老龄化上均存在显著劣势，但无论个体处于何种社会经济地位，维持健康生活方式都是延长总预期寿命、提升健康预期寿命的重要途径，能够有效缓解社会经济差异带来的健康不平等。该研究为破解”健康鸿沟”提供了可落地的个体干预突破口，为我国应对人口老龄化和促进健康老龄化实践提供了重要的科学证据。</p>
 <ul>
 <li>论文 DOI：10.1016/j.fmre.2025.10.004</li>
 </ul>
@@ -5500,7 +5750,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://web.stanford.edu/class/bios221/book/" title="Modern Statistics for Modern Biology">Modern Statistics for Modern Biology</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260129160746.png" class="img-fluid"></p>
-<p>该书旨在帮助从事生物研究的科学家快速掌握许多重要的概念和方法，从而最大限度地利用实验和其他可用数据。采用实践性强的教学方法，叙述围绕各类问题或特定数据类型展开。方法和理论的介绍也遵循“需要掌握”的原则，而非从基本原理出发进行系统推导。</p>
+<p>该书旨在帮助从事生物研究的科学家快速掌握许多重要的概念和方法，从而最大限度地利用实验和其他可用数据。采用实践性强的教学方法，叙述围绕各类问题或特定数据类型展开。方法和理论的介绍也遵循”需要掌握”的原则，而非从基本原理出发进行系统推导。</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -5548,7 +5798,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </section>
 <section id="本周话题一些大学老师开始坐班了" class="level3">
 <h3 class="anchored" data-anchor-id="本周话题一些大学老师开始坐班了">本周话题：<a href="https://mp.weixin.qq.com/s/wgIrs3MgdHaBuYMmtgC9SA">一些大学老师开始坐班了</a></h3>
-<p>近年来部分高校逐步推行的教师坐班制，在编制收紧、行政人力不足与绩效考核压力并存的背景下，部分民办高校、专科院校及“双非”高校要求新入职教师在承担教学与科研任务的同时，长期参与行政坐班工作，形成了“教学—科研—行政”高度叠加的工作模式。</p>
+<p>近年来部分高校逐步推行的教师坐班制，在编制收紧、行政人力不足与绩效考核压力并存的背景下，部分民办高校、专科院校及”双非”高校要求新入职教师在承担教学与科研任务的同时，长期参与行政坐班工作，形成了”教学—科研—行政”高度叠加的工作模式。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
@@ -5556,7 +5806,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/tkXx59w-E_FpPnLVVzfwgQ">Critical Care | 重症监护临床研究中靶向试验模拟的机遇、挑战与未来展望</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260121213443.png" class="img-fluid"></p>
-<p>系统综述了目标试验模拟（Target Trial Emulation, TTE）在重症医学临床研究中的应用潜力、方法学挑战及未来发展方向。文章指出，在重症医学领域，由于随机对照试验（RCT）在伦理、可行性和成本方面常受限制，基于真实世界数据（如ICU电子病历和多中心数据库）开展因果推断研究已成为重要补充，而TTE为此提供了一个以因果推断为核心的系统化研究框架。作者强调，TTE通过明确“理想随机试验”的关键要素（研究对象、治疗策略、随访起点、结局定义及因果对比方式），有助于减少观察性研究中常见的偏倚，如不朽时间偏倚和选择偏倚。与此同时，文章也深入讨论了在重症医学场景下实施TTE所面临的挑战，包括治疗时序高度动态化、时间依赖性混杂、结局与暴露定义复杂以及数据质量异质性等问题。最后，作者展望了TTE在结合因果图、先进统计方法和机器学习技术方面的发展前景，认为其有望成为提升重症医学真实世界证据质量、推动临床决策优化的重要方法学工具。</p>
+<p>系统综述了目标试验模拟（Target Trial Emulation, TTE）在重症医学临床研究中的应用潜力、方法学挑战及未来发展方向。文章指出，在重症医学领域，由于随机对照试验（RCT）在伦理、可行性和成本方面常受限制，基于真实世界数据（如ICU电子病历和多中心数据库）开展因果推断研究已成为重要补充，而TTE为此提供了一个以因果推断为核心的系统化研究框架。作者强调，TTE通过明确”理想随机试验”的关键要素（研究对象、治疗策略、随访起点、结局定义及因果对比方式），有助于减少观察性研究中常见的偏倚，如不朽时间偏倚和选择偏倚。与此同时，文章也深入讨论了在重症医学场景下实施TTE所面临的挑战，包括治疗时序高度动态化、时间依赖性混杂、结局与暴露定义复杂以及数据质量异质性等问题。最后，作者展望了TTE在结合因果图、先进统计方法和机器学习技术方面的发展前景，认为其有望成为提升重症医学真实世界证据质量、推动临床决策优化的重要方法学工具。</p>
 <ul>
 <li>论文 DOI：10.1186/s13054-025-05723-x</li>
 </ul>
@@ -5583,12 +5833,12 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/KhL4lRY2jCcWhOsfcB7-ew">倾向性评分模型我们应该纳入哪些自变量？</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260121215410.png" class="img-fluid"></p>
-<p>围绕倾向性评分分析（Propensity Score Analysis, PSA）中的关键起点——倾向性评分模型的协变量选择展开，强调变量选择并非“越多越好”，而是一项以因果推断理论为纲、以领域知识为主、以数据驱动为辅、以平衡诊断为最终裁决的系统工作。</p>
+<p>围绕倾向性评分分析（Propensity Score Analysis, PSA）中的关键起点——倾向性评分模型的协变量选择展开，强调变量选择并非”越多越好”，而是一项以因果推断理论为纲、以领域知识为主、以数据驱动为辅、以平衡诊断为最终裁决的系统工作。</p>
 <ol start="5" type="1">
 <li><a href="https://mp.weixin.qq.com/s/hndsmtRrqypGYab72M1IZQ">Wasserstein 回归</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260121220225.png" class="img-fluid"></p>
-<p>文章立足于最优传输理论与非欧几里得统计框架，将概率分布视为 Wasserstein 空间中的几何对象，针对传统回归模型无法直接处理“分布作为变量”的局限，提出在 Fréchet 均值处对分布空间进行线性化，并在切丛（tangent bundle）中构建函数型回归模型，从而实现分布—分布之间的回归建模与预测。</p>
+<p>文章立足于最优传输理论与非欧几里得统计框架，将概率分布视为 Wasserstein 空间中的几何对象，针对传统回归模型无法直接处理”分布作为变量”的局限，提出在 Fréchet 均值处对分布空间进行线性化，并在切丛（tangent bundle）中构建函数型回归模型，从而实现分布—分布之间的回归建模与预测。</p>
 <ul>
 <li>论文 DOI：10.1080/01621459.2021.1956937</li>
 </ul>
@@ -5694,7 +5944,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 <li><a href="https://mp.weixin.qq.com/s/g-0QVjPFa-gacZbzHL4fUQ">Lancet Digital Health | 评估AI预测模型性能的几大类指标总结</a></li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260115172640.png" class="img-fluid"></p>
-<p>2025年12月，《Lancet Digital Health》发表了一篇总结文章“Evaluation of performance measures in predictive artificial intelligence models to support medical decisions: overview and guidance”，对评估AI预测模型性能的几大类指标进行了评估。文章讨论了五大性能维度的32种性能指标及其图形化评估方法。</p>
+<p>2025年12月，《Lancet Digital Health》发表了一篇总结文章”Evaluation of performance measures in predictive artificial intelligence models to support medical decisions: overview and guidance”，对评估AI预测模型性能的几大类指标进行了评估。文章讨论了五大性能维度的32种性能指标及其图形化评估方法。</p>
 <ul>
 <li>论文 DOI：10.1016/j.landig.2025.100916</li>
 </ul>
@@ -5703,7 +5953,7 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260115174211.png" class="img-fluid"></p>
 <p>在过去十年中，中国超重与肥胖的流行率持续上升，并带来了日益加重的健康与经济后果。这篇个人观点（Personal View）对近期取得的进展进行了批判性审视，并识别了当前及新出现的挑战，这些挑战横跨公共卫生与政策、临床研究以及实践层面。国家层面的政策框架、健康与营养技术指南以及多部门协作机制，已将肥胖问题提升至公共议程的重要位置。支持肥胖生活方式干预和药物治疗的证据仍在不断积累。自2021年以来，中国已批准另外五种用于体重管理的胰高糖素样肽-1（GLP-1）受体激动剂（包括利拉鲁肽、贝那鲁肽、司美格鲁肽、替尔泊肽和马兹杜肽），拓宽了治疗选择，并推动了肥胖照护模式的转型。</p>
-<p>然而，仍然存在若干关键挑战，可能削弱上述进展的长期和持续影响。这些挑战包括：现有肥胖诊断标准在刻画表型差异性及心代谢异质性方面存在局限；缺乏可量化、可操作且具有问责机制的国家层面目标，从而削弱了治理与评估能力；以及缺少循证的肥胖药物治疗算法，这可能导致对药物治疗的过度依赖，并转移对社会经济、环境及行为决定因素的关注。我们呼吁建立以人为中心的整合型体系，在行星健康（planetary health）框架下，将以“全人”为导向的肥胖照护嵌入其中，提供涵盖预防、治疗与长期支持的连贯连续照护。</p>
+<p>然而，仍然存在若干关键挑战，可能削弱上述进展的长期和持续影响。这些挑战包括：现有肥胖诊断标准在刻画表型差异性及心代谢异质性方面存在局限；缺乏可量化、可操作且具有问责机制的国家层面目标，从而削弱了治理与评估能力；以及缺少循证的肥胖药物治疗算法，这可能导致对药物治疗的过度依赖，并转移对社会经济、环境及行为决定因素的关注。我们呼吁建立以人为中心的整合型体系，在行星健康（planetary health）框架下，将以”全人”为导向的肥胖照护嵌入其中，提供涵盖预防、治疗与长期支持的连贯连续照护。</p>
 <ul>
 <li>论文 DOI：10.1016/S2213-8587(25)00357-2</li>
 </ul>
@@ -5779,171 +6029,6 @@ Ojji, Dike B., Abdul Salam, Mahmoud U. Sani, Okechukwu S. Ogah, Aletta E. Schutt
   <guid>https://leslie-lu.github.io/blog/2026/01/16/biostat_weekly_issue17/</guid>
   <pubDate>Fri, 16 Jan 2026 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260115180915.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>《生统爱好者周刊》同名中文播客正式上线 Apple Podcast &amp; 小宇宙</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2026/01/13/podcast/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>好消息，为了让大家能更好地利用碎片化时间获取行业前沿资讯，《生统爱好者周刊》同名中文播客现已正式在<code>苹果播客（Apple Podcasts）</code>和<code>小宇宙</code>平台上线。</p>
-<p>我们希望通过声音，将那些深奥的统计模型、前沿的医学研究以及有趣的行业观察，更生动地传递给每一位在科研路上奋斗的你。你可以在通勤途中、锻炼时，甚至是休息时，轻松收听我们的播客，获取最新的生物统计资讯和实用技巧。</p>
-<section id="如何收听" class="level3">
-<h3 class="anchored" data-anchor-id="如何收听">如何收听</h3>
-<p>现在就打开你常用的播客客户端，搜索 “生统爱好者周刊” 即可订阅收听：</p>
-<ol type="1">
-<li><strong>苹果播客（Apple Podcasts）</strong>：在 Apple 设备上打开“播客”应用，搜索 “生统爱好者周刊”，点击订阅即可。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/7f0a76289c652efcbc66a66718ec8090.jpg" class="img-fluid"></p>
-<ol start="2" type="1">
-<li><strong>小宇宙</strong>：打开小宇宙应用，搜索 “生统爱好者周刊”，点击订阅即可。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/0adf9bfd8a348a117522b7f8543800b7.jpg" class="img-fluid"></p>
-<p>目前我们仅支持这两个平台，欢迎大家多多支持和分享。如果你希望在其他平台收听，欢迎在评论区留言，我们会根据大家的需求逐步扩展平台支持。</p>
-<p>科研之路，披荆斩棘。让我们在声音的世界里，一起见证生物统计学的魅力！</p>
-<p>如果你更倾向于阅读文字版，欢迎关注微信公众号<strong>「陆震生物统计」</strong>获取每周五的同步更新。</p>
-<p>注：本播客内容基于《生统爱好者周刊》公开内容制作，相关学术论文链接及原始资讯请查阅周刊文字版。</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostat-weekly</category>
-  <guid>https://leslie-lu.github.io/blog/2026/01/13/podcast/</guid>
-  <pubDate>Tue, 13 Jan 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/Gemini_Generated_Image_luoxs6luoxs6luox.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>生统爱好者周刊（第 16 期）：AI 看病，误诊了谁负责？</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2026/01/09/biostat_weekly_issue16/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
-<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
-<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
-<section id="封面图" class="level3">
-<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108225235.png" class="img-fluid"></p>
-</section>
-<section id="本周话题ai-看病误诊了谁负责" class="level3">
-<h3 class="anchored" data-anchor-id="本周话题ai-看病误诊了谁负责">本周话题：<a href="https://mp.weixin.qq.com/s/XLtF7rSeyZ4tn7qyu8jMLw">AI 看病，误诊了谁负责？</a></h3>
-<p><code>@GCRPM</code> AI在医疗领域快速应用，既被寄望缓解“看病难”，又引发隐私、安全和伦理担忧。当前共识是“人机共担”：医生负最终复核责任，AI厂商在产品缺陷致害时依法担责。破解“技术黑箱”需技术与法律协同，通过医工结合提升算法可解释性、通过算法治理框架明确权责，让制度与法律为AI医疗保驾护航。</p>
-</section>
-<section id="生统研究" class="level3">
-<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
-<ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/zzB_4DXirJ5BaC1_teqY7A">Nature Reviews Cancer | 重塑儿童及青少年癌症的遗传易感性认知</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108220832.png" class="img-fluid"></p>
-<p>尽管癌症在儿童和青少年中很少见，但它仍然是该年龄段死亡的主要原因，而遗传易感性是主要的已知风险因素。自1985年发现视网膜母细胞瘤易感性RB1病原种系变体以来，又发现了几种额外的高渗透率癌症易感基因（CPG）。尽管很少有临床上可识别的遗传疾病表现出中度的癌症表型，但负荷测试显示出低至中度的跨导率CPG。除了 CPG 中的种系致病变异，合子后体细胞嵌合体胚胎发育过程中获得的CPG致病变异越来越被认为是导致儿童和青少年患恶性肿瘤的重要因素。各种儿童和青少年癌症类型的全基因组关联研究已经确定了一些常见的低风险癌症易感性基因。尽管多基因风险评分目前在儿童和青少年中的临床应用有限，但为成人开发的多基因风险评分可以预测儿童和青少年癌症幸存者后续的癌症风险。在这篇综述中，描述了目前对儿童和青少年癌症遗传易感性的了解。患有癌症和CPG的儿童和青少年的生存率通常很低，因此需要将基因组检测更好地融入临床护理，以改善癌症预防、监测和治疗。</p>
-<ul>
-<li>论文 DOI：10.1038/s41568-024-00775-7</li>
-</ul>
-<ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/WnwUv6DEP1cfZUjfv1uQhg">Nature Medicine | 睡一晚就能预测130种疾病</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108221807.png" class="img-fluid"></p>
-<p>26年1月6日，《自然·医学》发表了来自斯坦福大学科研团队的论文，研究者们依据超过65000名参与者的多导睡眠图（PSG）数据，建立了一个多模态睡眠模型SleepFM，仅凭一晚的睡眠数据，SleepFM就能以至少0.75的C指数预测多达130种健康问题的风险，包括全因死亡（0.84）、痴呆（0.85）、心肌梗死（0.81）、心力衰竭（0.80）、慢性肾病（0.79）、中风（0.78）和心房颤动（0.78）。值得注意的是，SleepFM训练时采用了留一模态对比学习（Leave‑One‑Out Contrastive Learning），不要求所有模态同时存在，可在数据缺失时让模型保持鲁棒性，从而适应不同的PSG设备、采样方式和单位带来的数据变化，给模型提供更好的泛用性。本研究再次强调了睡眠在整体健康中的重要地位。</p>
-<ul>
-<li>论文 DOI：10.1038/s41591-025-04133-4</li>
-</ul>
-<ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/66F1cjjGaE_i6MfU6r93Ew">NC | 生成式AI在超低数据范围内实现医学图像分割</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108222134.png" class="img-fluid"></p>
-<p>医学图像分割在临床诊断和治疗中具有重要价值，但现有深度学习分割方法高度依赖大量高质量标注数据。在实际应用中，由于医学图像标注成本高、专业性强，许多任务只能获得极少量标注样本，导致模型在超低数据条件下难以有效训练，分割性能明显受限。如何在标注数据极其有限的情况下仍然实现可靠的医学图像分割，是该领域亟待解决的问题。本研究提出了一种面向超低标注数据条件的医学图像分割框架，其核心思想是将生成式模型与分割模型进行联合优化，而不是将数据生成作为独立的预处理步骤。通过在训练过程中引入生成模型，并利用分割模型的性能反馈不断调整生成策略，使生成的数据更加符合分割任务的实际需求，从而在极少真实标注样本的情况下提升模型整体分割性能。</p>
-<ul>
-<li>论文 DOI：10.1038/s41467-025-61754-6</li>
-</ul>
-</section>
-<section id="博文资讯" class="level3">
-<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
-<ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/u9__mA9CZ951cayesLW_9w">CHEST | 利用目标试验仿真估计异质性治疗效应</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108221446.png" class="img-fluid"></p>
-<p>本文介绍在目标试验仿真框架下，利用因果机器学习在真实世界数据中估计CATE/HTE的方法，强调交叉验证与交叉拟合、Qini与校准等评估及敏感性分析，并给出分步检查清单，提醒注意混杂与时变混杂等局限。</p>
-<ul>
-<li>论文 DOI：10.1016/j.chest.2025.05.028</li>
-</ul>
-<ol start="5" type="1">
-<li><a href="https://mp.weixin.qq.com/s/Kfn-oL5rOYgEihvsG2pT4Q">身体：我想动！大脑：不，你不想！</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108222340.png" class="img-fluid"></p>
-<p>研究人员和临床医生一直困于如何定义、衡量和治疗认知疲劳——这些主要依赖人们自述他们感受到的疲劳程度。而如今，不同领域的科学家正在运用创新性实验方法和生物标志物，探究认知疲劳的代谢根源和后果。</p>
-</section>
-<section id="工具" class="level3">
-<h3 class="anchored" data-anchor-id="工具">工具</h3>
-<ol start="6" type="1">
-<li><a href="https://mp.weixin.qq.com/s/HPBYwg8nBpKh79W4dHellw">Python | 主图+边缘图 (蓝粉系配色方案)</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108222807.png" class="img-fluid"></p>
-<p>汇总了一些主图+边缘图绘制的 python 代码。</p>
-<ol start="7" type="1">
-<li><a href="https://mp.weixin.qq.com/s/YtXPMQLUaxzhaDT-hKP-_Q">10种好看的特色热图绘制方法</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108223022.png" class="img-fluid"></p>
-<p>热图是通过颜色梯度变化直观呈现数据高低的图表，本文整理了很多漂亮的特色热图绘制方法。</p>
-<ol start="8" type="1">
-<li><a href="https://www.gnu.org/software/gawk/manual/gawk.html#Options" title="GNU Awk 用户指南">GNU Awk 用户指南</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108223258.png" class="img-fluid"></p>
-<p>这是GAWK 的第 5.3 版：《有效的 AWK 编程：GNU Awk 用户指南》，适用于 GNU AWK 的 5.3.1（或更高版本）实现。文档详细介绍了 awk 的具体使用。</p>
-</section>
-<section id="资源" class="level3">
-<h3 class="anchored" data-anchor-id="资源">资源</h3>
-<ol start="9" type="1">
-<li><a href="https://mp.weixin.qq.com/s/LDAO45I_JijwyeUKvzZhXw">医学电子资源概览与利用</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108223856.png" class="img-fluid"></p>
-<p>深圳大学城图书馆为医务工作者与医学生提供多元医学信息服务，在Springer Nature、Science、EBSCO、ProQuest、知网、万方等平台基础上，引入多种重要医学数据库，帮助及时获取全球医学前沿与研究热点，支持临床与科研实践。</p>
-<ol start="10" type="1">
-<li><a href="https://mp.weixin.qq.com/s/v4_JQhJYok2Q-HohPQjaWQ">Springer生物医学与生命科学期刊推荐</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108224044.png" class="img-fluid"></p>
-<p>Springer生物医学与生命科学电子期刊在相关领域内具有较高的科研影响力，始终坚持发现并发表高质量、前沿性的研究成果，涵盖从基础理论到应用技术的广泛主题。该合集收录的期刊获得了广泛的认可和使用，致力于为科研人员、高校、研究机构及企业研发团队提供有价值的参考资源。</p>
-<ol start="11" type="1">
-<li><a href="https://r4ds.hadley.nz/" title="R for Data Science (2e)">R for Data Science (2e)</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108224502.png" class="img-fluid"></p>
-<p>R4DS 在第一版的基础上增加了更多最新的内容，适合对 R 进行查漏补缺使用。目前是英文网站上持续更新。</p>
-</section>
-<section id="贡献者github-id" class="level3">
-<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
-<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
-<ul>
-<li>[<code>@Leslie-Lu</code>]（陆震）</li>
-<li>[<code>@YihanChen325</code>]（陈奕含）</li>
-<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
-<li>[<code>@GCRPM</code>]（徐林玉）</li>
-</ul>
-</section>
-<section id="订阅" class="level3">
-<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
-<p>本周刊每周五发布，支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
-<p>微信搜索“陆震生物统计”或者扫描二维码，即可订阅。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
-<p>（完）</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostat-weekly</category>
-  <guid>https://leslie-lu.github.io/blog/2026/01/09/biostat_weekly_issue16/</guid>
-  <pubDate>Fri, 09 Jan 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260108225235.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>

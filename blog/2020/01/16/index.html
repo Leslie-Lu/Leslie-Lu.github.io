@@ -328,7 +328,7 @@ div.column-margin+hr.dinkus {
 <h3 class="anchored" data-anchor-id="r包">R包</h3>
 <p>R提供了大量备用功能，通过可选模块的下载和安装来实现。目前有15364个称为包的用户贡献模块可从https://cran.r-project.org/web/packages下载。这些包提供了横跨各种领域、数量庞大的功能，包括分析地理数据、处理蛋白质质谱，甚至是心理测验分析的功能。</p>
 <p>R包是R函数、数据、预编译代码以一种定义完善的格式组成的集合，具有详细的说明和示例。计算机上存储包的目录称为库（library）。.libPaths()显示库所在位置，library()则可以显示库中包。</p>
-<p>第一次安装一个包，使用命令install.packages()即可，在括号中输入要安装的包名称，一个包仅需安装一次。update.packages()更新已安装的包。installed.packages()列出已安装的包的相关信息(如版本号、依赖关系等)。Windows下的R包是经过编译的zip文件，安装时不要解压缩。安装路径为“Pacakges&gt;install packages from local files”，选择本地磁盘上存储zip包的文件夹。</p>
+<p>第一次安装一个包，使用命令install.packages()即可，在括号中输入要安装的包名称，一个包仅需安装一次。update.packages()更新已安装的包。installed.packages()列出已安装的包的相关信息(如版本号、依赖关系等)。Windows下的R包是经过编译的zip文件，安装时不要解压缩。安装路径为”Pacakges&gt;install packages from local files”，选择本地磁盘上存储zip包的文件夹。</p>
 <p>包的安装是指从某个CRAN镜像站点下载它并将其放入库中的过程。安装好以后，必须被载入到会话中才能使用包，需要使用library()函数载入该包。在一次应用中，包只需载入一次，如果需要，我们可以自定义启动环境以自动载入会频繁使用的包。search()显示已加载并可使用的包。help(‘package_name’)输出某个包的简短描述以及包中可用的函数名称和数据集名称的列表，help()查看包中任意函数或数据集的描述，R的帮助系统包含了每个函数的一个描述（同时带有示例），每个数据集的信息也被包括其中。</p>
 </section>
 <section id="r的使用" class="level3">
@@ -829,7 +829,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -839,7 +839,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -876,59 +876,64 @@ div.column-margin+hr.dinkus {
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>RSiteSearch('foo')：以foo为关键词搜索在线文档和邮件列表存档</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>apropos('foo', mode='function')：列出名称中含有foo的所有可用函数，在只知道函数的部分名称时搜索可用</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>example(foo)：查看函数foo的使用范例</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>data() 列出当前已加载包中所含的所有可用示例数据集</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vignette() 列出当前已安装包中所有可用的vignette文档</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vignette('foo') 为主题foo显示指定的vignette文档</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工作空间和目录</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>工作空间（workspace）是当前R的工作环境，存储着所有你定义的对象（向量、矩阵、函数、数据框和列表）。在一个R会话结束时，你可以将当前工作空间保存到一个镜像中，以便在下次启动R时自动载入它。当前的工作目录（working directory）是R用来读取文件和保存结果的默认目录。</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>用于管理工作空间和目录的部分标准命令如下：</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>apropos('foo',</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  mode='function')：列出名称中含有foo的所有可用函数，在只知道函数的部分名称时搜索可用</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>example(foo)：查看函数foo的使用范例</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>data() 列出当前已加载包中所含的所有可用示例数据集</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vignette() 列出当前已安装包中所有可用的vignette文档</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vignette('foo') 为主题foo显示指定的vignette文档</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工作空间和目录</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>工作空间（workspace）是当前R的工作环境，存储着所有你定义的对象（向量、矩阵、函数、数据框和列表）。在一个R会话结束时，你可以将当前工作空间保存到一个镜像中，以便在下次启动R时自动载入它。当前的工作目录（working</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>directory）是R用来读取文件和保存结果的默认目录。</span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>getwd()：查看当前工作目录</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>用于管理工作空间和目录的部分标准命令如下：</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>setwd()：重新设定当前工作目录。如果需要读入一个不在当前工作目录下的文件，需要在调用语句中写明文件的完整路径。setwd()命令的路径中使用正斜杠/。R将反斜杠\作为转义符。即使在Windows平台上运行R，在路径中也要使用正斜杠。</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>getwd()：查看当前工作目录</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ls()：列出当前工作空间中的对象</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>setwd()：重新设定当前工作目录。如果需要读入一个不在当前工作目录下的文件，需要在调用语句中写明文件的完整路径。setwd()命令的路径中使用正斜杠/。R将反斜杠\作为转义符。即使在Windows平台上运行R，在路径中也要使用正斜杠。</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>rm(objectlist)：删除一个或多个对象</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ls()：列出当前工作空间中的对象</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>options()：显示或设置当前选项</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>rm(objectlist)：删除一个或多个对象</span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>history(#)：显示最近使用的#个命令(默认值为25)</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>options()：显示或设置当前选项</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>savehistory('myfile') 保存命令历史到文件myfile.Rhistory中</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>history(#)：显示最近使用的#个命令(默认值为25)</span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>loadhistory('myfile') 载入命令历史文件myfile.Rhistory</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>savehistory('myfile') 保存命令历史到文件myfile.Rhistory中</span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>save.image('myfile') 保存工作空间到文件myfile.RData中</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>loadhistory('myfile') 载入命令历史文件myfile.Rhistory</span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>load('myfile') 读取工作空间myfile.RData到当前会话中</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>save.image('myfile') 保存工作空间到文件myfile.RData中</span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>save(objectlist, file='myfile') 保存指定对象到一个文件中</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>load('myfile') 读取工作空间myfile.RData到当前会话中</span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>q()：结束对话退出R，并询问是否保存工作空间</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>save(objectlist, file='myfile') 保存指定对象到一个文件中</span>
 <span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## R包</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>q()：结束对话退出R，并询问是否保存工作空间</span>
 <span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>R提供了大量备用功能，通过可选模块的下载和安装来实现。目前有15364个称为包的用户贡献模块可从https://cran.r-project.org/web/packages下载。这些包提供了横跨各种领域、数量庞大的功能，包括分析地理数据、处理蛋白质质谱，甚至是心理测验分析的功能。</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## R包</span></span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>R包是R函数、数据、预编译代码以一种定义完善的格式组成的集合，具有详细的说明和示例。计算机上存储包的目录称为库（library）。.libPaths()显示库所在位置，library()则可以显示库中包。</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>R提供了大量备用功能，通过可选模块的下载和安装来实现。目前有15364个称为包的用户贡献模块可从https://cran.r-project.org/web/packages下载。这些包提供了横跨各种领域、数量庞大的功能，包括分析地理数据、处理蛋白质质谱，甚至是心理测验分析的功能。</span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>第一次安装一个包，使用命令install.packages()即可，在括号中输入要安装的包名称，一个包仅需安装一次。update.packages()更新已安装的包。installed.packages()列出已安装的包的相关信息(如版本号、依赖关系等)。Windows下的R包是经过编译的zip文件，安装时不要解压缩。安装路径为“Pacakges&gt;install packages from local files”，选择本地磁盘上存储zip包的文件夹。</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>R包是R函数、数据、预编译代码以一种定义完善的格式组成的集合，具有详细的说明和示例。计算机上存储包的目录称为库（library）。.libPaths()显示库所在位置，library()则可以显示库中包。</span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>包的安装是指从某个CRAN镜像站点下载它并将其放入库中的过程。安装好以后，必须被载入到会话中才能使用包，需要使用library()函数载入该包。在一次应用中，包只需载入一次，如果需要，我们可以自定义启动环境以自动载入会频繁使用的包。search()显示已加载并可使用的包。help('package_name')输出某个包的简短描述以及包中可用的函数名称和数据集名称的列表，help()查看包中任意函数或数据集的描述，R的帮助系统包含了每个函数的一个描述（同时带有示例），每个数据集的信息也被包括其中。</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## R的使用</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>R是面向对象的，区分大小写的解释型数组编程语言。R中多数功能是由程序内置函数、用户自编函数和对对象的创建和操作所实现的。一次交互式会话期间的所有数据对象都被保存在内存中。R语句由函数和赋值构成，R使用 -&gt; 而非 = 作为赋值符号。R也允许使用 = 为对象赋值，但是它不是标准语法，某些情况下会出现问题。R具有完备的数据存取、管理、分析和显示等功能，将数据处理和统计分析融为一体。以后我们继续学习R语言。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>第一次安装一个包，使用命令install.packages()即可，在括号中输入要安装的包名称，一个包仅需安装一次。update.packages()更新已安装的包。installed.packages()列出已安装的包的相关信息(如版本号、依赖关系等)。Windows下的R包是经过编译的zip文件，安装时不要解压缩。安装路径为"Pacakges&gt;install</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>packages from local files"，选择本地磁盘上存储zip包的文件夹。</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>包的安装是指从某个CRAN镜像站点下载它并将其放入库中的过程。安装好以后，必须被载入到会话中才能使用包，需要使用library()函数载入该包。在一次应用中，包只需载入一次，如果需要，我们可以自定义启动环境以自动载入会频繁使用的包。search()显示已加载并可使用的包。help('package_name')输出某个包的简短描述以及包中可用的函数名称和数据集名称的列表，help()查看包中任意函数或数据集的描述，R的帮助系统包含了每个函数的一个描述（同时带有示例），每个数据集的信息也被包括其中。</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## R的使用</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>R是面向对象的，区分大小写的解释型数组编程语言。R中多数功能是由程序内置函数、用户自编函数和对对象的创建和操作所实现的。一次交互式会话期间的所有数据对象都被保存在内存中。R语句由函数和赋值构成，R使用</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>-&gt; 而非 = 作为赋值符号。R也允许使用 =</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>为对象赋值，但是它不是标准语法，某些情况下会出现问题。R具有完备的数据存取、管理、分析和显示等功能，将数据处理和统计分析融为一体。以后我们继续学习R语言。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -774,7 +774,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linear algebra</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - matrix</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -784,7 +784,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -805,7 +805,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>而矩阵与向量相乘后，我们发现，列向量的基底被变换为新的基底，正是矩阵的各列，矩阵的各列称为新的基向量。</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>总结一般的情况：矩阵A是m*n的一般矩阵，其中，m不等于n，而向量x是一个n维列向量，没有任何的特殊性，映射前后，列向量x的基向量维数发生了变化：原始的n维列向量x被变换了n个m维列向量线性组合的形式，最终的运算结果是一个m维的列向量。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>总结一般的情况：矩阵A是m<span class="sc">\*</span>n的一般矩阵，其中，m不等于n，而向量x是一个n维列向量，没有任何的特殊性，映射前后，列向量x的基向量维数发生了变化：原始的n维列向量x被变换了n个m维列向量线性组合的形式，最终的运算结果是一个m维的列向量。</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>由此可以看出，映射后的向量维数和原始向量维数的关系取决于矩阵维数m和n的关系：若m大于n，那么映射后的目标向量维数就大于原始列向量的维数，注意：即使矩阵的n个列向量线性无关，由于n个列向量不能张成m维空间，不能表示m维空间中的所有向量，所以称为m维目标空间的基底是不妥当的；若m小于n，那么目标向量的维数就小于原始列向量的维数，注意：由于列向量实现了降维，显然这n个m维列向量线性相关，因此准确地来说，不能构成基底；若m=n，则列向量的维数保持不变，此时，若n个m维向量线性无关，此时，矩阵的各列向量才能称为目标空间中的一组新基底。</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>

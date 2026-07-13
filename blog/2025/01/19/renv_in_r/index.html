@@ -828,7 +828,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - tools</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - version control</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -838,62 +838,82 @@ div.column-margin+hr.dinkus {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>在 R 语言的项目开发和数据分析过程中，管理包的依赖关系一直是一个挑战。每个项目可能依赖不同版本的R包，而不同项目间的包依赖往往互相冲突。为了避免这些问题，renv 包应运而生，其相当于 python 中的 virtualenv，帮助 R 用户高效地管理和隔离项目的依赖环境。</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>这里，我们将介绍 renv 包的基本功能及使用方法，帮助大家更好地管理 R 项目的包依赖。</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="al">![renv](https://rstudio.github.io/renv/articles/renv.png)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 renv 包</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>在 R</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>语言的项目开发和数据分析过程中，管理包的依赖关系一直是一个挑战。每个项目可能依赖不同版本的R包，而不同项目间的包依赖往往互相冲突。为了避免这些问题，renv</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>包应运而生，其相当于 python 中的 virtualenv，帮助 R</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>用户高效地管理和隔离项目的依赖环境。</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>这里，我们将介绍 renv 包的基本功能及使用方法，帮助大家更好地管理 R</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>项目的包依赖。</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>renv（R Environment）是一个用于管理 R 项目环境的工具。它允许为每个 R 项目创建一个独立的虚拟环境，从而确保每个项目拥有独立且隔离的 R 包依赖。通过使用 renv，我们可以避免包版本冲突，并且可以轻松地复制和共享项目环境，确保项目在不同的机器或不同的时间点上能够重现。</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="al">![renv](https://rstudio.github.io/renv/articles/renv.png)</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## renv 的核心优势</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 什么是 renv 包</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>隔离环境：每个项目有独立的库，包的版本不会相互干扰。即使我们在一个项目中更新了某个包的版本，其他项目依然可以使用旧版本。</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>项目可重现性：通过保存和共享项目的依赖信息（如包的版本），其他开发者可以使用相同的环境重新创建项目，确保研究的可重现性。</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>便捷的依赖管理：renv 会自动创建和维护 renv.lock 文件，记录项目依赖的包及其版本。这个文件是重现项目环境的关键，确保在不同机器或时间点运行时，依赖的版本完全一致。</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>renv（R Environment）是一个用于管理 R 项目环境的工具。它允许为每个 R</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>项目创建一个独立的虚拟环境，从而确保每个项目拥有独立且隔离的 R 包依赖。通过使用</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>renv，我们可以避免包版本冲突，并且可以轻松地复制和共享项目环境，确保项目在不同的机器或不同的时间点上能够重现。</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何在 R 中使用 renv 包</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## renv 的核心优势</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 初始化项目</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>首先，我们需要安装并加载 renv 包。在一个新的 R 项目中，我们可以使用 <span class="in">`renv::init()`</span> 来初始化 renv 环境。这将会创建一个新的 renv 文件夹并生成 renv.lock 文件。初始化后，项目中会有一个专门的库（renv/library）存放该项目所需的所有 R 包，同时生成 renv.lock 文件，这个文件记录了所有依赖包的具体版本。</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 安装依赖包</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>当我们开始开发项目时，可以通过 <span class="in">`install.packages()`</span> 安装所需的 R 包，renv 会将这些包安装到项目的独立环境中。</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>例如，安装 ggplot2` 包后，renv 会自动更新 renv.lock 文件，记录包的安装信息及其版本。</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 恢复项目环境</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>如果我们或者其他人需要在另一个环境中重新运行该项目，renv 允许我们通过 <span class="in">`renv::restore()`</span> 命令恢复项目的所有依赖包。这个命令会根据 renv.lock 文件自动安装所有所需的包及其指定版本，从而确保每次运行时的包版本一致，避免了环境问题。</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 查看并更新项目依赖</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>如果我们需要查看项目当前依赖的所有包，可以使用 <span class="in">`renv::status()`</span> 命令，它会列出所有包及其状态。而当我们需要更新项目中的某个包时，可以使用 <span class="in">`renv::update()`</span> 命令，它会根据当前最新的包版本进行更新，并更新 renv.lock 文件。</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分享项目</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>隔离环境：每个项目有独立的库，包的版本不会相互干扰。即使我们在一个项目中更新了某个包的版本，其他项目依然可以使用旧版本。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>项目可重现性：通过保存和共享项目的依赖信息（如包的版本），其他开发者可以使用相同的环境重新创建项目，确保研究的可重现性。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>便捷的依赖管理：renv 会自动创建和维护 renv.lock</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  文件，记录项目依赖的包及其版本。这个文件是重现项目环境的关键，确保在不同机器或时间点运行时，依赖的版本完全一致。</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## 如何在 R 中使用 renv 包</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 初始化项目</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>首先，我们需要安装并加载 renv 包。在一个新的 R 项目中，我们可以使用</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="in">`renv::init()`</span> 来初始化 renv 环境。这将会创建一个新的 renv 文件夹并生成</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>renv.lock</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>文件。初始化后，项目中会有一个专门的库（renv/library）存放该项目所需的所有 R</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>包，同时生成 renv.lock 文件，这个文件记录了所有依赖包的具体版本。</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 安装依赖包</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>当我们开始开发项目时，可以通过 <span class="in">`install.packages()`</span> 安装所需的 R 包，renv</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>会将这些包安装到项目的独立环境中。</span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>当我们完成项目后，可以将 renv.lock 文件和源代码一起通过 github 分享给其他人，其他人只需要使用 <span class="in">`renv::restore()`</span> 来恢复项目环境，无需担心包依赖的问题。</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## renv 与 packrat 的对比</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>在 renv 之前，R 中有一个较为类似的包叫做 packrat，它也提供环境管理的功能。然而，renv 相比于 packrat 有几个优势：</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更简洁：renv 比 packrat 更轻量，易于使用和理解。</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更强的兼容性：renv 与 R 版本的兼容性更好，适应性更强，能够更好地处理依赖关系。</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>性能更高：renv 在项目初始化、恢复和更新时速度更快。</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>因此，renv 在目前 R 项目环境管理中得到了更广泛的使用。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>例如，安装 ggplot2<span class="sc">\`</span> 包后，renv 会自动更新 renv.lock</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>文件，记录包的安装信息及其版本。</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 恢复项目环境</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>如果我们或者其他人需要在另一个环境中重新运行该项目，renv 允许我们通过</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="in">`renv::restore()`</span> 命令恢复项目的所有依赖包。这个命令会根据 renv.lock</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>文件自动安装所有所需的包及其指定版本，从而确保每次运行时的包版本一致，避免了环境问题。</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. 查看并更新项目依赖</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>如果我们需要查看项目当前依赖的所有包，可以使用 <span class="in">`renv::status()`</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>命令，它会列出所有包及其状态。而当我们需要更新项目中的某个包时，可以使用</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="in">`renv::update()`</span> 命令，它会根据当前最新的包版本进行更新，并更新 renv.lock 文件。</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 分享项目</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>当我们完成项目后，可以将 renv.lock 文件和源代码一起通过 github</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>分享给其他人，其他人只需要使用 <span class="in">`renv::restore()`</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>来恢复项目环境，无需担心包依赖的问题。</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## renv 与 packrat 的对比</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>在 renv 之前，R 中有一个较为类似的包叫做</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>packrat，它也提供环境管理的功能。然而，renv 相比于 packrat 有几个优势：</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更简洁：renv 比 packrat 更轻量，易于使用和理解。</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更强的兼容性：renv 与 R 版本的兼容性更好，适应性更强，能够更好地处理依赖关系。</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>性能更高：renv 在项目初始化、恢复和更新时速度更快。</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>因此，renv 在目前 R 项目环境管理中得到了更广泛的使用。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -808,7 +808,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostatistics</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - chi-square test</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -818,7 +818,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -845,23 +845,23 @@ div.column-margin+hr.dinkus {
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## R*C 表资料卡方检验</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>R*C 表资料可以分为双向无序、单向有序、双向有序属性相同和双向有序属性不同4类：</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>R<span class="sc">\*</span>C 表资料可以分为双向无序、单向有序、双向有序属性相同和双向有序属性不同4类：</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>双向无序R*C表：表中两个分类变量皆为无序分类变量，对于该类资料：</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>双向无序R<span class="sc">\*</span>C表：表中两个分类变量皆为无序分类变量，对于该类资料：</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>   a. 若研究目的为多个样本率或构成比的比较，可用行*列表资料的卡方检验；</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>   a. 若研究目的为多个样本率或构成比的比较，可用行<span class="sc">\*</span>列表资料的卡方检验；</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>   b. 若研究目的为分析两个分类变量之间有无关联性以及关系的密切程度，可用行*列表资料的卡方检验，以及Pearson列联系数进行分析</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>   b. 若研究目的为分析两个分类变量之间有无关联性以及关系的密切程度，可用行<span class="sc">\*</span>列表资料的卡方检验，以及Pearson列联系数进行分析</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>单向有序R<span class="sc">\*</span>C表有两种形式：一种是R<span class="sc">\*</span>C表中的分组变量有序、指标变量无序，此种单向有序R<span class="sc">\*</span>C表可用行<span class="sc">\*</span>列表资料的卡方检验；另一种是R<span class="sc">\*</span>C表中的分组变量无序、指标变量有序，此种单向有序R<span class="sc">\*</span>C表宜用秩和检验或行均分检验进行分析。</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>   具体采用哪种检验方法，需要重点关注谁为指标变量、谁为分组变量以及指标变量是否有序。</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>双向有序属性相同的R<span class="sc">\*</span>C表，表中的两个分类变量皆为有序且属性相同，研究目的通常是分析两种方法的一致性，实际上是2<span class="sc">\*</span>2配对设计的扩展，此时宜用Kappa一致性检验，也可以用特殊模型分析方法。一致性检验与处理配对设计2*2表的思路一样。</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>双向有序属性相同的R<span class="sc">\*</span>C表，表中的两个分类变量皆为有序且属性相同，研究目的通常是分析两种方法的一致性，实际上是2<span class="sc">\*</span>2配对设计的扩展，此时宜用Kappa一致性检验，也可以用特殊模型分析方法。一致性检验与处理配对设计2<span class="sc">\*</span>2表的思路一样。</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    除了对该方表资料作一致性检验外，还可以对两种方法的结果不一致的部分作比较，此时称为对称性检验。</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>   除了对该方表资料作一致性检验外，还可以对两种方法的结果不一致的部分作比较，此时称为对称性检验。</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>双向有序属性不同的R*C表，表中的两个分类变量皆为有序且属性不同。对于此类资料，有3种分析目的，所以也就有3种相应的统计分析方法：</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>双向有序属性不同的R<span class="sc">\*</span>C表，表中的两个分类变量皆为有序且属性不同。对于此类资料，有3种分析目的，所以也就有3种相应的统计分析方法：</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>   a. 只关心试验分组变量取不同水平时，有序的指标结果变量之间的差别是否有显著性差异，可用单向有序列联表的第二种行均分检验；</span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>

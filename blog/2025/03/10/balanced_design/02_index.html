@@ -289,7 +289,7 @@ window.Quarto = {
 </section><section id="问题描述" class="level3"><h3 class="anchored" data-anchor-id="问题描述">问题描述</h3>
 <p>我们假设，对于某一个高优指标，超过某一阈值 <span class="math inline">\(c\)</span> 的患者被认为是治疗有效。那么，自然地，对于组别 <span class="math inline">\(X\)</span> 而言，某一受试者治疗无效的概率为：</p>
 <p><span class="math display">\[
-P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)
+  P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)
 \]</span></p>
 <p>其中：</p>
 <ul>
@@ -298,7 +298,7 @@ P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)
 <li><p><span class="math inline">\(c\)</span> 是响应阈值，<span class="math inline">\(\mu_X, \mu_Y\)</span> 是组 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 的均值，<span class="math inline">\(\sigma_X, \sigma_Y\)</span> 是标准差。</p></li>
 </ul></section><section id="优化问题" class="level3"><h3 class="anchored" data-anchor-id="优化问题">优化问题</h3>
 <p>我们希望追求最大的预期有效人数比例，即，目标是最小化非响应者总数： <span class="math display">\[
-\min \left\{ n_1 \Phi\left(\frac{c - \mu_X}{\sigma_X}\right) + n_2 \Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right) \right\},
+  \min \left\{ n_1 \Phi\left(\frac{c - \mu_X}{\sigma_X}\right) + n_2 \Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right) \right\},
 \]</span></p>
 <p>约束条件为：</p>
 <ol type="1">
@@ -308,37 +308,37 @@ P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)
 <section id="构造拉格朗日函数" class="level4"><h4 class="anchored" data-anchor-id="构造拉格朗日函数">1. 构造拉格朗日函数</h4>
 <p>在优化问题中，拉格朗日乘数法用于将有约束的极值问题转化为无约束问题，其核心是：将目标函数与约束条件结合，通过引入乘数（<span class="math inline">\(\lambda\)</span> 和 <span class="math inline">\(\mu\)</span>）将约束条件融入优化过程。</p>
 <p><span class="math display">\[
-\mathcal{L} = n_1 \Phi_X + n_2 \Phi_Y + \lambda (N - n_1 - n_2) + \mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)
+  \mathcal{L} = n_1 \Phi_X + n_2 \Phi_Y + \lambda (N - n_1 - n_2) + \mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)
 \]</span></p>
 <p>其中 <span class="math inline">\(\Phi_X = \Phi\left(\frac{c-\mu_X}{\sigma_X}\right)\)</span>, <span class="math inline">\(\Phi_Y = \Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)\)</span>，<span class="math inline">\(n_1 \Phi_X + n_2 \Phi_Y\)</span> 是目标函数，<span class="math inline">\(\lambda (N - n_1 - n_2)\)</span> 是总样本量约束，<span class="math inline">\(\mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)\)</span> 是方差约束。</p>
 </section><section id="求偏导并令其为零" class="level4"><h4 class="anchored" data-anchor-id="求偏导并令其为零">2. 求偏导并令其为零</h4>
 <p>通过对 <span class="math inline">\(n_1\)</span> 和 <span class="math inline">\(n_2\)</span> 求偏导并令其为零，可以得到极值条件：</p>
 <p><span class="math display">\[
-\frac{\partial \mathcal{L}}{\partial n_1} = \Phi_X - \lambda + \mu \frac{\sigma_X^2}{n_1^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_X + \mu \frac{\sigma_X^2}{n_1^2}
+  \frac{\partial \mathcal{L}}{\partial n_1} = \Phi_X - \lambda + \mu \frac{\sigma_X^2}{n_1^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_X + \mu \frac{\sigma_X^2}{n_1^2}
 \]</span></p>
 <p><span class="math display">\[
-\frac{\partial \mathcal{L}}{\partial n_2} = \Phi_Y - \lambda + \mu \frac{\sigma_Y^2}{n_2^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}
+  \frac{\partial \mathcal{L}}{\partial n_2} = \Phi_Y - \lambda + \mu \frac{\sigma_Y^2}{n_2^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}
 \]</span></p>
 <p>通过联立对 <span class="math inline">\(n_1\)</span> 和 <span class="math inline">\(n_2\)</span> 的偏导方程，消去 <span class="math inline">\(\lambda\)</span> 后得到：</p>
 <p><span class="math display">\[
-\Phi_X + \mu \frac{\sigma_X^2}{n_1^2} = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}
+  \Phi_X + \mu \frac{\sigma_X^2}{n_1^2} = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}
 \]</span></p>
 <p><span class="math display">\[
-\mu \left( \frac{\sigma_X^2}{n_1^2} - \frac{\sigma_Y^2}{n_2^2} \right) = \Phi_Y - \Phi_X \tag{1}
+  \mu \left( \frac{\sigma_X^2}{n_1^2} - \frac{\sigma_Y^2}{n_2^2} \right) = \Phi_Y - \Phi_X \tag{1}
 \]</span></p>
 <p>设 <span class="math inline">\(g = \frac{n_1}{N}\)</span>，<span class="math inline">\(n_1 = N g\)</span>，<span class="math inline">\(n_2 = N (1 - g)\)</span>，则：</p>
 <p><span class="math display">\[
-\frac{\sigma_X^2}{g} + \frac{\sigma_Y^2}{1-g} = KN \tag{2}
+  \frac{\sigma_X^2}{g} + \frac{\sigma_Y^2}{1-g} = KN \tag{2}
 \]</span></p>
 <p><span class="math display">\[
-\mu \left( \frac{\sigma_X^2}{(gN)^2} - \frac{\sigma_Y^2}{[(1-g)N]^2} \right) = \Phi_Y - \Phi_X
+  \mu \left( \frac{\sigma_X^2}{(gN)^2} - \frac{\sigma_Y^2}{[(1-g)N]^2} \right) = \Phi_Y - \Phi_X
 \]</span></p>
 <p>求解 <span class="math inline">\((1)\)</span> 和 <span class="math inline">\((2)\)</span>，得到：</p>
 <p><span class="math display">\[
-\frac{\sigma_X}{g} \sqrt{\Phi_Y} = \frac{\sigma_Y}{1-g} \sqrt{\Phi_X} \quad \Rightarrow \quad g = \frac{\sigma_X \sqrt{\Phi_Y}}{\sigma_X \sqrt{\Phi_Y} + \sigma_Y \sqrt{\Phi_X}}
+  \frac{\sigma_X}{g} \sqrt{\Phi_Y} = \frac{\sigma_Y}{1-g} \sqrt{\Phi_X} \quad \Rightarrow \quad g = \frac{\sigma_X \sqrt{\Phi_Y}}{\sigma_X \sqrt{\Phi_Y} + \sigma_Y \sqrt{\Phi_X}}
 \]</span></p>
 <p><span class="math display">\[
-g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)} + \sigma_Y \sqrt{\Phi\left(\frac{c-\mu_X}{\sigma_X}\right)}}
+  g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)} + \sigma_Y \sqrt{\Phi\left(\frac{c-\mu_X}{\sigma_X}\right)}}
 \]</span></p>
 </section><section id="关键结论" class="level4"><h4 class="anchored" data-anchor-id="关键结论">3. 关键结论</h4>
 <p>在 <span class="math inline">\(\mu \neq 0\)</span> 的情况下，推导过程表明：</p>
@@ -351,11 +351,11 @@ g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \s
 </section></section><section id="示例" class="level3"><h3 class="anchored" data-anchor-id="示例">示例</h3>
 <p>以为 R 代码示例，计算 <span class="math inline">\(g\)</span> 值：</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu_X</span> <span class="op">&lt;-</span> <span class="fl">2</span>    </span>
-<span><span class="va">mu_Y</span> <span class="op">&lt;-</span> <span class="fl">1.5</span> </span>
-<span><span class="va">sigma_X</span> <span class="op">&lt;-</span> <span class="fl">1</span> </span>
-<span><span class="va">sigma_Y</span> <span class="op">&lt;-</span> <span class="fl">1.2</span> </span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">2</span>      </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu_X</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">mu_Y</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
+<span><span class="va">sigma_X</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sigma_Y</span> <span class="op">&lt;-</span> <span class="fl">1.2</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span></span>
 <span><span class="va">prob_X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">(</span><span class="va">c</span> <span class="op">-</span> <span class="va">mu_X</span><span class="op">)</span> <span class="op">/</span> <span class="va">sigma_X</span><span class="op">)</span></span>
 <span><span class="va">prob_Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">(</span><span class="va">c</span> <span class="op">-</span> <span class="va">mu_Y</span><span class="op">)</span> <span class="op">/</span> <span class="va">sigma_Y</span><span class="op">)</span></span>
@@ -867,7 +867,7 @@ g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \s
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - allocation</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - optimization</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -877,7 +877,7 @@ g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \s
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -886,124 +886,142 @@ g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \s
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 引言</span></span>
 <span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>我们前面讨论了平衡设计和非平衡设计的统计学效率，这里我们讨论，如何在总样本量固定为 $N = n_1 + n_2$ 以及 $\text{Var}(\bar{x}_1 - \bar{x}_2) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}=K$ 的情况下，追求最大的预期有效人数比例。</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>需要强调的是，我们这里的目标是处于伦理的考虑最小化非响应者总数，而不是追求统计学效率。</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 问题描述</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>我们假设，对于某一个高优指标，超过某一阈值 $c$ 的患者被认为是治疗有效。那么，自然地，对于组别 $X$ 而言，某一受试者治疗无效的概率为：</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>其中：</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\Phi(\cdot)$ 是标准正态分布的累积分布函数。</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)$ 和 $\Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right)$ 分别表示组 $X$ 和组 $Y$ 中非响应者的概率。</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$c$ 是响应阈值，$\mu_X, \mu_Y$ 是组 $X$ 和 $Y$ 的均值，$\sigma_X, \sigma_Y$ 是标准差。</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## 优化问题</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>我们希望追求最大的预期有效人数比例，即，目标是最小化非响应者总数：</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>\min \left<span class="sc">\{</span> n_1 \Phi\left(\frac{c - \mu_X}{\sigma_X}\right) + n_2 \Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right) \right<span class="sc">\}</span>,</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>约束条件为：</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$n_1 + n_2 = N$（总样本量固定）。</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$\frac{\sigma_X^2}{n_1} + \frac{\sigma_Y^2}{n_2} = K$（$Z$ 统计量的分母固定，以保证检验的特定功率）。</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 公式推导</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>我们前面讨论了平衡设计和非平衡设计的统计学效率，这里我们讨论，如何在总样本量固定为</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>$N = n_1 + n_2$ 以及</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>$\text{Var}(\bar{x}_1 - \bar{x}_2) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}=K$</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>的情况下，追求最大的预期有效人数比例。</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>需要强调的是，我们这里的目标是处于伦理的考虑最小化非响应者总数，而不是追求统计学效率。</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 问题描述</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>我们假设，对于某一个高优指标，超过某一阈值 $c$</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>的患者被认为是治疗有效。那么，自然地，对于组别 $X$</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>而言，某一受试者治疗无效的概率为：</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  P(X&lt;c)=\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>其中：</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\Phi(\cdot)$ 是标准正态分布的累积分布函数。</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\Phi\left(\frac{c - \mu_X}{\sigma_X}\right)$ 和</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  $\Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right)$ 分别表示组 $X$ 和组 $Y$</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  中非响应者的概率。</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$c$ 是响应阈值，$\mu_X, \mu_Y$ 是组 $X$ 和 $Y$ 的均值，$\sigma_X, \sigma_Y$</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>  是标准差。</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## 优化问题</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>我们希望追求最大的预期有效人数比例，即，目标是最小化非响应者总数：</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  \min \left<span class="sc">\{</span> n_1 \Phi\left(\frac{c - \mu_X}{\sigma_X}\right) + n_2 \Phi\left(\frac{c - \mu_Y}{\sigma_Y}\right) \right<span class="sc">\}</span>,</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 构造拉格朗日函数</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>约束条件为：</span>
 <span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>在优化问题中，拉格朗日乘数法用于将有约束的极值问题转化为无约束问题，其核心是：将目标函数与约束条件结合，通过引入乘数（$\lambda$ 和 $\mu$）将约束条件融入优化过程。</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$n_1 + n_2 = N$（总样本量固定）。</span>
 <span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>\mathcal{L} = n_1 \Phi_X + n_2 \Phi_Y + \lambda (N - n_1 - n_2) + \mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>其中 $\Phi_X = \Phi\left(\frac{c-\mu_X}{\sigma_X}\right)$, $\Phi_Y = \Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)$，$n_1 \Phi_X + n_2 \Phi_Y$ 是目标函数，$\lambda (N - n_1 - n_2)$ 是总样本量约束，$\mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)$ 是方差约束。</span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 求偏导并令其为零</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>通过对 $n_1$ 和 $n_2$ 求偏导并令其为零，可以得到极值条件：</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$\frac{\sigma_X^2}{n_1} + \frac{\sigma_Y^2}{n_2} = K$（$Z$</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>   统计量的分母固定，以保证检验的特定功率）。</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## 公式推导</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 构造拉格朗日函数</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>在优化问题中，拉格朗日乘数法用于将有约束的极值问题转化为无约束问题，其核心是：将目标函数与约束条件结合，通过引入乘数（$\lambda$</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>和 $\mu$）将约束条件融入优化过程。</span>
 <span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>\frac{\partial \mathcal{L}}{\partial n_1} = \Phi_X - \lambda + \mu \frac{\sigma_X^2}{n_1^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_X + \mu \frac{\sigma_X^2}{n_1^2}</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>  \mathcal{L} = n_1 \Phi_X + n_2 \Phi_Y + \lambda (N - n_1 - n_2) + \mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>\frac{\partial \mathcal{L}}{\partial n_2} = \Phi_Y - \lambda + \mu \frac{\sigma_Y^2}{n_2^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}</span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>通过联立对 $n_1$ 和 $n_2$ 的偏导方程，消去 $\lambda$ 后得到：</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>其中 $\Phi_X = \Phi\left(\frac{c-\mu_X}{\sigma_X}\right)$,</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>$\Phi_Y = \Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)$，$n_1 \Phi_X + n_2 \Phi_Y$</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>是目标函数，$\lambda (N - n_1 - n_2)$</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>是总样本量约束，$\mu \left( K - \frac{\sigma_X^2}{n_1} - \frac{\sigma_Y^2}{n_2} \right)$</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>是方差约束。</span>
 <span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>\Phi_X + \mu \frac{\sigma_X^2}{n_1^2} = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}</span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. 求偏导并令其为零</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>通过对 $n_1$ 和 $n_2$ 求偏导并令其为零，可以得到极值条件：</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>\mu \left( \frac{\sigma_X^2}{n_1^2} - \frac{\sigma_Y^2}{n_2^2} \right) = \Phi_Y - \Phi_X \tag{1}</span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>  \frac{\partial \mathcal{L}}{\partial n_1} = \Phi_X - \lambda + \mu \frac{\sigma_X^2}{n_1^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_X + \mu \frac{\sigma_X^2}{n_1^2}</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>设 $g = \frac{n_1}{N}$，$n_1 = N g$，$n_2 = N (1 - g)$，则：</span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>  \frac{\partial \mathcal{L}}{\partial n_2} = \Phi_Y - \lambda + \mu \frac{\sigma_Y^2}{n_2^2} = 0 \quad \Rightarrow \quad \lambda = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}</span>
 <span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>\frac{\sigma_X^2}{g} + \frac{\sigma_Y^2}{1-g} = KN \tag{2}</span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>通过联立对 $n_1$ 和 $n_2$ 的偏导方程，消去 $\lambda$ 后得到：</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>\mu \left( \frac{\sigma_X^2}{(gN)^2} - \frac{\sigma_Y^2}{<span class="co">[</span><span class="ot">(1-g)N</span><span class="co">]</span>^2} \right) = \Phi_Y - \Phi_X</span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>  \Phi_X + \mu \frac{\sigma_X^2}{n_1^2} = \Phi_Y + \mu \frac{\sigma_Y^2}{n_2^2}</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>求解 $(1)$ 和 $(2)$，得到：</span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>  \mu \left( \frac{\sigma_X^2}{n_1^2} - \frac{\sigma_Y^2}{n_2^2} \right) = \Phi_Y - \Phi_X \tag{1}</span>
 <span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>\frac{\sigma_X}{g} \sqrt{\Phi_Y} = \frac{\sigma_Y}{1-g} \sqrt{\Phi_X} \quad \Rightarrow \quad g = \frac{\sigma_X \sqrt{\Phi_Y}}{\sigma_X \sqrt{\Phi_Y} + \sigma_Y \sqrt{\Phi_X}}</span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>设 $g = \frac{n_1}{N}$，$n_1 = N g$，$n_2 = N (1 - g)$，则：</span>
 <span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)} + \sigma_Y \sqrt{\Phi\left(\frac{c-\mu_X}{\sigma_X}\right)}}</span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 关键结论</span></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>在 $\mu \neq 0$ 的情况下，推导过程表明： </span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>  \frac{\sigma_X^2}{g} + \frac{\sigma_Y^2}{1-g} = KN \tag{2}</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>  \mu \left( \frac{\sigma_X^2}{(gN)^2} - \frac{\sigma_Y^2}{<span class="co">[</span><span class="ot">(1-g)N</span><span class="co">]</span>^2} \right) = \Phi_Y - \Phi_X</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>最优分配比例 $g$ 同时依赖于两组的标准差和非响应概率。</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>求解 $(1)$ 和 $(2)$，得到：</span>
 <span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若某组的非响应概率更低（即 $\Phi_X$ 或 $\Phi_Y$ 更小），应分配更多样本给该组以降低总非响应数。</span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若某组方差更大（$\sigma_X$ 或 $\sigma_Y$ 更大），需权衡其非响应概率与方差对统计功效的影响。</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>  \frac{\sigma_X}{g} \sqrt{\Phi_Y} = \frac{\sigma_Y}{1-g} \sqrt{\Phi_X} \quad \Rightarrow \quad g = \frac{\sigma_X \sqrt{\Phi_Y}}{\sigma_X \sqrt{\Phi_Y} + \sigma_Y \sqrt{\Phi_X}}</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>通过 $g$ 的计算，可以确定最优的样本分配比例，以最小化非响应者总数，成功平衡了伦理与效率的双重目标。在实际中，我们可以先根据一些初始值来进行试验设计，然后通过 $g$ 的计算再来优化后续试验的样本分配比例。这也是一种反应-适应性设计的思路。</span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## 示例</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>  g = \frac{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)}}{\sigma_X \sqrt{\Phi\left(\frac{c-\mu_Y}{\sigma_Y}\right)} + \sigma_Y \sqrt{\Phi\left(\frac{c-\mu_X}{\sigma_X}\right)}}</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>以为 R 代码示例，计算 $g$ 值：</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. 关键结论</span></span>
 <span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>mu_X <span class="ot">&lt;-</span> <span class="dv">2</span>    </span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>mu_Y <span class="ot">&lt;-</span> <span class="fl">1.5</span> </span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>sigma_X <span class="ot">&lt;-</span> <span class="dv">1</span> </span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>sigma_Y <span class="ot">&lt;-</span> <span class="fl">1.2</span> </span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">2</span>      </span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>prob_X <span class="ot">&lt;-</span> <span class="fu">pnorm</span>((c <span class="sc">-</span> mu_X) <span class="sc">/</span> sigma_X)</span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>prob_Y <span class="ot">&lt;-</span> <span class="fu">pnorm</span>((c <span class="sc">-</span> mu_Y) <span class="sc">/</span> sigma_Y)</span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> (sigma_X <span class="sc">*</span> <span class="fu">sqrt</span>(prob_Y)) <span class="sc">/</span> (sigma_X <span class="sc">*</span> <span class="fu">sqrt</span>(prob_Y) <span class="sc">+</span> sigma_Y <span class="sc">*</span> <span class="fu">sqrt</span>(prob_X))</span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"非响应概率 (X):"</span>, prob_X, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"非响应概率 (Y):"</span>, prob_Y, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"最优分配比例 g ="</span>, <span class="fu">round</span>(g, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>在 $\mu \neq 0$ 的情况下，推导过程表明：</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>最优分配比例 $g$ 同时依赖于两组的标准差和非响应概率。</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若某组的非响应概率更低（即 $\Phi_X$ 或 $\Phi_Y$</span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>  更小），应分配更多样本给该组以降低总非响应数。</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若某组方差更大（$\sigma_X$ 或 $\sigma_Y$</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a>  更大），需权衡其非响应概率与方差对统计功效的影响。</span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>通过 $g$</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>的计算，可以确定最优的样本分配比例，以最小化非响应者总数，成功平衡了伦理与效率的双重目标。在实际中，我们可以先根据一些初始值来进行试验设计，然后通过</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>$g$ 的计算再来优化后续试验的样本分配比例。这也是一种反应-适应性设计的思路。</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## 示例</span></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>以为 R 代码示例，计算 $g$ 值：</span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>mu_X <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>mu_Y <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>sigma_X <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>sigma_Y <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>prob_X <span class="ot">&lt;-</span> <span class="fu">pnorm</span>((c <span class="sc">-</span> mu_X) <span class="sc">/</span> sigma_X)</span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>prob_Y <span class="ot">&lt;-</span> <span class="fu">pnorm</span>((c <span class="sc">-</span> mu_Y) <span class="sc">/</span> sigma_Y)</span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> (sigma_X <span class="sc">*</span> <span class="fu">sqrt</span>(prob_Y)) <span class="sc">/</span> (sigma_X <span class="sc">*</span> <span class="fu">sqrt</span>(prob_Y) <span class="sc">+</span> sigma_Y <span class="sc">*</span> <span class="fu">sqrt</span>(prob_X))</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"非响应概率 (X):"</span>, prob_X, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"非响应概率 (Y):"</span>, prob_Y, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"最优分配比例 g ="</span>, <span class="fu">round</span>(g, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

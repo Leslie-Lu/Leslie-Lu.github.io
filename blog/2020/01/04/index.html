@@ -822,7 +822,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - pycharm</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - python</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -832,7 +832,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -843,47 +843,58 @@ div.column-margin+hr.dinkus {
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## 创建Python脚本</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Python的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入 <span class="in">`python3`</span>，按下回车键，就能看见Python提示符 <span class="in">`&gt;&gt;&gt;`</span>：</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="al">![Python提示符](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201333812.webp)</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Python的安装这里就不说了，当然如果你是mac用户，恭喜你的笔记本自带了Python2（前几天官方已停止对2的更新了）。如何在Python</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>shell中简单地运行代码呢？Windows用户打开命令行窗口，mac用户打开终端，输入</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="in">`python3`</span>，按下回车键，就能看见Python提示符 <span class="in">`&gt;&gt;&gt;`</span>：</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本 ，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter notebook、Visual Studio code等。打开编辑器，一般我们将 <span class="in">`#!/usr/bin/env python3`</span> 作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为 <span class="in">`first-script.py`</span> 文件，这就是一个简单的Python脚本了。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="al">![Python提示符](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201333812.webp)</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 运行Python脚本</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="al">![Pycharm运行按钮](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201335674.jpeg)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>面对复杂多代码的任务，我们需要把代码都写在Python脚本上，然后运行脚本</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>，提高工作效率。我们可以选择一个自己喜欢的文本编辑器，可供选择的有很多：Spyder、Pycharm、Jupyter</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>notebook、Visual Studio code等。打开编辑器，一般我们将 <span class="in">`#!/usr/bin/env python3`</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>作为第一行。以井号开头的代码行为注释行，Windows系统不读取也不执行该行代码，但是像macOS这样的基于Unix的系统会根据这一行来找到执行该脚本的Python版本，加入这一行可以使你的脚本在不同操作系统之间具有可移植性。我们将上面这俩行代码放到Pycharm中，保存为</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="in">`first-script.py`</span> 文件，这就是一个简单的Python脚本了。</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：<span class="in">`/Users/luzhen`</span>。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 运行Python脚本</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="al">![终端切换目录](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201336038.webp)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>对于在编辑器内运行，编辑器会有一个绿色三角运行按钮，点击一下即可运行输出：</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>mac上下一步就是为脚本添加执行权限，输入命令：<span class="in">`chmod +x first-script.py`</span>。chmod是一个Unix命令，表示改变访问权限（change access mode）。<span class="in">`+x`</span> 表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="al">![Pycharm运行按钮](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201335674.jpeg)</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>接下来就可以运行脚本了：</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>当然，我们也可以选择在命令行或者终端中运行脚本：打开命令行或者终端，提示符会是一个具体的文件夹，即目录，如mac：<span class="in">`/Users/luzhen`</span>。我们将脚本保存在桌面上，同时在终端中切换到桌面目录：</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![终端运行脚本](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201337790.webp)</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![终端切换目录](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201336038.webp)</span></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入 <span class="in">`python3 first-script.py`</span>，也可成功执行脚本，mac上同样适用。</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## 与命令行交互的几个小技巧</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>mac上下一步就是为脚本添加执行权限，输入命令：<span class="in">`chmod +x first-script.py`</span>。chmod是一个Unix命令，表示改变访问权限（change</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>access mode）。<span class="in">`+x`</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>表示在访问设置中添加执行权限，而非读、写权限。这样Python就可以执行脚本了。mac上只要你在一个脚本上运行了chmod命令，以后就可以随意运行该脚本，无需第二次执行chmod命令。</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>使用向上箭头键得到以前的命令</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>接下来就可以运行脚本了：</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="al">![终端运行脚本](https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img/202408201337790.webp)</span></span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用Ctrl+c停止脚本</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是 <span class="in">`Ctrl+C`</span>，mac是 <span class="in">`Control+c`</span>，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>读懂出错信息并找到解决方案</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>这样以后，接下来我们就可以来了解认识Python的语言基础要素了。</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>人生苦短，一起学习Python。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>可以看到终端窗口已经完成了脚本输出的打印，脚本运行成功！当然，Windows上还有一种运行方法，直接输入</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="in">`python3 first-script.py`</span>，也可成功执行脚本，mac上同样适用。</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## 与命令行交互的几个小技巧</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>使用向上箭头键得到以前的命令</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  在命令行和终端窗口中，你可以通过按向上箭头键找到以前输入的命令，可以减少每次运行Python脚本时必需的输入量，特别是当Python脚本的文件名特别长或需要在命令行上提供额外的参数（比如输入文件名或输出文件名）的时候。</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用Ctrl+c停止脚本</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  我们已经学会了运行脚本，那么如何提前中断和停止Python脚本呢？Windows是</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  <span class="in">`Ctrl+C`</span>，mac是</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  <span class="in">`Control+c`</span>，就可以停止通过命令开始的进程。（进程：计算机对一系列命令的处理过程。对于一个脚本或程序，计算机将它解释成一个进程，如果这个程序非常复杂，就解释成一系列进程，这些进程可以顺序执行，也可以并发执行。）</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>读懂出错信息并找到解决方案</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  当窗口显示了错误信息时，我们先读懂出错信息。某些情况下，出错信息中明确指出了代码中出现错误的行，我们可以集中精力解决这一行的错误（你的文本编辑器应该设置成显示行号，可以在网上搜索一下）。出错信息也是编程的一部分，学会编程也包括学会如何有效地调试程序错误。最好的做法是将整个错误信息（至少是信息的主要部分）复制到搜索引擎上，看看别人是如何调试这种错误的。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>这样以后，接下来我们就可以来了解认识Python的语言基础要素了。</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>人生苦短，一起学习Python。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

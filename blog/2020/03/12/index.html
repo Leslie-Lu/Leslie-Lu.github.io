@@ -804,7 +804,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostatistics</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - linear algebra</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -814,7 +814,7 @@ div.column-margin+hr.dinkus {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -827,43 +827,46 @@ div.column-margin+hr.dinkus {
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>向量的坐标依赖于选取的基底。</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>对于二维向量u=<span class="co">[</span><span class="ot">4,5</span><span class="co">]</span>⊤而言，我们一直以来都理所当然地认定一个事实：它表示一条在x轴上投影为4、y轴上投影为5的有向线段，它的坐标是(4,5)。这其实是基于一个没有刻意强调前提：利用方向为x轴、y轴正方向，且长度为1的两个向量，即Ex=<span class="co">[</span><span class="ot">1,0</span><span class="co">]</span>⊤，Ey=<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>⊤作为上述讨论的基础。因此，对于向量u而言，其完整的写法应该为u=4Ex + 5Ey，进一步展开就是u=4<span class="co">[</span><span class="ot">1,0</span><span class="co">]</span>⊤ + 5<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>⊤，这种形式的表意是最完整的。</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>这里被选中作为向量u基准的一组向量是Ex和Ey，它们被称为基底。基底的每一个成员向量被称为基向量，而坐标对应的就是各个基向量前的系数。一般情况下，若不做特殊说明，那么基向量都是选取沿着坐标轴正方向且长度为1的向量，这样方便描述和计算。</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>关于向量u的完整准确的说法是：在基底(Ex,Ey)下，其坐标是<span class="co">[</span><span class="ot">4,5</span><span class="co">]</span>⊤。也就是说，坐标必须依托于指定的基底才有意义。因此，要想准确地描述向量，首先就要确定一组基底，然后通过求出向量在各个基向量上的投影值，最后才能确定在这个基上的坐标值。</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量在不同基底上表示为不同坐标</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>一个指定的向量可以在多组不同的基底上进行坐标表示，在不同的基底表示下，坐标自然也是不同的。根据一组基底对应的坐标值去求另一组基底所对应的坐标值，这就是以后我们将会反复用到的坐标变换。</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>根据我们之前关于向量内积的介绍，最好是事先把基向量的模长转化为1。这样一来，从向量内积的内涵可以看出，若基向量的模长是1，那么就可以用目标向量内积基向量，从而可以直接获得该向量在这个基向量方向上的对应坐标值。实际上，对于任何一个向量，想要找到同方向上模长为1的向量并不是一件难事，只要让向量的各成分分别除以向量的模长即可，就能使向量的模长为单位1。而向量的坐标就是指定基的对应系数。</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构成基底的条件</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>在一个n维空间中，不是随便选取n个向量都能作为一组基底，构成基底的向量必须满足这样的条件：在n维空间中，任意一个向量都可以表示为这一组基向量的线性组合，并且这种线性组合的表示方式（也就是系数）必须是唯一的。</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>向量数量足够</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  若想成为三维空间中的一组基底，首先，其中的每个基向量的维数都必须是3；其次，基向量的个数也必须为3个。若数量不足，如只有两个三维向量a1和a2（假设它们是不共线的两个向量），那么无论对这两个向量怎么进行线性组合，它们都只能表示二者所构成的平面上的任意向量，而三维空间中位于该二维平面上外的任何一个向量，都无法由a1和a2的线性组合进行表示。</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>满足线性无关</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  如何确保表示方法的唯一性呢？这里我们引入向量线性无关的概念。一组向量需要满足线性无关的条件，即其中任何一个向量都不能通过其余向量的线性组合的形式进行表示。</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  换句话说，当且仅当x1=x2=x3=...=xn=0的等式关系成立时，线性组合x1u1 + x2u2 + x3u3 + ... + xnun才能生成零向量，若xi中有非零值存在，那么这一组向量就是线性相关的。一组向量满足线性无关的条件等效于满足线性组合表示方法的唯一性（可以从反证法的角度说明线性无关和表示方法的唯一性是等价的）。</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  在这个三维空间中，要求所选取的3个基向量线性无关。若它们线性相关，那么x3就可以表示为x1和x2的线性组合，换句话说，备选的3个向量就处在一个平面上了。这样，自然无法通过线性组合的方法来表示三维空间中位于平面外的任何一个向量了，即3个三维向量之间由于彼此线性相关，因此无法张成整个三维空间，只能张成三维空间中的二维平面甚至是退化为一条直线。</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  若三维空间中基向量的个数超过3个，则是不行的。如，假设有4个向量试图成为该空间的一组基向量，任选出其中的3个向量，按照前提，假设它们之间满足线性无关性，那么对于第4个向量，由于它也处于三维空间中，则它一定能够被前3个向量的线性组合所表示。那么，三维空间中的这4个向量显示是线性相关的，无法满足向量构成基底的唯一性条件。</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构成基底的条件</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>对于一组向量，由它的所有线性组合所构成的空间称为这一组向量的张成空间。张成空间对所讨论向量的线性无关性没有要求，这些向量可以是线性相关的。</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>两个线性无关的二维向量，它们构成了二维空间中的一组基底，因此它们的张成空间就是整个二维空间；两个线性相关的共线二维向量，它们的张成空间是一条穿过原点的一维直线；等。</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>向量的个数和维数都不是其张成空间维数及形态的决定因素，具体的情况需要结合向量的线性无关性进行整体考量，这就会涉及秩的相关概念。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>对于二维向量u=<span class="co">[</span><span class="ot">4,5</span><span class="co">]</span>⊤而言，我们一直以来都理所当然地认定一个事实：它表示一条在x轴上投影为4、y轴上投影为5的有向线段，它的坐标是(4,5)。这其实是基于一个没有刻意强调前提：利用方向为x轴、y轴正方向，且长度为1的两个向量，即Ex=<span class="co">[</span><span class="ot">1,0</span><span class="co">]</span>⊤，Ey=<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>⊤作为上述讨论的基础。因此，对于向量u而言，其完整的写法应该为u=4Ex</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>5Ey，进一步展开就是u=4<span class="co">[</span><span class="ot">1,0</span><span class="co">]</span>⊤ + 5<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>⊤，这种形式的表意是最完整的。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>这里被选中作为向量u基准的一组向量是Ex和Ey，它们被称为基底。基底的每一个成员向量被称为基向量，而坐标对应的就是各个基向量前的系数。一般情况下，若不做特殊说明，那么基向量都是选取沿着坐标轴正方向且长度为1的向量，这样方便描述和计算。</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>关于向量u的完整准确的说法是：在基底(Ex,Ey)下，其坐标是<span class="co">[</span><span class="ot">4,5</span><span class="co">]</span>⊤。也就是说，坐标必须依托于指定的基底才有意义。因此，要想准确地描述向量，首先就要确定一组基底，然后通过求出向量在各个基向量上的投影值，最后才能确定在这个基上的坐标值。</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## 向量在不同基底上表示为不同坐标</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>一个指定的向量可以在多组不同的基底上进行坐标表示，在不同的基底表示下，坐标自然也是不同的。根据一组基底对应的坐标值去求另一组基底所对应的坐标值，这就是以后我们将会反复用到的坐标变换。</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>根据我们之前关于向量内积的介绍，最好是事先把基向量的模长转化为1。这样一来，从向量内积的内涵可以看出，若基向量的模长是1，那么就可以用目标向量内积基向量，从而可以直接获得该向量在这个基向量方向上的对应坐标值。实际上，对于任何一个向量，想要找到同方向上模长为1的向量并不是一件难事，只要让向量的各成分分别除以向量的模长即可，就能使向量的模长为单位1。而向量的坐标就是指定基的对应系数。</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构成基底的条件</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>在一个n维空间中，不是随便选取n个向量都能作为一组基底，构成基底的向量必须满足这样的条件：在n维空间中，任意一个向量都可以表示为这一组基向量的线性组合，并且这种线性组合的表示方式（也就是系数）必须是唯一的。</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>向量数量足够</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  若想成为三维空间中的一组基底，首先，其中的每个基向量的维数都必须是3；其次，基向量的个数也必须为3个。若数量不足，如只有两个三维向量a1和a2（假设它们是不共线的两个向量），那么无论对这两个向量怎么进行线性组合，它们都只能表示二者所构成的平面上的任意向量，而三维空间中位于该二维平面上外的任何一个向量，都无法由a1和a2的线性组合进行表示。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>满足线性无关</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  如何确保表示方法的唯一性呢？这里我们引入向量线性无关的概念。一组向量需要满足线性无关的条件，即其中任何一个向量都不能通过其余向量的线性组合的形式进行表示。</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  换句话说，当且仅当x1=x2=x3=...=xn=0的等式关系成立时，线性组合x1u1 + x2u2 +</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  x3u3 + ... +</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  xnun才能生成零向量，若xi中有非零值存在，那么这一组向量就是线性相关的。一组向量满足线性无关的条件等效于满足线性组合表示方法的唯一性（可以从反证法的角度说明线性无关和表示方法的唯一性是等价的）。</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  在这个三维空间中，要求所选取的3个基向量线性无关。若它们线性相关，那么x3就可以表示为x1和x2的线性组合，换句话说，备选的3个向量就处在一个平面上了。这样，自然无法通过线性组合的方法来表示三维空间中位于平面外的任何一个向量了，即3个三维向量之间由于彼此线性相关，因此无法张成整个三维空间，只能张成三维空间中的二维平面甚至是退化为一条直线。</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  若三维空间中基向量的个数超过3个，则是不行的。如，假设有4个向量试图成为该空间的一组基向量，任选出其中的3个向量，按照前提，假设它们之间满足线性无关性，那么对于第4个向量，由于它也处于三维空间中，则它一定能够被前3个向量的线性组合所表示。那么，三维空间中的这4个向量显示是线性相关的，无法满足向量构成基底的唯一性条件。</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构成基底的条件</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>对于一组向量，由它的所有线性组合所构成的空间称为这一组向量的张成空间。张成空间对所讨论向量的线性无关性没有要求，这些向量可以是线性相关的。</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>两个线性无关的二维向量，它们构成了二维空间中的一组基底，因此它们的张成空间就是整个二维空间；两个线性相关的共线二维向量，它们的张成空间是一条穿过原点的一维直线；等。</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>向量的个数和维数都不是其张成空间维数及形态的决定因素，具体的情况需要结合向量的线性无关性进行整体考量，这就会涉及秩的相关概念。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

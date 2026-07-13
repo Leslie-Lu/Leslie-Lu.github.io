@@ -337,7 +337,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="累积风险函数">累积风险函数</h4>
 <p>在时间事件数据中，<strong>累积风险图（cumulative hazard plot）</strong>的 Y 轴表示的是累积风险函数（cumulative hazard function, <span class="math inline">\(H(t)\)</span>）。<span class="math inline">\(H(t)\)</span> 描述的是从起始时间到 <span class="math inline">\(t\)</span> 时刻，某个事件发生的<strong>累积风险总和</strong>。它是通过对瞬时风险函数（即危险率，hazard rate, <span class="math inline">\(h(t)\)</span>）在时间上的积分得到的，公式为 <span class="citation" data-cites="RN529">(<a href="#ref-RN529" role="doc-biblioref">Allison 2010</a>)</span>：</p>
 <p><span class="math display">\[
-H(t) = \int_{0}^{t} h(u) \, du
+  H(t) = \int_{0}^{t} h(u) \, du
 \]</span></p>
 <p>其中，<span class="math inline">\(h(t)\)</span> 是已生存到 <span class="math inline">\(t\)</span> 时刻的对象在 <span class="math inline">\(t\)</span> 时刻发生事件的速率。<span class="math inline">\(H(t)\)</span> 没有上限值，它随着时间 <span class="math inline">\(t\)</span> 的增加而单调递增。</p>
 </section>
@@ -345,12 +345,12 @@ H(t) = \int_{0}^{t} h(u) \, du
 <h4 class="anchored" data-anchor-id="累积风险与-hr风险比的关系">累积风险与 HR（风险比）的关系</h4>
 <p>HR 是比较两组（如治疗组与对照组）瞬时风险率 <span class="math inline">\(h(t)\)</span> 的比值：</p>
 <p><span class="math display">\[
-HR = \frac{h_1(t)}{h_2(t)}
+  HR = \frac{h_1(t)}{h_2(t)}
 \]</span></p>
 <p>它是一个相对指标，表示某组的风险率是另一组的多少倍。对 HR 的理解，可以类比 OR 的概念，只是 HR 是在时间上的比值，而 OR 无时间信息。如果时间对事件的影响较小（比如事件发生概率很低或者随访时间很短），HR 和 OR 的数值可能接近。但在事件发生率较高时，OR 通常会高于 HR，因为 OR 夸大了实际的效应。</p>
 <p>前面的累积风险函数 <span class="math inline">\(H(t)\)</span> 与瞬时风险率 <span class="math inline">\(h(t)\)</span> 紧密相关，若 HR 在所有时间上恒定（即比例风险假设成立），则累积风险函数之间的关系为：</p>
 <p><span class="math display">\[
-H_1(t) = HR \cdot H_2(t)
+  H_1(t) = HR \cdot H_2(t)
 \]</span></p>
 <p>这意味着在比例风险假设成立的情况下，<strong>累积风险图中两组曲线的斜率比值大致等于 HR</strong>，即如果两组的 HR 恒定不变，则累积风险曲线在对数尺度下呈现平行关系。而如果 HR 随时间变化，累积风险曲线的差异会随着时间的推移而增大或缩小。从这个角度看，累积风险图可以通过曲线的趋势和两组曲线间的相对关系直观地展示 HR 的变化。</p>
 
@@ -856,7 +856,7 @@ Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. 
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - cumulative hazard plot</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - hazard function</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
@@ -866,7 +866,7 @@ Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. 
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
@@ -881,31 +881,45 @@ Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. 
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### 累积风险函数</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>在时间事件数据中，**累积风险图（cumulative hazard plot）**的 Y 轴表示的是累积风险函数（cumulative hazard function, $H(t)$）。$H(t)$ 描述的是从起始时间到 $t$ 时刻，某个事件发生的**累积风险总和**。它是通过对瞬时风险函数（即危险率，hazard rate, $h(t)$）在时间上的积分得到的，公式为 <span class="co">[</span><span class="ot">@RN529</span><span class="co">]</span>：</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>H(t) = \int_{0}^{t} h(u) \, du</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>在时间事件数据中，**累积风险图（cumulative hazard plot）**的 Y</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>轴表示的是累积风险函数（cumulative hazard function, $H(t)$）。$H(t)$</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>描述的是从起始时间到 $t$</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>时刻，某个事件发生的**累积风险总和**。它是通过对瞬时风险函数（即危险率，hazard</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>rate, $h(t)$）在时间上的积分得到的，公式为 <span class="co">[</span><span class="ot">@RN529</span><span class="co">]</span>：</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>其中，$h(t)$ 是已生存到 $t$ 时刻的对象在 $t$ 时刻发生事件的速率。$H(t)$ 没有上限值，它随着时间 $t$ 的增加而单调递增。</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 累积风险与 HR（风险比）的关系</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  H(t) = \int_{0}^{t} h(u) \, du</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>HR 是比较两组（如治疗组与对照组）瞬时风险率 $h(t)$ 的比值：</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>HR = \frac{h_1(t)}{h_2(t)}</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>它是一个相对指标，表示某组的风险率是另一组的多少倍。对 HR 的理解，可以类比 OR 的概念，只是 HR 是在时间上的比值，而 OR 无时间信息。如果时间对事件的影响较小（比如事件发生概率很低或者随访时间很短），HR 和 OR 的数值可能接近。但在事件发生率较高时，OR 通常会高于 HR，因为 OR 夸大了实际的效应。</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>前面的累积风险函数 $H(t)$ 与瞬时风险率 $h(t)$ 紧密相关，若 HR 在所有时间上恒定（即比例风险假设成立），则累积风险函数之间的关系为：</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>H_1(t) = HR \cdot H_2(t)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>这意味着在比例风险假设成立的情况下，**累积风险图中两组曲线的斜率比值大致等于 HR**，即如果两组的 HR 恒定不变，则累积风险曲线在对数尺度下呈现平行关系。而如果 HR 随时间变化，累积风险曲线的差异会随着时间的推移而增大或缩小。从这个角度看，累积风险图可以通过曲线的趋势和两组曲线间的相对关系直观地展示 HR 的变化。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>其中，$h(t)$ 是已生存到 $t$ 时刻的对象在 $t$ 时刻发生事件的速率。$H(t)$</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>没有上限值，它随着时间 $t$ 的增加而单调递增。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">### 累积风险与 HR（风险比）的关系</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>HR 是比较两组（如治疗组与对照组）瞬时风险率 $h(t)$ 的比值：</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  HR = \frac{h_1(t)}{h_2(t)}</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>它是一个相对指标，表示某组的风险率是另一组的多少倍。对 HR 的理解，可以类比 OR</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>的概念，只是 HR 是在时间上的比值，而 OR</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>无时间信息。如果时间对事件的影响较小（比如事件发生概率很低或者随访时间很短），HR</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>和 OR 的数值可能接近。但在事件发生率较高时，OR 通常会高于 HR，因为 OR</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>夸大了实际的效应。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>前面的累积风险函数 $H(t)$ 与瞬时风险率 $h(t)$ 紧密相关，若 HR</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>在所有时间上恒定（即比例风险假设成立），则累积风险函数之间的关系为：</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  H_1(t) = HR \cdot H_2(t)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>这意味着在比例风险假设成立的情况下，**累积风险图中两组曲线的斜率比值大致等于</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>HR**，即如果两组的 HR 恒定不变，则累积风险曲线在对数尺度下呈现平行关系。而如果</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>HR</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>随时间变化，累积风险曲线的差异会随着时间的推移而增大或缩小。从这个角度看，累积风险图可以通过曲线的趋势和两组曲线间的相对关系直观地展示</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>HR 的变化。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
