@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="Linkage Disequilibrium, LD">
+<meta name="description" content="biostat weekly issue 42">
 
-<title>连锁不平衡 | Zhen Lu – Zhen Lu</title>
+<title>生统爱好者周刊（第 42 期）：如何应对中国的肥胖问题 | Zhen Lu – Zhen Lu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,35 +122,6 @@ div.column-margin+hr.dinkus {
 }
 </style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -252,8 +223,14 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#连锁不平衡linkage-disequilibrium-ld" id="toc-连锁不平衡linkage-disequilibrium-ld" class="nav-link active" data-scroll-target="#连锁不平衡linkage-disequilibrium-ld">连锁不平衡（Linkage Disequilibrium, LD）</a></li>
-  <li><a href="#ld的数学描述" id="toc-ld的数学描述" class="nav-link" data-scroll-target="#ld的数学描述"><strong>LD的数学描述</strong></a></li>
+  <li><a href="#封面图" id="toc-封面图" class="nav-link active" data-scroll-target="#封面图">封面图</a></li>
+  <li><a href="#本周话题如何应对中国的肥胖问题" id="toc-本周话题如何应对中国的肥胖问题" class="nav-link" data-scroll-target="#本周话题如何应对中国的肥胖问题">本周话题：如何应对中国的肥胖问题</a></li>
+  <li><a href="#生统研究" id="toc-生统研究" class="nav-link" data-scroll-target="#生统研究">生统研究</a></li>
+  <li><a href="#博文资讯" id="toc-博文资讯" class="nav-link" data-scroll-target="#博文资讯">博文资讯</a></li>
+  <li><a href="#工具" id="toc-工具" class="nav-link" data-scroll-target="#工具">工具</a></li>
+  <li><a href="#资源" id="toc-资源" class="nav-link" data-scroll-target="#资源">资源</a></li>
+  <li><a href="#贡献者github-id" id="toc-贡献者github-id" class="nav-link" data-scroll-target="#贡献者github-id">贡献者（GitHub ID）</a></li>
+  <li><a href="#订阅" id="toc-订阅" class="nav-link" data-scroll-target="#订阅">订阅</a></li>
   </ul>
 </nav>
 </nav>
@@ -266,16 +243,15 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">连锁不平衡</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 42 期）：如何应对中国的肥胖问题</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">linkage disequilibrium</div>
-    <div class="quarto-category">genetics</div>
+    <div class="quarto-category">biostat-weekly</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Linkage Disequilibrium, LD
+    biostat weekly issue 42
   </div>
 </div>
 
@@ -292,7 +268,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Tuesday, November 26, 2024</p>
+      <p class="date">Friday, July 17, 2026</p>
     </div>
   </div>
   
@@ -304,56 +280,96 @@ window.Quarto = {
 </header>
 
 
-<section id="连锁不平衡linkage-disequilibrium-ld" class="level3">
-<h3 class="anchored" data-anchor-id="连锁不平衡linkage-disequilibrium-ld">连锁不平衡（Linkage Disequilibrium, LD）</h3>
-<p><strong><a href="https://en.wikipedia.org/wiki/Linkage_disequilibrium" title="wiki">连锁不平衡（LD）</a></strong> 是群体遗传学和基因组学中的一个基本概念，用于描述两个或多个遗传标记（通常是单核苷酸多态性，SNP）之间的<strong>非随机关联</strong>。当某些 SNP 的等位基因 （allele）的组合在一个群体中出现的频率高于根据单独等位基因频率计算的预期频率时，这种现象被称为连锁不平衡。LD 是基因组关联分析（GWAS）和基因组选择等研究的重要基础，用于识别与复杂性状相关的遗传变异，并帮助推断遗传位点之间的关系。</p>
-<p>连锁是指基因组中靠得很近的基因或遗传标记倾向于一起遗传的现象，这是由染色体重组的随机性和空间上的接近性引起的。而 LD 则描述了在一个群体中等位基因组合的统计学偏差，如果遗传标记之间的组合频率偏离预期（非随机关联），就表明存在 LD。</p>
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png" class="img-fluid"></p>
 </section>
-<section id="ld的数学描述" class="level3">
-<h3 class="anchored" data-anchor-id="ld的数学描述"><strong>LD的数学描述</strong></h3>
-<p>连锁不平衡通常用两个指标来描述：<span class="math inline">\(D'\)</span> 和 <span class="math inline">\(r^2\)</span>。</p>
-<section id="不平衡系数d" class="level4">
-<h4 class="anchored" data-anchor-id="不平衡系数d"><strong>1. 不平衡系数（D）</strong></h4>
-<p>定义两个标记 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 的四种可能等位基因组合及其频率： - <span class="math inline">\(A_1B_1\)</span>, <span class="math inline">\(A_1B_2\)</span>, <span class="math inline">\(A_2B_1\)</span>, <span class="math inline">\(A_2B_2\)</span>，分别表示两位点上的不同等位基因组合。</p>
-<p>设： - <span class="math inline">\(P(A_1B_1)\)</span>：观察到 <span class="math inline">\(A_1\)</span> 和 <span class="math inline">\(B_1\)</span> 同时出现的频率。 - <span class="math inline">\(P(A_1)\)</span>：<span class="math inline">\(A_1\)</span> 的边际频率。 - <span class="math inline">\(P(B_1)\)</span>：<span class="math inline">\(B_1\)</span> 的边际频率。</p>
-<p>则不平衡系数 <span class="math inline">\(D\)</span> 定义为：</p>
-<p><span class="math display">\[
-  D = P(A_1B_1) - P(A_1)P(B_1)
-\]</span></p>
+<section id="本周话题如何应对中国的肥胖问题" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题如何应对中国的肥胖问题">本周话题：<a href="https://mp.weixin.qq.com/s/try5quB45L6VJLICDfEFig">如何应对中国的肥胖问题</a></h3>
+<p>柳叶刀-区域健康（西太平洋）》3月刊中多项中国相关研究核心聚焦肥胖流行趋势及其多层次风险因素，并延伸至感染治疗、抗菌耐药、HIV治疗策略及环境健康影响等议题。研究指出，中国肥胖问题将在未来持续加重，其成因涉及个体行为、环境与政策多重因素，当前防控体系仍存在明显缺口；同时，多项临床研究揭示了治疗策略优化、耐药性挑战及环境因素对健康的重要影响，强调循证决策与系统性干预的必要性。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/wcdwE_pfzH_TNk_lYGN2Yg">Science | 人工智能代理的自主生物医学研究 Biomni</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716215944.png" class="img-fluid"></p>
+<p>Kexin Huang 等人在 Science 发表《Autonomous biomedical research with an artificial intelligence agent》，介绍了通用生物医学 AI 智能体 Biomni。这项研究释放了一个清晰的信号：我们正在从医疗 AI 问答时代，进入医疗 AI 智能体时代。医疗 AI 的下一次跃迁，不只是“更会回答问题”，而是能够理解研究目标、调用专业工具、执行分析流程，并与临床医生共同完成一项研究。</p>
 <ul>
-<li>当 <span class="math inline">\(D = 0\)</span> 时，标记之间没有 LD，即独立遗传。</li>
-<li>当 <span class="math inline">\(D \neq 0\)</span> 时，标记之间存在 LD。</li>
+<li>论文 DOI: 10.1126/science.adz4351</li>
 </ul>
-<p>然而，由于 <span class="math inline">\(D\)</span> 的值依赖于等位基因的频率，其绝对值没有固定的范围，因此通常会对其进行标准化。</p>
-</section>
-<section id="标准化不平衡系数d" class="level4">
-<h4 class="anchored" data-anchor-id="标准化不平衡系数d"><strong>2. 标准化不平衡系数（<span class="math inline">\(D'\)</span>）</strong></h4>
-<p><span class="math display">\[
-  D' = \frac{D}{D_{\text{max}}}
-\]</span></p>
-<p>其中 <span class="math inline">\(D_{\text{max}}\)</span> 是 <span class="math inline">\(D\)</span> 的可能最大值或最小值，取决于等位基因频率。</p>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/gFgsFLa0jsFTmqEIIbjmNg">npj Digital Medicine | CancerLLM：癌症领域的大型语言模型</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220301.png" class="img-fluid"></p>
+<p>通用生物医学大语言模型（如 BioMistral、ClinicalCamel、PMC-LLaMA）主要在 PubMed 摘要或 MIMIC-III 等通用生物医学文本上训练，对肿瘤领域的特殊表述模式覆盖不足。肿瘤学有自己独特的术语体系、复杂的分期分级系统（TNM 分期、Gleason 评分等）以及高度结构化的临床记录格式。Li 等人在npj Digital Medicine上发表了 CancerLLM（DOI: 10.1038/s41746-026-02441-8），一个基于 Mistral 7B 构建的肿瘤领域专用大语言模型。该模型在癌症表型提取和诊断生成两个核心任务上的平均 F1 分别达到 91.78% 和 86.81%，比现有最优基线平均高出 9.23 个百分点——而它的推理显存仅需 5,550 MB，不到 70B 参数模型的七分之一。</p>
 <ul>
-<li><span class="math inline">\(D'\)</span> 的范围为 [-1, 1]。</li>
-<li><span class="math inline">\(D' = 1\)</span> 表示完全连锁不平衡。</li>
+<li>论文 DOI: 10.1038/s41746-026-02441-8</li>
 </ul>
 </section>
-<section id="相关系数r2" class="level4">
-<h4 class="anchored" data-anchor-id="相关系数r2"><strong>3. 相关系数（<span class="math inline">\(r^2\)</span>）</strong></h4>
-<p>但在群体遗传学中，其实我们更常用 <span class="math inline">\(r^2\)</span> 来衡量 LD：</p>
-<p><span class="math display">\[
-  r^2 = \frac{D^2}{P(A_1)P(A_2)P(B_1)P(B_2)}
-\]</span></p>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/Y-jguaIV4dRDc2nRXbBOxg">Anthropic：AI做生物研究，卡在数据库</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220412.png" class="img-fluid"></p>
+<p>AI写代码已经很强了，但做生物研究却明显落后。Anthropic最新发的一篇科学博客揭示了一个反直觉的原因：瓶颈不只是模型推理能力，而是生物数据基础设施还没为agent准备好。</p>
+<ol start="4" type="1">
+<li><a href="https://theconversation.com/can-ozempic-prevent-cancer-a-doctor-explains-why-the-headlines-are-easy-to-misread-285206" title="Ozempic等GLP-1类药物是否能预防癌症">Ozempic等GLP-1类药物是否能预防癌症</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png" class="img-fluid"></p>
+<p>最近”Ozempic等GLP-1类药物能预防癌症”的说法有点跑在证据前面了。而这类研究有三个特别容易被误读的地方：一是”健康使用者偏倚”——能用上这类药、还坚持用下去的人，往往本身就比同等体重但没有这些条件的人更健康、经济状况更好，观察性研究很难剔除这种偏倚，真正压低癌症风险的可能是促成用药的那些背景优势，而非药物本身；二是对照组选择会直接影响结果，比如把GLP-1药物使用者和胰岛素使用者做比较，但胰岛素通常留给病情更重的糖尿病患者，这类人群癌症风险本就偏高，跟这样一个高风险对照组比，几乎什么药都会显得”有保护作用”；三是起效时间不太合理——癌症往往要几十年才发展出来，但多数相关研究随访时间只有几年，部分研究里”保护效果”几乎在用药后立刻出现，这在生物学上讲不通，更像是偏倚而非真实药效。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/MYkNSBieg9W5_-Olopk3Tg">Anthropic推出Claude Science</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220717.png" class="img-fluid"></p>
+<p>Anthropic推出AI工作平台Claude Science，可用于自动化完成一系列生物学和化学研究任务，例如预测蛋白质结构。这款软件整合了科学家常用的多种工具，包括60多个科学数据库，其目标是让科学家能够更轻松地自动化执行多步骤任务，使用自然语言提问，并在无需逐一查询多个信息来源的情况下获得答案。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/dz5Fdv3RZi-x-jV7ZtNmiA">17 条规则去除 AI 味</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220920.png" class="img-fluid"></p>
+<p>Nature 报道了一款名为 Academic Humanizer 的开源项目。与常见的 AI 写作工具不同，它并不负责生成论文，而是专门处理已经完成的 AI 草稿，对语言风格、论断强度和学术表达进行二次优化。这一工具反映出一个新的趋势：AI 学术写作正在从“生成内容”进入“后处理（Post-processing）”阶段。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/9sTsSma2DLocKBZmXuCR1A">李飞飞: 对于世界模型的深入浅出讲解</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221037.png" class="img-fluid"></p>
+<p>世界模型目前被视为是智能体走向自主感知、推理、规划与生成的重要基础。作为一个未来趋势的重要概念，世界模型正被频繁提及。关于如何理解世界模型的概念和内涵，李飞飞本人在社媒上发布了文章《A Functional Taxonomy of World Models》，深入浅出地讲解了世界模型的内涵和功能。</p>
+<ol start="8" type="1">
+<li><a href="https://academy.openai.com/" title="OpenAI Academy">OpenAI Academy</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221142.png" class="img-fluid"></p>
+<p>由 OpenAI 推出的人工智能学习与交流平台，旨在帮助个人、开发者、教育工作者、研究人员和组织系统学习并应用人工智能技术。平台提供涵盖 ChatGPT、生成式 AI、提示工程、AI 应用开发、安全与负责任使用等方向的课程、教程、实践案例和社区资源，帮助用户从基础认知逐步提升至实际应用能力。OpenAI Academy 不仅关注工具使用，更强调培养 AI 素养、问题拆解能力和人机协作思维，推动 AI 在教育、科研、企业和社会领域的创新应用。对于希望系统学习 AI 工作流、智能体应用和未来技术趋势的学习者而言，该平台是官方权威的入门与进阶资源中心。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
 <ul>
-<li><span class="math inline">\(r^2\)</span> 的范围为 [0, 1]。</li>
-<li><span class="math inline">\(r^2 = 0\)</span>：标记之间完全独立。</li>
-<li><span class="math inline">\(r^2 = 1\)</span>：标记之间完全关联。</li>
-<li><span class="math inline">\(r^2\)</span> 的值通常用于评估 GWAS 研究中的 SNP 冗余。</li>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+<li>[<code>@Jinyu-Luo</code>]（罗瑾瑜）</li>
 </ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -838,82 +854,123 @@ window.Quarto = {
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "\u8FDE\u9501\u4E0D\u5E73\u8861"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-11-26</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> Linkage Disequilibrium, LD</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://upload.wikimedia.org/wikipedia/commons/9/92/Linkage_Disequilibrium_Heatmap.png</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 42 期）：如何应对中国的肥胖问题"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-07-17</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 42"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - linkage disequilibrium</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - genetics</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">          \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 连锁不平衡（Linkage Disequilibrium, LD）</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostat-weekly</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>**[连锁不平衡（LD）](https://en.wikipedia.org/wiki/Linkage_disequilibrium "wiki")**</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>是群体遗传学和基因组学中的一个基本概念，用于描述两个或多个遗传标记（通常是单核苷酸多态性，SNP）之间的**非随机关联**。当某些</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>SNP 的等位基因</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>（allele）的组合在一个群体中出现的频率高于根据单独等位基因频率计算的预期频率时，这种现象被称为连锁不平衡。LD</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>是基因组关联分析（GWAS）和基因组选择等研究的重要基础，用于识别与复杂性状相关的遗传变异，并帮助推断遗传位点之间的关系。</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>连锁是指基因组中靠得很近的基因或遗传标记倾向于一起遗传的现象，这是由染色体重组的随机性和空间上的接近性引起的。而</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>LD</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>则描述了在一个群体中等位基因组合的统计学偏差，如果遗传标记之间的组合频率偏离预期（非随机关联），就表明存在</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>LD。</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## **LD的数学描述**</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>连锁不平衡通常用两个指标来描述：$D'$ 和 $r^2$。</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### **1. 不平衡系数（D）**</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>定义两个标记 $A$ 和 $B$ 的四种可能等位基因组合及其频率： - $A_1B_1$, $A_1B_2$,</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>$A_2B_1$, $A_2B_2$，分别表示两位点上的不同等位基因组合。</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>这里记录每周值得分享的生统相关内容，周五发布。</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>本杂志开源（GitHub: <span class="co">[</span><span class="ot">openbiostat/biostat-weekly</span><span class="co">](https://github.com/openbiostat/biostat-weekly "openbiostat/biostat-weekly")</span>），欢迎提交 issue 投稿或推荐生统相关内容。</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">「生统爱好者周刊讨论区」</span><span class="co">](https://github.com/openbiostat/biostat-weekly/discussions "生统爱好者周刊讨论区")</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 封面图</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[如何应对中国的肥胖问题](https://mp.weixin.qq.com/s/try5quB45L6VJLICDfEFig)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>柳叶刀-区域健康（西太平洋）》3月刊中多项中国相关研究核心聚焦肥胖流行趋势及其多层次风险因素，并延伸至感染治疗、抗菌耐药、HIV治疗策略及环境健康影响等议题。研究指出，中国肥胖问题将在未来持续加重，其成因涉及个体行为、环境与政策多重因素，当前防控体系仍存在明显缺口；同时，多项临床研究揭示了治疗策略优化、耐药性挑战及环境因素对健康的重要影响，强调循证决策与系统性干预的必要性。</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>设： - $P(A_1B_1)$：观察到 $A_1$ 和 $B_1$ 同时出现的频率。 - $P(A_1)$：$A_1$</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>的边际频率。 - $P(B_1)$：$B_1$ 的边际频率。</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>则不平衡系数 $D$ 定义为：</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  D = P(A_1B_1) - P(A_1)P(B_1)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当 $D = 0$ 时，标记之间没有 LD，即独立遗传。</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>当 $D \neq 0$ 时，标记之间存在 LD。</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Science | 人工智能代理的自主生物医学研究 Biomni</span><span class="co">](https://mp.weixin.qq.com/s/wcdwE_pfzH_TNk_lYGN2Yg)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716215944.png)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Kexin Huang 等人在 Science 发表《Autonomous biomedical research with an artificial intelligence agent》，介绍了通用生物医学 AI 智能体 Biomni。这项研究释放了一个清晰的信号：我们正在从医疗 AI 问答时代，进入医疗 AI 智能体时代。医疗 AI 的下一次跃迁，不只是“更会回答问题”，而是能够理解研究目标、调用专业工具、执行分析流程，并与临床医生共同完成一项研究。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI: 10.1126/science.adz4351</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">npj Digital Medicine | CancerLLM：癌症领域的大型语言模型</span><span class="co">](https://mp.weixin.qq.com/s/gFgsFLa0jsFTmqEIIbjmNg)</span></span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>然而，由于 $D$</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>的值依赖于等位基因的频率，其绝对值没有固定的范围，因此通常会对其进行标准化。</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### **2. 标准化不平衡系数（$D'$）**</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  D' = \frac{D}{D_{\text{max}}}</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>其中 $D_{\text{max}}$ 是 $D$ 的可能最大值或最小值，取决于等位基因频率。</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$D'$ 的范围为 <span class="co">[</span><span class="ot">-1, 1</span><span class="co">]</span>。</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$D' = 1$ 表示完全连锁不平衡。</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220301.png)</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>通用生物医学大语言模型（如 BioMistral、ClinicalCamel、PMC-LLaMA）主要在 PubMed 摘要或 MIMIC-III 等通用生物医学文本上训练，对肿瘤领域的特殊表述模式覆盖不足。肿瘤学有自己独特的术语体系、复杂的分期分级系统（TNM 分期、Gleason 评分等）以及高度结构化的临床记录格式。Li 等人在npj Digital Medicine上发表了 CancerLLM（DOI: 10.1038/s41746-026-02441-8），一个基于 Mistral 7B 构建的肿瘤领域专用大语言模型。该模型在癌症表型提取和诊断生成两个核心任务上的平均 F1 分别达到 91.78% 和 86.81%，比现有最优基线平均高出 9.23 个百分点——而它的推理显存仅需 5,550 MB，不到 70B 参数模型的七分之一。</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI: 10.1038/s41746-026-02441-8</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">Anthropic：AI做生物研究，卡在数据库</span><span class="co">](https://mp.weixin.qq.com/s/Y-jguaIV4dRDc2nRXbBOxg)</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220412.png)</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>AI写代码已经很强了，但做生物研究却明显落后。Anthropic最新发的一篇科学博客揭示了一个反直觉的原因：瓶颈不只是模型推理能力，而是生物数据基础设施还没为agent准备好。</span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### **3. 相关系数（$r^2$）**</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">Ozempic等GLP-1类药物是否能预防癌症</span><span class="co">](https://theconversation.com/can-ozempic-prevent-cancer-a-doctor-explains-why-the-headlines-are-easy-to-misread-285206 "Ozempic等GLP-1类药物是否能预防癌症")</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>但在群体遗传学中，其实我们更常用 $r^2$ 来衡量 LD：</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png)</span></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  r^2 = \frac{D^2}{P(A_1)P(A_2)P(B_1)P(B_2)}</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>最近"Ozempic等GLP-1类药物能预防癌症"的说法有点跑在证据前面了。而这类研究有三个特别容易被误读的地方：一是"健康使用者偏倚"——能用上这类药、还坚持用下去的人，往往本身就比同等体重但没有这些条件的人更健康、经济状况更好，观察性研究很难剔除这种偏倚，真正压低癌症风险的可能是促成用药的那些背景优势，而非药物本身；二是对照组选择会直接影响结果，比如把GLP-1药物使用者和胰岛素使用者做比较，但胰岛素通常留给病情更重的糖尿病患者，这类人群癌症风险本就偏高，跟这样一个高风险对照组比，几乎什么药都会显得"有保护作用"；三是起效时间不太合理——癌症往往要几十年才发展出来，但多数相关研究随访时间只有几年，部分研究里"保护效果"几乎在用药后立刻出现，这在生物学上讲不通，更像是偏倚而非真实药效。</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2$ 的范围为 <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>。</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2 = 0$：标记之间完全独立。</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2 = 1$：标记之间完全关联。</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$r^2$ 的值通常用于评估 GWAS 研究中的 SNP 冗余。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">Anthropic推出Claude Science</span><span class="co">](https://mp.weixin.qq.com/s/MYkNSBieg9W5_-Olopk3Tg)</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220717.png)</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>Anthropic推出AI工作平台Claude Science，可用于自动化完成一系列生物学和化学研究任务，例如预测蛋白质结构。这款软件整合了科学家常用的多种工具，包括60多个科学数据库，其目标是让科学家能够更轻松地自动化执行多步骤任务，使用自然语言提问，并在无需逐一查询多个信息来源的情况下获得答案。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span><span class="co">[</span><span class="ot">17 条规则去除 AI 味</span><span class="co">](https://mp.weixin.qq.com/s/dz5Fdv3RZi-x-jV7ZtNmiA)</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220920.png)</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>Nature 报道了一款名为 Academic Humanizer 的开源项目。与常见的 AI 写作工具不同，它并不负责生成论文，而是专门处理已经完成的 AI 草稿，对语言风格、论断强度和学术表达进行二次优化。这一工具反映出一个新的趋势：AI 学术写作正在从“生成内容”进入“后处理（Post-processing）”阶段。</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span><span class="co">[</span><span class="ot">李飞飞: 对于世界模型的深入浅出讲解</span><span class="co">](https://mp.weixin.qq.com/s/9sTsSma2DLocKBZmXuCR1A)</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221037.png)</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>世界模型目前被视为是智能体走向自主感知、推理、规划与生成的重要基础。作为一个未来趋势的重要概念，世界模型正被频繁提及。关于如何理解世界模型的概念和内涵，李飞飞本人在社媒上发布了文章《A Functional Taxonomy of World Models》，深入浅出地讲解了世界模型的内涵和功能。</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span><span class="co">[</span><span class="ot">OpenAI Academy</span><span class="co">](https://academy.openai.com/ "OpenAI Academy")</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221142.png)</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>由 OpenAI 推出的人工智能学习与交流平台，旨在帮助个人、开发者、教育工作者、研究人员和组织系统学习并应用人工智能技术。平台提供涵盖 ChatGPT、生成式 AI、提示工程、AI 应用开发、安全与负责任使用等方向的课程、教程、实践案例和社区资源，帮助用户从基础认知逐步提升至实际应用能力。OpenAI Academy 不仅关注工具使用，更强调培养 AI 素养、问题拆解能力和人机协作思维，推动 AI 在教育、科研、企业和社会领域的创新应用。对于希望系统学习 AI 工作流、智能体应用和未来技术趋势的学习者而言，该平台是官方权威的入门与进阶资源中心。</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Jinyu-Luo`</span><span class="co">]</span>（罗瑾瑜）</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<span class="in">`陆震生物统计`</span>或者扫描二维码，即可订阅。</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png)</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>同时，本周刊同步支持 <span class="co">[</span><span class="ot">RSS 订阅</span><span class="co">](https://leslie-lu.github.io/biostat_weekly_rss.xml "生统爱好者周刊 RSS 订阅")</span>；本周刊同名中文播客现已正式在<span class="co">[</span><span class="ot">苹果播客（Apple Podcasts）</span><span class="co">](https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB "Apple Podcasts 订阅")</span>和<span class="co">[</span><span class="ot">小宇宙</span><span class="co">](https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e "小宇宙订阅")</span>平台上线，搜索<span class="in">`生统爱好者周刊`</span>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

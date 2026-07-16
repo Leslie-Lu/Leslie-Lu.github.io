@@ -11,7 +11,114 @@
 <description>A weekly newsletter covering new research and resources in biostatistics, founded by Zhen Lu.</description>
 <language>en</language>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Fri, 10 Jul 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 17 Jul 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>生统爱好者周刊（第 42 期）：如何应对中国的肥胖问题</title>
+  <dc:creator>Zhen Lu</dc:creator>
+  <link>https://leslie-lu.github.io/blog/2026/07/17/biostat_weekly_issue42/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png" class="img-fluid"></p>
+</section>
+<section id="本周话题如何应对中国的肥胖问题" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题如何应对中国的肥胖问题">本周话题：<a href="https://mp.weixin.qq.com/s/try5quB45L6VJLICDfEFig">如何应对中国的肥胖问题</a></h3>
+<p>柳叶刀-区域健康（西太平洋）》3月刊中多项中国相关研究核心聚焦肥胖流行趋势及其多层次风险因素，并延伸至感染治疗、抗菌耐药、HIV治疗策略及环境健康影响等议题。研究指出，中国肥胖问题将在未来持续加重，其成因涉及个体行为、环境与政策多重因素，当前防控体系仍存在明显缺口；同时，多项临床研究揭示了治疗策略优化、耐药性挑战及环境因素对健康的重要影响，强调循证决策与系统性干预的必要性。</p>
+</section>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/wcdwE_pfzH_TNk_lYGN2Yg">Science | 人工智能代理的自主生物医学研究 Biomni</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716215944.png" class="img-fluid"></p>
+<p>Kexin Huang 等人在 Science 发表《Autonomous biomedical research with an artificial intelligence agent》，介绍了通用生物医学 AI 智能体 Biomni。这项研究释放了一个清晰的信号：我们正在从医疗 AI 问答时代，进入医疗 AI 智能体时代。医疗 AI 的下一次跃迁，不只是“更会回答问题”，而是能够理解研究目标、调用专业工具、执行分析流程，并与临床医生共同完成一项研究。</p>
+<ul>
+<li>论文 DOI: 10.1126/science.adz4351</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/gFgsFLa0jsFTmqEIIbjmNg">npj Digital Medicine | CancerLLM：癌症领域的大型语言模型</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220301.png" class="img-fluid"></p>
+<p>通用生物医学大语言模型（如 BioMistral、ClinicalCamel、PMC-LLaMA）主要在 PubMed 摘要或 MIMIC-III 等通用生物医学文本上训练，对肿瘤领域的特殊表述模式覆盖不足。肿瘤学有自己独特的术语体系、复杂的分期分级系统（TNM 分期、Gleason 评分等）以及高度结构化的临床记录格式。Li 等人在npj Digital Medicine上发表了 CancerLLM（DOI: 10.1038/s41746-026-02441-8），一个基于 Mistral 7B 构建的肿瘤领域专用大语言模型。该模型在癌症表型提取和诊断生成两个核心任务上的平均 F1 分别达到 91.78% 和 86.81%，比现有最优基线平均高出 9.23 个百分点——而它的推理显存仅需 5,550 MB，不到 70B 参数模型的七分之一。</p>
+<ul>
+<li>论文 DOI: 10.1038/s41746-026-02441-8</li>
+</ul>
+</section>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/Y-jguaIV4dRDc2nRXbBOxg">Anthropic：AI做生物研究，卡在数据库</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220412.png" class="img-fluid"></p>
+<p>AI写代码已经很强了，但做生物研究却明显落后。Anthropic最新发的一篇科学博客揭示了一个反直觉的原因：瓶颈不只是模型推理能力，而是生物数据基础设施还没为agent准备好。</p>
+<ol start="4" type="1">
+<li><a href="https://theconversation.com/can-ozempic-prevent-cancer-a-doctor-explains-why-the-headlines-are-easy-to-misread-285206" title="Ozempic等GLP-1类药物是否能预防癌症">Ozempic等GLP-1类药物是否能预防癌症</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png" class="img-fluid"></p>
+<p>最近”Ozempic等GLP-1类药物能预防癌症”的说法有点跑在证据前面了。而这类研究有三个特别容易被误读的地方：一是”健康使用者偏倚”——能用上这类药、还坚持用下去的人，往往本身就比同等体重但没有这些条件的人更健康、经济状况更好，观察性研究很难剔除这种偏倚，真正压低癌症风险的可能是促成用药的那些背景优势，而非药物本身；二是对照组选择会直接影响结果，比如把GLP-1药物使用者和胰岛素使用者做比较，但胰岛素通常留给病情更重的糖尿病患者，这类人群癌症风险本就偏高，跟这样一个高风险对照组比，几乎什么药都会显得”有保护作用”；三是起效时间不太合理——癌症往往要几十年才发展出来，但多数相关研究随访时间只有几年，部分研究里”保护效果”几乎在用药后立刻出现，这在生物学上讲不通，更像是偏倚而非真实药效。</p>
+</section>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/MYkNSBieg9W5_-Olopk3Tg">Anthropic推出Claude Science</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220717.png" class="img-fluid"></p>
+<p>Anthropic推出AI工作平台Claude Science，可用于自动化完成一系列生物学和化学研究任务，例如预测蛋白质结构。这款软件整合了科学家常用的多种工具，包括60多个科学数据库，其目标是让科学家能够更轻松地自动化执行多步骤任务，使用自然语言提问，并在无需逐一查询多个信息来源的情况下获得答案。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/dz5Fdv3RZi-x-jV7ZtNmiA">17 条规则去除 AI 味</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220920.png" class="img-fluid"></p>
+<p>Nature 报道了一款名为 Academic Humanizer 的开源项目。与常见的 AI 写作工具不同，它并不负责生成论文，而是专门处理已经完成的 AI 草稿，对语言风格、论断强度和学术表达进行二次优化。这一工具反映出一个新的趋势：AI 学术写作正在从“生成内容”进入“后处理（Post-processing）”阶段。</p>
+</section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/9sTsSma2DLocKBZmXuCR1A">李飞飞: 对于世界模型的深入浅出讲解</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221037.png" class="img-fluid"></p>
+<p>世界模型目前被视为是智能体走向自主感知、推理、规划与生成的重要基础。作为一个未来趋势的重要概念，世界模型正被频繁提及。关于如何理解世界模型的概念和内涵，李飞飞本人在社媒上发布了文章《A Functional Taxonomy of World Models》，深入浅出地讲解了世界模型的内涵和功能。</p>
+<ol start="8" type="1">
+<li><a href="https://academy.openai.com/" title="OpenAI Academy">OpenAI Academy</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716221142.png" class="img-fluid"></p>
+<p>由 OpenAI 推出的人工智能学习与交流平台，旨在帮助个人、开发者、教育工作者、研究人员和组织系统学习并应用人工智能技术。平台提供涵盖 ChatGPT、生成式 AI、提示工程、AI 应用开发、安全与负责任使用等方向的课程、教程、实践案例和社区资源，帮助用户从基础认知逐步提升至实际应用能力。OpenAI Academy 不仅关注工具使用，更强调培养 AI 素养、问题拆解能力和人机协作思维，推动 AI 在教育、科研、企业和社会领域的创新应用。对于希望系统学习 AI 工作流、智能体应用和未来技术趋势的学习者而言，该平台是官方权威的入门与进阶资源中心。</p>
+</section>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+<li>[<code>@Jinyu-Luo</code>]（罗瑾瑜）</li>
+</ul>
+</section>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>biostat-weekly</category>
+  <guid>https://leslie-lu.github.io/blog/2026/07/17/biostat_weekly_issue42/</guid>
+  <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260716220556.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>生统爱好者周刊（第 41 期）：AI时代，你和导师的知识差距消失了！真的吗？然后呢？</title>
   <dc:creator>Zhen Lu</dc:creator>
@@ -4533,133 +4640,6 @@
   <guid>https://leslie-lu.github.io/blog/2025/10/10/biostat_weekly_issue3/</guid>
   <pubDate>Fri, 10 Oct 2025 00:00:00 GMT</pubDate>
   <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251009185540.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>生统爱好者周刊（第 2 期）：非升即走，是人才培养更重要还是科研绩效更重要</title>
-  <dc:creator>Zhen Lu</dc:creator>
-  <link>https://leslie-lu.github.io/blog/2025/10/03/biostat_weekly_issue2/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
-<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
-<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
-<section id="封面图" class="level3">
-<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002161737.png" class="img-fluid"></p>
-</section>
-<section id="本周话题非升即走是人才培养更重要还是科研绩效更重要" class="level3">
-<h3 class="anchored" data-anchor-id="本周话题非升即走是人才培养更重要还是科研绩效更重要">本周话题：<a href="https://mp.weixin.qq.com/s/fwizpM-ZDeZ9Qy81fa2Lmg">非升即走，是人才培养更重要还是科研绩效更重要</a></h3>
-<blockquote class="blockquote">
-<p>“培养”与”不培养”的区别，就是将预聘的青年教师看作”自己人”还是”过客”。如果是前者，就会竭其所能，在科研和教学方面提供方便。如果是后者，则”公事公办”，以硬性的量化指标予以考核和约束。现在看来，后一种情况占绝大多数。对比 Tenure Track，两者形似而神不似。</p>
-</blockquote>
-<p>有关此事，相关的评论和论文也发表了不少。但国内的情形就是这样，思考者与管理者经常是二分的，纵使思考者一再呼吁、理性分析，管理者仍常凭感觉行事。</p>
-</section>
-<section id="生统研究" class="level3">
-<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
-<ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/wzU7BnqkWe9o1wN6vXSp9g">Nature Medicine | 跨多种器官和影像模态生成高质量合成医学影像</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002162047.png" class="img-fluid"></p>
-<p>MINIM（Medical Image-Text Generative Intelligent Model），这是首个能够跨多种器官和影像模态生成高质量合成医学影像的统一基础模型。该研究团队在北京大学王金卓教授和温州医科大学张康教授的联合领导下，首次验证了基于文本条件的多模态医学影像生成技术在临床应用中的实际价值，不仅在图像质量上达到了临床可用标准，更重要的是在肺癌EGFR突变检测和乳腺癌HER2状态预测等关键临床任务中展现出显著的预后改善效果。</p>
-<ul>
-<li>论文 DOI：10.1038/s41591-024-03359-y</li>
-</ul>
-<ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/N9HF7a9mu2hbuBLrXNtjAw">Nature Machine Intelligence | 基于贝叶斯网络的 GWAS 因果推断框架</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002162317.png" class="img-fluid"></p>
-<p>本文提出了一种新的分析框架 Bayesian Network GWAS (BN-GWAS)，结合了贝叶斯网络建模和因果效应估计方法（如 MR、IDA/jointIDA），旨在系统性构建基因–基因–疾病因果网络，进而量化基因的直接效应、间接效应以及联合效应。</p>
-<ul>
-<li>论文 DOI：10.1038/s42256-024-00906-7</li>
-</ul>
-<ol start="3" type="1">
-<li>JAMA Psychiatry | 心理健康研究中的跨诊断临床分期模型</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/!%5B%5D(httpscdn.jsdelivr.netghLeslie-LuWeChatOfficialAccountimg_202520250925155951.png).png" class="img-fluid"></p>
-<p>当前心理健康研究中，跨诊断（transdiagnostic）临床分期模型受到越来越多关注。即不局限于某一类障碍（如抑郁、焦虑、精神病），而是试图把早期症状和风险因素建立一个分期 / 进展模型。该研究为跨诊断临床分期模型提供了强有力的纵向实证支持：从儿童到青年期，早期家族风险 -&gt; 轻微症状 -&gt; 中度 / 功能受损症状之间存在一种阶段性、渐进式的转变路径。中介分析表明，性格特质（如神经质倾向）等可能是干预目标：如果能够调节或缓冲神经质倾向（例如通过心理干预、情绪调节训练等），或许可以减缓或阻止从轻症到中重症的转化。该研究也强调：在心理健康的早期干预设计中，除了考虑固定的风险因素（如家族史、早期逆境等），还应将阶段身份（即当前症状状态）本身纳入风险评估和干预决策。</p>
-<ul>
-<li>论文 DOI：10.1001/jamapsychiatry.2025.2648</li>
-</ul>
-</section>
-<section id="博文资讯" class="level3">
-<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
-<ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/EkMK_xuLoAHuI--65trynw">解析面向对象在软件工程中的应用</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002163346.png" class="img-fluid"></p>
-<p>本文系统解析了面向对象思想在软件工程中的核心价值与应用体系。作者从发展史切入，厘清面向对象与UML、软件工程、DDD等概念的关系，重点阐述用例建模方法、面向对象分析（OOA）的建模过程（含静态/动态建模及深层模型）、面向对象设计（OOD）的职责驱动模式（GRASP），最终构建出从理论到实践的完整知识框架。</p>
-<ol start="5" type="1">
-<li><a href="https://www.lesswrong.com/posts/XGHf7EY3CK4KorBpw/understanding-llms-insights-from-mechanistic?utm_id=FAUN_VarBear495_Link_title" title="LLM 是如何工作的">LLM 是如何工作的</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002163741.png" class="img-fluid"></p>
-<p>该文概述了 Transformer LLM 工作的基本原理，适合初学者阅读。</p>
-</section>
-<section id="工具" class="level3">
-<h3 class="anchored" data-anchor-id="工具">工具</h3>
-<ol start="6" type="1">
-<li><a href="https://mp.weixin.qq.com/s/u4lt3ucIeMZT-c1zAj7YAg">Git 实用技巧</a></li>
-</ol>
-<p><img src="https://img.devrant.com/devrant/rant/r_292990_JmRu7.gif" class="img-fluid"></p>
-<p>推文文章列举 Git 实际应用的技巧，可以更直观的了解 Git 命令的使用方法。</p>
-<ol start="7" type="1">
-<li><a href="https://github.com/monkesearch/monkeSearch" title="monkeSearch GitHub">monkeSearch，Mac 上的语义文件搜索</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164205.png" class="img-fluid"></p>
-<p>在 Mac 上进行完全本地化、时间感知的自然语言文件搜索，在不到 1 秒的时间内使用自然语言查找相关文件。</p>
-<ol start="8" type="1">
-<li><a href="https://www.metametrix.cn/" title="开放科学计量学学习平台">开放科学计量学学习平台</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164322.png" class="img-fluid"></p>
-<p>该平台提供了科学计量学的相关阅读材料与教程指南，帮助研究者掌握科研趋势分析、合作网络可视化与知识图谱构建的方法，支持跨学科交流与科研影响力评估。</p>
-</section>
-<section id="资源" class="level3">
-<h3 class="anchored" data-anchor-id="资源">资源</h3>
-<ol start="9" type="1">
-<li><a href="https://cloufield.github.io/GWASTutorial/" title="GWAS 教程">GWAS 教程</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164457.png" class="img-fluid"></p>
-<p>该教程由东京大学镰谷研究室提供，主要面向生物信息学/统计遗传学的初学者。</p>
-<ol start="10" type="1">
-<li><a href="https://github.com/scoopcn/scoopcn" title="Scoop 国内软件仓库">Scoop 国内软件仓库</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164557.png" class="img-fluid"></p>
-<p>支持安装管理常用的国内应用程序。</p>
-<ol start="11" type="1">
-<li><a href="https://docs.python.org/3/reference/index.html" title="The Python Language Reference">The Python Language Reference</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002164759.png" class="img-fluid"></p>
-<p>《The Python Language Reference》是Python官方提供的一份核心文档，它系统地阐述了Python语言本身的语法和核心语义。当你对某个语言机制的底层原理感到困惑时（例如，描述符如何工作、生成器的执行流程、元类的实例化过程），这份文档是最终的答案来源。它也是Python解释器实现者必须遵循的准则。</p>
-</section>
-<section id="贡献者github-id" class="level3">
-<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
-<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
-<ul>
-<li>[<code>@Leslie-Lu</code>]（陆震）</li>
-<li>[<code>@YihanChen325</code>]（陈奕含）</li>
-<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
-<li>[<code>@GCRPM</code>]（徐林玉）</li>
-</ul>
-</section>
-<section id="订阅" class="level3">
-<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
-<p>本周刊每周五发布，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
-<p>微信搜索”陆震生物统计”或者扫描二维码，即可订阅。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/qrcode_for_gh_395f59db8b4c_258.jpg" class="img-fluid"></p>
-<p>（完）</p>
-
-
-<!-- -->
-
-</section>
-
- ]]></description>
-  <category>biostat-weekly</category>
-  <guid>https://leslie-lu.github.io/blog/2025/10/03/biostat_weekly_issue2/</guid>
-  <pubDate>Fri, 03 Oct 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://cdn.jsdelivr.net/gh/Leslie-Lu/WeChatOfficialAccount/img_2025/20251002161737.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>
