@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="一种用于大规模基因组关联研究的高效工具">
+<meta name="description" content="biostat weekly issue 43">
 
-<title>SAIGE | Zhen Lu – Zhen Lu</title>
+<title>生统爱好者周刊（第 43 期）：养老科技的最大增量市场不是80+，而是80后？ | Zhen Lu – Zhen Lu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -125,7 +125,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed slimcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -223,7 +223,14 @@ div.column-margin+hr.dinkus {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#saige" id="toc-saige" class="nav-link active" data-scroll-target="#saige">SAIGE</a></li>
+  <li><a href="#封面图" id="toc-封面图" class="nav-link active" data-scroll-target="#封面图">封面图</a></li>
+  <li><a href="#本周话题养老科技的最大增量市场不是80而是80后" id="toc-本周话题养老科技的最大增量市场不是80而是80后" class="nav-link" data-scroll-target="#本周话题养老科技的最大增量市场不是80而是80后">本周话题：养老科技的最大增量市场不是80+，而是80后？</a></li>
+  <li><a href="#生统研究" id="toc-生统研究" class="nav-link" data-scroll-target="#生统研究">生统研究</a></li>
+  <li><a href="#博文资讯" id="toc-博文资讯" class="nav-link" data-scroll-target="#博文资讯">博文资讯</a></li>
+  <li><a href="#工具" id="toc-工具" class="nav-link" data-scroll-target="#工具">工具</a></li>
+  <li><a href="#资源" id="toc-资源" class="nav-link" data-scroll-target="#资源">资源</a></li>
+  <li><a href="#贡献者github-id" id="toc-贡献者github-id" class="nav-link" data-scroll-target="#贡献者github-id">贡献者（GitHub ID）</a></li>
+  <li><a href="#订阅" id="toc-订阅" class="nav-link" data-scroll-target="#订阅">订阅</a></li>
   </ul>
 </nav>
 </nav>
@@ -232,21 +239,19 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">SAIGE</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 43 期）：养老科技的最大增量市场不是80+，而是80后？</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">saige</div>
-    <div class="quarto-category">gwas</div>
-    <div class="quarto-category">genomics</div>
+    <div class="quarto-category">biostat-weekly</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    一种用于大规模基因组关联研究的高效工具
+    biostat weekly issue 43
   </div>
 </div>
 
@@ -263,7 +268,7 @@ div.column-margin+hr.dinkus {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Thursday, November 28, 2024</p>
+      <p class="date">Friday, July 24, 2026</p>
     </div>
   </div>
   
@@ -275,56 +280,96 @@ div.column-margin+hr.dinkus {
 </header>
 
 
-<section id="saige" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="saige">SAIGE</h3>
-<p>SAIGE（Scalable and Accurate Implementation of GEneralized mixed models）是一个用于大规模基因组关联研究（GWAS）的 <a href="https://saigegit.github.io/SAIGE-doc/" title="SAIGE">R 包</a>，旨在通过<code>广义混合模型（Generalized Mixed Models, GMM）</code>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE 具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</p>
-<p>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</p>
-<section id="saige-的主要特点" class="level4">
-<h4 class="anchored" data-anchor-id="saige-的主要特点">1. SAIGE 的主要特点</h4>
-<section id="高效的计算方法" class="level5">
-<h5 class="anchored" data-anchor-id="高效的计算方法">1.1 高效的计算方法</h5>
-<p>SAIGE 的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE 通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</p>
+<p>这里记录每周值得分享的生统相关内容，周五发布。</p>
+<p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
+<p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
+<section id="封面图" class="level3">
+<h3 class="anchored" data-anchor-id="封面图">封面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723224058.png" class="img-fluid"></p>
 </section>
-<section id="处理样本相关性" class="level5">
-<h5 class="anchored" data-anchor-id="处理样本相关性">1.2 处理样本相关性</h5>
-<p>在 GWAS 中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE 通过<code>基因型关系矩阵（GRM）</code>来处理样本的相关性，使得 GWAS 结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE 都能够有效地调整，避免不必要的假阳性结果。</p>
+<section id="本周话题养老科技的最大增量市场不是80而是80后" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题养老科技的最大增量市场不是80而是80后">本周话题：<a href="https://mp.weixin.qq.com/s/gvFdr98gxXTCUt_nYolx_A">养老科技的最大增量市场不是80+，而是80后？</a></h3>
+<p>颈椎退行性病变、焦虑失眠、代谢综合征——18到44岁群体的慢性病患病率正在加速攀升，2030年预计将超过30%。80后还没老，身体已经开始”提前养老”了。养老科技的最大增量市场，不在养老院，在80后的手机里。</p>
 </section>
-<section id="支持多种表型类型" class="level5">
-<h5 class="anchored" data-anchor-id="支持多种表型类型">1.3 支持多种表型类型</h5>
-<p>SAIGE 不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<code>Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）</code>来分析稀有变异。</p>
+<section id="生统研究" class="level3">
+<h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
+<ol type="1">
+<li><a href="https://mp.weixin.qq.com/s/ODzQp6t6PxcbTFWXfTYNJA">Nature | 从348种疾病中提取21条生命轨迹，AI能否重新定义疾病分类？</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723224422.png" class="img-fluid"></p>
+<p>两个人最后进入同一个诊断框，却未必沿着同一条生物学路径走到这里。电子健康记录本来保留了这种差异：疾病在什么年龄出现，哪些诊断先发生，哪些疾病长期共存，新诊断出现后风险如何改变。然而，常见分析方法往往把每种疾病单独拿出来建模，心梗预测心梗，乳腺癌预测乳腺癌，糖尿病预测糖尿病。一个人几十年间不断交织的多种疾病，由此被拆成了一组彼此独立的标签。</p>
+<p>来自麻省总医院、哈佛医学院、Broad研究所、Dana-Farber癌症研究所等机构的研究团队，由 Sarah M. Urbut、Alexander Gusev、Pradeep Natarajan 和 Giovanni Parmigiani 担任通信作者，在 Nature 发表了题为 “A Bayesian framework for longitudinal EHR and genetic discovery” 的研究。团队开发了一个名为 ALADYNOULLI 的贝叶斯生成模型，把纵向电子健康记录、年龄变化和遗传风险放入同一个框架中，试图恢复隐藏在诊断代码背后的疾病组合及其随时间变化的轨迹。</p>
+<p>研究覆盖英国生物样本库、Mass General Brigham Biobank和美国All of Us三个独立队列，总样本量超过68.3万人，最长随访达到52年，共纳入348种疾病。模型最终识别出21个潜在疾病特征，其中20个对应相对明确的疾病过程，另一个用于描述低发病状态。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-026-10780-5</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://mp.weixin.qq.com/s/2UrXBTc5jok0GeSfv5qFLw">Nature ｜ 大语言模型能预测社会科学实验结果，但会系统性高估效应</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225254.png" class="img-fluid"></p>
+<p>社会科学最核心的问题之一，是因果。一段公共卫生信息能不能提高疫苗接种意愿？一种政治沟通方式会不会减少党派敌意？某个社会政策框架会不会改变公众支持度？这些问题不能只靠直觉回答，通常需要随机实验：把不同人随机分到不同条件，再比较他们的态度、选择或行为有没有变化。</p>
+<p>现在，一个新问题出现了：大语言模型能不能先替我们”预演”实验？不是简单问模型”你觉得这个实验会怎样”，而是把它当作很多虚拟参与者，让它根据不同人口学背景、不同实验材料和不同结果问题，模拟人类在每个条件下会怎么回答。随后再像分析真实实验一样，比较模拟回答中的 treatment effect。真正需要检验的是：这些由 LLM 生成的实验效应，和真实人类实验效应到底有多接近？</p>
+<p>来自 Harvard University Department of Psychology、Stanford University Department of Sociology 和 Transluce 的 Ashwini Ashokkumar、Luke Hewitt、Isaias Ghezae 和 Robb Willer，在Nature发表了题为Large language models can predict the results of social science experiments的研究。</p>
+<ul>
+<li>论文 DOI：10.1038/s41586-026-10742-x</li>
+</ul>
 </section>
-<section id="稀有变异分析的扩展功能saige-gene" class="level5">
-<h5 class="anchored" data-anchor-id="稀有变异分析的扩展功能saige-gene">1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</h5>
-<p>SAIGE-GENE+ 是 SAIGE 的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN 测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</p>
+<section id="博文资讯" class="level3">
+<h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/CT-_Kv-h43xR2eWhKcsB3Q">OpenAI新模型能碾压爱因斯坦，但不如一个会举手提问的小学生？</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225656.png" class="img-fluid"></p>
+<p>以前我们总是担心AI会失控，什么天网觉醒，产生自主意识，然后消灭人类。但现实版的”失控”，比这朴素太多了，没有那么多弯弯绕绕，不过这只是开始。</p>
+<p>AI可能不会产生自主意识，不过当它那颗能碾压爱因斯坦的大脑，只能认真干活的时候，可能就已经是最危险的事了。网上有句梗叫”不怕坏人绞尽脑汁，就怕蠢人灵机一动”。AI正好相反，它虽然没想害人，但它在”绞尽脑汁”完成任务时没有”灵机一动”，可能最后咱们得给它擦屁股。</p>
+<ol start="4" type="1">
+<li><a href="https://mp.weixin.qq.com/s/Y3TpKxv2haHlk3N_-FzI9Q">《柳叶刀》：过去十年青少年肥胖及心理健康问题持续攀升</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225829.png" class="img-fluid"></p>
+<p>5月21日，《柳叶刀》发布第二版《柳叶刀》青少年健康重大报告。报告指出，过去十年，青少年健康与福祉的进展喜忧参半且不均衡，其中，肥胖及心理健康等问题持续升高。若不采取有针对性的行动，到2030年全球仍将有超过10亿的青少年生活在条件堪忧的环境中。</p>
 </section>
-<section id="高度可定制化" class="level5">
-<h5 class="anchored" data-anchor-id="高度可定制化">1.5 高度可定制化</h5>
-<p>SAIGE 允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有 GWAS 信号的基础上进行进一步的变异筛选。</p>
+<section id="工具" class="level3">
+<h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://mp.weixin.qq.com/s/POk_9OB3jknkIDIm7p4Hyw">Python绘制带显著性标注的Spearman相关森林图</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230024.png" class="img-fluid"></p>
+<p>教程以肺癌临床数据为例，利用Python构建相关系数森林图，结合分组配色、零值基准线、特征标签与显著性标记展示变量关联方向及强度。该模块化绘图流程适用于生物统计中相关性分析结果的规范化可视化。</p>
+<ol start="6" type="1">
+<li><a href="https://mp.weixin.qq.com/s/vjfgliI2HNH9t9uZbky8NQ">R语言SCI组合图：模型结果与多维数据可视化模板</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230351.png" class="img-fluid"></p>
+<p>教程整合Sankey地图、GLMM优势比、瀑布图、特殊热图、分裂小提琴图与PCA等9类图形，覆盖分层模型、组间比较、降维及生态空间数据展示。内容强调依据数据结构选择图形，并通过模块化拼图提升复杂统计结果的可读性。</p>
 </section>
+<section id="资源" class="level3">
+<h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://mp.weixin.qq.com/s/SpYJkLMRzEzWmuJu2W8WRg">Nature Portfolio临床医学期刊：影响力指标与学科布局概览</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230516.png" class="img-fluid"></p>
+<p>文章汇总Nature Portfolio临床医学及综述期刊的2025年影响因子、学科排名、引用与下载数据，覆盖肿瘤、心血管、消化、肾脏及精神卫生等领域。该信息可为科研人员进行期刊定位、文献检索和投稿策略制定提供参考。</p>
 </section>
-<section id="saige-的工作原理" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="saige-的工作原理">2. SAIGE 的工作原理</h4>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">SAIGE 工作流程</figcaption>
-</figure>
-</div>
-<p>SAIGE 使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</p>
-<p>在分析过程中，SAIGE 会先使用 GRM 计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用 <code>REML（限制最大似然法）</code>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP 与表型之间的关联。</p>
-<section id="计算遗传关系矩阵grm" class="level5">
-<h5 class="anchored" data-anchor-id="计算遗传关系矩阵grm">2.1 计算遗传关系矩阵（GRM）</h5>
-<p>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的 GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM 可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM 文件，并将其作为输入提供给 SAIGE。</p>
+<section id="贡献者github-id" class="level3">
+<h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
+<p>「OpenBioStat 生统爱好者周刊」运维小组：</p>
+<ul>
+<li>[<code>@Leslie-Lu</code>]（陆震）</li>
+<li>[<code>@YihanChen325</code>]（陈奕含）</li>
+<li>[<code>@kirihsia</code>]（夏鑫辛）</li>
+<li>[<code>@GCRPM</code>]（徐林玉）</li>
+<li>[<code>@Jinyu-Luo</code>]（罗瑾瑜）</li>
+</ul>
 </section>
-<section id="模型拟合与关联分析" class="level5">
-<h5 class="anchored" data-anchor-id="模型拟合与关联分析">2.2 模型拟合与关联分析</h5>
-<p>SAIGE 使用 限制最大似然法（REML） 或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth 偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</p>
+<section id="订阅" class="level3">
+<h3 class="anchored" data-anchor-id="订阅">订阅</h3>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
+<p>（完）</p>
 
 
 <!-- -->
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -809,90 +854,145 @@ div.column-margin+hr.dinkus {
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> SAIGE</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-11-28</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "\u4E00\u79CD\u7528\u4E8E\u5927\u89C4\u6A21\u57FA\u56E0\u7EC4\u5173\u8054\</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  \u7814\u7A76\u7684\u9AD8\u6548\u5DE5\u5177"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - saige</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - gwas</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - genomics</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: "&lt;style type=\"text/css\"&gt;\nhr.dinkus {\n    width: 50px;\n    margin:\</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">          \ 2em auto 2em;\n    border-top: 5px dotted #454545;\n}\n\ndiv.column-margin+hr.dinkus\</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">          \ {\n    margin: 1em auto 2em;\n}\n&lt;/style&gt;"</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 43 期）：养老科技的最大增量市场不是80+，而是80后？"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-07-24</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 43"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723224058.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostat-weekly</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    shift-heading-level-by: 1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;style type="text/css"&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">          hr.dinkus {</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">              width: 50px;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 2em auto 2em;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">              border-top: 5px dotted #454545;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAIGE</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>SAIGE（Scalable and Accurate Implementation of GEneralized mixed</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>models）是一个用于大规模基因组关联研究（GWAS）的 [R</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>包](https://saigegit.github.io/SAIGE-doc/ "SAIGE")，旨在通过<span class="in">`广义混合模型（Generalized Mixed Models, GMM）`</span>处理样本之间的相关性，并对大规模遗传数据进行高效分析。SAIGE</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>具有处理大量样本、考虑遗传关系、避免样本相关性干扰等优点，是解析全基因组数据的理想工具。</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>本文将介绍 SAIGE 的主要功能、使用场景及其工作原理。</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. SAIGE 的主要特点</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.1 高效的计算方法</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>SAIGE</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>的核心优势之一是其高效的计算方法。它能够处理大规模数据集，尤其适用于大约几十万到上百万的样本。SAIGE</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>通过采用广义混合模型（GMM）来估计样本之间的遗传相关性，从而准确估计每个基因位点的效应大小，并进行全基因组关联测试。</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.2 处理样本相关性</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>在 GWAS</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>中，样本之间的相关性（例如家族结构或人口结构）可能会导致结果的偏差。SAIGE</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>通过<span class="in">`基因型关系矩阵（GRM）`</span>来处理样本的相关性，使得 GWAS</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>结果更加可靠。无论是亲缘关系还是其他类型的样本相关性，SAIGE</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>都能够有效地调整，避免不必要的假阳性结果。</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.3 支持多种表型类型</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          div.column-margin+hr.dinkus {</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">              margin: 1em auto 2em;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">          }</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/style&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>这里记录每周值得分享的生统相关内容，周五发布。</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>本杂志开源（GitHub:</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">openbiostat/biostat-weekly</span><span class="co">](https://github.com/openbiostat/biostat-weekly "openbiostat/biostat-weekly")</span>），欢迎提交</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>issue 投稿或推荐生统相关内容。</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">「生统爱好者周刊讨论区」</span><span class="co">](https://github.com/openbiostat/biostat-weekly/discussions "生统爱好者周刊讨论区")</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 封面图</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723224058.png)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[养老科技的最大增量市场不是80+，而是80后？](https://mp.weixin.qq.com/s/gvFdr98gxXTCUt_nYolx_A)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>颈椎退行性病变、焦虑失眠、代谢综合征------18到44岁群体的慢性病患病率正在加速攀升，2030年预计将超过30%。80后还没老，身体已经开始"提前养老"了。养老科技的最大增量市场，不在养老院，在80后的手机里。</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>[Nature <span class="sc">\|</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>   从348种疾病中提取21条生命轨迹，AI能否重新定义疾病分类？](https://mp.weixin.qq.com/s/ODzQp6t6PxcbTFWXfTYNJA)</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>SAIGE</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>不仅支持定量性状（例如身高、体重等），还支持二元性状（例如病例对照数据）。它能够处理不同类型的表型，并针对不同表型类型应用相应的统计方法，例如，<span class="in">`Firth 的偏差减少逻辑回归（Firth’s Bias-Reduced Logistic Regression）`</span>来分析稀有变异。</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.4 稀有变异分析的扩展功能（SAIGE-GENE+）</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>SAIGE-GENE+ 是 SAIGE</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>的扩展，用于稀有变异的集成分析。它提供了多种常用的稀有变异测试方法，包括 BURDEN</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>测试、SKAT 测试和 SKAT-O 测试，帮助识别变异集与表型的关系。</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.5 高度可定制化</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>SAIGE</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>允许用户根据实际需求调整参数，例如显著性阈值、遗传关系矩阵类型（完整或稀疏）等。此外，它还支持条件分析，可以在现有</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>GWAS 信号的基础上进行进一步的变异筛选。</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723224422.png)</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>两个人最后进入同一个诊断框，却未必沿着同一条生物学路径走到这里。电子健康记录本来保留了这种差异：疾病在什么年龄出现，哪些诊断先发生，哪些疾病长期共存，新诊断出现后风险如何改变。然而，常见分析方法往往把每种疾病单独拿出来建模，心梗预测心梗，乳腺癌预测乳腺癌，糖尿病预测糖尿病。一个人几十年间不断交织的多种疾病，由此被拆成了一组彼此独立的标签。</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>来自麻省总医院、哈佛医学院、Broad研究所、Dana-Farber癌症研究所等机构的研究团队，由</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Sarah M. Urbut、Alexander Gusev、Pradeep Natarajan 和 Giovanni Parmigiani</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>担任通信作者，在 Nature 发表了题为 "A Bayesian framework for longitudinal EHR</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>and genetic discovery" 的研究。团队开发了一个名为 ALADYNOULLI</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>的贝叶斯生成模型，把纵向电子健康记录、年龄变化和遗传风险放入同一个框架中，试图恢复隐藏在诊断代码背后的疾病组合及其随时间变化的轨迹。</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>研究覆盖英国生物样本库、Mass General Brigham Biobank和美国All of</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>Us三个独立队列，总样本量超过68.3万人，最长随访达到52年，共纳入348种疾病。模型最终识别出21个潜在疾病特征，其中20个对应相对明确的疾病过程，另一个用于描述低发病状态。</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1038/s41586-026-10780-5</span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. SAIGE 的工作原理</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="al">![SAIGE 工作流程](https://saigegit.github.io/SAIGE-doc/assets/img/saige-siage-gene-outline.png)</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>SAIGE</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>使用广义混合模型（GMM）来估计样本之间的相关性，并对每个基因位点进行全基因组关联分析。其核心思想是通过计算每对样本之间的遗传关系矩阵（GRM），从而调整样本间的相关性，避免这些关系对关联分析结果的干扰。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>[Nature ｜</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>   大语言模型能预测社会科学实验结果，但会系统性高估效应](https://mp.weixin.qq.com/s/2UrXBTc5jok0GeSfv5qFLw)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225254.png)</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>社会科学最核心的问题之一，是因果。一段公共卫生信息能不能提高疫苗接种意愿？一种政治沟通方式会不会减少党派敌意？某个社会政策框架会不会改变公众支持度？这些问题不能只靠直觉回答，通常需要随机实验：把不同人随机分到不同条件，再比较他们的态度、选择或行为有没有变化。</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>在分析过程中，SAIGE 会先使用 GRM</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>计算出样本间的相关性，并根据遗传相关性调整表型和基因型数据。接下来，使用</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="in">`REML（限制最大似然法）`</span>或其他拟合方法进行模型估计，最后通过统计检验得到每个 SNP</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>与表型之间的关联。</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2.1 计算遗传关系矩阵（GRM）</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>遗传关系矩阵（GRM）用于量化样本之间的基因型相似性。SAIGE 支持两种类型的</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>GRM：完整 GRM 和 稀疏 GRM。对于大规模数据集，稀疏 GRM</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>可以显著减少计算成本。我们可以使用 PLINK 等工具计算 GRM</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>文件，并将其作为输入提供给 SAIGE。</span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2.2 模型拟合与关联分析</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>SAIGE 使用 限制最大似然法（REML）</span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>或其他拟合方法来估计基因型和表型之间的关系。对于稀有变异，SAIGE 还提供了 Firth</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>偏差减少逻辑回归，提高了小样本数据和稀有变异分析的准确性。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>现在，一个新问题出现了：大语言模型能不能先替我们"预演"实验？不是简单问模型"你觉得这个实验会怎样"，而是把它当作很多虚拟参与者，让它根据不同人口学背景、不同实验材料和不同结果问题，模拟人类在每个条件下会怎么回答。随后再像分析真实实验一样，比较模拟回答中的</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>treatment effect。真正需要检验的是：这些由 LLM</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>生成的实验效应，和真实人类实验效应到底有多接近？</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>来自 Harvard University Department of Psychology、Stanford University Department</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>of Sociology 和 Transluce 的 Ashwini Ashokkumar、Luke Hewitt、Isaias Ghezae 和</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>Robb Willer，在Nature发表了题为Large language models can predict the results of</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>social science experiments的研究。</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1038/s41586-026-10742-x</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">OpenAI新模型能碾压爱因斯坦，但不如一个会举手提问的小学生？</span><span class="co">](https://mp.weixin.qq.com/s/CT-_Kv-h43xR2eWhKcsB3Q)</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225656.png)</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>以前我们总是担心AI会失控，什么天网觉醒，产生自主意识，然后消灭人类。但现实版的"失控"，比这朴素太多了，没有那么多弯弯绕绕，不过这只是开始。</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>AI可能不会产生自主意识，不过当它那颗能碾压爱因斯坦的大脑，只能认真干活的时候，可能就已经是最危险的事了。网上有句梗叫"不怕坏人绞尽脑汁，就怕蠢人灵机一动"。AI正好相反，它虽然没想害人，但它在"绞尽脑汁"完成任务时没有"灵机一动"，可能最后咱们得给它擦屁股。</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">《柳叶刀》：过去十年青少年肥胖及心理健康问题持续攀升</span><span class="co">](https://mp.weixin.qq.com/s/Y3TpKxv2haHlk3N_-FzI9Q)</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723225829.png)</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>5月21日，《柳叶刀》发布第二版《柳叶刀》青少年健康重大报告。报告指出，过去十年，青少年健康与福祉的进展喜忧参半且不均衡，其中，肥胖及心理健康等问题持续升高。若不采取有针对性的行动，到2030年全球仍将有超过10亿的青少年生活在条件堪忧的环境中。</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">Python绘制带显著性标注的Spearman相关森林图</span><span class="co">](https://mp.weixin.qq.com/s/POk_9OB3jknkIDIm7p4Hyw)</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230024.png)</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>教程以肺癌临床数据为例，利用Python构建相关系数森林图，结合分组配色、零值基准线、特征标签与显著性标记展示变量关联方向及强度。该模块化绘图流程适用于生物统计中相关性分析结果的规范化可视化。</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span><span class="co">[</span><span class="ot">R语言SCI组合图：模型结果与多维数据可视化模板</span><span class="co">](https://mp.weixin.qq.com/s/vjfgliI2HNH9t9uZbky8NQ)</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230351.png)</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>教程整合Sankey地图、GLMM优势比、瀑布图、特殊热图、分裂小提琴图与PCA等9类图形，覆盖分层模型、组间比较、降维及生态空间数据展示。内容强调依据数据结构选择图形，并通过模块化拼图提升复杂统计结果的可读性。</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>[Nature</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>   Portfolio临床医学期刊：影响力指标与学科布局概览](https://mp.weixin.qq.com/s/SpYJkLMRzEzWmuJu2W8WRg)</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260723230516.png)</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>文章汇总Nature</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>Portfolio临床医学及综述期刊的2025年影响因子、学科排名、引用与下载数据，覆盖肿瘤、心血管、消化、肾脏及精神卫生等领域。该信息可为科研人员进行期刊定位、文献检索和投稿策略制定提供参考。</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Jinyu-Luo`</span><span class="co">]</span>（罗瑾瑜）</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<span class="in">`陆震生物统计`</span>或者扫描二维码，即可订阅。</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png)</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>同时，本周刊同步支持 [RSS</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>订阅](https://leslie-lu.github.io/biostat_weekly_rss.xml "生统爱好者周刊 RSS 订阅")；本周刊同名中文播客现已正式在[苹果播客（Apple</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>Podcasts）](https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB "Apple Podcasts 订阅")和<span class="co">[</span><span class="ot">小宇宙</span><span class="co">](https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e "小宇宙订阅")</span>平台上线，搜索<span class="in">`生统爱好者周刊`</span>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
