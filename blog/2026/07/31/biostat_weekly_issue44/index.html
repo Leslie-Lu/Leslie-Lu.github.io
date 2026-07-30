@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhen Lu">
-<meta name="description" content="biostat weekly issue 11">
+<meta name="description" content="biostat weekly issue 44">
 
-<title>生统爱好者周刊（第 11 期）：开放数据集滥用危机 | Zhen Lu – Zhen Lu</title>
+<title>生统爱好者周刊（第 44 期）：AI到底是什么？在临床试验里怎么落地？ | Zhen Lu – Zhen Lu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -128,7 +128,7 @@ div.column-margin+hr.dinkus {
 
 </head>
 
-<body class="floating nav-fixed slimcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +227,7 @@ div.column-margin+hr.dinkus {
    
   <ul>
   <li><a href="#封面图" id="toc-封面图" class="nav-link active" data-scroll-target="#封面图">封面图</a></li>
-  <li><a href="#本周话题开放数据集滥用危机" id="toc-本周话题开放数据集滥用危机" class="nav-link" data-scroll-target="#本周话题开放数据集滥用危机">本周话题：开放数据集滥用危机</a></li>
+  <li><a href="#本周话题ai到底是什么在临床试验里怎么落地" id="toc-本周话题ai到底是什么在临床试验里怎么落地" class="nav-link" data-scroll-target="#本周话题ai到底是什么在临床试验里怎么落地">本周话题：AI到底是什么？在临床试验里怎么落地？</a></li>
   <li><a href="#生统研究" id="toc-生统研究" class="nav-link" data-scroll-target="#生统研究">生统研究</a></li>
   <li><a href="#博文资讯" id="toc-博文资讯" class="nav-link" data-scroll-target="#博文资讯">博文资讯</a></li>
   <li><a href="#工具" id="toc-工具" class="nav-link" data-scroll-target="#工具">工具</a></li>
@@ -242,11 +242,11 @@ div.column-margin+hr.dinkus {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 11 期）：开放数据集滥用危机</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">生统爱好者周刊（第 44 期）：AI到底是什么？在临床试验里怎么落地？</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">biostat-weekly</div>
   </div>
@@ -254,7 +254,7 @@ div.column-margin+hr.dinkus {
 
 <div>
   <div class="description">
-    biostat weekly issue 11
+    biostat weekly issue 44
   </div>
 </div>
 
@@ -271,7 +271,7 @@ div.column-margin+hr.dinkus {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Friday, December 5, 2025</p>
+      <p class="date">Friday, July 31, 2026</p>
     </div>
   </div>
   
@@ -286,87 +286,77 @@ div.column-margin+hr.dinkus {
 <p>这里记录每周值得分享的生统相关内容，周五发布。</p>
 <p>本杂志开源（GitHub: <a href="https://github.com/openbiostat/biostat-weekly" title="openbiostat/biostat-weekly">openbiostat/biostat-weekly</a>），欢迎提交 issue 投稿或推荐生统相关内容。</p>
 <p><a href="https://github.com/openbiostat/biostat-weekly/discussions" title="生统爱好者周刊讨论区">「生统爱好者周刊讨论区」</a></p>
-<section id="封面图" class="level3 page-columns page-full">
+<section id="封面图" class="level3">
 <h3 class="anchored" data-anchor-id="封面图">封面图</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203205245.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">儿童成长过程中有利、有害因素分布；论文 DOI：10.1016/S0140-6736(19)32540-1</figcaption>
-</figure>
-</div>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730104206.png" class="img-fluid"></p>
 </section>
-<section id="本周话题开放数据集滥用危机" class="level3">
-<h3 class="anchored" data-anchor-id="本周话题开放数据集滥用危机">本周话题：<a href="https://mp.weixin.qq.com/s/7WZV_Mp8UiwaunKOS_4bMQ">开放数据集滥用危机</a></h3>
-<p>大量依赖 NHANES、UK Biobank 等开放数据库的公式化论文在期刊中涌现，引发对”论文工厂”和 AI 辅助写作滥用的担忧，低质研究的激增正在侵蚀学术出版的可靠性。面对数据集被滥用的趋势，Journal of Global Health 已率先收紧审核标准，要求作者披露使用开放数据集的记录与 AI 写作情况。更多期刊或将跟进，以重建基于公共数据库研究的可信度。</p>
+<section id="本周话题ai到底是什么在临床试验里怎么落地" class="level3">
+<h3 class="anchored" data-anchor-id="本周话题ai到底是什么在临床试验里怎么落地">本周话题：<a href="https://mp.weixin.qq.com/s/JD1OZ_s9DCqb1EMxR_JCdQ">AI到底是什么？在临床试验里怎么落地？</a></h3>
+<p>封面故事里，插画师们在追问AI临摹的边界在哪里。<a href="https://mp.weixin.qq.com/s/8X1WYlssAO28RtRmfrwfkQ">GenAI</a> 就像是一位手法娴熟的临摹专家，它见得多，模仿得像，但不会对结果负责。在临床医药研发领域，哪些工作能放心交给它打草稿？哪些必须留给人来终裁？这篇文章给出了一套简单好用的判断框架。</p>
 </section>
 <section id="生统研究" class="level3">
 <h3 class="anchored" data-anchor-id="生统研究">生统研究</h3>
 <ol type="1">
-<li><a href="https://mp.weixin.qq.com/s/tta46qW5sX1rHhFJhFRiOQ">Nature Medicine | 每天走上几千步，推迟阿尔茨海默病数年</a></li>
+<li><a href="https://doi.org/10.1002/sim.70674" title="Statistics in Medicine">Statistics in Medicine | 纵向数据里的【信息性脱落】，如何用加权GEE进行修正？</a></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203193508.png" class="img-fluid"></p>
-<p>这项基于哈佛衰老大脑研究（Harvard Aging Brain Study）项目，长达 14 年的随访发现：在 β-淀粉样蛋白水平较高、阿尔茨海默病风险较高的老年人中，每天适量步行（约 3000–7500 步）能显著减缓认知能力下降。每天 3000–5000 步可延缓约 3 年，5000–7500 步可延缓约 7 年，但超过 7500 步并无额外好处。而对 β-淀粉样蛋白水平较低的人群，步行量对认知能力并无明显影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105030.png" class="img-fluid"></p>
+<p>临床试验里的数据缺失有多种类型，脱落（dropout）和失访（lost to follow-up）是其中最容易混淆的两种，二者的区别可参考这篇<a href="https://mp.weixin.qq.com/s/3WQt1iUAbOVuFY2T2zCqDw">科普</a>。当脱落原因本身与受试者健康结局相关时，称为信息性脱落（informative dropout）。该论文以一项抗抑郁症临床试验数据为例：试验方案规定，若受试者在当前治疗阶段持续未达到疗效、或无法耐受不良反应，可以提前终止该阶段、转入下一治疗方案，这类脱落的发生本身就和疾病变化直接挂钩。现有的IIW-GEE（逆强度加权广义估计方程）虽然能够校正随访时间不规律的问题，但是权重估计没有考量脱落与结局之间的这层关联，一旦脱落是信息性的，估计结果便会产生偏倚。<em>本文提出的方法</em>，是将逆强度权重与逆脱落概率权重相乘，构建出扩展后的 IIW×IPW-GEE，并通过模拟研究证实这一方法能显著降低偏倚；应用于该试验数据后发现，若沿用原有方法、不校正信息性脱落，患者的病情改善程度会被系统性高估。</p>
 <ul>
-<li>论文 DOI：10.1038/s41591-025-03955-6</li>
+<li>论文 DOI：10.1002/sim.70674</li>
 </ul>
 <ol start="2" type="1">
-<li><a href="https://mp.weixin.qq.com/s/yzRN6GO78T573DqxBbqcPg">Nature Communications | 深度学习模型赋能临床恶化预测提前17小时</a></li>
+<li><a href="https://doi.org/10.1093/biomtc/ujag131" title="Biometrics">Biometrics | 双相情感障碍移动健康研究中，如何在潜在疾病状态下估计个体因果效应？</a></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203194008.png" class="img-fluid"></p>
-<p>这项发表在 Nature Communications 的研究开发并验证了一种基于可穿戴设备和深度学习的院内恶化预测模型。研究利用 888 名住院患者的连续生命体征数据训练 RNN，可提前最多 17 小时预测临床警报和不良事件，AUC 高达 0.89，显著优于传统 EHR 间歇性监测。该模型为早期识别非 ICU 患者恶化提供了更及时、精准的工具，具有重要的临床和应用价值。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105211.png" class="img-fluid"></p>
+<p>双相情感障碍患者会在抑郁、轻躁狂、躁狂等不同情绪状态之间循环，同一种干预（比如运动、社交）对健康结局（比如睡眠）的影响，往往因患者当下所处的疾病状态不同而不同。本文使用一项移动健康研究的数据：受试者的通话与短信记录、GPS 位置、加速度计运动数据、每日情绪与症状问卷等，通过智能手机被动或主动地持续收集，用来连续追踪患者的日常状态。但这类数据里并不包含”患者现在处于哪种疾病状态”这一标签，它是需要被推断出来的潜变量，而非直接测量到的变量。本文提出一种改进的自回归隐马尔可夫模型（ARHMM），把疾病状态当作潜在变量来推断，同时处理数据缺失问题，并在个体层面（N-of-1）估计某项干预对结局的因果效应。模拟研究显示：忽略潜在疾病状态的传统方法会产生明显偏倚、置信区间覆盖率接近 0%；而本文方法基本无偏，覆盖率能达到理想水平。作者进一步将方法应用于一项长达五年的双相/精神分裂症患者智能手机追踪研究，成功从真实数据中识别出患者的抑郁/情绪稳定状态切换轨迹。</p>
 <ul>
-<li>论文 DOI：10.1038/s41467-025-65219-8</li>
-</ul>
-<ol start="3" type="1">
-<li><a href="https://mp.weixin.qq.com/s/fK24a9yT2_yxU6NIqgROiA">Nature Cardiovascular Research | 运动对女性心脏健康的帮助更大</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203194152.png" class="img-fluid"></p>
-<p>这项发表于 Nature Cardiovascular Research 的研究显示，尽管当前运动指南对男女采用相同标准，但女性实际上从运动中获得的冠心病防护作用更强。研究发现，相比男性，女性在增加身体活动后，其冠心病发病风险和全因死亡风险下降得更显著。这提示未来应根据性别差异制定更精准的运动建议，以改善冠心病的预防和管理。</p>
-<ul>
-<li>论文 DOI：10.1038/s44161-025-00732-z</li>
+<li>论文 DOI：10.1093/biomtc/ujag131</li>
 </ul>
 </section>
 <section id="博文资讯" class="level3">
 <h3 class="anchored" data-anchor-id="博文资讯">博文资讯</h3>
+<ol start="3" type="1">
+<li><a href="https://mp.weixin.qq.com/s/xdL1Z2xXXvKJMwlbSjrU1Q">Agent如何重塑医疗？AI已走进临床诊断、药物研发、管理健康全流程</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105355.png" class="img-fluid"></p>
+<p>2026世界人工智能大会上，机器人问诊、智能分拣送药这些消费端场景赚足了眼球，但这只是AI进医疗的”浅层形态”。真正的深水区，是AI智能体已经悄悄嵌进了诊断、新药研发和健康管理的全流程。</p>
+<p>复旦中山医院的”观心大模型”是个例子：从最初只能看心脏病，到现在能整合心电图、超声影像、化验单等多模态数据，自动生成结构化病历。新药研发这边更卷，水木分子把研发链路拆成了好几个专属智能体（挖文献的、生成分子的、跑临床试验的），彼此之间还能”吵架”式地互相修正，形成一条自动化的智能管线。</p>
+<p>不过医疗行业的容错率几乎是零，“沙发做歪了能改，人不行”。所以行业的共识很一致：智能体目前的定位是医生助手，不是拍板的人，真正难的不是把模型做大，而是让它在临床上足够准。</p>
 <ol start="4" type="1">
-<li><a href="https://mp.weixin.qq.com/s/JpYKYWtP159F71oWHo06yw">最全可视化韦恩图和集合图工具EVenn使用手册</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nDqIBtk5k9CQNfX4H57UOg">Anthropic杀入AI制药的100天，药王礼来都开始慌了！</a></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203195633.png" class="img-fluid"></p>
-<p><a href="http://www.ehbio.com/test/venn" title="EVenn">EVenn</a> 是一个集成多种韦恩图与数据交互工具的平台，支持标准化数据格式、提供高效的数据探索流程，并以友好的界面简化韦恩图、欧拉图和 UpSet 图的生成，是多组学数据分析与可视化的实用工具。相关论文发表在 iMeta 上。</p>
-<ul>
-<li>论文 DOI：10.1002/imt2.184</li>
-</ul>
-<ol start="5" type="1">
-<li><a href="https://mp.weixin.qq.com/s/TkMQVQ9iZSPHRmMjDYFMeg">性能优化到极致的Python库</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200229.png" class="img-fluid"></p>
-<p>该推文介绍几个经过深度底层优化的高性能 Python 库，它们在保持 Python 风格与易用性的同时，带来接近毫秒级的性能提升，避免多线程、多进程等问题，也能轻松应对大规模数据与高性能计算。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105443.png" class="img-fluid"></p>
+<p>今年4月，Anthropic 以四亿美元收购了成立仅八个月的 AI 制药初创 Coefficient Bio，随后挖来 AlphaFold 核心主创、诺贝尔化学奖得主 John Jumper，并于6月30日发布面向科研的新产品 Claude Science，宣布将自主推进临床前阶段的药物管线，聚焦传统药企不愿碰的罕见病靶点，近期又追加了一项罕见遗传病专项征集。这一系列动作让礼来等传统药企感到压力，其首席AI官 Thomas Fuchs 公开表示公司已自研开放权重模型，以掌控自身研发命运。</p>
 </section>
 <section id="工具" class="level3">
 <h3 class="anchored" data-anchor-id="工具">工具</h3>
+<ol start="5" type="1">
+<li><a href="https://doi.org/10.1111/biom.13050" title="Cluster-Weighted Generalized Estimating Equations, CWGEE">Cluster-Weighted Generalized Estimating Equations, CWGEE</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105550.png" class="img-fluid"></p>
+<p>由多伦多大学Aya Mitani 教授创建的聚类加权广义估计方程R包，用于分析具有信息性聚类大小（informative cluster size, ICS）的聚类纵向数据，即每个聚类内观测数量本身与结局相关、可能导致普通 GEE 估计产生偏倚的场景。包中 ordCWGEE 函数适用于有序结局的聚类纵向数据，mvoCWGEE 函数适用于横断面下多个相关二分类结局的分析，二分类结局的加权版本仍在开发中。该方法最初发表于论文 Marginal analysis of ordinal clustered longitudinal data with informative cluster size（Mitani, Kaye, Nelson, 2019, Biometrics）。</p>
+<p>R 包安装：<code>remotes::install_github("AyaMitani/CWGEE")</code></p>
+<ul>
+<li>论文 DOI：10.1111/biom.13050</li>
+</ul>
 <ol start="6" type="1">
-<li><a href="https://positron.posit.co/" title="Positron: the data science IDE">Positron: the data science IDE</a></li>
+<li><a href="https://github.com/tw93/Mole" title="Mole">Mole: 通过终端清理、卸载、分析、优化和监控您的 Mac</a></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200436.png" class="img-fluid"></p>
-<p>Positron 将探索与生产工作整合在一个免费的 AI 辅助环境中，为使用 Python 和 R 的数据科学全过程提供支持。</p>
-<ol start="7" type="1">
-<li><a href="https://labs.google.com/code/dsa?view=readme" title="Data Science Agent">Data Science Agent</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200918.png" class="img-fluid"></p>
-<p>Google Colab推出基于Gemini的数据分析工具 Data Science Agent，该产品旨在简化和自动化常见的数据科学任务，例如预测建模、数据预处理和可视化。目标是帮助数据科学家专注于更复杂的任务和战略性问题。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110023.png" class="img-fluid"></p>
+<p>一体化工具包，深度清理，智能卸载程序，磁盘洞察，实时监控 mac。</p>
 </section>
 <section id="资源" class="level3">
 <h3 class="anchored" data-anchor-id="资源">资源</h3>
+<ol start="7" type="1">
+<li><a href="https://pharmaverse.org/" title="Pharmaverse">Pharmaverse: 临床试验数据流程的开源 R 包生态</a></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110137.png" class="img-fluid"></p>
+<p>由 GSK 的 Michael Rimler、Roche 的 Ross Farrugia、Atorus 的 Mike Stackhouse 和 Janssen 的 Sumesh Kalappurakal 于2021年前后共同发起，最初的愿景是打造一套”从 CRF 到电子提交”全流程的开源 R 包工具栈，避免各大药企在标准化临床工作流上重复造轮子。目前已汇聚 admiral（SDTM→ADaM 映射）、sdtm.oak（SDTM 数据集生成）、tidyCDISC、rtables、Tplyr、xportr（XPT 文件生成与合规校验）等数十个包，覆盖数据收集、验证、分析到监管提交的完整链路，并与 Tidyverse 无缝集成。项目隶属于 PHUSE，社区与 FDA、EMA、R Consortium、CDISC 保持合作对接，Slack 频道已有千余名成员。各包相对独立，团队可以按需选用，不必整体采纳。</p>
 <ol start="8" type="1">
-<li><a href="https://r-graph-gallery.com/" title="可视化 | The R Graph Gallery">可视化 | The R Graph Gallery</a></li>
+<li><a href="https://tellingstorieswithdata.com/" title="Telling Stories with Data: With Applications in R">Telling Stories with Data: With Applications in R</a></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203201057.png" class="img-fluid"></p>
-<p>R Graph Gallery提供了最全面的 R 语言可视化示例集，涵盖 400 多个示例，按近 50 种图表类型分类，并配有可复现代码与功能说明。平台为每种图表提供基础教程和进阶自定义指南，帮助用户在掌握核心结构的基础上，灵活定制满足自身需求的高质量可视化图形。</p>
-<ol start="9" type="1">
-<li><a href="https://redcap.vumc.org/" title="REDCap | 高效可靠的研究管理工具">REDCap | 高效可靠的研究管理工具</a></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203202351.png" class="img-fluid"></p>
-<p>Research Electronic Data Capture (RED Cap) 是范德堡大学（Vanderbilt University）Paul Harris教授团队自2004年开发的一个电子数据采集（Electronic DataCapture,EDC）系统，这是一个成熟免费、安全可靠、网络化的在线临床研究和试验数据库管理程序，适用于中小型项目的电子化数据收集、储存及交换。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110248.png" class="img-fluid"></p>
+<p>作者 Rohan Alexander 是多伦多大学统计科学系助理教授，也是 RStudio 官方认证的 Tidyverse Trainer。这是一本用 R 语言（尤其是 tidyverse 生态）贯穿始终的数据科学入门教材，全书分为基础、沟通表达、数据获取、数据准备、建模、应用六大部分，共17章，把数据获取、清洗、可视化、建模到复现性工作流串成一条完整链路来讲，强调”讲故事”而非单纯罗列统计方法。同类教材内容大同小异，这本书的亮点在于大量采用较新的 R 方法，内容更新及时，剑桥大学 David Spiegelhalter 教授评价它”充满了给数据科学初学者的智慧建议”</p>
 </section>
 <section id="贡献者github-id" class="level3">
 <h3 class="anchored" data-anchor-id="贡献者github-id">贡献者（GitHub ID）</h3>
@@ -376,13 +366,14 @@ div.column-margin+hr.dinkus {
 <li>[<code>@YihanChen325</code>]（陈奕含）</li>
 <li>[<code>@kirihsia</code>]（夏鑫辛）</li>
 <li>[<code>@GCRPM</code>]（徐林玉）</li>
+<li>[<code>@Jinyu-Luo</code>]（罗瑾瑜）</li>
 </ul>
 </section>
 <section id="订阅" class="level3">
 <h3 class="anchored" data-anchor-id="订阅">订阅</h3>
-<p>本周刊每周五发布，支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</p>
-<p>微信搜索”陆震生物统计”或者扫描二维码，即可订阅。</p>
+<p>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<code>陆震生物统计</code>或者扫描二维码，即可订阅。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png" class="img-fluid"></p>
+<p>同时，本周刊同步支持 <a href="https://leslie-lu.github.io/biostat_weekly_rss.xml" title="生统爱好者周刊 RSS 订阅">RSS 订阅</a>；本周刊同名中文播客现已正式在<a href="https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB" title="Apple Podcasts 订阅">苹果播客（Apple Podcasts）</a>和<a href="https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e" title="小宇宙订阅">小宇宙</a>平台上线，搜索<code>生统爱好者周刊</code>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</p>
 <p>（完）</p>
 
 
@@ -872,10 +863,10 @@ div.column-margin+hr.dinkus {
   loadGiscus();
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 11 期）：开放数据集滥用危机"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-12-05</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 11"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203205245.png"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "生统爱好者周刊（第 44 期）：AI到底是什么？在临床试验里怎么落地？"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-07-31</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "biostat weekly issue 44"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730104206.png"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - biostat-weekly</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
@@ -906,131 +897,137 @@ div.column-margin+hr.dinkus {
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 封面图</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="al">![儿童成长过程中有利、有害因素分布；论文 DOI：10.1016/S0140-6736(19)32540-1](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203205245.png)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730104206.png)</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[开放数据集滥用危机](https://mp.weixin.qq.com/s/7WZV_Mp8UiwaunKOS_4bMQ)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 本周话题：[AI到底是什么？在临床试验里怎么落地？](https://mp.weixin.qq.com/s/JD1OZ_s9DCqb1EMxR_JCdQ)</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>大量依赖 NHANES、UK Biobank</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>等开放数据库的公式化论文在期刊中涌现，引发对"论文工厂"和 AI</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>辅助写作滥用的担忧，低质研究的激增正在侵蚀学术出版的可靠性。面对数据集被滥用的趋势，Journal</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>of Global Health 已率先收紧审核标准，要求作者披露使用开放数据集的记录与 AI</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>写作情况。更多期刊或将跟进，以重建基于公共数据库研究的可信度。</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>封面故事里，插画师们在追问AI临摹的边界在哪里。<span class="co">[</span><span class="ot">GenAI</span><span class="co">](https://mp.weixin.qq.com/s/8X1WYlssAO28RtRmfrwfkQ)</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>就像是一位手法娴熟的临摹专家，它见得多，模仿得像，但不会对结果负责。在临床医药研发领域，哪些工作能放心交给它打草稿？哪些必须留给人来终裁？这篇文章给出了一套简单好用的判断框架。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生统研究</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>[Statistics in Medicine <span class="sc">\|</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>   纵向数据里的【信息性脱落】，如何用加权GEE进行修正？](https://doi.org/10.1002/sim.70674 "Statistics in Medicine")</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>[Nature Medicine <span class="sc">\|</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>   每天走上几千步，推迟阿尔茨海默病数年](https://mp.weixin.qq.com/s/tta46qW5sX1rHhFJhFRiOQ)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203193508.png)</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>这项基于哈佛衰老大脑研究（Harvard Aging Brain Study）项目，长达 14</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>年的随访发现：在</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>β-淀粉样蛋白水平较高、阿尔茨海默病风险较高的老年人中，每天适量步行（约</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>3000--7500 步）能显著减缓认知能力下降。每天 3000--5000 步可延缓约 3</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>年，5000--7500 步可延缓约 7 年，但超过 7500 步并无额外好处。而对</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>β-淀粉样蛋白水平较低的人群，步行量对认知能力并无明显影响。</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105030.png)</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>临床试验里的数据缺失有多种类型，脱落（dropout）和失访（lost to</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>follow-up）是其中最容易混淆的两种，二者的区别可参考这篇<span class="co">[</span><span class="ot">科普</span><span class="co">](https://mp.weixin.qq.com/s/3WQt1iUAbOVuFY2T2zCqDw)</span>。当脱落原因本身与受试者健康结局相关时，称为信息性脱落（informative</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>dropout）。该论文以一项抗抑郁症临床试验数据为例：试验方案规定，若受试者在当前治疗阶段持续未达到疗效、或无法耐受不良反应，可以提前终止该阶段、转入下一治疗方案，这类脱落的发生本身就和疾病变化直接挂钩。现有的IIW-GEE（逆强度加权广义估计方程）虽然能够校正随访时间不规律的问题，但是权重估计没有考量脱落与结局之间的这层关联，一旦脱落是信息性的，估计结果便会产生偏倚。*本文提出的方法*，是将逆强度权重与逆脱落概率权重相乘，构建出扩展后的</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>IIW×IPW-GEE，并通过模拟研究证实这一方法能显著降低偏倚；应用于该试验数据后发现，若沿用原有方法、不校正信息性脱落，患者的病情改善程度会被系统性高估。</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1002/sim.70674</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>[Biometrics <span class="sc">\|</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>   双相情感障碍移动健康研究中，如何在潜在疾病状态下估计个体因果效应？](https://doi.org/10.1093/biomtc/ujag131 "Biometrics")</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1038/s41591-025-03955-6</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105211.png)</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>[Nature Communications <span class="sc">\|</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>   深度学习模型赋能临床恶化预测提前17小时](https://mp.weixin.qq.com/s/yzRN6GO78T573DqxBbqcPg)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203194008.png)</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>这项发表在 Nature Communications</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>的研究开发并验证了一种基于可穿戴设备和深度学习的院内恶化预测模型。研究利用 888</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>名住院患者的连续生命体征数据训练 RNN，可提前最多 17</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>小时预测临床警报和不良事件，AUC 高达 0.89，显著优于传统 EHR</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>间歇性监测。该模型为早期识别非 ICU</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>患者恶化提供了更及时、精准的工具，具有重要的临床和应用价值。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>双相情感障碍患者会在抑郁、轻躁狂、躁狂等不同情绪状态之间循环，同一种干预（比如运动、社交）对健康结局（比如睡眠）的影响，往往因患者当下所处的疾病状态不同而不同。本文使用一项移动健康研究的数据：受试者的通话与短信记录、GPS</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>位置、加速度计运动数据、每日情绪与症状问卷等，通过智能手机被动或主动地持续收集，用来连续追踪患者的日常状态。但这类数据里并不包含"患者现在处于哪种疾病状态"这一标签，它是需要被推断出来的潜变量，而非直接测量到的变量。本文提出一种改进的自回归隐马尔可夫模型（ARHMM），把疾病状态当作潜在变量来推断，同时处理数据缺失问题，并在个体层面（N-of-1）估计某项干预对结局的因果效应。模拟研究显示：忽略潜在疾病状态的传统方法会产生明显偏倚、置信区间覆盖率接近</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>0%；而本文方法基本无偏，覆盖率能达到理想水平。作者进一步将方法应用于一项长达五年的双相/精神分裂症患者智能手机追踪研究，成功从真实数据中识别出患者的抑郁/情绪稳定状态切换轨迹。</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1093/biomtc/ujag131</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="co">[</span><span class="ot">Agent如何重塑医疗？AI已走进临床诊断、药物研发、管理健康全流程</span><span class="co">](https://mp.weixin.qq.com/s/xdL1Z2xXXvKJMwlbSjrU1Q)</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105355.png)</span></span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1038/s41467-025-65219-8</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>2026世界人工智能大会上，机器人问诊、智能分拣送药这些消费端场景赚足了眼球，但这只是AI进医疗的"浅层形态"。真正的深水区，是AI智能体已经悄悄嵌进了诊断、新药研发和健康管理的全流程。</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>[Nature Cardiovascular Research <span class="sc">\|</span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>   运动对女性心脏健康的帮助更大](https://mp.weixin.qq.com/s/fK24a9yT2_yxU6NIqgROiA)</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203194152.png)</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>这项发表于 Nature Cardiovascular Research</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>的研究显示，尽管当前运动指南对男女采用相同标准，但女性实际上从运动中获得的冠心病防护作用更强。研究发现，相比男性，女性在增加身体活动后，其冠心病发病风险和全因死亡风险下降得更显著。这提示未来应根据性别差异制定更精准的运动建议，以改善冠心病的预防和管理。</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>复旦中山医院的"观心大模型"是个例子：从最初只能看心脏病，到现在能整合心电图、超声影像、化验单等多模态数据，自动生成结构化病历。新药研发这边更卷，水木分子把研发链路拆成了好几个专属智能体（挖文献的、生成分子的、跑临床试验的），彼此之间还能"吵架"式地互相修正，形成一条自动化的智能管线。</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>不过医疗行业的容错率几乎是零，"沙发做歪了能改，人不行"。所以行业的共识很一致：智能体目前的定位是医生助手，不是拍板的人，真正难的不是把模型做大，而是让它在临床上足够准。</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">Anthropic杀入AI制药的100天，药王礼来都开始慌了！</span><span class="co">](https://mp.weixin.qq.com/s/nDqIBtk5k9CQNfX4H57UOg)</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105443.png)</span></span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1038/s44161-025-00732-z</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## 博文资讯</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="co">[</span><span class="ot">最全可视化韦恩图和集合图工具EVenn使用手册</span><span class="co">](https://mp.weixin.qq.com/s/JpYKYWtP159F71oWHo06yw)</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>今年4月，Anthropic 以四亿美元收购了成立仅八个月的 AI 制药初创 Coefficient</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>Bio，随后挖来 AlphaFold 核心主创、诺贝尔化学奖得主 John</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>Jumper，并于6月30日发布面向科研的新产品 Claude</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>Science，宣布将自主推进临床前阶段的药物管线，聚焦传统药企不愿碰的罕见病靶点，近期又追加了一项罕见遗传病专项征集。这一系列动作让礼来等传统药企感到压力，其首席AI官</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Thomas Fuchs 公开表示公司已自研开放权重模型，以掌控自身研发命运。</span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203195633.png)</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">EVenn</span><span class="co">](http://www.ehbio.com/test/venn "EVenn")</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>是一个集成多种韦恩图与数据交互工具的平台，支持标准化数据格式、提供高效的数据探索流程，并以友好的界面简化韦恩图、欧拉图和</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>UpSet 图的生成，是多组学数据分析与可视化的实用工具。相关论文发表在 iMeta 上。</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1002/imt2.184</span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="co">[</span><span class="ot">性能优化到极致的Python库</span><span class="co">](https://mp.weixin.qq.com/s/TkMQVQ9iZSPHRmMjDYFMeg)</span></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200229.png)</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>该推文介绍几个经过深度底层优化的高性能 Python 库，它们在保持 Python</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>风格与易用性的同时，带来接近毫秒级的性能提升，避免多线程、多进程等问题，也能轻松应对大规模数据与高性能计算。</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>[Positron: the data science</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>   IDE](https://positron.posit.co/ "Positron: the data science IDE")</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>[Cluster-Weighted Generalized Estimating Equations,</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>   CWGEE](https://doi.org/10.1111/biom.13050 "Cluster-Weighted Generalized Estimating Equations, CWGEE")</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730105550.png)</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>由多伦多大学Aya Mitani</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>教授创建的聚类加权广义估计方程R包，用于分析具有信息性聚类大小（informative</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>cluster size,</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>ICS）的聚类纵向数据，即每个聚类内观测数量本身与结局相关、可能导致普通 GEE</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>估计产生偏倚的场景。包中 ordCWGEE 函数适用于有序结局的聚类纵向数据，mvoCWGEE</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>函数适用于横断面下多个相关二分类结局的分析，二分类结局的加权版本仍在开发中。该方法最初发表于论文</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>Marginal analysis of ordinal clustered longitudinal data with informative</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>cluster size（Mitani, Kaye, Nelson, 2019, Biometrics）。</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>R 包安装：<span class="in">`remotes::install_github("AyaMitani/CWGEE")`</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>论文 DOI：10.1111/biom.13050</span>
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200436.png)</span></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>Positron 将探索与生产工作整合在一个免费的 AI 辅助环境中，为使用 Python 和 R</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>的数据科学全过程提供支持。</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>[Mole: 通过终端清理、卸载、分析、优化和监控您的</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>   Mac](https://github.com/tw93/Mole "Mole")</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110023.png)</span></span>
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>[Data Science</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>   Agent](https://labs.google.com/code/dsa?view=readme "Data Science Agent")</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203200918.png)</span></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>Google Colab推出基于Gemini的数据分析工具 Data Science</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>Agent，该产品旨在简化和自动化常见的数据科学任务，例如预测建模、数据预处理和可视化。目标是帮助数据科学家专注于更复杂的任务和战略性问题。</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>[可视化 <span class="sc">\|</span> The R Graph</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>   Gallery](https://r-graph-gallery.com/ "可视化 | The R Graph Gallery")</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203201057.png)</span></span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>R Graph Gallery提供了最全面的 R 语言可视化示例集，涵盖 400 多个示例，按近 50</span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>种图表类型分类，并配有可复现代码与功能说明。平台为每种图表提供基础教程和进阶自定义指南，帮助用户在掌握核心结构的基础上，灵活定制满足自身需求的高质量可视化图形。</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>[REDCap <span class="sc">\|</span></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>   高效可靠的研究管理工具](https://redcap.vumc.org/ "REDCap | 高效可靠的研究管理工具")</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251203202351.png)</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>一体化工具包，深度清理，智能卸载程序，磁盘洞察，实时监控 mac。</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## 资源</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>[Pharmaverse: 临床试验数据流程的开源 R</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>   包生态](https://pharmaverse.org/ "Pharmaverse")</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110137.png)</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>由 GSK 的 Michael Rimler、Roche 的 Ross Farrugia、Atorus 的 Mike Stackhouse 和</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>Janssen 的 Sumesh Kalappurakal 于2021年前后共同发起，最初的愿景是打造一套"从 CRF</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>到电子提交"全流程的开源 R</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>包工具栈，避免各大药企在标准化临床工作流上重复造轮子。目前已汇聚</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>admiral（SDTM→ADaM 映射）、sdtm.oak（SDTM</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>数据集生成）、tidyCDISC、rtables、Tplyr、xportr（XPT</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>文件生成与合规校验）等数十个包，覆盖数据收集、验证、分析到监管提交的完整链路，并与</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>Tidyverse 无缝集成。项目隶属于 PHUSE，社区与 FDA、EMA、R Consortium、CDISC</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>保持合作对接，Slack</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>频道已有千余名成员。各包相对独立，团队可以按需选用，不必整体采纳。</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>[Telling Stories with Data: With Applications in</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>   R](https://tellingstorieswithdata.com/ "Telling Stories with Data: With Applications in R")</span>
 <span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>Research Electronic Data Capture (RED Cap) 是范德堡大学（Vanderbilt</span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>University）Paul Harris教授团队自2004年开发的一个电子数据采集（Electronic</span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>DataCapture,EDC）系统，这是一个成熟免费、安全可靠、网络化的在线临床研究和试验数据库管理程序，适用于中小型项目的电子化数据收集、储存及交换。</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20260730110248.png)</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>作者 Rohan Alexander 是多伦多大学统计科学系助理教授，也是 RStudio 官方认证的</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>Tidyverse Trainer。这是一本用 R 语言（尤其是 tidyverse</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>生态）贯穿始终的数据科学入门教材，全书分为基础、沟通表达、数据获取、数据准备、建模、应用六大部分，共17章，把数据获取、清洗、可视化、建模到复现性工作流串成一条完整链路来讲，强调"讲故事"而非单纯罗列统计方法。同类教材内容大同小异，这本书的亮点在于大量采用较新的</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>R 方法，内容更新及时，剑桥大学 David Spiegelhalter</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>教授评价它"充满了给数据科学初学者的智慧建议"</span>
 <span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，支持 [RSS</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>订阅](https://leslie-lu.github.io/biostat_weekly_rss.xml "生统爱好者周刊 RSS 订阅")，同步更新在微信公众号「陆震生物统计」（luzhen-biostat）上。</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 贡献者（GitHub ID）</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>「OpenBioStat 生统爱好者周刊」运维小组：</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Leslie-Lu`</span><span class="co">]</span>（陆震）</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@YihanChen325`</span><span class="co">]</span>（陈奕含）</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@kirihsia`</span><span class="co">]</span>（夏鑫辛）</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@GCRPM`</span><span class="co">]</span>（徐林玉）</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`@Jinyu-Luo`</span><span class="co">]</span>（罗瑾瑜）</span>
 <span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>微信搜索"陆震生物统计"或者扫描二维码，即可订阅。</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## 订阅</span></span>
 <span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png)</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>本周刊每周五发布，更新在微信公众号「陆震生物统计」（luzhen-biostat）上，微信搜索<span class="in">`陆震生物统计`</span>或者扫描二维码，即可订阅。</span>
 <span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/Leslie-Lu/images/images/20251113212819.png)</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>同时，本周刊同步支持 [RSS</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>订阅](https://leslie-lu.github.io/biostat_weekly_rss.xml "生统爱好者周刊 RSS 订阅")；本周刊同名中文播客现已正式在[苹果播客（Apple</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>Podcasts）](https://podcasts.apple.com/cn/podcast/%E7%94%9F%E7%BB%9F%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/id1868591486?l=en-GB "Apple Podcasts 订阅")和<span class="co">[</span><span class="ot">小宇宙</span><span class="co">](https://www.xiaoyuzhoufm.com/podcast/69650caa93e769238063a05e "小宇宙订阅")</span>平台上线，搜索<span class="in">`生统爱好者周刊`</span>即可订阅收听。该播客内容基于本周刊公开内容制作，相关学术论文链接及原始资讯请查阅本周刊文字版。</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>（完）</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
